@@ -2,6 +2,6 @@
 
 
 ```mermaid
-    graph Architecture;
-        a --> b;
+graph Architecture;
+    a --> b;
 ```
