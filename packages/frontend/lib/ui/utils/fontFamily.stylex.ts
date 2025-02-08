@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex';
 
 export const fontFamily = stylex.defineVars({
-  base: `Inter,
+  base: `Raleway,
     system-ui,
     -apple-system,
     Segoe UI,
