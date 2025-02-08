@@ -5,6 +5,7 @@ import type { StyleXStyles } from '@stylexjs/stylex';
 import { colors } from '@dnd/ui/tokens.stylex';
 import { fontFamily } from '@dnd/ui/utils/fontFamily.stylex';
 import { ButtonSize, ButtonVariant, ButtonWidth } from './types';
+import { Spinner } from '../Spinner';
 
 export interface ButtonProps extends Omit<ComponentProps<'button'>, 'style'> {
   style?: StyleXStyles;
@@ -29,7 +30,7 @@ export function Button({
 
   return (
     <Component {...stylex.props(styles.base, styles[variant], styles[size], styles[width], style)} {...props}>
-      {children}
+      {loading ? <Spinner /> : children}
     </Component>
   );
 }
