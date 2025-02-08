@@ -1,0 +1,1 @@
+export { BackgroundsPage } from './BackgroundsPage';
