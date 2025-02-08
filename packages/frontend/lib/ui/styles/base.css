@@ -1,6 +1,6 @@
-@import "sanitize.css" layer(reset);
-@import "sanitize.css/forms.css" layer(reset);
-@import "sanitize.css/typography.css" layer(reset);
+@import 'sanitize.css' layer(reset);
+@import 'sanitize.css/forms.css' layer(reset);
+@import 'sanitize.css/typography.css' layer(reset);
 
 @layer reset {
   html {
