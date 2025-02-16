@@ -155,17 +155,17 @@ $text-inverse: '#FFFFFF';
 
 // Outline colors
 
-$outline-primary-default: $black-5;
+$outline-primary-default: $black-3;
 $outline-primary-hover: $black-4;
-$outline-primary-active: $black-80;
+$outline-primary-active: $black-5;
 
 $outline-error-default: $red-60;
 $outline-error-hover: $red-50;
 $outline-error-active: $red-70;
 
-$outline-accent-default: $blue-80;
-$outline-accent-hover: $blue-70;
-$outline-accent-active: $blue-100;
+$outline-accent-default: $orange-50;
+$outline-accent-hover: $orange-40;
+$outline-accent-active: $orange-60;
 
 // Button colors
 
@@ -173,14 +173,28 @@ $button-primary-default: $black-90;
 $button-primary-hover: $black-80;
 $button-primary-active: $black-100;
 
-$button-accent-default: $blue-90;
-$button-accent-hover: $blue-80;
-$button-accent-active: $blue-100;
+$button-accent-default: $orange-90;
+$button-accent-hover: $orange-80;
+$button-accent-active: $orange-100;
 
-$button-secondary-accent-default: $blue-10;
-$button-secondary-accent-hover: $blue-5;
-$button-secondary-accent-active: $blue-20;
+$button-secondary-accent-default: $orange-10;
+$button-secondary-accent-hover: $orange-5;
+$button-secondary-accent-active: $orange-20;
 
-$button-tertiary-accent-default: $orange-10;
-$button-tertiary-accent-hover: $orange-5;
-$button-tertiary-accent-active: $orange-20;
+$button-tertiary-accent-default: $blue-10;
+$button-tertiary-accent-hover: $blue-5;
+$button-tertiary-accent-active: $blue-20;
+
+// Background colors
+
+$backgroundNeutralDefault: $black-2;
+$backgroundNeutralHover: $black-3;
+$backgroundNeutralActive: $black-4;
+
+$backgroundBlueDefault: $blue-10;
+$backgroundBlueHover: $blue-5;
+$backgroundBlueActive: $blue-20;
+
+$backgroundOrangeDefault: $orange-10;
+$backgroundOrangeHover: $orange-5;
+$backgroundOrangeActive: $orange-20;
