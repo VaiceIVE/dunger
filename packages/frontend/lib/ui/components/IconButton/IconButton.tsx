@@ -2,7 +2,7 @@ import { ComponentProps } from 'react';
 import { StyleXStyles } from '@stylexjs/stylex';
 import * as stylex from '@stylexjs/stylex';
 import { colors } from '@dnd/ui/tokens.stylex';
-import { IconButtonVariant } from './IconButtonVariant';
+import { IconButtonVariant } from './IconButton.types';
 
 export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'style'> {
   style?: StyleXStyles;
