@@ -5,6 +5,7 @@ export * from './components/Button';
 export * from './components/Spinner';
 export * from './components/IconButton';
 export * from './components/Stack';
+export * from './components/Flex';
 
 /**
  * Icons & Logos
