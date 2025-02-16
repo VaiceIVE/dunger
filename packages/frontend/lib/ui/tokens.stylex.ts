@@ -23,9 +23,9 @@ export const colors = stylex.defineVars({
 
   // Outline colors
 
-  outlinePrimaryDefault: '#CACACA', // black-5
+  outlinePrimaryDefault: '#E9E9E9', // black-3
   outlinePrimaryHover: '#DDDDDD', // black-4
-  outlinePrimaryActive: '#4A4A4A', // black-80
+  outlinePrimaryActive: '#CACACA', // black-5
 
   outlineErrorDefault: '#E72B2B', // red-60
   outlineErrorHover: '#EF4747', // red-50
