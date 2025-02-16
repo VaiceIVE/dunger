@@ -1,2 +1,2 @@
 export { IconButton } from './IconButton';
-export { IconButtonVariant } from './IconButtonVariant';
+export { IconButtonVariant } from './IconButton.types';
