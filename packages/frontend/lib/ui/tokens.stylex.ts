@@ -31,9 +31,9 @@ export const colors = stylex.defineVars({
   outlineErrorHover: '#EF4747', // red-50
   outlineErrorActive: '#E10F0F', // red-70
 
-  outlineAccentDefault: '#4772FF', // blue-80
-  outlineAccentHover: '#5A80FF', // blue-70
-  outlineAccentActive: '#023DFF', // blue-100
+  outlineAccentDefault: '#F4A370', // orange-50
+  outlineAccentHover: '#F6B388', // orange-40
+  outlineAccentActive: '#F39459', // orange-60
 
   // Button colors
 
@@ -41,17 +41,17 @@ export const colors = stylex.defineVars({
   buttonPrimaryHover: '#4A4A4A', // black-80
   buttonPrimaryActive: '#1D1D1D', // black-100
 
-  buttonAccentDefault: '#1E52FF', // blue-90
-  buttonAccentHover: '#4772FF', // blue-80
-  buttonAccentActive: '#023DFF', // blue-100
+  buttonAccentDefault: '#ED6611', // orange-90
+  buttonAccentHover: '#EF7629', // orange-80
+  buttonAccentActive: '#D65809', // orange-100
 
-  buttonSecondaryAccentDefault: '#DAE3FF', // blue-10
-  buttonSecondaryAccentHover: '#F1F4FF', // blue-5
-  buttonSecondaryAccentActive: '#C8D5FF', // blue-20
+  buttonSecondaryAccentDefault: '#FBE0CF', // orange-10
+  buttonSecondaryAccentHover: '#FEF0E8', // orange-5
+  buttonSecondaryAccentActive: '#FAD2B8', // orange-20
 
-  buttonTertiaryAccentDefault: '#FBE0CF', // orange-10
-  buttonTertiaryAccentHover: '#FEF0E8', // orange-5
-  buttonTertiaryAccentActive: '#FAD2B8', // orange-20
+  buttonTertiaryAccentDefault: '#DAE3FF', // blue-10
+  buttonTertiaryAccentHover: '#F1F4FF', // blue-5
+  buttonTertiaryAccentActive: '#C8D5FF', // blue-20
 
   // Basic colors
 
