@@ -53,6 +53,20 @@ export const colors = stylex.defineVars({
   buttonTertiaryAccentHover: '#F1F4FF', // blue-5
   buttonTertiaryAccentActive: '#C8D5FF', // blue-20
 
+  // Background colors
+
+  backgroundNeutralDefault: '#F3F3F3', // black-2
+  backgroundNeutralHover: '#E9E9E9', // black-3
+  backgroundNeutralActive: '#DDDDDD', // black-4
+
+  backgroundBlueDefault: '#F1F4FF', // blue-10
+  backgroundBlueHover: '#DAE3FF', // blue-5
+  backgroundBlueActive: '#C8D5FF', // blue-20
+
+  backgroundOrangeDefault: '#FEF0E8', // orange-10
+  backgroundOrangeHover: '#FBE0CF', // orange-5
+  backgroundOrangeActive: '#FAD2B8', // orange-20
+
   // Basic colors
 
   black100: '#1D1D1D',
