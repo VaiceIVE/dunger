@@ -1,4 +1,4 @@
-import { Container, Grid, Stack } from '@dnd/ui';
+import { Container, Grid, Stack } from '@dunger/ui';
 
 export const BestiaryPage = () => {
   return (

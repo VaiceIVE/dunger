@@ -1,5 +1,5 @@
 {
-  "name": "dnd-user-web",
+  "name": "dunger-user-web",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,7 @@
     "uw:preview": "yarn preview"
   },
   "dependencies": {
-    "@dnd/ui": "workspace:*",
+    "@dunger/ui": "workspace:*",
     "@stylexjs/stylex": "^0.6.0",
     "@types/lodash-es": "^4.17.0",
     "@types/node": "^22.0.0",

@@ -1,5 +1,5 @@
 {
-  "name": "@dnd/ui",
+  "name": "@dunger/ui",
   "main": "index.ts",
   "type": "module",
   "peerDependencies": {
