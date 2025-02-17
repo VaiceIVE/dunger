@@ -17,7 +17,7 @@ export const router = createBrowserRouter(
       <Route path={'/feats/:id?'} Component={FeatsPage} />
       <Route path={'/backgrounds/:id?'} Component={BackgroundsPage} />
 
-      <Route path={'/bestiary'} Component={BestiaryPage} />
+      <Route path={'/bestiary/:id?'} Component={BestiaryPage} />
 
       {/* not found */}
       <Route path={'*'} Component={() => <Navigate to={'/'} replace />} />
