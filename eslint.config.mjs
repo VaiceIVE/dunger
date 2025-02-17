@@ -1,4 +1,4 @@
-import eslintPluginImportPaths from '@dnd/eslint-plugin-import-paths';
+import eslintPluginImportPaths from '@dunger/eslint-plugin-import-paths';
 import eslintJs from '@eslint/js';
 import eslintPluginStylex from '@stylexjs/eslint-plugin';
 import eslintConfigPrettier from 'eslint-config-prettier';
@@ -72,7 +72,7 @@ export default [
           pathGroups: [
             { pattern: 'react', group: 'external', position: 'before' },
             // внутренние библиотеки после внешних
-            { pattern: '@dnd/**', group: 'external', position: 'after' },
+            { pattern: '@dunger/**', group: 'external', position: 'after' },
             // импорт SCSS-модулей всегда в самом низу
             { pattern: './*.module.scss', group: 'sibling', position: 'after' },
             // отделяет внутренние импорты от внешних
@@ -86,7 +86,7 @@ export default [
     }
   },
   {
-    // FRONT: @dnd/eslint-plugin-import-paths
+    // FRONT: @dunger/eslint-plugin-import-paths
     files: frontFiles,
     ignores: ['packages/frontend/lib/*'],
     plugins: { 'import-paths': eslintPluginImportPaths },

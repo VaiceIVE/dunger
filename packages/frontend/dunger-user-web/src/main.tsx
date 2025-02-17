@@ -1,6 +1,6 @@
-import '@dnd/ui/styles/fonts.css';
-import '@dnd/ui/styles/base.css';
-import '@dnd/ui/styles/ui.css';
+import '@dunger/ui/styles/fonts.css';
+import '@dunger/ui/styles/base.css';
+import '@dunger/ui/styles/ui.css';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';

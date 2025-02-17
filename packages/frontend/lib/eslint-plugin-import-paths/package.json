@@ -1,5 +1,5 @@
 {
-  "name": "@dnd/eslint-plugin-import-paths",
+  "name": "@dunger/eslint-plugin-import-paths",
   "main": "index.mjs",
   "type": "module",
   "devDependencies": {

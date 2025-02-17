@@ -1,16 +1,16 @@
 {
-  "name": "dnd",
+  "name": "dunger",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "private": true,
   "workspaces": [
     "packages/backend",
-    "packages/frontend/dnd-user-web",
+    "packages/frontend/dunger-user-web",
     "packages/frontend/lib/*"
   ],
   "devDependencies": {
-    "@dnd/eslint-plugin-import-paths": "workspace:*",
+    "@dunger/eslint-plugin-import-paths": "workspace:*",
     "@eslint/js": "^9.12.0",
     "@stylexjs/eslint-plugin": "^0.6.0",
     "eslint": "^9.12.0",
