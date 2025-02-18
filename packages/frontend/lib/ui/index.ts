@@ -19,3 +19,4 @@ export * from './components/Stack';
  */
 export { headers } from './utils/headers';
 export { text } from './utils/text';
+export { createSafeContext } from './utils/createSafeContext';
