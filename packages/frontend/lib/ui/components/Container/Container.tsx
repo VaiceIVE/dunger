@@ -5,6 +5,7 @@ import { StyleXStyles } from '@stylexjs/stylex';
 
 export interface ContainerProps extends Omit<ComponentProps<'div'>, 'style'> {
   style?: StyleXStyles;
+
   asChild?: boolean;
 }
 
@@ -16,11 +17,11 @@ export function Container({ children, style, asChild }: ContainerProps) {
 
 const styles = stylex.create({
   root: {
+    marginHorizontal: 'auto',
+    maxWidth: '1077px',
     padding: {
       default: '32px 0'
     },
-    width: '100%',
-    maxWidth: '1077px',
-    marginHorizontal: 'auto'
+    width: '100%'
   }
 });
