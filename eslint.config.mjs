@@ -21,9 +21,8 @@ export default [
     // global ignores
     ignores: [
       '**/.*/*',
-      '**/dist*/*',
+      '**/dist*/*'
       // TODO: разобраться с ошибками (и за одно обновить @stylexjs/stylex и @stylexjs/eslint-plugin, чтобы их стало еще больше)
-      'packages/frontend/lib/ui/*'
     ]
   },
 
