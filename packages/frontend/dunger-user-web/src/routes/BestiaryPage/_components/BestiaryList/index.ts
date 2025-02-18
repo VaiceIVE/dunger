@@ -1,0 +1,1 @@
+export { BestiaryList } from './BestiaryList';
