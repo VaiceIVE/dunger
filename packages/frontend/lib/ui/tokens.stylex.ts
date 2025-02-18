@@ -31,9 +31,9 @@ export const colors = stylex.defineVars({
   outlineErrorHover: '#EF4747', // red-50
   outlineErrorActive: '#E10F0F', // red-70
 
-  outlineAccentDefault: '#F4A370', // orange-50
-  outlineAccentHover: '#F6B388', // orange-40
-  outlineAccentActive: '#F39459', // orange-60
+  outlineAccentDefault: '#F89F81', // brand-50
+  outlineAccentHover: '#F9AE95', // brand-40
+  outlineAccentActive: '#F7906E', // brand-60
 
   // Button colors
 
@@ -41,9 +41,9 @@ export const colors = stylex.defineVars({
   buttonPrimaryHover: '#4A4A4A', // black-80
   buttonPrimaryActive: '#1D1D1D', // black-100
 
-  buttonAccentDefault: '#ED6611', // orange-90
-  buttonAccentHover: '#EF7629', // orange-80
-  buttonAccentActive: '#D65809', // orange-100
+  buttonAccentDefault: '#F46738', // brand-90
+  buttonAccentHover: '#F5764C', // brand-80
+  buttonAccentActive: '#F35521', // brand-100
 
   buttonSecondaryAccentDefault: '#FBE0CF', // orange-10
   buttonSecondaryAccentHover: '#FEF0E8', // orange-5
@@ -84,6 +84,19 @@ export const colors = stylex.defineVars({
   black3: '#E9E9E9',
   black2: '#F3F3F3',
   black1: '#F9F9F9',
+
+  brand100: '#F35521',
+  brand90: '#F46738',
+  brand80: '#F5764C',
+  brand70: '#F68560',
+  brand60: '#F7906E',
+  brand50: '#F89F81',
+  brand40: '#F9AE95',
+  brand30: '#FABDA8',
+  brand20: '#FBCBBB',
+  brand10: '#FCDACF',
+  brand5: '#FEECE7',
+  brand1: '#FEF8F5',
 
   blue100: '#023DFF',
   blue90: '#1E52FF',
