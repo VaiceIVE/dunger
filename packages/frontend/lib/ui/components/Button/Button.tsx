@@ -4,15 +4,20 @@ import * as stylex from '@stylexjs/stylex';
 import type { StyleXStyles } from '@stylexjs/stylex';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { fontFamily } from '@dunger/ui/utils/fontFamily.stylex';
-import { ButtonSize, ButtonVariant, ButtonWidth } from './Button.types';
 import { Spinner } from '../Spinner';
+import { ButtonSize, ButtonVariant, ButtonWidth } from './Button.types';
 
 export interface ButtonProps extends Omit<ComponentProps<'button'>, 'style'> {
   style?: StyleXStyles;
+
   asChild?: boolean;
+
   width?: ButtonWidth;
+
   variant?: ButtonVariant;
+
   size?: ButtonSize;
+
   loading?: boolean;
 }
 

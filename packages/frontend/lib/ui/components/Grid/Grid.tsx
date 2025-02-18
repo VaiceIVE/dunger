@@ -60,8 +60,8 @@ const styles = stylex.create({
     columnGap: number | string,
     columns: number,
     overflow: string,
-    justifyContent,
-    alignItems,
+    justifyContent: string,
+    alignItems: string,
     flexGrow: number
   ) => ({
     columnGap,

@@ -1,4 +1,5 @@
 import { ComponentProps } from 'react';
+import { Slot } from '@radix-ui/react-slot';
 import { StyleXStyles } from '@stylexjs/stylex';
 import * as stylex from '@stylexjs/stylex';
 import { colors } from '@dunger/ui/tokens.stylex';
@@ -6,55 +7,68 @@ import { IconButtonVariant } from './IconButton.types';
 
 export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'style'> {
   style?: StyleXStyles;
+
   variant?: IconButtonVariant;
+
+  asChild?: boolean;
 }
 
-export const IconButton = ({ children, style, variant = IconButtonVariant.outline, ...props }: IconButtonProps) => {
+export const IconButton = ({
+  children,
+  style,
+  asChild,
+  variant = IconButtonVariant.primary,
+  ...props
+}: IconButtonProps) => {
+  const Component = asChild ? Slot : 'button';
+
   return (
-    <button {...stylex.props(styles.iconButton, styles[variant], style)} {...props}>
+    <Component {...stylex.props(styles.iconButton, styles[variant], style)} {...props}>
       {children}
-    </button>
+    </Component>
   );
 };
 
-// TODO - добавить другие версии кнопки
 const styles = stylex.create({
   iconButton: {
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 8,
     borderStyle: 'none',
     cursor: 'pointer',
     display: 'flex',
-    height: 48,
+    height: 32,
     justifyContent: 'center',
-    padding: 12,
-    width: 48
+    padding: 6,
+    transition: 'all 0.2s',
+    width: 32
+  },
+  // variants
+  primary: {
+    backgroundColor: {
+      default: colors.backgroundNeutralDefault,
+      ':not(:disabled):hover': colors.backgroundNeutralHover,
+      ':not(:disabled):active': colors.backgroundNeutralActive
+      // ':disabled': colors.
+    },
+    color: {
+      default: colors.textPrimaryDefault,
+      ':not(:disabled):hover': colors.textPrimaryHover,
+      ':not(:disabled):active': colors.textPrimaryActive
+      // ':disabled': colors.
+    }
   },
   ghost: {
     backgroundColor: {
       default: 'transparent',
-      // ':not(:disabled):hover': colors.backgroundPrimaryHover,
-      // ':not(:disabled):active': colors.backgroundPrimaryActive,
-      ':disabled': 'transparent'
+      ':not(:disabled):hover': colors.backgroundNeutralHover,
+      ':not(:disabled):active': colors.backgroundNeutralActive
+      // ':disabled': colors.
     },
     color: {
-      default: colors.textSecondaryDefault
-      //':disabled': colors.textDisabled
+      default: colors.textPrimaryDefault,
+      ':not(:disabled):hover': colors.textPrimaryHover,
+      ':not(:disabled):active': colors.textPrimaryActive
+      // ':disabled': colors.
     }
-  },
-  outline: {
-    backgroundColor: 'transparent',
-    color: {
-      default: colors.textSecondaryDefault
-      //':disabled': colors.textDisabled
-    },
-    outlineColor: {
-      // default: colors.dividerSubtlePrimary,
-      // ':not(:disabled):hover': colors.dividerSubtleHover,
-      // ':not(:disabled):active': colors.dividerSubtleActive,
-      // ':disabled': colors.dividerMiscDisabled
-    },
-    outlineStyle: 'solid',
-    outlineWidth: '2px'
   }
 });

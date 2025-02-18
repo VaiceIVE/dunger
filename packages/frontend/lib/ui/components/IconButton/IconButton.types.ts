@@ -1,4 +1,4 @@
 export enum IconButtonVariant {
-  outline = 'outline',
+  primary = 'primary',
   ghost = 'ghost'
 }

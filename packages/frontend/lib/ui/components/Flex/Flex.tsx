@@ -57,10 +57,10 @@ const styles = stylex.create({
     alignItems,
     columnGap,
     display: 'flex',
-    gap,
-    rowGap,
     flexDirection,
     flexWrap,
-    justifyContent
+    gap,
+    justifyContent,
+    rowGap
   })
 });

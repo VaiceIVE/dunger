@@ -31,8 +31,8 @@ const styles = stylex.create({
   root: (alignItems: string, gap: number, justifyContent: string) => ({
     alignItems,
     display: 'flex',
-    gap,
     flexDirection: 'column',
+    gap,
     justifyContent
   })
 });
