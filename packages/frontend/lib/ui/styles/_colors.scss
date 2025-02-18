@@ -16,6 +16,19 @@ $black-3: '#E9E9E9';
 $black-2: '#F3F3F3';
 $black-1: '#F9F9F9';
 
+$brand-100: '#F35521';
+$brand-90: '#F46738';
+$brand-80: '#F5764C';
+$brand-70: '#F68560';
+$brand-60: '#F7906E';
+$brand-50: '#F89F81';
+$brand-40: '#F9AE95';
+$brand-30: '#FABDA8';
+$brand-20: '#FBCBBB';
+$brand-10: '#FCDACF';
+$brand-5: '#FEECE7';
+$brand-1: '#FEF8F5';
+
 $blue-100: '#023DFF';
 $blue-90: '#1E52FF';
 $blue-80: '#4772FF';
@@ -163,9 +176,9 @@ $outline-error-default: $red-60;
 $outline-error-hover: $red-50;
 $outline-error-active: $red-70;
 
-$outline-accent-default: $orange-50;
-$outline-accent-hover: $orange-40;
-$outline-accent-active: $orange-60;
+$outline-accent-default: $brand-50;
+$outline-accent-hover: $brand-40;
+$outline-accent-active: $brand-60;
 
 // Button colors
 
@@ -173,9 +186,9 @@ $button-primary-default: $black-90;
 $button-primary-hover: $black-80;
 $button-primary-active: $black-100;
 
-$button-accent-default: $orange-90;
-$button-accent-hover: $orange-80;
-$button-accent-active: $orange-100;
+$button-accent-default: $brand-90;
+$button-accent-hover: $brand-80;
+$button-accent-active: $brand-100;
 
 $button-secondary-accent-default: $orange-10;
 $button-secondary-accent-hover: $orange-5;
