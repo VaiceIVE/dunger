@@ -5,11 +5,13 @@ export enum ButtonWidth {
 
 export enum ButtonVariant {
   primary = 'primary',
-  secondary = 'secondary'
+  secondary = 'secondary',
+  accent = 'accent',
+  accentSecondary = 'accentSecondary'
 }
 
 export enum ButtonSize {
-  large = 'large',
-  medium = 'medium',
-  small = 'small'
+  lg = 'lg',
+  md = 'md',
+  sm = 'sm'
 }
