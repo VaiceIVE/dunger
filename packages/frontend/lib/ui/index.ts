@@ -12,7 +12,7 @@ export * from './components/Stack';
 /**
  * Icons & Logos
  */
-//export * from './components/Icon';
+export * from './components/Icon';
 
 /**
  * Utils
