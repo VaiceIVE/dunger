@@ -78,8 +78,8 @@ const styles = stylex.create({
     },
     borderColor: {
       default: colors.outlinePrimaryDefault,
-      ':focus-visible': colors.brand80,
-      ':hover': colors.outlinePrimaryHover
+      ':hover': colors.outlinePrimaryHover,
+      ':focus': colors.brand80
     },
     borderStyle: 'solid',
     borderWidth: '1px',
@@ -100,12 +100,14 @@ const styles = stylex.create({
     width: '100%'
   },
   leftSection: {
+    color: colors.textTertiaryDefault,
     left: 12,
     position: 'absolute',
     top: '50%',
     transform: 'translate(0, -50%)'
   },
   rightSection: {
+    color: colors.textTertiaryDefault,
     position: 'absolute',
     right: 12,
     top: '50%',
