@@ -62,8 +62,8 @@ export const InputWrapper = ({
 const styles = stylex.create({
   root: {
     display: 'flex',
+    flex: '1',
     flexDirection: 'column',
-    gap: 0,
-    width: '100%'
+    gap: 0
   }
 });

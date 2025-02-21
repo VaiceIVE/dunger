@@ -31,27 +31,26 @@ export const Input = ({
 }: InputProps) => {
   return (
     <div {...stylex.props(styles.root)}>
-      <div {...stylex.props(styles.input)}>
-        {leftSection && (
-          <div {...stylex.props(styles.leftSection)} data-position="left">
-            {leftSection}
-          </div>
-        )}
+      {leftSection && (
+        <div {...stylex.props(styles.leftSection)} data-position="left">
+          {leftSection}
+        </div>
+      )}
 
-        <input
-          value={value}
-          data-with-right-section={!!rightSection}
-          data-with-left-section={!!leftSection}
-          {...stylex.props(text.defaultMedium, styles.base, styles[size], style)}
-          placeholder={placeholder}
-          {...props}
-        />
-        {rightSection && (
-          <div {...stylex.props(styles.rightSection)} data-position="right">
-            {rightSection}
-          </div>
-        )}
-      </div>
+      <input
+        value={value}
+        data-with-right-section={!!rightSection}
+        data-with-left-section={!!leftSection}
+        {...stylex.props(text.defaultMedium, styles.base, styles[size], style)}
+        placeholder={placeholder}
+        {...props}
+      />
+
+      {rightSection && (
+        <div {...stylex.props(styles.rightSection)} data-position="right">
+          {rightSection}
+        </div>
+      )}
     </div>
   );
 };
@@ -62,10 +61,6 @@ Input.Description = InputDescription;
 
 const styles = stylex.create({
   root: {
-    display: 'flex',
-    gap: 0
-  },
-  input: {
     overflow: 'hidden',
     position: 'relative',
     width: '100%'
@@ -73,7 +68,7 @@ const styles = stylex.create({
   base: {
     alignItems: 'center',
     backgroundColor: {
-      default: 'trasparent',
+      default: 'transparent',
       ':active': colors.backgroundNeutralDefault
     },
     borderColor: {
