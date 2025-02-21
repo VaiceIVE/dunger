@@ -7,6 +7,7 @@ export * from './components/Flex';
 export * from './components/Grid';
 export * from './components/Spinner';
 export * from './components/IconButton';
+export * from './components/Input';
 export * from './components/Stack';
 
 /**
