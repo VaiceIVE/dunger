@@ -100,18 +100,26 @@ const styles = stylex.create({
     width: '100%'
   },
   leftSection: {
+    alignItems: 'center',
     color: colors.textTertiaryDefault,
+    display: 'flex',
+    justifyContent: 'center',
     left: 12,
     position: 'absolute',
     top: '50%',
-    transform: 'translate(0, -50%)'
+    transform: 'translate(0, -50%)',
+    zIndex: 1
   },
   rightSection: {
+    alignItems: 'center',
     color: colors.textTertiaryDefault,
+    display: 'flex',
+    justifyContent: 'center',
     position: 'absolute',
     right: 12,
     top: '50%',
-    transform: 'translate(0, -50%)'
+    transform: 'translate(0, -50%)',
+    zIndex: 1
   },
 
   // sizes
