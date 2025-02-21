@@ -9,6 +9,7 @@ export * from './components/Spinner';
 export * from './components/IconButton';
 export * from './components/Input';
 export * from './components/Stack';
+export * from './components/TextInput';
 
 /**
  * Icons & Logos
