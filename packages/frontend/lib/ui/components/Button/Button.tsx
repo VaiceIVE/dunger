@@ -3,7 +3,7 @@ import { Slot } from '@radix-ui/react-slot';
 import * as stylex from '@stylexjs/stylex';
 import type { StyleXStyles } from '@stylexjs/stylex';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { fontFamily } from '@dunger/ui/utils/fontFamily.stylex';
+import { text } from '../../utils/text';
 import { Spinner } from '../Spinner';
 import { ButtonSize, ButtonVariant, ButtonWidth } from './Button.types';
 
@@ -27,14 +27,16 @@ export function Button({
   asChild,
   width = ButtonWidth.fit,
   variant = ButtonVariant.primary,
-  size = ButtonSize.medium,
+  size = ButtonSize.md,
   loading,
   ...props
 }: ButtonProps) {
   const Component = asChild ? Slot : 'button';
 
   return (
-    <Component {...stylex.props(styles.base, styles[variant], styles[size], styles[width], style)} {...props}>
+    <Component
+      {...stylex.props(styles.base, text.defaultMedium, styles[variant], styles[size], styles[width], style)}
+      {...props}>
       {loading ? <Spinner /> : children}
     </Component>
   );
@@ -44,81 +46,61 @@ const styles = stylex.create({
   base: {
     alignItems: 'center',
     appearance: 'none',
-    backgroundColor: {
-      default: colors.buttonPrimaryDefault,
-      ':not(:disabled):hover': colors.buttonPrimaryHover,
-      ':not(:disabled):active': colors.buttonPrimaryActive,
-      ':disabled': colors.buttonPrimaryActive
-    },
-    borderRadius: 8,
-    borderWidth: 0,
+    borderStyle: 'none',
+    borderWidth: 2,
     boxSizing: 'border-box',
-    color: {
-      default: colors.textInverse,
-      ':disabled': colors.textTertiaryHover
-    },
     cursor: {
       default: 'pointer',
       ':disabled': 'default'
     },
     display: 'inline-flex',
-    fontFamily: fontFamily.base,
-    fontSize: '14px',
-    fontWeight: 600,
     gap: 10,
-    height: 40,
     justifyContent: 'center',
-    lineHeight: 'normal',
-    padding: '0 24px',
     position: 'relative',
     textAlign: 'center',
     textDecoration: 'none',
+    transition: 'all 0.2s',
     userSelect: 'none',
     verticalAlign: 'top',
     whiteSpace: 'nowrap'
   },
   // variants
-  primary: {
-    boxShadow: 'none'
-  },
-  secondary: {
-    backgroundColor: 'transparent',
-    borderColor: {
-      default: colors.outlinePrimaryDefault,
-      ':not(:disabled):hover': colors.outlinePrimaryHover,
-      ':not(:disabled):active': colors.outlinePrimaryHover,
-      ':disabled': 'transparent'
+  primary: {},
+  secondary: {},
+  accent: {
+    backgroundColor: {
+      default: colors.buttonAccentDefault,
+      ':not(:disabled):hover': colors.buttonAccentHover,
+      ':not(:disabled):active': colors.buttonAccentActive,
+      ':disabled': colors.backgroundNeutralDefault
     },
-    borderStyle: 'solid',
-    borderWidth: '2px',
     color: {
-      default: colors.textPrimaryDefault,
-      ':disabled': colors.textTertiaryHover
+      default: 'white',
+      ':disabled': colors.black30
     }
   },
-
+  accentSecondary: {
+    backgroundColor: {
+      default: colors.buttonSecondaryAccentDefault,
+      ':not(:disabled):hover': colors.buttonSecondaryAccentHover,
+      ':not(:disabled):active': colors.buttonSecondaryAccentActive,
+      ':disabled': colors.backgroundNeutralDefault
+    },
+    color: {
+      default: colors.brand90,
+      ':not(:disabled):hover': colors.brand70,
+      ':not(:disabled):active': colors.brand80,
+      ':disabled': colors.black30
+    }
+  },
   // size
-  large: {
-    borderRadius: 12,
-    fontSize: '18px',
-    height: 60,
-    lineHeight: '24px',
-    padding: '0 32px'
-  },
-  medium: {
-    borderRadius: 10,
-    fontSize: '16px',
-    height: 48,
-    lineHeight: '24px',
-    padding: '0 24px'
-  },
-  small: {
+  lg: {},
+  md: {
     borderRadius: 8,
-    fontSize: '14px',
-    height: 36,
-    lineHeight: '20px',
-    padding: '0 16px'
+    height: 44,
+    padding: '12px 24px'
   },
+  sm: {},
   full: {
     width: '100%'
   },

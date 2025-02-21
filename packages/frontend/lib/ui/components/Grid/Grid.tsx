@@ -38,10 +38,12 @@ export const Grid = ({
   align = 'center',
   columns = 12,
   overflow = 'unset',
-  style
+  style,
+  ...props
 }: GridProps) => {
   return (
     <div
+      {...props}
       {...stylex.props(
         styles.root(gap, rowGap ?? 'unset', columnGap ?? 'unset', columns, overflow, justify, align, grow ? 1 : 0),
         style
