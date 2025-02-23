@@ -93,6 +93,19 @@ const styles = stylex.create({
       ':disabled': colors.black30
     }
   },
+  ghost: {
+    backgroundColor: {
+      default: 'transparent',
+      ':not(:disabled):hover': colors.backgroundNeutralHover,
+      ':disabled': colors.backgroundNeutralDefault
+    },
+    color: {
+      default: colors.textPrimaryDefault,
+      ':not(:disabled):hover': colors.textPrimaryHover,
+      ':not(:disabled):active': colors.textPrimaryActive,
+      ':disabled': colors.black30
+    }
+  },
   // size
   lg: {},
   md: {

@@ -7,7 +7,8 @@ export enum ButtonVariant {
   primary = 'primary',
   secondary = 'secondary',
   accent = 'accent',
-  accentSecondary = 'accentSecondary'
+  accentSecondary = 'accentSecondary',
+  ghost = 'ghost'
 }
 
 export enum ButtonSize {
