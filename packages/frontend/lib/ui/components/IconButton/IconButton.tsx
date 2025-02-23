@@ -47,7 +47,7 @@ const styles = stylex.create({
     backgroundColor: {
       default: colors.backgroundNeutralDefault,
       ':not(:disabled):hover': colors.backgroundNeutralHover,
-      ':not(:disabled):active': colors.backgroundNeutralActive
+      ':not(:disabled):active, :is([aria-selected=true])': colors.backgroundNeutralActive
       // ':disabled': colors.
     },
     color: {
@@ -61,7 +61,7 @@ const styles = stylex.create({
     backgroundColor: {
       default: 'transparent',
       ':not(:disabled):hover': colors.backgroundNeutralHover,
-      ':not(:disabled):active': colors.backgroundNeutralActive
+      ':not(:disabled):active, :is([aria-selected=true])': colors.backgroundNeutralActive
       // ':disabled': colors.
     },
     color: {

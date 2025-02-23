@@ -15,6 +15,7 @@ export * from './components/TextInput';
  * Icons & Logos
  */
 export * from './components/Icon';
+export * from './components/LogoSmall';
 
 /**
  * Utils
