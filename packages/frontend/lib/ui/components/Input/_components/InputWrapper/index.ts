@@ -1,4 +1,4 @@
 export { InputWrapper } from './InputWrapper';
 export type { InputWrapperProps } from './InputWrapper';
 
-export { useInputWrapper } from './InputWrapperContext';
+export { useInputWrapper } from './InputWrapper.context';
