@@ -19,7 +19,7 @@ export const BestiaryPage = () => {
               <h1 {...stylex.props(headers.h1Bold)}>Бестиарий</h1>
 
               <Stack gap={16}>
-                <Grid gap={isActiveCreature ? 8 : 16}>
+                <Grid gap={16}>
                   <Grid.Col span={isActiveCreature ? 11 : 6}>
                     <TextInput style={styles.input} placeholder="Поиск" leftSection={<SearchIcon />} />
                   </Grid.Col>
