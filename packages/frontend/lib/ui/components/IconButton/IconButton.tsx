@@ -51,9 +51,9 @@ const styles = stylex.create({
       // ':disabled': colors.
     },
     color: {
-      default: colors.textPrimaryDefault,
-      ':not(:disabled):hover': colors.textPrimaryHover,
-      ':not(:disabled):active': colors.textPrimaryActive
+      default: colors.textSecondaryDefault,
+      ':not(:disabled):hover': colors.textSecondaryHover,
+      ':not(:disabled):active': colors.textSecondaryActive
       // ':disabled': colors.
     }
   },
@@ -65,9 +65,9 @@ const styles = stylex.create({
       // ':disabled': colors.
     },
     color: {
-      default: colors.textPrimaryDefault,
-      ':not(:disabled):hover': colors.textPrimaryHover,
-      ':not(:disabled):active': colors.textPrimaryActive
+      default: colors.textSecondaryDefault,
+      ':not(:disabled):hover': colors.textSecondaryHover,
+      ':not(:disabled):active': colors.textSecondaryActive
       // ':disabled': colors.
     }
   }
