@@ -1,4 +1,4 @@
-import { InputBaseProps } from '.';
+import { InputBaseProps } from './InputBase';
 
 export const useInputBaseProps = (props: InputBaseProps) => {
   const { rightSection, leftSection, size, style, description, label, inputWrapperOrder, required, children, ...rest } =

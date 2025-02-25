@@ -2,8 +2,8 @@ import { ComponentProps } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import * as stylex from '@stylexjs/stylex';
 import type { StyleXStyles } from '@stylexjs/stylex';
+import { text } from '@utils/text';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { text } from '../../utils/text';
 import { Spinner } from '../Spinner';
 import { ButtonSize, ButtonVariant, ButtonWidth } from './Button.types';
 
