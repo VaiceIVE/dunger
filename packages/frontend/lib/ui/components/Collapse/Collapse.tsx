@@ -1,8 +1,10 @@
 import { ComponentProps } from 'react';
 import { Slot } from '@radix-ui/react-slot';
+import * as stylex from '@stylexjs/stylex';
+import { StyleXStyles } from '@stylexjs/stylex';
 import { useCollapse } from './useCollapse';
 
-interface CollapseProps extends ComponentProps<'div'> {
+interface CollapseProps extends Omit<ComponentProps<'div'>, 'style'> {
   asChild?: boolean;
 
   /** Opened state */
@@ -19,6 +21,8 @@ interface CollapseProps extends ComponentProps<'div'> {
 
   /** Determines whether opacity should be animated, `true` by default */
   animateOpacity?: boolean;
+
+  style?: StyleXStyles;
 }
 
 export const Collapse = ({
@@ -30,6 +34,7 @@ export const Collapse = ({
   onTransitionEnd,
   animateOpacity,
   ref,
+  style,
   ...props
 }: CollapseProps) => {
   const Component = asChild ? Slot : 'div';
@@ -41,6 +46,8 @@ export const Collapse = ({
     onTransitionEnd
   });
 
+  const styleProps = stylex.props(style);
+
   if (transitionDuration === 0) {
     return <Component {...props}>{children}</Component>;
   }
@@ -50,6 +57,7 @@ export const Collapse = ({
       {...getCollapseProps({
         ref,
         style: {
+          ...styleProps.style,
           opacity: opened || !animateOpacity ? 1 : 0,
           transition: animateOpacity ? `opacity ${transitionDuration.toString()}ms ${transitionTimingFunction}` : 'none'
         },
