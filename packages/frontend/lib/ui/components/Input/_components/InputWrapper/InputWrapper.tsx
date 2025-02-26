@@ -1,10 +1,10 @@
 import { PropsWithChildren, Fragment } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
-import { InputSize } from '../../types';
+import { InputSize } from '../../Input.types';
 import { InputDescription } from '../InputDescription';
 import { InputLabel } from '../InputLabel';
-import { InputWrapperProvider } from './InputWrapperContext';
+import { InputWrapperProvider } from './InputWrapper.context';
 
 export interface InputWrapperProps extends PropsWithChildren {
   description?: string;

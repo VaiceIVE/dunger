@@ -25,5 +25,10 @@ export const router = createBrowserRouter(
       {/* not found */}
       <Route path={'*'} Component={() => <Navigate to={'/'} replace />} />
     </Route>
-  )
+  ),
+  {
+    future: {
+      v7_relativeSplatPath: true
+    }
+  }
 );

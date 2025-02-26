@@ -6,7 +6,7 @@ import { colors } from '../../tokens.stylex';
 import { InputDescription } from './_components/InputDescription';
 import { InputLabel } from './_components/InputLabel';
 import { InputWrapper } from './_components/InputWrapper';
-import { InputSize } from './types';
+import { InputSize } from './Input.types';
 
 export interface InputProps extends Omit<ComponentProps<'input'>, 'size' | 'style'> {
   rightSection?: ReactNode;

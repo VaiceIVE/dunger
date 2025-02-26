@@ -1,5 +1,5 @@
-import { createOptionalContext } from '../../../../utils/createOptionalContext';
-import { InputSize } from '../../types';
+import { createOptionalContext } from '@utils/createOptionalContext';
+import { InputSize } from '../../Input.types';
 
 interface InputWrapperContextValue {
   size: InputSize;

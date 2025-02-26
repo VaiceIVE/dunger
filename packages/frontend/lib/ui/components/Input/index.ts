@@ -1,5 +1,5 @@
 export { Input } from './Input';
-export * from './types';
+export * from './Input.types';
 
 export { InputWrapper } from './_components/InputWrapper';
 export type { InputWrapperProps } from './_components/InputWrapper';

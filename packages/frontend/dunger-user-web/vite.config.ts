@@ -14,7 +14,7 @@ export default defineConfig({
     }),
     svgr(),
     // система импортов TypeScript (иначе он игнорирует baseUrl)
-    tsconfigPaths({ root: './' })
+    tsconfigPaths()
   ],
   css: {
     preprocessorOptions: {
