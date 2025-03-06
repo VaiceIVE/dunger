@@ -51,11 +51,9 @@ export const Accordion = ({
   };
 
   return (
-    <div {...stylex.props(styles.root, style)}>
-      <AccordionProvider value={{ isItemActive, onChange: handleItemChange, transitionDuration }}>
-        <div {...stylex.props(styles.children)}>{children}</div>
-      </AccordionProvider>
-    </div>
+    <AccordionProvider value={{ isItemActive, onChange: handleItemChange, transitionDuration }}>
+      <div {...stylex.props(styles.root, style)}>{children}</div>
+    </AccordionProvider>
   );
 };
 
@@ -65,10 +63,6 @@ Accordion.Panel = AccordionPanel;
 
 const styles = stylex.create({
   root: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-  children: {
     display: 'flex',
     flexDirection: 'column',
     gap: 0,
