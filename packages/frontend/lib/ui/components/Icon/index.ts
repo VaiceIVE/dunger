@@ -1,4 +1,6 @@
 import BellFilledIcon from './_icons/bell-filled.svg?react';
+import ChevronDownIcon from './_icons/chevron-down.svg?react';
+import ChevronUpIcon from './_icons/chevron-up.svg?react';
 import DiceD20Icon from './_icons/dice-d20.svg?react';
 import FolderIcon from './_icons/folder.svg?react';
 import LinkIcon from './_icons/link.svg?react';
@@ -8,4 +10,16 @@ import PlusFilledIcon from './_icons/plus-filled.svg?react';
 import SearchIcon from './_icons/search.svg?react';
 import XIcon from './_icons/x.svg?react';
 
-export { BellFilledIcon, DiceD20Icon, FolderIcon, LinkIcon, MenuIcon, PencilIcon, PlusFilledIcon, SearchIcon, XIcon };
+export {
+  BellFilledIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  DiceD20Icon,
+  FolderIcon,
+  LinkIcon,
+  MenuIcon,
+  PencilIcon,
+  PlusFilledIcon,
+  SearchIcon,
+  XIcon
+};
