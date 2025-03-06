@@ -1,6 +1,6 @@
 import { Fragment, ReactNode, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import { Accordion, Avatar, Flex, Stack, Tag, text } from '@dunger/ui';
+import { Accordion, Avatar, ChevronDownIcon, ChevronUpIcon, Flex, Stack, Tag, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Card } from 'components/Card';
 import { Beast } from 'store/apiTypes.gen';
@@ -62,7 +62,16 @@ export const BeastCard = ({ beast, controls }: BeastCardProps) => {
           value={openedSection}>
           <Accordion.Item style={styles.description} value="description">
             <Accordion.Control style={[styles.control, text.subheaderSemibold]}>
-              {(open: boolean) => <Fragment>Описание {open ? 1 : 0}</Fragment>}
+              {(open: boolean) => (
+                <Fragment>
+                  Описание{' '}
+                  {open ? (
+                    <ChevronUpIcon {...stylex.props(styles.chevron)} />
+                  ) : (
+                    <ChevronDownIcon {...stylex.props(styles.chevron)} />
+                  )}
+                </Fragment>
+              )}
             </Accordion.Control>
             <Accordion.Panel>
               <div {...stylex.props(styles.panel, text.defaultRegular)}>{beast?.description ?? 'Не указано'}</div>
@@ -140,11 +149,11 @@ const styles = stylex.create({
     borderRadius: 10
   },
   control: {
-    alignItems: 'center',
     color: colors.textPrimaryDefault,
-    display: 'flex',
-    justifyContent: 'space-between',
     padding: 16
+  },
+  chevron: {
+    color: colors.brand90
   },
   panel: {
     paddingBottom: 16,
