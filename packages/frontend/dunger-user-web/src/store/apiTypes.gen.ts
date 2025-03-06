@@ -90,6 +90,15 @@ export interface Trait {
   damage?: { amount: number; type: DamageType }; // тут наверное так не прокатит, но мб
 }
 
+export interface Stats {
+  strength: number;
+  dexterity: number;
+  constitution: number;
+  intelligence: number;
+  wisdom: number;
+  charisma: number;
+}
+
 export interface Beast {
   id: string; // Уникальный идентификатор
   name: string; // Имя существа
@@ -102,14 +111,7 @@ export interface Beast {
   armorClass: number; // Класс брони
   hitPoints: number; // Очки здоровья
   speed: Speed; // Скорости передвижения
-  stats: {
-    strength: number;
-    dexterity: number;
-    constitution: number;
-    intelligence: number;
-    wisdom: number;
-    charisma: number;
-  }; // Характеристики
+  stats: Stats; // Характеристики
   skills?: Record<string, number>; // Навыки (например, { stealth: 5, perception: 8 }) тут точно надо из типов
   passivePerception: number; // Пассивное восприятие
   senses?: Senses; // Чувства (например, тёмное зрение, чувствительность к вибрациям)
