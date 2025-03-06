@@ -2,6 +2,7 @@ import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from '
 import { BaseLayout } from './_layouts/BaseLayout';
 import { UserLayout } from './_layouts/UserLayout';
 import { BackgroundsPage } from './BackgroundsPage';
+import { BeastPage } from './BeastPage';
 import { BestiaryPage } from './BestiaryPage';
 import { ClassesPage } from './ClassesPage';
 import { FeatsPage } from './FeatsPage';
@@ -20,6 +21,8 @@ export const router = createBrowserRouter(
         <Route path={'/backgrounds/:id?'} Component={BackgroundsPage} />
 
         <Route path={'/bestiary/:id?'} Component={BestiaryPage} />
+
+        <Route path="/beast/:id" Component={BeastPage} />
       </Route>
 
       {/* not found */}
