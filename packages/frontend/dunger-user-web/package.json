@@ -12,11 +12,13 @@
   "dependencies": {
     "@dunger/ui": "workspace:*",
     "@stylexjs/stylex": "^0.6.0",
+    "@tanstack/react-query": "^5.64.2",
     "@types/lodash-es": "^4.17.0",
     "@types/node": "^22.0.0",
     "@types/react": "npm:types-react@rc",
     "@types/react-dom": "npm:types-react-dom@rc",
     "@vitejs/plugin-react": "^4.2.0",
+    "axios": "^1.7.9",
     "clsx": "^2.1.0",
     "lodash-es": "^4.17.0",
     "react": "19.0.0-rc-fb9a90fa48-20240614",

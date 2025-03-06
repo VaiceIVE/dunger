@@ -2,6 +2,7 @@
  * Components
  */
 export * from './components/Accordion';
+export * from './components/Avatar';
 export * from './components/Button';
 export * from './components/Container';
 export * from './components/Collapse';
@@ -11,6 +12,7 @@ export * from './components/Spinner';
 export * from './components/IconButton';
 export * from './components/Input';
 export * from './components/Stack';
+export * from './components/Tag';
 export * from './components/TextInput';
 
 /**

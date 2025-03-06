@@ -1,0 +1,1 @@
+export { BeastCard } from './BeastCard';

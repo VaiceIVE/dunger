@@ -1,8 +1,23 @@
+import { Fragment } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import { useParams } from 'react-router-dom';
-import { Button, ButtonVariant, Container, Grid, headers, SearchIcon, Stack, TextInput } from '@dunger/ui';
+import { Link, useParams } from 'react-router-dom';
+import {
+  Button,
+  ButtonVariant,
+  Container,
+  FolderIcon,
+  Grid,
+  headers,
+  IconButton,
+  LinkIcon,
+  PencilIcon,
+  SearchIcon,
+  Stack,
+  TextInput,
+  XIcon
+} from '@dunger/ui';
+import { BeastCard } from 'features/BeastCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
-import { BestiaryCard } from './_components/BestiaryCard';
 import { BestiaryList } from './_components/BestiaryList';
 
 export const BestiaryPage = () => {
@@ -34,7 +49,26 @@ export const BestiaryPage = () => {
           </SplitViewLayout.Master>
 
           <SplitViewLayout.Detail>
-            <BestiaryCard />
+            <BeastCard
+              controls={
+                <Fragment>
+                  <IconButton>
+                    <PencilIcon />
+                  </IconButton>
+                  <IconButton>
+                    <LinkIcon />
+                  </IconButton>
+                  <IconButton>
+                    <FolderIcon />
+                  </IconButton>
+                  <Link to={'/bestiary'}>
+                    <IconButton>
+                      <XIcon />
+                    </IconButton>
+                  </Link>
+                </Fragment>
+              }
+            />
           </SplitViewLayout.Detail>
         </SplitViewLayout>
       </Container>
