@@ -54,7 +54,7 @@ const styles = stylex.create({
       ':disabled': 'default'
     },
     display: 'inline-flex',
-    gap: 10,
+    gap: 12,
     justifyContent: 'center',
     position: 'relative',
     textAlign: 'center',
@@ -65,7 +65,18 @@ const styles = stylex.create({
     whiteSpace: 'nowrap'
   },
   // variants
-  primary: {},
+  primary: {
+    backgroundColor: {
+      default: colors.buttonPrimaryDefault,
+      ':not(:disabled):hover': colors.buttonPrimaryHover,
+      ':not(:disabled):active': colors.buttonPrimaryActive,
+      ':disabled': colors.backgroundNeutralDefault
+    },
+    color: {
+      default: 'white',
+      ':disabled': colors.black30
+    }
+  },
   secondary: {},
   accent: {
     backgroundColor: {
