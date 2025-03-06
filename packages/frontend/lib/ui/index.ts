@@ -4,6 +4,7 @@
 export * from './components/Accordion';
 export * from './components/Avatar';
 export * from './components/Button';
+export * from './components/Checkbox';
 export * from './components/Container';
 export * from './components/Collapse';
 export * from './components/Flex';
