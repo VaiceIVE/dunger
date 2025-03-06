@@ -45,11 +45,13 @@ export const StatsTable = ({ stats }: { stats?: Stats }) => {
 
 const styles = stylex.create({
   root: {
+    borderBottomWidth: 2,
     borderColor: colors.outlinePrimaryDefault,
     borderLeftWidth: { default: 1, ':first-child': 2 },
     borderRadius: { default: 0, ':first-child': '10px 0 0 10px', ':last-child': '0 10px 10px 0' },
     borderRightWidth: { default: 1, ':last-child': 2 },
     borderStyle: 'solid',
+    borderTopWidth: 2,
     flex: '1'
   },
   title: {
