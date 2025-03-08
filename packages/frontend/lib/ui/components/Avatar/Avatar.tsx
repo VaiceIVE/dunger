@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
+import { colors } from 'tokens.stylex';
 
 interface AvatarProps {
   src?: string | null;
@@ -50,7 +51,7 @@ const styles = stylex.create({
   }),
   noImage: {
     alignItems: 'center',
-    backgroundColor: '#F6F6F7',
+    backgroundColor: colors.backgroundUniversal,
     color: 'white',
     display: 'flex',
     justifyContent: 'center'

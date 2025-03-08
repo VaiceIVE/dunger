@@ -145,7 +145,7 @@ const styles = stylex.create({
     color: colors.textSecondaryDefault
   },
   description: {
-    backgroundColor: '#F6F6F7',
+    backgroundColor: colors.backgroundUniversal,
     borderRadius: 10
   },
   control: {
@@ -168,7 +168,7 @@ const styles = stylex.create({
     padding: 0
   },
   card: {
-    backgroundColor: '#F6F6F7',
+    backgroundColor: colors.backgroundUniversal,
     borderLeftStyle: 'solid',
     borderLeftWidth: 4,
     borderRadius: 6,

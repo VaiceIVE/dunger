@@ -55,6 +55,8 @@ export const colors = stylex.defineVars({
 
   // Background colors
 
+  backgroundUniversal: '#F6F6F7',
+
   backgroundNeutralDefault: '#F3F3F3', // black-2
   backgroundNeutralHover: '#E9E9E9', // black-3
   backgroundNeutralActive: '#DDDDDD', // black-4
