@@ -1,10 +1,10 @@
+import { DungerSize } from '@styles/DungerSize';
 import { createOptionalContext } from '@utils/createOptionalContext';
-import { InputSize } from '../../Input.types';
 
 interface InputWrapperContextValue {
-  size: InputSize;
+  size: Extract<DungerSize, 'md' | 'lg'>;
 }
 
 export const [InputWrapperProvider, useInputWrapper] = createOptionalContext<InputWrapperContextValue>({
-  size: InputSize.md
+  size: 'md'
 });

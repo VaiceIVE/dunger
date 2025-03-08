@@ -1,7 +1,7 @@
 import { PropsWithChildren, Fragment } from 'react';
+import { DungerSize } from '@styles/DungerSize';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
-import { InputSize } from '../../Input.types';
 import { InputDescription } from '../InputDescription';
 import { InputLabel } from '../InputLabel';
 import { InputWrapperProvider } from './InputWrapper.context';
@@ -17,7 +17,7 @@ export interface InputWrapperProps extends PropsWithChildren {
 
   style?: StyleXStyles;
 
-  size?: InputSize;
+  size?: Extract<DungerSize, 'md' | 'lg'>;
 }
 
 export const InputWrapper = ({
@@ -27,7 +27,7 @@ export const InputWrapper = ({
   inputWrapperOrder = ['label', 'input', 'description'],
   required,
   style,
-  size = InputSize.md
+  size = 'md'
 }: InputWrapperProps) => {
   const _input = <Fragment key="input">{children}</Fragment>;
 

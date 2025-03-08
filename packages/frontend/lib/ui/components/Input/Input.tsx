@@ -1,4 +1,5 @@
 import { ComponentProps, ReactNode } from 'react';
+import { DungerSize } from '@styles/DungerSize';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { text } from '@dunger/ui';
@@ -6,29 +7,20 @@ import { colors } from '../../tokens.stylex';
 import { InputDescription } from './_components/InputDescription';
 import { InputLabel } from './_components/InputLabel';
 import { InputWrapper } from './_components/InputWrapper';
-import { InputSize } from './Input.types';
 
 export interface InputProps extends Omit<ComponentProps<'input'>, 'size' | 'style'> {
   rightSection?: ReactNode;
 
   leftSection?: ReactNode;
 
-  size?: InputSize;
+  size?: Extract<DungerSize, 'md' | 'lg'>;
 
   style?: StyleXStyles;
 
   // component?: 'input' | 'textarea';
 }
 
-export const Input = ({
-  leftSection,
-  rightSection,
-  size = InputSize.md,
-  style,
-  value,
-  placeholder,
-  ...props
-}: InputProps) => {
+export const Input = ({ leftSection, rightSection, size = 'md', style, value, placeholder, ...props }: InputProps) => {
   return (
     <div {...stylex.props(styles.root)}>
       {leftSection && (
@@ -120,8 +112,8 @@ const styles = stylex.create({
   // sizes
   md: {
     borderRadius: 10,
-    height: 40,
-    paddingBlock: 10,
+    height: 44,
+    paddingBlock: 12,
     paddingLeft: {
       default: 12,
       ':is([data-with-left-section=true])': 38

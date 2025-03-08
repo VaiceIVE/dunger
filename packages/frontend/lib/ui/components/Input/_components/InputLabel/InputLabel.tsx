@@ -1,5 +1,7 @@
 import { ComponentProps } from 'react';
 import * as stylex from '@stylexjs/stylex';
+import { text } from '@utils/text';
+import { colors } from 'tokens.stylex';
 
 export interface InputLabelProps extends ComponentProps<'div'> {
   required?: boolean;
@@ -11,18 +13,16 @@ export const InputLabel = ({ children, required, labelElement = 'label' }: Input
   const Component = labelElement;
 
   return (
-    <Component {...stylex.props(styles.root)}>
-      {children} {required && <div {...stylex.props(styles.required)}>*</div>}
+    <Component {...stylex.props(styles.root, text.defaultSemibold)}>
+      {children}
+      {required && '*'}
     </Component>
   );
 };
 
 const styles = stylex.create({
   root: {
-    alignItems: 'flex-start',
-    display: 'flex',
-    gap: 4,
-    marginBottom: 8
-  },
-  required: {}
+    color: colors.textPrimaryDefault,
+    marginBottom: 6
+  }
 });
