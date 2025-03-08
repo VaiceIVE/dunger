@@ -1,0 +1,24 @@
+import { useSheetContext } from '@components/Sheet/Sheet.context';
+import * as stylex from '@stylexjs/stylex';
+
+export function SheetOverlay() {
+  const { open } = useSheetContext();
+
+  if (!open) {
+    return null;
+  }
+
+  return <div {...stylex.props(styles.root)}></div>;
+}
+
+const styles = stylex.create({
+  root: {
+    left: 0,
+    position: 'fixed',
+    top: 0,
+    width: stylex.firstThatWorks('100svw', '100vw'),
+    zIndex: 199,
+    height: stylex.firstThatWorks('100svh', '100vh'),
+    background: 'rgba(17, 17, 17, 0.3)'
+  }
+});

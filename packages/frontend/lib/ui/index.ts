@@ -9,6 +9,7 @@ export * from './components/Container';
 export * from './components/Collapse';
 export * from './components/Flex';
 export * from './components/Grid';
+export * from './components/Sheet';
 export * from './components/Spinner';
 export * from './components/IconButton';
 export * from './components/Input';

@@ -1,4 +1,4 @@
-import { createSafeContext } from '../../utils/createSafeContext';
+import { createSafeContext } from '@utils/createSafeContext';
 
 interface AccordionItemContext {
   value: string;
