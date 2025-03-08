@@ -10,23 +10,23 @@ const statsMap: { title: string; key: keyof Stats }[] = [
   },
   {
     title: 'ЛОВ',
-    key: 'strength'
+    key: 'dexterity'
   },
   {
     title: 'ТЕЛ',
-    key: 'strength'
+    key: 'constitution'
   },
   {
     title: 'ИНТ',
-    key: 'strength'
+    key: 'intelligence'
   },
   {
     title: 'МДР',
-    key: 'strength'
+    key: 'wisdom'
   },
   {
     title: 'ХАР',
-    key: 'strength'
+    key: 'charisma'
   }
 ];
 
