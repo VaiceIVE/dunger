@@ -61,11 +61,12 @@ const styles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
+      ':focus': colors.backgroundNeutralDefault,
       ':active': colors.backgroundNeutralDefault
     },
     borderColor: {
       default: colors.outlinePrimaryDefault,
-      ':hover': colors.outlinePrimaryHover,
+      ':hover': colors.outlineAccentHover,
       ':focus': colors.brand80
     },
     borderStyle: 'solid',
