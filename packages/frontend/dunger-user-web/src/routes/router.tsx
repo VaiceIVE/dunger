@@ -7,6 +7,7 @@ import { BestiaryPage } from './BestiaryPage';
 import { ClassesPage } from './ClassesPage';
 import { FeatsPage } from './FeatsPage';
 import { HomePage } from './HomePage';
+import { NewBeastPage } from './NewBeastPage';
 import { SpeciesPage } from './SpeciesPage';
 
 export const router = createBrowserRouter(
@@ -22,6 +23,7 @@ export const router = createBrowserRouter(
 
         <Route path={'/bestiary/:id?'} Component={BestiaryPage} />
 
+        <Route path="/beast/new" Component={NewBeastPage} />
         <Route path="/beast/:id" Component={BeastPage} />
       </Route>
 

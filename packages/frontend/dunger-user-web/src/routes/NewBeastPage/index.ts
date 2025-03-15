@@ -1,0 +1,1 @@
+export { NewBeastPage } from './NewBeastPage';
