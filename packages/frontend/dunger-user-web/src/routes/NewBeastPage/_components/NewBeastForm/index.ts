@@ -1,0 +1,1 @@
+export { NewBeastForm } from './NewBeastForm';
