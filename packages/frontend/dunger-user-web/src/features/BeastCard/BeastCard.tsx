@@ -115,7 +115,7 @@ export const BeastCard = ({ beast, controls }: BeastCardProps) => {
 
 const KeyValue = ({ keyLabel, value }: { keyLabel?: ReactNode; value?: ReactNode }) => {
   return (
-    <Flex gap={6} style={text.defaultMedium}>
+    <Flex gap={4} style={text.defaultMedium}>
       <div {...stylex.props(styles.key, text.defaultSemibold)}>{keyLabel}</div>
       <div {...stylex.props(styles.value)}>{value}</div>
     </Flex>
