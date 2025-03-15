@@ -97,8 +97,8 @@ const styles = stylex.create({
     alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
-      ':focus': colors.backgroundNeutralDefault,
-      ':active': colors.backgroundNeutralDefault
+      ':focus': colors.backgroundUniversal,
+      ':active': colors.backgroundUniversal
     },
     borderColor: {
       default: colors.outlinePrimaryDefault,
