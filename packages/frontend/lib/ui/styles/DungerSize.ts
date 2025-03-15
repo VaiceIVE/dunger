@@ -1,1 +1,1 @@
-export type DungerSize = 'sm' | 'md' | 'lg';
+export type DungerSize = 'xs' | 'sm' | 'md' | 'lg';
