@@ -1,0 +1,89 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Size {
+  size_key String @id
+  size_name String
+  creature Creature[]
+}
+
+model Source {
+  id Int @default(autoincrement()) @id()
+  key String @unique
+  title String 
+
+  creatures Creature[]
+}
+
+model Language {
+  id Int @default(autoincrement()) @id
+  name String
+
+  creatures Creature[]
+}
+
+model Biome {
+  id Int @default(autoincrement()) @id()
+  key String @unique
+  title String
+
+  creatures Creature[]
+}
+
+model Creature {
+  id String @id
+  name String
+  image_uri String?
+  fiction String
+  size String 
+  size_relation Size @relation(references: [size_key], fields: [size])
+  type String
+  soirce_id Int
+  alignment String
+  ac Int
+  hp Int
+  speed String
+  str Int
+  dex Int
+  con Int
+  int Int
+  wis Int
+  cha Int
+  skill String
+  passive_perception Int
+  languages Language[]
+  biome_id Int
+  sType String //TODO
+  aSubTypes String[] //TODO
+  biome_reference Biome @relation(references: [id], fields: [biome_id])
+  source_relation Source @relation(references: [id], fields: [soirce_id])
+  
+}
+
+model Action {
+  id Int @default(autoincrement()) @id
+  name String 
+  text String
+  attack String
+
+}
+
+model Trait {
+  id Int @default(autoincrement()) @id
+  name String 
+  text String
+  attack String
+
+}
