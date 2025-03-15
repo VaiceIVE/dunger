@@ -22,7 +22,6 @@ export const autosizeTextarea = ({
   const lineHeight = parseFloat(computedStyle.lineHeight);
   const paddingTop = parseFloat(computedStyle.paddingTop);
   const paddingBottom = parseFloat(computedStyle.paddingBottom);
-  console.log(lineHeight);
 
   const maxHeight = maxRows ? maxRows * lineHeight + paddingTop + paddingBottom : undefined;
   const minHeight = minRows ? minRows * lineHeight + paddingTop + paddingBottom : 72;

@@ -1,13 +1,9 @@
 import { ComponentProps, FormEventHandler, useEffect, useRef, useState } from 'react';
-import { Input } from '@components/Input';
-import { InputWrapperProps, useInputWrapper } from '@components/Input/_components/InputWrapper';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
-import { text } from '@utils/text';
-import { colors } from 'tokens.stylex';
+import { text, InputWrapperProps, useInputWrapper, Input } from '@dunger/ui';
+import { colors } from '@dunger/ui/tokens.stylex';
 import { autosizeTextarea } from './autosizeTextarea';
-
-export type TextareaImplProps = InputWrapperProps & TextareaProps;
 
 interface TextareaProps extends Omit<ComponentProps<'textarea'>, 'style'> {
   autosize?: boolean;
@@ -18,6 +14,8 @@ interface TextareaProps extends Omit<ComponentProps<'textarea'>, 'style'> {
 
   style?: StyleXStyles;
 }
+
+export type TextareaImplProps = InputWrapperProps & TextareaProps;
 
 export const TextareaImpl = ({ label, description, required, validate, ...props }: TextareaImplProps) => {
   return (
