@@ -73,14 +73,15 @@ const styles = stylex.create({
   base: {
     backgroundColor: {
       default: 'white',
-      ':is(:hover):not([data-disabled=true], [data-state=checked])': colors.backgroundUniversal
+      ':is(:hover):not([data-disabled=true], [data-state=checked])': colors.backgroundUniversal,
+      ':is([data-state=checked])': colors.backgroundOrangeDefault
     },
     borderWidth: 0,
     color: {
       default: colors.textPrimaryDefault,
       // ':is([data-disabled=true])': colors.secondary40,
       ':is(:hover):not([data-disabled=true], [data-state=checked])': colors.textPrimaryHover,
-      ':is([data-state=checked])': colors.textPrimaryActive
+      ':is([data-state=checked])': colors.brand90
     },
     cursor: { ':not(:is([data-disabled=true]))': 'pointer' },
     display: 'block',
