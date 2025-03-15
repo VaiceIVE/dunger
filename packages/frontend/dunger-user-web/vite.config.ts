@@ -1,6 +1,6 @@
+import stylex from '@stylexjs/rollup-plugin';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
-import stylexPlugin from 'vite-plugin-stylex-dev';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
@@ -8,10 +8,18 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 export default defineConfig({
   plugins: [
     react(),
-    // https://stylexjs.com/docs/learn/installation/#compiler
-    stylexPlugin({
-      useCSSLayers: true
-    }),
+    {
+      ...stylex({ fileName: 'assets/stylex-[hash].css', useCSSLayers: true, lightningcssOptions: { minify: true } }),
+      transformIndexHtml(_, ctx) {
+        const asset =
+          ctx.bundle && Object.values(ctx.bundle).find((o) => o.type === 'asset' && o.fileName.includes('stylex'));
+
+        if (asset) {
+          const [tag, attrs] = ['link', { rel: 'stylesheet', crossorigin: true, href: `/${asset.fileName}` }];
+          return [{ tag, attrs, injectTo: 'head' }];
+        }
+      }
+    },
     svgr(),
     // система импортов TypeScript (иначе он игнорирует baseUrl)
     tsconfigPaths({ root: '.' })
