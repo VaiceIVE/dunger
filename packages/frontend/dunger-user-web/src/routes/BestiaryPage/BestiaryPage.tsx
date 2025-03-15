@@ -52,17 +52,17 @@ export const BestiaryPage = () => {
             <BeastCard
               controls={
                 <Fragment>
-                  <IconButton>
+                  <IconButton size="sm">
                     <PencilIcon />
                   </IconButton>
-                  <IconButton>
+                  <IconButton size="sm">
                     <LinkIcon />
                   </IconButton>
-                  <IconButton>
+                  <IconButton size="sm">
                     <FolderIcon />
                   </IconButton>
                   <Link to={'/bestiary'}>
-                    <IconButton>
+                    <IconButton size="sm">
                       <XIcon />
                     </IconButton>
                   </Link>

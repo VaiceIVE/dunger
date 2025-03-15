@@ -2,6 +2,7 @@ import { ComponentProps } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { StyleXStyles } from '@stylexjs/stylex';
 import * as stylex from '@stylexjs/stylex';
+import { DungerSize } from '@dunger/ui/styles/DungerSize';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { IconButtonVariant } from './IconButton.types';
 
@@ -11,19 +12,22 @@ export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'style'>
   variant?: IconButtonVariant;
 
   asChild?: boolean;
+
+  size?: Extract<DungerSize, 'sm' | 'md'>;
 }
 
 export const IconButton = ({
   children,
   style,
   asChild,
+  size = 'md',
   variant = IconButtonVariant.primary,
   ...props
 }: IconButtonProps) => {
   const Component = asChild ? Slot : 'button';
 
   return (
-    <Component {...stylex.props(styles.iconButton, styles[variant], style)} {...props}>
+    <Component {...stylex.props(styles.iconButton, styles[variant], styles[size], style)} {...props}>
       {children}
     </Component>
   );
@@ -36,10 +40,18 @@ const styles = stylex.create({
     borderStyle: 'none',
     cursor: 'pointer',
     display: 'flex',
-    height: 32,
+
     justifyContent: 'center',
     padding: 6,
-    transition: 'all 0.2s',
+    transition: 'all 0.2s'
+  },
+  // sizes
+  md: {
+    height: 40,
+    width: 40
+  },
+  sm: {
+    height: 32,
     width: 32
   },
   // variants

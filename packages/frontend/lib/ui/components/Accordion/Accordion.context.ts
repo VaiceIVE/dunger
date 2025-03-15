@@ -1,12 +1,13 @@
-import { createSafeContext } from '../../utils/createSafeContext';
+import { createSafeContext } from '@dunger/ui/utils/createSafeContext';
 
-export interface IAccordionContext {
+export interface AccordionContext {
   isItemActive: (itemValue: string) => boolean;
 
   transitionDuration?: number;
 
   onChange: (itemValue: string) => void;
 }
-export const [AccordionProvider, useAccordionContext] = createSafeContext<IAccordionContext>(
+
+export const [AccordionProvider, useAccordionContext] = createSafeContext<AccordionContext>(
   'Accordion component was not found in the tree'
 );

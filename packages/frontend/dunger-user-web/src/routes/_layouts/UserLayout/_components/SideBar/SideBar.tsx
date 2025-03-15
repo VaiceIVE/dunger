@@ -6,10 +6,12 @@ import {
   Button,
   ButtonVariant,
   ButtonWidth,
+  DiceD20Icon,
   IconButton,
   IconButtonVariant,
   LogoSmall,
   MenuIcon,
+  PlusFilledIcon,
   Stack,
   text,
   XIcon
@@ -69,6 +71,18 @@ export const SideBar = () => {
               <BellFilledIcon />
             </IconButton>
           </Stack>
+        </Stack>
+
+        <Stack gap={16}>
+          <Link to={'/beast/new'}>
+            <IconButton>
+              <PlusFilledIcon />
+            </IconButton>
+          </Link>
+
+          <IconButton>
+            <DiceD20Icon />
+          </IconButton>
         </Stack>
       </div>
 
