@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import { text } from '@utils/text';
-import { colors } from 'tokens.stylex';
+import { text } from '@dunger/ui';
+import { colors } from '@dunger/ui/tokens.stylex';
 
 export interface InputLabelProps extends ComponentProps<'div'> {
   required?: boolean;

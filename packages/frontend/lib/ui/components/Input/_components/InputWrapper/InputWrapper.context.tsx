@@ -1,5 +1,5 @@
-import { DungerSize } from '@styles/DungerSize';
-import { createOptionalContext } from '@utils/createOptionalContext';
+import { DungerSize } from '@dunger/ui/styles/DungerSize';
+import { createOptionalContext } from '@dunger/ui/utils/createOptionalContext';
 
 interface InputWrapperContextValue {
   size: Extract<DungerSize, 'md' | 'lg'>;

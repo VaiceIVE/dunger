@@ -1,7 +1,7 @@
 import { CSSProperties, Ref, useRef, useState } from 'react';
-import { useDidUpdate } from '@hooks/useDidUpdate';
-import { mergeRefs } from '@hooks/useMergedRef';
 import { flushSync } from 'react-dom';
+import { useDidUpdate } from '@dunger/ui/hooks/useDidUpdate';
+import { mergeRefs } from '@dunger/ui/hooks/useMergedRef';
 
 function getAutoHeightDuration(height: number | string) {
   if (!height || typeof height === 'string') {

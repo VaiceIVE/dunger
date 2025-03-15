@@ -1,8 +1,8 @@
 import { ComponentProps, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { StyleXStyles } from '@stylexjs/stylex';
 import * as stylex from '@stylexjs/stylex';
-import { text } from '@utils/text';
-import { colors } from 'tokens.stylex';
+import { text } from '@dunger/ui';
+import { colors } from '@dunger/ui/tokens.stylex';
 import { useComboboxContext } from '../../Combobox.context';
 
 export interface ComboboxOptionProps extends Omit<ComponentProps<'div'>, 'style'> {

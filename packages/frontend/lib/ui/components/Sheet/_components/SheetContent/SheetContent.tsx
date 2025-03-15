@@ -1,8 +1,8 @@
 import { PropsWithChildren, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { useSheetContext } from '@components/Sheet/Sheet.context';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { createPortal } from 'react-dom';
+import { useSheetContext } from '../../Sheet.context';
 
 export interface SheetContentProps extends PropsWithChildren {
   style?: StyleXStyles;
@@ -83,11 +83,11 @@ const styles = stylex.create({
     bottom: 0,
     boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.03);',
     overflowBehavior: 'contain',
+    overflowY: 'auto',
     padding: {
       default: '24px 16px',
       '@media (min-width: 540px)': '40px 32px'
     },
-    overflowY: 'auto',
     position: 'fixed',
     // right: {
     //   default: '-100%',

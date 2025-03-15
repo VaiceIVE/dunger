@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react';
-import { Collapse } from '@components/Collapse';
 import { StyleXStyles } from '@stylexjs/stylex';
+import { Collapse } from '@dunger/ui';
 import { useAccordionContext } from '../../Accordion.context';
 import { useAccordionItemContext } from '../../AccordionItem.context';
 

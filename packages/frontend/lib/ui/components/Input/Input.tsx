@@ -1,8 +1,8 @@
 import { ComponentProps, FormEventHandler, ReactNode } from 'react';
-import { DungerSize } from '@styles/DungerSize';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { text } from '@dunger/ui';
+import { DungerSize } from '@dunger/ui/styles/DungerSize';
 import { colors } from '../../tokens.stylex';
 import { InputDescription } from './_components/InputDescription';
 import { InputLabel } from './_components/InputLabel';

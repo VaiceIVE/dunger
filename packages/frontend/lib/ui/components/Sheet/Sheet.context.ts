@@ -1,4 +1,4 @@
-import { createSafeContext } from '@utils/createSafeContext';
+import { createSafeContext } from '@dunger/ui/utils/createSafeContext';
 
 export interface SheetContext {
   open: boolean;

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Combobox, ComboboxItem, getOptionsLockup } from '@components/Combobox';
-import { usePrevious } from '@hooks/usePrevious';
-import { useUncontrolled } from '@hooks/useUncontrolled';
+import { Combobox, ComboboxItem, getOptionsLockup, useUncontrolled } from '@dunger/ui';
+import { usePrevious } from '@dunger/ui/hooks/usePrevious';
 import { InputBase, InputBaseProps } from '../InputBase';
 import SelectorIcon from './selector.svg?react';
 

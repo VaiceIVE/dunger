@@ -1,7 +1,7 @@
 import { PropsWithChildren, Fragment, useState } from 'react';
-import { DungerSize } from '@styles/DungerSize';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
+import { DungerSize } from '@dunger/ui/styles/DungerSize';
 import { InputDescription } from '../InputDescription';
 import { InputLabel } from '../InputLabel';
 import { InputWrapperProvider } from './InputWrapper.context';

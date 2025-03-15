@@ -1,8 +1,8 @@
 import { ComponentProps, MouseEvent } from 'react';
-import { useSheetContext } from '@components/Sheet/Sheet.context';
 import { Slot } from '@radix-ui/react-slot';
 import { StyleXStyles } from '@stylexjs/stylex';
 import * as stylex from '@stylexjs/stylex';
+import { useSheetContext } from '../../Sheet.context';
 
 export interface SheetCloseProps extends Omit<ComponentProps<'button'>, 'style'> {
   style?: StyleXStyles;

@@ -1,5 +1,5 @@
-import { useSheetContext } from '@components/Sheet/Sheet.context';
 import * as stylex from '@stylexjs/stylex';
+import { useSheetContext } from '../../Sheet.context';
 
 export function SheetOverlay() {
   const { open } = useSheetContext();

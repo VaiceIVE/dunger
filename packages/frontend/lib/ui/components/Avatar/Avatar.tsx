@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
-import { colors } from 'tokens.stylex';
+import { colors } from '@dunger/ui/tokens.stylex';
 
 interface AvatarProps {
   src?: string | null;

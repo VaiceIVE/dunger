@@ -1,8 +1,8 @@
 import { ComponentProps } from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { DungerSize } from '@styles/DungerSize';
 import { StyleXStyles } from '@stylexjs/stylex';
 import * as stylex from '@stylexjs/stylex';
+import { DungerSize } from '@dunger/ui/styles/DungerSize';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { IconButtonVariant } from './IconButton.types';
 

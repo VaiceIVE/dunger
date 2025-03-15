@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import { StyleXStyles } from '@stylexjs/stylex';
 import * as stylex from '@stylexjs/stylex';
-import { colors } from 'tokens.stylex';
+import { colors } from '@dunger/ui/tokens.stylex';
 import CheckIcon from './check.svg?react';
 import MinusIcon from './minus.svg?react';
 

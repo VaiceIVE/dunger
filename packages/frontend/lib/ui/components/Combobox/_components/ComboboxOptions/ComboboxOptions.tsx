@@ -3,7 +3,7 @@ import { Slot } from '@radix-ui/react-slot';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { createPortal } from 'react-dom';
-import { colors } from 'tokens.stylex';
+import { colors } from '@dunger/ui/tokens.stylex';
 import { useComboboxContext } from '../../Combobox.context';
 
 export interface ComboboxOptionsProps extends Omit<ComponentProps<'div'>, 'style'> {
