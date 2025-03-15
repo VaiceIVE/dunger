@@ -138,3 +138,10 @@ $font-family:
   font-weight: 700;
   line-height: 110%;
 }
+
+@mixin text-caption-medium {
+  font-family: $font-family;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 140%;
+}

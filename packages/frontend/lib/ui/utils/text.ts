@@ -55,5 +55,11 @@ export const text = stylex.create({
     fontSize: 16,
     fontWeight: 700,
     lineHeight: '110%'
+  },
+  captionMedium: {
+    fontFamily: fontFamily.base,
+    fontSize: 10,
+    fontWeight: 500,
+    lineHeight: '140%'
   }
 });
