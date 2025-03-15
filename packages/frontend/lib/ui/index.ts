@@ -7,6 +7,7 @@ export * from './components/Button';
 export * from './components/Checkbox';
 export * from './components/Container';
 export * from './components/Collapse';
+export * from './components/Combobox';
 export * from './components/Flex';
 export * from './components/Grid';
 export * from './components/Sheet';
