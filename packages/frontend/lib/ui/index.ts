@@ -26,6 +26,11 @@ export * from './components/Icon';
 export * from './components/LogoSmall';
 
 /**
+ * Hooks
+ */
+export { useUncontrolled } from './hooks/useUncontrolled';
+
+/**
  * Utils
  */
 export { headers } from './utils/headers';
