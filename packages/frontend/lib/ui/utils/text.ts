@@ -38,15 +38,21 @@ export const text = stylex.create({
     fontWeight: 600,
     lineHeight: '140%'
   },
+  subheaderMedium: {
+    fontFamily: fontFamily.base,
+    fontSize: 16,
+    fontWeight: 500,
+    lineHeight: '140%'
+  },
   subheaderSemibold: {
     fontFamily: fontFamily.base,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 600,
     lineHeight: '110%'
   },
   subheaderBold: {
     fontFamily: fontFamily.base,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 700,
     lineHeight: '110%'
   }
