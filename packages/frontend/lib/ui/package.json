@@ -3,9 +3,9 @@
   "main": "index.ts",
   "type": "module",
   "peerDependencies": {
-    "@stylexjs/stylex": "^0.6.0",
-    "react": "19.0.0-rc-fb9a90fa48-20240614",
-    "react-dom": "19.0.0-rc-fb9a90fa48-20240614",
+    "@stylexjs/stylex": "^0.10.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-router-dom": "^6.23.0",
     "typescript": "~5.5.0"
   },
@@ -17,11 +17,11 @@
     "sanitize.css": "^13.0.0"
   },
   "devDependencies": {
-    "@stylexjs/stylex": "^0.6.0",
-    "@types/react": "npm:types-react@rc",
-    "@types/react-dom": "npm:types-react-dom@rc",
-    "react": "19.0.0-rc-fb9a90fa48-20240614",
-    "react-dom": "19.0.0-rc-fb9a90fa48-20240614",
+    "@stylexjs/stylex": "^0.11.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-router-dom": "^6.23.0",
     "typescript": "~5.5.0"
   }
