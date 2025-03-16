@@ -3,9 +3,10 @@ import { Slot } from '@radix-ui/react-slot';
 import * as stylex from '@stylexjs/stylex';
 import type { StyleXStyles } from '@stylexjs/stylex';
 import { text } from '@dunger/ui';
+import { DungerSize } from '@dunger/ui/styles/DungerSize';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Spinner } from '../Spinner';
-import { ButtonSize, ButtonVariant, ButtonWidth } from './Button.types';
+import { ButtonVariant, ButtonWidth } from './Button.types';
 
 export interface ButtonProps extends Omit<ComponentProps<'button'>, 'style'> {
   style?: StyleXStyles;
@@ -16,7 +17,7 @@ export interface ButtonProps extends Omit<ComponentProps<'button'>, 'style'> {
 
   variant?: ButtonVariant;
 
-  size?: ButtonSize;
+  size?: Extract<DungerSize, 'sm' | 'md' | 'lg'>;
 
   loading?: boolean;
 }
@@ -27,7 +28,7 @@ export function Button({
   asChild,
   width = ButtonWidth.fit,
   variant = ButtonVariant.primary,
-  size = ButtonSize.md,
+  size = 'md',
   loading,
   ...props
 }: ButtonProps) {
