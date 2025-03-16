@@ -1,5 +1,6 @@
 import { Fragment, ReactNode, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
+import { StyleXStyles } from '@stylexjs/stylex';
 import { Accordion, Avatar, ChevronDownIcon, ChevronUpIcon, Flex, Stack, Tag, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Card } from 'components/Card';
@@ -8,14 +9,17 @@ import { StatsTable } from './_components/StatsTable';
 
 interface BeastCardProps {
   beast?: Beast;
+
   controls?: ReactNode;
+
+  style?: StyleXStyles;
 }
 
-export const BeastCard = ({ beast, controls }: BeastCardProps) => {
+export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
   const [openedSection, setOpenedSection] = useState('');
 
   return (
-    <Card style={styles.root}>
+    <Card style={[styles.root, style]}>
       <Card.Header>
         <Card.Title>{beast?.name ?? 'Без названия'} </Card.Title>
         {controls}
