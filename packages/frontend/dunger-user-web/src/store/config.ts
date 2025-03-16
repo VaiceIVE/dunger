@@ -1,1 +1,3 @@
-export const apiUrl = (import.meta.env.VITE_API_URL as string | undefined) ?? '/api';
+export const basename = import.meta.env.BASE_URL;
+export const apiUrl = (import.meta.env.VITE_API_URL as string | undefined) ?? `${basename}/api`;
+export const authUrl = (import.meta.env.VITE_AUTH_URL as string | undefined) ?? `${basename}/auth`;
