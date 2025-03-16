@@ -50,6 +50,7 @@ export const BestiaryPage = () => {
 
           <SplitViewLayout.Detail>
             <BeastCard
+              style={styles.card}
               controls={
                 <Fragment>
                   <IconButton size="sm">
@@ -82,5 +83,11 @@ const styles = stylex.create({
       default: '100%',
       ':is([aria-selected=true])': '100%'
     }
+  },
+  card: {
+    height: 'calc(100dvh - 64px)',
+    position: 'sticky',
+    right: 0,
+    top: 32
   }
 });

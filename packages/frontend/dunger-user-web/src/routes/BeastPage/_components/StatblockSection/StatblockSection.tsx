@@ -1,5 +1,85 @@
 import { Fragment } from 'react';
+import * as stylex from '@stylexjs/stylex';
+import {
+  Button,
+  Checkbox,
+  Flex,
+  Grid,
+  Input,
+  PlusFilledIcon,
+  SearchIcon,
+  Select,
+  Stack,
+  text,
+  TextInput
+} from '@dunger/ui';
+import { colors } from '@dunger/ui/tokens.stylex';
 
 export const StatblockSection = () => {
-  return <Fragment></Fragment>;
+  return (
+    <Fragment>
+      <Stack style={styles.root} gap={24}>
+        <Flex gap={8}>
+          <TextInput label="Количество хитов" placeholder="Введите кол-во хитов" />
+          <Select label="Класс Опасности (CR)" placeholder="-Не выбрано-" />
+        </Flex>
+        <div {...stylex.props(text.smallMedium)}>
+          Выберите характеристики, а также спасброски, которыми владеет существо
+        </div>
+        <Grid columns={6} gap={8}>
+          <Grid.Col style={styles.stat}>
+            <TextInput label="СИЛ" placeholder="8" />
+            <Checkbox />
+          </Grid.Col>
+          <Grid.Col style={styles.stat}>
+            <TextInput label="ЛОВ" placeholder="8" />
+            <Checkbox />
+          </Grid.Col>
+          <Grid.Col style={styles.stat}>
+            <TextInput label="ТЕЛ" placeholder="8" />
+            <Checkbox />
+          </Grid.Col>
+          <Grid.Col style={styles.stat}>
+            <TextInput label="ИНТ " placeholder="8" />
+            <Checkbox />
+          </Grid.Col>
+          <Grid.Col style={styles.stat}>
+            <TextInput label="МДР" placeholder="8" />
+            <Checkbox />
+          </Grid.Col>
+          <Grid.Col style={styles.stat}>
+            <TextInput label="ХАР" placeholder="8" />
+            <Checkbox />
+          </Grid.Col>
+        </Grid>
+      </Stack>
+      <Select placeholder="-Не выбрано-" label="Тип брони" />
+      <Input.Wrapper label="Навыки">
+        <Button>
+          Добавить способности <PlusFilledIcon {...stylex.props(styles.icon)} />
+        </Button>
+      </Input.Wrapper>
+      <Select leftSection={<SearchIcon />} searchable placeholder="Начните вводить" label="Уязвимость к урону" />
+      <Select leftSection={<SearchIcon />} searchable placeholder="Начните вводить" label="Сопротивление к урону" />
+      <Select leftSection={<SearchIcon />} searchable placeholder="Начните вводить" label="Иммунитет к урону" />
+    </Fragment>
+  );
 };
+
+const styles = stylex.create({
+  root: {
+    backgroundColor: colors.backgroundUniversal,
+    borderRadius: 16,
+    padding: 16
+  },
+  stat: {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 8
+  },
+  icon: {
+    height: 16,
+    width: 16
+  }
+});

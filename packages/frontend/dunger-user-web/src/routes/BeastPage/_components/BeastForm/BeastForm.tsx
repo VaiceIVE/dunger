@@ -5,13 +5,11 @@ import { colors } from '@dunger/ui/tokens.stylex';
 import { AbilitiesSection } from '../AbilitiesSection';
 import { ActionsSection } from '../ActionsSection';
 import { CommonSection } from '../CommonSection';
-import { SkillsSection } from '../SkillsSection';
 import { StatblockSection } from '../StatblockSection';
 
 const sections = [
   { id: 'commonInfo', title: 'Общая информация' },
   { id: 'statblock', title: 'Статблок' },
-  { id: 'skills', title: 'Владение навыками' },
   { id: 'actions', title: 'Действия' },
   { id: 'abilities', title: 'Способности и свойства' }
 ];
@@ -19,7 +17,6 @@ const sections = [
 const sectionById: Record<string, FC<SectionProps>> = {
   commonInfo: CommonSection,
   statblock: StatblockSection,
-  skills: SkillsSection,
   actions: ActionsSection,
   abilities: AbilitiesSection
 };
@@ -30,7 +27,7 @@ export interface SectionProps {
 
 export const BeastForm = () => {
   return (
-    <Accordion multiple style={styles.root}>
+    <Accordion transitionDuration={600} multiple style={styles.root}>
       {sections.map((s, index) => {
         const Section = sectionById[s.id];
 
@@ -81,6 +78,6 @@ const styles = stylex.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 24,
-    padding: '16px 24px'
+    padding: '16px 24px 24px'
   }
 });

@@ -17,8 +17,8 @@ const styles = stylex.create({
     position: 'fixed',
     top: 0,
     width: stylex.firstThatWorks('100svw', '100vw'),
-    zIndex: 199,
+    zIndex: 20,
     height: stylex.firstThatWorks('100svh', '100vh'),
-    background: 'rgba(17, 17, 17, 0.3)'
+    background: 'rgba(0, 0, 0, 0.3)'
   }
 });

@@ -33,8 +33,8 @@ const styles = stylex.create({
   root: {
     alignItems: 'center',
     backgroundColor: {
-      default: 'transparent',
-      ':is([aria-checked=true])': colors.brand90
+      default: 'white',
+      ':is([aria-checked=true])': colors.textPrimaryDefault
     },
     borderColor: {
       default: colors.outlinePrimaryDefault,
@@ -42,7 +42,7 @@ const styles = stylex.create({
         colors.outlinePrimaryHover,
       ':is([aria-checked=true])': 'transparent'
     },
-    borderRadius: 4,
+    borderRadius: 7,
     borderStyle: 'solid',
     borderWidth: 2,
     cursor: {

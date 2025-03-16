@@ -13,7 +13,7 @@ export interface IconButtonProps extends Omit<ComponentProps<'button'>, 'style'>
 
   asChild?: boolean;
 
-  size?: Extract<DungerSize, 'sm' | 'md'>;
+  size?: Extract<DungerSize, 'sm' | 'md' | 'lg'>;
 }
 
 export const IconButton = ({
@@ -46,6 +46,10 @@ const styles = stylex.create({
     transition: 'all 0.2s'
   },
   // sizes
+  lg: {
+    height: 44,
+    width: 44
+  },
   md: {
     height: 40,
     width: 40

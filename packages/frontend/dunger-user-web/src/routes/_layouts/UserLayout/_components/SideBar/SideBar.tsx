@@ -125,7 +125,10 @@ const styles = stylex.create({
     flexDirection: 'column',
     height: '100dvh',
     justifyContent: 'space-between',
+    left: 0,
     padding: '20px 16px',
+    position: 'sticky',
+    top: 0,
     zIndex: 1
   },
   nav: {

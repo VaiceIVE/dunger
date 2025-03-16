@@ -91,7 +91,7 @@ const styles = stylex.create({
   },
   textarea: {
     backgroundColor: {
-      default: 'transparent',
+      default: 'white',
       ':focus': colors.backgroundUniversal,
       ':active': colors.backgroundUniversal
     },
@@ -108,7 +108,7 @@ const styles = stylex.create({
     borderWidth: '1px',
     color: {
       default: colors.textPrimaryDefault,
-      ':placeholder': colors.textSecondaryDefault
+      '::placeholder': colors.textSecondaryDefault
     },
     cursor: {
       default: 'pointer',

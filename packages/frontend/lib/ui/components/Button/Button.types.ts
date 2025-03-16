@@ -11,9 +11,3 @@ export enum ButtonVariant {
   tertiarySecondary = 'tertiarySecondary',
   ghost = 'ghost'
 }
-
-export enum ButtonSize {
-  lg = 'lg',
-  md = 'md',
-  sm = 'sm'
-}
