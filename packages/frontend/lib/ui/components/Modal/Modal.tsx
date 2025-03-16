@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode, useEffect } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { createPortal } from 'react-dom';
@@ -34,18 +34,6 @@ export const Modal = ({ withOverlay = true, withCloseButton = true, open, onOpen
   const handleClose = () => {
     setOpen(false);
   };
-
-  useEffect(() => {
-    if (_open) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [_open]);
 
   return (
     <ModalProvider value={{ open: handleOpen, close: handleClose, withOverlay, withCloseButton, ...props }}>
