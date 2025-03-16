@@ -15,7 +15,7 @@ export interface ChipsProps extends Omit<ComponentProps<'button'>, 'style'> {
   value: string;
 }
 
-export const Chips = ({ children, size = 'sm', style, value, ...props }: ChipsProps) => {
+export const Chips = ({ children, size = 'sm', style, value, onClick, ...props }: ChipsProps) => {
   const ctx = useChipsGroup();
 
   const status = ctx?.multiple
@@ -39,7 +39,7 @@ export const Chips = ({ children, size = 'sm', style, value, ...props }: ChipsPr
   return (
     <button
       type="button"
-      onClick={handleClick}
+      onClick={onClick ?? handleClick}
       data-state={status}
       {...stylex.props(text.defaultMedium, styles.root, styles[size], style)}
       {...props}>
