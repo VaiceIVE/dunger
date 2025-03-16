@@ -1,18 +1,6 @@
 import { Fragment } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import {
-  Button,
-  Checkbox,
-  Flex,
-  Grid,
-  Input,
-  PlusFilledIcon,
-  SearchIcon,
-  Select,
-  Stack,
-  text,
-  TextInput
-} from '@dunger/ui';
+import { Button, Checkbox, Flex, Grid, Input, PlusFilledIcon, Select, Stack, text, TextInput } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 
 export const StatblockSection = () => {
@@ -59,9 +47,9 @@ export const StatblockSection = () => {
           Добавить способности <PlusFilledIcon {...stylex.props(styles.icon)} />
         </Button>
       </Input.Wrapper>
-      <Select leftSection={<SearchIcon />} searchable placeholder="Начните вводить" label="Уязвимость к урону" />
-      <Select leftSection={<SearchIcon />} searchable placeholder="Начните вводить" label="Сопротивление к урону" />
-      <Select leftSection={<SearchIcon />} searchable placeholder="Начните вводить" label="Иммунитет к урону" />
+      <Select multiple searchable placeholder="Начните вводить" label="Уязвимость к видам урону" />
+      <Select multiple searchable placeholder="Начните вводить" label="Сопротивление к видам урону" />
+      <Select multiple searchable placeholder="Начните вводить" label="Иммунитет к видам урону" />
     </Fragment>
   );
 };

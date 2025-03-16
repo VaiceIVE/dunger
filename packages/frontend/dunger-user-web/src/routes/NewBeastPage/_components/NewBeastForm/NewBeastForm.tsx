@@ -7,7 +7,6 @@ import {
   Select,
   Chips,
   Textarea,
-  SearchIcon,
   Button,
   ButtonVariant,
   ButtonWidth,
@@ -16,7 +15,7 @@ import {
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Banner } from 'components/Banner';
-import { CreateMode } from '../../NewBeastForm.types';
+import { CreateMode } from '../../NewBeastPage.types';
 
 interface NewBeastFormProps {
   mode: CreateMode;
@@ -61,13 +60,7 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
         ) : (
           <Fragment>
             <Select name="challengeRating" label="Класс Опасности (CR)" placeholder="-Не выбрано-" required />
-            <Select
-              label="Шаблон заполнения"
-              name="templateId"
-              leftSection={<SearchIcon />}
-              placeholder="Начните вводить"
-              searchable
-            />
+            <Select label="Шаблон заполнения" name="templateId" placeholder="Начните вводить" searchable />
           </Fragment>
         )}
       </Stack>
