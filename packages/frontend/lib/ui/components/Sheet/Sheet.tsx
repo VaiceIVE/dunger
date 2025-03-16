@@ -8,8 +8,15 @@ import { SheetProvider } from './Sheet.context';
 
 export interface SheetProps {
   defaultOpen?: boolean;
+
   open?: boolean;
+
   onOpenChange?: (open: boolean) => void;
+  /**
+   * Отрисовывать оверлей пот открытии.
+   * По умолчанию true
+   */
+  withOverlay?: boolean;
   /**
    * Удаление компонента из DOM при закрытии.
    * По умолчанию true
@@ -17,7 +24,14 @@ export interface SheetProps {
   unmount?: boolean;
 }
 
-export function Sheet({ children, defaultOpen, open: openProp, onOpenChange, unmount }: PropsWithChildren<SheetProps>) {
+export function Sheet({
+  children,
+  defaultOpen,
+  open: openProp,
+  onOpenChange,
+  withOverlay = true,
+  unmount
+}: PropsWithChildren<SheetProps>) {
   const [open, setOpenState] = useState(defaultOpen ?? openProp ?? false);
 
   useEffect(() => {
@@ -34,7 +48,12 @@ export function Sheet({ children, defaultOpen, open: openProp, onOpenChange, unm
     [onOpenChange]
   );
 
-  return <SheetProvider value={{ open, setOpen, unmount }}>{children}</SheetProvider>;
+  return (
+    <SheetProvider value={{ open, setOpen, unmount }}>
+      {!!withOverlay && <SheetOverlay />}
+      {children}
+    </SheetProvider>
+  );
 }
 
 Sheet.Trigger = SheetTrigger;

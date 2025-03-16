@@ -82,12 +82,12 @@ const styles = stylex.create({
     // height: stylex.firstThatWorks('100svh', '100vh'),
     bottom: 0,
     boxShadow: '0 4px 12px 0 rgba(0, 0, 0, 0.03);',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 16,
+    // eslint-disable-next-line @stylexjs/valid-styles
     overflowBehavior: 'contain',
     overflowY: 'auto',
-    padding: {
-      default: '24px 16px',
-      '@media (min-width: 540px)': '40px 32px'
-    },
     position: 'fixed',
     // right: {
     //   default: '-100%',
@@ -100,7 +100,7 @@ const styles = stylex.create({
     visibility: 'hidden',
     width: {
       default: '100%',
-      '@media (min-width: 540px)': 480
+      '@media (min-width: 540px)': 500
     },
     zIndex: 200
   },

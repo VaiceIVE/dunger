@@ -12,6 +12,15 @@ export function SheetHeader({ children, style }: SheetHeaderProps) {
 
 const styles = stylex.create({
   base: {
-    marginBottom: 32
+    alignItems: 'center',
+    backgroundColor: 'white',
+    display: 'flex',
+    gap: 8,
+    justifyContent: 'space-between',
+    left: 0,
+    padding: '18px 24px',
+    position: 'sticky',
+    top: 0,
+    width: '100%'
   }
 });
