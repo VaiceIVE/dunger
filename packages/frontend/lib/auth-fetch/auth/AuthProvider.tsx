@@ -18,7 +18,7 @@ export function AuthProvider({
   }, [authUrl, basename]);
 
   const getToken = useCallback(() => {
-    return Promise<''>;
+    return Promise.resolve('mocked_token');
   }, []);
 
   return <AuthContext.Provider value={{ getToken }}>{children}</AuthContext.Provider>;
