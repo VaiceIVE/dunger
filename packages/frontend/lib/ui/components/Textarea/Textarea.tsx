@@ -91,7 +91,7 @@ const styles = stylex.create({
   },
   textarea: {
     backgroundColor: {
-      default: 'transparent',
+      default: 'white',
       ':focus': colors.backgroundUniversal,
       ':active': colors.backgroundUniversal
     },

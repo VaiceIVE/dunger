@@ -96,7 +96,7 @@ const styles = stylex.create({
   base: {
     alignItems: 'center',
     backgroundColor: {
-      default: 'transparent',
+      default: 'white',
       ':focus': colors.backgroundUniversal,
       ':active': colors.backgroundUniversal
     },
