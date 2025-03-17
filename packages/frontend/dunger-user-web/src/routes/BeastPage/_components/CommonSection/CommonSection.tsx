@@ -9,6 +9,7 @@ import {
   IconButton,
   MinusIcon,
   Modal,
+  MultiSelect,
   PlusIcon,
   Select,
   Stack,
@@ -87,7 +88,15 @@ export const CommonSection = () => {
           </Chips>
         ))}
       </Chips.Group>
-      <Select searchable placeholder="Начните вводить" label="Языки владения" />
+      <MultiSelect
+        options={[
+          { value: '1', label: 'test1' },
+          { value: '2', label: 'test2' }
+        ]}
+        searchable
+        placeholder="Начните вводить"
+        label="Языки владения"
+      />
       <Select searchable placeholder="Начните вводить" label="Места обитания" />
       <Chips.Group label="Чувства"></Chips.Group>
     </Fragment>

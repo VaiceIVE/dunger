@@ -27,7 +27,7 @@ export interface SectionProps {
 
 export const BeastForm = () => {
   return (
-    <Accordion transitionDuration={600} multiple style={styles.root}>
+    <Accordion defaultValue={[sections[0].id]} transitionDuration={600} multiple style={styles.root}>
       {sections.map((s, index) => {
         const Section = sectionById[s.id];
 
