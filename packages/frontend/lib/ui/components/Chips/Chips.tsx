@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
-import { text } from '@dunger/ui';
+import { text, XIcon } from '@dunger/ui';
 import { DungerSize } from '@dunger/ui/styles/DungerSize';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { ChipsGroup } from './_components/ChipsGroup';
@@ -13,9 +13,22 @@ export interface ChipsProps extends Omit<ComponentProps<'button'>, 'style'> {
   size?: Extract<DungerSize, 'xs' | 'sm'>;
 
   value: string;
+
+  withRemoveButton?: boolean;
+
+  onRemove?: () => void;
 }
 
-export const Chips = ({ children, size = 'sm', style, value, onClick, ...props }: ChipsProps) => {
+export const Chips = ({
+  children,
+  size = 'sm',
+  style,
+  value,
+  onClick,
+  withRemoveButton,
+  onRemove,
+  ...props
+}: ChipsProps) => {
   const ctx = useChipsGroup();
 
   const status = ctx?.multiple
@@ -41,9 +54,9 @@ export const Chips = ({ children, size = 'sm', style, value, onClick, ...props }
       type="button"
       onClick={onClick ?? handleClick}
       data-state={status}
-      {...stylex.props(text.defaultMedium, styles.root, styles[size], style)}
+      {...stylex.props(size == 'sm' ? text.defaultMedium : text.smallMedium, styles.root, styles[size], style)}
       {...props}>
-      {children}
+      {children} {withRemoveButton && <XIcon onClick={onRemove} {...stylex.props(styles.x)} />}
     </button>
   );
 };
@@ -52,6 +65,7 @@ Chips.Group = ChipsGroup;
 
 const styles = stylex.create({
   root: {
+    alignItems: 'center',
     backgroundColor: {
       default: 'transparent',
       ':is([aria-selected=true])': colors.backgroundOrangeActive,
@@ -72,14 +86,22 @@ const styles = stylex.create({
       ':is([data-state=checked])': colors.brand80
     },
     cursor: 'pointer',
-    paddingInline: 12,
+    display: 'flex',
+    gap: 8,
     width: 'fit-content'
   },
+  x: {
+    color: colors.textTertiaryDefault,
+    height: 16,
+    width: 16
+  },
   xs: {
-    paddingBlock: 4
+    paddingBlock: 4,
+    paddingInline: 8
   },
   sm: {
     fontSize: 12,
-    paddingBlock: 8
+    paddingBlock: 8,
+    paddingInline: 12
   }
 });

@@ -13,6 +13,7 @@ export * from './components/Flex';
 export * from './components/Footer';
 export * from './components/Grid';
 export * from './components/Modal';
+export * from './components/MultiSelect';
 export * from './components/Select';
 export * from './components/Sheet';
 export * from './components/Spinner';
