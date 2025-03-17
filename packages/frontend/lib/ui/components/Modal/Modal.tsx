@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode } from 'react';
+import { ComponentProps, Fragment, PropsWithChildren, ReactNode } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { createPortal } from 'react-dom';
@@ -19,7 +19,7 @@ interface ModalProps {
   onOpenChange?: (open: boolean) => void;
 }
 
-export const Modal = ({ withOverlay = true, withCloseButton = true, open, onOpenChange, ...props }: ModalProps) => {
+export const Modal = ({ withOverlay = true, withCloseButton = true, open, onOpenChange, children }: ModalProps) => {
   const [_open, setOpen] = useUncontrolled({
     value: open,
     defaultValue: false,
@@ -36,16 +36,23 @@ export const Modal = ({ withOverlay = true, withCloseButton = true, open, onOpen
   };
 
   return (
-    <ModalProvider value={{ open: handleOpen, close: handleClose, withOverlay, withCloseButton, ...props }}>
-      {_open && createPortal(<ModalContent />, document.body)}
+    <ModalProvider value={{ open: handleOpen, close: handleClose, withOverlay, withCloseButton, openState: _open }}>
+      {children}
+      {_open && createPortal(children, document.body)}
     </ModalProvider>
   );
 };
 
-const ModalContent = () => {
+interface ModalComponentProps extends Omit<ComponentProps<'div'>, 'style'> {
+  style?: StyleXStyles;
+}
+
+const ModalContent = ({ children }: PropsWithChildren) => {
   const ctx = useModalContext();
 
-  return (
+  if (!ctx.openState) return null;
+
+  const Modal = (
     <div {...stylex.props(styles.wrapper)} onClick={ctx.withOverlay ? ctx.close : undefined}>
       {ctx.withOverlay && <div {...stylex.props(styles.overlay)} />}
       <div
@@ -54,23 +61,23 @@ const ModalContent = () => {
           e.stopPropagation();
         }}>
         {ctx.withCloseButton && (
-          <IconButton style={styles.close} onClick={ctx.close}>
+          <IconButton size="sm" style={styles.close} onClick={ctx.close}>
             <XIcon />
           </IconButton>
         )}
-        {ctx.children}
+        {children}
       </div>
     </div>
   );
+
+  return <Fragment>{createPortal(Modal, document.body)}</Fragment>;
 };
 
-interface ModalBodyProps extends Omit<ComponentProps<'div'>, 'style'> {
-  style: StyleXStyles;
-}
+const ModalTarget = ({ style, children, ...props }: ModalComponentProps) => {
+  const ctx = useModalContext();
 
-const ModalBody = ({ style, children, ...props }: ModalBodyProps) => {
   return (
-    <div {...props} {...stylex.props(style)}>
+    <div {...props} onClick={ctx.open} {...stylex.props(style)}>
       {children}
     </div>
   );
@@ -82,7 +89,8 @@ const ModalBody = ({ style, children, ...props }: ModalBodyProps) => {
  * Header?
  * Overlay
  */
-Modal.Body = ModalBody;
+Modal.Content = ModalContent;
+Modal.Target = ModalTarget;
 
 const styles = stylex.create({
   overlay: {
@@ -100,7 +108,6 @@ const styles = stylex.create({
     zIndex: 20
   },
   content: {
-    alignItems: 'center',
     backgroundColor: 'white',
     borderRadius: 12,
     display: 'flex',
