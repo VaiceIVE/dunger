@@ -43,26 +43,28 @@ export const CommonSection = () => {
           setOpen(open);
           if (!open) setCurrentSpeedType(null);
         }}>
-        <Stack style={styles.modal} gap={24}>
-          <Stack gap={16}>
-            <div {...stylex.props(text.subheaderSemibold)}>
-              Скорость: {speeds.find((s) => s.id === currentSpeedType)?.name}
-            </div>
-            <p {...stylex.props(text.defaultMedium, styles.modalDescription)}>Укажите подходящее значение скорости</p>
+        <Modal.Content>
+          <Stack style={styles.modal} gap={24}>
+            <Stack gap={16}>
+              <div {...stylex.props(text.subheaderSemibold)}>
+                Скорость: {speeds.find((s) => s.id === currentSpeedType)?.name}
+              </div>
+              <p {...stylex.props(text.defaultMedium, styles.modalDescription)}>Укажите подходящее значение скорости</p>
+            </Stack>
+            <Flex gap={12}>
+              <IconButton size="lg">
+                <MinusIcon />
+              </IconButton>
+              <div {...stylex.props(styles.modalValue, text.defaultMedium)}>фт</div>
+              <IconButton size="lg">
+                <PlusIcon />
+              </IconButton>
+            </Flex>
+            <Button variant={ButtonVariant.accent} width={ButtonWidth.full}>
+              Добавить
+            </Button>
           </Stack>
-          <Flex gap={12}>
-            <IconButton size="lg">
-              <MinusIcon />
-            </IconButton>
-            <div {...stylex.props(styles.modalValue, text.defaultMedium)}>фт</div>
-            <IconButton size="lg">
-              <PlusIcon />
-            </IconButton>
-          </Flex>
-          <Button variant={ButtonVariant.accent} width={ButtonWidth.full}>
-            Добавить
-          </Button>
-        </Stack>
+        </Modal.Content>
       </Modal>
 
       <TextInput label="Название существа" placeholder="Например, “Хобгоблин-вожак”" />

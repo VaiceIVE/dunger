@@ -10,6 +10,7 @@ import MinusIcon from './_icons/minus.svg?react';
 import PencilIcon from './_icons/pencil.svg?react';
 import PlusFilledIcon from './_icons/plus-filled.svg?react';
 import PlusIcon from './_icons/plus.svg?react';
+import QuestionIcon from './_icons/question.svg?react';
 import SearchIcon from './_icons/search.svg?react';
 import XIcon from './_icons/x.svg?react';
 
@@ -26,6 +27,7 @@ export {
   PencilIcon,
   PlusFilledIcon,
   PlusIcon,
+  QuestionIcon,
   SearchIcon,
   XIcon
 };

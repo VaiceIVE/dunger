@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import { createSafeContext } from '@dunger/ui/utils/createSafeContext';
 
 export interface ModalContextValue {
@@ -10,7 +9,7 @@ export interface ModalContextValue {
 
   withCloseButton: boolean;
 
-  children?: ReactNode;
+  openState: boolean;
 }
 
 export const [ModalProvider, useModalContext] = createSafeContext<ModalContextValue>(
