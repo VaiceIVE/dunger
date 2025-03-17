@@ -1,8 +1,24 @@
 import { Fragment } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import { Button, headers, IconButton, IconButtonVariant, PlusFilledIcon, Sheet, Stack, XIcon } from '@dunger/ui';
+import {
+  Button,
+  headers,
+  IconButton,
+  IconButtonVariant,
+  PlusFilledIcon,
+  SearchIcon,
+  Sheet,
+  Stack,
+  text,
+  TextInput,
+  XIcon
+} from '@dunger/ui';
+import { colors } from '@dunger/ui/tokens.stylex';
+import { getWordForm } from 'utils/getWordForm';
 
 export const AbilitiesSection = () => {
+  const totalCount = 120;
+
   return (
     <Fragment>
       <Sheet>
@@ -20,7 +36,14 @@ export const AbilitiesSection = () => {
               </IconButton>
             </Sheet.Close>
           </Sheet.Header>
-          <Stack style={styles.body} gap={16}></Stack>
+          <Stack style={styles.body} gap={24}>
+            <Stack gap={16}>
+              <TextInput placeholder="Начните вводить" leftSection={<SearchIcon />} />
+              <div {...stylex.props(styles.count, text.smallSemibold)}>
+                Найдено: {totalCount} {getWordForm(totalCount, ['способность', 'способности', 'способностей'])}
+              </div>
+            </Stack>
+          </Stack>
         </Sheet.Content>
       </Sheet>
     </Fragment>
@@ -49,5 +72,8 @@ const styles = stylex.create({
   icon: {
     height: 16,
     width: 16
+  },
+  count: {
+    color: colors.textTertiaryDefault
   }
 });

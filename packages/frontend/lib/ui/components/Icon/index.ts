@@ -6,8 +6,10 @@ import DiceD20Icon from './_icons/dice-d20.svg?react';
 import FolderIcon from './_icons/folder.svg?react';
 import LinkIcon from './_icons/link.svg?react';
 import MenuIcon from './_icons/menu.svg?react';
+import MinusIcon from './_icons/minus.svg?react';
 import PencilIcon from './_icons/pencil.svg?react';
 import PlusFilledIcon from './_icons/plus-filled.svg?react';
+import PlusIcon from './_icons/plus.svg?react';
 import SearchIcon from './_icons/search.svg?react';
 import XIcon from './_icons/x.svg?react';
 
@@ -20,8 +22,10 @@ export {
   FolderIcon,
   LinkIcon,
   MenuIcon,
+  MinusIcon,
   PencilIcon,
   PlusFilledIcon,
+  PlusIcon,
   SearchIcon,
   XIcon
 };

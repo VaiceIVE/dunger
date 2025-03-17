@@ -6,7 +6,7 @@ import { Banner } from 'components/Banner';
 import { SplitViewLayout } from 'features/SplitViewLayout';
 import { Switch } from 'features/Switch';
 import { NewBeastForm } from './_components/NewBeastForm';
-import { CreateMode } from './NewBeastForm.types';
+import { CreateMode } from './NewBeastPage.types';
 import { useNewBeastAction } from './useNewBeastAction';
 
 export const NewBeastPage = () => {

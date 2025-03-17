@@ -6,8 +6,8 @@ import {
   Flex,
   Grid,
   Input,
+  MultiSelect,
   PlusFilledIcon,
-  SearchIcon,
   Select,
   Stack,
   text,
@@ -59,9 +59,9 @@ export const StatblockSection = () => {
           Добавить способности <PlusFilledIcon {...stylex.props(styles.icon)} />
         </Button>
       </Input.Wrapper>
-      <Select leftSection={<SearchIcon />} searchable placeholder="Начните вводить" label="Уязвимость к урону" />
-      <Select leftSection={<SearchIcon />} searchable placeholder="Начните вводить" label="Сопротивление к урону" />
-      <Select leftSection={<SearchIcon />} searchable placeholder="Начните вводить" label="Иммунитет к урону" />
+      <MultiSelect multiple searchable placeholder="Начните вводить" label="Уязвимость к видам урону" />
+      <MultiSelect multiple searchable placeholder="Начните вводить" label="Сопротивление к видам урону" />
+      <MultiSelect multiple searchable placeholder="Начните вводить" label="Иммунитет к видам урону" />
     </Fragment>
   );
 };

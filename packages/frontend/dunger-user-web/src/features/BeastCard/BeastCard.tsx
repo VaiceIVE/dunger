@@ -1,4 +1,4 @@
-import { Fragment, ReactNode, useState } from 'react';
+import { Fragment, ReactNode } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { Accordion, Avatar, ChevronDownIcon, ChevronUpIcon, Flex, Stack, Tag, text } from '@dunger/ui';
@@ -8,7 +8,7 @@ import { Beast } from 'store/apiTypes.gen';
 import { StatsTable } from './_components/StatsTable';
 
 interface BeastCardProps {
-  beast?: Beast;
+  beast?: Beast | null;
 
   controls?: ReactNode;
 
@@ -16,8 +16,6 @@ interface BeastCardProps {
 }
 
 export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
-  const [openedSection, setOpenedSection] = useState('');
-
   return (
     <Card style={[styles.root, style]}>
       <Card.Header>
@@ -59,11 +57,7 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
           </Stack>
         </Stack>
 
-        <Accordion
-          onChange={(value) => {
-            setOpenedSection(value as string);
-          }}
-          value={openedSection}>
+        <Accordion>
           <Accordion.Item style={styles.description} value="description">
             <Accordion.Control style={[styles.control, text.subheaderSemibold]}>
               {(open: boolean) => (

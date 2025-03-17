@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Combobox, ComboboxItem, getOptionsLockup, useUncontrolled } from '@dunger/ui';
+import { Combobox, ComboboxItem, getOptionsLockup, SearchIcon, useUncontrolled } from '@dunger/ui';
 import { usePrevious } from '@dunger/ui/hooks/usePrevious';
 import { InputBase, InputBaseProps } from '../InputBase';
 import SelectorIcon from './selector.svg?react';
@@ -36,6 +36,7 @@ export const Select = ({
   onBlur,
   onFocus,
   disabled,
+  leftSection,
   name,
   form,
   ...props
@@ -75,6 +76,8 @@ export const Select = ({
     }
   }, [value, selectedOption, setSearch, previousSelectedOption]);
 
+  const _leftSection = leftSection ?? (searchable ? <SearchIcon /> : null);
+
   return (
     <Combobox
       onOpenChange={setDropdownOpened}
@@ -89,6 +92,7 @@ export const Select = ({
           disabled={disabled}
           value={search}
           readOnly={readOnly ?? !searchable}
+          leftSection={_leftSection}
           rightSection={<SelectorIcon />}
           onChange={(event) => {
             setSearch(event.currentTarget.value);
