@@ -16,6 +16,7 @@ import {
   text,
   XIcon
 } from '@dunger/ui';
+import { ModalFooter } from '../ModalFooter';
 import { Tab } from '../Tab';
 
 export const SideBar = () => {
@@ -83,6 +84,8 @@ export const SideBar = () => {
           <IconButton>
             <DiceD20Icon />
           </IconButton>
+
+          <ModalFooter />
         </Stack>
       </div>
 
