@@ -31,7 +31,7 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
         <TextInput name="name" label="Название существа" placeholder="Например, “Хобгоблин-вожак”" required />
         {mode === CreateMode.generation ? (
           <Fragment>
-            <Flex gap={16}>
+            <Flex align="flex-start" gap={16}>
               <Select
                 options={[
                   { label: 'test', value: '1' },
