@@ -1,6 +1,7 @@
-import { PropsWithChildren, Fragment, useState } from 'react';
+import { PropsWithChildren, Fragment } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
+import { useUncontrolled } from '@dunger/ui/hooks/useUncontrolled';
 import { DungerSize } from '@dunger/ui/styles/DungerSize';
 import { InputDescription } from '../InputDescription';
 import { InputLabel } from '../InputLabel';
@@ -21,6 +22,10 @@ export interface InputWrapperProps extends PropsWithChildren {
 
   // custom validation function => errorMessage || null
   validate?: (value: string, validity: ValidityState) => string | null;
+
+  error?: string | null;
+
+  onErrorChange?: (error: string | null) => void;
 }
 
 export const InputWrapper = ({
@@ -31,9 +36,16 @@ export const InputWrapper = ({
   required,
   style,
   validate,
+  error,
+  onErrorChange,
   size = 'md'
 }: InputWrapperProps) => {
-  const [error, setError] = useState<string | null>(null);
+  const [_error, setError] = useUncontrolled({
+    value: error,
+    defaultValue: '',
+    onChange: onErrorChange,
+    finalValue: ''
+  });
 
   const _input = <Fragment key="input">{children}</Fragment>;
 
@@ -43,8 +55,8 @@ export const InputWrapper = ({
     </InputLabel>
   );
 
-  const _description = (!!description || !!error) && (
-    <InputDescription error={error} key="description">
+  const _description = (!!description || !!_error) && (
+    <InputDescription error={_error} key="description">
       {description}
     </InputDescription>
   );
@@ -63,7 +75,7 @@ export const InputWrapper = ({
   });
 
   return (
-    <InputWrapperProvider value={{ size, error, setError, validate }}>
+    <InputWrapperProvider value={{ size, error: _error, setError, validate }}>
       <div {...stylex.props(styles.root, style)}>{content}</div>
     </InputWrapperProvider>
   );
