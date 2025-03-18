@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { Flex, text, useUncontrolled } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
@@ -24,15 +24,24 @@ export const Switch = ({ options = [], value, defaultValue, onChange }: SwitchPr
   const containerRef = useRef<HTMLDivElement>(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ width: 0, left: 0 });
 
-  useEffect(() => {
-    if (!containerRef.current) return;
+  const updateIndicator = useCallback(() => {
+    const activeElement = containerRef.current?.querySelector('[aria-selected="true"]') as HTMLDivElement | null;
 
-    const activeElement = containerRef.current.querySelector('[aria-selected="true"]');
     if (activeElement) {
-      const { offsetLeft, offsetWidth } = activeElement as HTMLDivElement;
-      setIndicatorStyle({ left: offsetLeft - 8, width: offsetWidth });
+      setIndicatorStyle({ left: activeElement.offsetLeft - 8, width: activeElement.offsetWidth });
     }
-  }, [_value, options]);
+  }, []);
+
+  useEffect(() => {
+    updateIndicator();
+  }, [_value, options, updateIndicator]);
+
+  useEffect(() => {
+    window.addEventListener('resize', updateIndicator);
+    return () => {
+      window.removeEventListener('resize', updateIndicator);
+    };
+  }, [updateIndicator]);
 
   return (
     <Flex ref={containerRef} style={styles.root} gap={0} align="center">
