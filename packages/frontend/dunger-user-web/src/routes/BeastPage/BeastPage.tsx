@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { useParams } from 'react-router-dom';
-import { Button, ButtonVariant, ChevronUpIcon, Container, Flex, Footer, IconButton, text } from '@dunger/ui';
+import { Button, ButtonVariant, ChevronsUpIcon, Container, Flex, Footer, IconButton, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { BeastCard } from 'features/BeastCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
@@ -64,7 +64,7 @@ export const BeastPage = () => {
                 Закончить редактирование
               </Button>
               <IconButton onClick={scrollToTop} size="lg">
-                <ChevronUpIcon />
+                <ChevronsUpIcon />
               </IconButton>
             </Flex>
             <div {...stylex.props(text.defaultMedium, styles.saved)}>
