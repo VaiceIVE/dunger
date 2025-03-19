@@ -20,16 +20,15 @@ const styles = stylex.create({
   root: {
     backgroundColor: {
       default: 'transparent',
-      ':not(:disabled):hover': colors.backgroundNeutralHover,
-      ':is(.active)': colors.backgroundNeutralHover,
+      ':is(:hover):not(:disabled, .active)': colors.backgroundUniversal,
+      ':is(.active)': colors.backgroundOrangeDefault,
       ':disabled': colors.backgroundNeutralDefault
     },
     borderRadius: 0,
     color: {
       default: colors.textPrimaryDefault,
-      ':not(:disabled):hover': colors.textPrimaryHover,
-      ':not(:disabled):active': colors.textPrimaryActive,
-      ':is(.active)': colors.textPrimaryActive,
+      ':is(:hover):not(:disabled, .active)': colors.textPrimaryHover,
+      ':is(.active)': colors.brand80,
       ':disabled': colors.black30
     },
     justifyContent: 'flex-start',

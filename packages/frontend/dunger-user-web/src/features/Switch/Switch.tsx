@@ -86,7 +86,10 @@ const styles = stylex.create({
   },
   indicator: {
     backgroundColor: 'white',
+    borderColor: colors.outlinePrimaryDefault,
     borderRadius: 8,
+    borderStyle: 'solid',
+    borderWidth: 2,
     height: 'calc(100% - 16px)',
     position: 'absolute',
     transition: 'transform 0.3s ease, width 0.3s ease'

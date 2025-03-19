@@ -100,8 +100,8 @@ export const SideBar = () => {
             <Stack gap={24}>
               <section {...stylex.props(styles.section)}>
                 <div {...stylex.props(text.subheaderBold, styles.sectionTitle)}>Игровой персонаж</div>
-                <Tab to={'classes'}>Расы</Tab>
-                <Tab to={'species'}>Классы</Tab>
+                <Tab to={'species'}>Расы</Tab>
+                <Tab to={'classes'}>Классы </Tab>
                 <Tab to={'feats'}>Черты</Tab>
                 <Tab to={'backgrounds'}>Предыстории</Tab>
               </section>

@@ -39,7 +39,7 @@ export const BeastForm = () => {
                   <div>
                     {index + 1}. {s.title}
                   </div>
-                  <IconButton aria-selected={open} size={'sm'}>
+                  <IconButton type="button" aria-selected={open} size={'sm'}>
                     {open ? <ChevronUpIcon /> : <ChevronDownIcon />}
                   </IconButton>
                 </Fragment>
