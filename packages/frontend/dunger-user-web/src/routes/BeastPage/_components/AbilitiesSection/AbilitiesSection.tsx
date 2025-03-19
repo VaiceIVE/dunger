@@ -23,7 +23,7 @@ export const AbilitiesSection = () => {
     <Fragment>
       <Sheet>
         <Sheet.Trigger asChild>
-          <Button>
+          <Button type="button">
             Добавить способности <PlusFilledIcon {...stylex.props(styles.icon)} />
           </Button>
         </Sheet.Trigger>

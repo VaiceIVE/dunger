@@ -23,7 +23,7 @@ export const ActionsSection = () => {
     <Fragment>
       <Sheet>
         <Sheet.Trigger asChild>
-          <Button>
+          <Button type="button">
             Добавить действия <PlusFilledIcon {...stylex.props(styles.icon)} />
           </Button>
         </Sheet.Trigger>

@@ -60,10 +60,10 @@ export const BeastPage = () => {
         <Footer style={styles.footer}>
           <Container style={styles.container}>
             <Flex gap={8}>
-              <Button disabled={!changed} variant={ButtonVariant.accent}>
+              <Button type="submit" disabled={!changed} variant={ButtonVariant.accent}>
                 Закончить редактирование
               </Button>
-              <IconButton onClick={scrollToTop} size="lg">
+              <IconButton type="button" onClick={scrollToTop} size="lg">
                 <ChevronsUpIcon />
               </IconButton>
             </Flex>

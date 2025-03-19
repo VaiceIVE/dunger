@@ -55,8 +55,8 @@ export const StatblockSection = () => {
       </Stack>
       <Select placeholder="-Не выбрано-" label="Тип брони" />
       <Input.Wrapper label="Навыки">
-        <Button>
-          Добавить способности <PlusFilledIcon {...stylex.props(styles.icon)} />
+        <Button type="button">
+          Выбрать навыки <PlusFilledIcon {...stylex.props(styles.icon)} />
         </Button>
       </Input.Wrapper>
       <MultiSelect multiple searchable placeholder="Начните вводить" label="Уязвимость к видам урону" />
