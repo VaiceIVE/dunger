@@ -1,11 +1,30 @@
-export interface ComboboxHiddenInputProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'value'> {
-  /** Input value */
+import * as stylex from '@stylexjs/stylex';
+
+export interface ComboboxHiddenInputProps extends Omit<React.ComponentPropsWithoutRef<'input'>, 'value' | 'type'> {
+  /** Значение инпута */
   value: string | string[] | null;
 
-  /** Divider character that is used to transform array values to string, `','` by default */
+  /** Разделитель, используемый для преобразования массива в строку, по умолчанию `','` */
   valuesDivider?: string;
 }
 
+/**
+ * Не использует `type="hidden"`, чтобы работала нативная валидация формы.
+ */
 export function ComboboxHiddenInput({ value, valuesDivider = ',', ...others }: ComboboxHiddenInputProps) {
-  return <input type="hidden" value={Array.isArray(value) ? value.join(valuesDivider) : (value ?? '')} {...others} />;
+  return (
+    <input
+      {...stylex.props(styles.root)}
+      onChange={() => ({})}
+      value={Array.isArray(value) ? value.join(valuesDivider) : (value ?? '')}
+      {...others}
+    />
+  );
 }
+
+const styles = stylex.create({
+  root: {
+    display: 'none',
+    visibility: 'hidden'
+  }
+});

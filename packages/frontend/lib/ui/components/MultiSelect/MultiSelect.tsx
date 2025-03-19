@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { FormEventHandler, useMemo, useState } from 'react';
 import { Chips, Combobox, ComboboxItem, Flex, getOptionsLockup, SearchIcon, Stack, useUncontrolled } from '@dunger/ui';
 import { InputBase, InputBaseProps } from '../InputBase';
 import MultiSelectorIcon from './selector.svg?react';
@@ -34,6 +34,8 @@ export const MultiSelect = ({
   searchValue,
   defaultSearchValue,
   onSearchChange,
+  validate,
+  required,
   onKeyDown,
   onBlur,
   onFocus,
@@ -44,6 +46,8 @@ export const MultiSelect = ({
   ...props
 }: MultiSelectProps) => {
   const [dropdownOpened, setDropdownOpened] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const optionsLockup = useMemo(() => getOptionsLockup(options), [options]);
 
   const [_value, setValue] = useUncontrolled({
@@ -59,6 +63,21 @@ export const MultiSelect = ({
     finalValue: '',
     onChange: onSearchChange
   });
+
+  const handleInvalid: FormEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
+
+    const validity = e.currentTarget.validity;
+    const customError = validate?.(e.currentTarget.value, validity);
+
+    if (customError) {
+      setError(customError);
+    } else if (validity.valueMissing) {
+      setError('Обязательное поле');
+    } else if (!validity.valid) {
+      setError('Поле заполнено неправильно');
+    }
+  };
 
   const handleInputKeydown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     onKeyDown?.(event);
@@ -105,6 +124,9 @@ export const MultiSelect = ({
           <InputBase
             disabled={disabled}
             value={search}
+            error={error}
+            required={required}
+            onErrorChange={setError}
             readOnly={readOnly ?? !searchable}
             leftSection={_leftSection}
             rightSection={<MultiSelectorIcon />}
@@ -131,7 +153,14 @@ export const MultiSelect = ({
           ))}
         </Combobox.Options>
 
-        <Combobox.HiddenInput value={_value} name={name} disabled={disabled} form={form} />
+        <Combobox.HiddenInput
+          onInvalid={handleInvalid}
+          required={required}
+          value={_value}
+          name={name}
+          disabled={disabled}
+          form={form}
+        />
       </Combobox>
       {!!values.length && <Flex gap={8}>{values}</Flex>}
     </Stack>

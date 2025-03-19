@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { FormEventHandler, useEffect, useMemo, useState } from 'react';
 import { Combobox, ComboboxItem, getOptionsLockup, SearchIcon, useUncontrolled } from '@dunger/ui';
 import { usePrevious } from '@dunger/ui/hooks/usePrevious';
 import { InputBase, InputBaseProps } from '../InputBase';
@@ -29,6 +29,7 @@ export const Select = ({
   options = [],
   searchable = false,
   readOnly,
+  required,
   searchValue,
   defaultSearchValue,
   onSearchChange,
@@ -37,11 +38,13 @@ export const Select = ({
   onFocus,
   disabled,
   leftSection,
+  validate,
   name,
   form,
   ...props
 }: SelectProps) => {
   const [dropdownOpened, setDropdownOpened] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const optionsLockup = useMemo(() => getOptionsLockup(options), [options]);
 
@@ -54,6 +57,21 @@ export const Select = ({
 
   const selectedOption = typeof _value === 'string' ? optionsLockup[_value] : undefined;
   const previousSelectedOption = usePrevious(selectedOption);
+
+  const handleInvalid: FormEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
+
+    const validity = e.currentTarget.validity;
+    const customError = validate?.(e.currentTarget.value, validity);
+
+    if (customError) {
+      setError(customError);
+    } else if (validity.valueMissing) {
+      setError('Обязательное поле');
+    } else if (!validity.valid) {
+      setError('Поле заполнено неправильно');
+    }
+  };
 
   const [search, setSearch] = useUncontrolled({
     value: searchValue,
@@ -86,16 +104,21 @@ export const Select = ({
       disabled={disabled}
       onValueChange={(value) => {
         setValue(value as string);
+        setError(null);
       }}>
       <Combobox.Target asChild>
         <InputBase
           disabled={disabled}
           value={search}
+          onErrorChange={setError}
+          error={error}
+          required={required}
           readOnly={readOnly ?? !searchable}
           leftSection={_leftSection}
           rightSection={<SelectorIcon />}
           onChange={(event) => {
             setSearch(event.currentTarget.value);
+            setError(null);
           }}
           onFocus={(event) => {
             onFocus?.(event);
@@ -118,7 +141,15 @@ export const Select = ({
           </Combobox.Option>
         ))}
       </Combobox.Options>
-      <Combobox.HiddenInput value={_value} name={name} disabled={disabled} form={form} />
+
+      <Combobox.HiddenInput
+        required={required}
+        onInvalid={handleInvalid}
+        value={_value}
+        name={name}
+        disabled={disabled}
+        form={form}
+      />
     </Combobox>
   );
 };
