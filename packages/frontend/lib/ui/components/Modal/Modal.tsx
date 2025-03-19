@@ -38,7 +38,6 @@ export const Modal = ({ withOverlay = true, withCloseButton = true, open, onOpen
   return (
     <ModalProvider value={{ open: handleOpen, close: handleClose, withOverlay, withCloseButton, openState: _open }}>
       {children}
-      {_open && createPortal(children, document.body)}
     </ModalProvider>
   );
 };
