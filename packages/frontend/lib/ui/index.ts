@@ -37,6 +37,13 @@ export * from './components/LogoSmall';
 export { useUncontrolled } from './hooks/useUncontrolled';
 
 /**
+ * Features
+ */
+export * from './features/PositionObserver';
+export * from './features/PageTitle';
+export * from './features/WizardLoader';
+
+/**
  * Utils
  */
 export { headers } from './utils/headers';
