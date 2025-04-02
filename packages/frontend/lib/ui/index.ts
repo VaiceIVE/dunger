@@ -24,6 +24,7 @@ export * from './components/Stack';
 export * from './components/Tag';
 export * from './components/Textarea';
 export * from './components/TextInput';
+export * from './components/Tooltip';
 
 /**
  * Icons & Logos
