@@ -28,6 +28,7 @@ export const SideBar = () => {
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       if (!open) return;
+
       const target = e.target as Node | null;
 
       if (!target?.isConnected) {
