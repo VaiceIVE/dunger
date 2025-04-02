@@ -27,8 +27,6 @@ export const SideBar = () => {
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
-      e.preventDefault();
-
       if (!open) return;
 
       const target = e.target as Node | null;
