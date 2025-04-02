@@ -7,13 +7,13 @@
 
 Клиентская часть проекта (фронтэнд системы) включает в себя веб-приложение:
 
-- [`dunger-user-web`](packages/front/dunger-user-web) (`uw:`) – веб-приложение на React (Vite), интерфейс для игроков и гейм-мастеров
+- [`dunger-user-web`](packages/frontend/dunger-user-web) (`uw:`) – веб-приложение на React (Vite), интерфейс для игроков и гейм-мастеров
 
 Общий для всех веб-приложений код вынесен во внутренние библиотеки:
 
-- [`@dunger/auth-fetch`](packages/front/lib/auth-fetch) (`af:`) – React-провайдер всего необходимого для авторизации и запросов к API
-- [`@dunger/ui`](packages/front/lib/ui) (`ui:`) – UI-кит проекта, общие для веб-приложений стили, компоненты и утилиты
-- [`@dunger/eslint-plugin-import-paths`](packages/front/lib/eslint-plugin-import-paths) (`ip:`) – плагин для ESLint, правильно исправляет импорты на абсолютные и относительные
+- [`@dunger/auth-fetch`](packages/frontend/lib/auth-fetch) (`af:`) – React-провайдер всего необходимого для авторизации и запросов к API
+- [`@dunger/ui`](packages/frontend/lib/ui) (`ui:`) – UI-кит проекта, общие для веб-приложений стили, компоненты и утилиты
+- [`@dunger/eslint-plugin-import-paths`](packages/frontend/lib/eslint-plugin-import-paths) (`ip:`) – плагин для ESLint, правильно исправляет импорты на абсолютные и относительные
 
 Детальную информацию по конкретным пакетам ищите в их собственных `README.md`.
 
