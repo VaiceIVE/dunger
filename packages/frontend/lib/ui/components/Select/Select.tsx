@@ -1,6 +1,8 @@
-import { FormEventHandler, useEffect, useMemo, useState } from 'react';
-import { Combobox, ComboboxItem, getOptionsLockup, SearchIcon, useUncontrolled } from '@dunger/ui';
+import { FormEventHandler, ReactNode, useEffect, useMemo, useState } from 'react';
+import * as stylex from '@stylexjs/stylex';
+import { Combobox, ComboboxItem, getOptionsLockup, SearchIcon, text, useUncontrolled } from '@dunger/ui';
 import { usePrevious } from '@dunger/ui/hooks/usePrevious';
+import { colors } from '../../tokens.stylex';
 import { InputBase, InputBaseProps } from '../InputBase';
 import SelectorIcon from './selector.svg?react';
 
@@ -19,6 +21,8 @@ export interface SelectProps extends Omit<InputBaseProps, 'value' | 'defaultValu
 
   onSearchChange?: (value: string) => void;
 
+  nothingFoundMessage?: ReactNode;
+
   options?: ComboboxItem[];
 
   hasMore?: boolean;
@@ -31,6 +35,7 @@ export const Select = ({
   defaultValue,
   onChange,
   options = [],
+  nothingFoundMessage = 'Ничего не найдено',
   searchable = false,
   readOnly,
   required,
@@ -125,7 +130,7 @@ export const Select = ({
             onFocus?.(event);
           }}
           onBlur={(event) => {
-            setSearch(_value != null ? optionsLockup[_value].label || '' : '');
+            setSearch(_value != null ? (selectedOption?.label ?? '') : '');
             onBlur?.(event);
           }}
           onClick={(event) => {
@@ -136,11 +141,17 @@ export const Select = ({
       </Combobox.Target>
 
       <Combobox.Options hasMore={hasMore} next={next}>
-        {options.map((o) => (
-          <Combobox.Option key={o.value} disabled={o.disabled} value={o.value}>
-            {o.label}
-          </Combobox.Option>
-        ))}
+        {options.length ? (
+          options.map((o) => (
+            <Combobox.Option key={o.value} disabled={o.disabled} value={o.value}>
+              {o.label}
+            </Combobox.Option>
+          ))
+        ) : (
+          <div role="option" {...stylex.props(text.defaultMedium, styles.nothing)}>
+            {nothingFoundMessage}
+          </div>
+        )}
       </Combobox.Options>
 
       <Combobox.HiddenInput
@@ -154,3 +165,18 @@ export const Select = ({
     </Combobox>
   );
 };
+
+const styles = stylex.create({
+  nothing: {
+    backgroundColor: 'white',
+    borderWidth: 0,
+    color: colors.textPrimaryDefault,
+    display: 'block',
+    overflow: 'hidden',
+    paddingBlock: '12px',
+    paddingInline: '24px',
+    position: 'relative',
+    textAlign: 'left',
+    width: '100%'
+  }
+});
