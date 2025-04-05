@@ -21,6 +21,10 @@ export interface MultiSelectProps extends Omit<InputBaseProps, 'value' | 'defaul
   onSearchChange?: (value: string) => void;
 
   options?: ComboboxItem[];
+
+  hasMore?: boolean;
+
+  next?: () => void;
 }
 
 export const MultiSelect = ({
@@ -43,6 +47,8 @@ export const MultiSelect = ({
   leftSection,
   name,
   form,
+  hasMore,
+  next,
   ...props
 }: MultiSelectProps) => {
   const [dropdownOpened, setDropdownOpened] = useState(false);
@@ -50,12 +56,7 @@ export const MultiSelect = ({
 
   const optionsLockup = useMemo(() => getOptionsLockup(options), [options]);
 
-  const [_value, setValue] = useUncontrolled({
-    value,
-    defaultValue,
-    finalValue: [],
-    onChange
-  });
+  const [_value, setValue] = useUncontrolled({ value, defaultValue, finalValue: [], onChange });
 
   const [search, setSearch] = useUncontrolled({
     value: searchValue,
@@ -145,7 +146,7 @@ export const MultiSelect = ({
           />
         </Combobox.Target>
 
-        <Combobox.Options>
+        <Combobox.Options hasMore={hasMore} next={next}>
           {options.map((o) => (
             <Combobox.Option key={o.value} disabled={o.disabled} value={o.value}>
               {o.label}

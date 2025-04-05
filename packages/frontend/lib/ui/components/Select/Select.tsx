@@ -20,6 +20,10 @@ export interface SelectProps extends Omit<InputBaseProps, 'value' | 'defaultValu
   onSearchChange?: (value: string) => void;
 
   options?: ComboboxItem[];
+
+  hasMore?: boolean;
+
+  next?: () => void;
 }
 
 export const Select = ({
@@ -40,6 +44,8 @@ export const Select = ({
   leftSection,
   validate,
   name,
+  hasMore,
+  next,
   form,
   ...props
 }: SelectProps) => {
@@ -48,12 +54,7 @@ export const Select = ({
 
   const optionsLockup = useMemo(() => getOptionsLockup(options), [options]);
 
-  const [_value, setValue] = useUncontrolled({
-    value,
-    defaultValue,
-    finalValue: null,
-    onChange
-  });
+  const [_value, setValue] = useUncontrolled({ value, defaultValue, finalValue: null, onChange });
 
   const selectedOption = typeof _value === 'string' ? optionsLockup[_value] : undefined;
   const previousSelectedOption = usePrevious(selectedOption);
@@ -134,7 +135,7 @@ export const Select = ({
         />
       </Combobox.Target>
 
-      <Combobox.Options>
+      <Combobox.Options hasMore={hasMore} next={next}>
         {options.map((o) => (
           <Combobox.Option key={o.value} disabled={o.disabled} value={o.value}>
             {o.label}
