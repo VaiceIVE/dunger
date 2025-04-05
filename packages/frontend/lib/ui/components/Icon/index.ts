@@ -1,5 +1,6 @@
 import AiFillIcon from './_icons/ai-fill.svg?react';
 import BellFilledIcon from './_icons/bell-filled.svg?react';
+import BookmarkIcon from './_icons/bookmark.svg?react';
 import ChevronDownIcon from './_icons/chevron-down.svg?react';
 import ChevronUpIcon from './_icons/chevron-up.svg?react';
 import ChevronsUpIcon from './_icons/chevrons-up.svg?react';
@@ -18,6 +19,7 @@ import XIcon from './_icons/x.svg?react';
 export {
   AiFillIcon,
   BellFilledIcon,
+  BookmarkIcon,
   ChevronDownIcon,
   ChevronUpIcon,
   ChevronsUpIcon,
