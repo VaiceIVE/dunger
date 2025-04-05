@@ -133,7 +133,7 @@ const styles = stylex.create({
     padding: '20px 16px',
     position: 'sticky',
     top: 0,
-    zIndex: 1
+    zIndex: 0
   },
   nav: {
     background: 'white',
