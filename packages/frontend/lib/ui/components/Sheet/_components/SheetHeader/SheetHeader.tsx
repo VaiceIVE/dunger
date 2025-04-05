@@ -21,6 +21,7 @@ const styles = stylex.create({
     padding: '18px 24px',
     position: 'sticky',
     top: 0,
-    width: '100%'
+    width: '100%',
+    zIndex: 1
   }
 });
