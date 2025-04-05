@@ -2,118 +2,118 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 export async function SeedDamageType() {
     await prisma.damageType.upsert({
-        where: { key: "Acid" },
+        where: { id: "Acid" },
         update: {},
         create: {
-          key: "Acid",
+          id: "Acid",
           name: "Кислотный"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Bludgeoning" },
+        where: { id: "Bludgeoning" },
         update: {},
         create: {
-          key: "Bludgeoning",
+          id: "Bludgeoning",
           name: "Дробящий"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Cold" },
+        where: { id: "Cold" },
         update: {},
         create: {
-          key: "Cold",
+          id: "Cold",
           name: "Холод"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Fire" },
+        where: { id: "Fire" },
         update: {},
         create: {
-          key: "Fire",
+          id: "Fire",
           name: "Огонь"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Force" },
+        where: { id: "Force" },
         update: {},
         create: {
-          key: "Force",
+          id: "Force",
           name: "Силовой"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Lightning" },
+        where: { id: "Lightning" },
         update: {},
         create: {
-          key: "Lightning",
+          id: "Lightning",
           name: "Молния"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Necrotic" },
+        where: { id: "Necrotic" },
         update: {},
         create: {
-          key: "Necrotic",
+          id: "Necrotic",
           name: "Некротический"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Piercing" },
+        where: { id: "Piercing" },
         update: {},
         create: {
-          key: "Piercing",
+          id: "Piercing",
           name: "Колющий"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Poison" },
+        where: { id: "Poison" },
         update: {},
         create: {
-          key: "Poison",
+          id: "Poison",
           name: "Яд"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Psychic" },
+        where: { id: "Psychic" },
         update: {},
         create: {
-          key: "Psychic",
+          id: "Psychic",
           name: "Психический"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Radiant" },
+        where: { id: "Radiant" },
         update: {},
         create: {
-          key: "Radiant",
+          id: "Radiant",
           name: "Излучение"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Slashing" },
+        where: { id: "Slashing" },
         update: {},
         create: {
-          key: "Slashing",
+          id: "Slashing",
           name: "Рубящий"
         }
       });
       
       await prisma.damageType.upsert({
-        where: { key: "Thunder" },
+        where: { id: "Thunder" },
         update: {},
         create: {
-          key: "Thunder",
+          id: "Thunder",
           name: "Звуковой"
         }
       });

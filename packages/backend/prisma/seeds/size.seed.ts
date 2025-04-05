@@ -2,50 +2,50 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 export async function SeedSizes() {
   await prisma.size.upsert({
-      where: { key: "T" },
+      where: { id: "T" },
       update: {},
       create: {
-          key: "T",
+          id: "T",
           name: "Крошечный"
       }
   }),
   await prisma.size.upsert({
-      where: { key: "S" },
+      where: { id: "S" },
       update: {},
       create: {
-          key: "S",
+          id: "S",
           name: "Маленький"
       }
   }),
   await prisma.size.upsert({
-      where: { key: "M" },
+      where: { id: "M" },
       update: {},
       create: {
-          key: "M",
+          id: "M",
           name: "Средний"
       }
   }),
   await prisma.size.upsert({
-      where: { key: "L" },
+      where: { id: "L" },
       update: {},
       create: {
-          key: "L",
+          id: "L",
           name: "Большой"
       }
   }),
   await prisma.size.upsert({
-      where: { key: "H" },
+      where: { id: "H" },
       update: {},
       create: {
-          key: "H",
+          id: "H",
           name: "Огромный"
       }
   }),
   await prisma.size.upsert({
-      where: { key: "G" },
+      where: { id: "G" },
       update: {},
       create: {
-          key: "G",
+          id: "G",
           name: "Громадный"
       }
   })

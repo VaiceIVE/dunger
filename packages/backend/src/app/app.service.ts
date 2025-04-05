@@ -83,7 +83,7 @@ export class AppService {
         },
         size_relation: {
           create: {
-            key: "L",
+            id: "L",
             name: "Large"
           }
         },
