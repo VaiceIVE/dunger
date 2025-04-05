@@ -125,3 +125,8 @@ export interface Beast {
   actions?: Action[]; // Действия существа
   traits?: Trait[]; // Особенности существа
 }
+
+export interface ApiDirectory {
+  id: string;
+  name: string;
+}
