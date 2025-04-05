@@ -1,1 +1,1 @@
-export { MultiSelect } from './MultiSelect';
+export { PaginatedMultiSelect as MultiSelect } from './PaginatedMultiSelect';

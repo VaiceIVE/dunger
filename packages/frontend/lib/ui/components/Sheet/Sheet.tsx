@@ -1,6 +1,7 @@
 import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { SheetClose } from './_components/SheetClose';
 import { SheetContent } from './_components/SheetContent';
+import { SheetFooter } from './_components/SheetFooter';
 import { SheetHeader } from './_components/SheetHeader';
 import { SheetOverlay } from './_components/SheetOverlay';
 import { SheetTrigger } from './_components/SheetTrigger';
@@ -61,3 +62,4 @@ Sheet.Content = SheetContent;
 Sheet.Header = SheetHeader;
 Sheet.Overlay = SheetOverlay;
 Sheet.Close = SheetClose;
+Sheet.Footer = SheetFooter;

@@ -5,7 +5,6 @@ import {
   Button,
   ButtonVariant,
   Container,
-  FolderIcon,
   Grid,
   headers,
   IconButton,
@@ -18,6 +17,7 @@ import {
 } from '@dunger/ui';
 import { BeastCard } from 'features/BeastCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
+import { AddToCampaign } from './_components/AddToCampaign';
 import { BestiaryList } from './_components/BestiaryList';
 
 export const BestiaryPage = () => {
@@ -54,14 +54,12 @@ export const BestiaryPage = () => {
               controls={
                 <Fragment>
                   <IconButton size="sm">
-                    <PencilIcon />
-                  </IconButton>
-                  <IconButton size="sm">
                     <LinkIcon />
                   </IconButton>
                   <IconButton size="sm">
-                    <FolderIcon />
+                    <PencilIcon />
                   </IconButton>
+                  <AddToCampaign />
                   <Link to={'/bestiary'}>
                     <IconButton size="sm">
                       <XIcon />
