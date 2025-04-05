@@ -1,5 +1,7 @@
 import { FormEventHandler, Fragment } from 'react';
 import * as stylex from '@stylexjs/stylex';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { useAuthFetch } from '@dunger/auth-fetch';
 import {
   Stack,
   TextInput,
@@ -15,6 +17,7 @@ import {
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Banner } from 'components/Banner';
+import { ApiDirectory } from 'store/apiTypes.gen';
 import { CreateMode } from '../../NewBeastPage.types';
 
 interface NewBeastFormProps {
@@ -23,6 +26,24 @@ interface NewBeastFormProps {
 }
 
 export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
+  const authFetch = useAuthFetch();
+  const { data: types } = useSuspenseQuery<ApiDirectory[]>({
+    queryKey: ['creatures', 'types'],
+    queryFn: () => authFetch(`/creatures/types`)
+  });
+
+  const { data } = useSuspenseQuery({
+    queryKey: ['creatures', 'templates'],
+    queryFn: () => authFetch(`/creatures/templates?offset=0`)
+  });
+
+  const typeOptions = types.map((c) => {
+    return {
+      value: c.id.toString(),
+      label: c.name
+    };
+  });
+
   return (
     <form key={mode} onSubmit={handleSubmit} {...stylex.props(styles.root)}>
       <Stack gap={24}>
@@ -32,16 +53,7 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
         {mode === CreateMode.generation ? (
           <Fragment>
             <Flex align="flex-start" gap={16}>
-              <Select
-                options={[
-                  { label: 'test', value: '1' },
-                  { label: 'test2', value: '2' }
-                ]}
-                name="beastTypeId"
-                label="Тип"
-                placeholder="-Не выбрано-"
-                required
-              />
+              <Select options={typeOptions} name="beastTypeId" label="Тип" placeholder="-Не выбрано-" required />
               <Select name="challengeRating" label="Класс Опасности (CR)" placeholder="-Не выбрано-" required />
             </Flex>
             <Chips.Group name="type" label="Роль в бою">
