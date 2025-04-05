@@ -121,6 +121,10 @@ export class CreaturesService {
     })
   }
 
+  async findCR(){
+    return await this.prisma.challengeRating.findMany()
+  }
+
   async findSkills(){
     return await this.prisma.skill.findMany()
   }

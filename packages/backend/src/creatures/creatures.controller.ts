@@ -65,6 +65,11 @@ export class CreaturesController {
     return await this.creaturesService.findTraitsGroups()
   }
 
+  @Get('/cr')
+  async findCR(){
+    return await this.creaturesService.findCR()
+  }
+
 
 
   @Get(':id')

@@ -185,6 +185,10 @@ model DamageType {
 
 }
 
+model ChallengeRating {
+  id String @id
+}
+
 enum Stat {
   Strength  
   Dexterity   
