@@ -1,7 +1,12 @@
+export enum ApiCreatureRole {
+  OFFENCE = 'OFFENCE',
+  DEFENCE = 'DEFENCE'
+}
+
 export interface ApiCreatureAiInput {
   name: string;
-  danger_class: string;
+  challenge_rating: string;
   type: string;
   creation_description?: string | null;
-  role?: 'OFFENCE' | 'DEFENCE';
+  role?: ApiCreatureRole | null;
 }

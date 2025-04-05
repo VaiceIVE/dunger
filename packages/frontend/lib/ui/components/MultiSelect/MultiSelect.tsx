@@ -1,5 +1,17 @@
-import { FormEventHandler, useMemo, useState } from 'react';
-import { Chips, Combobox, ComboboxItem, Flex, getOptionsLockup, SearchIcon, Stack, useUncontrolled } from '@dunger/ui';
+import { FormEventHandler, ReactNode, useMemo, useState } from 'react';
+import * as stylex from '@stylexjs/stylex';
+import {
+  Chips,
+  Combobox,
+  ComboboxItem,
+  Flex,
+  getOptionsLockup,
+  SearchIcon,
+  Stack,
+  text,
+  useUncontrolled
+} from '@dunger/ui';
+import { colors } from '../../tokens.stylex';
 import { InputBase, InputBaseProps } from '../InputBase';
 import MultiSelectorIcon from './selector.svg?react';
 
@@ -20,7 +32,13 @@ export interface MultiSelectProps extends Omit<InputBaseProps, 'value' | 'defaul
 
   onSearchChange?: (value: string) => void;
 
+  nothingFoundMessage?: ReactNode;
+
   options?: ComboboxItem[];
+
+  hasMore?: boolean;
+
+  next?: () => void;
 }
 
 export const MultiSelect = ({
@@ -29,6 +47,7 @@ export const MultiSelect = ({
   onChange,
   onRemove,
   options = [],
+  nothingFoundMessage = 'Ничего не найдено',
   searchable = false,
   readOnly,
   searchValue,
@@ -43,6 +62,8 @@ export const MultiSelect = ({
   leftSection,
   name,
   form,
+  hasMore,
+  next,
   ...props
 }: MultiSelectProps) => {
   const [dropdownOpened, setDropdownOpened] = useState(false);
@@ -50,12 +71,7 @@ export const MultiSelect = ({
 
   const optionsLockup = useMemo(() => getOptionsLockup(options), [options]);
 
-  const [_value, setValue] = useUncontrolled({
-    value,
-    defaultValue,
-    finalValue: [],
-    onChange
-  });
+  const [_value, setValue] = useUncontrolled({ value, defaultValue, finalValue: [], onChange });
 
   const [search, setSearch] = useUncontrolled({
     value: searchValue,
@@ -145,12 +161,18 @@ export const MultiSelect = ({
           />
         </Combobox.Target>
 
-        <Combobox.Options>
-          {options.map((o) => (
-            <Combobox.Option key={o.value} disabled={o.disabled} value={o.value}>
-              {o.label}
-            </Combobox.Option>
-          ))}
+        <Combobox.Options hasMore={hasMore} next={next}>
+          {options.length ? (
+            options.map((o) => (
+              <Combobox.Option key={o.value} disabled={o.disabled} value={o.value}>
+                {o.label}
+              </Combobox.Option>
+            ))
+          ) : (
+            <div role="option" {...stylex.props(text.defaultMedium, styles.nothing)}>
+              {nothingFoundMessage}
+            </div>
+          )}
         </Combobox.Options>
 
         <Combobox.HiddenInput
@@ -166,3 +188,18 @@ export const MultiSelect = ({
     </Stack>
   );
 };
+
+const styles = stylex.create({
+  nothing: {
+    backgroundColor: 'white',
+    borderWidth: 0,
+    color: colors.textPrimaryDefault,
+    display: 'block',
+    overflow: 'hidden',
+    paddingBlock: '12px',
+    paddingInline: '24px',
+    position: 'relative',
+    textAlign: 'left',
+    width: '100%'
+  }
+});

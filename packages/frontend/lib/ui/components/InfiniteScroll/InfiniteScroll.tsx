@@ -1,8 +1,8 @@
-import { PropsWithChildren, useEffect, useRef } from 'react';
+import { ComponentProps, useEffect, useRef } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 
-export interface InfiniteScrollProps extends PropsWithChildren {
+export interface InfiniteScrollProps extends Omit<ComponentProps<'div'>, 'style'> {
   hasMore?: boolean;
 
   next?: () => void;
