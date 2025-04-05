@@ -107,12 +107,20 @@ const styles = stylex.create({
     borderWidth: 1,
     boxShadow: '0px 4px 4px 0px #383E490A, 0px 8px 24px 0px #383E491F',
     left: 0,
+    maxHeight: 176,
     overflow: 'hidden',
+    overflowY: 'auto',
     position: 'absolute',
     visibility: {
       default: 'visible',
       ':not(:has(> [role="option"]))': 'hidden'
     },
-    zIndex: 1
+    zIndex: 1,
+    '::-webkit-scrollbar': {
+      background: 'transparent',
+      display: 'none',
+      height: 0,
+      width: 0
+    }
   }
 });
