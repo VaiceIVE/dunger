@@ -20,9 +20,7 @@ export const AccordionControl = ({ children, onClick, style }: AccordionControlP
 
   return (
     <div {...stylex.props(styles.root, style)} onClick={handleClick}>
-      <div {...stylex.props(styles.children)}>
-        {typeof children === 'function' ? children(isItemActive(value)) : children}
-      </div>
+      {typeof children === 'function' ? children(isItemActive(value)) : children}
     </div>
   );
 };
@@ -38,11 +36,6 @@ const styles = stylex.create({
     paddingBlock: 16,
     paddingInline: '0',
     userSelect: 'none',
-    width: '100%'
-  },
-  children: {
-    display: 'flex',
-    minWidth: 0,
     width: '100%'
   }
 });

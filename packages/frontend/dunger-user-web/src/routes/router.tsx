@@ -2,10 +2,12 @@ import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from '
 import { BaseLayout } from './_layouts/BaseLayout';
 import { UserLayout } from './_layouts/UserLayout';
 import { BackgroundsPage } from './BackgroundsPage';
+import { BeastPage } from './BeastPage';
 import { BestiaryPage } from './BestiaryPage';
 import { ClassesPage } from './ClassesPage';
 import { FeatsPage } from './FeatsPage';
 import { HomePage } from './HomePage';
+import { NewBeastPage } from './NewBeastPage';
 import { SpeciesPage } from './SpeciesPage';
 
 export const router = createBrowserRouter(
@@ -20,15 +22,13 @@ export const router = createBrowserRouter(
         <Route path={'/backgrounds/:id?'} Component={BackgroundsPage} />
 
         <Route path={'/bestiary/:id?'} Component={BestiaryPage} />
+
+        <Route path="/beast/new" Component={NewBeastPage} />
+        <Route path="/beast/:id" Component={BeastPage} />
       </Route>
 
       {/* not found */}
       <Route path={'*'} Component={() => <Navigate to={'/'} replace />} />
     </Route>
-  ),
-  {
-    future: {
-      v7_relativeSplatPath: true
-    }
-  }
+  )
 );

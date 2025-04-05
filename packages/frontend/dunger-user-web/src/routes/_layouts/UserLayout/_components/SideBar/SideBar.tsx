@@ -6,14 +6,17 @@ import {
   Button,
   ButtonVariant,
   ButtonWidth,
+  DiceD20Icon,
   IconButton,
   IconButtonVariant,
   LogoSmall,
   MenuIcon,
+  PlusFilledIcon,
   Stack,
   text,
   XIcon
 } from '@dunger/ui';
+import { ModalFooter } from '../ModalFooter';
 import { Tab } from '../Tab';
 
 export const SideBar = () => {
@@ -25,6 +28,7 @@ export const SideBar = () => {
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
       if (!open) return;
+
       const target = e.target as Node | null;
 
       if (!target?.isConnected) {
@@ -70,6 +74,20 @@ export const SideBar = () => {
             </IconButton>
           </Stack>
         </Stack>
+
+        <Stack gap={16}>
+          <Link to={'/beast/new'}>
+            <IconButton>
+              <PlusFilledIcon />
+            </IconButton>
+          </Link>
+
+          <IconButton>
+            <DiceD20Icon />
+          </IconButton>
+
+          <ModalFooter />
+        </Stack>
       </div>
 
       {open && (
@@ -83,8 +101,8 @@ export const SideBar = () => {
             <Stack gap={24}>
               <section {...stylex.props(styles.section)}>
                 <div {...stylex.props(text.subheaderBold, styles.sectionTitle)}>Игровой персонаж</div>
-                <Tab to={'classes'}>Расы</Tab>
-                <Tab to={'species'}>Классы</Tab>
+                <Tab to={'species'}>Расы</Tab>
+                <Tab to={'classes'}>Классы </Tab>
                 <Tab to={'feats'}>Черты</Tab>
                 <Tab to={'backgrounds'}>Предыстории</Tab>
               </section>
@@ -111,7 +129,10 @@ const styles = stylex.create({
     flexDirection: 'column',
     height: '100dvh',
     justifyContent: 'space-between',
+    left: 0,
     padding: '20px 16px',
+    position: 'sticky',
+    top: 0,
     zIndex: 1
   },
   nav: {

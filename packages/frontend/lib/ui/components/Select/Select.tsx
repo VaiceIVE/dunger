@@ -1,0 +1,155 @@
+import { FormEventHandler, useEffect, useMemo, useState } from 'react';
+import { Combobox, ComboboxItem, getOptionsLockup, SearchIcon, useUncontrolled } from '@dunger/ui';
+import { usePrevious } from '@dunger/ui/hooks/usePrevious';
+import { InputBase, InputBaseProps } from '../InputBase';
+import SelectorIcon from './selector.svg?react';
+
+export interface SelectProps extends Omit<InputBaseProps, 'value' | 'defaultValue' | 'onChange'> {
+  value?: string | null;
+
+  defaultValue?: string | null;
+
+  onChange?: (value: string | null) => void;
+
+  searchable?: boolean;
+
+  searchValue?: string;
+
+  defaultSearchValue?: string;
+
+  onSearchChange?: (value: string) => void;
+
+  options?: ComboboxItem[];
+}
+
+export const Select = ({
+  value,
+  defaultValue,
+  onChange,
+  options = [],
+  searchable = false,
+  readOnly,
+  required,
+  searchValue,
+  defaultSearchValue,
+  onSearchChange,
+  onClick,
+  onBlur,
+  onFocus,
+  disabled,
+  leftSection,
+  validate,
+  name,
+  form,
+  ...props
+}: SelectProps) => {
+  const [dropdownOpened, setDropdownOpened] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const optionsLockup = useMemo(() => getOptionsLockup(options), [options]);
+
+  const [_value, setValue] = useUncontrolled({
+    value,
+    defaultValue,
+    finalValue: null,
+    onChange
+  });
+
+  const selectedOption = typeof _value === 'string' ? optionsLockup[_value] : undefined;
+  const previousSelectedOption = usePrevious(selectedOption);
+
+  const handleInvalid: FormEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
+
+    const validity = e.currentTarget.validity;
+    const customError = validate?.(e.currentTarget.value, validity);
+
+    if (customError) {
+      setError(customError);
+    } else if (validity.valueMissing) {
+      setError('Обязательное поле');
+    } else if (!validity.valid) {
+      setError('Поле заполнено неправильно');
+    }
+  };
+
+  const [search, setSearch] = useUncontrolled({
+    value: searchValue,
+    defaultValue: defaultSearchValue,
+    finalValue: selectedOption ? selectedOption.label : '',
+    onChange: onSearchChange
+  });
+
+  useEffect(() => {
+    if (value === null) {
+      setSearch('');
+    }
+
+    if (
+      typeof value === 'string' &&
+      selectedOption &&
+      (previousSelectedOption?.value !== selectedOption.value || previousSelectedOption.label !== selectedOption.label)
+    ) {
+      setSearch(selectedOption.label);
+    }
+  }, [value, selectedOption, setSearch, previousSelectedOption]);
+
+  const _leftSection = leftSection ?? (searchable ? <SearchIcon /> : null);
+
+  return (
+    <Combobox
+      onOpenChange={setDropdownOpened}
+      open={dropdownOpened}
+      value={_value}
+      disabled={disabled}
+      onValueChange={(value) => {
+        setValue(value as string);
+        setError(null);
+      }}>
+      <Combobox.Target asChild>
+        <InputBase
+          disabled={disabled}
+          value={search}
+          onErrorChange={setError}
+          error={error}
+          required={required}
+          readOnly={readOnly ?? !searchable}
+          leftSection={_leftSection}
+          rightSection={<SelectorIcon />}
+          onChange={(event) => {
+            setSearch(event.currentTarget.value);
+            setError(null);
+          }}
+          onFocus={(event) => {
+            onFocus?.(event);
+          }}
+          onBlur={(event) => {
+            setSearch(_value != null ? optionsLockup[_value].label || '' : '');
+            onBlur?.(event);
+          }}
+          onClick={(event) => {
+            onClick?.(event);
+          }}
+          {...props}
+        />
+      </Combobox.Target>
+
+      <Combobox.Options>
+        {options.map((o) => (
+          <Combobox.Option key={o.value} disabled={o.disabled} value={o.value}>
+            {o.label}
+          </Combobox.Option>
+        ))}
+      </Combobox.Options>
+
+      <Combobox.HiddenInput
+        required={required}
+        onInvalid={handleInvalid}
+        value={_value}
+        name={name}
+        disabled={disabled}
+        form={form}
+      />
+    </Combobox>
+  );
+};

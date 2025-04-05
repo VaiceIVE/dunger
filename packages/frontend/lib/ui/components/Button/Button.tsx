@@ -2,10 +2,11 @@ import { ComponentProps } from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import * as stylex from '@stylexjs/stylex';
 import type { StyleXStyles } from '@stylexjs/stylex';
-import { text } from '@utils/text';
+import { text } from '@dunger/ui';
+import { DungerSize } from '@dunger/ui/styles/DungerSize';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Spinner } from '../Spinner';
-import { ButtonSize, ButtonVariant, ButtonWidth } from './Button.types';
+import { ButtonVariant, ButtonWidth } from './Button.types';
 
 export interface ButtonProps extends Omit<ComponentProps<'button'>, 'style'> {
   style?: StyleXStyles;
@@ -16,7 +17,7 @@ export interface ButtonProps extends Omit<ComponentProps<'button'>, 'style'> {
 
   variant?: ButtonVariant;
 
-  size?: ButtonSize;
+  size?: Extract<DungerSize, 'sm' | 'md' | 'lg'>;
 
   loading?: boolean;
 }
@@ -27,7 +28,7 @@ export function Button({
   asChild,
   width = ButtonWidth.fit,
   variant = ButtonVariant.primary,
-  size = ButtonSize.md,
+  size = 'md',
   loading,
   ...props
 }: ButtonProps) {
@@ -54,7 +55,7 @@ const styles = stylex.create({
       ':disabled': 'default'
     },
     display: 'inline-flex',
-    gap: 10,
+    gap: 8,
     justifyContent: 'center',
     position: 'relative',
     textAlign: 'center',
@@ -65,8 +66,35 @@ const styles = stylex.create({
     whiteSpace: 'nowrap'
   },
   // variants
-  primary: {},
-  secondary: {},
+  primary: {
+    backgroundColor: {
+      default: colors.buttonPrimaryDefault,
+      ':not(:disabled):hover': colors.buttonPrimaryHover,
+      ':not(:disabled):active': colors.buttonPrimaryActive,
+      ':disabled': colors.backgroundNeutralDefault
+    },
+    color: {
+      default: 'white',
+      ':disabled': colors.black30
+    }
+  },
+  secondary: {
+    backgroundColor: {
+      default: 'transparent',
+      ':disabled': colors.backgroundNeutralDefault
+    },
+    borderColor: {
+      default: colors.outlinePrimaryDefault,
+      ':not(:disabled):hover': colors.outlinePrimaryHover,
+      ':not(:disabled):active': colors.outlinePrimaryActive,
+      ':disabled': 'transparent'
+    },
+    borderStyle: 'solid',
+    color: {
+      default: colors.textPrimaryDefault,
+      ':disabled': colors.black30
+    }
+  },
   accent: {
     backgroundColor: {
       default: colors.buttonAccentDefault,
@@ -90,6 +118,20 @@ const styles = stylex.create({
       default: colors.brand90,
       ':not(:disabled):hover': colors.brand70,
       ':not(:disabled):active': colors.brand80,
+      ':disabled': colors.black30
+    }
+  },
+  tertiarySecondary: {
+    backgroundColor: {
+      default: colors.buttonTertiaryAccentDefault,
+      ':not(:disabled):hover': colors.buttonTertiaryAccentHover,
+      ':not(:disabled):active': colors.buttonTertiaryAccentActive,
+      ':disabled': colors.backgroundNeutralDefault
+    },
+    color: {
+      default: colors.blue80,
+      ':not(:disabled):hover': colors.blue70,
+      ':not(:disabled):active': colors.blue90,
       ':disabled': colors.black30
     }
   },

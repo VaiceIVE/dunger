@@ -15,36 +15,64 @@ $font-family:
 
 @mixin h1-bold {
   font-family: $font-family;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 700;
   line-height: 110%;
 }
 
 @mixin h1-semibold {
   font-family: $font-family;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 600;
   line-height: 110%;
 }
 
 @mixin h1-medium {
   font-family: $font-family;
-  font-size: 28px;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 110%;
+}
+
+@mixin h2-bold {
+  font-family: $font-family;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 110%;
+}
+
+@mixin h2-semibold {
+  font-family: $font-family;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 110%;
+}
+
+@mixin h2-medium {
+  font-family: $font-family;
+  font-size: 24px;
   font-weight: 500;
   line-height: 110%;
 }
 
 @mixin h3-bold {
   font-family: $font-family;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 110%;
 }
 
 @mixin h3-semibold {
   font-family: $font-family;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
+  line-height: 110%;
+}
+
+@mixin h3-medium {
+  font-family: $font-family;
+  font-size: 18px;
+  font-weight: 500;
   line-height: 110%;
 }
 
@@ -90,16 +118,30 @@ $font-family:
   line-height: 140%;
 }
 
+@mixin text-subheader-medium {
+  font-family: $font-family;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 140%;
+}
+
 @mixin text-subheader-semibold {
   font-family: $font-family;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   line-height: 110%;
 }
 
 @mixin text-subheader-bold {
   font-family: $font-family;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 110%;
+}
+
+@mixin text-caption-medium {
+  font-family: $font-family;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 140%;
 }

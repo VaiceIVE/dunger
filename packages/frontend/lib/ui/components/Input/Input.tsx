@@ -1,19 +1,19 @@
-import { ComponentProps, ReactNode } from 'react';
+import { ComponentProps, FormEventHandler, ReactNode } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { text } from '@dunger/ui';
+import { DungerSize } from '@dunger/ui/styles/DungerSize';
 import { colors } from '../../tokens.stylex';
 import { InputDescription } from './_components/InputDescription';
 import { InputLabel } from './_components/InputLabel';
-import { InputWrapper } from './_components/InputWrapper';
-import { InputSize } from './Input.types';
+import { InputWrapper, useInputWrapper } from './_components/InputWrapper';
 
 export interface InputProps extends Omit<ComponentProps<'input'>, 'size' | 'style'> {
   rightSection?: ReactNode;
 
   leftSection?: ReactNode;
 
-  size?: InputSize;
+  size?: Extract<DungerSize, 'md' | 'lg'>;
 
   style?: StyleXStyles;
 
@@ -23,12 +23,36 @@ export interface InputProps extends Omit<ComponentProps<'input'>, 'size' | 'styl
 export const Input = ({
   leftSection,
   rightSection,
-  size = InputSize.md,
+  size = 'md',
   style,
   value,
   placeholder,
+  onInput,
+  required,
   ...props
 }: InputProps) => {
+  const ctx = useInputWrapper();
+
+  const handleInput: FormEventHandler<HTMLInputElement> = (e) => {
+    ctx?.setError(null);
+    onInput?.(e);
+  };
+
+  const handleInvalid: FormEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault();
+
+    const validity = e.currentTarget.validity;
+    const customError = ctx?.validate?.(e.currentTarget.value, validity);
+
+    if (customError) {
+      ctx?.setError(customError);
+    } else if (validity.valueMissing) {
+      ctx?.setError('Обязательное поле');
+    } else if (!validity.valid) {
+      ctx?.setError('Поле заполнено неправильно');
+    }
+  };
+
   return (
     <div {...stylex.props(styles.root)}>
       {leftSection && (
@@ -38,9 +62,13 @@ export const Input = ({
       )}
 
       <input
+        onInvalid={handleInvalid}
+        onInput={handleInput}
         value={value}
+        required={required}
         data-with-right-section={!!rightSection}
         data-with-left-section={!!leftSection}
+        aria-invalid={!!ctx?.error}
         {...stylex.props(text.defaultMedium, styles.base, styles[size], style)}
         placeholder={placeholder}
         {...props}
@@ -68,19 +96,23 @@ const styles = stylex.create({
   base: {
     alignItems: 'center',
     backgroundColor: {
-      default: 'transparent',
-      ':active': colors.backgroundNeutralDefault
+      default: 'white',
+      ':focus': colors.backgroundUniversal,
+      ':active': colors.backgroundUniversal
     },
     borderColor: {
       default: colors.outlinePrimaryDefault,
-      ':hover': colors.outlinePrimaryHover,
+      ':is([aria-invalid=true])': colors.textErrorDefault,
+      ':is([aria-invalid=true]):hover': colors.textErrorHover,
+      ':is([aria-invalid=true]):focus': colors.textErrorActive,
+      ':hover': colors.outlineAccentHover,
       ':focus': colors.brand80
     },
     borderStyle: 'solid',
     borderWidth: '1px',
     color: {
       default: colors.textPrimaryDefault,
-      ':placeholder': colors.textSecondaryDefault
+      '::placeholder': colors.textSecondaryDefault
     },
     cursor: {
       default: 'pointer',
@@ -120,8 +152,8 @@ const styles = stylex.create({
   // sizes
   md: {
     borderRadius: 10,
-    height: 40,
-    paddingBlock: 10,
+    height: 44,
+    paddingBlock: 12,
     paddingLeft: {
       default: 12,
       ':is([data-with-left-section=true])': 38

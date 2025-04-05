@@ -20,7 +20,7 @@ const styles = stylex.create({
     marginHorizontal: 'auto',
     maxWidth: {
       default: 868,
-      '@media(min-width: 1117px)': 1077,
+      '@media(min-width: 1197px)': 1077,
       '@media(min-width: 1564px)': 1444
     },
     padding: {

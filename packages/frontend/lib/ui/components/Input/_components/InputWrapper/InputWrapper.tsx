@@ -1,7 +1,8 @@
 import { PropsWithChildren, Fragment } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
-import { InputSize } from '../../Input.types';
+import { useUncontrolled } from '@dunger/ui/hooks/useUncontrolled';
+import { DungerSize } from '@dunger/ui/styles/DungerSize';
 import { InputDescription } from '../InputDescription';
 import { InputLabel } from '../InputLabel';
 import { InputWrapperProvider } from './InputWrapper.context';
@@ -17,7 +18,14 @@ export interface InputWrapperProps extends PropsWithChildren {
 
   style?: StyleXStyles;
 
-  size?: InputSize;
+  size?: Extract<DungerSize, 'md' | 'lg'>;
+
+  // custom validation function => errorMessage || null
+  validate?: (value: string, validity: ValidityState) => string | null;
+
+  error?: string | null;
+
+  onErrorChange?: (error: string | null) => void;
 }
 
 export const InputWrapper = ({
@@ -27,8 +35,18 @@ export const InputWrapper = ({
   inputWrapperOrder = ['label', 'input', 'description'],
   required,
   style,
-  size = InputSize.md
+  validate,
+  error,
+  onErrorChange,
+  size = 'md'
 }: InputWrapperProps) => {
+  const [_error, setError] = useUncontrolled({
+    value: error,
+    defaultValue: '',
+    onChange: onErrorChange,
+    finalValue: ''
+  });
+
   const _input = <Fragment key="input">{children}</Fragment>;
 
   const _label = !!label && (
@@ -37,7 +55,11 @@ export const InputWrapper = ({
     </InputLabel>
   );
 
-  const _description = !!description && <InputDescription key="description">{description}</InputDescription>;
+  const _description = (!!description || !!_error) && (
+    <InputDescription error={_error} key="description">
+      {description}
+    </InputDescription>
+  );
 
   const content = inputWrapperOrder.map((part) => {
     switch (part) {
@@ -53,7 +75,7 @@ export const InputWrapper = ({
   });
 
   return (
-    <InputWrapperProvider value={{ size }}>
+    <InputWrapperProvider value={{ size, error: _error, setError, validate }}>
       <div {...stylex.props(styles.root, style)}>{content}</div>
     </InputWrapperProvider>
   );

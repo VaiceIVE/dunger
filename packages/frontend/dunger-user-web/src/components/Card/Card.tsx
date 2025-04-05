@@ -47,7 +47,7 @@ const styles = stylex.create({
     borderRadius: 20,
     borderStyle: 'solid',
     borderWidth: 2,
-    height: 'calc(100dvh - 64px)',
+    height: '100%',
     overflowY: 'scroll',
     position: 'relative',
     scrollbarGutter: 'stable',

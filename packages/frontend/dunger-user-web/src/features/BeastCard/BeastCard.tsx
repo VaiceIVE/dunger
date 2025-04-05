@@ -1,21 +1,23 @@
-import { Fragment, ReactNode, useState } from 'react';
+import { Fragment, ReactNode } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import { Accordion, Avatar, Flex, Stack, Tag, text } from '@dunger/ui';
+import { StyleXStyles } from '@stylexjs/stylex';
+import { Accordion, Avatar, ChevronDownIcon, ChevronUpIcon, Flex, Stack, Tag, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Card } from 'components/Card';
 import { Beast } from 'store/apiTypes.gen';
 import { StatsTable } from './_components/StatsTable';
 
 interface BeastCardProps {
-  beast?: Beast;
+  beast?: Beast | null;
+
   controls?: ReactNode;
+
+  style?: StyleXStyles;
 }
 
-export const BeastCard = ({ beast, controls }: BeastCardProps) => {
-  const [openedSection, setOpenedSection] = useState('');
-
+export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
   return (
-    <Card style={styles.root}>
+    <Card style={[styles.root, style]}>
       <Card.Header>
         <Card.Title>{beast?.name ?? 'Без названия'} </Card.Title>
         {controls}
@@ -55,14 +57,19 @@ export const BeastCard = ({ beast, controls }: BeastCardProps) => {
           </Stack>
         </Stack>
 
-        <Accordion
-          onChange={(value) => {
-            setOpenedSection(value as string);
-          }}
-          value={openedSection}>
+        <Accordion>
           <Accordion.Item style={styles.description} value="description">
             <Accordion.Control style={[styles.control, text.subheaderSemibold]}>
-              {(open: boolean) => <Fragment>Описание {open ? 1 : 0}</Fragment>}
+              {(open: boolean) => (
+                <Fragment>
+                  Описание{' '}
+                  {open ? (
+                    <ChevronUpIcon {...stylex.props(styles.chevron)} />
+                  ) : (
+                    <ChevronDownIcon {...stylex.props(styles.chevron)} />
+                  )}
+                </Fragment>
+              )}
             </Accordion.Control>
             <Accordion.Panel>
               <div {...stylex.props(styles.panel, text.defaultRegular)}>{beast?.description ?? 'Не указано'}</div>
@@ -106,7 +113,7 @@ export const BeastCard = ({ beast, controls }: BeastCardProps) => {
 
 const KeyValue = ({ keyLabel, value }: { keyLabel?: ReactNode; value?: ReactNode }) => {
   return (
-    <Flex gap={6} style={text.defaultMedium}>
+    <Flex gap={4} style={text.defaultMedium}>
       <div {...stylex.props(styles.key, text.defaultSemibold)}>{keyLabel}</div>
       <div {...stylex.props(styles.value)}>{value}</div>
     </Flex>
@@ -136,15 +143,15 @@ const styles = stylex.create({
     color: colors.textSecondaryDefault
   },
   description: {
-    backgroundColor: '#F6F6F7',
+    backgroundColor: colors.backgroundUniversal,
     borderRadius: 10
   },
   control: {
-    alignItems: 'center',
     color: colors.textPrimaryDefault,
-    display: 'flex',
-    justifyContent: 'space-between',
     padding: 16
+  },
+  chevron: {
+    color: colors.brand90
   },
   panel: {
     paddingBottom: 16,
@@ -159,7 +166,7 @@ const styles = stylex.create({
     padding: 0
   },
   card: {
-    backgroundColor: '#F6F6F7',
+    backgroundColor: colors.backgroundUniversal,
     borderLeftStyle: 'solid',
     borderLeftWidth: 4,
     borderRadius: 6,
