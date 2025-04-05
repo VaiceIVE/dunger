@@ -9,5 +9,6 @@ export class PaginationQureiedQuery{
     offset: number = 0
 
     totalCount: number
+    
     query?: string
 }
