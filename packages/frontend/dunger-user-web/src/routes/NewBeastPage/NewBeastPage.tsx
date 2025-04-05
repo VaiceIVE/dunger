@@ -1,4 +1,4 @@
-import { FormEventHandler, useState } from 'react';
+import { FormEventHandler, Fragment, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { Container, Stack, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
@@ -63,14 +63,16 @@ const ExampleBlock = ({ mode }: { mode: CreateMode }) => (
         <span {...stylex.props(text.defaultSemibold)}>Название:</span> Ледяной троллинг
       </div>
       {mode === CreateMode.generation && (
-        <div>
-          <span {...stylex.props(text.defaultSemibold)}>Описание:</span> Тролль, который обитает только в водоёмах и
-          замораживает их. Способности связаны со льдом. Хаотично злой
-        </div>
+        <Fragment>
+          <div>
+            <span {...stylex.props(text.defaultSemibold)}>Описание:</span> Тролль, который обитает только в водоёмах и
+            замораживает их. Способности связаны со льдом. Хаотично злой
+          </div>
+          <div>
+            <span {...stylex.props(text.defaultSemibold)}>Тип:</span> Элементаль
+          </div>
+        </Fragment>
       )}
-      <div>
-        <span {...stylex.props(text.defaultSemibold)}>Тип:</span> Элементаль
-      </div>
       <div>
         <span {...stylex.props(text.defaultSemibold)}>Класс Опасности (CR):</span> 6
       </div>
@@ -83,8 +85,4 @@ const ExampleBlock = ({ mode }: { mode: CreateMode }) => (
   </Banner>
 );
 
-const styles = stylex.create({
-  description: {
-    color: colors.textSecondaryDefault
-  }
-});
+const styles = stylex.create({ description: { color: colors.textSecondaryDefault } });

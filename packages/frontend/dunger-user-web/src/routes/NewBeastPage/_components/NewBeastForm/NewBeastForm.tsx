@@ -1,6 +1,6 @@
-import { FormEventHandler, Fragment } from 'react';
+import { FormEventHandler, Fragment, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import { useSuspenseQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useAuthFetch } from '@dunger/auth-fetch';
 import {
   Stack,
@@ -17,8 +17,12 @@ import {
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Banner } from 'components/Banner';
+import { ApiPaginatedResult } from 'store/_types/_common';
+import { ApiCreatureRole } from 'store/_types/ApiCreatureAiInput';
 import { ApiDirectory } from 'store/apiTypes.gen';
+import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
 import { CreateMode } from '../../NewBeastPage.types';
+import { useDirectoryOptions } from '../../useDirectoryOptions';
 
 interface NewBeastFormProps {
   mode: CreateMode;
@@ -27,22 +31,36 @@ interface NewBeastFormProps {
 
 export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
   const authFetch = useAuthFetch();
-  const { data: types } = useSuspenseQuery<ApiDirectory[]>({
-    queryKey: ['creatures', 'types'],
-    queryFn: () => authFetch(`/creatures/types`)
+
+  const [templateQuery, setTemplateQuery] = useState('');
+  const debouncedQuery = useDebouncedValue(templateQuery);
+
+  const {
+    data: templates,
+    fetchNextPage: fetchMoreTemplates,
+    hasNextPage: hasMoreTemplates
+  } = useInfiniteQuery({
+    queryKey: ['creatures', { query: debouncedQuery }],
+    queryFn: async ({ pageParam = 0 }) => {
+      const params = new URLSearchParams({ offset: pageParam.toString() });
+
+      if (debouncedQuery) {
+        params.set('query', debouncedQuery);
+      }
+
+      return authFetch<{ results: ApiDirectory[] } & ApiPaginatedResult>(`/creatures/templates?${params.toString()}`);
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      const { offset, limit, totalCount } = lastPage.pagination;
+      const nextOffset = offset + limit;
+      return nextOffset < totalCount ? nextOffset : undefined;
+    }
   });
 
-  const { data } = useSuspenseQuery({
-    queryKey: ['creatures', 'templates'],
-    queryFn: () => authFetch(`/creatures/templates?offset=0`)
-  });
-
-  const typeOptions = types.map((c) => {
-    return {
-      value: c.id.toString(),
-      label: c.name
-    };
-  });
+  const { typeOptions, crOptions } = useDirectoryOptions();
+  const templateOptions =
+    templates?.pages.flatMap((p) => p.results).map((t) => ({ value: t.id.toString(), label: t.name })) ?? [];
 
   return (
     <form key={mode} onSubmit={handleSubmit} {...stylex.props(styles.root)}>
@@ -53,17 +71,24 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
         {mode === CreateMode.generation ? (
           <Fragment>
             <Flex align="flex-start" gap={16}>
-              <Select options={typeOptions} name="beastTypeId" label="Тип" placeholder="-Не выбрано-" required />
-              <Select name="challengeRating" label="Класс Опасности (CR)" placeholder="-Не выбрано-" required />
+              <Select options={typeOptions} name="type" label="Тип" placeholder="-Не выбрано-" required />
+              <Select
+                options={crOptions}
+                name="challenge_rating"
+                label="Класс Опасности (CR)"
+                placeholder="-Не выбрано-"
+                required
+              />
             </Flex>
-            <Chips.Group name="type" label="Роль в бою">
-              <Chips value="damage">Уклон в атаку</Chips>
-              <Chips value="defense">Уклон в защиту</Chips>
-              <Chips value="balanse">Сбалансированный</Chips>
+            <Chips.Group name="role" label="Роль в бою">
+              <Chips value={ApiCreatureRole.OFFENCE}>Уклон в атаку</Chips>
+              <Chips value={ApiCreatureRole.DEFENCE}>Уклон в защиту</Chips>
+              <Chips value="BALANCE">Сбалансированный</Chips>
             </Chips.Group>
             <Textarea
               label="Пожелания по генерации существа"
               placeholder="Опишите способности, мировоззрение и другие детали, которые характеризуют существо. Например: “стреляет ледяной паутиной”"
+              name="creation_description"
               autosize
               minRows={3}
               maxRows={8}
@@ -71,8 +96,24 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
           </Fragment>
         ) : (
           <Fragment>
-            <Select name="challengeRating" label="Класс Опасности (CR)" placeholder="-Не выбрано-" required />
-            <Select label="Шаблон заполнения" name="templateId" placeholder="Начните вводить" searchable />
+            <Select
+              options={crOptions}
+              name="challenge_rating"
+              label="Класс Опасности (CR)"
+              placeholder="-Не выбрано-"
+              required
+            />
+            <Select
+              options={templateOptions}
+              hasMore={hasMoreTemplates}
+              next={fetchMoreTemplates}
+              label="Шаблон заполнения"
+              name="template_id"
+              placeholder="Начните вводить"
+              searchable
+              searchValue={templateQuery}
+              onSearchChange={setTemplateQuery}
+            />
           </Fragment>
         )}
       </Stack>
@@ -134,15 +175,7 @@ const styles = stylex.create({
     justifyContent: 'center',
     width: 30
   },
-  buttonIcon: {
-    color: colors.blue60,
-    height: 14,
-    width: 14
-  },
-  description: {
-    color: colors.textSecondaryDefault
-  },
-  titleIcon: {
-    color: colors.blue60
-  }
+  buttonIcon: { color: colors.blue60, height: 14, width: 14 },
+  description: { color: colors.textSecondaryDefault },
+  titleIcon: { color: colors.blue60 }
 });
