@@ -1,5 +1,6 @@
 import { SeedAlignment } from "./alignment.seed";
 import { SeedBiomes } from "./biomes.seed";
+import { SeedCR } from "./cr.seed";
 import { SeedDamageType } from "./damageType.seed";
 import { SeedRaces } from "./races.seed";
 import { SeedSizes } from "./size.seed";
@@ -14,5 +15,6 @@ async function main(){
     await SeedSources()
     await SeedTypes()
     await SeedDamageType()
+    await SeedCR()
 }
 main();
