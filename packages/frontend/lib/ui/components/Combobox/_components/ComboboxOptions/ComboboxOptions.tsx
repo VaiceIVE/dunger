@@ -1,12 +1,12 @@
-import { ComponentProps, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Slot } from '@radix-ui/react-slot';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { createPortal } from 'react-dom';
 import { colors } from '@dunger/ui/tokens.stylex';
+import { InfiniteScroll, InfiniteScrollProps } from '../../../InfiniteScroll';
 import { useComboboxContext } from '../../Combobox.context';
 
-export interface ComboboxOptionsProps extends Omit<ComponentProps<'div'>, 'style'> {
+export interface ComboboxOptionsProps extends InfiniteScrollProps {
   asChild?: boolean;
 
   style?: StyleXStyles;
@@ -28,10 +28,9 @@ export function ComboboxOptions(props: ComboboxOptionsProps) {
   return <ComboboxOptionsImpl {...props} />;
 }
 
-function ComboboxOptionsImpl({ children, style, asChild, ...props }: ComboboxOptionsProps) {
+function ComboboxOptionsImpl({ children, style, ...props }: ComboboxOptionsProps) {
   const { open, setOpen, targetElement } = useComboboxContext();
   const ref = useRef<HTMLDivElement>(null);
-  const Component = asChild ? Slot : 'div';
 
   useEffect(() => {
     const handleClick = (e: MouseEvent | TouchEvent) => {
@@ -64,8 +63,6 @@ function ComboboxOptionsImpl({ children, style, asChild, ...props }: ComboboxOpt
   if (!targetElement) {
     throw new Error('There must be a target element');
   }
-
-  const styleProps = stylex.props(styles.root, style);
   const position = targetElement.getBoundingClientRect();
 
   // Прибавляется текущее положение скролла страницы
@@ -75,19 +72,13 @@ function ComboboxOptionsImpl({ children, style, asChild, ...props }: ComboboxOpt
   const width = position.width;
 
   const element = (
-    <Component
-      {...styleProps}
-      style={{
-        ...styleProps.style,
-        top,
-        left,
-        width
-      }}
+    <InfiniteScroll
+      {...stylex.props(styles.root(top, left, width), style)}
       ref={ref}
       data-state={open ? 'open' : 'closed'}
       {...props}>
       {children}
-    </Component>
+    </InfiniteScroll>
   );
 
   const containerElement = document.getElementById('root');
@@ -99,28 +90,22 @@ function ComboboxOptionsImpl({ children, style, asChild, ...props }: ComboboxOpt
 }
 
 const styles = stylex.create({
-  root: {
+  root: (top: number | string, left: number, width: number | string) => ({
     backgroundColor: 'white',
     borderColor: colors.outlineAccentDefault,
     borderRadius: 12,
     borderStyle: 'solid',
     borderWidth: 1,
     boxShadow: '0px 4px 4px 0px #383E490A, 0px 8px 24px 0px #383E491F',
-    left: 0,
+    left,
     maxHeight: 176,
     overflow: 'hidden',
     overflowY: 'auto',
     position: 'absolute',
-    visibility: {
-      default: 'visible',
-      ':not(:has(> [role="option"]))': 'hidden'
-    },
+    top,
+    visibility: { default: 'visible', ':not(:has(> [role="option"]))': 'hidden' },
+    width,
     zIndex: 1,
-    '::-webkit-scrollbar': {
-      background: 'transparent',
-      display: 'none',
-      height: 0,
-      width: 0
-    }
-  }
+    '::-webkit-scrollbar': { background: 'transparent', display: 'none', height: 0, width: 0 }
+  })
 });
