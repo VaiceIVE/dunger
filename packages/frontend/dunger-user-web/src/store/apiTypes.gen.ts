@@ -127,6 +127,6 @@ export interface Beast {
 }
 
 export interface ApiDirectory {
-  id: string;
+  id: number;
   name: string;
 }
