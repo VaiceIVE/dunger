@@ -1,1 +1,1 @@
-export { Select } from './Select';
+export { PaginatedSelect as Select } from './PaginatedSelect';
