@@ -12,7 +12,7 @@ export class CreaturesService {
   ){}
 
   async initCreature(createCreatureDto: CreateCreatureManualDto) {
-    if(createCreatureDto.template_id){
+    if(createCreatureDto.template_id != null && createCreatureDto.template_id != undefined){
       const template = await this.prisma.creature.findUnique({
         where: {id: createCreatureDto.template_id}
       })
@@ -174,7 +174,7 @@ export class CreaturesService {
         data: {
           size_relation: {
             connect: {
-              key: updateCreatureDto.size_key
+              id: updateCreatureDto.size_key
             }
           }
         }

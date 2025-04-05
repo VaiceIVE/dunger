@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Size {
-  key String @id
+  id String @id
   name String @unique
   creature Creature[]
 }
@@ -180,9 +180,8 @@ model GenrationRequest{
 
 
 model DamageType {
-  key String @id
+  id String @id
   name String
-
 }
 
 model ChallengeRating {
