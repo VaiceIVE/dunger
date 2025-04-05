@@ -1,0 +1,212 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Size {
+  key String @id
+  name String @unique
+  creature Creature[]
+}
+
+model Source {
+  id Int @default(autoincrement()) @id()
+  key String @unique
+  title String 
+
+  creatures Creature[]
+}
+
+model Language {
+  id Int @default(autoincrement()) @id
+  name String @unique
+
+  creatures Creature[]
+}
+
+model Biome {
+  id Int @default(autoincrement()) @id()
+  key String @unique
+  title String
+
+  creatures Creature[]
+}
+
+model Type{
+  id Int @default(autoincrement()) @id
+  name String // аберрация, гуманоид итд
+  
+  creatures Creature[]
+}
+
+model Alignment{
+  id Int @default(autoincrement()) @id
+  name String @unique
+
+  creatures Creature[]
+}
+
+model Speed_stat{
+  id String @id
+  walk Int?
+  fly Int?
+  swim Int?
+  burrow Int?
+  climb Int?
+
+  id_relation Creature @relation(references: [id], fields: [id])
+}
+
+model Creature_stats{
+  id String @id
+  str Int 
+  dex Int
+  con Int
+  int Int
+  wis Int
+  cha Int
+
+  id_relation Creature @relation(references: [id], fields: [id])
+}
+
+model SkillsList {
+  id String @id
+  athletics Int?
+  acrobatics Int?
+  sleight_of_hand Int?
+  stealth Int?
+  arcana Int?
+  history Int?
+  investigation Int?
+  nature Int?
+  religion Int?
+  animal_handling Int?
+  insight Int?
+  medicine Int?
+  perception Int?
+  survival Int?
+  deception Int?
+  intimidation Int?
+  performance Int?
+  persuasion Int?
+
+  id_relation Creature @relation(references: [id], fields: [id])
+}
+
+model Skill{
+  id Int @id @default(autoincrement())
+  name String @unique
+  stat Stat
+}
+
+model Creature {
+  id String @default(uuid()) @id 
+  name String
+  image_uri String?
+  description String?
+  size String? 
+  type_id Int? //Тип с действиями и свойствами, как Дроу или горный гном
+  soirce_id Int?
+  alignment_id Int?
+  speed Speed_stat?
+  armor_class Int?
+  hit_points Int?
+  stats Creature_stats?
+  skills SkillsList?
+  resistances Damage_type[]
+  immunities Damage_type[] 
+  vunlerabilities Damage_type[]
+  //senses
+  //conditionImmune
+  passive_perception Int?
+  challenge_rating String
+  languages Language[]
+  biome_id Int?
+  sType Int? //TODO
+  aSubTypes String[] //TODO
+  actions Action[]
+  traits Trait[]
+  alignment_relation Alignment? @relation(references: [id], fields: [alignment_id])
+  race_relation CreatureRace? @relation(references: [id], fields: [type_id])
+  type_relation Type? @relation(references: [id], fields: [sType])
+  size_relation Size? @relation(references: [name], fields: [size])
+  biome_relation Biome? @relation(references: [id], fields: [biome_id])
+  source_relation Source? @relation(references: [id], fields: [soirce_id])
+}
+
+model Action {
+  id Int @default(autoincrement()) @id
+  name String 
+  text String
+  attack String?
+  creatures Creature[]
+  creatureTypes CreatureRace[]
+}
+
+model Trait {
+  id Int @default(autoincrement()) @id
+  name String 
+  text String
+  attack String?
+  cretures Creature[]
+  creatureTypes CreatureRace[]
+}
+
+model CreatureRace{
+  id Int @default(autoincrement()) @id
+  name String
+  description String
+  traits Trait[]
+  actions Action[]
+  creatures Creature[]
+}
+
+model GenrationRequest{
+  id Int @default(autoincrement()) @id
+  request String
+  danger String //todo
+  name String
+}
+
+
+model DamageType {
+  key String @id
+  name String
+
+}
+
+enum Stat {
+  Strength  
+  Dexterity   
+  Constitution  
+  Intelegence  
+  Wisdom 
+  Charisma
+
+}
+
+enum Damage_type {
+  Acid
+  Bludgeoning
+  Cold
+  Fire
+  Force
+  Lightning
+  Necrotic
+  Piercing
+  Poison
+  Psychic
+  Radiant
+  Slashing
+  Thunder
+}
