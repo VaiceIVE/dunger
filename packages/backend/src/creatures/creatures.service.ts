@@ -7,6 +7,10 @@ import { PaginationQuery } from 'src/app/dto/queries/paginationQuery';
 import { ApiCreatureInput } from './dto/stolen_types/ApiCreatureInput';
 import { skip } from 'node:test';
 import { ApiCreature } from './dto/stolen_types/ApiCreature';
+import { nullSkillsObject } from './objects/nullSkills.object';
+import { nullSpeedObject } from './objects/nullSpeed.object';
+import { nullStatObject } from './objects/nullStat.objecxt';
+import { nullSensesObject } from './objects/nullSenses.object';
 
 @Injectable()
 export class CreaturesService {
@@ -1024,37 +1028,37 @@ export class CreaturesService {
     console.log(result)
 
     return {
-      actions: result.actions,
+      actions: result.actions ? result.actions : [],
       alignment_id: result.alignment_relation ? result.alignment_relation.id : null,
       alignment_name: result.alignment_relation ? result.alignment_relation.name : null,
       armor_class: result.armor_class,
       armor_type_id: null, //TODO
       armor_type_name: null, //TODO
-      biomes: result.biome_relation ? result.biome_relation.map((biome)=>({id: biome.id, name: biome.title})) : null,
-      biomes_ids: result.biome_relation ? result.biome_relation.map(biome => biome.id) : null,
+      biomes: result.biome_relation ? result.biome_relation.map((biome)=>({id: biome.id, name: biome.title})) : [],
+      biomes_ids: result.biome_relation ? result.biome_relation.map(biome => biome.id) : [],
       challenge_rating: result.challenge_rating,
       description: result.description,
       generation_info: null,
       hit_points: result.hit_points,
       id: result.id,
       immunities: result.immunities,
-      immunities_ids: result.immunities ? result.immunities.map(imm => imm.id) : null,
-      languages: result.languages,
-      languages_ids: result.languages ? result.languages.map(lang => lang.id) : null,
+      immunities_ids: result.immunities ? result.immunities.map(imm => imm.id) : [],
+      languages: result.languages ? result.languages : [],
+      languages_ids: result.languages ? result.languages.map(lang => lang.id) : [],
       name: result.name,
       resistances: result.resistances,
-      resistances_ids: result.resistances ? result.resistances.map(res => res.id) : null,
-      senses: null,
+      resistances_ids: result.resistances ? result.resistances.map(res => res.id) : [],
+      senses: nullSensesObject,
       size_id: result.size_relation ? result.size_relation.id : null,
       size_name: result.size_relation ? result.size_relation.name : null,
-      skills: result.skills,
-      speed: result.speed,
-      stats: result.stats,
-      traits: result.traits,
+      skills: result.skills ? result.skills : nullSkillsObject,
+      speed: result.speed ? result.speed : nullSpeedObject,
+      stats: result.stats ? result.stats : nullStatObject,
+      traits: result.traits ? result.traits : [],
       type_id: result.type_relation ? result.type_relation.id : null,
       type_name: result.type_relation ? result.type_relation.name : null,
-      vunlerabilities: result.vunlerabilities,
-      vunlerabilities_ids: result.vunlerabilities ? result.vunlerabilities.map(vun => vun.id) : null
+      vunlerabilities: result.vunlerabilities ? result.vunlerabilities : [],
+      vunlerabilities_ids: result.vunlerabilities ? result.vunlerabilities.map(vun => vun.id) : []
     } as ApiCreature
   }
 
