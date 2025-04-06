@@ -12,3 +12,4 @@ export class PaginationQuery{
     @IsInt()
     totalCount: number
 }
+

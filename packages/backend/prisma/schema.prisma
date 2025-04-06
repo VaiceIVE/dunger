@@ -69,14 +69,63 @@ model Speed_stat{
 
 model Creature_stats{
   id String @id
-  str Int 
-  dex Int
-  con Int
-  int Int
-  wis Int
-  cha Int
+  
+  strength Strength_stat_details? 
+  dexterity Dexterity_stat_details? 
+  constitution Constitution_stat_details? 
+  intellegence Intellegence_stat_details? 
+  wisdom Wisdom_stat_details? 
+  charisma Charisma_stat_details? 
 
   id_relation Creature @relation(references: [id], fields: [id])
+}
+
+model Strength_stat_details {
+  statblock_id String @id
+  value Int
+  mastery Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
+}
+
+model Dexterity_stat_details {
+  statblock_id String @id
+  value Int
+  mastery Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
+}
+
+model Constitution_stat_details {
+  statblock_id String @id
+  value Int
+  mastery Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
+}
+
+model Intellegence_stat_details {
+  statblock_id String @id
+  value Int
+  mastery Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
+}
+
+model Wisdom_stat_details {
+  statblock_id String @id
+  value Int
+  mastery Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
+}
+
+model Charisma_stat_details {
+  statblock_id String @id
+  value Int
+  mastery Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
 }
 
 model SkillsList {
@@ -115,7 +164,7 @@ model Creature {
   image_uri String?
   description String?
   size String? 
-  type_id Int? //Тип с действиями и свойствами, как Дроу или горный гном
+  race_id Int? //Тип с действиями и свойствами, как Дроу или горный гном 
   soirce_id Int?
   alignment_id Int?
   speed Speed_stat?
@@ -123,12 +172,12 @@ model Creature {
   hit_points Int?
   stats Creature_stats?
   skills SkillsList?
-  resistances Damage_type[]
-  immunities Damage_type[] 
-  vunlerabilities Damage_type[]
-  //senses
-  //conditionImmune
-  passive_perception Int?
+  resistances DamageType[] @relation("creature_resistances")
+  immunities DamageType[] @relation("creature_immunities")
+  vunlerabilities DamageType[] @relation("creature_vunlerabilities")
+  // senses
+  // conditionImmune
+  senses Senses?
   challenge_rating String
   languages Language[]
   biome_id Int?
@@ -137,17 +186,25 @@ model Creature {
   actions Action[]
   traits Trait[]
   alignment_relation Alignment? @relation(references: [id], fields: [alignment_id])
-  race_relation CreatureRace? @relation(references: [id], fields: [type_id])
+  race_relation CreatureRace? @relation(references: [id], fields: [race_id])
   type_relation Type? @relation(references: [id], fields: [sType])
   size_relation Size? @relation(references: [name], fields: [size])
-  biome_relation Biome? @relation(references: [id], fields: [biome_id])
+  biome_relation Biome[] 
   source_relation Source? @relation(references: [id], fields: [soirce_id])
+}
+
+model Senses {
+  creature_id String @id
+  passive_perception Int?
+
+
+  creature Creature @relation(fields: [creature_id], references: [id])
 }
 
 model Action {
   id Int @default(autoincrement()) @id
   name String 
-  text String
+  description String @unique
   attack String?
   creatures Creature[]
   creatureTypes CreatureRace[]
@@ -156,7 +213,7 @@ model Action {
 model Trait {
   id Int @default(autoincrement()) @id
   name String 
-  text String
+  description String @unique
   attack String?
   cretures Creature[]
   creatureTypes CreatureRace[]
@@ -182,6 +239,12 @@ model GenrationRequest{
 model DamageType {
   id String @id
   name String
+
+
+  resistant_creatures Creature[] @relation("creature_resistances")
+  immune_creatures Creature[] @relation("creature_immunities")
+  vunlerable_creatures Creature[] @relation("creature_vunlerabilities")
+
 }
 
 model ChallengeRating {
@@ -195,21 +258,5 @@ enum Stat {
   Intelegence  
   Wisdom 
   Charisma
-
 }
 
-enum Damage_type {
-  Acid
-  Bludgeoning
-  Cold
-  Fire
-  Force
-  Lightning
-  Necrotic
-  Piercing
-  Poison
-  Psychic
-  Radiant
-  Slashing
-  Thunder
-}

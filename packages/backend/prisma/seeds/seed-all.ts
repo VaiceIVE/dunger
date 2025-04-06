@@ -1,3 +1,4 @@
+import { SeedActions } from "./actions.seed";
 import { SeedAlignment } from "./alignment.seed";
 import { SeedBiomes } from "./biomes.seed";
 import { SeedCR } from "./cr.seed";
@@ -6,6 +7,7 @@ import { SeedRaces } from "./races.seed";
 import { SeedSizes } from "./size.seed";
 import { SeedSources } from "./source.seed";
 import { SeedTypes } from "./subtype.seed";
+import { SeedTraits } from "./traits.seed";
 
 async function main(){
     await SeedAlignment()
@@ -16,5 +18,7 @@ async function main(){
     await SeedTypes()
     await SeedDamageType()
     await SeedCR()
+    await SeedTraits()
+    await SeedActions()
 }
 main();

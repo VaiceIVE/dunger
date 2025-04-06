@@ -60,9 +60,19 @@ export class CreaturesController {
     return await this.creaturesService.findActionsGroups()
   }
 
-  @Get('/traits/gruops')
+  @Get('/actions/groups/:groupId')
+  async findActionsGroup(@Param('groupId') groupName: string){
+    return await this.creaturesService.findActionsGroup(groupName)
+  }
+
+  @Get('/traits/groups/')
   async findTraitsGroups(){
     return await this.creaturesService.findTraitsGroups()
+  }
+
+  @Get('/traits/groups/:groupId')
+  async findTraitsGroup(@Param('groupId') groupName: string){
+    return await this.creaturesService.findTraitsGroup(groupName)
   }
 
   @Get('/cr')

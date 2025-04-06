@@ -147,6 +147,22 @@ export class CreaturesService {
     })
   }
 
+  async findTraitsGroup(groupName: string){
+    return await this.prisma.trait.findMany({
+      where: {
+        name: groupName
+      }
+    })
+  }
+
+  async findActionsGroup(groupName: string){
+    return await this.prisma.action.findMany({
+      where: {
+        name: groupName
+      }
+    })
+  }
+
   private cleanObj(obj){
     var newobj = {}
     const complexPropnames = ['speed', 'stats', 'skills', 'languages', 'actions', 'traits', 'size_key']
