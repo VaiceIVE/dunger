@@ -420,6 +420,23 @@ model ChallengeRating {
   id String @id
 }
 
+model GPTMessageHistory {
+  id String @default(uuid()) @id
+  type String
+  messages GPTMessage[]
+}
+
+model GPTMessage {
+  number Int
+  message_history_id String
+  text String
+  role String
+
+  message_history GPTMessageHistory @relation(references: [id], fields: [message_history_id])
+
+  @@id([message_history_id, number])
+}
+
 enum Stat {
   Strength  
   Dexterity   
