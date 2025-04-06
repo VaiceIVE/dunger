@@ -40,7 +40,7 @@ export const ChipsGroup = ({
         </Input.Label>
       )}
       <ChipsGroupProvider value={{ value: _value, setValue, multiple }}>
-        <Flex gap={8} {...props}>
+        <Flex gap={8} rowGap={8} {...props}>
           {children}
         </Flex>
       </ChipsGroupProvider>

@@ -5,7 +5,7 @@ import { MultiSelect, MultiSelectProps } from './MultiSelect';
  * нужны клиенту, чтобы отрисовывать значение справочников
  */
 interface SelectedRecordsState {
-  id: string;
+  id: string | number;
 
   name?: string;
 
@@ -39,7 +39,7 @@ export const PaginatedMultiSelect = ({
   // Значения, которые пришли с сервера и возможно имеют offset=n
   const selectedOptions =
     selectedRecords?.map((d) => ({
-      value: d.id,
+      value: d.id.toString(),
       label: d.name ?? d.title ?? '',
       disabled: !d.active
     })) ?? [];
@@ -53,7 +53,7 @@ export const PaginatedMultiSelect = ({
    */
   const handleChange = (value: string[] | null) => {
     const updatedSelectedRecords: SelectedRecordsState[] = [...selectedOptions, ...filteredOptions]
-      .filter((o) => value?.includes(o.value))
+      .filter((o) => value?.includes(o.value.toString()))
       .map((o) => ({ id: o.value, name: o.label }));
 
     onChange?.(value, updatedSelectedRecords);
