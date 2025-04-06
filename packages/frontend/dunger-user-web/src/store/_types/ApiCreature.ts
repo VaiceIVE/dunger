@@ -30,7 +30,7 @@ export interface ApiCreature {
   size_id: string | null;
   size_name: string | null;
   speed: ApiSpeedStat;
-  languages_ids: string[];
+  languages_ids: number[];
   languages: ApiLanguages[];
   biomes_ids: string[];
   biomes: ApiBiomes[];

@@ -12,7 +12,7 @@ export interface ApiCreatureInput {
   alignment_id: string | null;
   size_id: string | null;
   speed: ApiSpeedStat;
-  languages_ids: string[];
+  languages_ids: number[];
   biomes_ids: string[];
   senses: ApiSenses;
   // Статблок
@@ -25,7 +25,7 @@ export interface ApiCreatureInput {
   immunities_ids: string[];
   vulnerabilities_ids: string[];
   // Действия
-  actions_ids: string[];
+  actions_ids: number[];
   // Способности и свойства
-  traits_ids: string[];
+  traits_ids: number[];
 }

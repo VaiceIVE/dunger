@@ -3,7 +3,7 @@ export interface ApiStats {
     value: number | null;
     mastery: boolean;
   };
-  dextedexterity: {
+  dexterity: {
     value: number | null;
     mastery: boolean;
   };

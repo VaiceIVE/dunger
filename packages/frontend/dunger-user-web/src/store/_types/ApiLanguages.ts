@@ -1,4 +1,4 @@
 export interface ApiLanguages {
-  id: string;
+  id: number;
   name: string;
 }
