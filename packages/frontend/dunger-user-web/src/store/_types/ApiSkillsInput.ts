@@ -2,7 +2,7 @@ export interface ApiSkillsInput {
   strength: {
     athletics: ApiSkillInput;
   };
-  dextedexterity: {
+  dexterity: {
     acrobatics: ApiSkillInput;
     sleight_of_hand: ApiSkillInput;
     stealth: ApiSkillInput;
