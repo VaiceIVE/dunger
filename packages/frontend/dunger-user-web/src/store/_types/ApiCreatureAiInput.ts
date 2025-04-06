@@ -7,6 +7,6 @@ export interface ApiCreatureAiInput {
   name: string;
   challenge_rating: string;
   type: string;
-  creation_description?: string | null;
-  role?: ApiCreatureRole | null;
+  creation_description: string | null;
+  role: ApiCreatureRole | null;
 }
