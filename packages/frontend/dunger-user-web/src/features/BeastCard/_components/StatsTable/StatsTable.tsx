@@ -1,9 +1,9 @@
 import * as stylex from '@stylexjs/stylex';
 import { Flex, Stack, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { Stats } from 'store/apiTypes.gen';
+import { ApiStats } from 'store/_types/ApiStats';
 
-const statsMap: { title: string; key: keyof Stats }[] = [
+const statsMap: { title: string; key: keyof ApiStats }[] = [
   {
     title: 'CИЛ',
     key: 'strength'
@@ -30,13 +30,13 @@ const statsMap: { title: string; key: keyof Stats }[] = [
   }
 ];
 
-export const StatsTable = ({ stats }: { stats?: Stats }) => {
+export const StatsTable = ({ stats }: { stats?: ApiStats }) => {
   return (
     <Flex gap={0}>
       {statsMap.map((s) => (
         <Stack style={[styles.root, text.defaultSemibold]} key={s.key} gap={0}>
           <div {...stylex.props(styles.title)}>{s.title}</div>
-          <div {...stylex.props(styles.value)}>{stats ? stats[s.key] : '-'}</div>
+          <div {...stylex.props(styles.value)}>{stats ? stats[s.key].value : '-'}</div>
         </Stack>
       ))}
     </Flex>

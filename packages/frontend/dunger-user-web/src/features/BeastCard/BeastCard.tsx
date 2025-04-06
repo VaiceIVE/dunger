@@ -4,11 +4,11 @@ import { StyleXStyles } from '@stylexjs/stylex';
 import { Accordion, Avatar, ChevronDownIcon, ChevronUpIcon, Flex, Stack, Tag, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Card } from 'components/Card';
-import { Beast } from 'store/apiTypes.gen';
+import { ApiCreature } from 'store/_types/ApiCreature';
 import { StatsTable } from './_components/StatsTable';
 
 interface BeastCardProps {
-  beast?: Beast | null;
+  beast?: ApiCreature | null;
 
   controls?: ReactNode;
 
@@ -29,29 +29,29 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
             <Stack gap={12} style={styles.common}>
               <div {...stylex.props(styles.personality, text.defaultMedium)}>
                 <div>
-                  {beast?.type ?? 'Не выбрано'}, {beast?.alignment ?? 'Не выбрано'}
+                  {beast?.type_name ?? 'Не выбрано'}, {beast?.alignment_name ?? 'Не выбрано'}
                 </div>
-                <div>/ {beast?.size ?? 'Не выбрано'}</div>
+                <div>/ {beast?.size_name ?? 'Не выбрано'}</div>
               </div>
               <Stack gap={4}>
-                <KeyValue keyLabel={'Класс доспеха:'} value={beast?.armorClass ?? 'Не указано'} />
-                <KeyValue keyLabel={'Хиты:'} value={beast?.hitPoints ?? 'Не указано'} />
+                <KeyValue keyLabel={'Класс доспеха:'} value={beast?.armor_class ?? 'Не указано'} />
+                <KeyValue keyLabel={'Хиты:'} value={beast?.hit_points ?? 'Не указано'} />
                 <KeyValue keyLabel={'Скорость:'} value={beast?.speed.walk ?? 'Не указано'} />
               </Stack>
             </Stack>
-            <Avatar size={120} src={beast?.imageUrl} />
+            <Avatar size={120} src={null} />
           </Flex>
 
-          <StatsTable />
+          <StatsTable stats={beast?.stats} />
 
           <Stack gap={12}>
-            <KeyValue keyLabel={'Навыки:'} value={beast?.biom.join(', ') ?? 'Не указано'} />
-            <KeyValue keyLabel={'Где обитает:'} value={beast?.biom.join(', ') ?? 'Не указано'} />
-            <KeyValue keyLabel={'Языки:'} value={beast?.languages?.join(', ') ?? 'Не указано'} />
+            <KeyValue keyLabel={'Навыки:'} value={beast?.biomes.map((b) => b.name).join(', ') ?? 'Не указано'} />
+            <KeyValue keyLabel={'Где обитает:'} value={beast?.biomes.map((b) => b.name).join(', ') ?? 'Не указано'} />
+            <KeyValue keyLabel={'Языки:'} value={beast?.languages.map((l) => l.name).join(', ') ?? 'Не указано'} />
 
-            <Flex gap={8}>
-              <Tag>пассивная Внимательность: -</Tag>
-              <Tag>Уровень опасности: -</Tag>
+            <Flex rowGap={8} gap={8}>
+              <Tag>Пассивная внимательность: {beast?.senses.passive_perception ?? '-'}</Tag>
+              <Tag>Уровень опасности: {beast?.challenge_rating ?? '-'}</Tag>
               <Tag>БМ: -</Tag>
             </Flex>
           </Stack>
@@ -62,7 +62,7 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
             <Accordion.Control style={[styles.control, text.subheaderSemibold]}>
               {(open: boolean) => (
                 <Fragment>
-                  Описание{' '}
+                  Описание
                   {open ? (
                     <ChevronUpIcon {...stylex.props(styles.chevron)} />
                   ) : (
@@ -80,9 +80,9 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
         <Stack gap={16}>
           <h5 {...stylex.props(text.subheaderSemibold)}>Особенности</h5>
           <ul {...stylex.props(styles.list)}>
-            {beast?.traits?.length ? (
+            {beast?.traits.length ? (
               beast.traits.map((t) => (
-                <li {...stylex.props(styles.card, styles.trait)} key={t.name}>
+                <li {...stylex.props(styles.card, styles.trait)} key={t.id}>
                   <KeyValue keyLabel={t.name} value={t.description} />
                 </li>
               ))
@@ -95,9 +95,9 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
         <Stack gap={16}>
           <h5 {...stylex.props(text.subheaderSemibold)}>Действия</h5>
           <ul {...stylex.props(styles.list)}>
-            {beast?.actions?.length ? (
+            {beast?.actions.length ? (
               beast.actions.map((a) => (
-                <li {...stylex.props(styles.card, styles.action)} key={a.name}>
+                <li {...stylex.props(styles.card, styles.action)} key={a.id}>
                   <KeyValue keyLabel={a.name} value={a.description} />
                 </li>
               ))
