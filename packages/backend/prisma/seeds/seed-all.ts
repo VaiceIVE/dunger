@@ -3,6 +3,7 @@ import { SeedAlignment } from "./alignment.seed";
 import { SeedBiomes } from "./biomes.seed";
 import { SeedCR } from "./cr.seed";
 import { SeedDamageType } from "./damageType.seed";
+import { SeedLanguages } from "./languages.seed";
 import { SeedRaces } from "./races.seed";
 import { SeedSizes } from "./size.seed";
 import { SeedSources } from "./source.seed";
@@ -20,5 +21,6 @@ async function main(){
     await SeedCR()
     await SeedTraits()
     await SeedActions()
+    await SeedLanguages()
 }
 main();

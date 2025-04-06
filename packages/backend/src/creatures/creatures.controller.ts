@@ -5,6 +5,7 @@ import { UpdateCreatureDto } from './dto/update-creature.dto';
 import { PaginationQuery } from '../app/dto/queries/paginationQuery';
 import { PaginationQureiedQuery } from 'src/app/dto/queries/paginationQueriedQuery';
 import { QueryValidationPipe } from 'src/pipes/query.pipe';
+import { ApiCreatureInput } from './dto/stolen_types/ApiCreatureInput';
 
 @Controller('creatures')
 export class CreaturesController {
@@ -21,8 +22,13 @@ export class CreaturesController {
   }
 
   @Get('/templates')
-  async findTemplates(@Query(new ValidationPipe({transform: true, transformOptions: {enableImplicitConversion: true}})) query: PaginationQureiedQuery){
+  async findTemplates(@Query(new ValidationPipe({transform: true})) query: PaginationQureiedQuery){
     return await this.creaturesService.findTemplates(query);
+  }
+
+  @Get('/languages')
+  async findLanguages(@Query(new ValidationPipe({transform: true})) query: PaginationQureiedQuery){
+    return await this.creaturesService.findLanguages(query);
   }
 
   @Get('/types')
@@ -56,8 +62,8 @@ export class CreaturesController {
   }
 
   @Get('/actions/groups')
-  async findActionsGroups(){
-    return await this.creaturesService.findActionsGroups()
+  async findActionsGroups(@Query(new ValidationPipe({transform: true})) query: PaginationQureiedQuery){
+    return await this.creaturesService.findActionsGroups(query)
   }
 
   @Get('/actions/groups/:groupId')
@@ -66,8 +72,8 @@ export class CreaturesController {
   }
 
   @Get('/traits/groups/')
-  async findTraitsGroups(){
-    return await this.creaturesService.findTraitsGroups()
+  async findTraitsGroups(@Query(new ValidationPipe({transform: true})) query: PaginationQureiedQuery){
+    return await this.creaturesService.findTraitsGroups(query)
   }
 
   @Get('/traits/groups/:groupId')
@@ -88,7 +94,7 @@ export class CreaturesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCreatureDto: UpdateCreatureDto) {
+  update(@Param('id') id: string, @Body() updateCreatureDto: ApiCreatureInput) {
     return this.creaturesService.update(id, updateCreatureDto);
   }
 
