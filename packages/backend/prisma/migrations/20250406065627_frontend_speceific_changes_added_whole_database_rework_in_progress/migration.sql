@@ -81,12 +81,12 @@ CREATE TABLE "Constitution_stat_details" (
 );
 
 -- CreateTable
-CREATE TABLE "Intellegence_stat_details" (
+CREATE TABLE "intelligence_stat_details" (
     "statblock_id" TEXT NOT NULL,
     "value" INTEGER NOT NULL,
     "mastery" BOOLEAN NOT NULL,
 
-    CONSTRAINT "Intellegence_stat_details_pkey" PRIMARY KEY ("statblock_id")
+    CONSTRAINT "intelligence_stat_details_pkey" PRIMARY KEY ("statblock_id")
 );
 
 -- CreateTable
@@ -175,7 +175,7 @@ ALTER TABLE "Dexterity_stat_details" ADD CONSTRAINT "Dexterity_stat_details_stat
 ALTER TABLE "Constitution_stat_details" ADD CONSTRAINT "Constitution_stat_details_statblock_id_fkey" FOREIGN KEY ("statblock_id") REFERENCES "Creature_stats"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Intellegence_stat_details" ADD CONSTRAINT "Intellegence_stat_details_statblock_id_fkey" FOREIGN KEY ("statblock_id") REFERENCES "Creature_stats"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "intelligence_stat_details" ADD CONSTRAINT "intelligence_stat_details_statblock_id_fkey" FOREIGN KEY ("statblock_id") REFERENCES "Creature_stats"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Wisdom_stat_details" ADD CONSTRAINT "Wisdom_stat_details_statblock_id_fkey" FOREIGN KEY ("statblock_id") REFERENCES "Creature_stats"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
