@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useAuthFetch } from '@dunger/auth-fetch';
-import { ApiDirectory } from 'store/apiTypes.gen';
+import { ApiDirectory } from 'store/_types/_common';
 
 const useDirectoryQuery = <T>(key: string) => {
   const authFetch = useAuthFetch();
