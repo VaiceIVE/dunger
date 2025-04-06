@@ -32,7 +32,11 @@ export const useNewBeastAction = () => {
     const challenge_rating = (formData.get('challenge_rating') as string).toString();
     const template_id = formData.get('template_id') as string | null;
 
-    const input: ApiCreatureManualInput = { name, challenge_rating, template_id };
+    const input: ApiCreatureManualInput = {
+      name,
+      challenge_rating,
+      template_id: template_id == '' ? null : template_id
+    };
 
     try {
       const response = await createManualCreature(input);
