@@ -22,12 +22,12 @@ export class CreaturesController {
   }
 
   @Get('/templates')
-  async findTemplates(@Query(new ValidationPipe({transform: true})) query: PaginationQureiedQuery){
+  async findTemplates(@Query(new ValidationPipe({transform: true, transformOptions: {enableImplicitConversion: true}})) query: PaginationQureiedQuery){
     return await this.creaturesService.findTemplates(query);
   }
 
   @Get('/languages')
-  async findLanguages(@Query(new ValidationPipe({transform: true})) query: PaginationQureiedQuery){
+  async findLanguages(@Query(new ValidationPipe({transform: true, transformOptions: {enableImplicitConversion: true}})) query: PaginationQureiedQuery){
     return await this.creaturesService.findLanguages(query);
   }
 
@@ -62,7 +62,7 @@ export class CreaturesController {
   }
 
   @Get('/actions/groups')
-  async findActionsGroups(@Query(new ValidationPipe({transform: true})) query: PaginationQureiedQuery){
+  async findActionsGroups(@Query(new ValidationPipe({transform: true, transformOptions: {enableImplicitConversion: true}})) query: PaginationQureiedQuery){
     return await this.creaturesService.findActionsGroups(query)
   }
 
@@ -72,7 +72,7 @@ export class CreaturesController {
   }
 
   @Get('/traits/groups/')
-  async findTraitsGroups(@Query(new ValidationPipe({transform: true})) query: PaginationQureiedQuery){
+  async findTraitsGroups(@Query(new ValidationPipe({transform: true, transformOptions: {enableImplicitConversion: true}})) query: PaginationQureiedQuery){
     return await this.creaturesService.findTraitsGroups(query)
   }
 
