@@ -40,8 +40,7 @@ export const PaginatedMultiSelect = ({
   const selectedOptions =
     selectedRecords?.map((d) => ({
       value: d.id.toString(),
-      label: d.name ?? d.title ?? '',
-      disabled: !d.active
+      label: d.name ?? d.title ?? ''
     })) ?? [];
 
   // Фильтрация значений из общего массива options для того, чтобы не было дублирования с выбранными

@@ -184,7 +184,11 @@ export const MultiSelect = ({
           form={form}
         />
       </Combobox>
-      {!!values.length && <Flex gap={8}>{values}</Flex>}
+      {!!values.length && (
+        <Flex rowGap={8} gap={8}>
+          {values}
+        </Flex>
+      )}
     </Stack>
   );
 };
