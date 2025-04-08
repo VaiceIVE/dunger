@@ -5,7 +5,7 @@ import { text, InputWrapperProps, useInputWrapper, Input } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { autosizeTextarea } from './autosizeTextarea';
 
-interface TextareaProps extends Omit<ComponentProps<'textarea'>, 'style'> {
+interface TextareaImplProps extends Omit<ComponentProps<'textarea'>, 'style'> {
   autosize?: boolean;
 
   maxRows?: number;
@@ -15,17 +15,26 @@ interface TextareaProps extends Omit<ComponentProps<'textarea'>, 'style'> {
   style?: StyleXStyles;
 }
 
-export type TextareaImplProps = InputWrapperProps & TextareaProps;
+export type TextareaProps = InputWrapperProps & TextareaImplProps;
 
-export const TextareaImpl = ({ label, description, required, validate, ...props }: TextareaImplProps) => {
+export const Textarea = ({ label, description, required, validate, ...props }: TextareaProps) => {
   return (
     <Input.Wrapper label={label} description={description} required={required} validate={validate}>
-      <Textarea {...props} required={required} />
+      <TextareaImpl {...props} required={required} />
     </Input.Wrapper>
   );
 };
 
-const Textarea = ({ autosize, maxRows, minRows, value, onInput, style, maxLength, ...props }: TextareaProps) => {
+const TextareaImpl = ({
+  autosize,
+  maxRows,
+  minRows,
+  value,
+  onInput,
+  style,
+  maxLength,
+  ...props
+}: TextareaImplProps) => {
   const textareaRef = useRef<HTMLDivElement>(null);
   const ctx = useInputWrapper();
 
