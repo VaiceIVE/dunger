@@ -30,10 +30,10 @@ export const BestiaryPage = () => {
       <Container>
         <SplitViewLayout isLayoutSplit={isActiveCreature}>
           <SplitViewLayout.Master>
-            <Stack gap={29}>
+            <Stack gap={40}>
               <h1 {...stylex.props(headers.h1Bold)}>Бестиарий</h1>
 
-              <Stack gap={16}>
+              <Stack gap={24}>
                 <Grid gap={16}>
                   <Grid.Col span={isActiveCreature ? 11 : 6}>
                     <TextInput style={styles.input} placeholder="Поиск" leftSection={<SearchIcon />} />
