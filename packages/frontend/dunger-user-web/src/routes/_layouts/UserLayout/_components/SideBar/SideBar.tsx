@@ -105,6 +105,7 @@ export const SideBar = () => {
                 <Tab to={'classes'}>Классы </Tab>
                 <Tab to={'feats'}>Черты</Tab>
                 <Tab to={'backgrounds'}>Предыстории</Tab>
+                <Tab to={'adventurelist'}>Мои приключения</Tab>
               </section>
               <section {...stylex.props(styles.section)}>
                 <div {...stylex.props(text.subheaderBold, styles.sectionTitle)}>Для мастера</div>

@@ -9,6 +9,7 @@ import { FeatsPage } from './FeatsPage';
 import { HomePage } from './HomePage';
 import { NewBeastPage } from './NewBeastPage';
 import { SpeciesPage } from './SpeciesPage';
+import { AdventureListPage } from './AdventureListPage';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,7 +23,7 @@ export const router = createBrowserRouter(
         <Route path={'/backgrounds/:id?'} Component={BackgroundsPage} />
 
         <Route path={'/bestiary/:id?'} Component={BestiaryPage} />
-
+        <Route path={'/adventurelist/:id?'} Component={AdventureListPage} />
         <Route path="/beast/new" Component={NewBeastPage} />
         <Route path="/beast/:id" Component={BeastPage} />
       </Route>
