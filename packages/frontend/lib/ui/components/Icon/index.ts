@@ -10,6 +10,7 @@ import LinkIcon from './_icons/link.svg?react';
 import MenuIcon from './_icons/menu.svg?react';
 import MinusIcon from './_icons/minus.svg?react';
 import PencilIcon from './_icons/pencil.svg?react';
+import PhotoIcon from './_icons/photo.svg?react';
 import PlusFilledIcon from './_icons/plus-filled.svg?react';
 import PlusIcon from './_icons/plus.svg?react';
 import QuestionIcon from './_icons/question.svg?react';
@@ -29,6 +30,7 @@ export {
   MenuIcon,
   MinusIcon,
   PencilIcon,
+  PhotoIcon,
   PlusFilledIcon,
   PlusIcon,
   QuestionIcon,
