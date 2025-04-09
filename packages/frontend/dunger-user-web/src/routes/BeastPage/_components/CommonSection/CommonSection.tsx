@@ -1,129 +1,98 @@
-import { Fragment, useState } from 'react';
-import * as stylex from '@stylexjs/stylex';
-import {
-  Button,
-  ButtonVariant,
-  ButtonWidth,
-  Chips,
-  Flex,
-  IconButton,
-  MinusIcon,
-  Modal,
-  MultiSelect,
-  PlusIcon,
-  Select,
-  Stack,
-  text,
-  Textarea,
-  TextInput
-} from '@dunger/ui';
-import { colors } from '@dunger/ui/tokens.stylex';
+import { Fragment } from 'react';
+import { Chips, MultiSelect, Select, Textarea, TextInput } from '@dunger/ui';
+import { useDirectoryOptions } from '../../useDirectoryOptions';
+import { SectionProps } from '../BeastForm/BeastForm';
+import { SensesInput } from '../SensesInput';
+import { SpeedInput } from '../SpeedInput';
 
-const speeds = [
-  { id: 'walk', name: 'Хождения' },
-  { id: 'fly', name: 'Полета' },
-  { id: 'swim', name: 'Плавания' },
-  { id: 'climb', name: 'Лазания' }
-];
-
-export const CommonSection = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [currentSpeedType, setCurrentSpeedType] = useState<string | null>('');
-
-  const handleSpeedOptionClick = (type: string) => {
-    setCurrentSpeedType(type);
-    setOpen(true);
-  };
+export const CommonSection = ({ formState, handleFieldChange }: SectionProps) => {
+  const { typeOptions, alignmentOptions, sizeOptions, biomeOptions, languageOptions } = useDirectoryOptions();
 
   return (
     <Fragment>
-      <Modal
-        open={open}
-        onOpenChange={(open) => {
-          setOpen(open);
-          if (!open) setCurrentSpeedType(null);
-        }}>
-        <Modal.Content>
-          <Stack style={styles.modal} gap={24}>
-            <Stack gap={16}>
-              <div {...stylex.props(text.subheaderSemibold)}>
-                Скорость: {speeds.find((s) => s.id === currentSpeedType)?.name}
-              </div>
-              <p {...stylex.props(text.defaultMedium, styles.modalDescription)}>Укажите подходящее значение скорости</p>
-            </Stack>
-            <Flex gap={12}>
-              <IconButton size="lg">
-                <MinusIcon />
-              </IconButton>
-              <div {...stylex.props(styles.modalValue, text.defaultMedium)}>фт</div>
-              <IconButton size="lg">
-                <PlusIcon />
-              </IconButton>
-            </Flex>
-            <Button variant={ButtonVariant.accent} width={ButtonWidth.full}>
-              Добавить
-            </Button>
-          </Stack>
-        </Modal.Content>
-      </Modal>
-
-      <TextInput label="Название существа" placeholder="Например, “Хобгоблин-вожак”" />
+      <TextInput
+        value={formState.name}
+        onChange={(e) => {
+          handleFieldChange(e.target.value, 'name');
+        }}
+        name="name"
+        label="Название существа"
+        placeholder="Например, “Хобгоблин-вожак”"
+      />
       <Textarea
+        value={formState.description ?? ''}
+        onChange={(e) => {
+          handleFieldChange(e.target.value, 'description');
+        }}
+        name="description"
         label="Описание"
         placeholder={`Будучи Лордом Протектором Трибара и тайным агентом Арфистов, Даратра дала клятву защищать город.`}
         minRows={8}
         maxRows={12}
         autosize
       />
-      <Select placeholder="-Не выбрано-" label="Мировоззрение" />
-      <Select placeholder="-Не выбрано-" label="Тип" />
-      <Chips.Group label="Размер"></Chips.Group>
-      <Chips.Group label="Скорость">
-        {speeds.map((s) => (
-          <Chips
-            key={s.id}
-            value={s.id}
-            onClick={() => {
-              handleSpeedOptionClick(s.id);
-            }}>
-            {s.name}
+      <Select
+        value={formState.alignment_id}
+        onChange={(e, selectedRecord) => {
+          handleFieldChange(e, 'alignment_id');
+          handleFieldChange(selectedRecord?.name, 'alignment_name');
+        }}
+        options={alignmentOptions}
+        name="alignment_id"
+        placeholder="-Не выбрано-"
+        label="Мировоззрение"
+      />
+      <Select
+        value={formState.type_id?.toString()}
+        onChange={(e, selectedRecord) => {
+          handleFieldChange(e, 'type_id');
+          handleFieldChange(selectedRecord?.name, 'type_name');
+        }}
+        options={typeOptions}
+        name="type_id"
+        placeholder="-Не выбрано-"
+        label="Тип"
+      />
+      <Chips.Group
+        name="size_id"
+        value={formState.size_id ?? ''}
+        onChange={(e) => {
+          handleFieldChange(e, 'size_id');
+          handleFieldChange(sizeOptions.find((o) => o.value == e)?.label ?? '', 'size_name');
+        }}
+        label="Размер">
+        {sizeOptions.map((o) => (
+          <Chips key={o.value} value={o.value}>
+            {o.label}
           </Chips>
         ))}
       </Chips.Group>
+      <SpeedInput speed={formState.speed} handleFieldChange={handleFieldChange} />
       <MultiSelect
-        options={[
-          { value: '1', label: 'test1' },
-          { value: '2', label: 'test2' }
-        ]}
-        searchable
-        placeholder="Начните вводить"
+        options={languageOptions}
+        value={formState.languages_string_ids}
+        onChange={(ids, selectedRecords) => {
+          handleFieldChange(ids, 'languages_string_ids');
+          handleFieldChange(selectedRecords, 'languages');
+        }}
+        selectedRecords={formState.languages}
+        name="languages_string_ids"
+        placeholder="-Не выбрано-"
         label="Языки владения"
       />
-      <Select searchable placeholder="Начните вводить" label="Места обитания" />
-      <Chips.Group label="Чувства"></Chips.Group>
+      <MultiSelect
+        value={formState.biomes_ids}
+        onChange={(ids, selectedRecords) => {
+          handleFieldChange(ids, 'biomes_ids');
+          handleFieldChange(selectedRecords, 'biomes');
+        }}
+        selectedRecords={formState.biomes}
+        name="biomes_ids"
+        options={biomeOptions}
+        placeholder="-Не выбрано-"
+        label="Места обитания"
+      />
+      <SensesInput senses={formState.senses} handleFieldChange={handleFieldChange} />
     </Fragment>
   );
 };
-
-const styles = stylex.create({
-  modal: {
-    color: colors.textPrimaryDefault,
-    width: '100%'
-  },
-  modalDescription: {
-    color: colors.textSecondaryDefault
-  },
-  modalValue: {
-    alignItems: 'center',
-    borderColor: colors.outlinePrimaryDefault,
-    borderRadius: 10,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    color: colors.textTertiaryDefault,
-    display: 'flex',
-    flex: '1',
-    height: '100%',
-    justifyContent: 'center',
-    padding: 12
-  }
-});
