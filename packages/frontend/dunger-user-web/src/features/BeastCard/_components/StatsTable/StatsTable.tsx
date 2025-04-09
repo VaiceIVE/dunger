@@ -36,7 +36,7 @@ export const StatsTable = ({ stats }: { stats?: ApiStats }) => {
       {statsMap.map((s) => (
         <Stack style={[styles.root, text.defaultSemibold]} key={s.key} gap={0}>
           <div {...stylex.props(styles.title)}>{s.title}</div>
-          <div {...stylex.props(styles.value)}>{stats ? stats[s.key].value : '-'}</div>
+          <div {...stylex.props(styles.value)}>{stats ? (stats[s.key].value ?? '-') : '-'}</div>
         </Stack>
       ))}
     </Flex>

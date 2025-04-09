@@ -5,6 +5,9 @@ import { Accordion, Avatar, ChevronDownIcon, ChevronUpIcon, Flex, Stack, Tag, te
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Card } from 'components/Card';
 import { ApiCreature } from 'store/_types/ApiCreature';
+import { ApiSkill, ApiSkills } from 'store/_types/ApiSkills';
+import { ApiSpeedStat } from 'store/_types/ApiSpeedStat';
+import { getProficiencyBonusByCR } from 'utils/getProficiencyBonusByCR';
 import { StatsTable } from './_components/StatsTable';
 
 interface BeastCardProps {
@@ -15,11 +18,51 @@ interface BeastCardProps {
   style?: StyleXStyles;
 }
 
+const formatSpeed = (speed?: ApiSpeedStat): string => {
+  if (!speed || Object.values(speed).filter(Boolean).length === 0) {
+    return 'Не указано';
+  }
+
+  const entries: string[] = [];
+  const { walk, ...other } = speed;
+
+  const translate: Record<string, string> = {
+    fly: 'летая',
+    swim: 'плавая',
+    climb: 'лазая'
+  };
+
+  if (walk) {
+    entries.push(`${walk.toString()} фт.`);
+  } else {
+    entries.push(`0 фт.`);
+  }
+
+  for (const [key, value] of Object.entries(other)) {
+    if (value) {
+      entries.push(`${translate[key] ?? key} ${value.toString()} фт.`);
+    }
+  }
+
+  return entries.join(', ');
+};
+
 export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
+  const biomes = beast?.biomes.map((b) => b.name);
+  const languages = beast?.languages.map((l) => l.name);
+
+  const skills = beast?.skills
+    ? (Object.entries(beast.skills) as [keyof ApiSkills, Record<string, ApiSkill>][]).flatMap(([, skills]) =>
+        Object.entries(skills)
+          .filter(([, skill]) => skill.mastery)
+          .map(([, skill]) => skill.name)
+      )
+    : [];
+
   return (
     <Card style={[styles.root, style]}>
       <Card.Header>
-        <Card.Title>{beast?.name ?? 'Без названия'} </Card.Title>
+        <Card.Title>{beast?.name === '' ? 'Без названия' : (beast?.name ?? 'Без названия')} </Card.Title>
         {controls}
       </Card.Header>
 
@@ -28,15 +71,13 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
           <Flex gap={16}>
             <Stack gap={12} style={styles.common}>
               <div {...stylex.props(styles.personality, text.defaultMedium)}>
-                <div>
-                  {beast?.type_name ?? 'Не выбрано'}, {beast?.alignment_name ?? 'Не выбрано'}
-                </div>
-                <div>/ {beast?.size_name ?? 'Не выбрано'}</div>
+                {beast?.type_name ?? 'Не выбрано'}, {beast?.alignment_name ?? 'Не выбрано'} /{' '}
+                {beast?.size_name ?? 'Не выбрано'}
               </div>
               <Stack gap={4}>
                 <KeyValue keyLabel={'Класс доспеха:'} value={beast?.armor_class ?? 'Не указано'} />
                 <KeyValue keyLabel={'Хиты:'} value={beast?.hit_points ?? 'Не указано'} />
-                <KeyValue keyLabel={'Скорость:'} value={beast?.speed.walk ?? 'Не указано'} />
+                <KeyValue keyLabel={'Скорость:'} value={formatSpeed(beast?.speed)} />
               </Stack>
             </Stack>
             <Avatar size={120} src={null} />
@@ -45,14 +86,14 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
           <StatsTable stats={beast?.stats} />
 
           <Stack gap={12}>
-            <KeyValue keyLabel={'Навыки:'} value={beast?.biomes.map((b) => b.name).join(', ') ?? 'Не указано'} />
-            <KeyValue keyLabel={'Где обитает:'} value={beast?.biomes.map((b) => b.name).join(', ') ?? 'Не указано'} />
-            <KeyValue keyLabel={'Языки:'} value={beast?.languages.map((l) => l.name).join(', ') ?? 'Не указано'} />
+            <KeyValue keyLabel={'Навыки:'} value={skills.length ? skills.join(', ') : 'Не указано'} />
+            <KeyValue keyLabel={'Где обитает:'} value={biomes?.length ? biomes.join(', ') : 'Не указано'} />
+            <KeyValue keyLabel={'Языки:'} value={languages?.length ? languages.join(', ') : 'Не указано'} />
 
             <Flex rowGap={8} gap={8}>
               <Tag>Пассивная внимательность: {beast?.senses.passive_perception ?? '-'}</Tag>
               <Tag>Уровень опасности: {beast?.challenge_rating ?? '-'}</Tag>
-              <Tag>БМ: -</Tag>
+              <Tag>БМ: {getProficiencyBonusByCR(beast?.challenge_rating)}</Tag>
             </Flex>
           </Stack>
         </Stack>
