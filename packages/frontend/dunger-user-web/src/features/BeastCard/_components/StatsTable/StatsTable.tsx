@@ -2,6 +2,7 @@ import * as stylex from '@stylexjs/stylex';
 import { Flex, Stack, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { ApiStats } from 'store/_types/ApiStats';
+import { getAbilityModifier } from 'utils/getAbilityModifier';
 
 const statsMap: { title: string; key: keyof ApiStats }[] = [
   {
@@ -31,12 +32,24 @@ const statsMap: { title: string; key: keyof ApiStats }[] = [
 ];
 
 export const StatsTable = ({ stats }: { stats?: ApiStats }) => {
+  if (!stats) return;
+
   return (
     <Flex gap={0}>
       {statsMap.map((s) => (
         <Stack style={[styles.root, text.defaultSemibold]} key={s.key} gap={0}>
           <div {...stylex.props(styles.title)}>{s.title}</div>
-          <div {...stylex.props(styles.value)}>{stats ? (stats[s.key].value ?? '-') : '-'}</div>
+          <div {...stylex.props(styles.value)}>
+            {(() => {
+              const value = stats[s.key].value;
+
+              if (!value || value.toString() === '') return '-';
+
+              const mod = getAbilityModifier(value);
+
+              return `${value.toString()} (${mod > 0 ? '+' : ''}${getAbilityModifier(value).toString()})`;
+            })()}
+          </div>
         </Stack>
       ))}
     </Flex>
