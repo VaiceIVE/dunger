@@ -51,8 +51,8 @@ const styles = stylex.create({
   }),
   noImage: {
     alignItems: 'center',
-    backgroundColor: colors.backgroundUniversal,
-    color: 'white',
+    backgroundColor: colors.backgroundNeutralDefault,
+    color: colors.textTertiaryDefault,
     display: 'flex',
     justifyContent: 'center'
   },
