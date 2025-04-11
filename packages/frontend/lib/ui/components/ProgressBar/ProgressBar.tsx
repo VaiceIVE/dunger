@@ -1,7 +1,7 @@
+import * as stylex from '@stylexjs/stylex';
 import { colors } from '../../tokens.stylex';
 import { text } from '../../utils/text';
 import { Stack } from '../Stack';
-import * as stylex from '@stylexjs/stylex';
 
 interface ProgressBarProps {
   value?: number;
@@ -12,13 +12,14 @@ interface ProgressBarProps {
 
 export const ProgressBar = ({ value, max, description, title }: ProgressBarProps) => {
   const percent = value && max ? Math.floor((value / max) * 100) : 0;
+
   return (
-    <Stack gap={4} style={[text.defaultSemibold, styles.root]}>
+    <Stack gap={4} style={[text.defaultMedium, styles.root]}>
       <div>
-        {title}:{' '}
+        {!!title && <span {...stylex.props(text.defaultSemibold)}>{title}: </span>}
         <span {...stylex.props(styles.value)}>
           {value}/{max}
-        </span>
+        </span>{' '}
         {description}
       </div>
       <div>
@@ -35,17 +36,18 @@ const styles = stylex.create({
     color: colors.textSecondaryDefault
   },
   bar: {
-    position: 'relative',
     backgroundColor: colors.backgroundNeutralDefault,
     borderRadius: 2,
     height: 8,
     overflow: 'hidden',
+    position: 'relative',
     width: '100%'
   },
   progress: (width: number) => ({
     height: '100%',
     width: `${String(width)}%`,
-    backgroundColor: colors.brand80
+    backgroundColor: colors.brand80,
+    borderRadius: 2
   }),
   value: {
     color: colors.brand80
