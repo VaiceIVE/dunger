@@ -1,6 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom';
 import { BaseLayout } from './_layouts/BaseLayout';
 import { UserLayout } from './_layouts/UserLayout';
+import { AdventuresPage } from './AdventuresPage';
 import { BackgroundsPage } from './BackgroundsPage';
 import { BeastPage } from './BeastPage';
 import { BestiaryPage } from './BestiaryPage';
@@ -9,7 +10,6 @@ import { FeatsPage } from './FeatsPage';
 import { HomePage } from './HomePage';
 import { NewBeastPage } from './NewBeastPage';
 import { SpeciesPage } from './SpeciesPage';
-import { AdventureListPage } from './AdventureListPage';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,9 +23,11 @@ export const router = createBrowserRouter(
         <Route path={'/backgrounds/:id?'} Component={BackgroundsPage} />
 
         <Route path={'/bestiary/:id?'} Component={BestiaryPage} />
-        <Route path={'/adventurelist/:id?'} Component={AdventureListPage} />
+
         <Route path="/beast/new" Component={NewBeastPage} />
         <Route path="/beast/:id" Component={BeastPage} />
+
+        <Route path={'/adventures'} Component={AdventuresPage} />
       </Route>
 
       {/* not found */}
