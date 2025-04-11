@@ -15,6 +15,7 @@ import PlusFilledIcon from './_icons/plus-filled.svg?react';
 import PlusIcon from './_icons/plus.svg?react';
 import QuestionIcon from './_icons/question.svg?react';
 import SearchIcon from './_icons/search.svg?react';
+import SelectorIcon from './_icons/selector.svg?react';
 import XIcon from './_icons/x.svg?react';
 
 export {
@@ -35,5 +36,6 @@ export {
   PlusIcon,
   QuestionIcon,
   SearchIcon,
+  SelectorIcon,
   XIcon
 };
