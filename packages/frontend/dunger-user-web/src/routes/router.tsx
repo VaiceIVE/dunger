@@ -1,6 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom';
 import { BaseLayout } from './_layouts/BaseLayout';
 import { UserLayout } from './_layouts/UserLayout';
+import { AdventuresPage } from './AdventuresPage';
 import { BackgroundsPage } from './BackgroundsPage';
 import { BeastPage } from './BeastPage';
 import { BestiaryPage } from './BestiaryPage';
@@ -25,6 +26,8 @@ export const router = createBrowserRouter(
 
         <Route path="/beast/new" Component={NewBeastPage} />
         <Route path="/beast/:id" Component={BeastPage} />
+
+        <Route path={'/adventures'} Component={AdventuresPage} />
       </Route>
 
       {/* not found */}

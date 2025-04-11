@@ -1,10 +1,9 @@
 import { FormEventHandler, ReactNode, useEffect, useMemo, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import { Combobox, ComboboxItem, getOptionsLockup, SearchIcon, text, useUncontrolled } from '@dunger/ui';
+import { Combobox, ComboboxItem, getOptionsLockup, SearchIcon, SelectorIcon, text, useUncontrolled } from '@dunger/ui';
 import { usePrevious } from '@dunger/ui/hooks/usePrevious';
 import { colors } from '../../tokens.stylex';
 import { InputBase, InputBaseProps } from '../InputBase';
-import SelectorIcon from './selector.svg?react';
 
 export interface SelectProps extends Omit<InputBaseProps, 'value' | 'defaultValue' | 'onChange'> {
   value?: string | null;

@@ -7,13 +7,13 @@ import {
   Flex,
   getOptionsLockup,
   SearchIcon,
+  SelectorIcon,
   Stack,
   text,
   useUncontrolled
 } from '@dunger/ui';
 import { colors } from '../../tokens.stylex';
 import { InputBase, InputBaseProps } from '../InputBase';
-import MultiSelectorIcon from './selector.svg?react';
 
 export interface MultiSelectProps extends Omit<InputBaseProps, 'value' | 'defaultValue' | 'onChange'> {
   value?: string[];
@@ -145,7 +145,7 @@ export const MultiSelect = ({
             onErrorChange={setError}
             readOnly={readOnly ?? !searchable}
             leftSection={_leftSection}
-            rightSection={<MultiSelectorIcon />}
+            rightSection={<SelectorIcon />}
             onFocus={(event) => {
               onFocus?.(event);
             }}
