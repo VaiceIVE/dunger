@@ -86,6 +86,7 @@ const styles = stylex.create({
     display: 'flex',
     flex: '1',
     flexDirection: 'column',
-    gap: 0
+    gap: 0,
+    width: '100%'
   }
 });
