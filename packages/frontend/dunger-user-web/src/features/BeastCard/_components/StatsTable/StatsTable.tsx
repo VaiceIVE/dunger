@@ -42,12 +42,12 @@ export const StatsTable = ({ stats }: { stats?: ApiStats }) => {
           <div {...stylex.props(styles.value)}>
             {(() => {
               const value = stats[s.key].value;
-
               if (!value || value.toString() === '') return '-';
 
+              const _value = value > 30 ? 30 : value < 1 ? 1 : value;
               const mod = getAbilityModifier(value);
 
-              return `${value.toString()} (${mod > 0 ? '+' : ''}${getAbilityModifier(value).toString()})`;
+              return `${_value.toString()} (${mod > 0 ? '+' : ''}${getAbilityModifier(_value).toString()})`;
             })()}
           </div>
         </Stack>
