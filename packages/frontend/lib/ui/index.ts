@@ -19,6 +19,7 @@ export * from './components/Modal';
 export * from './components/MultiSelect';
 export * from './components/NumberInput';
 export * from './components/ProgressBar';
+export * from './components/Radio';
 export * from './components/Select';
 export * from './components/Sheet';
 export * from './components/Spinner';
