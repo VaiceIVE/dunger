@@ -195,9 +195,7 @@ export class CreaturesService {
           _count: {
             id: 'desc'
           }
-        },
-        skip: query.offset,
-        take: query.limit
+        }
       })
       total = await this.prisma.trait.groupBy({
         by: ['name'],
@@ -214,16 +212,16 @@ export class CreaturesService {
           _count: {
             id: 'desc'
           }
-        },
-        skip: query.offset,
-        take: query.limit
+        }
       })
       total = await this.prisma.trait.groupBy({
         by: ['name'],
       })
       total = total.length
-
       }
+      
+      results = results.slice(query.offset, query.offset + query.limit)
+
 
     return {
       pagination: {
@@ -253,9 +251,7 @@ export class CreaturesService {
           _count: {
             id: 'desc'
           }
-        },
-        skip: query.offset,
-        take: query.limit
+        }
       })
       total = await this.prisma.action.groupBy({
         by: ['name'],
@@ -272,9 +268,7 @@ export class CreaturesService {
           _count: {
             id: 'desc'
           }
-        },
-        skip: query.offset,
-        take: query.limit
+        }
       })
       total = await this.prisma.action.groupBy({
         by: ['name'],
@@ -282,6 +276,8 @@ export class CreaturesService {
       total = total.length
 
       }
+    
+      results = results.slice(query.offset, query.offset + query.limit)
 
     return {
       pagination: {
