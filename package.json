@@ -5,7 +5,8 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "packages/backend",
+    "packages/backend/dunger-core",
+    "packages/backend/dunger-gpt",
     "packages/frontend/dunger-user-web",
     "packages/frontend/lib/*"
   ],
@@ -24,6 +25,7 @@
     "husky": "^9.0.0",
     "lint-staged": "^15.0.0",
     "prettier": "^3.0.0",
+    "prisma": "6.5.0",
     "stylelint": "^16.0.0",
     "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-standard-scss": "^13.1.0",
@@ -46,5 +48,8 @@
       "prettier --write --ignore-unknown"
     ]
   },
-  "packageManager": "yarn@4.6.0"
+  "packageManager": "yarn@4.6.0",
+  "dependencies": {
+    "@prisma/client": "6.5.0"
+  }
 }

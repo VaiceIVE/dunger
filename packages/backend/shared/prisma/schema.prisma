@@ -37,14 +37,14 @@ model Language {
 model Biome {
   id Int @default(autoincrement()) @id()
   key String @unique
-  title String
+  title String @unique
 
   creatures Creature[]
 }
 
 model Type{
   id Int @default(autoincrement()) @id
-  name String // аберрация, гуманоид итд
+  name String @unique// аберрация, гуманоид итд
   
   creatures Creature[]
 }
@@ -343,8 +343,7 @@ model Creature {
   skills SkillsList?
   resistances DamageType[] @relation("creature_resistances")
   immunities DamageType[] @relation("creature_immunities")
-  vunlerabilities DamageType[] @relation("creature_vunlerabilities")
-  // senses
+  vulnerabilities DamageType[] @relation("creature_vulnerabilities")
   // conditionImmune
   senses Senses?
   challenge_rating String
@@ -412,7 +411,7 @@ model DamageType {
 
   resistant_creatures Creature[] @relation("creature_resistances")
   immune_creatures Creature[] @relation("creature_immunities")
-  vunlerable_creatures Creature[] @relation("creature_vunlerabilities")
+  vunlerable_creatures Creature[] @relation("creature_vulnerabilities")
 
 }
 

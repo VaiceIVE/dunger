@@ -6,7 +6,7 @@
   - You are about to drop the column `passive_perception` on the `Creature` table. All the data in the column will be lost.
   - You are about to drop the column `resistances` on the `Creature` table. All the data in the column will be lost.
   - You are about to drop the column `type_id` on the `Creature` table. All the data in the column will be lost.
-  - You are about to drop the column `vunlerabilities` on the `Creature` table. All the data in the column will be lost.
+  - You are about to drop the column `vulnerabilities` on the `Creature` table. All the data in the column will be lost.
   - You are about to drop the column `cha` on the `Creature_stats` table. All the data in the column will be lost.
   - You are about to drop the column `con` on the `Creature_stats` table. All the data in the column will be lost.
   - You are about to drop the column `dex` on the `Creature_stats` table. All the data in the column will be lost.
@@ -35,7 +35,7 @@ ALTER TABLE "Creature" DROP COLUMN "immunities",
 DROP COLUMN "passive_perception",
 DROP COLUMN "resistances",
 DROP COLUMN "type_id",
-DROP COLUMN "vunlerabilities",
+DROP COLUMN "vulnerabilities",
 ADD COLUMN     "race_id" INTEGER;
 
 -- AlterTable
@@ -140,11 +140,11 @@ CREATE TABLE "_creature_immunities" (
 );
 
 -- CreateTable
-CREATE TABLE "_creature_vunlerabilities" (
+CREATE TABLE "_creature_vulnerabilities" (
     "A" TEXT NOT NULL,
     "B" TEXT NOT NULL,
 
-    CONSTRAINT "_creature_vunlerabilities_AB_pkey" PRIMARY KEY ("A","B")
+    CONSTRAINT "_creature_vulnerabilities_AB_pkey" PRIMARY KEY ("A","B")
 );
 
 -- CreateIndex
@@ -157,7 +157,7 @@ CREATE INDEX "_creature_resistances_B_index" ON "_creature_resistances"("B");
 CREATE INDEX "_creature_immunities_B_index" ON "_creature_immunities"("B");
 
 -- CreateIndex
-CREATE INDEX "_creature_vunlerabilities_B_index" ON "_creature_vunlerabilities"("B");
+CREATE INDEX "_creature_vulnerabilities_B_index" ON "_creature_vulnerabilities"("B");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Action_description_key" ON "Action"("description");
@@ -208,7 +208,7 @@ ALTER TABLE "_creature_immunities" ADD CONSTRAINT "_creature_immunities_A_fkey" 
 ALTER TABLE "_creature_immunities" ADD CONSTRAINT "_creature_immunities_B_fkey" FOREIGN KEY ("B") REFERENCES "DamageType"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_creature_vunlerabilities" ADD CONSTRAINT "_creature_vunlerabilities_A_fkey" FOREIGN KEY ("A") REFERENCES "Creature"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_creature_vulnerabilities" ADD CONSTRAINT "_creature_vulnerabilities_A_fkey" FOREIGN KEY ("A") REFERENCES "Creature"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_creature_vunlerabilities" ADD CONSTRAINT "_creature_vunlerabilities_B_fkey" FOREIGN KEY ("B") REFERENCES "DamageType"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_creature_vulnerabilities" ADD CONSTRAINT "_creature_vulnerabilities_B_fkey" FOREIGN KEY ("B") REFERENCES "DamageType"("id") ON DELETE CASCADE ON UPDATE CASCADE;

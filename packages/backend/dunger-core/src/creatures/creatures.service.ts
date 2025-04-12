@@ -311,7 +311,7 @@ export class CreaturesService {
 
   private cleanObj(obj){
     var newobj = {}
-    const complexPropnames = ['speed', 'stats', 'skills', 'languages_ids', 'actions_ids', 'traits_ids', 'size_id', 'resistances_ids', 'immunities_ids', 'vunlerabilities_ids', 'resistances', 'immunities', 'vunlerabilities']
+    const complexPropnames = ['speed', 'stats', 'skills', 'languages_ids', 'actions_ids', 'traits_ids', 'size_id', 'resistances_ids', 'immunities_ids', 'vulnerabilities_ids', 'resistances', 'immunities', 'vulnerabilities', 'senses', 'languages', 'alignment_relation', 'type_relation', 'size_relation', 'biome_relation', 'race_relation']
     for (var propname in obj){
       if(!(obj[propname] === null || obj[propname] === undefined || complexPropnames.includes(propname))){
         newobj[propname] = obj[propname]
@@ -342,6 +342,91 @@ export class CreaturesService {
         }
       })
     }
+    if(updateCreatureDto.senses){
+      await this.prisma.creature.update({
+        where: {id: id},
+        data: {
+          senses: {
+            upsert: {
+              where: {creature_id: id},
+              create: updateCreatureDto.senses,
+              update: {passive_perception: updateCreatureDto.senses.passive_perception}
+            },
+
+          }
+        }
+      })
+    }
+    if(updateCreatureDto.alignment_relation){
+      await this.prisma.creature.update({
+        where: {id: id},
+        data: {
+          alignment_relation: {
+            connect: {
+              name: updateCreatureDto.alignment_relation.name
+            }
+          }
+        }
+      })
+    }
+    if(updateCreatureDto.type_relation){
+      await this.prisma.creature.update({
+        where: {id: id},
+        data: {
+          type_relation: {
+            connect: {
+              name: updateCreatureDto.type_relation.name
+            }
+          }
+        }
+      })
+    }
+    if(updateCreatureDto.size_relation){
+      await this.prisma.creature.update({
+        where: {id: id},
+        data: {
+          size_relation: {
+            connect: {
+              id: updateCreatureDto.size_relation.name
+            }
+          }
+        }
+      })
+    }
+    if(updateCreatureDto.biome_relation){
+      for(const biome of updateCreatureDto.biome_relation){
+        await this.prisma.creature.update({
+          where: {id: id},
+          data: {
+            biome_relation: {
+              connect: {
+                title: biome.title
+              }
+            }
+          }
+        })
+      }
+    }
+    if(updateCreatureDto.languages){
+      for(const lang of updateCreatureDto.languages){
+        await this.prisma.creature.update({
+          where: {id: id},
+          data: {
+            languages: {
+              set: [],
+              connectOrCreate: {
+                create: {
+                  name: lang.name
+                },
+                where: {
+                  name: lang.name
+                }
+              }
+            }
+          }
+        })
+      }
+    }
     if(updateCreatureDto.speed){
       await this.prisma.creature.update({
         where: {id: id},
@@ -362,7 +447,6 @@ export class CreaturesService {
       })
     }
     if(updateCreatureDto.stats){
-      
       await this.prisma.creature.update({
         where: {id: id},
         data: {
@@ -760,22 +844,22 @@ export class CreaturesService {
         })
       }
     }
-    if(updateCreatureDto.vunlerabilities_ids){
+    if(updateCreatureDto.vulnerabilities_ids){
       await this.prisma.creature.update({
         where: {id: id},
         data: {
-          vunlerabilities: {
+          vulnerabilities: {
             set: []
           }
         }
       })
-      for(const vunlerability_id of updateCreatureDto.vunlerabilities_ids){
+      for(const vunlerability_id of updateCreatureDto.vulnerabilities_ids){
         await this.prisma.creature.update({
           where: {
             id: id
           },
           data: {
-            vunlerabilities: {
+            vulnerabilities: {
               connect: {
                 id: vunlerability_id
               }
@@ -844,7 +928,7 @@ export class CreaturesService {
         type_relation: true,
         immunities: true,
         resistances: true,
-        vunlerabilities: true,
+        vulnerabilities: true,
         speed: {
           omit: {
             id: true
@@ -1019,6 +1103,11 @@ export class CreaturesService {
             }
           }
         },
+        senses: {
+          omit: {
+            creature_id: true
+          }
+        },
         actions: true,
         traits: true,
         languages: true
@@ -1048,7 +1137,7 @@ export class CreaturesService {
       name: result.name,
       resistances: result.resistances,
       resistances_ids: result.resistances ? result.resistances.map(res => res.id) : [],
-      senses: nullSensesObject,
+      senses: result.senses,
       size_id: result.size_relation ? result.size_relation.id : null,
       size_name: result.size_relation ? result.size_relation.name : null,
       skills: result.skills ? result.skills : nullSkillsObject,
@@ -1057,8 +1146,8 @@ export class CreaturesService {
       traits: result.traits ? result.traits : [],
       type_id: result.type_relation ? result.type_relation.id : null,
       type_name: result.type_relation ? result.type_relation.name : null,
-      vunlerabilities: result.vunlerabilities ? result.vunlerabilities : [],
-      vunlerabilities_ids: result.vunlerabilities ? result.vunlerabilities.map(vun => vun.id) : []
+      vulnerabilities: result.vulnerabilities ? result.vulnerabilities : [],
+      vulnerabilities_ids: result.vulnerabilities ? result.vulnerabilities.map(vun => vun.id) : []
     } as ApiCreature
   }
 
