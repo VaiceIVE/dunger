@@ -4,6 +4,7 @@ import BookmarkIcon from './_icons/bookmark.svg?react';
 import ChevronDownIcon from './_icons/chevron-down.svg?react';
 import ChevronUpIcon from './_icons/chevron-up.svg?react';
 import ChevronsUpIcon from './_icons/chevrons-up.svg?react';
+import CopyIcon from './_icons/copy.svg?react';
 import DiceD20Icon from './_icons/dice-d20.svg?react';
 import FolderIcon from './_icons/folder.svg?react';
 import LinkIcon from './_icons/link.svg?react';
@@ -26,6 +27,7 @@ export {
   ChevronDownIcon,
   ChevronUpIcon,
   ChevronsUpIcon,
+  CopyIcon,
   DiceD20Icon,
   FolderIcon,
   LinkIcon,
