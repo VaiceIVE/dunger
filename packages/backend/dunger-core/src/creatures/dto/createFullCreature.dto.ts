@@ -15,7 +15,7 @@ export class FullCreatureDTO {
     creature_type?: string
     immunities?: string[]
     resistances?: string[]
-    vunlerabilities?: string[]
+    vulnerabilities?: string[]
     languages?: string[]
     actions?: Action[]
     traits?: Trait[]

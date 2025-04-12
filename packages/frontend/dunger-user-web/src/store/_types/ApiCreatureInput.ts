@@ -23,7 +23,7 @@ export interface ApiCreatureInput {
   skills: ApiSkillsInput;
   resistances_ids: string[];
   immunities_ids: string[];
-  vunlerabilities_ids: string[];
+  vulnerabilities_ids: string[];
   // Действия
   actions_ids: string[];
   // Способности и свойства

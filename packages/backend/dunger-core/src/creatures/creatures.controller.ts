@@ -6,15 +6,35 @@ import { PaginationQuery } from '../app/dto/queries/paginationQuery';
 import { PaginationQureiedQuery } from 'src/app/dto/queries/paginationQueriedQuery';
 import { QueryValidationPipe } from 'src/pipes/query.pipe';
 import { ApiCreatureInput } from './dto/stolen_types/ApiCreatureInput';
+import axios from 'axios';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('creatures')
 export class CreaturesController {
-  constructor(private readonly creaturesService: CreaturesService) {}
+  constructor(
+    private readonly creaturesService: CreaturesService,
+    private readonly configService: ConfigService
+  
+  ) {}
 
   @Post('/init')
   initCreature(@Body() createCreatureDto: CreateCreatureManualDto) {
     return this.creaturesService.initCreature(createCreatureDto);
   }
+
+  @Post('/generate')
+  async generateCreature(@Body() createCreatureDto: CreateCreatureManualDto) {
+    const creatureId = await this.creaturesService.initCreature(createCreatureDto);
+    
+    const aiCretureData = (await axios.post(`${this.configService.get('GPT_BASE_URL')}/gpt/generate/creature`, createCreatureDto)).data
+
+    console.log(aiCretureData)
+
+    const updatedCreature = await this.creaturesService.update(creatureId.id, aiCretureData)
+
+    return updatedCreature.id
+  }
+
 
   @Get()
   findAll() {

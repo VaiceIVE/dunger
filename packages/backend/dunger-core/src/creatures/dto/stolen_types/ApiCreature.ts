@@ -46,10 +46,10 @@ export interface ApiCreature {
   skills: ApiSkills;
   resistances_ids: string[];
   immunities_ids: string[];
-  vunlerabilities_ids: string[];
+  vulnerabilities_ids: string[];
   resistances: ApiDamageType[];
   immunities: ApiDamageType[];
-  vunlerabilities: ApiDamageType[];
+  vulnerabilities: ApiDamageType[];
   // Действия
   actions: ApiAction[];
   // Способности и свойства

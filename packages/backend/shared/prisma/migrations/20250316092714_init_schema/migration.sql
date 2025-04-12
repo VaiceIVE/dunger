@@ -115,7 +115,7 @@ CREATE TABLE "Creature" (
     "hit_points" INTEGER,
     "resistances" "Damage_type"[],
     "immunities" "Damage_type"[],
-    "vunlerabilities" "Damage_type"[],
+    "vulnerabilities" "Damage_type"[],
     "passive_perception" INTEGER,
     "challenge_rating" TEXT NOT NULL,
     "biome_id" INTEGER,
