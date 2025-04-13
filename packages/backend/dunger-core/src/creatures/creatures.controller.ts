@@ -4,7 +4,7 @@ import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
 import { UpdateCreatureDto } from './dto/update-creature.dto';
 import { PaginationQuery } from '../app/dto/queries/paginationQuery';
 import { PaginationQureiedQuery } from 'src/app/dto/queries/paginationQueriedQuery';
-import { QueryValidationPipe } from 'src/pipes/query.pipe';
+import { QueryValidationPipe } from 'src/common/pipes/query.pipe';
 import { ApiCreatureInput } from './dto/stolen_types/ApiCreatureInput';
 import axios from 'axios';
 import { ConfigService } from '@nestjs/config';

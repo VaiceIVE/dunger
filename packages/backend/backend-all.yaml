@@ -10,6 +10,10 @@ services:
     entrypoint: bash -c "yarn install && npx prisma generate && npx prisma migrate deploy && npx ts-node --transpile-only ./prisma/seeds/seed-all.ts &&  npm run b:start"
     networks:
       - dunger_backend_net
+    depends_on:
+      keycloak:
+          condition: service_healthy
+
 
   postgres:
     image: postgres
@@ -20,8 +24,8 @@ services:
         POSTGRES_PASSWORD: postgres
         POSTGRES_USER: postgres
         POSTGRES_DATABASE: postgres
-    # volumes:
-        # - ./mounts/postgres/:/docker-entrypoint-initdb.d/
+    volumes:
+        - ./postgres/:/docker-entrypoint-initdb.d/
         # - ./mounts/postgres/data:/var/lib/postgresql/data
     networks:
       - dunger_backend_net
@@ -49,6 +53,31 @@ services:
     entrypoint: bash -c "yarn install && npm run g:start"
     networks:
       - dunger_backend_net
+
+  keycloak:
+    build: keycloak
+    container_name: keycloak
+    ports:
+        - 8080:8080
+    command: start-dev
+    env_file: keycloak/.env
+    networks:
+      - dunger_backend_net
+    healthcheck:
+      test:
+          [
+              'CMD-SHELL',
+              "exec 3<>/dev/tcp/127.0.0.1/9000;echo -e 'GET /health/ready HTTP/1.1\r\nhost: http://localhost\r\nConnection: close\r\n\r\n' >&3;if [ $? -eq 0 ]; then echo 'Healthcheck Successful';exit 0;else echo 'Healthcheck Failed>';exit 1;fi;"
+          ]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - type: bind
+        source: ./keycloak/realm-export.json
+        target: /opt/keycloak/data/import/realm-export.json
+
+
 
 
 networks:
