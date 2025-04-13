@@ -10,6 +10,7 @@ import { FeatsPage } from './FeatsPage';
 import { HomePage } from './HomePage';
 import { NewBeastPage } from './NewBeastPage';
 import { SpeciesPage } from './SpeciesPage';
+import { ProfilePage } from './ProfilePage';
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +29,7 @@ export const router = createBrowserRouter(
         <Route path="/beast/:id" Component={BeastPage} />
 
         <Route path={'/adventures'} Component={AdventuresPage} />
+        <Route path={'/profile'} Component={ProfilePage} />
       </Route>
 
       {/* not found */}
