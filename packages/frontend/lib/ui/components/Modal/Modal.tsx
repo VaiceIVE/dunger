@@ -1,4 +1,4 @@
-import { ComponentProps, Fragment, PropsWithChildren, ReactNode } from 'react';
+import { ComponentProps, Fragment, ReactNode } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { createPortal } from 'react-dom';
@@ -46,7 +46,7 @@ interface ModalComponentProps extends Omit<ComponentProps<'div'>, 'style'> {
   style?: StyleXStyles;
 }
 
-const ModalContent = ({ children }: PropsWithChildren) => {
+const ModalContent = ({ children, style }: ModalComponentProps) => {
   const ctx = useModalContext();
 
   if (!ctx.openState) return null;
@@ -55,7 +55,7 @@ const ModalContent = ({ children }: PropsWithChildren) => {
     <div {...stylex.props(styles.wrapper)} onClick={ctx.withOverlay ? ctx.close : undefined}>
       {ctx.withOverlay && <div {...stylex.props(styles.overlay)} />}
       <div
-        {...stylex.props(styles.content)}
+        {...stylex.props(styles.content, style)}
         onClick={(e) => {
           e.stopPropagation();
         }}>
