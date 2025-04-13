@@ -3,8 +3,8 @@ import * as stylex from '@stylexjs/stylex';
 import { createPortal } from 'react-dom';
 import { Accordion, ChevronDownIcon, ChevronUpIcon, CopyIcon, Flex, RadioGroup, Spinner, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { ApiAction } from 'store/_types/ApiAction';
-import { ActionList } from '../ActionList';
+import { ApiTrait } from 'store/_types/ApiTrait';
+import { TraitList } from '../TraitList';
 
 interface GroupListProps {
   name: string;
@@ -13,22 +13,22 @@ interface GroupListProps {
 
   setOpenedSections: (sections: string[]) => void;
 
-  value: Record<string, ApiAction | undefined>;
+  value: Record<string, ApiTrait | undefined>;
 
-  setValue: (actionObj: Record<string, ApiAction>) => void;
+  setValue: (actionObj: Record<string, ApiTrait>) => void;
 
-  actionGroupOptions: {
+  traitGroupOptions: {
     name: string;
     count: number;
   }[];
 }
 
-export const GroupList = ({ actionGroupOptions, openedSections, value, setValue, name }: GroupListProps) => {
+export const GroupList = ({ traitGroupOptions, openedSections, value, setValue, name }: GroupListProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   return (
     <Fragment>
-      {actionGroupOptions.map((o) => (
+      {traitGroupOptions.map((o) => (
         <Accordion.Item style={styles.item} value={o.name} key={o.name}>
           <Accordion.Control style={[styles.control, text.defaultSemibold]}>
             {(open: boolean) => (
@@ -48,7 +48,7 @@ export const GroupList = ({ actionGroupOptions, openedSections, value, setValue,
           <Accordion.Panel>
             <Suspense fallback={<FallbackLoader targetRef={contentRef} />}>
               <RadioGroup value={value[o.name]?.id.toString() ?? ''}>
-                <ActionList name={name} setValue={setValue} opened={openedSections.includes(o.name)} groupId={o.name} />
+                <TraitList name={name} setValue={setValue} opened={openedSections.includes(o.name)} groupId={o.name} />
               </RadioGroup>
             </Suspense>
           </Accordion.Panel>

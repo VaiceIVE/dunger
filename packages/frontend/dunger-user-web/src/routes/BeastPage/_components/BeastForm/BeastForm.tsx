@@ -3,23 +3,23 @@ import * as stylex from '@stylexjs/stylex';
 import { Accordion, ChevronDownIcon, ChevronUpIcon, headers, IconButton } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { ApiCreature } from 'store/_types/ApiCreature';
-import { AbilitiesSection } from '../AbilitiesSection';
 import { ActionsSection } from '../ActionsSection';
 import { CommonSection } from '../CommonSection';
 import { StatblockSection } from '../StatblockSection';
+import { TraitsSection } from '../TraitsSection';
 
 const sections = [
   { id: 'commonInfo', title: 'Общая информация' },
   { id: 'statblock', title: 'Статблок' },
   { id: 'actions', title: 'Действия' },
-  { id: 'abilities', title: 'Способности и свойства' }
+  { id: 'traits', title: 'Способности и свойства' }
 ];
 
 const sectionById: Record<string, FC<SectionProps>> = {
   commonInfo: CommonSection,
   statblock: StatblockSection,
   actions: ActionsSection,
-  abilities: AbilitiesSection
+  traits: TraitsSection
 };
 
 interface BeastFormProps {
