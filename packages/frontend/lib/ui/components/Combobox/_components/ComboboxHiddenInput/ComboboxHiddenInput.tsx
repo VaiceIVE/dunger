@@ -15,7 +15,7 @@ export function ComboboxHiddenInput({ value, valuesDivider = ',', ...others }: C
   return (
     <input
       {...stylex.props(styles.root)}
-      onChange={() => ({})}
+      onChange={() => void 0}
       value={Array.isArray(value) ? value.join(valuesDivider) : (value ?? '')}
       {...others}
     />
