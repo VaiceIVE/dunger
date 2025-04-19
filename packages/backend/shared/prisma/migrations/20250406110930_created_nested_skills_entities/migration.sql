@@ -145,7 +145,7 @@ CREATE TABLE "InvestigationSkill" (
     "skill_list_id" TEXT NOT NULL,
     "value" INTEGER NOT NULL,
     "mastery" BOOLEAN NOT NULL,
-    "name" TEXT NOT NULL DEFAULT 'Расслкдование',
+    "name" TEXT NOT NULL DEFAULT 'Расследование',
 
     CONSTRAINT "InvestigationSkill_pkey" PRIMARY KEY ("skill_list_id")
 );

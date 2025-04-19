@@ -243,7 +243,7 @@ model InvestigationSkill{
   id String @id
   value Int
   mastery Boolean
-  name String @default("Расслкдование")
+  name String @default("Расследование")
   skill_list IntellengenceBasedSkills @relation(fields: [id], references: [id])
 }
 model NatureSkill{
