@@ -9,11 +9,11 @@ export interface ApiCreatureInput {
   name: string;
   description: string | null;
   type_id: number | null;
-  alignment_id: string | null;
+  alignment_id: number | null;
   size_id: string | null;
   speed: ApiSpeedStat;
   languages_ids: number[];
-  biomes_ids: string[];
+  biomes_ids: number[];
   senses: ApiSenses;
   // Статблок
   hit_points: number;
