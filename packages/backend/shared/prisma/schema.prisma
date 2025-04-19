@@ -330,6 +330,7 @@ model PersuasionSkill{
 model Creature {
   id String @default(uuid()) @id 
   name String
+  creator_id String?
   image_uri String?
   description String?
   size String? 
