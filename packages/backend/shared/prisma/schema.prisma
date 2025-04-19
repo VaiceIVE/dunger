@@ -330,7 +330,7 @@ model PersuasionSkill{
 model Creature {
   id String @default(uuid()) @id 
   name String
-  creator_id String?
+  // creator_id String?
   image_uri String?
   description String?
   size String? 
@@ -349,7 +349,7 @@ model Creature {
   senses Senses?
   challenge_rating String
   languages Language[]
-  biome_id Int?
+  biomes_ids Int[]
   type_id Int? 
   aSubTypes String[] //TODO
   actions Action[]
