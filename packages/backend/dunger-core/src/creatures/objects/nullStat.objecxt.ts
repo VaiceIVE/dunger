@@ -1,3 +1,10 @@
-import { ApiStatsInput } from "../dto/stolen_types/ApiStatsInput";
+import { ApiStatsInput } from '../dto/stolen_types/ApiStatsInput';
 
-export const nullStatObject = {charisma: {mastery: false, value: null}, constitution: { mastery: false, value: null}, dexterity: {mastery: false, value: null}, intelligence: {mastery: false, value: null}, strength: {mastery: false, value: null}, wisdom: {mastery: false, value: null}} as ApiStatsInput
+export const nullStatObject: ApiStatsInput = {
+  strength: { mastery: false, value: 8 },
+  dexterity: { mastery: false, value: 8 },
+  constitution: { mastery: false, value: 8 },
+  intelligence: { mastery: false, value: 8 },
+  wisdom: { mastery: false, value: 8 },
+  charisma: { mastery: false, value: 8 },
+};

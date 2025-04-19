@@ -1,5 +1,5 @@
-import { ApiSenses } from "../dto/stolen_types/ApiSenses";
+import { ApiSenses } from '../dto/stolen_types/ApiSenses';
 
-export const nullSensesObject = {
-    passive_perception: null
-} as ApiSenses
+export const nullSensesObject: ApiSenses = {
+  passive_perception: null,
+};
