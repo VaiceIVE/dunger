@@ -9,12 +9,12 @@ export interface ApiCreatureInput {
   name: string;
   description: string | null;
   type_id: number | null;
-  alignment_id: string | null;
+  alignment_id: number | null;
   size_id: string | null;
   speed: ApiSpeedStat;
   languages_ids: number[];
-  languages?: {name: string}[];
-  biomes_ids: string[];
+  languages?: { name: string }[];
+  biomes_ids: number[];
   senses: ApiSenses;
   // Статблок
   hit_points: number;
@@ -25,12 +25,13 @@ export interface ApiCreatureInput {
   resistances_ids: string[];
   immunities_ids: string[];
   vulnerabilities_ids: string[];
-  alignment_relation?: {name: string}
-  type_relation?: {name: string}
-  size_relation?: {name: string}
-  biome_relation?: {title: string}[]
+  alignment_relation?: { name: string };
+  type_relation?: { name: string };
+  size_relation?: { name: string };
+  biome_relation?: { title: string }[];
   // Действия
   actions_ids: number[];
   // Способности и свойства
   traits_ids: number[];
-}``
+}
+``;
