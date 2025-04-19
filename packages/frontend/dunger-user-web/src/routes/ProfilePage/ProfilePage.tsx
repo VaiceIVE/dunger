@@ -29,74 +29,72 @@ export const ProfilePage = () => {
     <main {...stylex.props(styles.root)}>
       <Container>
         <Grid gap={16} align="flex-start">
-          <Grid.Col span={7}>
-            <Stack gap={40}>
-              <h1 {...stylex.props(headers.h2Bold)}>Мой профиль</h1>
-              <Stack gap={20}>
-                <h3 {...stylex.props(headers.h3Bold)}>Системные данные</h3>
-                <Stack gap={8}>
-                  {sections.map((s) => (
-                    <Flex
-                      justify="space-between"
-                      style={[styles.profileBlock, openedSections.includes(s.id) && styles.activeBlock]}
-                      key={s.id}>
-                      {openedSections.includes(s.id) ? (
-                        <Stack gap={16} style={styles.form}>
-                          <TextInput label={s.label} />
-                          <Flex gap={8}>
-                            <Button>Подтвердить изменения</Button>
-                            <Button
-                              variant={ButtonVariant.secondary}
-                              onClick={() => {
-                                setOpenedSections((prev) => prev.filter((p) => p != s.id));
-                              }}>
-                              Отменить
-                            </Button>
-                          </Flex>
-                        </Stack>
-                      ) : (
-                        <Fragment>
-                          <div {...stylex.props(text.defaultMedium)}>
-                            <span>{s.label}: </span>
-                            <span {...stylex.props(styles.profileValue)}>galyagalya122</span>
-                          </div>
-                          <IconButton
-                            variant={IconButtonVariant.ghost}
+          <Grid.Col style={styles.content} span={7}>
+            <h1 {...stylex.props(headers.h2Bold)}>Мой профиль</h1>
+            <Stack gap={20}>
+              <h3 {...stylex.props(headers.h3Bold)}>Системные данные</h3>
+              <Stack gap={8}>
+                {sections.map((s) => (
+                  <Flex
+                    justify="space-between"
+                    style={[styles.profileBlock, openedSections.includes(s.id) && styles.activeBlock]}
+                    key={s.id}>
+                    {openedSections.includes(s.id) ? (
+                      <Stack gap={16} style={styles.form}>
+                        <TextInput label={s.label} />
+                        <Flex gap={8}>
+                          <Button>Подтвердить изменения</Button>
+                          <Button
+                            variant={ButtonVariant.secondary}
                             onClick={() => {
-                              setOpenedSections((prev) => [...prev, s.id]);
+                              setOpenedSections((prev) => prev.filter((p) => p != s.id));
                             }}>
-                            <PencilIcon />
-                          </IconButton>
-                        </Fragment>
-                      )}
-                    </Flex>
-                  ))}
-
-                  <Modal>
-                    <Flex justify="space-between" style={styles.profileBlock}>
-                      <div {...stylex.props(text.defaultMedium)}>
-                        <span>Пароль: </span>
-                        <span {...stylex.props(styles.profileValue)}>galyagalya122</span>
-                      </div>
-                      <Modal.Target>
-                        <IconButton variant={IconButtonVariant.ghost}>
+                            Отменить
+                          </Button>
+                        </Flex>
+                      </Stack>
+                    ) : (
+                      <Fragment>
+                        <div {...stylex.props(text.defaultMedium)}>
+                          <span>{s.label}: </span>
+                          <span {...stylex.props(styles.profileValue)}>galyagalya122</span>
+                        </div>
+                        <IconButton
+                          variant={IconButtonVariant.ghost}
+                          onClick={() => {
+                            setOpenedSections((prev) => [...prev, s.id]);
+                          }}>
                           <PencilIcon />
                         </IconButton>
-                      </Modal.Target>
-                    </Flex>
+                      </Fragment>
+                    )}
+                  </Flex>
+                ))}
 
-                    <Modal.Content style={styles.modalContent}>
-                      <h2 {...stylex.props(headers.h2Bold)}>Смена пароля</h2>
-                      <Stack gap={24}>
-                        <TextInput label="Придумайте новый пароль"></TextInput>
-                        <TextInput label="Подтвердите пароль"></TextInput>
-                      </Stack>
-                      <Button variant={ButtonVariant.accent} width={ButtonWidth.full}>
-                        Подтвердить
-                      </Button>
-                    </Modal.Content>
-                  </Modal>
-                </Stack>
+                <Modal>
+                  <Flex justify="space-between" style={styles.profileBlock}>
+                    <div {...stylex.props(text.defaultMedium)}>
+                      <span>Пароль: </span>
+                      <span {...stylex.props(styles.profileValue)}>galyagalya122</span>
+                    </div>
+                    <Modal.Target>
+                      <IconButton variant={IconButtonVariant.ghost}>
+                        <PencilIcon />
+                      </IconButton>
+                    </Modal.Target>
+                  </Flex>
+
+                  <Modal.Content style={styles.modalContent}>
+                    <h2 {...stylex.props(headers.h2Bold)}>Смена пароля</h2>
+                    <Stack gap={24}>
+                      <TextInput label="Придумайте новый пароль"></TextInput>
+                      <TextInput label="Подтвердите пароль"></TextInput>
+                    </Stack>
+                    <Button variant={ButtonVariant.accent} width={ButtonWidth.full}>
+                      Подтвердить
+                    </Button>
+                  </Modal.Content>
+                </Modal>
               </Stack>
             </Stack>
           </Grid.Col>
@@ -112,6 +110,11 @@ export const ProfilePage = () => {
 const styles = stylex.create({
   root: {
     color: colors.textPrimaryDefault
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 40
   },
   form: {
     width: '100%'
