@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import {
   Button,
@@ -117,6 +117,19 @@ export const AddSkills = ({ skills, stats, challenge_rating, handleFieldChange }
             {masteredSkillNodes}
           </Flex>
         )}
+
+        {Object.keys(temp).map((t) => (
+          <Fragment key={t}>
+            {Object.entries(temp[t as keyof ApiSkills]).map(([skillKey, skillValue]) => (
+              <input
+                type="hidden"
+                key={skillValue.name}
+                value={String(skillValue.mastery)}
+                name={`${skillKey}_mastery`}
+              />
+            ))}
+          </Fragment>
+        ))}
       </Stack>
 
       <Sheet.Content style={styles.root}>

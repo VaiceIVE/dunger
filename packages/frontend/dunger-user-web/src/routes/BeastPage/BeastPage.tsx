@@ -9,6 +9,7 @@ import { BeastCard } from 'features/BeastCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
 import { ApiCreature } from 'store/_types/ApiCreature';
 import { invariant } from 'utils/invariant';
+import { updateNestedField } from 'utils/updateNestedField';
 import { BeastForm } from './_components/BeastForm';
 import { useBeastAction } from './useBeastAction';
 
@@ -24,7 +25,7 @@ export const BeastPage = () => {
 
   const [formState, setFormState] = useState<ApiCreature & { languages_string_ids: string[] }>({
     ...creature,
-    languages_string_ids: []
+    languages_string_ids: creature.languages_ids.map((i) => i.toString())
   });
 
   const { saveAction } = useBeastAction();
@@ -58,15 +59,15 @@ export const BeastPage = () => {
     setIsFailed(false);
   };
 
-  const handleFieldChange = (value: unknown, name: string) => {
-    setFormState((prev) => {
-      return { ...prev, [name]: value };
-    });
+  const handleFieldChange = (value: unknown, path: string) => {
+    setFormState((prev) => updateNestedField(prev, path, value));
+
+    handleChange();
   };
 
   return (
     <main>
-      <form onChange={handleChange} onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Container style={styles.root}>
           <SplitViewLayout isLayoutSplit gap={16}>
             <SplitViewLayout.Master span={6}>

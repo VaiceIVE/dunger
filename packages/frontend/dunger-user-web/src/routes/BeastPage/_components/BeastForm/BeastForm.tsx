@@ -12,7 +12,7 @@ const sections = [
   { id: 'commonInfo', title: 'Общая информация' },
   { id: 'statblock', title: 'Статблок' },
   { id: 'actions', title: 'Действия' },
-  { id: 'traits', title: 'Способности и свойства' }
+  { id: 'traits', title: 'Особенности' }
 ];
 
 const sectionById: Record<string, FC<SectionProps>> = {
