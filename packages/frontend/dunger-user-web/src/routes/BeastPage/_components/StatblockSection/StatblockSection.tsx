@@ -80,11 +80,11 @@ export const StatblockSection = ({ formState, handleFieldChange }: SectionProps)
       />
       <MultiSelect
         options={damageTypeOptions}
-        value={formState.vunlerabilities_ids}
+        value={formState.vulnerabilities_ids}
         onChange={(ids) => {
-          handleFieldChange(ids, 'vunlerabilities_ids');
+          handleFieldChange(ids, 'vulnerabilities_ids');
         }}
-        name="vunlerabilities_ids"
+        name="vulnerabilities_ids"
         placeholder="-Не выбрано-"
         label="Уязвимость к видам урону"
       />
