@@ -8,4 +8,4 @@ RUN /opt/keycloak/bin/kc.sh build
 FROM quay.io/keycloak/keycloak:26.1.2
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh --import-realm"]
+CMD ["start-dev", "--import-realm"]

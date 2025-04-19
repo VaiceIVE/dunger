@@ -2,74 +2,65 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 export async function SeedAlignment() {
   await prisma.alignment.upsert({
-      where: { id: 1 },
+      where: { name: "Законно-добрый" },
       update: {},
       create: {
-          id: 1,
           name: "Законно-добрый"
       }
   }),
   await prisma.alignment.upsert({
-      where: { id: 2 },
+      where: { name: "Нейтрально-добрый" },
       update: {},
       create: {
-        id: 2,  
         name: "Нейтрально-добрый"
       }
   }),
   await prisma.alignment.upsert({
-      where: { id: 3 },
+      where: { name: "Хаотично-добрый" },
       update: {},
       create: {
-        id: 3,  
         name: "Хаотично-добрый"
       }
   }),
   await prisma.alignment.upsert({
-      where: { id: 4 },
+      where: { name: "Законно-нейтральный" },
       update: {},
       create: {
-        id: 4,  
         name: "Законно-нейтральный"
       }
   }),
   await prisma.alignment.upsert({
-      where: { id: 5 },
+      where: { name: "Нейтральный" },
       update: {},
       create: {
-        id: 5,  
         name: "Нейтральный"
       }
   }),
   await prisma.alignment.upsert({
-      where: { id: 6 },
+      where: { name: "Хаотично-нейтральный" },
       update: {},
       create: {
-        id: 6,  
         name: "Хаотично-нейтральный"
       }
   }),
   await prisma.alignment.upsert({
-      where: { id: 7 },
+      where: { name: "Законно-злой" },
       update: {},
       create: {
-        id: 7,  
         name: "Законно-злой"
       }
   }),
   await prisma.alignment.upsert({
-      where: { id: 8 },
+      where: { name: "Нейтрально-злой" },
       update: {},
       create: {
-        id: 8,  
         name: "Нейтрально-злой"
       }
   }),
   await prisma.alignment.upsert({
-      where: { id: 9 },
+      where: { name: "Хаотично-злой" },
       update: {},
       create: {
-        id: 9,  
         name: "Хаотично-злой"
       }
   })
