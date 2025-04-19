@@ -1,12 +1,9 @@
 services:
-  nest:
+  frontend:
     image: node:latest
     ports: 
       - 127.0.0.1:5173:5173
     volumes:
-      - ./dunger-core:/nest-app/
-    working_dir: /nest-app/
+      - ./:/frontend/
+    working_dir: /frontend/
     entrypoint: bash -c "yarn install && npm run uw:dev"
-    depends_on:
-      keycloak:
-          condition: service_healthy
