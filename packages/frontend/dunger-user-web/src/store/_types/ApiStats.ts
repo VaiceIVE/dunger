@@ -1,26 +1,13 @@
 export interface ApiStats {
-  strength: {
-    value: number | null;
-    mastery: boolean;
-  };
-  dexterity: {
-    value: number | null;
-    mastery: boolean;
-  };
-  constitution: {
-    value: number | null;
-    mastery: boolean;
-  };
-  intelligence: {
-    value: number | null;
-    mastery: boolean;
-  };
-  wisdom: {
-    value: number | null;
-    mastery: boolean;
-  };
-  charisma: {
-    value: number | null;
-    mastery: boolean;
-  };
+  strength: ApiStat;
+  dexterity: ApiStat;
+  constitution: ApiStat;
+  intelligence: ApiStat;
+  wisdom: ApiStat;
+  charisma: ApiStat;
+}
+
+export interface ApiStat {
+  value: number | null;
+  mastery: boolean;
 }
