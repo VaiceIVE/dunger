@@ -9,6 +9,7 @@ import { ClassesPage } from './ClassesPage';
 import { FeatsPage } from './FeatsPage';
 import { HomePage } from './HomePage';
 import { NewBeastPage } from './NewBeastPage';
+import { ProfilePage } from './ProfilePage';
 import { SpeciesPage } from './SpeciesPage';
 
 export const router = createBrowserRouter(
@@ -28,6 +29,8 @@ export const router = createBrowserRouter(
         <Route path="/beast/:id" Component={BeastPage} />
 
         <Route path={'/adventures'} Component={AdventuresPage} />
+
+        <Route path={'/profile'} Component={ProfilePage} />
       </Route>
 
       {/* not found */}
