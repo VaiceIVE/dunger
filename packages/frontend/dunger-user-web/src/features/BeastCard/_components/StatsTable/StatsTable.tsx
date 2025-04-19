@@ -2,7 +2,7 @@ import * as stylex from '@stylexjs/stylex';
 import { Flex, Stack, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { ApiStats } from 'store/_types/ApiStats';
-import { getAbilityModifier } from 'utils/getAbilityModifier';
+import { formatModifier } from 'utils/formatModifier';
 
 const statsMap: { title: string; key: keyof ApiStats }[] = [
   {
@@ -42,12 +42,13 @@ export const StatsTable = ({ stats }: { stats?: ApiStats }) => {
           <div {...stylex.props(styles.value)}>
             {(() => {
               const value = stats[s.key].value;
+
               if (!value || value.toString() === '') return '-';
 
-              const _value = value > 30 ? 30 : value < 1 ? 1 : value;
-              const mod = getAbilityModifier(value);
+              const clamped = Math.min(30, Math.max(1, value));
+              const modStr = formatModifier({ value });
 
-              return `${_value.toString()} (${mod > 0 ? '+' : ''}${getAbilityModifier(_value).toString()})`;
+              return `${clamped.toString()} (${modStr})`;
             })()}
           </div>
         </Stack>

@@ -20,8 +20,7 @@ import {
 import { colors } from '@dunger/ui/tokens.stylex';
 import { ApiSkill, ApiSkills } from 'store/_types/ApiSkills';
 import { ApiStats } from 'store/_types/ApiStats';
-import { getAbilityModifier } from 'utils/getAbilityModifier';
-import { getProficiencyBonusByCR } from 'utils/getProficiencyBonusByCR';
+import { formatModifier } from 'utils/formatModifier';
 
 interface AddSkillsProps {
   skills: ApiSkills;
@@ -69,15 +68,13 @@ export const AddSkills = ({ skills, stats, challenge_rating, handleFieldChange }
     handleFieldChange(updatedSkills, 'skills');
   };
 
-  const getModifier = (groupKey: keyof ApiStats, skill: ApiSkill) => {
-    const value = stats[groupKey].value;
-    if (!value || value.toString() === '') return '-';
-
-    const _value = value > 30 ? 30 : value < 1 ? 1 : value;
-    const mod = getAbilityModifier(_value) + (skill.mastery ? getProficiencyBonusByCR(challenge_rating) : 0);
-
-    return `${mod > 0 ? '+' : ''}${mod.toString()}`;
-  };
+  const getModifier = (groupKey: keyof ApiStats, skill: ApiSkill) =>
+    formatModifier({
+      value: stats[groupKey].value,
+      includeMastery: true,
+      mastery: skill.mastery,
+      challengeRating: challenge_rating
+    });
 
   const masteredSkillNodes: React.ReactNode[] = Object.entries(skills).flatMap(([key, skillGroup]) =>
     Object.entries(skillGroup as Record<string, ApiSkill>)
