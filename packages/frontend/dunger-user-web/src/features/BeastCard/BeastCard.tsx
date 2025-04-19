@@ -4,9 +4,12 @@ import { StyleXStyles } from '@stylexjs/stylex';
 import { Accordion, Avatar, ChevronDownIcon, ChevronUpIcon, Flex, Stack, Tag, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Card } from 'components/Card';
+import { KeyValue } from 'components/KeyValue';
 import { ApiCreature } from 'store/_types/ApiCreature';
 import { ApiSkill, ApiSkills } from 'store/_types/ApiSkills';
 import { ApiSpeedStat } from 'store/_types/ApiSpeedStat';
+import { ApiStat, ApiStats } from 'store/_types/ApiStats';
+import { formatModifier } from 'utils/formatModifier';
 import { getProficiencyBonusByCR } from 'utils/getProficiencyBonusByCR';
 import { StatsTable } from './_components/StatsTable';
 
@@ -17,6 +20,15 @@ interface BeastCardProps {
 
   style?: StyleXStyles;
 }
+
+const labelByStat: Record<keyof ApiStats, string> = {
+  strength: 'Сила',
+  dexterity: 'Ловкость',
+  constitution: 'Телосложение',
+  intelligence: 'Интеллект',
+  wisdom: 'Мудрость',
+  charisma: 'Харизма'
+};
 
 const formatSpeed = (speed?: ApiSpeedStat): string => {
   if (!speed || Object.values(speed).filter(Boolean).length === 0) {
@@ -52,11 +64,41 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
   const languages = beast?.languages.map((l) => l.name);
 
   const skills = beast?.skills
-    ? (Object.entries(beast.skills) as [keyof ApiSkills, Record<string, ApiSkill>][]).flatMap(([, skills]) =>
+    ? (Object.entries(beast.skills) as [keyof ApiSkills, Record<string, ApiSkill>][]).flatMap(([stat, skills]) =>
         Object.entries(skills)
           .filter(([, skill]) => skill.mastery)
-          .map(([, skill]) => skill.name)
+          .map(([, skill]) => (
+            <span key={skill.name}>
+              {skill.name}{' '}
+              <span {...stylex.props(styles.mod)}>
+                {formatModifier({
+                  value: beast.stats[stat as keyof ApiStats].value,
+                  mastery: true,
+                  includeMastery: true,
+                  challengeRating: beast.challenge_rating
+                })}
+              </span>
+            </span>
+          ))
       )
+    : [];
+
+  const savedThrows = beast?.stats
+    ? (Object.entries(beast.stats) as [keyof ApiStats, ApiStat][])
+        .filter(([, stats]) => stats.mastery)
+        .map(([statKey, stat]) => (
+          <span key={statKey}>
+            {labelByStat[statKey]}{' '}
+            <span {...stylex.props(styles.mod)}>
+              {formatModifier({
+                value: stat.value,
+                mastery: true,
+                includeMastery: true,
+                challengeRating: beast.challenge_rating
+              })}
+            </span>
+          </span>
+        ))
     : [];
 
   return (
@@ -86,9 +128,46 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
           <StatsTable stats={beast?.stats} />
 
           <Stack gap={12}>
-            <KeyValue keyLabel={'Навыки:'} value={skills.length ? skills.join(', ') : 'Не указано'} />
+            <KeyValue
+              keyLabel={'Спасброски:'}
+              value={
+                savedThrows.length
+                  ? savedThrows.map((s, index) => (
+                      <Fragment key={s.key}>
+                        {s}
+                        {index + 1 !== skills.length && ', '}
+                      </Fragment>
+                    ))
+                  : 'Не указано'
+              }
+            />
+            <KeyValue
+              keyLabel={'Навыки:'}
+              value={
+                skills.length
+                  ? skills.map((s, index) => (
+                      <Fragment key={s.key}>
+                        {s}
+                        {index + 1 !== skills.length && ', '}
+                      </Fragment>
+                    ))
+                  : 'Не указано'
+              }
+            />
             <KeyValue keyLabel={'Где обитает:'} value={biomes?.length ? biomes.join(', ') : 'Не указано'} />
             <KeyValue keyLabel={'Языки:'} value={languages?.length ? languages.join(', ') : 'Не указано'} />
+            <KeyValue
+              keyLabel={'Уязвимости:'}
+              value={beast?.vulnerabilities.length ? beast.vulnerabilities.map((i) => i.name).join(', ') : 'Не указано'}
+            />
+            <KeyValue
+              keyLabel={'Сопротивления:'}
+              value={beast?.resistances.length ? beast.resistances.map((i) => i.name).join(', ') : 'Не указано'}
+            />
+            <KeyValue
+              keyLabel={'Иммунитеты:'}
+              value={beast?.immunities.length ? beast.immunities.map((i) => i.name).join(', ') : 'Не указано'}
+            />
 
             <Flex rowGap={8} gap={8}>
               <Tag>Пассивная внимательность: {beast?.senses.passive_perception ?? '-'}</Tag>
@@ -113,7 +192,9 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
               )}
             </Accordion.Control>
             <Accordion.Panel>
-              <div {...stylex.props(styles.panel, text.defaultRegular)}>{beast?.description ?? 'Не указано'}</div>
+              <div {...stylex.props(styles.panel, text.defaultRegular)}>
+                {beast?.description === '' ? 'Не указано' : (beast?.description ?? 'Не указано')}
+              </div>
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
@@ -124,7 +205,7 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
             {beast?.traits.length ? (
               beast.traits.map((t) => (
                 <li {...stylex.props(styles.card, styles.trait)} key={t.id}>
-                  <KeyValue keyLabel={t.name} value={t.description} />
+                  <KeyValue keyLabel={t.name + ':'} value={t.description.replaceAll('{name}', beast.name)} />
                 </li>
               ))
             ) : (
@@ -139,7 +220,7 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
             {beast?.actions.length ? (
               beast.actions.map((a) => (
                 <li {...stylex.props(styles.card, styles.action)} key={a.id}>
-                  <KeyValue keyLabel={a.name} value={a.description} />
+                  <KeyValue keyLabel={a.name + ':'} value={a.description.replaceAll('{name}', beast.name)} />
                 </li>
               ))
             ) : (
@@ -149,15 +230,6 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
         </Stack>
       </Card.Body>
     </Card>
-  );
-};
-
-const KeyValue = ({ keyLabel, value }: { keyLabel?: ReactNode; value?: ReactNode }) => {
-  return (
-    <Flex gap={4} style={text.defaultMedium}>
-      <div {...stylex.props(styles.key, text.defaultSemibold)}>{keyLabel}</div>
-      <div {...stylex.props(styles.value)}>{value}</div>
-    </Flex>
   );
 };
 
@@ -176,12 +248,6 @@ const styles = stylex.create({
     display: 'flex',
     gap: 4,
     padding: 8
-  },
-  key: {
-    color: colors.textPrimaryDefault
-  },
-  value: {
-    color: colors.textSecondaryDefault
   },
   description: {
     backgroundColor: colors.backgroundUniversal,
@@ -219,5 +285,8 @@ const styles = stylex.create({
   },
   action: {
     borderLeftColor: colors.textTertiaryDefault
+  },
+  mod: {
+    color: colors.brand80
   }
 });
