@@ -23,9 +23,12 @@ export const BeastPage = () => {
     queryFn: () => authFetch<ApiCreature>(`/creatures/${id}`)
   });
 
-  const [formState, setFormState] = useState<ApiCreature & { languages_string_ids: string[] }>({
+  const [formState, setFormState] = useState<
+    ApiCreature & { languages_string_ids: string[]; biomes_string_ids: string[] }
+  >({
     ...creature,
-    languages_string_ids: creature.languages_ids.map((i) => i.toString())
+    languages_string_ids: creature.languages_ids.map(String),
+    biomes_string_ids: creature.biomes_ids.map(String)
   });
 
   const { saveAction } = useBeastAction();

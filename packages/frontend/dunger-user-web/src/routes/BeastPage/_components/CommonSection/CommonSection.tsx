@@ -32,7 +32,7 @@ export const CommonSection = ({ formState, handleFieldChange }: SectionProps) =>
         autosize
       />
       <Select
-        value={formState.alignment_id}
+        value={formState.alignment_id?.toString()}
         onChange={(e, selectedRecord) => {
           handleFieldChange(e, 'alignment_id');
           handleFieldChange(selectedRecord?.name, 'alignment_name');
@@ -76,14 +76,14 @@ export const CommonSection = ({ formState, handleFieldChange }: SectionProps) =>
           handleFieldChange(selectedRecords, 'languages');
         }}
         selectedRecords={formState.languages}
-        name="languages_string_ids"
+        name="languages_ids"
         placeholder="-Не выбрано-"
         label="Языки владения"
       />
       <MultiSelect
-        value={formState.biomes_ids}
+        value={formState.biomes_string_ids}
         onChange={(ids, selectedRecords) => {
-          handleFieldChange(ids, 'biomes_ids');
+          handleFieldChange(ids, 'biomes_string_ids');
           handleFieldChange(selectedRecords, 'biomes');
         }}
         selectedRecords={formState.biomes}

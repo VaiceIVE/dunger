@@ -82,7 +82,7 @@ export const useBeastAction = () => {
     const swim = (formData.get('swim') as string).toString();
     const climb = (formData.get('climb') as string).toString();
 
-    const languages_ids = (formData.get('languages_string_ids') as string).toString();
+    const languages_ids = (formData.get('languages_ids') as string).toString();
     const biomes_ids = (formData.get('biomes_ids') as string).toString();
     const passive_perception = (formData.get('passive_perception') as string).toString();
 
@@ -152,11 +152,11 @@ export const useBeastAction = () => {
       name,
       description,
       type_id: type_id ? +type_id : null,
-      alignment_id: alignment_id === '' ? null : alignment_id,
+      alignment_id: alignment_id === '' ? null : +alignment_id,
       size_id: size_id === '' ? null : size_id,
       speed,
       languages_ids: languages_ids ? languages_ids.split(',').map(Number) : [],
-      biomes_ids: biomes_ids ? biomes_ids.split(',') : [],
+      biomes_ids: biomes_ids ? biomes_ids.split(',').map(Number) : [],
       senses: {
         passive_perception: passive_perception === '' ? null : +passive_perception
       },
