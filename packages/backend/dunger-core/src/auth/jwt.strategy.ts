@@ -8,11 +8,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      issuer: 'http://keycloak:8080/realms/master',
+      issuer: 'https://keycloak.dunger.site/realms/master',
       audience: 'admin-cli',
       algorithms: ['RS256'],
       secretOrKeyProvider: jwksRsa.passportJwtSecret({
-        jwksUri: 'http://keycloak:8080/realms/master/protocol/openid-connect/certs',
+        jwksUri: 'https://keycloak.dunger.site/realms/master/protocol/openid-connect/certs',
         cache: true,
         rateLimit: true,
       }),
