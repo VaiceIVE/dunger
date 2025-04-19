@@ -41,9 +41,7 @@ export const Select = ({
   searchValue,
   defaultSearchValue,
   onSearchChange,
-  onClick,
   onBlur,
-  onFocus,
   disabled,
   leftSection,
   validate,
@@ -125,15 +123,9 @@ export const Select = ({
             setSearch(event.currentTarget.value);
             setError(null);
           }}
-          onFocus={(event) => {
-            onFocus?.(event);
-          }}
           onBlur={(event) => {
-            setSearch(_value != null ? (selectedOption?.label ?? '') : '');
+            setSearch(_value != null ? optionsLockup[_value].label || '' : '');
             onBlur?.(event);
-          }}
-          onClick={(event) => {
-            onClick?.(event);
           }}
           {...props}
         />

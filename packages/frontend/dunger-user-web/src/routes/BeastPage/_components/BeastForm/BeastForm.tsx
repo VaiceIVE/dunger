@@ -2,30 +2,34 @@ import { FC, Fragment } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { Accordion, ChevronDownIcon, ChevronUpIcon, headers, IconButton } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { AbilitiesSection } from '../AbilitiesSection';
+import { ApiCreature } from 'store/_types/ApiCreature';
 import { ActionsSection } from '../ActionsSection';
 import { CommonSection } from '../CommonSection';
 import { StatblockSection } from '../StatblockSection';
+import { TraitsSection } from '../TraitsSection';
 
 const sections = [
   { id: 'commonInfo', title: 'Общая информация' },
   { id: 'statblock', title: 'Статблок' },
   { id: 'actions', title: 'Действия' },
-  { id: 'abilities', title: 'Способности и свойства' }
+  { id: 'traits', title: 'Особенности' }
 ];
 
 const sectionById: Record<string, FC<SectionProps>> = {
   commonInfo: CommonSection,
   statblock: StatblockSection,
   actions: ActionsSection,
-  abilities: AbilitiesSection
+  traits: TraitsSection
 };
 
-export interface SectionProps {
-  id: string;
+interface BeastFormProps {
+  formState: ApiCreature & { languages_string_ids: string[]; biomes_string_ids: string[] };
+  handleFieldChange: (value: unknown, name: string) => void;
 }
 
-export const BeastForm = () => {
+export type SectionProps = BeastFormProps;
+
+export const BeastForm = ({ formState, handleFieldChange }: BeastFormProps) => {
   return (
     <Accordion defaultValue={[sections[0].id]} transitionDuration={600} multiple style={styles.root}>
       {sections.map((s, index) => {
@@ -48,7 +52,7 @@ export const BeastForm = () => {
 
             <Accordion.Panel>
               <div {...stylex.props(styles.panel)}>
-                <Section id={s.id} />
+                <Section formState={formState} handleFieldChange={handleFieldChange} />
               </div>
             </Accordion.Panel>
           </Accordion.Item>

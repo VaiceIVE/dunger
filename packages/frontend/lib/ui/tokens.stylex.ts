@@ -65,8 +65,8 @@ export const colors = stylex.defineVars({
   backgroundBlueHover: '#DAE3FF', // blue-5
   backgroundBlueActive: '#C8D5FF', // blue-20
 
-  backgroundOrangeDefault: '#FEF0E8', // orange-10
-  backgroundOrangeHover: '#FBE0CF', // orange-5
+  backgroundOrangeDefault: '#FEF0E8', // orange-5
+  backgroundOrangeHover: '#FBE0CF', // orange-10
   backgroundOrangeActive: '#FAD2B8', // orange-20
 
   // Basic colors

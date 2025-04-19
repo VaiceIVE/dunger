@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useState } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import { useUncontrolled } from '../../hooks/useUncontrolled';
 import { ComboboxHiddenInput } from './_components/ComboboxHiddenInput';
 import { ComboboxOption } from './_components/ComboboxOption';
@@ -54,16 +54,6 @@ export function Combobox({
     finalValue: false,
     onChange: onOpenChange
   });
-
-  useEffect(() => {
-    if (_value) {
-      setValue(_value);
-
-      if (_value === '') {
-        setLabel('');
-      }
-    }
-  }, [_value, setValue]);
 
   // TODO добавить переключение опций кнопками Up/Down
 

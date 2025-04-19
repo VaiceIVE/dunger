@@ -61,6 +61,7 @@ export const MultiSelect = ({
   disabled,
   leftSection,
   name,
+  label,
   form,
   hasMore,
   next,
@@ -138,8 +139,17 @@ export const MultiSelect = ({
         }}>
         <Combobox.Target asChild>
           <InputBase
+            label={
+              searchable ? (
+                <div>
+                  {label} {!!values.length && <span {...stylex.props(styles.count)}>(выбрано {values.length})</span>}
+                </div>
+              ) : (
+                label
+              )
+            }
             disabled={disabled}
-            value={search}
+            value={searchable ? search : values.length ? `Выбрано ${values.length.toString()}` : ''}
             error={error}
             required={required}
             onErrorChange={setError}
@@ -184,7 +194,11 @@ export const MultiSelect = ({
           form={form}
         />
       </Combobox>
-      {!!values.length && <Flex gap={8}>{values}</Flex>}
+      {!!values.length && (
+        <Flex rowGap={8} gap={8}>
+          {values}
+        </Flex>
+      )}
     </Stack>
   );
 };
@@ -201,5 +215,8 @@ const styles = stylex.create({
     position: 'relative',
     textAlign: 'left',
     width: '100%'
+  },
+  count: {
+    color: colors.textTertiaryDefault
   }
 });

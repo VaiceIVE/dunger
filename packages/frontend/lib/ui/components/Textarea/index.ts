@@ -1,1 +1,1 @@
-export { TextareaImpl as Textarea } from './Textarea';
+export { Textarea } from './Textarea';

@@ -1,4 +1,4 @@
-import { PropsWithChildren, Fragment } from 'react';
+import { PropsWithChildren, Fragment, ReactNode } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { useUncontrolled } from '@dunger/ui/hooks/useUncontrolled';
@@ -10,7 +10,7 @@ import { InputWrapperProvider } from './InputWrapper.context';
 export interface InputWrapperProps extends PropsWithChildren {
   description?: string;
 
-  label?: string;
+  label?: ReactNode;
 
   inputWrapperOrder?: ('label' | 'input' | 'description')[];
 
@@ -86,6 +86,7 @@ const styles = stylex.create({
     display: 'flex',
     flex: '1',
     flexDirection: 'column',
-    gap: 0
+    gap: 0,
+    width: '100%'
   }
 });

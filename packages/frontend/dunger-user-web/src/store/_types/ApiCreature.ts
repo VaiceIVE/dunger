@@ -25,14 +25,14 @@ export interface ApiCreature {
   description: string | null;
   type_id: number | null;
   type_name: string | null;
-  alignment_id: string | null;
+  alignment_id: number | null;
   alignment_name: string | null;
   size_id: string | null;
   size_name: string | null;
   speed: ApiSpeedStat;
-  languages_ids: string[];
+  languages_ids: number[];
   languages: ApiLanguages[];
-  biomes_ids: string[];
+  biomes_ids: number[];
   biomes: ApiBiomes[];
   senses: ApiSenses;
   //soirce_id: null;

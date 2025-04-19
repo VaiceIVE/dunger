@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import { StyleXStyles } from '@stylexjs/stylex';
 import * as stylex from '@stylexjs/stylex';
@@ -10,7 +10,7 @@ export interface CheckboxProps extends Omit<RadixCheckbox.CheckboxProps, 'style'
   style?: StyleXStyles;
 }
 
-export function Checkbox({ style, checked: checkedProp, defaultChecked, ...props }: CheckboxProps) {
+export function Checkbox({ style, checked: checkedProp, defaultChecked, name, form, ...props }: CheckboxProps) {
   const [checked, setChecked] = useState(checkedProp ?? defaultChecked ?? false);
 
   useEffect(() => {
@@ -20,12 +20,26 @@ export function Checkbox({ style, checked: checkedProp, defaultChecked, ...props
   }, [checkedProp]);
 
   return (
-    <RadixCheckbox.Root checked={checked} onCheckedChange={setChecked} {...stylex.props(styles.root, style)} {...props}>
-      <RadixCheckbox.Indicator {...stylex.props(styles.indicator)}>
-        {checked === 'indeterminate' && <MinusIcon />}
-        {checked === true && <CheckIcon />}
-      </RadixCheckbox.Indicator>
-    </RadixCheckbox.Root>
+    <Fragment>
+      {name && (
+        <input
+          form={form}
+          type="hidden"
+          name={name}
+          value={String(checked)} // 'true' или 'false'
+        />
+      )}
+      <RadixCheckbox.Root
+        checked={checked}
+        onCheckedChange={setChecked}
+        {...stylex.props(styles.root, style)}
+        {...props}>
+        <RadixCheckbox.Indicator {...stylex.props(styles.indicator)}>
+          {checked === 'indeterminate' && <MinusIcon />}
+          {checked === true && <CheckIcon />}
+        </RadixCheckbox.Indicator>
+      </RadixCheckbox.Root>
+    </Fragment>
   );
 }
 
