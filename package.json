@@ -8,7 +8,8 @@
     "packages/backend/dunger-core",
     "packages/backend/dunger-gpt",
     "packages/frontend/dunger-user-web",
-    "packages/frontend/lib/*"
+    "packages/frontend/lib/*",
+    "packages/lib/*"
   ],
   "devDependencies": {
     "@dunger/eslint-plugin-import-paths": "workspace:*",

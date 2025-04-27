@@ -536,6 +536,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@dunger/common-enums@workspace:packages/lib/common-enums":
+  version: 0.0.0-use.local
+  resolution: "@dunger/common-enums@workspace:packages/lib/common-enums"
+  dependencies:
+    typescript: "npm:~5.5.0"
+  languageName: unknown
+  linkType: soft
+
 "@dunger/eslint-plugin-import-paths@workspace:*, @dunger/eslint-plugin-import-paths@workspace:packages/frontend/lib/eslint-plugin-import-paths":
   version: 0.0.0-use.local
   resolution: "@dunger/eslint-plugin-import-paths@workspace:packages/frontend/lib/eslint-plugin-import-paths"
