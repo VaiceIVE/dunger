@@ -1,6 +1,6 @@
 import { useContext } from 'react';
+import { invariant } from './_internal/invariant';
 import { AuthContext } from './AuthContext';
-import { invariant } from './invariant';
 
 export const useAuth = () => {
   const authContext = useContext(AuthContext);
