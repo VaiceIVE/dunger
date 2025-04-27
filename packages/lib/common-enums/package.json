@@ -1,0 +1,14 @@
+{
+  "name": "@dunger/common-enums",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "exports": {
+    "import": "./index.js"
+  },
+  "devDependencies": {
+    "typescript": "~5.5.0"
+  }
+}
