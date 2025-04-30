@@ -7,6 +7,7 @@
   "workspaces": [
     "packages/backend/dunger-core",
     "packages/backend/dunger-gpt",
+    "packages/backend/lib/*",
     "packages/frontend/dunger-user-web",
     "packages/frontend/lib/*",
     "packages/lib/*"
