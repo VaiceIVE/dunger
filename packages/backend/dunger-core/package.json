@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "dunger-core",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -20,9 +20,11 @@
     "b:test:watch": "jest --watch",
     "b:test:cov": "jest --coverage",
     "b:test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "b:test:e2e": "jest --config ./test/jest-e2e.json"
+    "b:test:e2e": "jest --config ./test/jest-e2e.json",
+    "b:test123": "npx prisma generate --schema=../shared/prisma/schema.prisma && npx prisma migrate deploy --schema=../shared/prisma/schema.prisma  && npx ts-node --transpile-only ../shared/prisma/seeds/seed-all.ts"
   },
   "dependencies": {
+    "@dunger/common-enums": "workspace:*",
     "@keycloak/keycloak-admin-client": "^26.2.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^4.0.2",
