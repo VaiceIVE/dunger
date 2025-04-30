@@ -8,34 +8,38 @@ type NewErrorResponseInput = {
   message?: string;
 };
 
+type HandlerResponse = {
+  status: HttpStatus;
+  body: {
+    errorMessage: string;
+    statusText: string;
+    status: HttpStatus;
+  };
+};
+
 /**
- * Функция для получения универсального Response-объекта отражающего выброшенную ошибку
+ * Функция для получения универсального HandlerResponse-объекта отражающего выброшенную ошибку
  */
-const getErrorResponse = (input?: NewErrorResponseInput): Response => {
-  const errorResponse = new Response(
-    JSON.stringify({
+const getErrorResponse = (input?: NewErrorResponseInput): HandlerResponse => {
+  return {
+    status: input?.code ?? HttpStatus.INTERNAL_SERVER_ERROR,
+    body: {
       errorMessage: input?.message ?? 'an error occurred',
       statusText: input?.code ? HttpStatusText[input?.code] : 'ERROR',
       status: input?.code ?? HttpStatus.INTERNAL_SERVER_ERROR,
-    }),
-    {
-      statusText: input?.message ?? 'ERROR',
-      status: input?.code ?? HttpStatus.INTERNAL_SERVER_ERROR,
     },
-  );
-  errorResponse.headers.set('Content-Type', 'application/json');
-  return errorResponse;
+  };
 };
 
 /**
  * Универсальный хендлер ошибки для приложения
  * - перехватывает ошибки выброшенные в роутерах/middleware
  * - производит логирование ошибки
- * - приводит любую ошибку к универсальному формату - Response объект с JSON содержимым
+ * - приводит любую ошибку к универсальному формату - HandlerResponse объект с JSON содержимым
  */
 export const errorHandler = (
   error: AppError | Error | string | unknown,
-): Response | Promise<Response> => {
+): HandlerResponse => {
   const {
     // errorScope,
     errorCode,
