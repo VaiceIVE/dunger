@@ -16,8 +16,8 @@ import {
   XIcon
 } from '@dunger/ui';
 import { SplitViewLayout } from 'features/SplitViewLayout';
-import { MagicItemList } from './_components/MagicItemList';
 import { MagicItemCard } from './_components/MagicItemCard';
+import { MagicItemList } from './_components/MagicItemList';
 
 export const MagicItemsPage = () => {
   const { id } = useParams();
