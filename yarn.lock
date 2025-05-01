@@ -552,7 +552,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@dunger/prisma@workspace:packages/backend/lib/prisma":
+"@dunger/prisma@workspace:*, @dunger/prisma@workspace:packages/backend/lib/prisma":
   version: 0.0.0-use.local
   resolution: "@dunger/prisma@workspace:packages/backend/lib/prisma"
   dependencies:
@@ -4842,6 +4842,7 @@ __metadata:
   resolution: "dunger-core@workspace:packages/backend/dunger-core"
   dependencies:
     "@dunger/common-enums": "workspace:*"
+    "@dunger/prisma": "workspace:*"
     "@keycloak/keycloak-admin-client": "npm:^26.2.0"
     "@nestjs/cli": "npm:^10.0.0"
     "@nestjs/common": "npm:^10.0.0"

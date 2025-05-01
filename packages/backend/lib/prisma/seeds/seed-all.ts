@@ -1,13 +1,13 @@
-import { SeedActions } from './actions.seed';
-import { SeedAlignment } from './alignment.seed';
-import { SeedBiomes } from './biomes.seed';
-import { SeedCR } from './cr.seed';
-import { SeedDamageType } from './damageType.seed';
-import { SeedLanguages } from './languages.seed';
-import { SeedSizes } from './size.seed';
-import { SeedSources } from './source.seed';
-import { SeedTypes } from './subtype.seed';
-import { SeedTraits } from './traits.seed';
+import { SeedActions } from './actions.seed.ts';
+import { SeedAlignment } from './alignment.seed.ts';
+import { SeedBiomes } from './biomes.seed.ts';
+import { SeedCR } from './cr.seed.ts';
+import { SeedDamageType } from './damageType.seed.ts';
+import { SeedLanguages } from './languages.seed.ts';
+import { SeedSizes } from './size.seed.ts';
+import { SeedSources } from './source.seed.ts';
+import { SeedTypes } from './subtype.seed.ts';
+import { SeedTraits } from './traits.seed.ts';
 
 async function main() {
   await SeedAlignment();

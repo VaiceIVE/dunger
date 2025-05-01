@@ -1,18 +1,23 @@
-import { PrismaClient } from '@prisma/client';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 
-import * as traits_data from '../data/traits.json';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 export async function SeedTraits() {
-  for (const trait_data of traits_data) {
+  const filePath = resolve(import.meta.dirname, '../data/traits.json');
+  const defaultValuesFile = await readFile(filePath, { encoding: 'utf-8' });
+  const data: { name: string; text: string }[] = JSON.parse(defaultValuesFile);
+
+  for (const trait of data) {
     await prisma.trait.upsert({
       where: {
-        description: trait_data.text
+        description: trait.text
       },
       update: {},
       create: {
-        description: trait_data.text,
-        name: trait_data.name
+        description: trait.text,
+        name: trait.name
       }
     });
   }
