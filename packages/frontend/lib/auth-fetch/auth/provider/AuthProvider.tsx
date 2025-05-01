@@ -6,11 +6,10 @@ import { useSetState } from './_internal/state';
 import { AuthContext, AuthState } from './AuthContext';
 
 export interface AuthProviderProps extends PropsWithChildren {
-  clearStore: () => Promise<void>;
   apiUrl: string;
 }
 
-export const AuthProvider = ({ children, clearStore, apiUrl }: AuthProviderProps) => {
+export const AuthProvider = ({ children, apiUrl }: AuthProviderProps) => {
   const serviceRef = useRef<AuthService>(new AuthService(new Cache('dunger:'), apiUrl));
   const service = serviceRef.current;
 
@@ -43,9 +42,8 @@ export const AuthProvider = ({ children, clearStore, apiUrl }: AuthProviderProps
       await service.logout();
     } finally {
       setState({ loading: false, isAuthenticated: false });
-      await clearStore();
     }
-  }, [service, setState, clearStore]);
+  }, [service, setState]);
 
   /**
    * Устанавливает обработчик с валидацией токенов на изменения local storage

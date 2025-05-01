@@ -24,7 +24,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   }
 
   static getDerivedStateFromError(error: unknown) {
-    // apollo-client превращает DungerError в Error, когда они выбрасываются внутри authLink
+    // превращает DungerError в Error, когда они выбрасываются внутри authLink
     return { hasError: true, hasAuthError: error instanceof Error && isAuthError(error), error };
   }
 

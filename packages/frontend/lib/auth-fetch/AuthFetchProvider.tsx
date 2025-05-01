@@ -1,22 +1,10 @@
-import { ReactElement, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { AuthProvider } from './auth';
 import { FetchProvider } from './fetch';
 
-export function AuthFetchProvider({
-  basename,
-  authUrl,
-  apiUrl,
-  loggingInElement,
-  children
-}: {
-  basename: string;
-  authUrl: string;
-  apiUrl: string;
-  loggingInElement?: ReactElement;
-  children?: ReactNode;
-}) {
+export function AuthFetchProvider({ apiUrl, children }: { apiUrl: string; children?: ReactNode }) {
   return (
-    <AuthProvider basename={basename} authUrl={authUrl} loggingInElement={loggingInElement}>
+    <AuthProvider apiUrl={apiUrl}>
       <FetchProvider apiUrl={apiUrl}>{children}</FetchProvider>
     </AuthProvider>
   );

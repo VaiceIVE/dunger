@@ -1,4 +1,5 @@
 import { DungerError, isDungerErrorBody } from '../../error';
+import { DungerErrorBody } from '../../error/DungerError';
 import { InitUserInput, initUser } from '../api/initUser';
 import { login } from '../api/login';
 import { refreshToken, RefreshTokenInput } from '../api/refreshToken';
@@ -84,14 +85,12 @@ export class AuthService {
     const response = await callback();
 
     // Если ошибка формата Dunger (кастомный формат ошибки с бэкенда),
-    // то она преобразуется в DungerError и выбрасывается
+    // то она преобразуется в DungerError и выбра сывается
     // В противном случае выбрасывается в исходном виде
     if (response.error) {
-      if (response.error instanceof Error) {
-        const errorBody = response.error;
-        if (isDungerErrorBody(errorBody)) {
-          throw new DungerError(errorBody);
-        }
+      const errorBody = response.error as unknown as DungerErrorBody;
+      if (isDungerErrorBody(errorBody)) {
+        throw new DungerError(errorBody);
       }
 
       throw response.error;

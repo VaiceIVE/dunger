@@ -10,23 +10,18 @@ export function singleton<Args extends unknown[], Result>(func: (...args: Args) 
 
     const promise = func(...args);
 
-    if (promise) {
-      try {
-        worker.pending = true;
-        worker.promise = promise;
+    try {
+      worker.pending = true;
+      worker.promise = promise;
 
-        await worker.promise;
+      await worker.promise;
 
-        worker.promise = undefined;
-        worker.pending = undefined;
-      } catch (error) {
-        worker.promise = undefined;
-        worker.pending = undefined;
-        throw error;
-      }
-    } else {
       worker.promise = undefined;
       worker.pending = undefined;
+    } catch (error) {
+      worker.promise = undefined;
+      worker.pending = undefined;
+      throw error;
     }
 
     return promise;
