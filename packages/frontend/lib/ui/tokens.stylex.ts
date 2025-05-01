@@ -173,7 +173,7 @@ export const colors = stylex.defineVars({
   yellow50: '#E7C27F',
   yellow40: '#ECCF99',
   yellow30: '#F1DBB3',
-  yellow20: '#F6E7C',
+  yellow20: '#F6E7CC',
   yellow10: '#F9F0E0',
   yellow5: '#FCF6ED',
   yellow1: '#FDFAF5',

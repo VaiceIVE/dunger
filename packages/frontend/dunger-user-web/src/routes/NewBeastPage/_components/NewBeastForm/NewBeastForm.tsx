@@ -70,12 +70,12 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
         {mode === CreateMode.generation ? (
           <Fragment>
             <Flex align="flex-start" gap={16}>
-              <Select options={typeOptions} name="type" label="Тип" placeholder="-Не выбрано-" required />
+              <Select options={typeOptions} name="type" label="Тип" placeholder="- Не выбрано -" required />
               <Select
                 options={crOptions}
                 name="challenge_rating"
                 label="Класс Опасности (CR)"
-                placeholder="-Не выбрано-"
+                placeholder="- Не выбрано -"
                 required
               />
             </Flex>
@@ -99,7 +99,7 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
               options={crOptions}
               name="challenge_rating"
               label="Класс Опасности (CR)"
-              placeholder="-Не выбрано-"
+              placeholder="- Не выбрано -"
               required
             />
             <Select

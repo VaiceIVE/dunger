@@ -8,8 +8,10 @@ import { BestiaryPage } from './BestiaryPage';
 import { ClassesPage } from './ClassesPage';
 import { FeatsPage } from './FeatsPage';
 import { HomePage } from './HomePage';
+import { MagicItemsPage } from './MagicItemsPage';
 import { NewBeastPage } from './NewBeastPage';
 import { ProfilePage } from './ProfilePage';
+//import { NoAuthPage } from './NoAuthPage';
 import { SpeciesPage } from './SpeciesPage';
 
 export const router = createBrowserRouter(
@@ -25,12 +27,15 @@ export const router = createBrowserRouter(
 
         <Route path={'/bestiary/:id?'} Component={BestiaryPage} />
 
+        <Route path={'/magic-items/:id?'} Component={MagicItemsPage} />
+
         <Route path="/beast/new" Component={NewBeastPage} />
         <Route path="/beast/:id" Component={BeastPage} />
 
         <Route path={'/adventures'} Component={AdventuresPage} />
 
         <Route path={'/profile'} Component={ProfilePage} />
+        {/* <Route path={'/noauth'} Component={NoAuthPage} /> */}
       </Route>
 
       {/* not found */}

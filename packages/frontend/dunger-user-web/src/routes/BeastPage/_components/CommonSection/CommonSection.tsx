@@ -39,7 +39,7 @@ export const CommonSection = ({ formState, handleFieldChange }: SectionProps) =>
         }}
         options={alignmentOptions}
         name="alignment_id"
-        placeholder="-Не выбрано-"
+        placeholder="- Не выбрано -"
         label="Мировоззрение"
       />
       <Select
@@ -50,7 +50,7 @@ export const CommonSection = ({ formState, handleFieldChange }: SectionProps) =>
         }}
         options={typeOptions}
         name="type_id"
-        placeholder="-Не выбрано-"
+        placeholder="- Не выбрано -"
         label="Тип"
       />
       <Chips.Group
@@ -77,7 +77,7 @@ export const CommonSection = ({ formState, handleFieldChange }: SectionProps) =>
         }}
         selectedRecords={formState.languages}
         name="languages_ids"
-        placeholder="-Не выбрано-"
+        placeholder="- Не выбрано -"
         label="Языки владения"
       />
       <MultiSelect
@@ -89,7 +89,7 @@ export const CommonSection = ({ formState, handleFieldChange }: SectionProps) =>
         selectedRecords={formState.biomes}
         name="biomes_ids"
         options={biomeOptions}
-        placeholder="-Не выбрано-"
+        placeholder="- Не выбрано -"
         label="Места обитания"
       />
       <SensesInput senses={formState.senses} handleFieldChange={handleFieldChange} />

@@ -4,14 +4,15 @@ import { text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 
 export interface TagProps extends PropsWithChildren {
-  color?: 'orange' | 'purple' | 'blue' | 'gray';
+  color?: 'orange' | 'purple' | 'blue' | 'gray' | 'yellow';
 }
 
 const styleByColor = {
   orange: { backgroundColor: colors.orange5, color: colors.brand80 },
   purple: { backgroundColor: colors.purple20, color: colors.purple80 },
   blue: { backgroundColor: colors.blue10, color: colors.blue80 },
-  gray: { backgroundColor: colors.backgroundUniversal, color: colors.black70 }
+  gray: { backgroundColor: colors.backgroundUniversal, color: colors.black70 },
+  yellow: { backgroundColor: colors.yellow20, color: colors.yellow80 }
 };
 
 export const Tag = ({ children, color = 'gray' }: TagProps) => {

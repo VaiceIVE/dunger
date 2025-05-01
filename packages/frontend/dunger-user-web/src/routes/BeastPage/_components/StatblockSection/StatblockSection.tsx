@@ -40,7 +40,7 @@ export const StatblockSection = ({ formState, handleFieldChange }: SectionProps)
             name="challenge_rating"
             options={crOptions}
             label="Класс Опасности (CR)"
-            placeholder="-Не выбрано-"
+            placeholder="- Не выбрано -"
           />
         </Flex>
         <div {...stylex.props(text.smallMedium, styles.description)}>
@@ -71,7 +71,7 @@ export const StatblockSection = ({ formState, handleFieldChange }: SectionProps)
           ))}
         </Grid>
       </Stack>
-      <Select disabled placeholder="-Не выбрано-" label="Тип брони" />
+      <Select disabled placeholder="- Не выбрано -" label="Тип брони" />
       <AddSkills
         handleFieldChange={handleFieldChange}
         challenge_rating={formState.challenge_rating}
@@ -85,7 +85,7 @@ export const StatblockSection = ({ formState, handleFieldChange }: SectionProps)
           handleFieldChange(ids, 'vulnerabilities_ids');
         }}
         name="vulnerabilities_ids"
-        placeholder="-Не выбрано-"
+        placeholder="- Не выбрано -"
         label="Уязвимость к видам урону"
       />
       <MultiSelect
@@ -95,7 +95,7 @@ export const StatblockSection = ({ formState, handleFieldChange }: SectionProps)
           handleFieldChange(ids, 'resistances_ids');
         }}
         name="resistances_ids"
-        placeholder="-Не выбрано-"
+        placeholder="- Не выбрано -"
         label="Сопротивление к видам урону"
       />
       <MultiSelect
@@ -105,7 +105,7 @@ export const StatblockSection = ({ formState, handleFieldChange }: SectionProps)
           handleFieldChange(ids, 'immunities_ids');
         }}
         name="immunities_ids"
-        placeholder="-Не выбрано-"
+        placeholder="- Не выбрано -"
         label="Иммунитет к видам урону"
       />
     </Fragment>
