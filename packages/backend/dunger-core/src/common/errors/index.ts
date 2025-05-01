@@ -1,2 +1,3 @@
-export * from './AppError.js';
-export * from './errorHandler.js';
+export * from './AppError';
+export * from './errorHandler';
+export * from './AllExceptionsFilter';
