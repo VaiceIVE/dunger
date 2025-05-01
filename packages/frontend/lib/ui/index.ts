@@ -33,7 +33,7 @@ export * from './components/Tooltip';
  * Icons & Logos
  */
 export * from './components/Icon';
-export * from './components/LogoSmall';
+export * from './components/Logo';
 
 /**
  * Hooks
