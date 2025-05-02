@@ -49,63 +49,123 @@ export class CreaturesService {
     return `This action returns all creatures`;
   }
 
-  async findTemplates(query: PaginationQureiedQuery) {
-    let results = [];
-    let total = 0;
-    if (query.query) {
+  async findSome(query: PaginationQureiedQuery){
+    let results = []
+    let total = 0
+    if(query.query){
       results = await this.prisma.creature.findMany({
+        select: {
+          id: true
+        },
         where: {
           name: {
-            contains: query.query,
-          },
-        },
-        select: {
-          name: true,
-          id: true,
+            contains: query.query
+          }
         },
         skip: query.offset,
-        take: query.limit,
-      });
+        take: query.limit
+      })
       total = await this.prisma.creature.count({
         where: {
           name: {
-            contains: query.query,
-          },
-        },
-      });
-    } else {
+            contains: query.query
+          }
+        }
+      })
+    }else{
       results = await this.prisma.creature.findMany({
         select: {
-          name: true,
-          id: true,
+          id: true
         },
         skip: query.offset,
-        take: query.limit,
-      });
-      total = await this.prisma.creature.count();
+        take: query.limit
+      })
+      total = await this.prisma.creature.count()
     }
 
+    let final_results = []
+
+    for(const result of results){
+      final_results.push(await this.selectCreatureForCard(result.id))
+    }
+
+    console.log('this was final results')
     return {
       pagination: {
         limit: query.limit,
         offset: query.offset,
-        totalCount: total,
+        totalCount: total
       },
-      results: results,
-    };
+      results: final_results,
+    }
+    
   }
 
-  async findTypes() {
+  async findTemplates(query: PaginationQureiedQuery){
+    let results = []
+    let total = 0
+    if(query.query){
+      results = await this.prisma.creature.findMany({
+        where: {
+          name: {
+            contains: query.query
+          }
+        },
+        select: {
+          name: true,
+          id: true
+        },
+        skip: query.offset,
+        take: query.limit
+      })
+      total = await this.prisma.creature.count({
+        where: {
+          name: {
+            contains: query.query
+          }
+        }
+      })
+    }else{
+      results = await this.prisma.creature.findMany({
+        select: {
+          name: true,
+          id: true
+        },
+        skip: query.offset,
+        take: query.limit
+      })
+      total = await this.prisma.creature.count()
+    }
+
+    let final_results = []
+
+    for(const result of results){
+      final_results.push(await this.selectCreatureForCard(result.id))
+    }
+
+    console.log('this was final results')
+    return {
+      pagination: {
+        limit: query.limit,
+        offset: query.offset,
+        totalCount: total
+      },
+      results: results,
+    }
+    
+  }
+
+  async findTypes(){
     return await this.prisma.type.findMany({
       select: {
         id: true,
-        name: true,
-      },
-    });
+        name: true
+      }
+    })
   }
 
-  async findAlignment() {
-    return await this.prisma.alignment.findMany();
+  async findAlignment(){
+    return await this.prisma.alignment.findMany()
   }
 
   async findSizes() {
@@ -185,8 +245,9 @@ export class CreaturesService {
         by: ['name'],
         where: {
           name: {
-            contains: query.query,
+            contains: query.query
           },
+          is_template: true
         },
         _count: {
           id: true,
@@ -205,6 +266,9 @@ export class CreaturesService {
     } else {
       results = await this.prisma.trait.groupBy({
         by: ['name'],
+        where: {
+          is_template: true
+        },
         _count: {
           id: true,
         },
@@ -240,8 +304,9 @@ export class CreaturesService {
         by: ['name'],
         where: {
           name: {
-            contains: query.query,
+            contains: query.query
           },
+          is_template: true
         },
         _count: {
           id: true,
@@ -261,7 +326,10 @@ export class CreaturesService {
       results = await this.prisma.action.groupBy({
         by: ['name'],
         _count: {
-          id: true,
+          id: true
+        },
+        where: {
+          is_template: true
         },
         orderBy: {
           _count: {
@@ -291,16 +359,18 @@ export class CreaturesService {
     return await this.prisma.trait.findMany({
       where: {
         name: groupName,
-      },
-    });
+        is_template: true
+      }
+    })
   }
 
   async findActionsGroup(groupName: string) {
     return await this.prisma.action.findMany({
       where: {
         name: groupName,
-      },
-    });
+        is_template: true
+      }
+    })
   }
 
   private cleanObj(obj) {
@@ -385,7 +455,7 @@ export class CreaturesService {
         data: {
           alignment_relation: {
             connect: {
-              name: updateCreatureDto.alignment_relation.name,
+              name: updateCreatureDto.alignment_relation.name.toLowerCase(),
             },
           },
         },
@@ -397,7 +467,7 @@ export class CreaturesService {
         data: {
           type_relation: {
             connect: {
-              name: updateCreatureDto.type_relation.name,
+              name: updateCreatureDto.type_relation.name.toLowerCase(),
             },
           },
         },
@@ -1191,10 +1261,8 @@ export class CreaturesService {
       type_id: result.type_relation ? result.type_relation.id : null,
       type_name: result.type_relation ? result.type_relation.name : null,
       vulnerabilities: result.vulnerabilities ? result.vulnerabilities : [],
-      vulnerabilities_ids: result.vulnerabilities
-        ? result.vulnerabilities.map((vun) => vun.id)
-        : [],
-    } as ApiCreature;
+      vulnerabilities_ids: result.vulnerabilities ? result.vulnerabilities.map(vun => vun.id) : []
+    } //as ApiCreature
   }
 
   remove(id: number) {

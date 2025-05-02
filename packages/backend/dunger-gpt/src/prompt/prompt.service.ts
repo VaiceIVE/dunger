@@ -33,7 +33,7 @@ export class PromptService {
         тип Senses: {passive_perception Int}
         challenge_rating String
         languages Language[] - тип Language: {name: String}
-        alignment_relation Alignment? - тип Alingment: {  name String @unique - выбирается из списка: ["Законно-добрый","Нейтрально-добрый","Хаотично-добрый","Законно-нейтральный","Нейтральный","Хаотично-нейтральный","Законно-злой","Нейтрально-злой","Хаотично-злой"] }
+        alignment_relation Alignment? - тип Alingment: {  name String @unique - выбирается из списка: ["законно-добрый","нейтрально-добрый","хаотично-добрый","законно-нейтральный","нейтральный","хаотично-нейтральный","законно-злой","нейтрально-злой","хаотично-злой"] }
         race_relation CreatureRace? - тип CreatureRace: {name String  description String}
         type_relation Type? - тип Type: {  name String - тип, полученный в начале генерации}
         size_relation Size? - тип Size: {  name String @unique- токен размера существа, подбирается из ключей объекта(одна заглавная буква): {"T": "Крошечный", "S": "Маленький", "M": "Средний", "L": "Большой", "H": "Огромный", "G": "Громадный"}}

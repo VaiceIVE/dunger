@@ -35,11 +35,15 @@ export class CreaturesController {
     return updatedCreature.id
   }
 
-
   @Get()
-  findAll() {
-    return this.creaturesService.findAll();
+  async findSome(@Query(new ValidationPipe({transform: true, transformOptions: {enableImplicitConversion: true}})) query: PaginationQureiedQuery) {
+    return await this.creaturesService.findSome(query);
   }
+
+  // @Get()
+  // findAll() {
+  //   return this.creaturesService.findAll();
+  // }
 
   @Get('/templates')
   async findTemplates(@Query(new ValidationPipe({transform: true, transformOptions: {enableImplicitConversion: true}})) query: PaginationQureiedQuery){

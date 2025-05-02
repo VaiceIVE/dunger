@@ -50,7 +50,7 @@ services:
       - ./shared/prisma:/nest-app/prisma
       - ./dunger-gpt:/nest-app/
     working_dir: /nest-app/
-    entrypoint: bash -c "yarn install && npm run g:start"
+    entrypoint: bash -c "yarn install && npx prisma generate && npm run g:start"
     networks:
       - dunger_backend_net
 
