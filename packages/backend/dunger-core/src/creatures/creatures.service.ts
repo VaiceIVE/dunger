@@ -106,9 +106,6 @@ export class CreaturesService {
     let total = 0
     if(query.query){
       results = await this.prisma.creature.findMany({
-        select: {
-          id: true
-        },
         where: {
           name: {
             contains: query.query
@@ -458,7 +455,7 @@ export class CreaturesService {
         data: {
           alignment_relation: {
             connect: {
-              name: updateCreatureDto.alignment_relation.name,
+              name: updateCreatureDto.alignment_relation.name.toLowerCase(),
             },
           },
         },
@@ -470,7 +467,7 @@ export class CreaturesService {
         data: {
           type_relation: {
             connect: {
-              name: updateCreatureDto.type_relation.name,
+              name: updateCreatureDto.type_relation.name.toLowerCase(),
             },
           },
         },
