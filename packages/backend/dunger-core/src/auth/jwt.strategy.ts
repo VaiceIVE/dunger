@@ -42,8 +42,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
    * @returns объект с id, username и списком ролей
    */
   async validate(payload: JwtPayload) {
-    console.error('test'); // TODO: удалить перед продакшеном
-    console.log('JWT payload:', payload);
     return {
       id: payload.sub,
       username: payload.preferred_username,
