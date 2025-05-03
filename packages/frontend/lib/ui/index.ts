@@ -46,6 +46,7 @@ export { useUncontrolled } from './hooks/useUncontrolled';
 export * from './features/PositionObserver';
 export * from './features/PageTitle';
 export * from './features/WizardLoader';
+export * from './features/ShowPasswordButton';
 
 /**
  * Utils
