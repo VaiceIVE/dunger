@@ -9,7 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    ConfigModule.forRoot()
+    ConfigModule.forRoot(),
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, UserService],
