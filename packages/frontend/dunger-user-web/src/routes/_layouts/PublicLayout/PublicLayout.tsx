@@ -1,23 +1,13 @@
 import { Suspense } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { Outlet } from 'react-router-dom';
+import { AuthModal } from 'features/AuthModal';
 import { SideBar } from './_components/SideBar';
 
-export function UserLayout() {
-  //const { isAuthenticated } = useAuth();
-
-  // if (!isAuthenticated) {
-  //   return <Navigate to={'/sign-in'} replace />;
-  // }
-
-  /**
-   * TODO
-   * ErrorBoundary
-   * UserProvider
-   */
-
+export function PublicLayout() {
   return (
     <Suspense fallback={'Loading...'}>
+      <AuthModal />
       <div {...stylex.props(styles.root)}>
         <SideBar />
         <div {...stylex.props(styles.content)}>

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { Link } from 'react-router-dom';
+import { useAuth } from '@dunger/auth-fetch';
 import {
   BellFilledIcon,
   Button,
@@ -16,12 +17,14 @@ import {
   text,
   XIcon
 } from '@dunger/ui';
+import { LoginButton } from 'features/LoginButton';
+import { AuthBar } from '../AuthBar';
 import { ModalFooter } from '../ModalFooter';
 import { Tab } from '../Tab';
 
 export const SideBar = () => {
   const [open, setOpen] = useState(false);
-  //const [isAuthenticated] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -94,9 +97,17 @@ export const SideBar = () => {
         <nav {...stylex.props(styles.nav)}>
           <Stack gap={20}>
             <div {...stylex.props(styles.header)}>
-              <Button width={ButtonWidth.full} variant={ButtonVariant.accent}>
-                Войти
-              </Button>
+              {isAuthenticated ? (
+                <AuthBar />
+              ) : (
+                <div {...stylex.props(styles.button)}>
+                  <LoginButton>
+                    <Button width={ButtonWidth.full} variant={ButtonVariant.accent}>
+                      Войти
+                    </Button>
+                  </LoginButton>
+                </div>
+              )}
             </div>
             <Stack gap={24}>
               <section {...stylex.props(styles.section)}>
@@ -151,7 +162,10 @@ const styles = stylex.create({
     borderBottomColor: '#EAEAEA',
     borderBottomStyle: 'solid',
     borderBottomWidth: 1,
-    padding: 20
+    paddingBottom: 20
+  },
+  button: {
+    padding: '20px 20px 0'
   },
   section: {
     display: 'flex',

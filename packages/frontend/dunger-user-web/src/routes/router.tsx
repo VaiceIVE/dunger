@@ -1,6 +1,6 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom';
 import { BaseLayout } from './_layouts/BaseLayout';
-import { UserLayout } from './_layouts/UserLayout';
+import { PublicLayout } from './_layouts/PublicLayout';
 import { AdventuresPage } from './AdventuresPage';
 import { BackgroundsPage } from './BackgroundsPage';
 import { BeastPage } from './BeastPage';
@@ -17,7 +17,7 @@ import { SpeciesPage } from './SpeciesPage';
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route Component={BaseLayout}>
-      <Route Component={UserLayout}>
+      <Route Component={PublicLayout}>
         <Route path={'/'} Component={HomePage} />
 
         <Route path={'/classes/:id?'} Component={ClassesPage} />
