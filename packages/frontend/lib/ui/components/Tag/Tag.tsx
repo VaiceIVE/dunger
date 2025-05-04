@@ -29,7 +29,10 @@ const styles = stylex.create({
     backgroundColor,
     borderRadius: 12,
     color,
+    overflow: 'hidden',
     padding: '2px 6px',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
     width: 'fit-content'
   })
 });

@@ -31,7 +31,7 @@ export const AuthBar = () => {
           {(open: boolean) => (
             <Flex style={styles.root} align="center" justify="space-between" wrap="nowrap">
               {!!user && (
-                <Flex align="center" gap={16}>
+                <Flex style={styles.header} align="center" wrap="nowrap" gap={16}>
                   <Avatar size="sm" />
                   <Tag>{user.username}</Tag>
                 </Flex>
@@ -78,6 +78,9 @@ export const AuthBar = () => {
 const styles = stylex.create({
   root: {
     width: '100%'
+  },
+  header: {
+    overflow: 'hidden'
   },
   control: {
     padding: '20px 20px 0'
