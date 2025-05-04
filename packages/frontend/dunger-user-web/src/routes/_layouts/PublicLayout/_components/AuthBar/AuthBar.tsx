@@ -13,7 +13,8 @@ import {
   AiFillIcon,
   text,
   LogoutIcon,
-  IconButtonVariant
+  IconButtonVariant,
+  Avatar
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { useUser } from 'store/user';
@@ -31,6 +32,7 @@ export const AuthBar = () => {
             <Flex style={styles.root} align="center" justify="space-between" wrap="nowrap">
               {!!user && (
                 <Flex align="center" gap={16}>
+                  <Avatar size="sm" />
                   <Tag>{user.username}</Tag>
                 </Flex>
               )}

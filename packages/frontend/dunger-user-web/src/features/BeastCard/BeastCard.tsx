@@ -1,7 +1,7 @@
 import { Fragment, ReactNode } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
-import { Accordion, Avatar, ChevronDownIcon, ChevronUpIcon, Flex, Stack, Tag, text } from '@dunger/ui';
+import { Accordion, ChevronDownIcon, ChevronUpIcon, Flex, Stack, Tag, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Card } from 'components/Card';
 import { KeyValue } from 'components/KeyValue';
@@ -122,7 +122,6 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
                 <KeyValue keyLabel={'Скорость:'} value={formatSpeed(beast?.speed)} />
               </Stack>
             </Stack>
-            <Avatar size={120} src={null} />
           </Flex>
 
           <StatsTable stats={beast?.stats} />
