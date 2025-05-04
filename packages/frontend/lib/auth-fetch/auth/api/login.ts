@@ -1,7 +1,7 @@
 import { AuthMethodReturn, AuthTokensResult } from './types';
 
 export interface LoginInput {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -14,12 +14,15 @@ export interface LoginInput {
 export async function login(apiUrl: string, input: LoginInput): Promise<AuthMethodReturn> {
   try {
     const response = await fetch(apiUrl + '/auth/login', {
+      method: 'POST',
       body: JSON.stringify(input),
       headers: { 'Content-type': 'application/json' }
     });
 
+    const data = (await response.json()) as AuthTokensResult;
+
     return {
-      response
+      data: data
     };
   } catch (error: unknown) {
     return {

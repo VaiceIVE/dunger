@@ -11,7 +11,7 @@ export interface IAuthContext extends AuthState {
    * Авторизует пользователя, получает пару токенов.
    * При возникновении ошибки выбрасывает исключение с ошибкой DungerError | Error
    */
-  login: (email: string, password: string) => Promise<void>;
+  login: (username: string, password: string) => Promise<void>;
   /**
    * Создает аккаунт пользователя, получает пару токенов.
    * При возникновении ошибки выбрасывает исключение с ошибкой DungerError | Error

@@ -1,40 +1,18 @@
-import { Suspense } from 'react';
-import * as stylex from '@stylexjs/stylex';
-import { Outlet } from 'react-router-dom';
-import { SideBar } from './_components/SideBar';
+import { Fragment } from 'react';
+import { Navigate, Outlet, ScrollRestoration } from 'react-router-dom';
+import { useAuth } from '@dunger/auth-fetch';
 
-export function UserLayout() {
-  //const { isAuthenticated } = useAuth();
+export const UserLayout = () => {
+  const { isAuthenticated } = useAuth();
 
-  // if (!isAuthenticated) {
-  //   return <Navigate to={'/sign-in'} replace />;
-  // }
-
-  /**
-   * TODO
-   * ErrorBoundary
-   * UserProvider
-   */
+  if (!isAuthenticated) {
+    return <Navigate to={'/no-auth'} replace />;
+  }
 
   return (
-    <Suspense fallback={'Loading...'}>
-      <div {...stylex.props(styles.root)}>
-        <SideBar />
-        <div {...stylex.props(styles.content)}>
-          <Outlet />
-        </div>
-      </div>
-    </Suspense>
+    <Fragment>
+      <ScrollRestoration />
+      <Outlet />
+    </Fragment>
   );
-}
-
-const styles = stylex.create({
-  root: {
-    display: 'flex',
-    gap: 0,
-    width: '100%'
-  },
-  content: {
-    flex: '1'
-  }
-});
+};

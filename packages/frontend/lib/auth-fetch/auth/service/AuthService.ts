@@ -55,8 +55,8 @@ export class AuthService {
     throw new Error('AuthService: refresh token is outdated');
   }
 
-  public async login(email: string, password: string) {
-    return this._runMethod(() => login(this.apiUrl, { email, password }));
+  public async login(username: string, password: string) {
+    return this._runMethod(() => login(this.apiUrl, { username, password }));
   }
 
   public async initUser(input: InitUserInput) {

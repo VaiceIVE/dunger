@@ -12,13 +12,16 @@ export interface RefreshTokenInput {
  */
 export async function refreshToken(apiUrl: string, input: RefreshTokenInput): Promise<AuthMethodReturn> {
   try {
-    const response = await fetch(apiUrl + '/auth/login', {
+    const response = await fetch(apiUrl + '/auth/refresh', {
+      method: 'POST',
       body: JSON.stringify(input),
-      headers: { 'Content-type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' }
     });
 
+    const data = (await response.json()) as AuthTokensResult;
+
     return {
-      response
+      data: data
     };
   } catch (error: unknown) {
     return {

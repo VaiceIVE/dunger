@@ -33,7 +33,7 @@ export * from './components/Tooltip';
  * Icons & Logos
  */
 export * from './components/Icon';
-export * from './components/LogoSmall';
+export * from './components/Logo';
 
 /**
  * Hooks
@@ -46,6 +46,7 @@ export { useUncontrolled } from './hooks/useUncontrolled';
 export * from './features/PositionObserver';
 export * from './features/PageTitle';
 export * from './features/WizardLoader';
+export * from './features/ShowPasswordButton';
 
 /**
  * Utils

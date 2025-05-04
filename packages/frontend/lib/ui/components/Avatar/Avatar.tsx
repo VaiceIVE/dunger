@@ -2,12 +2,18 @@ import { ReactNode, useEffect, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { colors } from '@dunger/ui/tokens.stylex';
+import { DungerSize } from '../../styles/DungerSize';
+import { UserIcon } from '../Icon';
 
 interface AvatarProps {
   src?: string | null;
+
   alt?: string;
-  size?: number;
+
+  size?: Extract<DungerSize, 'sm' | 'md' | 'lg'>;
+
   style?: StyleXStyles;
+
   stubIcon?: ReactNode;
 }
 
@@ -24,7 +30,7 @@ const isValidImage = (src: string): Promise<boolean> => {
   });
 };
 
-export function Avatar({ src, alt, size = 120, style, stubIcon }: AvatarProps) {
+export function Avatar({ src, alt, size = 'md', style, stubIcon }: AvatarProps) {
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
@@ -35,26 +41,47 @@ export function Avatar({ src, alt, size = 120, style, stubIcon }: AvatarProps) {
   }, [src]);
 
   return (
-    <div {...stylex.props(styles.root(size), !isValid && styles.noImage, style)}>
-      {isValid ? <img src={src ?? undefined} alt={alt} {...stylex.props(styles.image)} /> : (stubIcon ?? null)}
+    <div {...stylex.props(styles.root, styles[size], !isValid && styles.noImage, style)}>
+      <div {...stylex.props(styles[size], styles.border)}>
+        {isValid ? (
+          <img src={src ?? undefined} alt={alt} {...stylex.props(styles.image)} />
+        ) : (
+          (stubIcon ?? <UserIcon />)
+        )}
+      </div>
     </div>
   );
 }
 
 const styles = stylex.create({
-  root: (size: number) => ({
-    borderRadius: '50%',
+  root: {
+    borderColor: colors.brand50,
+    borderStyle: 'solid',
+    borderWidth: 2,
     flexShrink: 0,
-    height: size,
-    overflow: 'hidden',
-    width: size
-  }),
+    overflow: 'hidden'
+  },
+  sm: { borderRadius: 10, height: 40, width: 40 },
+  md: { borderRadius: 12, height: 88, width: 88 },
+  lg: { borderRadius: 16, height: 120, width: 120 },
   noImage: {
     alignItems: 'center',
     backgroundColor: colors.backgroundNeutralDefault,
+    borderColor: colors.outlinePrimaryActive,
     color: colors.textTertiaryDefault,
     display: 'flex',
     justifyContent: 'center'
+  },
+  border: {
+    alignItems: 'center',
+    borderColor: 'white',
+    borderStyle: 'solid',
+    borderWidth: 2,
+    display: 'flex',
+    height: '100%',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    width: '100%'
   },
   image: {
     display: 'block',

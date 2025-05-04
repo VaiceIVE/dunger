@@ -11,8 +11,6 @@ import {
   TextInput,
   Flex,
   ProgressBar,
-  Avatar,
-  PhotoIcon,
   text,
   SelectorIcon
 } from '@dunger/ui';
@@ -49,8 +47,6 @@ export const AdventuresPage = () => {
                     <ProgressBar value={20} max={25} title={'Создано'} description={'партий'} />
                   </Stack>
                 </Stack>
-
-                <Avatar stubIcon={<PhotoIcon />} style={styles.avatar} size={84} />
               </Grid.Col>
             </Grid>
           </Stack>
