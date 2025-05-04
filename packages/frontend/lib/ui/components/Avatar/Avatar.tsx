@@ -42,7 +42,13 @@ export function Avatar({ src, alt, size = 'md', style, stubIcon }: AvatarProps) 
 
   return (
     <div {...stylex.props(styles.root, styles[size], !isValid && styles.noImage, style)}>
-      {isValid ? <img src={src ?? undefined} alt={alt} {...stylex.props(styles.image)} /> : (stubIcon ?? <UserIcon />)}
+      <div {...stylex.props(styles[size], styles.border)}>
+        {isValid ? (
+          <img src={src ?? undefined} alt={alt} {...stylex.props(styles.image)} />
+        ) : (
+          (stubIcon ?? <UserIcon />)
+        )}
+      </div>
     </div>
   );
 }
@@ -65,6 +71,17 @@ const styles = stylex.create({
     color: colors.textTertiaryDefault,
     display: 'flex',
     justifyContent: 'center'
+  },
+  border: {
+    alignItems: 'center',
+    borderColor: 'white',
+    borderStyle: 'solid',
+    borderWidth: 2,
+    display: 'flex',
+    height: '100%',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    width: '100%'
   },
   image: {
     display: 'block',
