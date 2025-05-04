@@ -1,6 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from 'react-router-dom';
 import { BaseLayout } from './_layouts/BaseLayout';
 import { PublicLayout } from './_layouts/PublicLayout';
+import { UserLayout } from './_layouts/UserLayout';
 import { AdventuresPage } from './AdventuresPage';
 import { BackgroundsPage } from './BackgroundsPage';
 import { BeastPage } from './BeastPage';
@@ -26,16 +27,18 @@ export const router = createBrowserRouter(
         <Route path={'/backgrounds/:id?'} Component={BackgroundsPage} />
 
         <Route path={'/bestiary/:id?'} Component={BestiaryPage} />
-
         <Route path={'/magic-items/:id?'} Component={MagicItemsPage} />
 
-        <Route path="/beast/new" Component={NewBeastPage} />
-        <Route path="/beast/:id" Component={BeastPage} />
+        <Route Component={UserLayout}>
+          <Route path="/beast/new" Component={NewBeastPage} />
+          <Route path="/beast/:id" Component={BeastPage} />
 
-        <Route path={'/adventures'} Component={AdventuresPage} />
+          <Route path={'/adventures'} Component={AdventuresPage} />
 
-        <Route path={'/profile'} Component={ProfilePage} />
-        {/* <Route path={'/noauth'} Component={NoAuthPage} /> */}
+          {/* <Route path={'/noauth'} Component={NoAuthPage} /> */}
+
+          <Route path={'/profile'} Component={ProfilePage} />
+        </Route>
       </Route>
 
       {/* not found */}

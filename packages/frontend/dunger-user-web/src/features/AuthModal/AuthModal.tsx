@@ -1,5 +1,7 @@
+import { useCallback, useEffect } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useAuth } from '@dunger/auth-fetch';
 import { LogoHorizontal, Modal, Stack, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { LoginForm } from './_components/LoginForm';
@@ -9,14 +11,16 @@ export const AuthModal = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  const { isAuthenticated } = useAuth();
+
   const authView = searchParams.get('auth'); // 'login' | 'register' | null
 
   const open = authView === 'login' || authView === 'register';
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     searchParams.delete('auth');
     setSearchParams(searchParams, { replace: true });
-  };
+  }, [searchParams, setSearchParams]);
 
   const handleChangeAuthView = (authView: string) => {
     const newParams = new URLSearchParams(searchParams);
@@ -24,7 +28,11 @@ export const AuthModal = () => {
     void navigate(`?${newParams.toString()}`, { replace: false });
   };
 
-  if (!open) return null;
+  useEffect(() => {
+    if (isAuthenticated) closeModal();
+  }, [closeModal, isAuthenticated]);
+
+  if (!open || isAuthenticated) return null;
 
   return (
     <Modal
