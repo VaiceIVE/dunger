@@ -5,14 +5,17 @@ import { AuthFetchProvider } from '@dunger/auth-fetch';
 import { router } from 'routes/router';
 import { apiUrl } from 'store/config';
 import { queryClient } from 'store/queryClient';
+import { UserProvider } from 'store/user';
 
 export function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthFetchProvider apiUrl={apiUrl}>
-        <Suspense>
-          <RouterProvider router={router} />
-        </Suspense>
+        <UserProvider>
+          <Suspense>
+            <RouterProvider router={router} />
+          </Suspense>
+        </UserProvider>
       </AuthFetchProvider>
     </QueryClientProvider>
   );
