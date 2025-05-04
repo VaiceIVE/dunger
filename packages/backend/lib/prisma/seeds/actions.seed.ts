@@ -4,30 +4,29 @@ import { resolve } from 'node:path';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
+
 export async function SeedActions() {
   const filePath = resolve(import.meta.dirname, '../data/actions.json');
   const defaultValuesFile = await readFile(filePath, { encoding: 'utf-8' });
   const data: { name: string; text: string; attack: string }[] = JSON.parse(defaultValuesFile);
 
-  for (const action of data) {
-    await prisma.action.upsert({
-      where: {
-        description: action.text
-      },
-      update: {},
-      create: {
-        description: action.text,
-        name: action.name
-      }
-    });
+  const promises = [];
+
+  for (const action_data of data) {
+    promises.push(
+      await prisma.action
+        .create({
+          data: {
+            description: action_data.text,
+            name: action_data.name,
+            attack: action_data.attack,
+            is_template: true
+          }
+        })
+        .catch(() => {})
+    );
   }
-}
-SeedActions()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
+  Promise.all(promises).then(() => {
+    return 1;
   });
+}

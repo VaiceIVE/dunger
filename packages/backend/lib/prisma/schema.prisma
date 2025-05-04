@@ -375,6 +375,7 @@ model Action {
   name String 
   description String @unique
   attack String?
+  is_template Boolean? 
   creatures Creature[]
   creatureTypes CreatureRace[]
 }
@@ -384,6 +385,7 @@ model Trait {
   name String 
   description String @unique
   attack String?
+  is_template Boolean? 
   cretures Creature[]
   creatureTypes CreatureRace[]
 }
@@ -407,7 +409,7 @@ model GenrationRequest{
 
 model DamageType {
   id String @id
-  name String
+  name String @unique
 
 
   resistant_creatures Creature[] @relation("creature_resistances")
