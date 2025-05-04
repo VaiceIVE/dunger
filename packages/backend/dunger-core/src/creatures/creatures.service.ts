@@ -499,6 +499,20 @@ export class CreaturesService {
         });
       }
     }
+    if(updateCreatureDto.biomes_ids){
+      for(const biome_id of updateCreatureDto.biomes_ids){
+        await this.prisma.creature.update({
+          where: { id: id },
+          data: {
+            biome_relation: {
+              connect: {
+                id: biome_id,
+              },
+            },
+          },
+        });
+      }
+    }
     if (updateCreatureDto.languages) {
       for (const lang of updateCreatureDto.languages) {
         await this.prisma.creature.update({
