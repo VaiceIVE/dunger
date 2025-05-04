@@ -1,10 +1,14 @@
-import { ReactNode, useRef } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { useAuth } from '../auth';
 import { createAuthFetch } from './createAuthFetch';
 import { FetchContext } from './FetchContext';
 
 export function FetchProvider({ apiUrl, children }: { apiUrl: string; children?: ReactNode }) {
-  const { getToken } = useAuth();
-  const v = useRef(createAuthFetch(apiUrl, getToken));
-  return <FetchContext.Provider value={v.current}>{children}</FetchContext.Provider>;
+  const { getToken, isAuthenticated } = useAuth();
+
+  const fetchClient = useMemo(() => {
+    return createAuthFetch(apiUrl, isAuthenticated ? getToken : undefined);
+  }, [apiUrl, isAuthenticated, getToken]);
+
+  return <FetchContext.Provider value={fetchClient}>{children}</FetchContext.Provider>;
 }

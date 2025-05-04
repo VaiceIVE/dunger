@@ -1,0 +1,11 @@
+{
+  "name": "@dunger/prisma",
+  "type": "module",
+  "exports": {
+    "./schema": "./schema.prisma"
+  },
+  "devDependencies": {
+    "prisma": "^5.10.2",
+    "typescript": "~5.8.0"
+  }
+}
