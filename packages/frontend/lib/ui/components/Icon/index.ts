@@ -19,6 +19,7 @@ import QuestionIcon from './_icons/question.svg?react';
 import SearchIcon from './_icons/search.svg?react';
 import SelectorIcon from './_icons/selector.svg?react';
 import TrashXIcon from './_icons/trash-x.svg?react';
+import UserIcon from './_icons/user.svg?react';
 import XIcon from './_icons/x.svg?react';
 
 export {
@@ -43,5 +44,6 @@ export {
   SearchIcon,
   SelectorIcon,
   TrashXIcon,
+  UserIcon,
   XIcon
 };
