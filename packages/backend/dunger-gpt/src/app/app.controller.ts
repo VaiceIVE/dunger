@@ -36,4 +36,21 @@ export class AppController {
 
     return creatureData
   }
+
+  @Post('/generate/creature/debug')
+  async createCreatureDebug(@Body() createCreatureDTO: ApiCreatureAiInput){
+    const creatureData = await this.gptService.createCreature(createCreatureDTO)
+
+    console.log(creatureData)
+
+    const validationResult = (await axios.post(`${this.configService.get('VALIDATOR_BASE_URL')}/validate_entity`, {entity_json: creatureData})).data
+
+    console.log(validationResult)
+
+
+
+    //validate creature, if false, retry prompt
+
+    return {creatureData, validationResult}
+  }
 }

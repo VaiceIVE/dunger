@@ -36,6 +36,20 @@ export class CreaturesController {
     return aiCretureData
   }
 
+  @Post('/generate/debug')
+  async generateCreatureDebug(@Body() createCreatureDto: CreateCreatureManualDto) {
+    const creatureId = await this.creaturesService.initCreature(createCreatureDto);
+    
+    const aiCretureData = (await axios.post(`${this.configService.get('GPT_BASE_URL')}/gpt/generate/creature/debug`, createCreatureDto)).data
+
+    console.log(aiCretureData)
+
+    const updatedCreature = await this.creaturesService.update(creatureId.id, aiCretureData.creatureData)
+
+    // return updatedCreature.id
+    return {aiCretureData}
+  }
+
   @Get()
   async findSome(@Query(new ValidationPipe({transform: true, transformOptions: {enableImplicitConversion: true}})) query: PaginationQureiedQuery) {
     return await this.creaturesService.findSome(query);
