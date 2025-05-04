@@ -1010,7 +1010,7 @@ export class CreaturesService {
           },
         },
       });
-      for (const trait_id of updateCreatureDto.actions_ids) {
+      for (const trait_id of updateCreatureDto.traits_ids) {
         await this.prisma.creature.update({
           where: { id: id },
           data: {

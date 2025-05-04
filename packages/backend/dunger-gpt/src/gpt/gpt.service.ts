@@ -58,6 +58,7 @@ export class GptService {
                 },
               ))
         } catch (error) {
+            modelResponse
             console.log(error)
             console.log(error.response)
             console.log(error.response.data)

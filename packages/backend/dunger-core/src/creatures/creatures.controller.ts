@@ -32,7 +32,8 @@ export class CreaturesController {
 
     const updatedCreature = await this.creaturesService.update(creatureId.id, aiCretureData)
 
-    return updatedCreature.id
+    // return updatedCreature.id
+    return aiCretureData
   }
 
   @Get()
