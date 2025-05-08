@@ -79,7 +79,7 @@ export const SideBar = () => {
         </Stack>
 
         <Stack gap={16}>
-          <Link to={'/beast/new'}>
+          <Link to={isAuthenticated ? '/beast/new' : '/no-auth'}>
             <IconButton>
               <PlusFilledIcon />
             </IconButton>

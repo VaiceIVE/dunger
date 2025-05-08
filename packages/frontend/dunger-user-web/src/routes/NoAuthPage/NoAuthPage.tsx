@@ -1,4 +1,6 @@
 import * as stylex from '@stylexjs/stylex';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '@dunger/auth-fetch';
 import { Button, ButtonVariant, Container, Flex, Grid, headers, Stack, Tag, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { LoginButton } from 'features/LoginButton';
@@ -6,6 +8,10 @@ import banner from './_images/banner.png';
 import { creatures, flowCard, words } from './mock';
 
 export const NoAuthPage = () => {
+  const { isAuthenticated } = useAuth();
+
+  if (isAuthenticated) return <Navigate to={'/adventures'} replace />;
+
   return (
     <main {...stylex.props(styles.root)}>
       <Container>
@@ -80,7 +86,9 @@ export const NoAuthPage = () => {
                   <br /> полезны именно вашим игрокам и существам
                 </h3>
               </Stack>
-              <Button>Зарегистрироваться и генерировать</Button>
+              <LoginButton>
+                <Button>Зарегистрироваться и генерировать</Button>
+              </LoginButton>
             </Stack>
           </Flex>
           <Stack gap={28}>

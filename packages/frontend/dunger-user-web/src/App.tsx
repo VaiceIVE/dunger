@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from 'react-router-dom';
-import { AuthFetchProvider } from '@dunger/auth-fetch';
+import { AuthFetchProvider, ErrorBoundary } from '@dunger/auth-fetch';
 import { router } from 'routes/router';
 import { apiUrl } from 'store/config';
 import { queryClient } from 'store/queryClient';
@@ -12,9 +12,11 @@ export function App() {
     <QueryClientProvider client={queryClient}>
       <AuthFetchProvider apiUrl={apiUrl}>
         <UserProvider>
-          <Suspense>
-            <RouterProvider router={router} />
-          </Suspense>
+          <ErrorBoundary errorElement={() => <div>error</div>}>
+            <Suspense>
+              <RouterProvider router={router} />
+            </Suspense>
+          </ErrorBoundary>
         </UserProvider>
       </AuthFetchProvider>
     </QueryClientProvider>
