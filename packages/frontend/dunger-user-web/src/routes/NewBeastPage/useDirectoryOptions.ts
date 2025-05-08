@@ -4,7 +4,7 @@ import { ApiDirectory } from 'store/_types/_common';
 
 const useDirectoryQuery = <T>(key: string) => {
   const authFetch = useAuthFetch();
-  return useSuspenseQuery<T>({ queryKey: ['creatures', key], queryFn: () => authFetch<T>(`/creatures/${key}`) });
+  return useSuspenseQuery<T>({ queryKey: ['directories', key], queryFn: () => authFetch<T>(`/directories/${key}`) });
 };
 
 const mapToOptions = <T extends { id: string | number; name?: string; title?: string }>(data?: T[]) =>

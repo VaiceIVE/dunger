@@ -5,8 +5,8 @@ import { ApiDirectory, ApiPaginatedResult } from 'store/_types/_common';
 const useDirectoryQuery = <T>(key: string) => {
   const authFetch = useAuthFetch();
   return useSuspenseQuery<T>({
-    queryKey: ['creatures', key],
-    queryFn: () => authFetch<T>(`/creatures/${key}`)
+    queryKey: ['directories', key],
+    queryFn: () => authFetch<T>(`/directories/${key}`)
   });
 };
 
@@ -14,9 +14,9 @@ const useInfiniteDirectoryQuery = <T extends ApiPaginatedResult>(key: string) =>
   const authFetch = useAuthFetch();
 
   return useInfiniteQuery({
-    queryKey: ['creatures', key],
+    queryKey: ['directories', key],
     queryFn: async ({ pageParam = 0 }) => {
-      return authFetch<T>(`/creatures/${key}?offset=${pageParam.toString()}`);
+      return authFetch<T>(`/directories/${key}?offset=${pageParam.toString()}`);
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
