@@ -19,6 +19,12 @@ export async function login(apiUrl: string, input: LoginInput): Promise<AuthMeth
       headers: { 'Content-type': 'application/json' }
     });
 
+    if (!response.ok)
+      return {
+        data: null,
+        error: (await response.json()) as Error
+      };
+
     const data = (await response.json()) as AuthTokensResult;
 
     return {

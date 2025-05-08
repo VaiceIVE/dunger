@@ -24,6 +24,12 @@ export async function initUser(apiUrl: string, input: InitUserInput): Promise<Au
       headers: { 'Content-type': 'application/json' }
     });
 
+    if (!response.ok)
+      return {
+        data: null,
+        error: (await response.json()) as Error
+      };
+
     const data = (await response.json()) as AuthTokensResult;
 
     return {
