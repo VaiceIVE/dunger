@@ -1,7 +1,7 @@
 import { Fragment, ReactNode } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
-import { Accordion, Avatar, ChevronDownIcon, ChevronUpIcon, Flex, Stack, text } from '@dunger/ui';
+import { Accordion, ChevronDownIcon, ChevronUpIcon, Flex, Stack, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Card } from 'components/Card';
 import { ApiMagicItem } from 'store/_types/ApiMagicItem';
@@ -34,7 +34,7 @@ export const MagicItemCard = ({ magicItem, controls, style }: magicItemCardProps
                 <KeyValue keyLabel={'Редкость:'} value={magicItem?.rarity_name ?? 'Не указано'} />
               </Stack>
             </Stack>
-            <Avatar size={120} />
+            {/* <Avatar size={120} /> */}
           </Flex>
         </Stack>
 

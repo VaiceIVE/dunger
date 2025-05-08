@@ -19,13 +19,13 @@ export const AuthModal = () => {
 
   const closeModal = useCallback(() => {
     searchParams.delete('auth');
-    setSearchParams(searchParams, { replace: true });
+    setSearchParams(searchParams, { replace: true, preventScrollReset: true });
   }, [searchParams, setSearchParams]);
 
   const handleChangeAuthView = (authView: string) => {
     const newParams = new URLSearchParams(searchParams);
     newParams.set('auth', authView);
-    void navigate(`?${newParams.toString()}`, { replace: false });
+    void navigate(`?${newParams.toString()}`, { replace: false, preventScrollReset: true });
   };
 
   useEffect(() => {

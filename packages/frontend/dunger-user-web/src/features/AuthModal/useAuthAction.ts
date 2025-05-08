@@ -5,6 +5,7 @@ import { HttpStatus } from '@dunger/common-enums';
 export const useAuthAction = () => {
   const { login, initUser, loading } = useAuth();
   const [loginError, setLoginError] = useState<string | null>(null);
+  const [registrationError, setRegistrationError] = useState<string | null>(null);
 
   const loginAction = async (formData: FormData) => {
     if (loading) return;
@@ -43,12 +44,12 @@ export const useAuthAction = () => {
     const username = (formData.get('username') as string).toString();
     const email = (formData.get('email') as string).toString();
     const password = (formData.get('password') as string).toString();
+    const passwordConfirmation = (formData.get('passwordConfirmation') as string).toString();
 
-    // if (passwordConfirmation !== password) {
-
-    //   setErrors({ passwordConfirmation: 'Пароли не совпадают' });
-    //   return;
-    // }
+    if (passwordConfirmation !== password) {
+      setRegistrationError('Пароли не совпадают');
+      return;
+    }
 
     try {
       const user = {
@@ -60,7 +61,6 @@ export const useAuthAction = () => {
       await initUser(user);
     } catch (error: unknown) {
       let initUserError: string | undefined;
-      console.log(error);
       if (error instanceof DungerError) {
         switch (error.body.statusCode) {
           case HttpStatus.CONFLICT:
@@ -78,11 +78,14 @@ export const useAuthAction = () => {
       } else {
         initUserError = 'Неизвестная ошибка';
       }
+
+      setRegistrationError(initUserError);
     }
   };
 
   return {
     loginAction,
+    registrationError,
     registerAction,
     loginError,
     loading

@@ -1,130 +1,59 @@
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 export async function SeedDamageType() {
-  await prisma.damageType.upsert({
-    where: { id: 'Acid' },
-    update: {},
-    create: {
-      id: 'Acid',
-      name: 'Кислотный'
-    }
-  });
+  const filePath = resolve(import.meta.dirname, '../data/creatures_data.json');
+  const defaultValuesFile = await readFile(filePath, { encoding: 'utf-8' });
+  const creatures: {
+    immune: string;
+    resist: string;
+    vulnerable: string;
+  }[] = JSON.parse(defaultValuesFile);
 
-  await prisma.damageType.upsert({
-    where: { id: 'Bludgeoning' },
-    update: {},
-    create: {
-      id: 'Bludgeoning',
-      name: 'Дробящий'
-    }
-  });
+  const promises = [];
 
-  await prisma.damageType.upsert({
-    where: { id: 'Cold' },
-    update: {},
-    create: {
-      id: 'Cold',
-      name: 'Холод'
-    }
-  });
+  const allDamageTypes = new Set();
+  const damageStrings = Array.from(
+    new Set(creatures.flatMap(({ immune, resist, vulnerable }) => [immune, resist, vulnerable]))
+  );
 
-  await prisma.damageType.upsert({
-    where: { id: 'Fire' },
-    update: {},
-    create: {
-      id: 'Fire',
-      name: 'Огонь'
+  for (const damageString of damageStrings) {
+    let localDamageList: string[] = [];
+    if (damageString) {
+      const parts = damageString.split('; ');
+      console.log(parts);
+      localDamageList = parts.length > 1 ? [parts[1]] : [];
+      localDamageList = localDamageList.concat(parts[0].split(','));
     }
-  });
+    if (localDamageList.length > 0) {
+      for (const damageType of localDamageList) {
+        console.log(damageType);
+        allDamageTypes.add(damageType.trim().toLowerCase());
+      }
+    }
+  }
 
-  await prisma.damageType.upsert({
-    where: { id: 'Force' },
-    update: {},
-    create: {
-      id: 'Force',
-      name: 'Силовой'
+  for (const damageType of Array.from(allDamageTypes)) {
+    if (damageType && typeof damageType === 'string') {
+      promises.push(
+        prisma.damageType
+          .create({
+            data: {
+              name: damageType,
+              id: damageType
+            }
+          })
+          .catch((error) => {
+            // console.error(`Failed to create damage type "${damageType}":`, error);
+          })
+      );
     }
-  });
+  }
 
-  await prisma.damageType.upsert({
-    where: { id: 'Lightning' },
-    update: {},
-    create: {
-      id: 'Lightning',
-      name: 'Молния'
-    }
-  });
-
-  await prisma.damageType.upsert({
-    where: { id: 'Necrotic' },
-    update: {},
-    create: {
-      id: 'Necrotic',
-      name: 'Некротический'
-    }
-  });
-
-  await prisma.damageType.upsert({
-    where: { id: 'Piercing' },
-    update: {},
-    create: {
-      id: 'Piercing',
-      name: 'Колющий'
-    }
-  });
-
-  await prisma.damageType.upsert({
-    where: { id: 'Poison' },
-    update: {},
-    create: {
-      id: 'Poison',
-      name: 'Яд'
-    }
-  });
-
-  await prisma.damageType.upsert({
-    where: { id: 'Psychic' },
-    update: {},
-    create: {
-      id: 'Psychic',
-      name: 'Психический'
-    }
-  });
-
-  await prisma.damageType.upsert({
-    where: { id: 'Radiant' },
-    update: {},
-    create: {
-      id: 'Radiant',
-      name: 'Излучение'
-    }
-  });
-
-  await prisma.damageType.upsert({
-    where: { id: 'Slashing' },
-    update: {},
-    create: {
-      id: 'Slashing',
-      name: 'Рубящий'
-    }
-  });
-
-  await prisma.damageType.upsert({
-    where: { id: 'Thunder' },
-    update: {},
-    create: {
-      id: 'Thunder',
-      name: 'Звуковой'
-    }
+  Promise.all(promises).then(() => {
+    return 1;
   });
 }
-SeedDamageType()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });

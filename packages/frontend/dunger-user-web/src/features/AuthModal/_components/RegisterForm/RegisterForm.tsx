@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { Button, ButtonVariant, ButtonWidth, ShowPasswordButton, Stack, TextInput } from '@dunger/ui';
 import { emailPattern } from 'utils/isValidEmail';
@@ -10,8 +10,13 @@ export const RegisterForm = () => {
 
   const { registerAction, loading } = useAuthAction();
 
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    void registerAction(new FormData(e.currentTarget));
+  };
+
   return (
-    <form action={registerAction} {...stylex.props(styles.root)}>
+    <form onSubmit={onSubmit} {...stylex.props(styles.root)}>
       <Stack gap={24}>
         <TextInput
           pattern={emailPattern}

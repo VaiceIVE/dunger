@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { Button, ButtonVariant, ButtonWidth, ShowPasswordButton, Stack, TextInput } from '@dunger/ui';
 import { useAuthAction } from '../../useAuthAction';
@@ -8,8 +8,13 @@ export const LoginForm = () => {
 
   const { loginAction, loading } = useAuthAction();
 
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    void loginAction(new FormData(e.currentTarget));
+  };
+
   return (
-    <form action={loginAction} {...stylex.props(styles.root)}>
+    <form onSubmit={onSubmit} {...stylex.props(styles.root)}>
       <Stack gap={24}>
         <TextInput label="Логин" placeholder="@dunger" name={'username'} required />
         <TextInput

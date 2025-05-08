@@ -30,7 +30,7 @@ services:
       timeout: 10s
       retries: 5
     volumes:
-      - ./realm-export.json:/opt/keycloak/data/import/realm-export.json
+      - ./keycloak/realm-export.json:/opt/keycloak/data/export
 
 volumes:
   postgres_data:

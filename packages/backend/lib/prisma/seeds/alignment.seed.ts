@@ -1,87 +1,38 @@
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
-
 export async function SeedAlignment() {
-  await prisma.alignment.upsert({
-    where: { name: 'Законно-добрый' },
-    update: {},
-    create: {
-      name: 'Законно-добрый'
-    }
-  });
+  const filePath = resolve(import.meta.dirname, '../data/creatures_data.json');
+  const defaultValuesFile = await readFile(filePath, { encoding: 'utf-8' });
+  const creatures: {
+    alignment: string;
+  }[] = JSON.parse(defaultValuesFile);
 
-  await prisma.alignment.upsert({
-    where: { name: 'Нейтрально-добрый' },
-    update: {},
-    create: {
-      name: 'Нейтрально-добрый'
-    }
-  });
+  const promises = [];
 
-  await prisma.alignment.upsert({
-    where: { name: 'Хаотично-добрый' },
-    update: {},
-    create: {
-      name: 'Хаотично-добрый'
-    }
-  });
+  const alignments = Array.from(new Set(creatures.map((x) => x.alignment)));
 
-  await prisma.alignment.upsert({
-    where: { name: 'Законно-нейтральный' },
-    update: {},
-    create: {
-      name: 'Законно-нейтральный'
-    }
-  });
+  for (const alignment of alignments) {
+    const normalizedName = alignment.trim().toLowerCase();
 
-  await prisma.alignment.upsert({
-    where: { name: 'Нейтральный' },
-    update: {},
-    create: {
-      name: 'Нейтральный'
-    }
-  });
-
-  await prisma.alignment.upsert({
-    where: { name: 'Хаотично-нейтральный' },
-    update: {},
-    create: {
-      name: 'Хаотично-нейтральный'
-    }
-  });
-
-  await prisma.alignment.upsert({
-    where: { name: 'Законно-злой' },
-    update: {},
-    create: {
-      name: 'Законно-злой'
-    }
-  });
-
-  await prisma.alignment.upsert({
-    where: { name: 'Нейтрально-злой' },
-    update: {},
-    create: {
-      name: 'Нейтрально-злой'
-    }
-  });
-
-  await prisma.alignment.upsert({
-    where: { name: 'Хаотично-злой' },
-    update: {},
-    create: {
-      name: 'Хаотично-злой'
-    }
+    promises.push(
+      prisma.alignment
+        .upsert({
+          where: { name: normalizedName },
+          update: {},
+          create: {
+            name: alignment
+          }
+        })
+        .catch((error) => {
+          // console.error(`Failed to upsert alignment "${alignment}":`, error);
+        })
+    );
+  }
+  Promise.all(promises).then(() => {
+    return 1;
   });
 }
-
-SeedAlignment()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });

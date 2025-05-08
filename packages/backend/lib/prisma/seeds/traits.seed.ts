@@ -7,27 +7,27 @@ const prisma = new PrismaClient();
 export async function SeedTraits() {
   const filePath = resolve(import.meta.dirname, '../data/traits.json');
   const defaultValuesFile = await readFile(filePath, { encoding: 'utf-8' });
-  const data: { name: string; text: string }[] = JSON.parse(defaultValuesFile);
+  const traits: { name: string; text: string; attack: string }[] = JSON.parse(defaultValuesFile);
 
-  for (const trait of data) {
-    await prisma.trait.upsert({
-      where: {
-        description: trait.text
-      },
-      update: {},
-      create: {
-        description: trait.text,
-        name: trait.name
-      }
-    });
+  const promises = [];
+
+  for (const trait of traits) {
+    promises.push(
+      prisma.trait
+        .create({
+          data: {
+            description: trait.text,
+            name: trait.name,
+            is_template: true
+          }
+        })
+        .catch((error) => {
+          // console.error(`Error creating trait ${trait_data.name}:`, error);
+        })
+    );
   }
-}
-SeedTraits()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
+
+  Promise.all(promises).then(() => {
+    return 1;
   });
+}

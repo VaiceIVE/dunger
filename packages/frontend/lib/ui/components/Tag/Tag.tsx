@@ -26,9 +26,11 @@ export const Tag = ({ children, color = 'gray' }: TagProps) => {
 
 const styles = stylex.create({
   root: (backgroundColor: string, color: string) => ({
+    alignItems: 'center',
     backgroundColor,
     borderRadius: 12,
     color,
+    display: 'flex',
     overflow: 'hidden',
     padding: '2px 6px',
     textOverflow: 'ellipsis',

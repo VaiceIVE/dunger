@@ -13,8 +13,21 @@ export interface UpdatePasswordInput {
  */
 export async function updatePassword(apiUrl: string, input: UpdatePasswordInput): Promise<AuthMethodReturn> {
   try {
+    const response = await fetch(apiUrl + '/some-url', {
+      body: JSON.stringify(input),
+      headers: { 'Content-type': 'application/json' }
+    });
+
+    if (!response.ok)
+      return {
+        data: null,
+        error: (await response.json()) as Error
+      };
+
+    const data = (await response.json()) as AuthTokensResult;
+
     return {
-      data: null
+      data: data
     };
   } catch (error: unknown) {
     return {

@@ -18,6 +18,12 @@ export async function refreshToken(apiUrl: string, input: RefreshTokenInput): Pr
       headers: { 'Content-Type': 'application/json' }
     });
 
+    if (!response.ok)
+      return {
+        data: null,
+        error: (await response.json()) as Error
+      };
+
     const data = (await response.json()) as AuthTokensResult;
 
     return {

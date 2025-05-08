@@ -79,7 +79,7 @@ export const SideBar = () => {
         </Stack>
 
         <Stack gap={16}>
-          <Link to={'/beast/new'}>
+          <Link to={isAuthenticated ? '/beast/new' : '/no-auth'}>
             <IconButton>
               <PlusFilledIcon />
             </IconButton>
@@ -151,6 +151,7 @@ const styles = stylex.create({
     borderRightColor: '#EAEAEA',
     borderRightStyle: 'solid',
     borderRightWidth: 1,
+    boxShadow: '4px 0 0.9em rgba(0, 0, 0, 0.1)',
     height: '100dvh',
     left: 77,
     position: 'fixed',

@@ -13,13 +13,21 @@ export interface ResetPasswordInput {
  */
 export async function resetPassword(apiUrl: string, input: ResetPasswordInput): Promise<AuthMethodReturn> {
   try {
-    const response = await fetch(apiUrl + '/auth/login', {
+    const response = await fetch(apiUrl + '/some-url', {
       body: JSON.stringify(input),
       headers: { 'Content-type': 'application/json' }
     });
 
+    if (!response.ok)
+      return {
+        data: null,
+        error: (await response.json()) as Error
+      };
+
+    const data = (await response.json()) as AuthTokensResult;
+
     return {
-      response
+      data: data
     };
   } catch (error: unknown) {
     return {

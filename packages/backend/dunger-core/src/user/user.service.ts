@@ -120,10 +120,26 @@ export class UserService implements OnModuleInit {
         return await this.authService.login(username, password);
       });
     } catch (error) {
+      let errorText = 'failed to create user';
+      let statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+
+      const status = error?.response?.status || error?.body?.statusCode;
+
+      switch (status) {
+        case HttpStatus.CONFLICT:
+          errorText = 'A user with such data is already registered';
+          statusCode = HttpStatus.CONFLICT;
+          break;
+        case HttpStatus.BAD_REQUEST:
+          errorText = 'The password does not meet the requirements';
+          statusCode = HttpStatus.BAD_REQUEST;
+          break;
+      }
+
       throw new AppError({
-        errorText: `failed to create user`,
-        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-        additionalInfo: `original error: ${error}`,
+        errorText,
+        statusCode,
+        additionalInfo: error?.message || JSON.stringify(error),
       });
     }
   }

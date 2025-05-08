@@ -14,7 +14,7 @@ export const LoginButton = ({
   const openModal = () => {
     const newParams = new URLSearchParams(searchParams);
     newParams.set('auth', authView);
-    void navigate(`?${newParams.toString()}`, { replace: false });
+    void navigate(`?${newParams.toString()}`, { replace: false, preventScrollReset: true });
   };
 
   return <div onClick={openModal}>{children}</div>;
