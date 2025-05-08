@@ -44,11 +44,45 @@ export class AuthService {
         refreshToken: data.refresh_token,
         refreshTokenExpiresIn: data.refresh_expires_in,
       };
-    } catch (error) {
+    } catch (error: any) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          const status = error.response.status;
+          const kcError = error.response.data?.error;
+          const kcDescription = error.response.data?.error_description;
+
+          if (kcError === 'invalid_grant') {
+            throw new AppError({
+              errorText: 'wrong email or password',
+              statusCode: HttpStatus.FORBIDDEN,
+            });
+          }
+
+          throw new AppError({
+            errorText: `Keycloak responded with status ${status}`,
+            statusCode: status,
+            additionalInfo: `error: ${kcError}, description: ${kcDescription}`,
+          });
+        } else if (error.request) {
+          throw new AppError({
+            errorText: 'No response from Keycloak',
+            statusCode: HttpStatus.GATEWAY_TIMEOUT,
+            additionalInfo:
+              'Request was made but no response received from Keycloak',
+          });
+        } else {
+          throw new AppError({
+            errorText: 'Failed to make request to Keycloak',
+            statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+            additionalInfo: error.message,
+          });
+        }
+      }
+
       throw new AppError({
-        errorText: `failed to generate tokens`,
+        errorText: 'Unexpected error while retrieving tokens',
         statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-        additionalInfo: `original error: ${error}`,
+        additionalInfo: error?.message || String(error),
       });
     }
   }
