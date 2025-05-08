@@ -27,7 +27,7 @@ export class AppError extends Error {
   constructor(readonly errorFields: AppErrorConstructorFields) {
     super(errorFields.errorText);
     this.errorText = errorFields.errorText;
-    this.errorScope = errorFields.errorScope ?? 'sk-connect-company-api';
+    this.errorScope = errorFields.errorScope ?? 'dunger-core-api';
     this.statusCode =
       errorFields.statusCode ?? HttpStatus.INTERNAL_SERVER_ERROR;
     this.additionalInfo = errorFields.additionalInfo;
