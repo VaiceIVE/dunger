@@ -5,9 +5,10 @@ import { CreaturesModule } from 'src/creatures/creatures.module';
 import { PrismaClient } from '@prisma/client';
 import { AuthModule } from 'src/auth/auth.module';
 import { UserModule } from 'src/user/user.module';
+import { DirectoriesModule } from 'src/directories/directories.module';
 
 @Module({
-  imports: [CreaturesModule, AuthModule, UserModule],
+  imports: [CreaturesModule, AuthModule, UserModule, DirectoriesModule],
   controllers: [AppController],
   providers: [AppService, PrismaClient],
 })

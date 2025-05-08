@@ -1,16 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
-import { UpdateCreatureDto } from './dto/update-creature.dto';
 import { PrismaClient } from '@prisma/client';
-import { PaginationQureiedQuery } from 'src/app/dto/queries/paginationQueriedQuery';
-import { PaginationQuery } from 'src/app/dto/queries/paginationQuery';
 import { ApiCreatureInput } from './dto/stolen_types/ApiCreatureInput';
-import { skip } from 'node:test';
-import { ApiCreature } from './dto/stolen_types/ApiCreature';
 import { nullSkillsObject } from './objects/nullSkills.object';
 import { nullSpeedObject } from './objects/nullSpeed.object';
 import { nullStatObject } from './objects/nullStat.objecxt';
 import { nullSensesObject } from './objects/nullSenses.object';
+import { PaginationQueryDto } from 'src/common/dto';
 
 @Injectable()
 export class CreaturesService {
@@ -49,195 +45,69 @@ export class CreaturesService {
     return `This action returns all creatures`;
   }
 
-  async findSome(query: PaginationQureiedQuery){
-    let results = []
-    let total = 0
-    if(query.query){
-      results = await this.prisma.creature.findMany({
-        select: {
-          id: true
-        },
-        where: {
-          name: {
-            contains: query.query
-          }
-        },
-        skip: query.offset,
-        take: query.limit
-      })
-      total = await this.prisma.creature.count({
-        where: {
-          name: {
-            contains: query.query
-          }
-        }
-      })
-    }else{
-      results = await this.prisma.creature.findMany({
-        select: {
-          id: true
-        },
-        skip: query.offset,
-        take: query.limit
-      })
-      total = await this.prisma.creature.count()
-    }
+  async findSome(query: PaginationQueryDto) {
+    const { query: searchQuery, offset, limit } = query;
 
-    let final_results = []
+    const where = searchQuery ? { name: { contains: searchQuery } } : undefined;
 
-    for(const result of results){
-      final_results.push(await this.selectCreatureForCard(result.id))
-    }
+    const [results, total] = await Promise.all([
+      this.prisma.creature.findMany({
+        select: { id: true },
+        where,
+        skip: offset,
+        take: limit,
+      }),
+      this.prisma.creature.count({ where }),
+    ]);
 
-    console.log('this was final results')
+    const final_results = await Promise.all(
+      results.map(({ id }) => this.selectCreatureForCard(id)),
+    );
+
     return {
       pagination: {
-        limit: query.limit,
-        offset: query.offset,
-        totalCount: total
+        limit,
+        offset,
+        totalCount: total,
       },
       results: final_results,
-    }
-    
+    };
   }
 
-  async findTemplates(query: PaginationQureiedQuery){
-    let results = []
-    let total = 0
-    if(query.query){
-      results = await this.prisma.creature.findMany({
-        where: {
-          name: {
-            contains: query.query
-          }
-        },
-        select: {
-          name: true,
-          id: true
-        },
-        skip: query.offset,
-        take: query.limit
-      })
-      total = await this.prisma.creature.count({
-        where: {
-          name: {
-            contains: query.query
-          }
-        }
-      })
-    }else{
-      results = await this.prisma.creature.findMany({
-        select: {
-          name: true,
-          id: true
-        },
-        skip: query.offset,
-        take: query.limit
-      })
-      total = await this.prisma.creature.count()
-    }
+  async findTemplates(query: PaginationQueryDto) {
+    const { query: search, offset, limit } = query;
 
-    let final_results = []
+    const whereClause = search ? { name: { contains: search } } : undefined;
 
-    for(const result of results){
-      final_results.push(await this.selectCreatureForCard(result.id))
-    }
+    const [rawResults, total] = await this.prisma.$transaction([
+      this.prisma.creature.findMany({
+        where: whereClause,
+        select: { id: true },
+        skip: offset,
+        take: limit,
+      }),
+      this.prisma.creature.count({ where: whereClause }),
+    ]);
 
-    console.log('this was final results')
+    const results = await Promise.all(
+      rawResults.map(({ id }) => this.selectCreatureForCard(id)),
+    );
+
     return {
       pagination: {
-        limit: query.limit,
-        offset: query.offset,
-        totalCount: total
+        limit,
+        offset,
+        totalCount: total,
       },
-      results: results,
-    }
-    
-  }
-
-  async findTypes(){
-    return await this.prisma.type.findMany({
-      select: {
-        id: true,
-        name: true
-      }
-    })
-  }
-
-  async findAlignment(){
-    return await this.prisma.alignment.findMany()
-  }
-
-  async findSizes() {
-    return await this.prisma.size.findMany();
-  }
-
-  async findBimes() {
-    return await this.prisma.biome.findMany({});
-  }
-
-  async findDamageType() {
-    return await this.prisma.damageType.findMany();
+      results,
+    };
   }
 
   async findOne(id: string) {
     return this.selectCreatureForCard(id);
   }
-  async findLanguages(query: PaginationQureiedQuery) {
-    let results = [];
-    let total = 0;
-    if (query.query) {
-      results = await this.prisma.language.findMany({
-        where: {
-          name: {
-            contains: query.query,
-          },
-        },
-        select: {
-          name: true,
-          id: true,
-        },
-        skip: query.offset,
-        take: query.limit,
-      });
-      total = await this.prisma.language.count({
-        where: {
-          name: {
-            contains: query.query,
-          },
-        },
-      });
-    } else {
-      results = await this.prisma.language.findMany({
-        select: {
-          name: true,
-          id: true,
-        },
-        skip: query.offset,
-        take: query.limit,
-      });
-      total = await this.prisma.language.count();
-    }
 
-    return {
-      pagination: {
-        limit: query.limit,
-        offset: query.offset,
-        totalCount: total,
-      },
-      results: results,
-    };
-  }
-
-  async findCR() {
-    return await this.prisma.challengeRating.findMany();
-  }
-
-  async findSkills() {
-    return await this.prisma.skillsList.findMany();
-  }
-
-  async findTraitsGroups(query: PaginationQureiedQuery) {
+  async findTraitsGroups(query: PaginationQueryDto) {
     let results;
     let total;
     if (query.query) {
@@ -245,9 +115,9 @@ export class CreaturesService {
         by: ['name'],
         where: {
           name: {
-            contains: query.query
+            contains: query.query,
           },
-          is_template: true
+          is_template: true,
         },
         _count: {
           id: true,
@@ -267,7 +137,7 @@ export class CreaturesService {
       results = await this.prisma.trait.groupBy({
         by: ['name'],
         where: {
-          is_template: true
+          is_template: true,
         },
         _count: {
           id: true,
@@ -296,7 +166,7 @@ export class CreaturesService {
     };
   }
 
-  async findActionsGroups(query: PaginationQureiedQuery) {
+  async findActionsGroups(query: PaginationQueryDto) {
     let results;
     let total;
     if (query.query) {
@@ -304,9 +174,9 @@ export class CreaturesService {
         by: ['name'],
         where: {
           name: {
-            contains: query.query
+            contains: query.query,
           },
-          is_template: true
+          is_template: true,
         },
         _count: {
           id: true,
@@ -326,10 +196,10 @@ export class CreaturesService {
       results = await this.prisma.action.groupBy({
         by: ['name'],
         _count: {
-          id: true
+          id: true,
         },
         where: {
-          is_template: true
+          is_template: true,
         },
         orderBy: {
           _count: {
@@ -359,18 +229,18 @@ export class CreaturesService {
     return await this.prisma.trait.findMany({
       where: {
         name: groupName,
-        is_template: true
-      }
-    })
+        is_template: true,
+      },
+    });
   }
 
   async findActionsGroup(groupName: string) {
     return await this.prisma.action.findMany({
       where: {
         name: groupName,
-        is_template: true
-      }
-    })
+        is_template: true,
+      },
+    });
   }
 
   private cleanObj(obj) {
@@ -499,8 +369,8 @@ export class CreaturesService {
         });
       }
     }
-    if(updateCreatureDto.biomes_ids){
-      for(const biome_id of updateCreatureDto.biomes_ids){
+    if (updateCreatureDto.biomes_ids) {
+      for (const biome_id of updateCreatureDto.biomes_ids) {
         await this.prisma.creature.update({
           where: { id: id },
           data: {
@@ -1275,8 +1145,10 @@ export class CreaturesService {
       type_id: result.type_relation ? result.type_relation.id : null,
       type_name: result.type_relation ? result.type_relation.name : null,
       vulnerabilities: result.vulnerabilities ? result.vulnerabilities : [],
-      vulnerabilities_ids: result.vulnerabilities ? result.vulnerabilities.map(vun => vun.id) : []
-    } //as ApiCreature
+      vulnerabilities_ids: result.vulnerabilities
+        ? result.vulnerabilities.map((vun) => vun.id)
+        : [],
+    }; //as ApiCreature
   }
 
   remove(id: number) {
