@@ -4,13 +4,16 @@ import { Prisma, PrismaClient } from '@dunger/prisma';
 import { ApiCreatureInput } from './dto/stolen_types/ApiCreatureInput';
 import { nullSkillsObject } from './objects/nullSkills.object';
 import { nullSpeedObject } from './objects/nullSpeed.object';
-import { nullStatObject } from './objects/nullStat.objecxt';
+import { nullStatObject } from './objects/nullStat.object';
 import { nullSensesObject } from './objects/nullSenses.object';
 import { PaginationQueryDto } from 'src/common/dto';
 import { ApiCreatureList } from './dto/stolen_types/ApiCreatureList';
 import { ApiPaginatedResult } from './dto/stolen_types/_common';
 import { ConfigService } from '@nestjs/config';
 import { ApiCreature } from './dto/stolen_types/ApiCreature';
+import { creatureInclude } from './includes/creature.include';
+import { AppError } from 'src/common/errors';
+import { HttpStatus } from '@dunger/common-enums';
 
 @Injectable()
 export class CreaturesService {
@@ -947,260 +950,61 @@ export class CreaturesService {
     return this.selectCreatureForCard(id);
   }
 
-  private async selectCreatureForCard(
-    creatureId: string,
-  ): Promise<ApiCreature> {
-    const result = await this.prisma.creature.findUnique({
-      where: {
-        id: creatureId,
-      },
-      include: {
-        alignment_relation: true,
-        biome_relation: true,
-        race_relation: true,
-        size_relation: true,
-        type_relation: true,
-        immunities: true,
-        resistances: true,
-        vulnerabilities: true,
-        speed: {
-          omit: {
-            id: true,
-          },
-        },
-        skills: {
-          omit: {
-            id: true,
-          },
-          include: {
-            charisma: {
-              include: {
-                deception: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                intimidation: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                performance: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                persuasion: {
-                  omit: {
-                    id: true,
-                  },
-                },
-              },
-              omit: {
-                id: true,
-              },
-            },
-            dexterity: {
-              include: {
-                acrobatics: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                sleight_of_hand: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                stealth: {
-                  omit: {
-                    id: true,
-                  },
-                },
-              },
-              omit: {
-                id: true,
-              },
-            },
-            intelligence: {
-              include: {
-                arcana: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                history: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                investigation: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                nature: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                religion: {
-                  omit: {
-                    id: true,
-                  },
-                },
-              },
-              omit: {
-                id: true,
-              },
-            },
-            strength: {
-              include: {
-                athletics: {
-                  omit: {
-                    id: true,
-                  },
-                },
-              },
-              omit: {
-                id: true,
-              },
-            },
-            wisdom: {
-              include: {
-                animal_handling: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                insight: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                medicine: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                perception: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                survival: {
-                  omit: {
-                    id: true,
-                  },
-                },
-              },
-              omit: {
-                id: true,
-              },
-            },
-          },
-        },
-        stats: {
-          omit: {
-            id: true,
-          },
-          include: {
-            charisma: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-            constitution: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-            dexterity: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-            intelligence: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-            strength: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-            wisdom: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-          },
-        },
-        senses: {
-          omit: {
-            creature_id: true,
-          },
-        },
-        actions: true,
-        traits: true,
-        languages: true,
-      },
-    });
-
+  private async mapCreatureToApiCreature(creature): Promise<ApiCreature> {
     const creature_biomes = await this.prisma.biome.findMany({
-      where: {
-        id: {
-          in: result.biomes_ids,
-        },
-      },
+      where: { id: { in: creature.biomes_ids } },
     });
 
     return {
-      actions: result.actions ? result.actions : [],
-      alignment_id: result.alignment_relation
-        ? result.alignment_relation.id
-        : null,
-      alignment_name: result.alignment_relation
-        ? result.alignment_relation.name
-        : null,
-      armor_class: result.armor_class,
-      armor_type_id: null, //TODO
-      armor_type_name: null, //TODO
-      biomes: creature_biomes ?? [],
-      biomes_ids: result.biomes_ids,
-      challenge_rating: result.challenge_rating,
-      description: result.description,
+      id: creature.id,
+      name: creature.name,
+      description: creature.description,
+      alignment_id: creature.alignment_relation?.id ?? null,
+      alignment_name: creature.alignment_relation?.name ?? null,
+      size_id: creature.size_relation?.id ?? null,
+      size_name: creature.size_relation?.name ?? null,
+      type_id: creature.type_relation?.id ?? null,
+      type_name: creature.type_relation?.name ?? null,
+      armor_class: creature.armor_class,
+      armor_type_id: null, // TODO
+      armor_type_name: null, // TODO
+      biomes_ids: creature.biomes_ids,
+      biomes: creature_biomes,
+      challenge_rating: creature.challenge_rating,
+      hit_points: creature.hit_points,
       generation_info: null,
-      hit_points: result.hit_points,
-      id: result.id,
-      immunities: result.immunities,
-      immunities_ids: result.immunities
-        ? result.immunities.map((imm) => imm.id)
-        : [],
-      languages: result.languages ? result.languages : [],
-      languages_ids: result.languages
-        ? result.languages.map((lang) => lang.id)
-        : [],
-      name: result.name,
-      resistances: result.resistances,
-      resistances_ids: result.resistances
-        ? result.resistances.map((res) => res.id)
-        : [],
-      senses: result.senses ?? nullSensesObject,
-      size_id: result.size_relation ? result.size_relation.id : null,
-      size_name: result.size_relation ? result.size_relation.name : null,
-      skills: result.skills ? result.skills : nullSkillsObject,
-      speed: result.speed ? result.speed : nullSpeedObject,
-      stats: result.stats ? result.stats : nullStatObject,
-      traits: result.traits ? result.traits : [],
-      type_id: result.type_relation ? result.type_relation.id : null,
-      type_name: result.type_relation ? result.type_relation.name : null,
-      vulnerabilities: result.vulnerabilities ? result.vulnerabilities : [],
-      vulnerabilities_ids: result.vulnerabilities
-        ? result.vulnerabilities.map((vun) => vun.id)
-        : [],
+      languages: creature.languages ?? [],
+      languages_ids: creature.languages?.map((l) => l.id) ?? [],
+      immunities: creature.immunities ?? [],
+      immunities_ids: creature.immunities?.map((i) => i.id) ?? [],
+      resistances: creature.resistances ?? [],
+      resistances_ids: creature.resistances?.map((r) => r.id) ?? [],
+      vulnerabilities: creature.vulnerabilities ?? [],
+      vulnerabilities_ids: creature.vulnerabilities?.map((v) => v.id) ?? [],
+      senses: creature.senses ?? nullSensesObject,
+      skills: creature.skills ?? nullSkillsObject,
+      stats: creature.stats ?? nullStatObject,
+      speed: creature.speed ?? nullSpeedObject,
+      traits: creature.traits ?? [],
+      actions: creature.actions ?? [],
     };
+  }
+
+  private async selectCreatureForCard(
+    creatureId: string,
+  ): Promise<ApiCreature> {
+    const creature = await this.prisma.creature.findUnique({
+      where: { id: creatureId },
+      include: creatureInclude,
+    });
+
+    if (!creature)
+      throw new AppError({
+        statusCode: HttpStatus.NOT_FOUND,
+        errorText: `Creature not found: ${creatureId}`,
+      });
+
+    return this.mapCreatureToApiCreature(creature);
   }
 
   remove(id: number) {
