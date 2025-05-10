@@ -35,7 +35,7 @@ export class DirectoriesController {
    */
   @Get('/biomes')
   async findBiomes() {
-    return await this.directoriesService.findBimes();
+    return await this.directoriesService.findBiomes();
   }
 
   /**

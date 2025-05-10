@@ -1,58 +1,114 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
-import { PrismaClient } from '@prisma/client';
+import { Prisma, PrismaClient } from '@dunger/prisma';
 import { ApiCreatureInput } from './dto/stolen_types/ApiCreatureInput';
 import { nullSkillsObject } from './objects/nullSkills.object';
 import { nullSpeedObject } from './objects/nullSpeed.object';
 import { nullStatObject } from './objects/nullStat.objecxt';
 import { nullSensesObject } from './objects/nullSenses.object';
 import { PaginationQueryDto } from 'src/common/dto';
+import { ApiCreatureList } from './dto/stolen_types/ApiCreatureList';
+import { ApiPaginatedResult } from './dto/stolen_types/_common';
+import { ConfigService } from '@nestjs/config';
+import { ApiCreature } from './dto/stolen_types/ApiCreature';
 
 @Injectable()
 export class CreaturesService {
-  constructor(private readonly prisma: PrismaClient) {}
+  private readonly customContentSource: string;
 
+  constructor(
+    private readonly prisma: PrismaClient,
+    private readonly configService: ConfigService,
+  ) {
+    this.customContentSource = this.configService.get<string>(
+      'CUSTOM_CONTENT_SOURCE',
+    );
+  }
+
+  /**
+   * Создаёт существо вручную, опционально на основе шаблона.
+   * Устанавливает источник как кастомный (по shortName из this.customContentSource).
+   *
+   * @param createCreatureDto - Данные для создания существа вручную.
+   * @returns id созданного существа.
+   */
   async initCreature(createCreatureDto: CreateCreatureManualDto) {
-    if (
-      createCreatureDto.template_id != null &&
-      createCreatureDto.template_id != undefined
-    ) {
+    const { template_id, name, challenge_rating } = createCreatureDto;
+
+    // Получаем id кастомного источника (например, "DUNGER")
+    const customSourceId = (
+      await this.prisma.source.findUnique({
+        where: { shortName: this.customContentSource },
+        select: { id: true },
+      })
+    )?.id;
+
+    const creatureData = {
+      name,
+      challenge_rating,
+      source_id: customSourceId,
+    };
+
+    // Если указан шаблон — копируем все поля, кроме id, и переопределяем имя/CR/source
+    if (template_id) {
       const template = await this.prisma.creature.findUnique({
-        where: { id: createCreatureDto.template_id },
+        where: { id: template_id },
       });
-      delete template.id;
-      template.name = createCreatureDto.name;
-      template.challenge_rating = createCreatureDto.challenge_rating;
-      return await this.prisma.creature.create({
-        data: template,
-        select: {
-          id: true,
-        },
-      });
+
+      if (template) {
+        const { id: _, ...templateData } = template;
+        return this.prisma.creature.create({
+          data: { ...templateData, ...creatureData },
+          select: { id: true },
+        });
+      }
     }
-    return await this.prisma.creature.create({
-      data: {
-        name: createCreatureDto.name,
-        challenge_rating: createCreatureDto.challenge_rating,
-      },
-      select: {
-        id: true,
-      },
+
+    // Если шаблона нет — создаём существо с переданными полями
+    return this.prisma.creature.create({
+      data: creatureData,
+      select: { id: true },
     });
   }
 
-  findAll() {
-    return `This action returns all creatures`;
-  }
+  /**
+   * Возвращает список существ с пагинацией и фильтрацией по имени.
+   * Исключает существа, источник которых соответствует кастомному контенту (shortName берётся из configService).
+   *
+   * @param query - Объект с параметрами пагинации и поиска.
+   * @returns Существа + информация о пагинации.
+   */
+  async findSome(
+    query: PaginationQueryDto,
+  ): Promise<{ creatures: ApiCreatureList } & ApiPaginatedResult> {
+    const { query: search, offset, limit } = query;
 
-  async findSome(query: PaginationQueryDto) {
-    const { query: searchQuery, offset, limit } = query;
+    // Получаем id кастомного источника (например, 'DUNGER'), чтобы исключить его из выборки
+    const dungerSource = await this.prisma.source.findUnique({
+      where: { shortName: this.customContentSource },
+      select: { id: true },
+    });
 
-    const where = searchQuery ? { name: { contains: searchQuery } } : undefined;
+    const excludeSourceId = dungerSource?.id;
 
-    const [results, total] = await Promise.all([
+    const where = {
+      ...(search ? { name: { contains: search } } : {}),
+      ...(excludeSourceId ? { source_id: { not: excludeSourceId } } : {}),
+    };
+
+    const [creaturesRaw, totalCount] = await Promise.all([
       this.prisma.creature.findMany({
-        select: { id: true },
+        select: {
+          id: true,
+          name: true,
+          challenge_rating: true,
+          type_relation: {
+            select: { name: true },
+          },
+          alignment_relation: {
+            select: { name: true },
+          },
+        },
         where,
         skip: offset,
         take: limit,
@@ -60,38 +116,52 @@ export class CreaturesService {
       this.prisma.creature.count({ where }),
     ]);
 
-    const final_results = await Promise.all(
-      results.map(({ id }) => this.selectCreatureForCard(id)),
+    const creatures = creaturesRaw.map(
+      ({ type_relation, alignment_relation, ...rest }) => ({
+        ...rest,
+        type_name: type_relation.name,
+        alignment_name: alignment_relation?.name,
+      }),
     );
 
     return {
-      pagination: {
-        limit,
-        offset,
-        totalCount: total,
-      },
-      results: final_results,
+      pagination: { limit, offset, totalCount },
+      creatures,
     };
   }
 
+  /**
+   * Возвращает список шаблонов с пагинацией и фильтрацией по имени.
+   * Исключает шаблоны, источник которых соответствует кастомному контенту (shortName берётся из configService).
+   *
+   * @param query - Объект с параметрами пагинации и поиска.
+   * @returns Шаблоны + информация о пагинации.
+   */
   async findTemplates(query: PaginationQueryDto) {
     const { query: search, offset, limit } = query;
 
-    const whereClause = search ? { name: { contains: search } } : undefined;
+    // Получаем id кастомного источника (например, 'DUNGER'), чтобы исключить его из выборки
+    const dungerSource = await this.prisma.source.findUnique({
+      where: { shortName: this.customContentSource },
+      select: { id: true },
+    });
 
-    const [rawResults, total] = await this.prisma.$transaction([
+    const excludeSourceId = dungerSource?.id;
+
+    const where = {
+      ...(search ? { name: { contains: search } } : {}),
+      ...(excludeSourceId ? { source_id: { not: excludeSourceId } } : {}),
+    };
+
+    const [templatesRaw, total] = await this.prisma.$transaction([
       this.prisma.creature.findMany({
-        where: whereClause,
-        select: { id: true },
+        where,
+        select: { id: true, name: true },
         skip: offset,
         take: limit,
       }),
-      this.prisma.creature.count({ where: whereClause }),
+      this.prisma.creature.count({ where }),
     ]);
-
-    const results = await Promise.all(
-      rawResults.map(({ id }) => this.selectCreatureForCard(id)),
-    );
 
     return {
       pagination: {
@@ -99,7 +169,7 @@ export class CreaturesService {
         offset,
         totalCount: total,
       },
-      results,
+      templates: templatesRaw,
     };
   }
 
@@ -167,61 +237,42 @@ export class CreaturesService {
   }
 
   async findActionsGroups(query: PaginationQueryDto) {
-    let results;
-    let total;
-    if (query.query) {
-      results = await this.prisma.action.groupBy({
-        by: ['name'],
-        where: {
-          name: {
-            contains: query.query,
-          },
-          is_template: true,
-        },
-        _count: {
-          id: true,
-        },
-        orderBy: {
-          _count: {
-            id: 'desc',
-          },
-        },
-      });
-      total = await this.prisma.action.groupBy({
-        by: ['name'],
-        _count: true,
-      });
-      total = total.length;
-    } else {
-      results = await this.prisma.action.groupBy({
-        by: ['name'],
-        _count: {
-          id: true,
-        },
-        where: {
-          is_template: true,
-        },
-        orderBy: {
-          _count: {
-            id: 'desc',
-          },
-        },
-      });
-      total = await this.prisma.action.groupBy({
-        by: ['name'],
-      });
-      total = total.length;
-    }
+    const { query: search, limit, offset } = query;
 
-    results = results.slice(query.offset, query.offset + query.limit);
+    const where: Prisma.ActionWhereInput = {
+      is_template: true,
+      ...(search && {
+        name: {
+          contains: search,
+        },
+      }),
+    };
+
+    const groups = await this.prisma.action.groupBy({
+      by: ['name'],
+      where,
+      _count: {
+        id: true,
+      },
+      orderBy: {
+        _count: {
+          id: 'desc',
+        },
+      },
+    });
+
+    const paginated = groups.slice(offset, offset + limit);
 
     return {
       pagination: {
-        limit: query.limit,
-        offset: query.offset,
-        totalCount: total,
+        limit,
+        offset,
+        totalCount: groups.length,
       },
-      results: results.map((res) => ({ count: res._count.id, name: res.name })),
+      results: paginated.map((group) => ({
+        name: group.name,
+        count: group._count.id,
+      })),
     };
   }
 
@@ -362,7 +413,7 @@ export class CreaturesService {
           data: {
             biome_relation: {
               connect: {
-                title: biome.title,
+                name: biome.name,
               },
             },
           },
@@ -896,8 +947,10 @@ export class CreaturesService {
     return this.selectCreatureForCard(id);
   }
 
-  private async selectCreatureForCard(creatureId: string) {
-    let result = await this.prisma.creature.findUnique({
+  private async selectCreatureForCard(
+    creatureId: string,
+  ): Promise<ApiCreature> {
+    const result = await this.prisma.creature.findUnique({
       where: {
         id: creatureId,
       },
@@ -1095,7 +1148,13 @@ export class CreaturesService {
       },
     });
 
-    console.log(result);
+    const creature_biomes = await this.prisma.biome.findMany({
+      where: {
+        id: {
+          in: result.biomes_ids,
+        },
+      },
+    });
 
     return {
       actions: result.actions ? result.actions : [],
@@ -1108,15 +1167,8 @@ export class CreaturesService {
       armor_class: result.armor_class,
       armor_type_id: null, //TODO
       armor_type_name: null, //TODO
-      biomes: result.biome_relation
-        ? result.biome_relation.map((biome) => ({
-            id: biome.id,
-            name: biome.title,
-          }))
-        : [],
-      biomes_ids: result.biome_relation
-        ? result.biome_relation.map((biome) => biome.id)
-        : [],
+      biomes: creature_biomes ?? [],
+      biomes_ids: result.biomes_ids,
       challenge_rating: result.challenge_rating,
       description: result.description,
       generation_info: null,
@@ -1148,7 +1200,7 @@ export class CreaturesService {
       vulnerabilities_ids: result.vulnerabilities
         ? result.vulnerabilities.map((vun) => vun.id)
         : [],
-    }; //as ApiCreature
+    };
   }
 
   remove(id: number) {

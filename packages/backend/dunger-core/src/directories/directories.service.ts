@@ -23,7 +23,7 @@ export class DirectoriesService {
     return await this.prisma.size.findMany();
   }
 
-  async findBimes() {
+  async findBiomes() {
     return await this.prisma.biome.findMany();
   }
 

@@ -28,10 +28,9 @@ export interface ApiCreatureInput {
   alignment_relation?: { name: string };
   type_relation?: { name: string };
   size_relation?: { name: string };
-  biome_relation?: { title: string }[];
+  biome_relation?: { name: string }[];
   // Действия
   actions_ids: number[];
   // Способности и свойства
   traits_ids: number[];
 }
-``;
