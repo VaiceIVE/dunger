@@ -136,7 +136,7 @@ exports.Prisma.LanguageScalarFieldEnum = {
 exports.Prisma.BiomeScalarFieldEnum = {
   id: 'id',
   key: 'key',
-  title: 'title'
+  name: 'name'
 };
 
 exports.Prisma.TypeScalarFieldEnum = {

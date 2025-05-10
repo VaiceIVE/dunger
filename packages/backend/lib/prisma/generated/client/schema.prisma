@@ -36,9 +36,9 @@ model Language {
 }
 
 model Biome {
-  id    Int    @id() @default(autoincrement())
-  key   String @unique
-  title String @unique
+  id   Int    @id() @default(autoincrement())
+  key  String @unique
+  name String @unique
 
   creatures Creature[]
 }

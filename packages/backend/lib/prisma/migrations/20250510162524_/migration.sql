@@ -30,7 +30,7 @@ CREATE TABLE "Language" (
 CREATE TABLE "Biome" (
     "id" SERIAL NOT NULL,
     "key" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
 
     CONSTRAINT "Biome_pkey" PRIMARY KEY ("id")
 );
@@ -533,7 +533,7 @@ CREATE UNIQUE INDEX "Language_name_key" ON "Language"("name");
 CREATE UNIQUE INDEX "Biome_key_key" ON "Biome"("key");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Biome_title_key" ON "Biome"("title");
+CREATE UNIQUE INDEX "Biome_name_key" ON "Biome"("name");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Type_name_key" ON "Type"("name");

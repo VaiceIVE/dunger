@@ -6,6 +6,27 @@ import { PrismaClient } from '@dunger/prisma';
 import type { Creature } from '../types/Creature.ts';
 
 const prisma = new PrismaClient();
+
+function getStatMastery(statName: string, stats: string | undefined): boolean {
+  if (!stats) return false;
+  // Маппинг на русском и английском для статов
+  const statMap: { [key: string]: string[] } = {
+    charisma: ['Хар', 'Char'],
+    constitution: ['Тел', 'Con'],
+    dexterity: ['Лов', 'Dex'],
+    intelligence: ['Инт', 'Int'],
+    wisdom: ['Мдр', 'Муд', 'Wis'],
+    strength: ['Сил', 'Str']
+  };
+
+  const statAbbreviations = statMap[statName.toLowerCase()];
+
+  if (!statAbbreviations) return false;
+
+  // Проверяем наличие хотя бы одного сокращения в строке
+  return statAbbreviations.some((abbr) => stats.includes(abbr));
+}
+
 export async function SeedCreatures() {
   const filePath = resolve(import.meta.dirname, '../data/creatures.json');
   const defaultValuesFile = await readFile(filePath, { encoding: 'utf-8' });
@@ -178,7 +199,11 @@ export async function SeedCreatures() {
         if (skill.split(' ')[0] == 'Медицина' || skill.split(' ')[0] == 'Medicine') {
           creature_skills.medicine = +skill.split(' ')[1];
         }
-        if (skill.split(' ')[0] == 'Восприятие' || skill.split(' ')[0] == 'Perception') {
+        if (
+          skill.split(' ')[0] == 'Восприятие' ||
+          skill.split(' ')[0] == 'Perception' ||
+          skill.split(' ')[0] == 'Внимательность'
+        ) {
           creature_skills.perception = +skill.split(' ')[1];
         }
         if (skill.split(' ')[0] == 'Выживание' || skill.split(' ')[0] == 'Survival') {
@@ -261,7 +286,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.deception,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -269,7 +294,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.intimidation,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -277,7 +302,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.performance,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -285,7 +310,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.persuasion,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {}
@@ -297,7 +322,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.acrobatics,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -305,7 +330,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.sleight_of_hand,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -313,7 +338,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.stealth,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {}
@@ -325,7 +350,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.arcana,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -333,7 +358,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.history,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -341,7 +366,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.investigation,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -349,7 +374,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.nature,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -357,7 +382,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.religion,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {}
@@ -369,7 +394,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.athletics,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {}
@@ -381,7 +406,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.animal_handling,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -389,7 +414,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.insight,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -397,7 +422,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.medicine,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -405,7 +430,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.perception,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {},
@@ -413,7 +438,7 @@ export async function SeedCreatures() {
                       ? {
                           create: {
                             value: creature_skills.survival,
-                            mastery: false
+                            mastery: true
                           }
                         }
                       : {}
@@ -432,37 +457,37 @@ export async function SeedCreatures() {
             charisma: {
               create: {
                 value: +creature_data.cha,
-                mastery: false
+                mastery: getStatMastery('charisma', creature_data.save)
               }
             },
             constitution: {
               create: {
                 value: +creature_data.con,
-                mastery: false
+                mastery: getStatMastery('constitution', creature_data.save)
               }
             },
             dexterity: {
               create: {
                 value: +creature_data.dex,
-                mastery: false
+                mastery: getStatMastery('dexterity', creature_data.save)
               }
             },
             intelligence: {
               create: {
                 value: +creature_data.int,
-                mastery: false
+                mastery: getStatMastery('intelligence', creature_data.save)
               }
             },
             strength: {
               create: {
                 value: +creature_data.str,
-                mastery: false
+                mastery: getStatMastery('strength', creature_data.save)
               }
             },
             wisdom: {
               create: {
                 value: +creature_data.wis,
-                mastery: false
+                mastery: getStatMastery('wisdom', creature_data.save)
               }
             }
           }

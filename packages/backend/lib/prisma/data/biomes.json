@@ -1,110 +1,110 @@
 [
   {
     "text": {
-      "key": "FOREST",       
-      "title": "Лес"
+      "key": "FOREST",
+      "name": "Лес"
     }
   },
   {
-      "text": {
-        "key": "ARCTIC",       
-        "title": "Полярная тундра"
-      }
-    },
-    {
-      "text": {
-        "key": "COASTAL",      
-        "title": "Побережье"
-      }
-    },
-    {
-      "text": {
-        "key": "UNDERWATER",    
-        "title": "Под водой"
-      }
-    },
-    {
-      "text": {
-        "key": "GRASSLAND",     
-        "title": "Равнина/Луг"
-      }
-    },
-    {
-      "text": {
-        "key": "UNDERDARK",     
-        "title": "Подземье"
-      }
-    },
-    {
-      "text": {
-        "key": "URBAN",         
-        "title": "Город"
-      }
-    },
-    {
-      "text": {
-        "key": "VILLAGE",       
-        "title": "Деревня"
-      }
-    },
-    {
-      "text": {
-        "key": "RUINS",         
-        "title": "Руины"
-      }
-    },
-    {
-      "text": {
-        "key": "DUNGEON",       
-        "title": "Подземелья"
-      }
-    },
-    {
-      "text": {
-        "key": "HILL",          
-        "title": "Холмы"
-      }
-    },
-    {
-      "text": {
-        "key": "MOUNTAIN",      
-        "title": "Горы"
-      }
-    },
-    {
-      "text": {
-        "key": "SWAMP",        
-        "title": "Болото"
-      }
-    },
-    {
-      "text": {
-        "key": "DESERT",        
-        "title": "Пустыня"
-      }
-    },
-    {
-      "text": {
-        "key": "TROPICAL",      
-        "title": "Тропики"
-      }
-    },
-    {
-      "text": {
-        "key": "ASTRAL",        
-        "title": "Астрал"
-      }
-    },
-    {
-      "text": {
-        "key": "ABYSS",         
-        "title": "Бездна"
-      }
-    },
-    {
-      "text": {
-        "key": "ELEMENTAL",     
-        "title": "Стихийный план"
-      }
+    "text": {
+      "key": "ARCTIC",
+      "name": "Полярная тундра"
     }
-  ]
+  },
+  {
+    "text": {
+      "key": "COASTAL",
+      "name": "Побережье"
+    }
+  },
+  {
+    "text": {
+      "key": "UNDERWATER",
+      "name": "Под водой"
+    }
+  },
+  {
+    "text": {
+      "key": "GRASSLAND",
+      "name": "Равнина/Луг"
+    }
+  },
+  {
+    "text": {
+      "key": "UNDERDARK",
+      "name": "Подземье"
+    }
+  },
+  {
+    "text": {
+      "key": "URBAN",
+      "name": "Город"
+    }
+  },
+  {
+    "text": {
+      "key": "VILLAGE",
+      "name": "Деревня"
+    }
+  },
+  {
+    "text": {
+      "key": "RUINS",
+      "name": "Руины"
+    }
+  },
+  {
+    "text": {
+      "key": "DUNGEON",
+      "name": "Подземелья"
+    }
+  },
+  {
+    "text": {
+      "key": "HILL",
+      "name": "Холмы"
+    }
+  },
+  {
+    "text": {
+      "key": "MOUNTAIN",
+      "name": "Горы"
+    }
+  },
+  {
+    "text": {
+      "key": "SWAMP",
+      "name": "Болото"
+    }
+  },
+  {
+    "text": {
+      "key": "DESERT",
+      "name": "Пустыня"
+    }
+  },
+  {
+    "text": {
+      "key": "TROPICAL",
+      "name": "Тропики"
+    }
+  },
+  {
+    "text": {
+      "key": "ASTRAL",
+      "name": "Астрал"
+    }
+  },
+  {
+    "text": {
+      "key": "ABYSS",
+      "name": "Бездна"
+    }
+  },
+  {
+    "text": {
+      "key": "ELEMENTAL",
+      "name": "Стихийный план"
+    }
+  }
+]

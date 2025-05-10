@@ -8840,19 +8840,19 @@ export namespace Prisma {
   export type BiomeMinAggregateOutputType = {
     id: number | null
     key: string | null
-    title: string | null
+    name: string | null
   }
 
   export type BiomeMaxAggregateOutputType = {
     id: number | null
     key: string | null
-    title: string | null
+    name: string | null
   }
 
   export type BiomeCountAggregateOutputType = {
     id: number
     key: number
-    title: number
+    name: number
     _all: number
   }
 
@@ -8868,19 +8868,19 @@ export namespace Prisma {
   export type BiomeMinAggregateInputType = {
     id?: true
     key?: true
-    title?: true
+    name?: true
   }
 
   export type BiomeMaxAggregateInputType = {
     id?: true
     key?: true
-    title?: true
+    name?: true
   }
 
   export type BiomeCountAggregateInputType = {
     id?: true
     key?: true
-    title?: true
+    name?: true
     _all?: true
   }
 
@@ -8973,7 +8973,7 @@ export namespace Prisma {
   export type BiomeGroupByOutputType = {
     id: number
     key: string
-    title: string
+    name: string
     _count: BiomeCountAggregateOutputType | null
     _avg: BiomeAvgAggregateOutputType | null
     _sum: BiomeSumAggregateOutputType | null
@@ -8998,7 +8998,7 @@ export namespace Prisma {
   export type BiomeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     key?: boolean
-    title?: boolean
+    name?: boolean
     creatures?: boolean | Biome$creaturesArgs<ExtArgs>
     _count?: boolean | BiomeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["biome"]>
@@ -9006,22 +9006,22 @@ export namespace Prisma {
   export type BiomeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     key?: boolean
-    title?: boolean
+    name?: boolean
   }, ExtArgs["result"]["biome"]>
 
   export type BiomeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     key?: boolean
-    title?: boolean
+    name?: boolean
   }, ExtArgs["result"]["biome"]>
 
   export type BiomeSelectScalar = {
     id?: boolean
     key?: boolean
-    title?: boolean
+    name?: boolean
   }
 
-  export type BiomeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "title", ExtArgs["result"]["biome"]>
+  export type BiomeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "name", ExtArgs["result"]["biome"]>
   export type BiomeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creatures?: boolean | Biome$creaturesArgs<ExtArgs>
     _count?: boolean | BiomeCountOutputTypeDefaultArgs<ExtArgs>
@@ -9037,7 +9037,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       key: string
-      title: string
+      name: string
     }, ExtArgs["result"]["biome"]>
     composites: {}
   }
@@ -9464,7 +9464,7 @@ export namespace Prisma {
   interface BiomeFieldRefs {
     readonly id: FieldRef<"Biome", 'Int'>
     readonly key: FieldRef<"Biome", 'String'>
-    readonly title: FieldRef<"Biome", 'String'>
+    readonly name: FieldRef<"Biome", 'String'>
   }
     
 
@@ -57964,7 +57964,7 @@ export namespace Prisma {
   export const BiomeScalarFieldEnum: {
     id: 'id',
     key: 'key',
-    title: 'title'
+    name: 'name'
   };
 
   export type BiomeScalarFieldEnum = (typeof BiomeScalarFieldEnum)[keyof typeof BiomeScalarFieldEnum]
@@ -58599,31 +58599,31 @@ export namespace Prisma {
     NOT?: BiomeWhereInput | BiomeWhereInput[]
     id?: IntFilter<"Biome"> | number
     key?: StringFilter<"Biome"> | string
-    title?: StringFilter<"Biome"> | string
+    name?: StringFilter<"Biome"> | string
     creatures?: CreatureListRelationFilter
   }
 
   export type BiomeOrderByWithRelationInput = {
     id?: SortOrder
     key?: SortOrder
-    title?: SortOrder
+    name?: SortOrder
     creatures?: CreatureOrderByRelationAggregateInput
   }
 
   export type BiomeWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     key?: string
-    title?: string
+    name?: string
     AND?: BiomeWhereInput | BiomeWhereInput[]
     OR?: BiomeWhereInput[]
     NOT?: BiomeWhereInput | BiomeWhereInput[]
     creatures?: CreatureListRelationFilter
-  }, "id" | "key" | "title">
+  }, "id" | "key" | "name">
 
   export type BiomeOrderByWithAggregationInput = {
     id?: SortOrder
     key?: SortOrder
-    title?: SortOrder
+    name?: SortOrder
     _count?: BiomeCountOrderByAggregateInput
     _avg?: BiomeAvgOrderByAggregateInput
     _max?: BiomeMaxOrderByAggregateInput
@@ -58637,7 +58637,7 @@ export namespace Prisma {
     NOT?: BiomeScalarWhereWithAggregatesInput | BiomeScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Biome"> | number
     key?: StringWithAggregatesFilter<"Biome"> | string
-    title?: StringWithAggregatesFilter<"Biome"> | string
+    name?: StringWithAggregatesFilter<"Biome"> | string
   }
 
   export type TypeWhereInput = {
@@ -61038,45 +61038,45 @@ export namespace Prisma {
 
   export type BiomeCreateInput = {
     key: string
-    title: string
+    name: string
     creatures?: CreatureCreateNestedManyWithoutBiome_relationInput
   }
 
   export type BiomeUncheckedCreateInput = {
     id?: number
     key: string
-    title: string
+    name: string
     creatures?: CreatureUncheckedCreateNestedManyWithoutBiome_relationInput
   }
 
   export type BiomeUpdateInput = {
     key?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     creatures?: CreatureUpdateManyWithoutBiome_relationNestedInput
   }
 
   export type BiomeUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     key?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     creatures?: CreatureUncheckedUpdateManyWithoutBiome_relationNestedInput
   }
 
   export type BiomeCreateManyInput = {
     id?: number
     key: string
-    title: string
+    name: string
   }
 
   export type BiomeUpdateManyMutationInput = {
     key?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type BiomeUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     key?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type TypeCreateInput = {
@@ -63345,7 +63345,7 @@ export namespace Prisma {
   export type BiomeCountOrderByAggregateInput = {
     id?: SortOrder
     key?: SortOrder
-    title?: SortOrder
+    name?: SortOrder
   }
 
   export type BiomeAvgOrderByAggregateInput = {
@@ -63355,13 +63355,13 @@ export namespace Prisma {
   export type BiomeMaxOrderByAggregateInput = {
     id?: SortOrder
     key?: SortOrder
-    title?: SortOrder
+    name?: SortOrder
   }
 
   export type BiomeMinOrderByAggregateInput = {
     id?: SortOrder
     key?: SortOrder
-    title?: SortOrder
+    name?: SortOrder
   }
 
   export type BiomeSumOrderByAggregateInput = {
@@ -71306,13 +71306,13 @@ export namespace Prisma {
 
   export type BiomeCreateWithoutCreaturesInput = {
     key: string
-    title: string
+    name: string
   }
 
   export type BiomeUncheckedCreateWithoutCreaturesInput = {
     id?: number
     key: string
-    title: string
+    name: string
   }
 
   export type BiomeCreateOrConnectWithoutCreaturesInput = {
@@ -71681,7 +71681,7 @@ export namespace Prisma {
     NOT?: BiomeScalarWhereInput | BiomeScalarWhereInput[]
     id?: IntFilter<"Biome"> | number
     key?: StringFilter<"Biome"> | string
-    title?: StringFilter<"Biome"> | string
+    name?: StringFilter<"Biome"> | string
   }
 
   export type SourceUpsertWithoutCreaturesInput = {
@@ -73135,19 +73135,19 @@ export namespace Prisma {
 
   export type BiomeUpdateWithoutCreaturesInput = {
     key?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type BiomeUncheckedUpdateWithoutCreaturesInput = {
     id?: IntFieldUpdateOperationsInput | number
     key?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type BiomeUncheckedUpdateManyWithoutCreaturesInput = {
     id?: IntFieldUpdateOperationsInput | number
     key?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type CreatureUpdateWithoutActionsInput = {
