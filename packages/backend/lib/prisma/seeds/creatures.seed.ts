@@ -90,6 +90,13 @@ export async function SeedCreatures() {
     if (creature_data.biom) {
       creature_biomes = creature_data.biom.replaceAll(',', '').replaceAll(';', '').split(' ');
     }
+    const biomes = await prisma.biome.findMany({
+      where: {
+        key: {
+          in: creature_biomes
+        }
+      }
+    });
 
     const speeds_strings = creature_data.speed.split(',');
     const creature_speeds: { walk?: number; fly?: number; swim?: number; climb?: number; burrow?: number } = {};
@@ -239,9 +246,7 @@ export async function SeedCreatures() {
               connect: creature_vunlerabilities.map((vunlarability) => ({ name: vunlarability.trim().toLowerCase() }))
             }
           : {},
-        biome_relation: {
-          connect: creature_biomes.map((biome) => ({ key: biome }))
-        },
+        biomes_ids: biomes.map((b) => b.id),
         senses: {
           create: {
             passive_perception: +creature_data.passive

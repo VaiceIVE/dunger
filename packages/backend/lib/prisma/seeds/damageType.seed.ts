@@ -24,13 +24,11 @@ export async function SeedDamageType() {
     let localDamageList: string[] = [];
     if (damageString) {
       const parts = damageString.split('; ');
-      console.log(parts);
       localDamageList = parts.length > 1 ? [parts[1]] : [];
       localDamageList = localDamageList.concat(parts[0].split(','));
     }
     if (localDamageList.length > 0) {
       for (const damageType of localDamageList) {
-        console.log(damageType);
         allDamageTypes.add(damageType.trim().toLowerCase());
       }
     }
