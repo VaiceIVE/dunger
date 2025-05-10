@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "./generated/client"
 }
 
 datasource db {
@@ -21,8 +22,8 @@ model Size {
 
 model Source {
   id Int @default(autoincrement()) @id()
-  key String @unique
-  title String 
+  shortName String @unique
+  name String 
 
   creatures Creature[]
 }
@@ -335,7 +336,7 @@ model Creature {
   description String?
   size String? 
   race_id Int? //Тип с действиями и свойствами, как Дроу или горный гном 
-  soirce_id Int?
+  source_id Int?
   alignment_id Int?
   speed Speed_stat?
   armor_class Int?
@@ -359,7 +360,7 @@ model Creature {
   type_relation Type? @relation(references: [id], fields: [type_id])
   size_relation Size? @relation(references: [name], fields: [size])
   biome_relation Biome[] 
-  source_relation Source? @relation(references: [id], fields: [soirce_id])
+  source_relation Source? @relation(references: [id], fields: [source_id])
 }
 
 model Senses {

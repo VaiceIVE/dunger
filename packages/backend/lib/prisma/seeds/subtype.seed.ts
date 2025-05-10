@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@dunger/prisma';
 
 const prisma = new PrismaClient();
 export async function SeedTypes() {
@@ -31,7 +31,7 @@ export async function SeedTypes() {
             name: type
           }
         })
-        .catch((error) => {
+        .catch(() => {
           // console.error(`Error creating type ${type}:`, error);
         })
     );

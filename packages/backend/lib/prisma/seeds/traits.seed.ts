@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@dunger/prisma';
 
 const prisma = new PrismaClient();
 export async function SeedTraits() {
@@ -21,8 +21,8 @@ export async function SeedTraits() {
             is_template: true
           }
         })
-        .catch((error) => {
-          // console.error(`Error creating trait ${trait_data.name}:`, error);
+        .catch((error: any) => {
+          console.error(`Error creating trait ${trait.name}:`, error);
         })
     );
   }

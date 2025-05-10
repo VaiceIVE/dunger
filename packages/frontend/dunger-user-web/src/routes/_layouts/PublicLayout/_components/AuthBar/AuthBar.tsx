@@ -54,7 +54,7 @@ export const AuthBar = () => {
                   title="Генерации"
                   description="использовано"
                   variant={ProgressBarVariant.secondary}
-                  value={6}
+                  value={0}
                   max={25}
                 />
               </Flex>
@@ -62,7 +62,7 @@ export const AuthBar = () => {
             <Stack gap={0}>
               <Tab to={'/3'}>Мои персонажи</Tab>
               <Tab to={'/2'}>Мой бестиарий</Tab>
-              <Tab to={'/1'}>Мои кампании</Tab>
+              <Tab to={'/adventures'}>Мои кампании</Tab>
               <Tab to={'/profile'}>Мой профиль</Tab>
             </Stack>
             <div {...stylex.props(styles.button, text.defaultSemibold)} onClick={logout}>

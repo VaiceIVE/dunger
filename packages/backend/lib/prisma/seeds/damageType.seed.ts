@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@dunger/prisma';
 
 const prisma = new PrismaClient();
 export async function SeedDamageType() {
@@ -46,7 +46,7 @@ export async function SeedDamageType() {
               id: damageType
             }
           })
-          .catch((error) => {
+          .catch(() => {
             // console.error(`Failed to create damage type "${damageType}":`, error);
           })
       );

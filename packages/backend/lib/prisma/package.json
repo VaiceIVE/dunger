@@ -1,11 +1,23 @@
 {
   "name": "@dunger/prisma",
   "type": "module",
+  "version": "1.0.0",
+  "main": "./index.ts",
+  "types": "./index.ts",
   "exports": {
+    ".": {
+      "import": "./index.ts",
+      "require": "./index.ts"
+    },
     "./schema": "./schema.prisma"
   },
+  "scripts": {
+    "gen": "prisma generate"
+  },
   "devDependencies": {
-    "prisma": "^5.10.2",
+    "@prisma/client": "6.4.1",
+    "@prisma/engines": "^6.5.0",
+    "prisma": "^6.4.1",
     "typescript": "~5.8.0"
   }
 }
