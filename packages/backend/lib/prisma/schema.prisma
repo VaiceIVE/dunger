@@ -74,7 +74,7 @@ model Creature_stats{
   strength Strength_stat_details? 
   dexterity Dexterity_stat_details? 
   constitution Constitution_stat_details? 
-  intelligence intelligence_stat_details? 
+  intelligence Intelligence_stat_details? 
   wisdom Wisdom_stat_details? 
   charisma Charisma_stat_details? 
 
@@ -105,7 +105,7 @@ model Constitution_stat_details {
   creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
 }
 
-model intelligence_stat_details {
+model Intelligence_stat_details {
   statblock_id String @id
   value Int
   mastery Boolean
@@ -197,7 +197,7 @@ model CharismaBasedSkills {
 
 model AthleticsSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Атлетика")
   skill_list StrengthBasedSkills @relation(fields: [id], references: [id])
@@ -205,7 +205,7 @@ model AthleticsSkill{
 
 model AcrobaticsSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Акробатика")
   skill_list DexterityBasedSkills @relation(fields: [id], references: [id])
@@ -213,7 +213,7 @@ model AcrobaticsSkill{
 
 model SleightOfHandSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Ловкость рук")
   skill_list DexterityBasedSkills @relation(fields: [id], references: [id])
@@ -221,70 +221,70 @@ model SleightOfHandSkill{
 
 model StealthSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Скрытность")
   skill_list DexterityBasedSkills @relation(fields: [id], references: [id])
 }
 model ArcanaSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Магия")
   skill_list IntellengenceBasedSkills @relation(fields: [id], references: [id])
 }
 model HistorySkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("История")
   skill_list IntellengenceBasedSkills @relation(fields: [id], references: [id])
 }
 model InvestigationSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Расследование")
   skill_list IntellengenceBasedSkills @relation(fields: [id], references: [id])
 }
 model NatureSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Природа")
   skill_list IntellengenceBasedSkills @relation(fields: [id], references: [id])
 }
 model ReligionSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Религия")
   skill_list IntellengenceBasedSkills @relation(fields: [id], references: [id])
 }
 model AnimalHandlingSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Уход за животными")
   skill_list WisdomBasedSkills @relation(fields: [id], references: [id])
 }
 model InsightSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Проницательность")
   skill_list WisdomBasedSkills @relation(fields: [id], references: [id])
 }
 model MedicineSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Медицина")
   skill_list WisdomBasedSkills @relation(fields: [id], references: [id])
 }
 model PerceptionSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Восприятие")
   skill_list WisdomBasedSkills @relation(fields: [id], references: [id])
@@ -292,35 +292,35 @@ model PerceptionSkill{
 
 model SurvivalSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Выживание")
   skill_list WisdomBasedSkills @relation(fields: [id], references: [id])
 }
 model DeceptionSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Обман")
   skill_list CharismaBasedSkills @relation(fields: [id], references: [id])
 }
 model IntimidationSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Запугивание")
   skill_list CharismaBasedSkills @relation(fields: [id], references: [id])
 }
 model PerformanceSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean 
   name String @default("Исполнение")
   skill_list CharismaBasedSkills @relation(fields: [id], references: [id])
 }
 model PersuasionSkill{
   id String @id
-  value Int
+  value Int?
   mastery Boolean
   name String @default("Соблазнение")
   skill_list CharismaBasedSkills @relation(fields: [id], references: [id])

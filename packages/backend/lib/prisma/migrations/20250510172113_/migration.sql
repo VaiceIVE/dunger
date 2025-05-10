@@ -98,12 +98,12 @@ CREATE TABLE "Constitution_stat_details" (
 );
 
 -- CreateTable
-CREATE TABLE "intelligence_stat_details" (
+CREATE TABLE "Intelligence_stat_details" (
     "statblock_id" TEXT NOT NULL,
     "value" INTEGER NOT NULL,
     "mastery" BOOLEAN NOT NULL,
 
-    CONSTRAINT "intelligence_stat_details_pkey" PRIMARY KEY ("statblock_id")
+    CONSTRAINT "Intelligence_stat_details_pkey" PRIMARY KEY ("statblock_id")
 );
 
 -- CreateTable
@@ -169,7 +169,7 @@ CREATE TABLE "CharismaBasedSkills" (
 -- CreateTable
 CREATE TABLE "AthleticsSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Атлетика',
 
@@ -179,7 +179,7 @@ CREATE TABLE "AthleticsSkill" (
 -- CreateTable
 CREATE TABLE "AcrobaticsSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Акробатика',
 
@@ -189,7 +189,7 @@ CREATE TABLE "AcrobaticsSkill" (
 -- CreateTable
 CREATE TABLE "SleightOfHandSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Ловкость рук',
 
@@ -199,7 +199,7 @@ CREATE TABLE "SleightOfHandSkill" (
 -- CreateTable
 CREATE TABLE "StealthSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Скрытность',
 
@@ -209,7 +209,7 @@ CREATE TABLE "StealthSkill" (
 -- CreateTable
 CREATE TABLE "ArcanaSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Магия',
 
@@ -219,7 +219,7 @@ CREATE TABLE "ArcanaSkill" (
 -- CreateTable
 CREATE TABLE "HistorySkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'История',
 
@@ -229,7 +229,7 @@ CREATE TABLE "HistorySkill" (
 -- CreateTable
 CREATE TABLE "InvestigationSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Расследование',
 
@@ -239,7 +239,7 @@ CREATE TABLE "InvestigationSkill" (
 -- CreateTable
 CREATE TABLE "NatureSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Природа',
 
@@ -249,7 +249,7 @@ CREATE TABLE "NatureSkill" (
 -- CreateTable
 CREATE TABLE "ReligionSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Религия',
 
@@ -259,7 +259,7 @@ CREATE TABLE "ReligionSkill" (
 -- CreateTable
 CREATE TABLE "AnimalHandlingSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Уход за животными',
 
@@ -269,7 +269,7 @@ CREATE TABLE "AnimalHandlingSkill" (
 -- CreateTable
 CREATE TABLE "InsightSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Проницательность',
 
@@ -279,7 +279,7 @@ CREATE TABLE "InsightSkill" (
 -- CreateTable
 CREATE TABLE "MedicineSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Медицина',
 
@@ -289,7 +289,7 @@ CREATE TABLE "MedicineSkill" (
 -- CreateTable
 CREATE TABLE "PerceptionSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Восприятие',
 
@@ -299,7 +299,7 @@ CREATE TABLE "PerceptionSkill" (
 -- CreateTable
 CREATE TABLE "SurvivalSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Выживание',
 
@@ -309,7 +309,7 @@ CREATE TABLE "SurvivalSkill" (
 -- CreateTable
 CREATE TABLE "DeceptionSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Обман',
 
@@ -319,7 +319,7 @@ CREATE TABLE "DeceptionSkill" (
 -- CreateTable
 CREATE TABLE "IntimidationSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Запугивание',
 
@@ -329,7 +329,7 @@ CREATE TABLE "IntimidationSkill" (
 -- CreateTable
 CREATE TABLE "PerformanceSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Исполнение',
 
@@ -339,7 +339,7 @@ CREATE TABLE "PerformanceSkill" (
 -- CreateTable
 CREATE TABLE "PersuasionSkill" (
     "id" TEXT NOT NULL,
-    "value" INTEGER NOT NULL,
+    "value" INTEGER,
     "mastery" BOOLEAN NOT NULL,
     "name" TEXT NOT NULL DEFAULT 'Соблазнение',
 
@@ -593,7 +593,7 @@ ALTER TABLE "Dexterity_stat_details" ADD CONSTRAINT "Dexterity_stat_details_stat
 ALTER TABLE "Constitution_stat_details" ADD CONSTRAINT "Constitution_stat_details_statblock_id_fkey" FOREIGN KEY ("statblock_id") REFERENCES "Creature_stats"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "intelligence_stat_details" ADD CONSTRAINT "intelligence_stat_details_statblock_id_fkey" FOREIGN KEY ("statblock_id") REFERENCES "Creature_stats"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Intelligence_stat_details" ADD CONSTRAINT "Intelligence_stat_details_statblock_id_fkey" FOREIGN KEY ("statblock_id") REFERENCES "Creature_stats"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Wisdom_stat_details" ADD CONSTRAINT "Wisdom_stat_details_statblock_id_fkey" FOREIGN KEY ("statblock_id") REFERENCES "Creature_stats"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

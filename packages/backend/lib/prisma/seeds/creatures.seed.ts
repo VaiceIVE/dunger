@@ -277,176 +277,138 @@ export async function SeedCreatures() {
             passive_perception: +creature_data.passive
           }
         },
-        skills: creature_skills
-          ? {
+        skills: {
+          create: {
+            charisma: {
               create: {
-                charisma: {
+                deception: {
                   create: {
-                    deception: creature_skills.deception
-                      ? {
-                          create: {
-                            value: creature_skills.deception,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    intimidation: creature_skills.intimidation
-                      ? {
-                          create: {
-                            value: creature_skills.intimidation,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    performance: creature_skills.performance
-                      ? {
-                          create: {
-                            value: creature_skills.performance,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    persuasion: creature_skills.persuasion
-                      ? {
-                          create: {
-                            value: creature_skills.persuasion,
-                            mastery: true
-                          }
-                        }
-                      : {}
+                    value: creature_skills.deception ?? null,
+                    mastery: creature_skills.deception ? true : false
                   }
                 },
-                dexterity: {
+                intimidation: {
                   create: {
-                    acrobatics: creature_skills.acrobatics
-                      ? {
-                          create: {
-                            value: creature_skills.acrobatics,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    sleight_of_hand: creature_skills.sleight_of_hand
-                      ? {
-                          create: {
-                            value: creature_skills.sleight_of_hand,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    stealth: creature_skills.stealth
-                      ? {
-                          create: {
-                            value: creature_skills.stealth,
-                            mastery: true
-                          }
-                        }
-                      : {}
+                    value: creature_skills.intimidation ?? null,
+                    mastery: creature_skills.intimidation ? true : false
                   }
                 },
-                intelligence: {
+                performance: {
                   create: {
-                    arcana: creature_skills.arcana
-                      ? {
-                          create: {
-                            value: creature_skills.arcana,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    history: creature_skills.history
-                      ? {
-                          create: {
-                            value: creature_skills.history,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    investigation: creature_skills.investigation
-                      ? {
-                          create: {
-                            value: creature_skills.investigation,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    nature: creature_skills.nature
-                      ? {
-                          create: {
-                            value: creature_skills.nature,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    religion: creature_skills.religion
-                      ? {
-                          create: {
-                            value: creature_skills.religion,
-                            mastery: true
-                          }
-                        }
-                      : {}
+                    value: creature_skills.performance ?? null,
+                    mastery: creature_skills.performance ? true : false
                   }
                 },
-                strength: {
+                persuasion: {
                   create: {
-                    athletics: creature_skills.athletics
-                      ? {
-                          create: {
-                            value: creature_skills.athletics,
-                            mastery: true
-                          }
-                        }
-                      : {}
+                    value: creature_skills.persuasion ?? null,
+                    mastery: creature_skills.persuasion ? true : false
+                  }
+                }
+              }
+            },
+            dexterity: {
+              create: {
+                acrobatics: {
+                  create: {
+                    value: creature_skills.acrobatics ?? null,
+                    mastery: creature_skills.acrobatics ? true : false
                   }
                 },
-                wisdom: {
+                sleight_of_hand: {
                   create: {
-                    animal_handling: creature_skills.animal_handling
-                      ? {
-                          create: {
-                            value: creature_skills.animal_handling,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    insight: creature_skills.insight
-                      ? {
-                          create: {
-                            value: creature_skills.insight,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    medicine: creature_skills.medicine
-                      ? {
-                          create: {
-                            value: creature_skills.medicine,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    perception: creature_skills.perception
-                      ? {
-                          create: {
-                            value: creature_skills.perception,
-                            mastery: true
-                          }
-                        }
-                      : {},
-                    survival: creature_skills.survival
-                      ? {
-                          create: {
-                            value: creature_skills.survival,
-                            mastery: true
-                          }
-                        }
-                      : {}
+                    value: creature_skills.sleight_of_hand ?? null,
+                    mastery: creature_skills.sleight_of_hand ? true : false
+                  }
+                },
+                stealth: {
+                  create: {
+                    value: creature_skills.stealth ?? null,
+                    mastery: creature_skills.stealth ? true : false
+                  }
+                }
+              }
+            },
+            intelligence: {
+              create: {
+                arcana: {
+                  create: {
+                    value: creature_skills.arcana ?? null,
+                    mastery: creature_skills.arcana ? true : false
+                  }
+                },
+                history: {
+                  create: {
+                    value: creature_skills.history ?? null,
+                    mastery: creature_skills.history ? true : false
+                  }
+                },
+                investigation: {
+                  create: {
+                    value: creature_skills.investigation ?? null,
+                    mastery: creature_skills.investigation ? true : false
+                  }
+                },
+                nature: {
+                  create: {
+                    value: creature_skills.nature ?? null,
+                    mastery: creature_skills.nature ? true : false
+                  }
+                },
+                religion: {
+                  create: {
+                    value: creature_skills.religion ?? null,
+                    mastery: creature_skills.religion ? true : false
+                  }
+                }
+              }
+            },
+            strength: {
+              create: {
+                athletics: {
+                  create: {
+                    value: creature_skills.athletics ?? null,
+                    mastery: creature_skills.athletics ? true : false
+                  }
+                }
+              }
+            },
+            wisdom: {
+              create: {
+                animal_handling: {
+                  create: {
+                    value: creature_skills.animal_handling ?? null,
+                    mastery: creature_skills.animal_handling ? true : false
+                  }
+                },
+                insight: {
+                  create: {
+                    value: creature_skills.insight ?? null,
+                    mastery: creature_skills.insight ? true : false
+                  }
+                },
+                medicine: {
+                  create: {
+                    value: creature_skills.medicine ?? null,
+                    mastery: creature_skills.medicine ? true : false
+                  }
+                },
+                perception: {
+                  create: {
+                    value: creature_skills.perception ?? null,
+                    mastery: creature_skills.perception ? true : false
+                  }
+                },
+                survival: {
+                  create: {
+                    value: creature_skills.survival ?? null,
+                    mastery: creature_skills.survival ? true : false
                   }
                 }
               }
             }
-          : {},
+          }
+        },
         speed: creature_speeds
           ? {
               create: creature_speeds

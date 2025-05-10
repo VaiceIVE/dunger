@@ -448,7 +448,7 @@ exports.Prisma.ModelName = {
   Strength_stat_details: 'Strength_stat_details',
   Dexterity_stat_details: 'Dexterity_stat_details',
   Constitution_stat_details: 'Constitution_stat_details',
-  intelligence_stat_details: 'intelligence_stat_details',
+  Intelligence_stat_details: 'Intelligence_stat_details',
   Wisdom_stat_details: 'Wisdom_stat_details',
   Charisma_stat_details: 'Charisma_stat_details',
   SkillsList: 'SkillsList',

@@ -66,7 +66,7 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
   const skills = beast?.skills
     ? (Object.entries(beast.skills) as [keyof ApiSkills, Record<string, ApiSkill>][]).flatMap(([stat, skills]) =>
         Object.entries(skills)
-          .filter(([, skill]) => skill?.mastery)
+          .filter(([, skill]) => skill.mastery)
           .map(([, skill]) => (
             <span key={skill.name}>
               {skill.name}{' '}

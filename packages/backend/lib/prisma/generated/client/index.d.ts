@@ -69,10 +69,10 @@ export type Dexterity_stat_details = $Result.DefaultSelection<Prisma.$Dexterity_
  */
 export type Constitution_stat_details = $Result.DefaultSelection<Prisma.$Constitution_stat_detailsPayload>
 /**
- * Model intelligence_stat_details
+ * Model Intelligence_stat_details
  * 
  */
-export type intelligence_stat_details = $Result.DefaultSelection<Prisma.$intelligence_stat_detailsPayload>
+export type Intelligence_stat_details = $Result.DefaultSelection<Prisma.$Intelligence_stat_detailsPayload>
 /**
  * Model Wisdom_stat_details
  * 
@@ -511,14 +511,14 @@ export class PrismaClient<
   get constitution_stat_details(): Prisma.Constitution_stat_detailsDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.intelligence_stat_details`: Exposes CRUD operations for the **intelligence_stat_details** model.
+   * `prisma.intelligence_stat_details`: Exposes CRUD operations for the **Intelligence_stat_details** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Intelligence_stat_details
     * const intelligence_stat_details = await prisma.intelligence_stat_details.findMany()
     * ```
     */
-  get intelligence_stat_details(): Prisma.intelligence_stat_detailsDelegate<ExtArgs, ClientOptions>;
+  get intelligence_stat_details(): Prisma.Intelligence_stat_detailsDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.wisdom_stat_details`: Exposes CRUD operations for the **Wisdom_stat_details** model.
@@ -1330,7 +1330,7 @@ export namespace Prisma {
     Strength_stat_details: 'Strength_stat_details',
     Dexterity_stat_details: 'Dexterity_stat_details',
     Constitution_stat_details: 'Constitution_stat_details',
-    intelligence_stat_details: 'intelligence_stat_details',
+    Intelligence_stat_details: 'Intelligence_stat_details',
     Wisdom_stat_details: 'Wisdom_stat_details',
     Charisma_stat_details: 'Charisma_stat_details',
     SkillsList: 'SkillsList',
@@ -2200,76 +2200,76 @@ export namespace Prisma {
           }
         }
       }
-      intelligence_stat_details: {
-        payload: Prisma.$intelligence_stat_detailsPayload<ExtArgs>
-        fields: Prisma.intelligence_stat_detailsFieldRefs
+      Intelligence_stat_details: {
+        payload: Prisma.$Intelligence_stat_detailsPayload<ExtArgs>
+        fields: Prisma.Intelligence_stat_detailsFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.intelligence_stat_detailsFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$intelligence_stat_detailsPayload> | null
+            args: Prisma.Intelligence_stat_detailsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Intelligence_stat_detailsPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.intelligence_stat_detailsFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$intelligence_stat_detailsPayload>
+            args: Prisma.Intelligence_stat_detailsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Intelligence_stat_detailsPayload>
           }
           findFirst: {
-            args: Prisma.intelligence_stat_detailsFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$intelligence_stat_detailsPayload> | null
+            args: Prisma.Intelligence_stat_detailsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Intelligence_stat_detailsPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.intelligence_stat_detailsFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$intelligence_stat_detailsPayload>
+            args: Prisma.Intelligence_stat_detailsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Intelligence_stat_detailsPayload>
           }
           findMany: {
-            args: Prisma.intelligence_stat_detailsFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$intelligence_stat_detailsPayload>[]
+            args: Prisma.Intelligence_stat_detailsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Intelligence_stat_detailsPayload>[]
           }
           create: {
-            args: Prisma.intelligence_stat_detailsCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$intelligence_stat_detailsPayload>
+            args: Prisma.Intelligence_stat_detailsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Intelligence_stat_detailsPayload>
           }
           createMany: {
-            args: Prisma.intelligence_stat_detailsCreateManyArgs<ExtArgs>
+            args: Prisma.Intelligence_stat_detailsCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.intelligence_stat_detailsCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$intelligence_stat_detailsPayload>[]
+            args: Prisma.Intelligence_stat_detailsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Intelligence_stat_detailsPayload>[]
           }
           delete: {
-            args: Prisma.intelligence_stat_detailsDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$intelligence_stat_detailsPayload>
+            args: Prisma.Intelligence_stat_detailsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Intelligence_stat_detailsPayload>
           }
           update: {
-            args: Prisma.intelligence_stat_detailsUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$intelligence_stat_detailsPayload>
+            args: Prisma.Intelligence_stat_detailsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Intelligence_stat_detailsPayload>
           }
           deleteMany: {
-            args: Prisma.intelligence_stat_detailsDeleteManyArgs<ExtArgs>
+            args: Prisma.Intelligence_stat_detailsDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.intelligence_stat_detailsUpdateManyArgs<ExtArgs>
+            args: Prisma.Intelligence_stat_detailsUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.intelligence_stat_detailsUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$intelligence_stat_detailsPayload>[]
+            args: Prisma.Intelligence_stat_detailsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Intelligence_stat_detailsPayload>[]
           }
           upsert: {
-            args: Prisma.intelligence_stat_detailsUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$intelligence_stat_detailsPayload>
+            args: Prisma.Intelligence_stat_detailsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Intelligence_stat_detailsPayload>
           }
           aggregate: {
             args: Prisma.Intelligence_stat_detailsAggregateArgs<ExtArgs>
             result: $Utils.Optional<AggregateIntelligence_stat_details>
           }
           groupBy: {
-            args: Prisma.intelligence_stat_detailsGroupByArgs<ExtArgs>
+            args: Prisma.Intelligence_stat_detailsGroupByArgs<ExtArgs>
             result: $Utils.Optional<Intelligence_stat_detailsGroupByOutputType>[]
           }
           count: {
-            args: Prisma.intelligence_stat_detailsCountArgs<ExtArgs>
+            args: Prisma.Intelligence_stat_detailsCountArgs<ExtArgs>
             result: $Utils.Optional<Intelligence_stat_detailsCountAggregateOutputType> | number
           }
         }
@@ -5033,7 +5033,7 @@ export namespace Prisma {
     strength_stat_details?: Strength_stat_detailsOmit
     dexterity_stat_details?: Dexterity_stat_detailsOmit
     constitution_stat_details?: Constitution_stat_detailsOmit
-    intelligence_stat_details?: intelligence_stat_detailsOmit
+    intelligence_stat_details?: Intelligence_stat_detailsOmit
     wisdom_stat_details?: Wisdom_stat_detailsOmit
     charisma_stat_details?: Charisma_stat_detailsOmit
     skillsList?: SkillsListOmit
@@ -13324,7 +13324,7 @@ export namespace Prisma {
       strength: Prisma.$Strength_stat_detailsPayload<ExtArgs> | null
       dexterity: Prisma.$Dexterity_stat_detailsPayload<ExtArgs> | null
       constitution: Prisma.$Constitution_stat_detailsPayload<ExtArgs> | null
-      intelligence: Prisma.$intelligence_stat_detailsPayload<ExtArgs> | null
+      intelligence: Prisma.$Intelligence_stat_detailsPayload<ExtArgs> | null
       wisdom: Prisma.$Wisdom_stat_detailsPayload<ExtArgs> | null
       charisma: Prisma.$Charisma_stat_detailsPayload<ExtArgs> | null
       id_relation: Prisma.$CreaturePayload<ExtArgs>
@@ -13728,7 +13728,7 @@ export namespace Prisma {
     strength<T extends Creature_stats$strengthArgs<ExtArgs> = {}>(args?: Subset<T, Creature_stats$strengthArgs<ExtArgs>>): Prisma__Strength_stat_detailsClient<$Result.GetResult<Prisma.$Strength_stat_detailsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     dexterity<T extends Creature_stats$dexterityArgs<ExtArgs> = {}>(args?: Subset<T, Creature_stats$dexterityArgs<ExtArgs>>): Prisma__Dexterity_stat_detailsClient<$Result.GetResult<Prisma.$Dexterity_stat_detailsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     constitution<T extends Creature_stats$constitutionArgs<ExtArgs> = {}>(args?: Subset<T, Creature_stats$constitutionArgs<ExtArgs>>): Prisma__Constitution_stat_detailsClient<$Result.GetResult<Prisma.$Constitution_stat_detailsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    intelligence<T extends Creature_stats$intelligenceArgs<ExtArgs> = {}>(args?: Subset<T, Creature_stats$intelligenceArgs<ExtArgs>>): Prisma__intelligence_stat_detailsClient<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    intelligence<T extends Creature_stats$intelligenceArgs<ExtArgs> = {}>(args?: Subset<T, Creature_stats$intelligenceArgs<ExtArgs>>): Prisma__Intelligence_stat_detailsClient<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     wisdom<T extends Creature_stats$wisdomArgs<ExtArgs> = {}>(args?: Subset<T, Creature_stats$wisdomArgs<ExtArgs>>): Prisma__Wisdom_stat_detailsClient<$Result.GetResult<Prisma.$Wisdom_stat_detailsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     charisma<T extends Creature_stats$charismaArgs<ExtArgs> = {}>(args?: Subset<T, Creature_stats$charismaArgs<ExtArgs>>): Prisma__Charisma_stat_detailsClient<$Result.GetResult<Prisma.$Charisma_stat_detailsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     id_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
@@ -14219,18 +14219,18 @@ export namespace Prisma {
    */
   export type Creature_stats$intelligenceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelect<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsInclude<ExtArgs> | null
-    where?: intelligence_stat_detailsWhereInput
+    include?: Intelligence_stat_detailsInclude<ExtArgs> | null
+    where?: Intelligence_stat_detailsWhereInput
   }
 
   /**
@@ -17489,7 +17489,7 @@ export namespace Prisma {
 
 
   /**
-   * Model intelligence_stat_details
+   * Model Intelligence_stat_details
    */
 
   export type AggregateIntelligence_stat_details = {
@@ -17557,37 +17557,37 @@ export namespace Prisma {
 
   export type Intelligence_stat_detailsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which intelligence_stat_details to aggregate.
+     * Filter which Intelligence_stat_details to aggregate.
      */
-    where?: intelligence_stat_detailsWhereInput
+    where?: Intelligence_stat_detailsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of intelligence_stat_details to fetch.
+     * Determine the order of Intelligence_stat_details to fetch.
      */
-    orderBy?: intelligence_stat_detailsOrderByWithRelationInput | intelligence_stat_detailsOrderByWithRelationInput[]
+    orderBy?: Intelligence_stat_detailsOrderByWithRelationInput | Intelligence_stat_detailsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: intelligence_stat_detailsWhereUniqueInput
+    cursor?: Intelligence_stat_detailsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` intelligence_stat_details from the position of the cursor.
+     * Take `±n` Intelligence_stat_details from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` intelligence_stat_details.
+     * Skip the first `n` Intelligence_stat_details.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned intelligence_stat_details
+     * Count returned Intelligence_stat_details
     **/
     _count?: true | Intelligence_stat_detailsCountAggregateInputType
     /**
@@ -17627,11 +17627,11 @@ export namespace Prisma {
 
 
 
-  export type intelligence_stat_detailsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: intelligence_stat_detailsWhereInput
-    orderBy?: intelligence_stat_detailsOrderByWithAggregationInput | intelligence_stat_detailsOrderByWithAggregationInput[]
+  export type Intelligence_stat_detailsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Intelligence_stat_detailsWhereInput
+    orderBy?: Intelligence_stat_detailsOrderByWithAggregationInput | Intelligence_stat_detailsOrderByWithAggregationInput[]
     by: Intelligence_stat_detailsScalarFieldEnum[] | Intelligence_stat_detailsScalarFieldEnum
-    having?: intelligence_stat_detailsScalarWhereWithAggregatesInput
+    having?: Intelligence_stat_detailsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
     _count?: Intelligence_stat_detailsCountAggregateInputType | true
@@ -17652,7 +17652,7 @@ export namespace Prisma {
     _max: Intelligence_stat_detailsMaxAggregateOutputType | null
   }
 
-  type GetIntelligence_stat_detailsGroupByPayload<T extends intelligence_stat_detailsGroupByArgs> = Prisma.PrismaPromise<
+  type GetIntelligence_stat_detailsGroupByPayload<T extends Intelligence_stat_detailsGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickEnumerable<Intelligence_stat_detailsGroupByOutputType, T['by']> &
         {
@@ -17666,46 +17666,46 @@ export namespace Prisma {
     >
 
 
-  export type intelligence_stat_detailsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type Intelligence_stat_detailsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     statblock_id?: boolean
     value?: boolean
     mastery?: boolean
     creature_stat?: boolean | Creature_statsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["intelligence_stat_details"]>
 
-  export type intelligence_stat_detailsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type Intelligence_stat_detailsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     statblock_id?: boolean
     value?: boolean
     mastery?: boolean
     creature_stat?: boolean | Creature_statsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["intelligence_stat_details"]>
 
-  export type intelligence_stat_detailsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type Intelligence_stat_detailsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     statblock_id?: boolean
     value?: boolean
     mastery?: boolean
     creature_stat?: boolean | Creature_statsDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["intelligence_stat_details"]>
 
-  export type intelligence_stat_detailsSelectScalar = {
+  export type Intelligence_stat_detailsSelectScalar = {
     statblock_id?: boolean
     value?: boolean
     mastery?: boolean
   }
 
-  export type intelligence_stat_detailsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"statblock_id" | "value" | "mastery", ExtArgs["result"]["intelligence_stat_details"]>
-  export type intelligence_stat_detailsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"statblock_id" | "value" | "mastery", ExtArgs["result"]["intelligence_stat_details"]>
+  export type Intelligence_stat_detailsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creature_stat?: boolean | Creature_statsDefaultArgs<ExtArgs>
   }
-  export type intelligence_stat_detailsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creature_stat?: boolean | Creature_statsDefaultArgs<ExtArgs>
   }
-  export type intelligence_stat_detailsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creature_stat?: boolean | Creature_statsDefaultArgs<ExtArgs>
   }
 
-  export type $intelligence_stat_detailsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "intelligence_stat_details"
+  export type $Intelligence_stat_detailsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Intelligence_stat_details"
     objects: {
       creature_stat: Prisma.$Creature_statsPayload<ExtArgs>
     }
@@ -17717,18 +17717,18 @@ export namespace Prisma {
     composites: {}
   }
 
-  type intelligence_stat_detailsGetPayload<S extends boolean | null | undefined | intelligence_stat_detailsDefaultArgs> = $Result.GetResult<Prisma.$intelligence_stat_detailsPayload, S>
+  type Intelligence_stat_detailsGetPayload<S extends boolean | null | undefined | Intelligence_stat_detailsDefaultArgs> = $Result.GetResult<Prisma.$Intelligence_stat_detailsPayload, S>
 
-  type intelligence_stat_detailsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<intelligence_stat_detailsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+  type Intelligence_stat_detailsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Intelligence_stat_detailsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: Intelligence_stat_detailsCountAggregateInputType | true
     }
 
-  export interface intelligence_stat_detailsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['intelligence_stat_details'], meta: { name: 'intelligence_stat_details' } }
+  export interface Intelligence_stat_detailsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Intelligence_stat_details'], meta: { name: 'Intelligence_stat_details' } }
     /**
      * Find zero or one Intelligence_stat_details that matches the filter.
-     * @param {intelligence_stat_detailsFindUniqueArgs} args - Arguments to find a Intelligence_stat_details
+     * @param {Intelligence_stat_detailsFindUniqueArgs} args - Arguments to find a Intelligence_stat_details
      * @example
      * // Get one Intelligence_stat_details
      * const intelligence_stat_details = await prisma.intelligence_stat_details.findUnique({
@@ -17737,12 +17737,12 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends intelligence_stat_detailsFindUniqueArgs>(args: SelectSubset<T, intelligence_stat_detailsFindUniqueArgs<ExtArgs>>): Prisma__intelligence_stat_detailsClient<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends Intelligence_stat_detailsFindUniqueArgs>(args: SelectSubset<T, Intelligence_stat_detailsFindUniqueArgs<ExtArgs>>): Prisma__Intelligence_stat_detailsClient<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find one Intelligence_stat_details that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {intelligence_stat_detailsFindUniqueOrThrowArgs} args - Arguments to find a Intelligence_stat_details
+     * @param {Intelligence_stat_detailsFindUniqueOrThrowArgs} args - Arguments to find a Intelligence_stat_details
      * @example
      * // Get one Intelligence_stat_details
      * const intelligence_stat_details = await prisma.intelligence_stat_details.findUniqueOrThrow({
@@ -17751,13 +17751,13 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends intelligence_stat_detailsFindUniqueOrThrowArgs>(args: SelectSubset<T, intelligence_stat_detailsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__intelligence_stat_detailsClient<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends Intelligence_stat_detailsFindUniqueOrThrowArgs>(args: SelectSubset<T, Intelligence_stat_detailsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Intelligence_stat_detailsClient<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find the first Intelligence_stat_details that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {intelligence_stat_detailsFindFirstArgs} args - Arguments to find a Intelligence_stat_details
+     * @param {Intelligence_stat_detailsFindFirstArgs} args - Arguments to find a Intelligence_stat_details
      * @example
      * // Get one Intelligence_stat_details
      * const intelligence_stat_details = await prisma.intelligence_stat_details.findFirst({
@@ -17766,14 +17766,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends intelligence_stat_detailsFindFirstArgs>(args?: SelectSubset<T, intelligence_stat_detailsFindFirstArgs<ExtArgs>>): Prisma__intelligence_stat_detailsClient<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends Intelligence_stat_detailsFindFirstArgs>(args?: SelectSubset<T, Intelligence_stat_detailsFindFirstArgs<ExtArgs>>): Prisma__Intelligence_stat_detailsClient<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
      * Find the first Intelligence_stat_details that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {intelligence_stat_detailsFindFirstOrThrowArgs} args - Arguments to find a Intelligence_stat_details
+     * @param {Intelligence_stat_detailsFindFirstOrThrowArgs} args - Arguments to find a Intelligence_stat_details
      * @example
      * // Get one Intelligence_stat_details
      * const intelligence_stat_details = await prisma.intelligence_stat_details.findFirstOrThrow({
@@ -17782,13 +17782,13 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends intelligence_stat_detailsFindFirstOrThrowArgs>(args?: SelectSubset<T, intelligence_stat_detailsFindFirstOrThrowArgs<ExtArgs>>): Prisma__intelligence_stat_detailsClient<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends Intelligence_stat_detailsFindFirstOrThrowArgs>(args?: SelectSubset<T, Intelligence_stat_detailsFindFirstOrThrowArgs<ExtArgs>>): Prisma__Intelligence_stat_detailsClient<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Find zero or more Intelligence_stat_details that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {intelligence_stat_detailsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {Intelligence_stat_detailsFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Intelligence_stat_details
      * const intelligence_stat_details = await prisma.intelligence_stat_details.findMany()
@@ -17800,11 +17800,11 @@ export namespace Prisma {
      * const intelligence_stat_detailsWithStatblock_idOnly = await prisma.intelligence_stat_details.findMany({ select: { statblock_id: true } })
      * 
      */
-    findMany<T extends intelligence_stat_detailsFindManyArgs>(args?: SelectSubset<T, intelligence_stat_detailsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends Intelligence_stat_detailsFindManyArgs>(args?: SelectSubset<T, Intelligence_stat_detailsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
      * Create a Intelligence_stat_details.
-     * @param {intelligence_stat_detailsCreateArgs} args - Arguments to create a Intelligence_stat_details.
+     * @param {Intelligence_stat_detailsCreateArgs} args - Arguments to create a Intelligence_stat_details.
      * @example
      * // Create one Intelligence_stat_details
      * const Intelligence_stat_details = await prisma.intelligence_stat_details.create({
@@ -17814,11 +17814,11 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends intelligence_stat_detailsCreateArgs>(args: SelectSubset<T, intelligence_stat_detailsCreateArgs<ExtArgs>>): Prisma__intelligence_stat_detailsClient<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends Intelligence_stat_detailsCreateArgs>(args: SelectSubset<T, Intelligence_stat_detailsCreateArgs<ExtArgs>>): Prisma__Intelligence_stat_detailsClient<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Create many Intelligence_stat_details.
-     * @param {intelligence_stat_detailsCreateManyArgs} args - Arguments to create many Intelligence_stat_details.
+     * @param {Intelligence_stat_detailsCreateManyArgs} args - Arguments to create many Intelligence_stat_details.
      * @example
      * // Create many Intelligence_stat_details
      * const intelligence_stat_details = await prisma.intelligence_stat_details.createMany({
@@ -17828,11 +17828,11 @@ export namespace Prisma {
      * })
      *     
      */
-    createMany<T extends intelligence_stat_detailsCreateManyArgs>(args?: SelectSubset<T, intelligence_stat_detailsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends Intelligence_stat_detailsCreateManyArgs>(args?: SelectSubset<T, Intelligence_stat_detailsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many Intelligence_stat_details and returns the data saved in the database.
-     * @param {intelligence_stat_detailsCreateManyAndReturnArgs} args - Arguments to create many Intelligence_stat_details.
+     * @param {Intelligence_stat_detailsCreateManyAndReturnArgs} args - Arguments to create many Intelligence_stat_details.
      * @example
      * // Create many Intelligence_stat_details
      * const intelligence_stat_details = await prisma.intelligence_stat_details.createManyAndReturn({
@@ -17852,11 +17852,11 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends intelligence_stat_detailsCreateManyAndReturnArgs>(args?: SelectSubset<T, intelligence_stat_detailsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends Intelligence_stat_detailsCreateManyAndReturnArgs>(args?: SelectSubset<T, Intelligence_stat_detailsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
 
     /**
      * Delete a Intelligence_stat_details.
-     * @param {intelligence_stat_detailsDeleteArgs} args - Arguments to delete one Intelligence_stat_details.
+     * @param {Intelligence_stat_detailsDeleteArgs} args - Arguments to delete one Intelligence_stat_details.
      * @example
      * // Delete one Intelligence_stat_details
      * const Intelligence_stat_details = await prisma.intelligence_stat_details.delete({
@@ -17866,11 +17866,11 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends intelligence_stat_detailsDeleteArgs>(args: SelectSubset<T, intelligence_stat_detailsDeleteArgs<ExtArgs>>): Prisma__intelligence_stat_detailsClient<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends Intelligence_stat_detailsDeleteArgs>(args: SelectSubset<T, Intelligence_stat_detailsDeleteArgs<ExtArgs>>): Prisma__Intelligence_stat_detailsClient<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Update one Intelligence_stat_details.
-     * @param {intelligence_stat_detailsUpdateArgs} args - Arguments to update one Intelligence_stat_details.
+     * @param {Intelligence_stat_detailsUpdateArgs} args - Arguments to update one Intelligence_stat_details.
      * @example
      * // Update one Intelligence_stat_details
      * const intelligence_stat_details = await prisma.intelligence_stat_details.update({
@@ -17883,11 +17883,11 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends intelligence_stat_detailsUpdateArgs>(args: SelectSubset<T, intelligence_stat_detailsUpdateArgs<ExtArgs>>): Prisma__intelligence_stat_detailsClient<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends Intelligence_stat_detailsUpdateArgs>(args: SelectSubset<T, Intelligence_stat_detailsUpdateArgs<ExtArgs>>): Prisma__Intelligence_stat_detailsClient<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
      * Delete zero or more Intelligence_stat_details.
-     * @param {intelligence_stat_detailsDeleteManyArgs} args - Arguments to filter Intelligence_stat_details to delete.
+     * @param {Intelligence_stat_detailsDeleteManyArgs} args - Arguments to filter Intelligence_stat_details to delete.
      * @example
      * // Delete a few Intelligence_stat_details
      * const { count } = await prisma.intelligence_stat_details.deleteMany({
@@ -17897,13 +17897,13 @@ export namespace Prisma {
      * })
      * 
      */
-    deleteMany<T extends intelligence_stat_detailsDeleteManyArgs>(args?: SelectSubset<T, intelligence_stat_detailsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends Intelligence_stat_detailsDeleteManyArgs>(args?: SelectSubset<T, Intelligence_stat_detailsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Intelligence_stat_details.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {intelligence_stat_detailsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {Intelligence_stat_detailsUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Intelligence_stat_details
      * const intelligence_stat_details = await prisma.intelligence_stat_details.updateMany({
@@ -17916,11 +17916,11 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends intelligence_stat_detailsUpdateManyArgs>(args: SelectSubset<T, intelligence_stat_detailsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends Intelligence_stat_detailsUpdateManyArgs>(args: SelectSubset<T, Intelligence_stat_detailsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Intelligence_stat_details and returns the data updated in the database.
-     * @param {intelligence_stat_detailsUpdateManyAndReturnArgs} args - Arguments to update many Intelligence_stat_details.
+     * @param {Intelligence_stat_detailsUpdateManyAndReturnArgs} args - Arguments to update many Intelligence_stat_details.
      * @example
      * // Update many Intelligence_stat_details
      * const intelligence_stat_details = await prisma.intelligence_stat_details.updateManyAndReturn({
@@ -17946,11 +17946,11 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends intelligence_stat_detailsUpdateManyAndReturnArgs>(args: SelectSubset<T, intelligence_stat_detailsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends Intelligence_stat_detailsUpdateManyAndReturnArgs>(args: SelectSubset<T, Intelligence_stat_detailsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
 
     /**
      * Create or update one Intelligence_stat_details.
-     * @param {intelligence_stat_detailsUpsertArgs} args - Arguments to update or create a Intelligence_stat_details.
+     * @param {Intelligence_stat_detailsUpsertArgs} args - Arguments to update or create a Intelligence_stat_details.
      * @example
      * // Update or create a Intelligence_stat_details
      * const intelligence_stat_details = await prisma.intelligence_stat_details.upsert({
@@ -17965,14 +17965,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends intelligence_stat_detailsUpsertArgs>(args: SelectSubset<T, intelligence_stat_detailsUpsertArgs<ExtArgs>>): Prisma__intelligence_stat_detailsClient<$Result.GetResult<Prisma.$intelligence_stat_detailsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends Intelligence_stat_detailsUpsertArgs>(args: SelectSubset<T, Intelligence_stat_detailsUpsertArgs<ExtArgs>>): Prisma__Intelligence_stat_detailsClient<$Result.GetResult<Prisma.$Intelligence_stat_detailsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
 
 
     /**
      * Count the number of Intelligence_stat_details.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {intelligence_stat_detailsCountArgs} args - Arguments to filter Intelligence_stat_details to count.
+     * @param {Intelligence_stat_detailsCountArgs} args - Arguments to filter Intelligence_stat_details to count.
      * @example
      * // Count the number of Intelligence_stat_details
      * const count = await prisma.intelligence_stat_details.count({
@@ -17981,8 +17981,8 @@ export namespace Prisma {
      *   }
      * })
     **/
-    count<T extends intelligence_stat_detailsCountArgs>(
-      args?: Subset<T, intelligence_stat_detailsCountArgs>,
+    count<T extends Intelligence_stat_detailsCountArgs>(
+      args?: Subset<T, Intelligence_stat_detailsCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -18021,7 +18021,7 @@ export namespace Prisma {
      * Group by Intelligence_stat_details.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {intelligence_stat_detailsGroupByArgs} args - Group by arguments.
+     * @param {Intelligence_stat_detailsGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -18036,14 +18036,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends intelligence_stat_detailsGroupByArgs,
+      T extends Intelligence_stat_detailsGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: intelligence_stat_detailsGroupByArgs['orderBy'] }
-        : { orderBy?: intelligence_stat_detailsGroupByArgs['orderBy'] },
+        ? { orderBy: Intelligence_stat_detailsGroupByArgs['orderBy'] }
+        : { orderBy?: Intelligence_stat_detailsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -18092,20 +18092,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, intelligence_stat_detailsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIntelligence_stat_detailsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, Intelligence_stat_detailsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIntelligence_stat_detailsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the intelligence_stat_details model
+   * Fields of the Intelligence_stat_details model
    */
-  readonly fields: intelligence_stat_detailsFieldRefs;
+  readonly fields: Intelligence_stat_detailsFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for intelligence_stat_details.
+   * The delegate class that acts as a "Promise-like" for Intelligence_stat_details.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__intelligence_stat_detailsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__Intelligence_stat_detailsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     creature_stat<T extends Creature_statsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, Creature_statsDefaultArgs<ExtArgs>>): Prisma__Creature_statsClient<$Result.GetResult<Prisma.$Creature_statsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
@@ -18134,423 +18134,423 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the intelligence_stat_details model
+   * Fields of the Intelligence_stat_details model
    */ 
-  interface intelligence_stat_detailsFieldRefs {
-    readonly statblock_id: FieldRef<"intelligence_stat_details", 'String'>
-    readonly value: FieldRef<"intelligence_stat_details", 'Int'>
-    readonly mastery: FieldRef<"intelligence_stat_details", 'Boolean'>
+  interface Intelligence_stat_detailsFieldRefs {
+    readonly statblock_id: FieldRef<"Intelligence_stat_details", 'String'>
+    readonly value: FieldRef<"Intelligence_stat_details", 'Int'>
+    readonly mastery: FieldRef<"Intelligence_stat_details", 'Boolean'>
   }
     
 
   // Custom InputTypes
   /**
-   * intelligence_stat_details findUnique
+   * Intelligence_stat_details findUnique
    */
-  export type intelligence_stat_detailsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelect<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsInclude<ExtArgs> | null
+    include?: Intelligence_stat_detailsInclude<ExtArgs> | null
     /**
-     * Filter, which intelligence_stat_details to fetch.
+     * Filter, which Intelligence_stat_details to fetch.
      */
-    where: intelligence_stat_detailsWhereUniqueInput
+    where: Intelligence_stat_detailsWhereUniqueInput
   }
 
   /**
-   * intelligence_stat_details findUniqueOrThrow
+   * Intelligence_stat_details findUniqueOrThrow
    */
-  export type intelligence_stat_detailsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelect<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsInclude<ExtArgs> | null
+    include?: Intelligence_stat_detailsInclude<ExtArgs> | null
     /**
-     * Filter, which intelligence_stat_details to fetch.
+     * Filter, which Intelligence_stat_details to fetch.
      */
-    where: intelligence_stat_detailsWhereUniqueInput
+    where: Intelligence_stat_detailsWhereUniqueInput
   }
 
   /**
-   * intelligence_stat_details findFirst
+   * Intelligence_stat_details findFirst
    */
-  export type intelligence_stat_detailsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelect<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsInclude<ExtArgs> | null
+    include?: Intelligence_stat_detailsInclude<ExtArgs> | null
     /**
-     * Filter, which intelligence_stat_details to fetch.
+     * Filter, which Intelligence_stat_details to fetch.
      */
-    where?: intelligence_stat_detailsWhereInput
+    where?: Intelligence_stat_detailsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of intelligence_stat_details to fetch.
+     * Determine the order of Intelligence_stat_details to fetch.
      */
-    orderBy?: intelligence_stat_detailsOrderByWithRelationInput | intelligence_stat_detailsOrderByWithRelationInput[]
+    orderBy?: Intelligence_stat_detailsOrderByWithRelationInput | Intelligence_stat_detailsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for intelligence_stat_details.
+     * Sets the position for searching for Intelligence_stat_details.
      */
-    cursor?: intelligence_stat_detailsWhereUniqueInput
+    cursor?: Intelligence_stat_detailsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` intelligence_stat_details from the position of the cursor.
+     * Take `±n` Intelligence_stat_details from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` intelligence_stat_details.
+     * Skip the first `n` Intelligence_stat_details.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of intelligence_stat_details.
+     * Filter by unique combinations of Intelligence_stat_details.
      */
     distinct?: Intelligence_stat_detailsScalarFieldEnum | Intelligence_stat_detailsScalarFieldEnum[]
   }
 
   /**
-   * intelligence_stat_details findFirstOrThrow
+   * Intelligence_stat_details findFirstOrThrow
    */
-  export type intelligence_stat_detailsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelect<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsInclude<ExtArgs> | null
+    include?: Intelligence_stat_detailsInclude<ExtArgs> | null
     /**
-     * Filter, which intelligence_stat_details to fetch.
+     * Filter, which Intelligence_stat_details to fetch.
      */
-    where?: intelligence_stat_detailsWhereInput
+    where?: Intelligence_stat_detailsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of intelligence_stat_details to fetch.
+     * Determine the order of Intelligence_stat_details to fetch.
      */
-    orderBy?: intelligence_stat_detailsOrderByWithRelationInput | intelligence_stat_detailsOrderByWithRelationInput[]
+    orderBy?: Intelligence_stat_detailsOrderByWithRelationInput | Intelligence_stat_detailsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for intelligence_stat_details.
+     * Sets the position for searching for Intelligence_stat_details.
      */
-    cursor?: intelligence_stat_detailsWhereUniqueInput
+    cursor?: Intelligence_stat_detailsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` intelligence_stat_details from the position of the cursor.
+     * Take `±n` Intelligence_stat_details from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` intelligence_stat_details.
+     * Skip the first `n` Intelligence_stat_details.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of intelligence_stat_details.
+     * Filter by unique combinations of Intelligence_stat_details.
      */
     distinct?: Intelligence_stat_detailsScalarFieldEnum | Intelligence_stat_detailsScalarFieldEnum[]
   }
 
   /**
-   * intelligence_stat_details findMany
+   * Intelligence_stat_details findMany
    */
-  export type intelligence_stat_detailsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelect<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsInclude<ExtArgs> | null
+    include?: Intelligence_stat_detailsInclude<ExtArgs> | null
     /**
-     * Filter, which intelligence_stat_details to fetch.
+     * Filter, which Intelligence_stat_details to fetch.
      */
-    where?: intelligence_stat_detailsWhereInput
+    where?: Intelligence_stat_detailsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of intelligence_stat_details to fetch.
+     * Determine the order of Intelligence_stat_details to fetch.
      */
-    orderBy?: intelligence_stat_detailsOrderByWithRelationInput | intelligence_stat_detailsOrderByWithRelationInput[]
+    orderBy?: Intelligence_stat_detailsOrderByWithRelationInput | Intelligence_stat_detailsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing intelligence_stat_details.
+     * Sets the position for listing Intelligence_stat_details.
      */
-    cursor?: intelligence_stat_detailsWhereUniqueInput
+    cursor?: Intelligence_stat_detailsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` intelligence_stat_details from the position of the cursor.
+     * Take `±n` Intelligence_stat_details from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` intelligence_stat_details.
+     * Skip the first `n` Intelligence_stat_details.
      */
     skip?: number
     distinct?: Intelligence_stat_detailsScalarFieldEnum | Intelligence_stat_detailsScalarFieldEnum[]
   }
 
   /**
-   * intelligence_stat_details create
+   * Intelligence_stat_details create
    */
-  export type intelligence_stat_detailsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelect<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsInclude<ExtArgs> | null
+    include?: Intelligence_stat_detailsInclude<ExtArgs> | null
     /**
-     * The data needed to create a intelligence_stat_details.
+     * The data needed to create a Intelligence_stat_details.
      */
-    data: XOR<intelligence_stat_detailsCreateInput, intelligence_stat_detailsUncheckedCreateInput>
+    data: XOR<Intelligence_stat_detailsCreateInput, Intelligence_stat_detailsUncheckedCreateInput>
   }
 
   /**
-   * intelligence_stat_details createMany
+   * Intelligence_stat_details createMany
    */
-  export type intelligence_stat_detailsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many intelligence_stat_details.
+     * The data used to create many Intelligence_stat_details.
      */
-    data: intelligence_stat_detailsCreateManyInput | intelligence_stat_detailsCreateManyInput[]
+    data: Intelligence_stat_detailsCreateManyInput | Intelligence_stat_detailsCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * intelligence_stat_details createManyAndReturn
+   * Intelligence_stat_details createManyAndReturn
    */
-  export type intelligence_stat_detailsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelectCreateManyAndReturn<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
-     * The data used to create many intelligence_stat_details.
+     * The data used to create many Intelligence_stat_details.
      */
-    data: intelligence_stat_detailsCreateManyInput | intelligence_stat_detailsCreateManyInput[]
+    data: Intelligence_stat_detailsCreateManyInput | Intelligence_stat_detailsCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: Intelligence_stat_detailsIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * intelligence_stat_details update
+   * Intelligence_stat_details update
    */
-  export type intelligence_stat_detailsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelect<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsInclude<ExtArgs> | null
+    include?: Intelligence_stat_detailsInclude<ExtArgs> | null
     /**
-     * The data needed to update a intelligence_stat_details.
+     * The data needed to update a Intelligence_stat_details.
      */
-    data: XOR<intelligence_stat_detailsUpdateInput, intelligence_stat_detailsUncheckedUpdateInput>
+    data: XOR<Intelligence_stat_detailsUpdateInput, Intelligence_stat_detailsUncheckedUpdateInput>
     /**
-     * Choose, which intelligence_stat_details to update.
+     * Choose, which Intelligence_stat_details to update.
      */
-    where: intelligence_stat_detailsWhereUniqueInput
+    where: Intelligence_stat_detailsWhereUniqueInput
   }
 
   /**
-   * intelligence_stat_details updateMany
+   * Intelligence_stat_details updateMany
    */
-  export type intelligence_stat_detailsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update intelligence_stat_details.
+     * The data used to update Intelligence_stat_details.
      */
-    data: XOR<intelligence_stat_detailsUpdateManyMutationInput, intelligence_stat_detailsUncheckedUpdateManyInput>
+    data: XOR<Intelligence_stat_detailsUpdateManyMutationInput, Intelligence_stat_detailsUncheckedUpdateManyInput>
     /**
-     * Filter which intelligence_stat_details to update
+     * Filter which Intelligence_stat_details to update
      */
-    where?: intelligence_stat_detailsWhereInput
+    where?: Intelligence_stat_detailsWhereInput
     /**
-     * Limit how many intelligence_stat_details to update.
+     * Limit how many Intelligence_stat_details to update.
      */
     limit?: number
   }
 
   /**
-   * intelligence_stat_details updateManyAndReturn
+   * Intelligence_stat_details updateManyAndReturn
    */
-  export type intelligence_stat_detailsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
-     * The data used to update intelligence_stat_details.
+     * The data used to update Intelligence_stat_details.
      */
-    data: XOR<intelligence_stat_detailsUpdateManyMutationInput, intelligence_stat_detailsUncheckedUpdateManyInput>
+    data: XOR<Intelligence_stat_detailsUpdateManyMutationInput, Intelligence_stat_detailsUncheckedUpdateManyInput>
     /**
-     * Filter which intelligence_stat_details to update
+     * Filter which Intelligence_stat_details to update
      */
-    where?: intelligence_stat_detailsWhereInput
+    where?: Intelligence_stat_detailsWhereInput
     /**
-     * Limit how many intelligence_stat_details to update.
+     * Limit how many Intelligence_stat_details to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: Intelligence_stat_detailsIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * intelligence_stat_details upsert
+   * Intelligence_stat_details upsert
    */
-  export type intelligence_stat_detailsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelect<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsInclude<ExtArgs> | null
+    include?: Intelligence_stat_detailsInclude<ExtArgs> | null
     /**
-     * The filter to search for the intelligence_stat_details to update in case it exists.
+     * The filter to search for the Intelligence_stat_details to update in case it exists.
      */
-    where: intelligence_stat_detailsWhereUniqueInput
+    where: Intelligence_stat_detailsWhereUniqueInput
     /**
-     * In case the intelligence_stat_details found by the `where` argument doesn't exist, create a new intelligence_stat_details with this data.
+     * In case the Intelligence_stat_details found by the `where` argument doesn't exist, create a new Intelligence_stat_details with this data.
      */
-    create: XOR<intelligence_stat_detailsCreateInput, intelligence_stat_detailsUncheckedCreateInput>
+    create: XOR<Intelligence_stat_detailsCreateInput, Intelligence_stat_detailsUncheckedCreateInput>
     /**
-     * In case the intelligence_stat_details was found with the provided `where` argument, update it with this data.
+     * In case the Intelligence_stat_details was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<intelligence_stat_detailsUpdateInput, intelligence_stat_detailsUncheckedUpdateInput>
+    update: XOR<Intelligence_stat_detailsUpdateInput, Intelligence_stat_detailsUncheckedUpdateInput>
   }
 
   /**
-   * intelligence_stat_details delete
+   * Intelligence_stat_details delete
    */
-  export type intelligence_stat_detailsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelect<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsInclude<ExtArgs> | null
+    include?: Intelligence_stat_detailsInclude<ExtArgs> | null
     /**
-     * Filter which intelligence_stat_details to delete.
+     * Filter which Intelligence_stat_details to delete.
      */
-    where: intelligence_stat_detailsWhereUniqueInput
+    where: Intelligence_stat_detailsWhereUniqueInput
   }
 
   /**
-   * intelligence_stat_details deleteMany
+   * Intelligence_stat_details deleteMany
    */
-  export type intelligence_stat_detailsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which intelligence_stat_details to delete
+     * Filter which Intelligence_stat_details to delete
      */
-    where?: intelligence_stat_detailsWhereInput
+    where?: Intelligence_stat_detailsWhereInput
     /**
-     * Limit how many intelligence_stat_details to delete.
+     * Limit how many Intelligence_stat_details to delete.
      */
     limit?: number
   }
 
   /**
-   * intelligence_stat_details without action
+   * Intelligence_stat_details without action
    */
-  export type intelligence_stat_detailsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Intelligence_stat_detailsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the intelligence_stat_details
+     * Select specific fields to fetch from the Intelligence_stat_details
      */
-    select?: intelligence_stat_detailsSelect<ExtArgs> | null
+    select?: Intelligence_stat_detailsSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the intelligence_stat_details
+     * Omit specific fields from the Intelligence_stat_details
      */
-    omit?: intelligence_stat_detailsOmit<ExtArgs> | null
+    omit?: Intelligence_stat_detailsOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: intelligence_stat_detailsInclude<ExtArgs> | null
+    include?: Intelligence_stat_detailsInclude<ExtArgs> | null
   }
 
 
@@ -27412,7 +27412,7 @@ export namespace Prisma {
 
   export type AthleticsSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: AthleticsSkillCountAggregateOutputType | null
@@ -27485,7 +27485,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["athleticsSkill"]>
@@ -28491,7 +28491,7 @@ export namespace Prisma {
 
   export type AcrobaticsSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: AcrobaticsSkillCountAggregateOutputType | null
@@ -28564,7 +28564,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["acrobaticsSkill"]>
@@ -29570,7 +29570,7 @@ export namespace Prisma {
 
   export type SleightOfHandSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: SleightOfHandSkillCountAggregateOutputType | null
@@ -29643,7 +29643,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["sleightOfHandSkill"]>
@@ -30649,7 +30649,7 @@ export namespace Prisma {
 
   export type StealthSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: StealthSkillCountAggregateOutputType | null
@@ -30722,7 +30722,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["stealthSkill"]>
@@ -31728,7 +31728,7 @@ export namespace Prisma {
 
   export type ArcanaSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: ArcanaSkillCountAggregateOutputType | null
@@ -31801,7 +31801,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["arcanaSkill"]>
@@ -32807,7 +32807,7 @@ export namespace Prisma {
 
   export type HistorySkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: HistorySkillCountAggregateOutputType | null
@@ -32880,7 +32880,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["historySkill"]>
@@ -33886,7 +33886,7 @@ export namespace Prisma {
 
   export type InvestigationSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: InvestigationSkillCountAggregateOutputType | null
@@ -33959,7 +33959,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["investigationSkill"]>
@@ -34965,7 +34965,7 @@ export namespace Prisma {
 
   export type NatureSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: NatureSkillCountAggregateOutputType | null
@@ -35038,7 +35038,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["natureSkill"]>
@@ -36044,7 +36044,7 @@ export namespace Prisma {
 
   export type ReligionSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: ReligionSkillCountAggregateOutputType | null
@@ -36117,7 +36117,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["religionSkill"]>
@@ -37123,7 +37123,7 @@ export namespace Prisma {
 
   export type AnimalHandlingSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: AnimalHandlingSkillCountAggregateOutputType | null
@@ -37196,7 +37196,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["animalHandlingSkill"]>
@@ -38202,7 +38202,7 @@ export namespace Prisma {
 
   export type InsightSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: InsightSkillCountAggregateOutputType | null
@@ -38275,7 +38275,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["insightSkill"]>
@@ -39281,7 +39281,7 @@ export namespace Prisma {
 
   export type MedicineSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: MedicineSkillCountAggregateOutputType | null
@@ -39354,7 +39354,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["medicineSkill"]>
@@ -40360,7 +40360,7 @@ export namespace Prisma {
 
   export type PerceptionSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: PerceptionSkillCountAggregateOutputType | null
@@ -40433,7 +40433,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["perceptionSkill"]>
@@ -41439,7 +41439,7 @@ export namespace Prisma {
 
   export type SurvivalSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: SurvivalSkillCountAggregateOutputType | null
@@ -41512,7 +41512,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["survivalSkill"]>
@@ -42518,7 +42518,7 @@ export namespace Prisma {
 
   export type DeceptionSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: DeceptionSkillCountAggregateOutputType | null
@@ -42591,7 +42591,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["deceptionSkill"]>
@@ -43597,7 +43597,7 @@ export namespace Prisma {
 
   export type IntimidationSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: IntimidationSkillCountAggregateOutputType | null
@@ -43670,7 +43670,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["intimidationSkill"]>
@@ -44676,7 +44676,7 @@ export namespace Prisma {
 
   export type PerformanceSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: PerformanceSkillCountAggregateOutputType | null
@@ -44749,7 +44749,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["performanceSkill"]>
@@ -45755,7 +45755,7 @@ export namespace Prisma {
 
   export type PersuasionSkillGroupByOutputType = {
     id: string
-    value: number
+    value: number | null
     mastery: boolean
     name: string
     _count: PersuasionSkillCountAggregateOutputType | null
@@ -45828,7 +45828,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      value: number
+      value: number | null
       mastery: boolean
       name: string
     }, ExtArgs["result"]["persuasionSkill"]>
@@ -58794,7 +58794,7 @@ export namespace Prisma {
     strength?: XOR<Strength_stat_detailsNullableScalarRelationFilter, Strength_stat_detailsWhereInput> | null
     dexterity?: XOR<Dexterity_stat_detailsNullableScalarRelationFilter, Dexterity_stat_detailsWhereInput> | null
     constitution?: XOR<Constitution_stat_detailsNullableScalarRelationFilter, Constitution_stat_detailsWhereInput> | null
-    intelligence?: XOR<Intelligence_stat_detailsNullableScalarRelationFilter, intelligence_stat_detailsWhereInput> | null
+    intelligence?: XOR<Intelligence_stat_detailsNullableScalarRelationFilter, Intelligence_stat_detailsWhereInput> | null
     wisdom?: XOR<Wisdom_stat_detailsNullableScalarRelationFilter, Wisdom_stat_detailsWhereInput> | null
     charisma?: XOR<Charisma_stat_detailsNullableScalarRelationFilter, Charisma_stat_detailsWhereInput> | null
     id_relation?: XOR<CreatureScalarRelationFilter, CreatureWhereInput>
@@ -58805,7 +58805,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsOrderByWithRelationInput
     dexterity?: Dexterity_stat_detailsOrderByWithRelationInput
     constitution?: Constitution_stat_detailsOrderByWithRelationInput
-    intelligence?: intelligence_stat_detailsOrderByWithRelationInput
+    intelligence?: Intelligence_stat_detailsOrderByWithRelationInput
     wisdom?: Wisdom_stat_detailsOrderByWithRelationInput
     charisma?: Charisma_stat_detailsOrderByWithRelationInput
     id_relation?: CreatureOrderByWithRelationInput
@@ -58819,7 +58819,7 @@ export namespace Prisma {
     strength?: XOR<Strength_stat_detailsNullableScalarRelationFilter, Strength_stat_detailsWhereInput> | null
     dexterity?: XOR<Dexterity_stat_detailsNullableScalarRelationFilter, Dexterity_stat_detailsWhereInput> | null
     constitution?: XOR<Constitution_stat_detailsNullableScalarRelationFilter, Constitution_stat_detailsWhereInput> | null
-    intelligence?: XOR<Intelligence_stat_detailsNullableScalarRelationFilter, intelligence_stat_detailsWhereInput> | null
+    intelligence?: XOR<Intelligence_stat_detailsNullableScalarRelationFilter, Intelligence_stat_detailsWhereInput> | null
     wisdom?: XOR<Wisdom_stat_detailsNullableScalarRelationFilter, Wisdom_stat_detailsWhereInput> | null
     charisma?: XOR<Charisma_stat_detailsNullableScalarRelationFilter, Charisma_stat_detailsWhereInput> | null
     id_relation?: XOR<CreatureScalarRelationFilter, CreatureWhereInput>
@@ -58980,51 +58980,51 @@ export namespace Prisma {
     mastery?: BoolWithAggregatesFilter<"Constitution_stat_details"> | boolean
   }
 
-  export type intelligence_stat_detailsWhereInput = {
-    AND?: intelligence_stat_detailsWhereInput | intelligence_stat_detailsWhereInput[]
-    OR?: intelligence_stat_detailsWhereInput[]
-    NOT?: intelligence_stat_detailsWhereInput | intelligence_stat_detailsWhereInput[]
-    statblock_id?: StringFilter<"intelligence_stat_details"> | string
-    value?: IntFilter<"intelligence_stat_details"> | number
-    mastery?: BoolFilter<"intelligence_stat_details"> | boolean
+  export type Intelligence_stat_detailsWhereInput = {
+    AND?: Intelligence_stat_detailsWhereInput | Intelligence_stat_detailsWhereInput[]
+    OR?: Intelligence_stat_detailsWhereInput[]
+    NOT?: Intelligence_stat_detailsWhereInput | Intelligence_stat_detailsWhereInput[]
+    statblock_id?: StringFilter<"Intelligence_stat_details"> | string
+    value?: IntFilter<"Intelligence_stat_details"> | number
+    mastery?: BoolFilter<"Intelligence_stat_details"> | boolean
     creature_stat?: XOR<Creature_statsScalarRelationFilter, Creature_statsWhereInput>
   }
 
-  export type intelligence_stat_detailsOrderByWithRelationInput = {
+  export type Intelligence_stat_detailsOrderByWithRelationInput = {
     statblock_id?: SortOrder
     value?: SortOrder
     mastery?: SortOrder
     creature_stat?: Creature_statsOrderByWithRelationInput
   }
 
-  export type intelligence_stat_detailsWhereUniqueInput = Prisma.AtLeast<{
+  export type Intelligence_stat_detailsWhereUniqueInput = Prisma.AtLeast<{
     statblock_id?: string
-    AND?: intelligence_stat_detailsWhereInput | intelligence_stat_detailsWhereInput[]
-    OR?: intelligence_stat_detailsWhereInput[]
-    NOT?: intelligence_stat_detailsWhereInput | intelligence_stat_detailsWhereInput[]
-    value?: IntFilter<"intelligence_stat_details"> | number
-    mastery?: BoolFilter<"intelligence_stat_details"> | boolean
+    AND?: Intelligence_stat_detailsWhereInput | Intelligence_stat_detailsWhereInput[]
+    OR?: Intelligence_stat_detailsWhereInput[]
+    NOT?: Intelligence_stat_detailsWhereInput | Intelligence_stat_detailsWhereInput[]
+    value?: IntFilter<"Intelligence_stat_details"> | number
+    mastery?: BoolFilter<"Intelligence_stat_details"> | boolean
     creature_stat?: XOR<Creature_statsScalarRelationFilter, Creature_statsWhereInput>
   }, "statblock_id">
 
-  export type intelligence_stat_detailsOrderByWithAggregationInput = {
+  export type Intelligence_stat_detailsOrderByWithAggregationInput = {
     statblock_id?: SortOrder
     value?: SortOrder
     mastery?: SortOrder
-    _count?: intelligence_stat_detailsCountOrderByAggregateInput
-    _avg?: intelligence_stat_detailsAvgOrderByAggregateInput
-    _max?: intelligence_stat_detailsMaxOrderByAggregateInput
-    _min?: intelligence_stat_detailsMinOrderByAggregateInput
-    _sum?: intelligence_stat_detailsSumOrderByAggregateInput
+    _count?: Intelligence_stat_detailsCountOrderByAggregateInput
+    _avg?: Intelligence_stat_detailsAvgOrderByAggregateInput
+    _max?: Intelligence_stat_detailsMaxOrderByAggregateInput
+    _min?: Intelligence_stat_detailsMinOrderByAggregateInput
+    _sum?: Intelligence_stat_detailsSumOrderByAggregateInput
   }
 
-  export type intelligence_stat_detailsScalarWhereWithAggregatesInput = {
-    AND?: intelligence_stat_detailsScalarWhereWithAggregatesInput | intelligence_stat_detailsScalarWhereWithAggregatesInput[]
-    OR?: intelligence_stat_detailsScalarWhereWithAggregatesInput[]
-    NOT?: intelligence_stat_detailsScalarWhereWithAggregatesInput | intelligence_stat_detailsScalarWhereWithAggregatesInput[]
-    statblock_id?: StringWithAggregatesFilter<"intelligence_stat_details"> | string
-    value?: IntWithAggregatesFilter<"intelligence_stat_details"> | number
-    mastery?: BoolWithAggregatesFilter<"intelligence_stat_details"> | boolean
+  export type Intelligence_stat_detailsScalarWhereWithAggregatesInput = {
+    AND?: Intelligence_stat_detailsScalarWhereWithAggregatesInput | Intelligence_stat_detailsScalarWhereWithAggregatesInput[]
+    OR?: Intelligence_stat_detailsScalarWhereWithAggregatesInput[]
+    NOT?: Intelligence_stat_detailsScalarWhereWithAggregatesInput | Intelligence_stat_detailsScalarWhereWithAggregatesInput[]
+    statblock_id?: StringWithAggregatesFilter<"Intelligence_stat_details"> | string
+    value?: IntWithAggregatesFilter<"Intelligence_stat_details"> | number
+    mastery?: BoolWithAggregatesFilter<"Intelligence_stat_details"> | boolean
   }
 
   export type Wisdom_stat_detailsWhereInput = {
@@ -59405,7 +59405,7 @@ export namespace Prisma {
     OR?: AthleticsSkillWhereInput[]
     NOT?: AthleticsSkillWhereInput | AthleticsSkillWhereInput[]
     id?: StringFilter<"AthleticsSkill"> | string
-    value?: IntFilter<"AthleticsSkill"> | number
+    value?: IntNullableFilter<"AthleticsSkill"> | number | null
     mastery?: BoolFilter<"AthleticsSkill"> | boolean
     name?: StringFilter<"AthleticsSkill"> | string
     skill_list?: XOR<StrengthBasedSkillsScalarRelationFilter, StrengthBasedSkillsWhereInput>
@@ -59413,7 +59413,7 @@ export namespace Prisma {
 
   export type AthleticsSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: StrengthBasedSkillsOrderByWithRelationInput
@@ -59424,7 +59424,7 @@ export namespace Prisma {
     AND?: AthleticsSkillWhereInput | AthleticsSkillWhereInput[]
     OR?: AthleticsSkillWhereInput[]
     NOT?: AthleticsSkillWhereInput | AthleticsSkillWhereInput[]
-    value?: IntFilter<"AthleticsSkill"> | number
+    value?: IntNullableFilter<"AthleticsSkill"> | number | null
     mastery?: BoolFilter<"AthleticsSkill"> | boolean
     name?: StringFilter<"AthleticsSkill"> | string
     skill_list?: XOR<StrengthBasedSkillsScalarRelationFilter, StrengthBasedSkillsWhereInput>
@@ -59432,7 +59432,7 @@ export namespace Prisma {
 
   export type AthleticsSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: AthleticsSkillCountOrderByAggregateInput
@@ -59447,7 +59447,7 @@ export namespace Prisma {
     OR?: AthleticsSkillScalarWhereWithAggregatesInput[]
     NOT?: AthleticsSkillScalarWhereWithAggregatesInput | AthleticsSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AthleticsSkill"> | string
-    value?: IntWithAggregatesFilter<"AthleticsSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"AthleticsSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"AthleticsSkill"> | boolean
     name?: StringWithAggregatesFilter<"AthleticsSkill"> | string
   }
@@ -59457,7 +59457,7 @@ export namespace Prisma {
     OR?: AcrobaticsSkillWhereInput[]
     NOT?: AcrobaticsSkillWhereInput | AcrobaticsSkillWhereInput[]
     id?: StringFilter<"AcrobaticsSkill"> | string
-    value?: IntFilter<"AcrobaticsSkill"> | number
+    value?: IntNullableFilter<"AcrobaticsSkill"> | number | null
     mastery?: BoolFilter<"AcrobaticsSkill"> | boolean
     name?: StringFilter<"AcrobaticsSkill"> | string
     skill_list?: XOR<DexterityBasedSkillsScalarRelationFilter, DexterityBasedSkillsWhereInput>
@@ -59465,7 +59465,7 @@ export namespace Prisma {
 
   export type AcrobaticsSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: DexterityBasedSkillsOrderByWithRelationInput
@@ -59476,7 +59476,7 @@ export namespace Prisma {
     AND?: AcrobaticsSkillWhereInput | AcrobaticsSkillWhereInput[]
     OR?: AcrobaticsSkillWhereInput[]
     NOT?: AcrobaticsSkillWhereInput | AcrobaticsSkillWhereInput[]
-    value?: IntFilter<"AcrobaticsSkill"> | number
+    value?: IntNullableFilter<"AcrobaticsSkill"> | number | null
     mastery?: BoolFilter<"AcrobaticsSkill"> | boolean
     name?: StringFilter<"AcrobaticsSkill"> | string
     skill_list?: XOR<DexterityBasedSkillsScalarRelationFilter, DexterityBasedSkillsWhereInput>
@@ -59484,7 +59484,7 @@ export namespace Prisma {
 
   export type AcrobaticsSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: AcrobaticsSkillCountOrderByAggregateInput
@@ -59499,7 +59499,7 @@ export namespace Prisma {
     OR?: AcrobaticsSkillScalarWhereWithAggregatesInput[]
     NOT?: AcrobaticsSkillScalarWhereWithAggregatesInput | AcrobaticsSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AcrobaticsSkill"> | string
-    value?: IntWithAggregatesFilter<"AcrobaticsSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"AcrobaticsSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"AcrobaticsSkill"> | boolean
     name?: StringWithAggregatesFilter<"AcrobaticsSkill"> | string
   }
@@ -59509,7 +59509,7 @@ export namespace Prisma {
     OR?: SleightOfHandSkillWhereInput[]
     NOT?: SleightOfHandSkillWhereInput | SleightOfHandSkillWhereInput[]
     id?: StringFilter<"SleightOfHandSkill"> | string
-    value?: IntFilter<"SleightOfHandSkill"> | number
+    value?: IntNullableFilter<"SleightOfHandSkill"> | number | null
     mastery?: BoolFilter<"SleightOfHandSkill"> | boolean
     name?: StringFilter<"SleightOfHandSkill"> | string
     skill_list?: XOR<DexterityBasedSkillsScalarRelationFilter, DexterityBasedSkillsWhereInput>
@@ -59517,7 +59517,7 @@ export namespace Prisma {
 
   export type SleightOfHandSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: DexterityBasedSkillsOrderByWithRelationInput
@@ -59528,7 +59528,7 @@ export namespace Prisma {
     AND?: SleightOfHandSkillWhereInput | SleightOfHandSkillWhereInput[]
     OR?: SleightOfHandSkillWhereInput[]
     NOT?: SleightOfHandSkillWhereInput | SleightOfHandSkillWhereInput[]
-    value?: IntFilter<"SleightOfHandSkill"> | number
+    value?: IntNullableFilter<"SleightOfHandSkill"> | number | null
     mastery?: BoolFilter<"SleightOfHandSkill"> | boolean
     name?: StringFilter<"SleightOfHandSkill"> | string
     skill_list?: XOR<DexterityBasedSkillsScalarRelationFilter, DexterityBasedSkillsWhereInput>
@@ -59536,7 +59536,7 @@ export namespace Prisma {
 
   export type SleightOfHandSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: SleightOfHandSkillCountOrderByAggregateInput
@@ -59551,7 +59551,7 @@ export namespace Prisma {
     OR?: SleightOfHandSkillScalarWhereWithAggregatesInput[]
     NOT?: SleightOfHandSkillScalarWhereWithAggregatesInput | SleightOfHandSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"SleightOfHandSkill"> | string
-    value?: IntWithAggregatesFilter<"SleightOfHandSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"SleightOfHandSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"SleightOfHandSkill"> | boolean
     name?: StringWithAggregatesFilter<"SleightOfHandSkill"> | string
   }
@@ -59561,7 +59561,7 @@ export namespace Prisma {
     OR?: StealthSkillWhereInput[]
     NOT?: StealthSkillWhereInput | StealthSkillWhereInput[]
     id?: StringFilter<"StealthSkill"> | string
-    value?: IntFilter<"StealthSkill"> | number
+    value?: IntNullableFilter<"StealthSkill"> | number | null
     mastery?: BoolFilter<"StealthSkill"> | boolean
     name?: StringFilter<"StealthSkill"> | string
     skill_list?: XOR<DexterityBasedSkillsScalarRelationFilter, DexterityBasedSkillsWhereInput>
@@ -59569,7 +59569,7 @@ export namespace Prisma {
 
   export type StealthSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: DexterityBasedSkillsOrderByWithRelationInput
@@ -59580,7 +59580,7 @@ export namespace Prisma {
     AND?: StealthSkillWhereInput | StealthSkillWhereInput[]
     OR?: StealthSkillWhereInput[]
     NOT?: StealthSkillWhereInput | StealthSkillWhereInput[]
-    value?: IntFilter<"StealthSkill"> | number
+    value?: IntNullableFilter<"StealthSkill"> | number | null
     mastery?: BoolFilter<"StealthSkill"> | boolean
     name?: StringFilter<"StealthSkill"> | string
     skill_list?: XOR<DexterityBasedSkillsScalarRelationFilter, DexterityBasedSkillsWhereInput>
@@ -59588,7 +59588,7 @@ export namespace Prisma {
 
   export type StealthSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: StealthSkillCountOrderByAggregateInput
@@ -59603,7 +59603,7 @@ export namespace Prisma {
     OR?: StealthSkillScalarWhereWithAggregatesInput[]
     NOT?: StealthSkillScalarWhereWithAggregatesInput | StealthSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"StealthSkill"> | string
-    value?: IntWithAggregatesFilter<"StealthSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"StealthSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"StealthSkill"> | boolean
     name?: StringWithAggregatesFilter<"StealthSkill"> | string
   }
@@ -59613,7 +59613,7 @@ export namespace Prisma {
     OR?: ArcanaSkillWhereInput[]
     NOT?: ArcanaSkillWhereInput | ArcanaSkillWhereInput[]
     id?: StringFilter<"ArcanaSkill"> | string
-    value?: IntFilter<"ArcanaSkill"> | number
+    value?: IntNullableFilter<"ArcanaSkill"> | number | null
     mastery?: BoolFilter<"ArcanaSkill"> | boolean
     name?: StringFilter<"ArcanaSkill"> | string
     skill_list?: XOR<IntellengenceBasedSkillsScalarRelationFilter, IntellengenceBasedSkillsWhereInput>
@@ -59621,7 +59621,7 @@ export namespace Prisma {
 
   export type ArcanaSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: IntellengenceBasedSkillsOrderByWithRelationInput
@@ -59632,7 +59632,7 @@ export namespace Prisma {
     AND?: ArcanaSkillWhereInput | ArcanaSkillWhereInput[]
     OR?: ArcanaSkillWhereInput[]
     NOT?: ArcanaSkillWhereInput | ArcanaSkillWhereInput[]
-    value?: IntFilter<"ArcanaSkill"> | number
+    value?: IntNullableFilter<"ArcanaSkill"> | number | null
     mastery?: BoolFilter<"ArcanaSkill"> | boolean
     name?: StringFilter<"ArcanaSkill"> | string
     skill_list?: XOR<IntellengenceBasedSkillsScalarRelationFilter, IntellengenceBasedSkillsWhereInput>
@@ -59640,7 +59640,7 @@ export namespace Prisma {
 
   export type ArcanaSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: ArcanaSkillCountOrderByAggregateInput
@@ -59655,7 +59655,7 @@ export namespace Prisma {
     OR?: ArcanaSkillScalarWhereWithAggregatesInput[]
     NOT?: ArcanaSkillScalarWhereWithAggregatesInput | ArcanaSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"ArcanaSkill"> | string
-    value?: IntWithAggregatesFilter<"ArcanaSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"ArcanaSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"ArcanaSkill"> | boolean
     name?: StringWithAggregatesFilter<"ArcanaSkill"> | string
   }
@@ -59665,7 +59665,7 @@ export namespace Prisma {
     OR?: HistorySkillWhereInput[]
     NOT?: HistorySkillWhereInput | HistorySkillWhereInput[]
     id?: StringFilter<"HistorySkill"> | string
-    value?: IntFilter<"HistorySkill"> | number
+    value?: IntNullableFilter<"HistorySkill"> | number | null
     mastery?: BoolFilter<"HistorySkill"> | boolean
     name?: StringFilter<"HistorySkill"> | string
     skill_list?: XOR<IntellengenceBasedSkillsScalarRelationFilter, IntellengenceBasedSkillsWhereInput>
@@ -59673,7 +59673,7 @@ export namespace Prisma {
 
   export type HistorySkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: IntellengenceBasedSkillsOrderByWithRelationInput
@@ -59684,7 +59684,7 @@ export namespace Prisma {
     AND?: HistorySkillWhereInput | HistorySkillWhereInput[]
     OR?: HistorySkillWhereInput[]
     NOT?: HistorySkillWhereInput | HistorySkillWhereInput[]
-    value?: IntFilter<"HistorySkill"> | number
+    value?: IntNullableFilter<"HistorySkill"> | number | null
     mastery?: BoolFilter<"HistorySkill"> | boolean
     name?: StringFilter<"HistorySkill"> | string
     skill_list?: XOR<IntellengenceBasedSkillsScalarRelationFilter, IntellengenceBasedSkillsWhereInput>
@@ -59692,7 +59692,7 @@ export namespace Prisma {
 
   export type HistorySkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: HistorySkillCountOrderByAggregateInput
@@ -59707,7 +59707,7 @@ export namespace Prisma {
     OR?: HistorySkillScalarWhereWithAggregatesInput[]
     NOT?: HistorySkillScalarWhereWithAggregatesInput | HistorySkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"HistorySkill"> | string
-    value?: IntWithAggregatesFilter<"HistorySkill"> | number
+    value?: IntNullableWithAggregatesFilter<"HistorySkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"HistorySkill"> | boolean
     name?: StringWithAggregatesFilter<"HistorySkill"> | string
   }
@@ -59717,7 +59717,7 @@ export namespace Prisma {
     OR?: InvestigationSkillWhereInput[]
     NOT?: InvestigationSkillWhereInput | InvestigationSkillWhereInput[]
     id?: StringFilter<"InvestigationSkill"> | string
-    value?: IntFilter<"InvestigationSkill"> | number
+    value?: IntNullableFilter<"InvestigationSkill"> | number | null
     mastery?: BoolFilter<"InvestigationSkill"> | boolean
     name?: StringFilter<"InvestigationSkill"> | string
     skill_list?: XOR<IntellengenceBasedSkillsScalarRelationFilter, IntellengenceBasedSkillsWhereInput>
@@ -59725,7 +59725,7 @@ export namespace Prisma {
 
   export type InvestigationSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: IntellengenceBasedSkillsOrderByWithRelationInput
@@ -59736,7 +59736,7 @@ export namespace Prisma {
     AND?: InvestigationSkillWhereInput | InvestigationSkillWhereInput[]
     OR?: InvestigationSkillWhereInput[]
     NOT?: InvestigationSkillWhereInput | InvestigationSkillWhereInput[]
-    value?: IntFilter<"InvestigationSkill"> | number
+    value?: IntNullableFilter<"InvestigationSkill"> | number | null
     mastery?: BoolFilter<"InvestigationSkill"> | boolean
     name?: StringFilter<"InvestigationSkill"> | string
     skill_list?: XOR<IntellengenceBasedSkillsScalarRelationFilter, IntellengenceBasedSkillsWhereInput>
@@ -59744,7 +59744,7 @@ export namespace Prisma {
 
   export type InvestigationSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: InvestigationSkillCountOrderByAggregateInput
@@ -59759,7 +59759,7 @@ export namespace Prisma {
     OR?: InvestigationSkillScalarWhereWithAggregatesInput[]
     NOT?: InvestigationSkillScalarWhereWithAggregatesInput | InvestigationSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"InvestigationSkill"> | string
-    value?: IntWithAggregatesFilter<"InvestigationSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"InvestigationSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"InvestigationSkill"> | boolean
     name?: StringWithAggregatesFilter<"InvestigationSkill"> | string
   }
@@ -59769,7 +59769,7 @@ export namespace Prisma {
     OR?: NatureSkillWhereInput[]
     NOT?: NatureSkillWhereInput | NatureSkillWhereInput[]
     id?: StringFilter<"NatureSkill"> | string
-    value?: IntFilter<"NatureSkill"> | number
+    value?: IntNullableFilter<"NatureSkill"> | number | null
     mastery?: BoolFilter<"NatureSkill"> | boolean
     name?: StringFilter<"NatureSkill"> | string
     skill_list?: XOR<IntellengenceBasedSkillsScalarRelationFilter, IntellengenceBasedSkillsWhereInput>
@@ -59777,7 +59777,7 @@ export namespace Prisma {
 
   export type NatureSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: IntellengenceBasedSkillsOrderByWithRelationInput
@@ -59788,7 +59788,7 @@ export namespace Prisma {
     AND?: NatureSkillWhereInput | NatureSkillWhereInput[]
     OR?: NatureSkillWhereInput[]
     NOT?: NatureSkillWhereInput | NatureSkillWhereInput[]
-    value?: IntFilter<"NatureSkill"> | number
+    value?: IntNullableFilter<"NatureSkill"> | number | null
     mastery?: BoolFilter<"NatureSkill"> | boolean
     name?: StringFilter<"NatureSkill"> | string
     skill_list?: XOR<IntellengenceBasedSkillsScalarRelationFilter, IntellengenceBasedSkillsWhereInput>
@@ -59796,7 +59796,7 @@ export namespace Prisma {
 
   export type NatureSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: NatureSkillCountOrderByAggregateInput
@@ -59811,7 +59811,7 @@ export namespace Prisma {
     OR?: NatureSkillScalarWhereWithAggregatesInput[]
     NOT?: NatureSkillScalarWhereWithAggregatesInput | NatureSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"NatureSkill"> | string
-    value?: IntWithAggregatesFilter<"NatureSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"NatureSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"NatureSkill"> | boolean
     name?: StringWithAggregatesFilter<"NatureSkill"> | string
   }
@@ -59821,7 +59821,7 @@ export namespace Prisma {
     OR?: ReligionSkillWhereInput[]
     NOT?: ReligionSkillWhereInput | ReligionSkillWhereInput[]
     id?: StringFilter<"ReligionSkill"> | string
-    value?: IntFilter<"ReligionSkill"> | number
+    value?: IntNullableFilter<"ReligionSkill"> | number | null
     mastery?: BoolFilter<"ReligionSkill"> | boolean
     name?: StringFilter<"ReligionSkill"> | string
     skill_list?: XOR<IntellengenceBasedSkillsScalarRelationFilter, IntellengenceBasedSkillsWhereInput>
@@ -59829,7 +59829,7 @@ export namespace Prisma {
 
   export type ReligionSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: IntellengenceBasedSkillsOrderByWithRelationInput
@@ -59840,7 +59840,7 @@ export namespace Prisma {
     AND?: ReligionSkillWhereInput | ReligionSkillWhereInput[]
     OR?: ReligionSkillWhereInput[]
     NOT?: ReligionSkillWhereInput | ReligionSkillWhereInput[]
-    value?: IntFilter<"ReligionSkill"> | number
+    value?: IntNullableFilter<"ReligionSkill"> | number | null
     mastery?: BoolFilter<"ReligionSkill"> | boolean
     name?: StringFilter<"ReligionSkill"> | string
     skill_list?: XOR<IntellengenceBasedSkillsScalarRelationFilter, IntellengenceBasedSkillsWhereInput>
@@ -59848,7 +59848,7 @@ export namespace Prisma {
 
   export type ReligionSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: ReligionSkillCountOrderByAggregateInput
@@ -59863,7 +59863,7 @@ export namespace Prisma {
     OR?: ReligionSkillScalarWhereWithAggregatesInput[]
     NOT?: ReligionSkillScalarWhereWithAggregatesInput | ReligionSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"ReligionSkill"> | string
-    value?: IntWithAggregatesFilter<"ReligionSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"ReligionSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"ReligionSkill"> | boolean
     name?: StringWithAggregatesFilter<"ReligionSkill"> | string
   }
@@ -59873,7 +59873,7 @@ export namespace Prisma {
     OR?: AnimalHandlingSkillWhereInput[]
     NOT?: AnimalHandlingSkillWhereInput | AnimalHandlingSkillWhereInput[]
     id?: StringFilter<"AnimalHandlingSkill"> | string
-    value?: IntFilter<"AnimalHandlingSkill"> | number
+    value?: IntNullableFilter<"AnimalHandlingSkill"> | number | null
     mastery?: BoolFilter<"AnimalHandlingSkill"> | boolean
     name?: StringFilter<"AnimalHandlingSkill"> | string
     skill_list?: XOR<WisdomBasedSkillsScalarRelationFilter, WisdomBasedSkillsWhereInput>
@@ -59881,7 +59881,7 @@ export namespace Prisma {
 
   export type AnimalHandlingSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: WisdomBasedSkillsOrderByWithRelationInput
@@ -59892,7 +59892,7 @@ export namespace Prisma {
     AND?: AnimalHandlingSkillWhereInput | AnimalHandlingSkillWhereInput[]
     OR?: AnimalHandlingSkillWhereInput[]
     NOT?: AnimalHandlingSkillWhereInput | AnimalHandlingSkillWhereInput[]
-    value?: IntFilter<"AnimalHandlingSkill"> | number
+    value?: IntNullableFilter<"AnimalHandlingSkill"> | number | null
     mastery?: BoolFilter<"AnimalHandlingSkill"> | boolean
     name?: StringFilter<"AnimalHandlingSkill"> | string
     skill_list?: XOR<WisdomBasedSkillsScalarRelationFilter, WisdomBasedSkillsWhereInput>
@@ -59900,7 +59900,7 @@ export namespace Prisma {
 
   export type AnimalHandlingSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: AnimalHandlingSkillCountOrderByAggregateInput
@@ -59915,7 +59915,7 @@ export namespace Prisma {
     OR?: AnimalHandlingSkillScalarWhereWithAggregatesInput[]
     NOT?: AnimalHandlingSkillScalarWhereWithAggregatesInput | AnimalHandlingSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AnimalHandlingSkill"> | string
-    value?: IntWithAggregatesFilter<"AnimalHandlingSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"AnimalHandlingSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"AnimalHandlingSkill"> | boolean
     name?: StringWithAggregatesFilter<"AnimalHandlingSkill"> | string
   }
@@ -59925,7 +59925,7 @@ export namespace Prisma {
     OR?: InsightSkillWhereInput[]
     NOT?: InsightSkillWhereInput | InsightSkillWhereInput[]
     id?: StringFilter<"InsightSkill"> | string
-    value?: IntFilter<"InsightSkill"> | number
+    value?: IntNullableFilter<"InsightSkill"> | number | null
     mastery?: BoolFilter<"InsightSkill"> | boolean
     name?: StringFilter<"InsightSkill"> | string
     skill_list?: XOR<WisdomBasedSkillsScalarRelationFilter, WisdomBasedSkillsWhereInput>
@@ -59933,7 +59933,7 @@ export namespace Prisma {
 
   export type InsightSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: WisdomBasedSkillsOrderByWithRelationInput
@@ -59944,7 +59944,7 @@ export namespace Prisma {
     AND?: InsightSkillWhereInput | InsightSkillWhereInput[]
     OR?: InsightSkillWhereInput[]
     NOT?: InsightSkillWhereInput | InsightSkillWhereInput[]
-    value?: IntFilter<"InsightSkill"> | number
+    value?: IntNullableFilter<"InsightSkill"> | number | null
     mastery?: BoolFilter<"InsightSkill"> | boolean
     name?: StringFilter<"InsightSkill"> | string
     skill_list?: XOR<WisdomBasedSkillsScalarRelationFilter, WisdomBasedSkillsWhereInput>
@@ -59952,7 +59952,7 @@ export namespace Prisma {
 
   export type InsightSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: InsightSkillCountOrderByAggregateInput
@@ -59967,7 +59967,7 @@ export namespace Prisma {
     OR?: InsightSkillScalarWhereWithAggregatesInput[]
     NOT?: InsightSkillScalarWhereWithAggregatesInput | InsightSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"InsightSkill"> | string
-    value?: IntWithAggregatesFilter<"InsightSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"InsightSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"InsightSkill"> | boolean
     name?: StringWithAggregatesFilter<"InsightSkill"> | string
   }
@@ -59977,7 +59977,7 @@ export namespace Prisma {
     OR?: MedicineSkillWhereInput[]
     NOT?: MedicineSkillWhereInput | MedicineSkillWhereInput[]
     id?: StringFilter<"MedicineSkill"> | string
-    value?: IntFilter<"MedicineSkill"> | number
+    value?: IntNullableFilter<"MedicineSkill"> | number | null
     mastery?: BoolFilter<"MedicineSkill"> | boolean
     name?: StringFilter<"MedicineSkill"> | string
     skill_list?: XOR<WisdomBasedSkillsScalarRelationFilter, WisdomBasedSkillsWhereInput>
@@ -59985,7 +59985,7 @@ export namespace Prisma {
 
   export type MedicineSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: WisdomBasedSkillsOrderByWithRelationInput
@@ -59996,7 +59996,7 @@ export namespace Prisma {
     AND?: MedicineSkillWhereInput | MedicineSkillWhereInput[]
     OR?: MedicineSkillWhereInput[]
     NOT?: MedicineSkillWhereInput | MedicineSkillWhereInput[]
-    value?: IntFilter<"MedicineSkill"> | number
+    value?: IntNullableFilter<"MedicineSkill"> | number | null
     mastery?: BoolFilter<"MedicineSkill"> | boolean
     name?: StringFilter<"MedicineSkill"> | string
     skill_list?: XOR<WisdomBasedSkillsScalarRelationFilter, WisdomBasedSkillsWhereInput>
@@ -60004,7 +60004,7 @@ export namespace Prisma {
 
   export type MedicineSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: MedicineSkillCountOrderByAggregateInput
@@ -60019,7 +60019,7 @@ export namespace Prisma {
     OR?: MedicineSkillScalarWhereWithAggregatesInput[]
     NOT?: MedicineSkillScalarWhereWithAggregatesInput | MedicineSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MedicineSkill"> | string
-    value?: IntWithAggregatesFilter<"MedicineSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"MedicineSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"MedicineSkill"> | boolean
     name?: StringWithAggregatesFilter<"MedicineSkill"> | string
   }
@@ -60029,7 +60029,7 @@ export namespace Prisma {
     OR?: PerceptionSkillWhereInput[]
     NOT?: PerceptionSkillWhereInput | PerceptionSkillWhereInput[]
     id?: StringFilter<"PerceptionSkill"> | string
-    value?: IntFilter<"PerceptionSkill"> | number
+    value?: IntNullableFilter<"PerceptionSkill"> | number | null
     mastery?: BoolFilter<"PerceptionSkill"> | boolean
     name?: StringFilter<"PerceptionSkill"> | string
     skill_list?: XOR<WisdomBasedSkillsScalarRelationFilter, WisdomBasedSkillsWhereInput>
@@ -60037,7 +60037,7 @@ export namespace Prisma {
 
   export type PerceptionSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: WisdomBasedSkillsOrderByWithRelationInput
@@ -60048,7 +60048,7 @@ export namespace Prisma {
     AND?: PerceptionSkillWhereInput | PerceptionSkillWhereInput[]
     OR?: PerceptionSkillWhereInput[]
     NOT?: PerceptionSkillWhereInput | PerceptionSkillWhereInput[]
-    value?: IntFilter<"PerceptionSkill"> | number
+    value?: IntNullableFilter<"PerceptionSkill"> | number | null
     mastery?: BoolFilter<"PerceptionSkill"> | boolean
     name?: StringFilter<"PerceptionSkill"> | string
     skill_list?: XOR<WisdomBasedSkillsScalarRelationFilter, WisdomBasedSkillsWhereInput>
@@ -60056,7 +60056,7 @@ export namespace Prisma {
 
   export type PerceptionSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: PerceptionSkillCountOrderByAggregateInput
@@ -60071,7 +60071,7 @@ export namespace Prisma {
     OR?: PerceptionSkillScalarWhereWithAggregatesInput[]
     NOT?: PerceptionSkillScalarWhereWithAggregatesInput | PerceptionSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"PerceptionSkill"> | string
-    value?: IntWithAggregatesFilter<"PerceptionSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"PerceptionSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"PerceptionSkill"> | boolean
     name?: StringWithAggregatesFilter<"PerceptionSkill"> | string
   }
@@ -60081,7 +60081,7 @@ export namespace Prisma {
     OR?: SurvivalSkillWhereInput[]
     NOT?: SurvivalSkillWhereInput | SurvivalSkillWhereInput[]
     id?: StringFilter<"SurvivalSkill"> | string
-    value?: IntFilter<"SurvivalSkill"> | number
+    value?: IntNullableFilter<"SurvivalSkill"> | number | null
     mastery?: BoolFilter<"SurvivalSkill"> | boolean
     name?: StringFilter<"SurvivalSkill"> | string
     skill_list?: XOR<WisdomBasedSkillsScalarRelationFilter, WisdomBasedSkillsWhereInput>
@@ -60089,7 +60089,7 @@ export namespace Prisma {
 
   export type SurvivalSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: WisdomBasedSkillsOrderByWithRelationInput
@@ -60100,7 +60100,7 @@ export namespace Prisma {
     AND?: SurvivalSkillWhereInput | SurvivalSkillWhereInput[]
     OR?: SurvivalSkillWhereInput[]
     NOT?: SurvivalSkillWhereInput | SurvivalSkillWhereInput[]
-    value?: IntFilter<"SurvivalSkill"> | number
+    value?: IntNullableFilter<"SurvivalSkill"> | number | null
     mastery?: BoolFilter<"SurvivalSkill"> | boolean
     name?: StringFilter<"SurvivalSkill"> | string
     skill_list?: XOR<WisdomBasedSkillsScalarRelationFilter, WisdomBasedSkillsWhereInput>
@@ -60108,7 +60108,7 @@ export namespace Prisma {
 
   export type SurvivalSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: SurvivalSkillCountOrderByAggregateInput
@@ -60123,7 +60123,7 @@ export namespace Prisma {
     OR?: SurvivalSkillScalarWhereWithAggregatesInput[]
     NOT?: SurvivalSkillScalarWhereWithAggregatesInput | SurvivalSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"SurvivalSkill"> | string
-    value?: IntWithAggregatesFilter<"SurvivalSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"SurvivalSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"SurvivalSkill"> | boolean
     name?: StringWithAggregatesFilter<"SurvivalSkill"> | string
   }
@@ -60133,7 +60133,7 @@ export namespace Prisma {
     OR?: DeceptionSkillWhereInput[]
     NOT?: DeceptionSkillWhereInput | DeceptionSkillWhereInput[]
     id?: StringFilter<"DeceptionSkill"> | string
-    value?: IntFilter<"DeceptionSkill"> | number
+    value?: IntNullableFilter<"DeceptionSkill"> | number | null
     mastery?: BoolFilter<"DeceptionSkill"> | boolean
     name?: StringFilter<"DeceptionSkill"> | string
     skill_list?: XOR<CharismaBasedSkillsScalarRelationFilter, CharismaBasedSkillsWhereInput>
@@ -60141,7 +60141,7 @@ export namespace Prisma {
 
   export type DeceptionSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: CharismaBasedSkillsOrderByWithRelationInput
@@ -60152,7 +60152,7 @@ export namespace Prisma {
     AND?: DeceptionSkillWhereInput | DeceptionSkillWhereInput[]
     OR?: DeceptionSkillWhereInput[]
     NOT?: DeceptionSkillWhereInput | DeceptionSkillWhereInput[]
-    value?: IntFilter<"DeceptionSkill"> | number
+    value?: IntNullableFilter<"DeceptionSkill"> | number | null
     mastery?: BoolFilter<"DeceptionSkill"> | boolean
     name?: StringFilter<"DeceptionSkill"> | string
     skill_list?: XOR<CharismaBasedSkillsScalarRelationFilter, CharismaBasedSkillsWhereInput>
@@ -60160,7 +60160,7 @@ export namespace Prisma {
 
   export type DeceptionSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: DeceptionSkillCountOrderByAggregateInput
@@ -60175,7 +60175,7 @@ export namespace Prisma {
     OR?: DeceptionSkillScalarWhereWithAggregatesInput[]
     NOT?: DeceptionSkillScalarWhereWithAggregatesInput | DeceptionSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"DeceptionSkill"> | string
-    value?: IntWithAggregatesFilter<"DeceptionSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"DeceptionSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"DeceptionSkill"> | boolean
     name?: StringWithAggregatesFilter<"DeceptionSkill"> | string
   }
@@ -60185,7 +60185,7 @@ export namespace Prisma {
     OR?: IntimidationSkillWhereInput[]
     NOT?: IntimidationSkillWhereInput | IntimidationSkillWhereInput[]
     id?: StringFilter<"IntimidationSkill"> | string
-    value?: IntFilter<"IntimidationSkill"> | number
+    value?: IntNullableFilter<"IntimidationSkill"> | number | null
     mastery?: BoolFilter<"IntimidationSkill"> | boolean
     name?: StringFilter<"IntimidationSkill"> | string
     skill_list?: XOR<CharismaBasedSkillsScalarRelationFilter, CharismaBasedSkillsWhereInput>
@@ -60193,7 +60193,7 @@ export namespace Prisma {
 
   export type IntimidationSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: CharismaBasedSkillsOrderByWithRelationInput
@@ -60204,7 +60204,7 @@ export namespace Prisma {
     AND?: IntimidationSkillWhereInput | IntimidationSkillWhereInput[]
     OR?: IntimidationSkillWhereInput[]
     NOT?: IntimidationSkillWhereInput | IntimidationSkillWhereInput[]
-    value?: IntFilter<"IntimidationSkill"> | number
+    value?: IntNullableFilter<"IntimidationSkill"> | number | null
     mastery?: BoolFilter<"IntimidationSkill"> | boolean
     name?: StringFilter<"IntimidationSkill"> | string
     skill_list?: XOR<CharismaBasedSkillsScalarRelationFilter, CharismaBasedSkillsWhereInput>
@@ -60212,7 +60212,7 @@ export namespace Prisma {
 
   export type IntimidationSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: IntimidationSkillCountOrderByAggregateInput
@@ -60227,7 +60227,7 @@ export namespace Prisma {
     OR?: IntimidationSkillScalarWhereWithAggregatesInput[]
     NOT?: IntimidationSkillScalarWhereWithAggregatesInput | IntimidationSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"IntimidationSkill"> | string
-    value?: IntWithAggregatesFilter<"IntimidationSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"IntimidationSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"IntimidationSkill"> | boolean
     name?: StringWithAggregatesFilter<"IntimidationSkill"> | string
   }
@@ -60237,7 +60237,7 @@ export namespace Prisma {
     OR?: PerformanceSkillWhereInput[]
     NOT?: PerformanceSkillWhereInput | PerformanceSkillWhereInput[]
     id?: StringFilter<"PerformanceSkill"> | string
-    value?: IntFilter<"PerformanceSkill"> | number
+    value?: IntNullableFilter<"PerformanceSkill"> | number | null
     mastery?: BoolFilter<"PerformanceSkill"> | boolean
     name?: StringFilter<"PerformanceSkill"> | string
     skill_list?: XOR<CharismaBasedSkillsScalarRelationFilter, CharismaBasedSkillsWhereInput>
@@ -60245,7 +60245,7 @@ export namespace Prisma {
 
   export type PerformanceSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: CharismaBasedSkillsOrderByWithRelationInput
@@ -60256,7 +60256,7 @@ export namespace Prisma {
     AND?: PerformanceSkillWhereInput | PerformanceSkillWhereInput[]
     OR?: PerformanceSkillWhereInput[]
     NOT?: PerformanceSkillWhereInput | PerformanceSkillWhereInput[]
-    value?: IntFilter<"PerformanceSkill"> | number
+    value?: IntNullableFilter<"PerformanceSkill"> | number | null
     mastery?: BoolFilter<"PerformanceSkill"> | boolean
     name?: StringFilter<"PerformanceSkill"> | string
     skill_list?: XOR<CharismaBasedSkillsScalarRelationFilter, CharismaBasedSkillsWhereInput>
@@ -60264,7 +60264,7 @@ export namespace Prisma {
 
   export type PerformanceSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: PerformanceSkillCountOrderByAggregateInput
@@ -60279,7 +60279,7 @@ export namespace Prisma {
     OR?: PerformanceSkillScalarWhereWithAggregatesInput[]
     NOT?: PerformanceSkillScalarWhereWithAggregatesInput | PerformanceSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"PerformanceSkill"> | string
-    value?: IntWithAggregatesFilter<"PerformanceSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"PerformanceSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"PerformanceSkill"> | boolean
     name?: StringWithAggregatesFilter<"PerformanceSkill"> | string
   }
@@ -60289,7 +60289,7 @@ export namespace Prisma {
     OR?: PersuasionSkillWhereInput[]
     NOT?: PersuasionSkillWhereInput | PersuasionSkillWhereInput[]
     id?: StringFilter<"PersuasionSkill"> | string
-    value?: IntFilter<"PersuasionSkill"> | number
+    value?: IntNullableFilter<"PersuasionSkill"> | number | null
     mastery?: BoolFilter<"PersuasionSkill"> | boolean
     name?: StringFilter<"PersuasionSkill"> | string
     skill_list?: XOR<CharismaBasedSkillsScalarRelationFilter, CharismaBasedSkillsWhereInput>
@@ -60297,7 +60297,7 @@ export namespace Prisma {
 
   export type PersuasionSkillOrderByWithRelationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     skill_list?: CharismaBasedSkillsOrderByWithRelationInput
@@ -60308,7 +60308,7 @@ export namespace Prisma {
     AND?: PersuasionSkillWhereInput | PersuasionSkillWhereInput[]
     OR?: PersuasionSkillWhereInput[]
     NOT?: PersuasionSkillWhereInput | PersuasionSkillWhereInput[]
-    value?: IntFilter<"PersuasionSkill"> | number
+    value?: IntNullableFilter<"PersuasionSkill"> | number | null
     mastery?: BoolFilter<"PersuasionSkill"> | boolean
     name?: StringFilter<"PersuasionSkill"> | string
     skill_list?: XOR<CharismaBasedSkillsScalarRelationFilter, CharismaBasedSkillsWhereInput>
@@ -60316,7 +60316,7 @@ export namespace Prisma {
 
   export type PersuasionSkillOrderByWithAggregationInput = {
     id?: SortOrder
-    value?: SortOrder
+    value?: SortOrderInput | SortOrder
     mastery?: SortOrder
     name?: SortOrder
     _count?: PersuasionSkillCountOrderByAggregateInput
@@ -60331,7 +60331,7 @@ export namespace Prisma {
     OR?: PersuasionSkillScalarWhereWithAggregatesInput[]
     NOT?: PersuasionSkillScalarWhereWithAggregatesInput | PersuasionSkillScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"PersuasionSkill"> | string
-    value?: IntWithAggregatesFilter<"PersuasionSkill"> | number
+    value?: IntNullableWithAggregatesFilter<"PersuasionSkill"> | number | null
     mastery?: BoolWithAggregatesFilter<"PersuasionSkill"> | boolean
     name?: StringWithAggregatesFilter<"PersuasionSkill"> | string
   }
@@ -61217,7 +61217,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsCreateNestedOneWithoutCreature_statInput
     dexterity?: Dexterity_stat_detailsCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsCreateNestedOneWithoutCreature_statInput
     id_relation: CreatureCreateNestedOneWithoutStatsInput
@@ -61228,7 +61228,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     dexterity?: Dexterity_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
   }
@@ -61237,7 +61237,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUpdateOneWithoutCreature_statNestedInput
     dexterity?: Dexterity_stat_detailsUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUpdateOneWithoutCreature_statNestedInput
     id_relation?: CreatureUpdateOneRequiredWithoutStatsNestedInput
@@ -61248,7 +61248,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     dexterity?: Dexterity_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
   }
@@ -61388,42 +61388,42 @@ export namespace Prisma {
     mastery?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type intelligence_stat_detailsCreateInput = {
+  export type Intelligence_stat_detailsCreateInput = {
     value: number
     mastery: boolean
     creature_stat: Creature_statsCreateNestedOneWithoutIntelligenceInput
   }
 
-  export type intelligence_stat_detailsUncheckedCreateInput = {
+  export type Intelligence_stat_detailsUncheckedCreateInput = {
     statblock_id: string
     value: number
     mastery: boolean
   }
 
-  export type intelligence_stat_detailsUpdateInput = {
+  export type Intelligence_stat_detailsUpdateInput = {
     value?: IntFieldUpdateOperationsInput | number
     mastery?: BoolFieldUpdateOperationsInput | boolean
     creature_stat?: Creature_statsUpdateOneRequiredWithoutIntelligenceNestedInput
   }
 
-  export type intelligence_stat_detailsUncheckedUpdateInput = {
+  export type Intelligence_stat_detailsUncheckedUpdateInput = {
     statblock_id?: StringFieldUpdateOperationsInput | string
     value?: IntFieldUpdateOperationsInput | number
     mastery?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type intelligence_stat_detailsCreateManyInput = {
+  export type Intelligence_stat_detailsCreateManyInput = {
     statblock_id: string
     value: number
     mastery: boolean
   }
 
-  export type intelligence_stat_detailsUpdateManyMutationInput = {
+  export type Intelligence_stat_detailsUpdateManyMutationInput = {
     value?: IntFieldUpdateOperationsInput | number
     mastery?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type intelligence_stat_detailsUncheckedUpdateManyInput = {
+  export type Intelligence_stat_detailsUncheckedUpdateManyInput = {
     statblock_id?: StringFieldUpdateOperationsInput | string
     value?: IntFieldUpdateOperationsInput | number
     mastery?: BoolFieldUpdateOperationsInput | boolean
@@ -61772,7 +61772,7 @@ export namespace Prisma {
   }
 
   export type AthleticsSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: StrengthBasedSkillsCreateNestedOneWithoutAthleticsInput
@@ -61780,13 +61780,13 @@ export namespace Prisma {
 
   export type AthleticsSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type AthleticsSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: StrengthBasedSkillsUpdateOneRequiredWithoutAthleticsNestedInput
@@ -61794,33 +61794,33 @@ export namespace Prisma {
 
   export type AthleticsSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AthleticsSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type AthleticsSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AthleticsSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AcrobaticsSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: DexterityBasedSkillsCreateNestedOneWithoutAcrobaticsInput
@@ -61828,13 +61828,13 @@ export namespace Prisma {
 
   export type AcrobaticsSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type AcrobaticsSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: DexterityBasedSkillsUpdateOneRequiredWithoutAcrobaticsNestedInput
@@ -61842,33 +61842,33 @@ export namespace Prisma {
 
   export type AcrobaticsSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AcrobaticsSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type AcrobaticsSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AcrobaticsSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type SleightOfHandSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: DexterityBasedSkillsCreateNestedOneWithoutSleight_of_handInput
@@ -61876,13 +61876,13 @@ export namespace Prisma {
 
   export type SleightOfHandSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type SleightOfHandSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: DexterityBasedSkillsUpdateOneRequiredWithoutSleight_of_handNestedInput
@@ -61890,33 +61890,33 @@ export namespace Prisma {
 
   export type SleightOfHandSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type SleightOfHandSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type SleightOfHandSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type SleightOfHandSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type StealthSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: DexterityBasedSkillsCreateNestedOneWithoutStealthInput
@@ -61924,13 +61924,13 @@ export namespace Prisma {
 
   export type StealthSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type StealthSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: DexterityBasedSkillsUpdateOneRequiredWithoutStealthNestedInput
@@ -61938,33 +61938,33 @@ export namespace Prisma {
 
   export type StealthSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type StealthSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type StealthSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type StealthSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type ArcanaSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: IntellengenceBasedSkillsCreateNestedOneWithoutArcanaInput
@@ -61972,13 +61972,13 @@ export namespace Prisma {
 
   export type ArcanaSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type ArcanaSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: IntellengenceBasedSkillsUpdateOneRequiredWithoutArcanaNestedInput
@@ -61986,33 +61986,33 @@ export namespace Prisma {
 
   export type ArcanaSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type ArcanaSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type ArcanaSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type ArcanaSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type HistorySkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: IntellengenceBasedSkillsCreateNestedOneWithoutHistoryInput
@@ -62020,13 +62020,13 @@ export namespace Prisma {
 
   export type HistorySkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type HistorySkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: IntellengenceBasedSkillsUpdateOneRequiredWithoutHistoryNestedInput
@@ -62034,33 +62034,33 @@ export namespace Prisma {
 
   export type HistorySkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type HistorySkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type HistorySkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type HistorySkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type InvestigationSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: IntellengenceBasedSkillsCreateNestedOneWithoutInvestigationInput
@@ -62068,13 +62068,13 @@ export namespace Prisma {
 
   export type InvestigationSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type InvestigationSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: IntellengenceBasedSkillsUpdateOneRequiredWithoutInvestigationNestedInput
@@ -62082,33 +62082,33 @@ export namespace Prisma {
 
   export type InvestigationSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type InvestigationSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type InvestigationSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type InvestigationSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type NatureSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: IntellengenceBasedSkillsCreateNestedOneWithoutNatureInput
@@ -62116,13 +62116,13 @@ export namespace Prisma {
 
   export type NatureSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type NatureSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: IntellengenceBasedSkillsUpdateOneRequiredWithoutNatureNestedInput
@@ -62130,33 +62130,33 @@ export namespace Prisma {
 
   export type NatureSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type NatureSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type NatureSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type NatureSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type ReligionSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: IntellengenceBasedSkillsCreateNestedOneWithoutReligionInput
@@ -62164,13 +62164,13 @@ export namespace Prisma {
 
   export type ReligionSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type ReligionSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: IntellengenceBasedSkillsUpdateOneRequiredWithoutReligionNestedInput
@@ -62178,33 +62178,33 @@ export namespace Prisma {
 
   export type ReligionSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type ReligionSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type ReligionSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type ReligionSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AnimalHandlingSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: WisdomBasedSkillsCreateNestedOneWithoutAnimal_handlingInput
@@ -62212,13 +62212,13 @@ export namespace Prisma {
 
   export type AnimalHandlingSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type AnimalHandlingSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: WisdomBasedSkillsUpdateOneRequiredWithoutAnimal_handlingNestedInput
@@ -62226,33 +62226,33 @@ export namespace Prisma {
 
   export type AnimalHandlingSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AnimalHandlingSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type AnimalHandlingSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AnimalHandlingSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type InsightSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: WisdomBasedSkillsCreateNestedOneWithoutInsightInput
@@ -62260,13 +62260,13 @@ export namespace Prisma {
 
   export type InsightSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type InsightSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: WisdomBasedSkillsUpdateOneRequiredWithoutInsightNestedInput
@@ -62274,33 +62274,33 @@ export namespace Prisma {
 
   export type InsightSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type InsightSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type InsightSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type InsightSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type MedicineSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: WisdomBasedSkillsCreateNestedOneWithoutMedicineInput
@@ -62308,13 +62308,13 @@ export namespace Prisma {
 
   export type MedicineSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type MedicineSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: WisdomBasedSkillsUpdateOneRequiredWithoutMedicineNestedInput
@@ -62322,33 +62322,33 @@ export namespace Prisma {
 
   export type MedicineSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type MedicineSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type MedicineSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type MedicineSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PerceptionSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: WisdomBasedSkillsCreateNestedOneWithoutPerceptionInput
@@ -62356,13 +62356,13 @@ export namespace Prisma {
 
   export type PerceptionSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type PerceptionSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: WisdomBasedSkillsUpdateOneRequiredWithoutPerceptionNestedInput
@@ -62370,33 +62370,33 @@ export namespace Prisma {
 
   export type PerceptionSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PerceptionSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type PerceptionSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PerceptionSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type SurvivalSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: WisdomBasedSkillsCreateNestedOneWithoutSurvivalInput
@@ -62404,13 +62404,13 @@ export namespace Prisma {
 
   export type SurvivalSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type SurvivalSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: WisdomBasedSkillsUpdateOneRequiredWithoutSurvivalNestedInput
@@ -62418,33 +62418,33 @@ export namespace Prisma {
 
   export type SurvivalSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type SurvivalSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type SurvivalSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type SurvivalSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type DeceptionSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: CharismaBasedSkillsCreateNestedOneWithoutDeceptionInput
@@ -62452,13 +62452,13 @@ export namespace Prisma {
 
   export type DeceptionSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type DeceptionSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: CharismaBasedSkillsUpdateOneRequiredWithoutDeceptionNestedInput
@@ -62466,33 +62466,33 @@ export namespace Prisma {
 
   export type DeceptionSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type DeceptionSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type DeceptionSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type DeceptionSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntimidationSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: CharismaBasedSkillsCreateNestedOneWithoutIntimidationInput
@@ -62500,13 +62500,13 @@ export namespace Prisma {
 
   export type IntimidationSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type IntimidationSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: CharismaBasedSkillsUpdateOneRequiredWithoutIntimidationNestedInput
@@ -62514,33 +62514,33 @@ export namespace Prisma {
 
   export type IntimidationSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntimidationSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type IntimidationSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntimidationSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PerformanceSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: CharismaBasedSkillsCreateNestedOneWithoutPerformanceInput
@@ -62548,13 +62548,13 @@ export namespace Prisma {
 
   export type PerformanceSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type PerformanceSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: CharismaBasedSkillsUpdateOneRequiredWithoutPerformanceNestedInput
@@ -62562,33 +62562,33 @@ export namespace Prisma {
 
   export type PerformanceSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PerformanceSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type PerformanceSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PerformanceSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PersuasionSkillCreateInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
     skill_list: CharismaBasedSkillsCreateNestedOneWithoutPersuasionInput
@@ -62596,13 +62596,13 @@ export namespace Prisma {
 
   export type PersuasionSkillUncheckedCreateInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type PersuasionSkillUpdateInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
     skill_list?: CharismaBasedSkillsUpdateOneRequiredWithoutPersuasionNestedInput
@@ -62610,27 +62610,27 @@ export namespace Prisma {
 
   export type PersuasionSkillUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PersuasionSkillCreateManyInput = {
     id: string
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type PersuasionSkillUpdateManyMutationInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PersuasionSkillUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -63510,8 +63510,8 @@ export namespace Prisma {
   }
 
   export type Intelligence_stat_detailsNullableScalarRelationFilter = {
-    is?: intelligence_stat_detailsWhereInput | null
-    isNot?: intelligence_stat_detailsWhereInput | null
+    is?: Intelligence_stat_detailsWhereInput | null
+    isNot?: Intelligence_stat_detailsWhereInput | null
   }
 
   export type Wisdom_stat_detailsNullableScalarRelationFilter = {
@@ -63632,29 +63632,29 @@ export namespace Prisma {
     value?: SortOrder
   }
 
-  export type intelligence_stat_detailsCountOrderByAggregateInput = {
+  export type Intelligence_stat_detailsCountOrderByAggregateInput = {
     statblock_id?: SortOrder
     value?: SortOrder
     mastery?: SortOrder
   }
 
-  export type intelligence_stat_detailsAvgOrderByAggregateInput = {
+  export type Intelligence_stat_detailsAvgOrderByAggregateInput = {
     value?: SortOrder
   }
 
-  export type intelligence_stat_detailsMaxOrderByAggregateInput = {
+  export type Intelligence_stat_detailsMaxOrderByAggregateInput = {
     statblock_id?: SortOrder
     value?: SortOrder
     mastery?: SortOrder
   }
 
-  export type intelligence_stat_detailsMinOrderByAggregateInput = {
+  export type Intelligence_stat_detailsMinOrderByAggregateInput = {
     statblock_id?: SortOrder
     value?: SortOrder
     mastery?: SortOrder
   }
 
-  export type intelligence_stat_detailsSumOrderByAggregateInput = {
+  export type Intelligence_stat_detailsSumOrderByAggregateInput = {
     value?: SortOrder
   }
 
@@ -65212,10 +65212,10 @@ export namespace Prisma {
     connect?: Constitution_stat_detailsWhereUniqueInput
   }
 
-  export type intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput = {
-    create?: XOR<intelligence_stat_detailsCreateWithoutCreature_statInput, intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
-    connectOrCreate?: intelligence_stat_detailsCreateOrConnectWithoutCreature_statInput
-    connect?: intelligence_stat_detailsWhereUniqueInput
+  export type Intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput = {
+    create?: XOR<Intelligence_stat_detailsCreateWithoutCreature_statInput, Intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
+    connectOrCreate?: Intelligence_stat_detailsCreateOrConnectWithoutCreature_statInput
+    connect?: Intelligence_stat_detailsWhereUniqueInput
   }
 
   export type Wisdom_stat_detailsCreateNestedOneWithoutCreature_statInput = {
@@ -65254,10 +65254,10 @@ export namespace Prisma {
     connect?: Constitution_stat_detailsWhereUniqueInput
   }
 
-  export type intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput = {
-    create?: XOR<intelligence_stat_detailsCreateWithoutCreature_statInput, intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
-    connectOrCreate?: intelligence_stat_detailsCreateOrConnectWithoutCreature_statInput
-    connect?: intelligence_stat_detailsWhereUniqueInput
+  export type Intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput = {
+    create?: XOR<Intelligence_stat_detailsCreateWithoutCreature_statInput, Intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
+    connectOrCreate?: Intelligence_stat_detailsCreateOrConnectWithoutCreature_statInput
+    connect?: Intelligence_stat_detailsWhereUniqueInput
   }
 
   export type Wisdom_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput = {
@@ -65302,14 +65302,14 @@ export namespace Prisma {
     update?: XOR<XOR<Constitution_stat_detailsUpdateToOneWithWhereWithoutCreature_statInput, Constitution_stat_detailsUpdateWithoutCreature_statInput>, Constitution_stat_detailsUncheckedUpdateWithoutCreature_statInput>
   }
 
-  export type intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput = {
-    create?: XOR<intelligence_stat_detailsCreateWithoutCreature_statInput, intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
-    connectOrCreate?: intelligence_stat_detailsCreateOrConnectWithoutCreature_statInput
-    upsert?: intelligence_stat_detailsUpsertWithoutCreature_statInput
-    disconnect?: intelligence_stat_detailsWhereInput | boolean
-    delete?: intelligence_stat_detailsWhereInput | boolean
-    connect?: intelligence_stat_detailsWhereUniqueInput
-    update?: XOR<XOR<intelligence_stat_detailsUpdateToOneWithWhereWithoutCreature_statInput, intelligence_stat_detailsUpdateWithoutCreature_statInput>, intelligence_stat_detailsUncheckedUpdateWithoutCreature_statInput>
+  export type Intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput = {
+    create?: XOR<Intelligence_stat_detailsCreateWithoutCreature_statInput, Intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
+    connectOrCreate?: Intelligence_stat_detailsCreateOrConnectWithoutCreature_statInput
+    upsert?: Intelligence_stat_detailsUpsertWithoutCreature_statInput
+    disconnect?: Intelligence_stat_detailsWhereInput | boolean
+    delete?: Intelligence_stat_detailsWhereInput | boolean
+    connect?: Intelligence_stat_detailsWhereUniqueInput
+    update?: XOR<XOR<Intelligence_stat_detailsUpdateToOneWithWhereWithoutCreature_statInput, Intelligence_stat_detailsUpdateWithoutCreature_statInput>, Intelligence_stat_detailsUncheckedUpdateWithoutCreature_statInput>
   }
 
   export type Wisdom_stat_detailsUpdateOneWithoutCreature_statNestedInput = {
@@ -65370,14 +65370,14 @@ export namespace Prisma {
     update?: XOR<XOR<Constitution_stat_detailsUpdateToOneWithWhereWithoutCreature_statInput, Constitution_stat_detailsUpdateWithoutCreature_statInput>, Constitution_stat_detailsUncheckedUpdateWithoutCreature_statInput>
   }
 
-  export type intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput = {
-    create?: XOR<intelligence_stat_detailsCreateWithoutCreature_statInput, intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
-    connectOrCreate?: intelligence_stat_detailsCreateOrConnectWithoutCreature_statInput
-    upsert?: intelligence_stat_detailsUpsertWithoutCreature_statInput
-    disconnect?: intelligence_stat_detailsWhereInput | boolean
-    delete?: intelligence_stat_detailsWhereInput | boolean
-    connect?: intelligence_stat_detailsWhereUniqueInput
-    update?: XOR<XOR<intelligence_stat_detailsUpdateToOneWithWhereWithoutCreature_statInput, intelligence_stat_detailsUpdateWithoutCreature_statInput>, intelligence_stat_detailsUncheckedUpdateWithoutCreature_statInput>
+  export type Intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput = {
+    create?: XOR<Intelligence_stat_detailsCreateWithoutCreature_statInput, Intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
+    connectOrCreate?: Intelligence_stat_detailsCreateOrConnectWithoutCreature_statInput
+    upsert?: Intelligence_stat_detailsUpsertWithoutCreature_statInput
+    disconnect?: Intelligence_stat_detailsWhereInput | boolean
+    delete?: Intelligence_stat_detailsWhereInput | boolean
+    connect?: Intelligence_stat_detailsWhereUniqueInput
+    update?: XOR<XOR<Intelligence_stat_detailsUpdateToOneWithWhereWithoutCreature_statInput, Intelligence_stat_detailsUpdateWithoutCreature_statInput>, Intelligence_stat_detailsUncheckedUpdateWithoutCreature_statInput>
   }
 
   export type Wisdom_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput = {
@@ -68337,19 +68337,19 @@ export namespace Prisma {
     create: XOR<Constitution_stat_detailsCreateWithoutCreature_statInput, Constitution_stat_detailsUncheckedCreateWithoutCreature_statInput>
   }
 
-  export type intelligence_stat_detailsCreateWithoutCreature_statInput = {
+  export type Intelligence_stat_detailsCreateWithoutCreature_statInput = {
     value: number
     mastery: boolean
   }
 
-  export type intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput = {
+  export type Intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput = {
     value: number
     mastery: boolean
   }
 
-  export type intelligence_stat_detailsCreateOrConnectWithoutCreature_statInput = {
-    where: intelligence_stat_detailsWhereUniqueInput
-    create: XOR<intelligence_stat_detailsCreateWithoutCreature_statInput, intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
+  export type Intelligence_stat_detailsCreateOrConnectWithoutCreature_statInput = {
+    where: Intelligence_stat_detailsWhereUniqueInput
+    create: XOR<Intelligence_stat_detailsCreateWithoutCreature_statInput, Intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
   }
 
   export type Wisdom_stat_detailsCreateWithoutCreature_statInput = {
@@ -68504,23 +68504,23 @@ export namespace Prisma {
     mastery?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type intelligence_stat_detailsUpsertWithoutCreature_statInput = {
-    update: XOR<intelligence_stat_detailsUpdateWithoutCreature_statInput, intelligence_stat_detailsUncheckedUpdateWithoutCreature_statInput>
-    create: XOR<intelligence_stat_detailsCreateWithoutCreature_statInput, intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
-    where?: intelligence_stat_detailsWhereInput
+  export type Intelligence_stat_detailsUpsertWithoutCreature_statInput = {
+    update: XOR<Intelligence_stat_detailsUpdateWithoutCreature_statInput, Intelligence_stat_detailsUncheckedUpdateWithoutCreature_statInput>
+    create: XOR<Intelligence_stat_detailsCreateWithoutCreature_statInput, Intelligence_stat_detailsUncheckedCreateWithoutCreature_statInput>
+    where?: Intelligence_stat_detailsWhereInput
   }
 
-  export type intelligence_stat_detailsUpdateToOneWithWhereWithoutCreature_statInput = {
-    where?: intelligence_stat_detailsWhereInput
-    data: XOR<intelligence_stat_detailsUpdateWithoutCreature_statInput, intelligence_stat_detailsUncheckedUpdateWithoutCreature_statInput>
+  export type Intelligence_stat_detailsUpdateToOneWithWhereWithoutCreature_statInput = {
+    where?: Intelligence_stat_detailsWhereInput
+    data: XOR<Intelligence_stat_detailsUpdateWithoutCreature_statInput, Intelligence_stat_detailsUncheckedUpdateWithoutCreature_statInput>
   }
 
-  export type intelligence_stat_detailsUpdateWithoutCreature_statInput = {
+  export type Intelligence_stat_detailsUpdateWithoutCreature_statInput = {
     value?: IntFieldUpdateOperationsInput | number
     mastery?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type intelligence_stat_detailsUncheckedUpdateWithoutCreature_statInput = {
+  export type Intelligence_stat_detailsUncheckedUpdateWithoutCreature_statInput = {
     value?: IntFieldUpdateOperationsInput | number
     mastery?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -68635,7 +68635,7 @@ export namespace Prisma {
   export type Creature_statsCreateWithoutStrengthInput = {
     dexterity?: Dexterity_stat_detailsCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsCreateNestedOneWithoutCreature_statInput
     id_relation: CreatureCreateNestedOneWithoutStatsInput
@@ -68645,7 +68645,7 @@ export namespace Prisma {
     id: string
     dexterity?: Dexterity_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
   }
@@ -68669,7 +68669,7 @@ export namespace Prisma {
   export type Creature_statsUpdateWithoutStrengthInput = {
     dexterity?: Dexterity_stat_detailsUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUpdateOneWithoutCreature_statNestedInput
     id_relation?: CreatureUpdateOneRequiredWithoutStatsNestedInput
@@ -68679,7 +68679,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     dexterity?: Dexterity_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
   }
@@ -68687,7 +68687,7 @@ export namespace Prisma {
   export type Creature_statsCreateWithoutDexterityInput = {
     strength?: Strength_stat_detailsCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsCreateNestedOneWithoutCreature_statInput
     id_relation: CreatureCreateNestedOneWithoutStatsInput
@@ -68697,7 +68697,7 @@ export namespace Prisma {
     id: string
     strength?: Strength_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
   }
@@ -68721,7 +68721,7 @@ export namespace Prisma {
   export type Creature_statsUpdateWithoutDexterityInput = {
     strength?: Strength_stat_detailsUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUpdateOneWithoutCreature_statNestedInput
     id_relation?: CreatureUpdateOneRequiredWithoutStatsNestedInput
@@ -68731,7 +68731,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     strength?: Strength_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
   }
@@ -68739,7 +68739,7 @@ export namespace Prisma {
   export type Creature_statsCreateWithoutConstitutionInput = {
     strength?: Strength_stat_detailsCreateNestedOneWithoutCreature_statInput
     dexterity?: Dexterity_stat_detailsCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsCreateNestedOneWithoutCreature_statInput
     id_relation: CreatureCreateNestedOneWithoutStatsInput
@@ -68749,7 +68749,7 @@ export namespace Prisma {
     id: string
     strength?: Strength_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     dexterity?: Dexterity_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
   }
@@ -68773,7 +68773,7 @@ export namespace Prisma {
   export type Creature_statsUpdateWithoutConstitutionInput = {
     strength?: Strength_stat_detailsUpdateOneWithoutCreature_statNestedInput
     dexterity?: Dexterity_stat_detailsUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUpdateOneWithoutCreature_statNestedInput
     id_relation?: CreatureUpdateOneRequiredWithoutStatsNestedInput
@@ -68783,7 +68783,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     strength?: Strength_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     dexterity?: Dexterity_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
   }
@@ -68844,7 +68844,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsCreateNestedOneWithoutCreature_statInput
     dexterity?: Dexterity_stat_detailsCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsCreateNestedOneWithoutCreature_statInput
     id_relation: CreatureCreateNestedOneWithoutStatsInput
   }
@@ -68854,7 +68854,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     dexterity?: Dexterity_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
   }
 
@@ -68878,7 +68878,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUpdateOneWithoutCreature_statNestedInput
     dexterity?: Dexterity_stat_detailsUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUpdateOneWithoutCreature_statNestedInput
     id_relation?: CreatureUpdateOneRequiredWithoutStatsNestedInput
   }
@@ -68888,7 +68888,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     dexterity?: Dexterity_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
   }
 
@@ -68896,7 +68896,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsCreateNestedOneWithoutCreature_statInput
     dexterity?: Dexterity_stat_detailsCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsCreateNestedOneWithoutCreature_statInput
     id_relation: CreatureCreateNestedOneWithoutStatsInput
   }
@@ -68906,7 +68906,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     dexterity?: Dexterity_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
   }
 
@@ -68930,7 +68930,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUpdateOneWithoutCreature_statNestedInput
     dexterity?: Dexterity_stat_detailsUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUpdateOneWithoutCreature_statNestedInput
     id_relation?: CreatureUpdateOneRequiredWithoutStatsNestedInput
   }
@@ -68940,7 +68940,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     dexterity?: Dexterity_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
   }
 
@@ -69281,13 +69281,13 @@ export namespace Prisma {
   }
 
   export type AthleticsSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type AthleticsSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69330,13 +69330,13 @@ export namespace Prisma {
   }
 
   export type AthleticsSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AthleticsSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69369,13 +69369,13 @@ export namespace Prisma {
   }
 
   export type AcrobaticsSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type AcrobaticsSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69386,13 +69386,13 @@ export namespace Prisma {
   }
 
   export type SleightOfHandSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type SleightOfHandSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69403,13 +69403,13 @@ export namespace Prisma {
   }
 
   export type StealthSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type StealthSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69452,13 +69452,13 @@ export namespace Prisma {
   }
 
   export type AcrobaticsSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AcrobaticsSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69475,13 +69475,13 @@ export namespace Prisma {
   }
 
   export type SleightOfHandSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type SleightOfHandSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69498,13 +69498,13 @@ export namespace Prisma {
   }
 
   export type StealthSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type StealthSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69537,13 +69537,13 @@ export namespace Prisma {
   }
 
   export type ArcanaSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type ArcanaSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69554,13 +69554,13 @@ export namespace Prisma {
   }
 
   export type HistorySkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type HistorySkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69571,13 +69571,13 @@ export namespace Prisma {
   }
 
   export type InvestigationSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type InvestigationSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69588,13 +69588,13 @@ export namespace Prisma {
   }
 
   export type NatureSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type NatureSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69605,13 +69605,13 @@ export namespace Prisma {
   }
 
   export type ReligionSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type ReligionSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69654,13 +69654,13 @@ export namespace Prisma {
   }
 
   export type ArcanaSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type ArcanaSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69677,13 +69677,13 @@ export namespace Prisma {
   }
 
   export type HistorySkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type HistorySkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69700,13 +69700,13 @@ export namespace Prisma {
   }
 
   export type InvestigationSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type InvestigationSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69723,13 +69723,13 @@ export namespace Prisma {
   }
 
   export type NatureSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type NatureSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69746,13 +69746,13 @@ export namespace Prisma {
   }
 
   export type ReligionSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type ReligionSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69785,13 +69785,13 @@ export namespace Prisma {
   }
 
   export type AnimalHandlingSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type AnimalHandlingSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69802,13 +69802,13 @@ export namespace Prisma {
   }
 
   export type InsightSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type InsightSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69819,13 +69819,13 @@ export namespace Prisma {
   }
 
   export type MedicineSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type MedicineSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69836,13 +69836,13 @@ export namespace Prisma {
   }
 
   export type PerceptionSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type PerceptionSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69853,13 +69853,13 @@ export namespace Prisma {
   }
 
   export type SurvivalSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type SurvivalSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -69902,13 +69902,13 @@ export namespace Prisma {
   }
 
   export type AnimalHandlingSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AnimalHandlingSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69925,13 +69925,13 @@ export namespace Prisma {
   }
 
   export type InsightSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type InsightSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69948,13 +69948,13 @@ export namespace Prisma {
   }
 
   export type MedicineSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type MedicineSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69971,13 +69971,13 @@ export namespace Prisma {
   }
 
   export type PerceptionSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PerceptionSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -69994,13 +69994,13 @@ export namespace Prisma {
   }
 
   export type SurvivalSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type SurvivalSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -70033,13 +70033,13 @@ export namespace Prisma {
   }
 
   export type DeceptionSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type DeceptionSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -70050,13 +70050,13 @@ export namespace Prisma {
   }
 
   export type IntimidationSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type IntimidationSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -70067,13 +70067,13 @@ export namespace Prisma {
   }
 
   export type PerformanceSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type PerformanceSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -70084,13 +70084,13 @@ export namespace Prisma {
   }
 
   export type PersuasionSkillCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
 
   export type PersuasionSkillUncheckedCreateWithoutSkill_listInput = {
-    value: number
+    value?: number | null
     mastery: boolean
     name?: string
   }
@@ -70133,13 +70133,13 @@ export namespace Prisma {
   }
 
   export type DeceptionSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type DeceptionSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -70156,13 +70156,13 @@ export namespace Prisma {
   }
 
   export type IntimidationSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntimidationSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -70179,13 +70179,13 @@ export namespace Prisma {
   }
 
   export type PerformanceSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PerformanceSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -70202,13 +70202,13 @@ export namespace Prisma {
   }
 
   export type PersuasionSkillUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type PersuasionSkillUncheckedUpdateWithoutSkill_listInput = {
-    value?: IntFieldUpdateOperationsInput | number
+    value?: NullableIntFieldUpdateOperationsInput | number | null
     mastery?: BoolFieldUpdateOperationsInput | boolean
     name?: StringFieldUpdateOperationsInput | string
   }
@@ -71073,7 +71073,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsCreateNestedOneWithoutCreature_statInput
     dexterity?: Dexterity_stat_detailsCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsCreateNestedOneWithoutCreature_statInput
   }
@@ -71082,7 +71082,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     dexterity?: Dexterity_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     constitution?: Constitution_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
-    intelligence?: intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
+    intelligence?: Intelligence_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     wisdom?: Wisdom_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
     charisma?: Charisma_stat_detailsUncheckedCreateNestedOneWithoutCreature_statInput
   }
@@ -71378,7 +71378,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUpdateOneWithoutCreature_statNestedInput
     dexterity?: Dexterity_stat_detailsUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUpdateOneWithoutCreature_statNestedInput
   }
@@ -71387,7 +71387,7 @@ export namespace Prisma {
     strength?: Strength_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     dexterity?: Dexterity_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     constitution?: Constitution_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
-    intelligence?: intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
+    intelligence?: Intelligence_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     wisdom?: Wisdom_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
     charisma?: Charisma_stat_detailsUncheckedUpdateOneWithoutCreature_statNestedInput
   }
