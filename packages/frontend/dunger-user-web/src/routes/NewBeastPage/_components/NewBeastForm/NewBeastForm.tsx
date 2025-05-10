@@ -39,7 +39,7 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
     fetchNextPage: fetchMoreTemplates,
     hasNextPage: hasMoreTemplates
   } = useInfiniteQuery({
-    queryKey: ['creatures', { query: debouncedQuery }],
+    queryKey: ['creatures-templates', { query: debouncedQuery }],
     queryFn: async ({ pageParam = 0 }) => {
       const params = new URLSearchParams({ offset: pageParam.toString() });
 
@@ -47,7 +47,7 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
         params.set('query', debouncedQuery);
       }
 
-      return authFetch<{ results: ApiDirectory[] } & ApiPaginatedResult>(`/creatures/templates?${params.toString()}`);
+      return authFetch<{ templates: ApiDirectory[] } & ApiPaginatedResult>(`/creatures/templates?${params.toString()}`);
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
@@ -59,7 +59,7 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
 
   const { typeOptions, crOptions } = useDirectoryOptions();
   const templateOptions =
-    templates?.pages.flatMap((p) => p.results).map((t) => ({ value: t.id.toString(), label: t.name })) ?? [];
+    templates?.pages.flatMap((p) => p.templates).map((t) => ({ value: t.id.toString(), label: t.name })) ?? [];
 
   return (
     <form key={mode} onSubmit={handleSubmit} {...stylex.props(styles.root)}>
