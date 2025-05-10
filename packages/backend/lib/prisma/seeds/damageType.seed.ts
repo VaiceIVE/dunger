@@ -5,7 +5,7 @@ import { PrismaClient } from '@dunger/prisma';
 
 const prisma = new PrismaClient();
 export async function SeedDamageType() {
-  const filePath = resolve(import.meta.dirname, '../data/creatures_data.json');
+  const filePath = resolve(import.meta.dirname, '../data/creatures.json');
   const defaultValuesFile = await readFile(filePath, { encoding: 'utf-8' });
   const creatures: {
     immune: string;
