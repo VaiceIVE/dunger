@@ -10,6 +10,7 @@ import { ClassesPage } from './ClassesPage';
 import { FeatsPage } from './FeatsPage';
 import { HomePage } from './HomePage';
 import { MagicItemsPage } from './MagicItemsPage';
+import { MyBestiaryPage } from './MyBestiaryPage';
 import { NewBeastPage } from './NewBeastPage';
 import { NoAuthPage } from './NoAuthPage';
 import { ProfilePage } from './ProfilePage';
@@ -34,6 +35,8 @@ export const router = createBrowserRouter(
         <Route Component={UserLayout}>
           <Route path="/beast/new" Component={NewBeastPage} />
           <Route path="/beast/:id" Component={BeastPage} />
+
+          <Route path={'/my-bestiary/:id?'} Component={MyBestiaryPage} />
 
           <Route path={'/adventures'} Component={AdventuresPage} />
 

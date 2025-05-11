@@ -61,7 +61,7 @@ export const AuthBar = () => {
             </div>
             <Stack gap={0}>
               <Tab to={'/3'}>Мои персонажи</Tab>
-              <Tab to={'/2'}>Мой бестиарий</Tab>
+              <Tab to={'/my-bestiary'}>Мой бестиарий</Tab>
               <Tab to={'/adventures'}>Мои кампании</Tab>
               <Tab to={'/profile'}>Мой профиль</Tab>
             </Stack>

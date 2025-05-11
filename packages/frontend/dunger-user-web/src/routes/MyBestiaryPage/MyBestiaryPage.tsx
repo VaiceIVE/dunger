@@ -27,7 +27,7 @@ import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
 import { AddToCampaign } from './_components/AddToCampaign';
 import { BestiaryList } from './_components/BestiaryList';
 
-export const BestiaryPage = () => {
+export const MyBestiaryPage = () => {
   const { id } = useParams();
 
   const isActiveCreature = !!id;
@@ -42,7 +42,7 @@ export const BestiaryPage = () => {
     fetchNextPage: fetchMoreCreatures,
     hasNextPage: hasMoreCreatures
   } = useInfiniteQuery({
-    queryKey: ['creatures', { query: debouncedQuery }],
+    queryKey: ['creatures-user', { query: debouncedQuery }],
     queryFn: async ({ pageParam = 0 }) => {
       const params = new URLSearchParams({ offset: pageParam.toString() });
 
@@ -50,7 +50,7 @@ export const BestiaryPage = () => {
         params.set('query', debouncedQuery);
       }
 
-      return authFetch<{ creatures: ApiCreatureList } & ApiPaginatedResult>(`/creatures?${params.toString()}`);
+      return authFetch<{ creatures: ApiCreatureList } & ApiPaginatedResult>(`/creatures/user?${params.toString()}`);
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
@@ -75,7 +75,7 @@ export const BestiaryPage = () => {
         <SplitViewLayout isLayoutSplit={isActiveCreature}>
           <SplitViewLayout.Master>
             <Stack gap={40}>
-              <h1 {...stylex.props(headers.h1Bold)}>Бестиарий</h1>
+              <h1 {...stylex.props(headers.h1Bold)}>Мои существа</h1>
 
               <Stack gap={24}>
                 <Grid gap={16}>
@@ -111,11 +111,13 @@ export const BestiaryPage = () => {
                   <IconButton size="sm">
                     <LinkIcon />
                   </IconButton>
-                  <IconButton size="sm">
-                    <PencilIcon />
-                  </IconButton>
+                  <Link to={`/beast/${beast?.id ?? ''}`}>
+                    <IconButton size="sm">
+                      <PencilIcon />
+                    </IconButton>
+                  </Link>
                   <AddToCampaign />
-                  <Link to={'/bestiary'} preventScrollReset>
+                  <Link to={'/my-bestiary'} preventScrollReset>
                     <IconButton size="sm">
                       <XIcon />
                     </IconButton>
