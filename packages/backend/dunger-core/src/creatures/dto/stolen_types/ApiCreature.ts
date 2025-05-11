@@ -20,7 +20,7 @@ export interface ApiCreature {
   id: string;
   generation_info: ApiCreatureAiInput | null;
   // Общая информация
-  name: string;   
+  name: string;
   //image_uri: string | null;
   description: string | null;
   type_id: number | null;
@@ -57,5 +57,3 @@ export interface ApiCreature {
   //s_type: null;
   //aSubTypes: [];
 }
-
-

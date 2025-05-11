@@ -33,9 +33,13 @@ export class CreaturesService {
    * Устанавливает источник как кастомный (по shortName из this.customContentSource).
    *
    * @param createCreatureDto - Данные для создания существа вручную.
+   * @param userId - id пользователя, который создает существо.
    * @returns id созданного существа.
    */
-  async initCreature(createCreatureDto: CreateCreatureManualDto) {
+  async initCreature(
+    createCreatureDto: CreateCreatureManualDto,
+    userId: string,
+  ) {
     const { template_id, name, challenge_rating } = createCreatureDto;
 
     // Получаем id кастомного источника (например, "DUNGER")
@@ -50,6 +54,7 @@ export class CreaturesService {
       name,
       challenge_rating,
       source_id: customSourceId,
+      creator_id: userId,
     };
 
     // Если указан шаблон — копируем все поля, кроме id, и переопределяем имя/CR/source
@@ -75,13 +80,13 @@ export class CreaturesService {
   }
 
   /**
-   * Возвращает список существ с пагинацией и фильтрацией по имени.
+   * Возвращает список существ из книги с пагинацией и фильтрацией по имени.
    * Исключает существа, источник которых соответствует кастомному контенту (shortName берётся из configService).
    *
    * @param query - Объект с параметрами пагинации и поиска.
    * @returns Существа + информация о пагинации.
    */
-  async findSome(
+  async findAllPublic(
     query: PaginationQueryDto,
   ): Promise<{ creatures: ApiCreatureList } & ApiPaginatedResult> {
     const { query: search, offset, limit } = query;
@@ -123,6 +128,58 @@ export class CreaturesService {
       ({ type_relation, alignment_relation, ...rest }) => ({
         ...rest,
         type_name: type_relation.name,
+        alignment_name: alignment_relation?.name,
+      }),
+    );
+
+    return {
+      pagination: { limit, offset, totalCount },
+      creatures,
+    };
+  }
+
+  /**
+   * Возвращает список существ, которых создал пользователь, с пагинацией и фильтрацией по имени.
+   *
+   * @param query - Объект с параметрами пагинации и поиска.
+   * @param userId - id пользователя, который создал существ.
+   * @returns Существа + информация о пагинации.
+   */
+  async findAllUser(
+    query: PaginationQueryDto,
+    userId: string,
+  ): Promise<{ creatures: ApiCreatureList } & ApiPaginatedResult> {
+    const { query: search, offset, limit } = query;
+
+    const where = {
+      ...(search ? { name: { contains: search } } : {}),
+      creator_id: userId,
+    };
+
+    const [creaturesRaw, totalCount] = await Promise.all([
+      this.prisma.creature.findMany({
+        select: {
+          id: true,
+          name: true,
+          challenge_rating: true,
+          type_relation: {
+            select: { name: true },
+          },
+          alignment_relation: {
+            select: { name: true },
+          },
+        },
+        where,
+        skip: offset,
+        take: limit,
+      }),
+      this.prisma.creature.count({ where }),
+    ]);
+
+    const creatures = creaturesRaw.map(
+      ({ type_relation, alignment_relation, ...rest }) => ({
+        ...rest,
+        type_name: type_relation?.name,
         alignment_name: alignment_relation?.name,
       }),
     );

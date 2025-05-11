@@ -8,6 +8,7 @@ import {
   Delete,
   Query,
   ValidationPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { CreaturesService } from './creatures.service';
 import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
@@ -15,6 +16,8 @@ import { ApiCreatureInput } from './dto/stolen_types/ApiCreatureInput';
 import axios from 'axios';
 import { ConfigService } from '@nestjs/config';
 import { PaginationQueryDto } from 'src/common/dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 
 @Controller('creatures')
 export class CreaturesController {
@@ -23,15 +26,30 @@ export class CreaturesController {
     private readonly configService: ConfigService,
   ) {}
 
+  /**
+   * POST, Создает существо вручную
+   *
+   * Получает данные для создания из body и данные о пользователе из JWT payload
+   */
+  @UseGuards(JwtAuthGuard)
   @Post('/init')
-  initCreature(@Body() createCreatureDto: CreateCreatureManualDto) {
-    return this.creaturesService.initCreature(createCreatureDto);
+  initCreature(
+    @Body() createCreatureDto: CreateCreatureManualDto,
+    @CurrentUser() user,
+  ) {
+    return this.creaturesService.initCreature(createCreatureDto, user.id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('/generate')
-  async generateCreature(@Body() createCreatureDto: CreateCreatureManualDto) {
-    const creatureId =
-      await this.creaturesService.initCreature(createCreatureDto);
+  async generateCreature(
+    @Body() createCreatureDto: CreateCreatureManualDto,
+    @CurrentUser() user,
+  ) {
+    const creatureId = await this.creaturesService.initCreature(
+      createCreatureDto,
+      user.id,
+    );
 
     const aiCretureData = (
       await axios.post(
@@ -39,8 +57,6 @@ export class CreaturesController {
         createCreatureDto,
       )
     ).data;
-
-    console.log(aiCretureData);
 
     const updatedCreature = await this.creaturesService.update(
       creatureId.id,
@@ -51,12 +67,16 @@ export class CreaturesController {
     return aiCretureData;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post('/generate/debug')
   async generateCreatureDebug(
     @Body() createCreatureDto: CreateCreatureManualDto,
+    @CurrentUser() user,
   ) {
-    const creatureId =
-      await this.creaturesService.initCreature(createCreatureDto);
+    const creatureId = await this.creaturesService.initCreature(
+      createCreatureDto,
+      user.id,
+    );
 
     const aiCretureData = (
       await axios.post(
@@ -76,8 +96,11 @@ export class CreaturesController {
     return { aiCretureData };
   }
 
+  /**
+   * GET, Получение списка существ из бестиария игры
+   */
   @Get()
-  async findSome(
+  async findAllPublic(
     @Query(
       new ValidationPipe({
         transform: true,
@@ -86,7 +109,25 @@ export class CreaturesController {
     )
     query: PaginationQueryDto,
   ) {
-    return await this.creaturesService.findSome(query);
+    return await this.creaturesService.findAllPublic(query);
+  }
+
+  /**
+   * GET, Получение списка существ, созданных пользователем
+   */
+  @UseGuards(JwtAuthGuard)
+  @Get('user')
+  async findAllUser(
+    @Query(
+      new ValidationPipe({
+        transform: true,
+        transformOptions: { enableImplicitConversion: true },
+      }),
+    )
+    query: PaginationQueryDto,
+    @CurrentUser() user,
+  ) {
+    return await this.creaturesService.findAllUser(query, user.id);
   }
 
   @Get('/templates')
