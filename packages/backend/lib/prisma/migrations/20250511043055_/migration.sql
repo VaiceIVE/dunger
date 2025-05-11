@@ -350,6 +350,7 @@ CREATE TABLE "PersuasionSkill" (
 CREATE TABLE "Creature" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "creator_id" TEXT,
     "image_uri" TEXT,
     "description" TEXT,
     "size" TEXT,

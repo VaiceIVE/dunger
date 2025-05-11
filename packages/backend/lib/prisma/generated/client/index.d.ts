@@ -46708,6 +46708,7 @@ export namespace Prisma {
   export type CreatureMinAggregateOutputType = {
     id: string | null
     name: string | null
+    creator_id: string | null
     image_uri: string | null
     description: string | null
     size: string | null
@@ -46723,6 +46724,7 @@ export namespace Prisma {
   export type CreatureMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    creator_id: string | null
     image_uri: string | null
     description: string | null
     size: string | null
@@ -46738,6 +46740,7 @@ export namespace Prisma {
   export type CreatureCountAggregateOutputType = {
     id: number
     name: number
+    creator_id: number
     image_uri: number
     description: number
     size: number
@@ -46777,6 +46780,7 @@ export namespace Prisma {
   export type CreatureMinAggregateInputType = {
     id?: true
     name?: true
+    creator_id?: true
     image_uri?: true
     description?: true
     size?: true
@@ -46792,6 +46796,7 @@ export namespace Prisma {
   export type CreatureMaxAggregateInputType = {
     id?: true
     name?: true
+    creator_id?: true
     image_uri?: true
     description?: true
     size?: true
@@ -46807,6 +46812,7 @@ export namespace Prisma {
   export type CreatureCountAggregateInputType = {
     id?: true
     name?: true
+    creator_id?: true
     image_uri?: true
     description?: true
     size?: true
@@ -46911,6 +46917,7 @@ export namespace Prisma {
   export type CreatureGroupByOutputType = {
     id: string
     name: string
+    creator_id: string | null
     image_uri: string | null
     description: string | null
     size: string | null
@@ -46947,6 +46954,7 @@ export namespace Prisma {
   export type CreatureSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    creator_id?: boolean
     image_uri?: boolean
     description?: boolean
     size?: boolean
@@ -46981,6 +46989,7 @@ export namespace Prisma {
   export type CreatureSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    creator_id?: boolean
     image_uri?: boolean
     description?: boolean
     size?: boolean
@@ -47003,6 +47012,7 @@ export namespace Prisma {
   export type CreatureSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    creator_id?: boolean
     image_uri?: boolean
     description?: boolean
     size?: boolean
@@ -47025,6 +47035,7 @@ export namespace Prisma {
   export type CreatureSelectScalar = {
     id?: boolean
     name?: boolean
+    creator_id?: boolean
     image_uri?: boolean
     description?: boolean
     size?: boolean
@@ -47039,7 +47050,7 @@ export namespace Prisma {
     aSubTypes?: boolean
   }
 
-  export type CreatureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "image_uri" | "description" | "size" | "race_id" | "source_id" | "alignment_id" | "armor_class" | "hit_points" | "challenge_rating" | "biomes_ids" | "type_id" | "aSubTypes", ExtArgs["result"]["creature"]>
+  export type CreatureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "creator_id" | "image_uri" | "description" | "size" | "race_id" | "source_id" | "alignment_id" | "armor_class" | "hit_points" | "challenge_rating" | "biomes_ids" | "type_id" | "aSubTypes", ExtArgs["result"]["creature"]>
   export type CreatureInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     speed?: boolean | Creature$speedArgs<ExtArgs>
     stats?: boolean | Creature$statsArgs<ExtArgs>
@@ -47097,6 +47108,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      creator_id: string | null
       image_uri: string | null
       description: string | null
       size: string | null
@@ -47550,6 +47562,7 @@ export namespace Prisma {
   interface CreatureFieldRefs {
     readonly id: FieldRef<"Creature", 'String'>
     readonly name: FieldRef<"Creature", 'String'>
+    readonly creator_id: FieldRef<"Creature", 'String'>
     readonly image_uri: FieldRef<"Creature", 'String'>
     readonly description: FieldRef<"Creature", 'String'>
     readonly size: FieldRef<"Creature", 'String'>
@@ -58284,6 +58297,7 @@ export namespace Prisma {
   export const CreatureScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    creator_id: 'creator_id',
     image_uri: 'image_uri',
     description: 'description',
     size: 'size',
@@ -60342,6 +60356,7 @@ export namespace Prisma {
     NOT?: CreatureWhereInput | CreatureWhereInput[]
     id?: StringFilter<"Creature"> | string
     name?: StringFilter<"Creature"> | string
+    creator_id?: StringNullableFilter<"Creature"> | string | null
     image_uri?: StringNullableFilter<"Creature"> | string | null
     description?: StringNullableFilter<"Creature"> | string | null
     size?: StringNullableFilter<"Creature"> | string | null
@@ -60375,6 +60390,7 @@ export namespace Prisma {
   export type CreatureOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    creator_id?: SortOrderInput | SortOrder
     image_uri?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     size?: SortOrderInput | SortOrder
@@ -60411,6 +60427,7 @@ export namespace Prisma {
     OR?: CreatureWhereInput[]
     NOT?: CreatureWhereInput | CreatureWhereInput[]
     name?: StringFilter<"Creature"> | string
+    creator_id?: StringNullableFilter<"Creature"> | string | null
     image_uri?: StringNullableFilter<"Creature"> | string | null
     description?: StringNullableFilter<"Creature"> | string | null
     size?: StringNullableFilter<"Creature"> | string | null
@@ -60444,6 +60461,7 @@ export namespace Prisma {
   export type CreatureOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    creator_id?: SortOrderInput | SortOrder
     image_uri?: SortOrderInput | SortOrder
     description?: SortOrderInput | SortOrder
     size?: SortOrderInput | SortOrder
@@ -60469,6 +60487,7 @@ export namespace Prisma {
     NOT?: CreatureScalarWhereWithAggregatesInput | CreatureScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Creature"> | string
     name?: StringWithAggregatesFilter<"Creature"> | string
+    creator_id?: StringNullableWithAggregatesFilter<"Creature"> | string | null
     image_uri?: StringNullableWithAggregatesFilter<"Creature"> | string | null
     description?: StringNullableWithAggregatesFilter<"Creature"> | string | null
     size?: StringNullableWithAggregatesFilter<"Creature"> | string | null
@@ -62638,6 +62657,7 @@ export namespace Prisma {
   export type CreatureCreateInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -62666,6 +62686,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -62694,6 +62715,7 @@ export namespace Prisma {
   export type CreatureUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -62722,6 +62744,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -62750,6 +62773,7 @@ export namespace Prisma {
   export type CreatureCreateManyInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -62767,6 +62791,7 @@ export namespace Prisma {
   export type CreatureUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -62779,6 +62804,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -64578,6 +64604,7 @@ export namespace Prisma {
   export type CreatureCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    creator_id?: SortOrder
     image_uri?: SortOrder
     description?: SortOrder
     size?: SortOrder
@@ -64605,6 +64632,7 @@ export namespace Prisma {
   export type CreatureMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    creator_id?: SortOrder
     image_uri?: SortOrder
     description?: SortOrder
     size?: SortOrder
@@ -64620,6 +64648,7 @@ export namespace Prisma {
   export type CreatureMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    creator_id?: SortOrder
     image_uri?: SortOrder
     description?: SortOrder
     size?: SortOrder
@@ -67681,6 +67710,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutSize_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -67708,6 +67738,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutSize_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     race_id?: number | null
@@ -67764,6 +67795,7 @@ export namespace Prisma {
     NOT?: CreatureScalarWhereInput | CreatureScalarWhereInput[]
     id?: StringFilter<"Creature"> | string
     name?: StringFilter<"Creature"> | string
+    creator_id?: StringNullableFilter<"Creature"> | string | null
     image_uri?: StringNullableFilter<"Creature"> | string | null
     description?: StringNullableFilter<"Creature"> | string | null
     size?: StringNullableFilter<"Creature"> | string | null
@@ -67781,6 +67813,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutSource_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -67808,6 +67841,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutSource_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -67861,6 +67895,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutLanguagesInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -67888,6 +67923,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutLanguagesInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -67936,6 +67972,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutBiome_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -67963,6 +68000,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutBiome_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -68011,6 +68049,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutType_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -68038,6 +68077,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutType_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -68091,6 +68131,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutAlignment_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -68118,6 +68159,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutAlignment_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -68171,6 +68213,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutSpeedInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -68198,6 +68241,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutSpeedInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -68241,6 +68285,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutSpeedInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -68268,6 +68313,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutSpeedInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -68385,6 +68431,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutStatsInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -68412,6 +68459,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutStatsInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -68581,6 +68629,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -68608,6 +68657,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutStatsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -69038,6 +69088,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutSkillsInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -69065,6 +69116,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutSkillsInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -69229,6 +69281,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutSkillsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -69256,6 +69309,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutSkillsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71709,6 +71763,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutSensesInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -71736,6 +71791,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutSensesInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -71779,6 +71835,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutSensesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -71806,6 +71863,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutSensesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -71833,6 +71891,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutActionsInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -71860,6 +71919,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutActionsInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -71953,6 +72013,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutTraitsInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -71980,6 +72041,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutTraitsInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -72108,6 +72170,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutRace_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -72135,6 +72198,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutRace_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -72220,6 +72284,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutResistancesInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -72247,6 +72312,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutResistancesInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -72279,6 +72345,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutImmunitiesInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -72306,6 +72373,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutImmunitiesInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -72338,6 +72406,7 @@ export namespace Prisma {
   export type CreatureCreateWithoutVulnerabilitiesInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     armor_class?: number | null
@@ -72365,6 +72434,7 @@ export namespace Prisma {
   export type CreatureUncheckedCreateWithoutVulnerabilitiesInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -72529,6 +72599,7 @@ export namespace Prisma {
   export type CreatureCreateManySize_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     race_id?: number | null
@@ -72545,6 +72616,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutSize_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72572,6 +72644,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutSize_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     race_id?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72599,6 +72672,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutSize_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     race_id?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72615,6 +72689,7 @@ export namespace Prisma {
   export type CreatureCreateManySource_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -72631,6 +72706,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutSource_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72658,6 +72734,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutSource_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72685,6 +72762,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutSource_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72701,6 +72779,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutLanguagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72728,6 +72807,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutLanguagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72755,6 +72835,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutLanguagesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72772,6 +72853,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutBiome_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72799,6 +72881,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutBiome_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72826,6 +72909,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutBiome_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72843,6 +72927,7 @@ export namespace Prisma {
   export type CreatureCreateManyType_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -72859,6 +72944,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutType_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72886,6 +72972,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutType_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72913,6 +73000,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutType_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72929,6 +73017,7 @@ export namespace Prisma {
   export type CreatureCreateManyAlignment_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -72945,6 +73034,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutAlignment_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -72972,6 +73062,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutAlignment_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -72999,6 +73090,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutAlignment_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73153,6 +73245,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutActionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -73180,6 +73273,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutActionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73207,6 +73301,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutActionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73245,6 +73340,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutTraitsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -73272,6 +73368,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutTraitsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73299,6 +73396,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutTraitsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73337,6 +73435,7 @@ export namespace Prisma {
   export type CreatureCreateManyRace_relationInput = {
     id?: string
     name: string
+    creator_id?: string | null
     image_uri?: string | null
     description?: string | null
     size?: string | null
@@ -73403,6 +73502,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutRace_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -73430,6 +73530,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutRace_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73457,6 +73558,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutRace_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73473,6 +73575,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutResistancesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -73500,6 +73603,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutResistancesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73527,6 +73631,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutResistancesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73544,6 +73649,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutImmunitiesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -73571,6 +73677,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutImmunitiesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73598,6 +73705,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutImmunitiesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73615,6 +73723,7 @@ export namespace Prisma {
   export type CreatureUpdateWithoutVulnerabilitiesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
@@ -73642,6 +73751,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateWithoutVulnerabilitiesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null
@@ -73669,6 +73779,7 @@ export namespace Prisma {
   export type CreatureUncheckedUpdateManyWithoutVulnerabilitiesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     image_uri?: NullableStringFieldUpdateOperationsInput | string | null
     description?: NullableStringFieldUpdateOperationsInput | string | null
     size?: NullableStringFieldUpdateOperationsInput | string | null

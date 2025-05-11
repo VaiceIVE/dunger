@@ -351,6 +351,7 @@ exports.Prisma.PersuasionSkillScalarFieldEnum = {
 exports.Prisma.CreatureScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  creator_id: 'creator_id',
   image_uri: 'image_uri',
   description: 'description',
   size: 'size',
