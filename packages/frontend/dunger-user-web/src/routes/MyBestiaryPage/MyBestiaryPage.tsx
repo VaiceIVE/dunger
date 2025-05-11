@@ -1,0 +1,148 @@
+import { Fragment, useState } from 'react';
+import * as stylex from '@stylexjs/stylex';
+import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { Link, useParams } from 'react-router-dom';
+import { useAuthFetch } from '@dunger/auth-fetch';
+import {
+  Button,
+  ButtonVariant,
+  Container,
+  Grid,
+  headers,
+  IconButton,
+  InfiniteScroll,
+  LinkIcon,
+  PencilIcon,
+  SearchIcon,
+  Stack,
+  TextInput,
+  XIcon
+} from '@dunger/ui';
+import { BeastCard } from 'features/BeastCard';
+import { SplitViewLayout } from 'features/SplitViewLayout';
+import { ApiPaginatedResult } from 'store/_types/_common';
+import { ApiCreature } from 'store/_types/ApiCreature';
+import { ApiCreatureList } from 'store/_types/ApiCreatureList';
+import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
+import { AddToCampaign } from './_components/AddToCampaign';
+import { BestiaryList } from './_components/BestiaryList';
+
+export const MyBestiaryPage = () => {
+  const { id } = useParams();
+
+  const isActiveCreature = !!id;
+
+  const [nameQuery, setNameQuery] = useState('');
+  const debouncedQuery = useDebouncedValue(nameQuery, 500);
+
+  const authFetch = useAuthFetch();
+
+  const {
+    data: data,
+    fetchNextPage: fetchMoreCreatures,
+    hasNextPage: hasMoreCreatures
+  } = useInfiniteQuery({
+    queryKey: ['creatures-user', { query: debouncedQuery }],
+    queryFn: async ({ pageParam = 0 }) => {
+      const params = new URLSearchParams({ offset: pageParam.toString() });
+
+      if (debouncedQuery) {
+        params.set('query', debouncedQuery);
+      }
+
+      return authFetch<{ creatures: ApiCreatureList } & ApiPaginatedResult>(`/creatures/user?${params.toString()}`);
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      const { offset, limit, totalCount } = lastPage.pagination;
+      const nextOffset = offset + limit;
+      return nextOffset < totalCount ? nextOffset : undefined;
+    }
+  });
+
+  const { data: beast } = useQuery({
+    queryKey: ['creatures', { id }],
+    queryFn: () => authFetch<ApiCreature>(`/creatures/${id ?? ''}`),
+    enabled: isActiveCreature,
+    placeholderData: keepPreviousData
+  });
+
+  const creatures = data?.pages.flatMap((p) => p.creatures) ?? [];
+
+  return (
+    <main>
+      <Container>
+        <SplitViewLayout isLayoutSplit={isActiveCreature}>
+          <SplitViewLayout.Master>
+            <Stack gap={40}>
+              <h1 {...stylex.props(headers.h1Bold)}>Мои существа</h1>
+
+              <Stack gap={24}>
+                <Grid gap={16}>
+                  <Grid.Col span={isActiveCreature ? 11 : 6}>
+                    <TextInput
+                      value={nameQuery}
+                      onChange={(e) => {
+                        setNameQuery(e.target.value);
+                      }}
+                      style={styles.input}
+                      placeholder="Поиск"
+                      leftSection={<SearchIcon />}
+                    />
+                  </Grid.Col>
+                  <Grid.Col span={isActiveCreature ? 1 : 6}>
+                    <Button variant={ButtonVariant.accentSecondary}>Фильтры</Button>
+                  </Grid.Col>
+                </Grid>
+
+                <InfiniteScroll hasMore={hasMoreCreatures} next={fetchMoreCreatures}>
+                  <BestiaryList creatureId={id} creatures={creatures} isActiveCreature={isActiveCreature} />
+                </InfiniteScroll>
+              </Stack>
+            </Stack>
+          </SplitViewLayout.Master>
+
+          <SplitViewLayout.Detail>
+            <BeastCard
+              beast={beast}
+              style={styles.card}
+              controls={
+                <Fragment>
+                  <IconButton size="sm">
+                    <LinkIcon />
+                  </IconButton>
+                  <Link to={`/beast/${beast?.id ?? ''}`}>
+                    <IconButton size="sm">
+                      <PencilIcon />
+                    </IconButton>
+                  </Link>
+                  <AddToCampaign />
+                  <Link to={'/my-bestiary'} preventScrollReset>
+                    <IconButton size="sm">
+                      <XIcon />
+                    </IconButton>
+                  </Link>
+                </Fragment>
+              }
+            />
+          </SplitViewLayout.Detail>
+        </SplitViewLayout>
+      </Container>
+    </main>
+  );
+};
+
+const styles = stylex.create({
+  input: {
+    width: {
+      default: '100%',
+      ':is([aria-selected=true])': '100%'
+    }
+  },
+  card: {
+    height: 'calc(100dvh - 64px)',
+    position: 'sticky',
+    right: 0,
+    top: 32
+  }
+});

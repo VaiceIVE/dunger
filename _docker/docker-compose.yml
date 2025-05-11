@@ -18,6 +18,9 @@ services:
     ports:
       - 8080:8080
     command: start-dev
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
     networks:
       - dunger_backend_net
     healthcheck:

@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@dunger/prisma';
 
 const prisma = new PrismaClient();
 export async function SeedSizes() {

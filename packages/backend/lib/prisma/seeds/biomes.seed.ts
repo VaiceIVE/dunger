@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@dunger/prisma';
 
 const prisma = new PrismaClient();
 
@@ -9,7 +9,7 @@ export async function SeedBiomes() {
   const filePath = resolve(import.meta.dirname, '../data/biomes.json');
   const defaultValuesFile = await readFile(filePath, { encoding: 'utf-8' });
   const biomes: {
-    text: { key: string; title: string };
+    text: { key: string; name: string };
   }[] = JSON.parse(defaultValuesFile);
 
   const promises = [];
@@ -24,7 +24,7 @@ export async function SeedBiomes() {
           update: {},
           create: {
             key: biome.text.key,
-            title: biome.text.title
+            name: biome.text.name
           }
         })
         .catch((error) => {

@@ -1,6 +1,8 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
+import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
+import { useAuthFetch } from '@dunger/auth-fetch';
 import {
   Button,
   ButtonVariant,
@@ -8,6 +10,7 @@ import {
   Grid,
   headers,
   IconButton,
+  InfiniteScroll,
   LinkIcon,
   PencilIcon,
   SearchIcon,
@@ -17,6 +20,10 @@ import {
 } from '@dunger/ui';
 import { BeastCard } from 'features/BeastCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
+import { ApiPaginatedResult } from 'store/_types/_common';
+import { ApiCreature } from 'store/_types/ApiCreature';
+import { ApiCreatureList } from 'store/_types/ApiCreatureList';
+import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
 import { AddToCampaign } from './_components/AddToCampaign';
 import { BestiaryList } from './_components/BestiaryList';
 
@@ -24,6 +31,43 @@ export const BestiaryPage = () => {
   const { id } = useParams();
 
   const isActiveCreature = !!id;
+
+  const [nameQuery, setNameQuery] = useState('');
+  const debouncedQuery = useDebouncedValue(nameQuery, 500);
+
+  const authFetch = useAuthFetch();
+
+  const {
+    data: data,
+    fetchNextPage: fetchMoreCreatures,
+    hasNextPage: hasMoreCreatures
+  } = useInfiniteQuery({
+    queryKey: ['creatures', { query: debouncedQuery }],
+    queryFn: async ({ pageParam = 0 }) => {
+      const params = new URLSearchParams({ offset: pageParam.toString() });
+
+      if (debouncedQuery) {
+        params.set('query', debouncedQuery);
+      }
+
+      return authFetch<{ creatures: ApiCreatureList } & ApiPaginatedResult>(`/creatures?${params.toString()}`);
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      const { offset, limit, totalCount } = lastPage.pagination;
+      const nextOffset = offset + limit;
+      return nextOffset < totalCount ? nextOffset : undefined;
+    }
+  });
+
+  const { data: beast } = useQuery({
+    queryKey: ['creatures', { id }],
+    queryFn: () => authFetch<ApiCreature>(`/creatures/${id ?? ''}`),
+    enabled: isActiveCreature,
+    placeholderData: keepPreviousData
+  });
+
+  const creatures = data?.pages.flatMap((p) => p.creatures) ?? [];
 
   return (
     <main>
@@ -36,20 +80,31 @@ export const BestiaryPage = () => {
               <Stack gap={24}>
                 <Grid gap={16}>
                   <Grid.Col span={isActiveCreature ? 11 : 6}>
-                    <TextInput style={styles.input} placeholder="Поиск" leftSection={<SearchIcon />} />
+                    <TextInput
+                      value={nameQuery}
+                      onChange={(e) => {
+                        setNameQuery(e.target.value);
+                      }}
+                      style={styles.input}
+                      placeholder="Поиск"
+                      leftSection={<SearchIcon />}
+                    />
                   </Grid.Col>
                   <Grid.Col span={isActiveCreature ? 1 : 6}>
                     <Button variant={ButtonVariant.accentSecondary}>Фильтры</Button>
                   </Grid.Col>
                 </Grid>
 
-                <BestiaryList isActiveCreature={isActiveCreature} />
+                <InfiniteScroll hasMore={hasMoreCreatures} next={fetchMoreCreatures}>
+                  <BestiaryList creatureId={id} creatures={creatures} isActiveCreature={isActiveCreature} />
+                </InfiniteScroll>
               </Stack>
             </Stack>
           </SplitViewLayout.Master>
 
           <SplitViewLayout.Detail>
             <BeastCard
+              beast={beast}
               style={styles.card}
               controls={
                 <Fragment>
@@ -60,7 +115,7 @@ export const BestiaryPage = () => {
                     <PencilIcon />
                   </IconButton>
                   <AddToCampaign />
-                  <Link to={'/bestiary'}>
+                  <Link to={'/bestiary'} preventScrollReset>
                     <IconButton size="sm">
                       <XIcon />
                     </IconButton>

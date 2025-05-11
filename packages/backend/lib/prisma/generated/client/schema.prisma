@@ -1,0 +1,456 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Size {
+  id       String     @id
+  name     String     @unique
+  creature Creature[]
+}
+
+model Source {
+  id        Int    @id() @default(autoincrement())
+  shortName String @unique
+  name      String
+
+  creatures Creature[]
+}
+
+model Language {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  creatures Creature[]
+}
+
+model Biome {
+  id   Int    @id() @default(autoincrement())
+  key  String @unique
+  name String @unique
+
+  creatures Creature[]
+}
+
+model Type {
+  id   Int    @id @default(autoincrement())
+  name String @unique // аберрация, гуманоид итд
+
+  creatures Creature[]
+}
+
+model Alignment {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  creatures Creature[]
+}
+
+model Speed_stat {
+  id     String @id
+  walk   Int?
+  fly    Int?
+  swim   Int?
+  burrow Int?
+  climb  Int?
+
+  id_relation Creature @relation(references: [id], fields: [id])
+}
+
+model Creature_stats {
+  id String @id
+
+  strength     Strength_stat_details?
+  dexterity    Dexterity_stat_details?
+  constitution Constitution_stat_details?
+  intelligence Intelligence_stat_details?
+  wisdom       Wisdom_stat_details?
+  charisma     Charisma_stat_details?
+
+  id_relation Creature @relation(references: [id], fields: [id])
+}
+
+model Strength_stat_details {
+  statblock_id String  @id
+  value        Int
+  mastery      Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
+}
+
+model Dexterity_stat_details {
+  statblock_id String  @id
+  value        Int
+  mastery      Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
+}
+
+model Constitution_stat_details {
+  statblock_id String  @id
+  value        Int
+  mastery      Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
+}
+
+model Intelligence_stat_details {
+  statblock_id String  @id
+  value        Int
+  mastery      Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
+}
+
+model Wisdom_stat_details {
+  statblock_id String  @id
+  value        Int
+  mastery      Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
+}
+
+model Charisma_stat_details {
+  statblock_id String  @id
+  value        Int
+  mastery      Boolean
+
+  creature_stat Creature_stats @relation(fields: [statblock_id], references: [id])
+}
+
+model SkillsList {
+  id String @id
+
+  strength     StrengthBasedSkills?
+  dexterity    DexterityBasedSkills?
+  intelligence IntellengenceBasedSkills?
+  wisdom       WisdomBasedSkills?
+  charisma     CharismaBasedSkills?
+
+  id_relation Creature @relation(references: [id], fields: [id])
+}
+
+model StrengthBasedSkills {
+  id String @id
+
+  athletics AthleticsSkill?
+
+  skills_list_relation SkillsList @relation(references: [id], fields: [id])
+}
+
+model DexterityBasedSkills {
+  id String @id
+
+  acrobatics      AcrobaticsSkill?
+  sleight_of_hand SleightOfHandSkill?
+  stealth         StealthSkill?
+
+  skills_list_relation SkillsList @relation(references: [id], fields: [id])
+}
+
+model IntellengenceBasedSkills {
+  id String @id
+
+  arcana        ArcanaSkill?
+  history       HistorySkill?
+  investigation InvestigationSkill?
+  nature        NatureSkill?
+  religion      ReligionSkill?
+
+  skills_list_relation SkillsList @relation(references: [id], fields: [id])
+}
+
+model WisdomBasedSkills {
+  id String @id
+
+  animal_handling AnimalHandlingSkill?
+  insight         InsightSkill?
+  medicine        MedicineSkill?
+  perception      PerceptionSkill?
+  survival        SurvivalSkill?
+
+  skills_list_relation SkillsList @relation(references: [id], fields: [id])
+}
+
+model CharismaBasedSkills {
+  id String @id
+
+  deception    DeceptionSkill?
+  intimidation IntimidationSkill?
+  performance  PerformanceSkill?
+  persuasion   PersuasionSkill?
+
+  skills_list_relation SkillsList @relation(references: [id], fields: [id])
+}
+
+model AthleticsSkill {
+  id         String              @id
+  value      Int?
+  mastery    Boolean
+  name       String              @default("Атлетика")
+  skill_list StrengthBasedSkills @relation(fields: [id], references: [id])
+}
+
+model AcrobaticsSkill {
+  id         String               @id
+  value      Int?
+  mastery    Boolean
+  name       String               @default("Акробатика")
+  skill_list DexterityBasedSkills @relation(fields: [id], references: [id])
+}
+
+model SleightOfHandSkill {
+  id         String               @id
+  value      Int?
+  mastery    Boolean
+  name       String               @default("Ловкость рук")
+  skill_list DexterityBasedSkills @relation(fields: [id], references: [id])
+}
+
+model StealthSkill {
+  id         String               @id
+  value      Int?
+  mastery    Boolean
+  name       String               @default("Скрытность")
+  skill_list DexterityBasedSkills @relation(fields: [id], references: [id])
+}
+
+model ArcanaSkill {
+  id         String                   @id
+  value      Int?
+  mastery    Boolean
+  name       String                   @default("Магия")
+  skill_list IntellengenceBasedSkills @relation(fields: [id], references: [id])
+}
+
+model HistorySkill {
+  id         String                   @id
+  value      Int?
+  mastery    Boolean
+  name       String                   @default("История")
+  skill_list IntellengenceBasedSkills @relation(fields: [id], references: [id])
+}
+
+model InvestigationSkill {
+  id         String                   @id
+  value      Int?
+  mastery    Boolean
+  name       String                   @default("Расследование")
+  skill_list IntellengenceBasedSkills @relation(fields: [id], references: [id])
+}
+
+model NatureSkill {
+  id         String                   @id
+  value      Int?
+  mastery    Boolean
+  name       String                   @default("Природа")
+  skill_list IntellengenceBasedSkills @relation(fields: [id], references: [id])
+}
+
+model ReligionSkill {
+  id         String                   @id
+  value      Int?
+  mastery    Boolean
+  name       String                   @default("Религия")
+  skill_list IntellengenceBasedSkills @relation(fields: [id], references: [id])
+}
+
+model AnimalHandlingSkill {
+  id         String            @id
+  value      Int?
+  mastery    Boolean
+  name       String            @default("Уход за животными")
+  skill_list WisdomBasedSkills @relation(fields: [id], references: [id])
+}
+
+model InsightSkill {
+  id         String            @id
+  value      Int?
+  mastery    Boolean
+  name       String            @default("Проницательность")
+  skill_list WisdomBasedSkills @relation(fields: [id], references: [id])
+}
+
+model MedicineSkill {
+  id         String            @id
+  value      Int?
+  mastery    Boolean
+  name       String            @default("Медицина")
+  skill_list WisdomBasedSkills @relation(fields: [id], references: [id])
+}
+
+model PerceptionSkill {
+  id         String            @id
+  value      Int?
+  mastery    Boolean
+  name       String            @default("Восприятие")
+  skill_list WisdomBasedSkills @relation(fields: [id], references: [id])
+}
+
+model SurvivalSkill {
+  id         String            @id
+  value      Int?
+  mastery    Boolean
+  name       String            @default("Выживание")
+  skill_list WisdomBasedSkills @relation(fields: [id], references: [id])
+}
+
+model DeceptionSkill {
+  id         String              @id
+  value      Int?
+  mastery    Boolean
+  name       String              @default("Обман")
+  skill_list CharismaBasedSkills @relation(fields: [id], references: [id])
+}
+
+model IntimidationSkill {
+  id         String              @id
+  value      Int?
+  mastery    Boolean
+  name       String              @default("Запугивание")
+  skill_list CharismaBasedSkills @relation(fields: [id], references: [id])
+}
+
+model PerformanceSkill {
+  id         String              @id
+  value      Int?
+  mastery    Boolean
+  name       String              @default("Исполнение")
+  skill_list CharismaBasedSkills @relation(fields: [id], references: [id])
+}
+
+model PersuasionSkill {
+  id         String              @id
+  value      Int?
+  mastery    Boolean
+  name       String              @default("Соблазнение")
+  skill_list CharismaBasedSkills @relation(fields: [id], references: [id])
+}
+
+model Creature {
+  id                 String          @id @default(uuid())
+  name               String
+  creator_id         String?
+  image_uri          String?
+  description        String?
+  size               String?
+  race_id            Int? //Тип с действиями и свойствами, как Дроу или горный гном 
+  source_id          Int?
+  alignment_id       Int?
+  speed              Speed_stat?
+  armor_class        Int?
+  hit_points         Int?
+  stats              Creature_stats?
+  skills             SkillsList?
+  resistances        DamageType[]    @relation("creature_resistances")
+  immunities         DamageType[]    @relation("creature_immunities")
+  vulnerabilities    DamageType[]    @relation("creature_vulnerabilities")
+  // conditionImmune
+  senses             Senses?
+  challenge_rating   String
+  languages          Language[]
+  biomes_ids         Int[]
+  type_id            Int?
+  aSubTypes          String[] //TODO
+  actions            Action[]
+  traits             Trait[]
+  alignment_relation Alignment?      @relation(references: [id], fields: [alignment_id])
+  race_relation      CreatureRace?   @relation(references: [id], fields: [race_id])
+  type_relation      Type?           @relation(references: [id], fields: [type_id])
+  size_relation      Size?           @relation(references: [name], fields: [size])
+  biome_relation     Biome[]
+  source_relation    Source?         @relation(references: [id], fields: [source_id])
+}
+
+model Senses {
+  creature_id        String @id
+  passive_perception Int?
+
+  creature Creature @relation(fields: [creature_id], references: [id])
+}
+
+model Action {
+  id            Int            @id @default(autoincrement())
+  name          String
+  description   String         @unique
+  attack        String?
+  is_template   Boolean?
+  creatures     Creature[]
+  creatureTypes CreatureRace[]
+}
+
+model Trait {
+  id            Int            @id @default(autoincrement())
+  name          String
+  description   String         @unique
+  attack        String?
+  is_template   Boolean?
+  cretures      Creature[]
+  creatureTypes CreatureRace[]
+}
+
+model CreatureRace {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  traits      Trait[]
+  actions     Action[]
+  creatures   Creature[]
+}
+
+model GenrationRequest {
+  id      Int    @id @default(autoincrement())
+  request String
+  danger  String //todo
+  name    String
+}
+
+model DamageType {
+  id   String @id
+  name String @unique
+
+  resistant_creatures  Creature[] @relation("creature_resistances")
+  immune_creatures     Creature[] @relation("creature_immunities")
+  vunlerable_creatures Creature[] @relation("creature_vulnerabilities")
+}
+
+model ChallengeRating {
+  id String @id
+}
+
+model GPTMessageHistory {
+  id       String       @id @default(uuid())
+  type     String
+  messages GPTMessage[]
+}
+
+model GPTMessage {
+  number             Int
+  message_history_id String
+  text               String
+  role               String
+
+  message_history GPTMessageHistory @relation(references: [id], fields: [message_history_id])
+
+  @@id([message_history_id, number])
+}
+
+enum Stat {
+  Strength
+  Dexterity
+  Constitution
+  Intelegence
+  Wisdom
+  Charisma
+}

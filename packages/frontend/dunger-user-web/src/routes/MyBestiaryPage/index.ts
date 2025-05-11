@@ -1,0 +1,1 @@
+export { MyBestiaryPage } from './MyBestiaryPage';

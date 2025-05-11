@@ -4,6 +4,7 @@ export type Creature = {
   size: string;
   type: string;
   source: string;
+  save?: string;
   alignment: string;
   ac: string;
   hp: string;

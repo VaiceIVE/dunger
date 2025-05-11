@@ -1,11 +1,11 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@dunger/prisma';
 
 const prisma = new PrismaClient();
 export async function SeedAlignment() {
-  const filePath = resolve(import.meta.dirname, '../data/creatures_data.json');
+  const filePath = resolve(import.meta.dirname, '../data/creatures.json');
   const defaultValuesFile = await readFile(filePath, { encoding: 'utf-8' });
   const creatures: {
     alignment: string;
@@ -27,7 +27,7 @@ export async function SeedAlignment() {
             name: alignment
           }
         })
-        .catch((error) => {
+        .catch(() => {
           // console.error(`Failed to upsert alignment "${alignment}":`, error);
         })
     );

@@ -1,11 +1,11 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@dunger/prisma';
 
 const prisma = new PrismaClient();
 export async function SeedDamageType() {
-  const filePath = resolve(import.meta.dirname, '../data/creatures_data.json');
+  const filePath = resolve(import.meta.dirname, '../data/creatures.json');
   const defaultValuesFile = await readFile(filePath, { encoding: 'utf-8' });
   const creatures: {
     immune: string;
@@ -24,13 +24,11 @@ export async function SeedDamageType() {
     let localDamageList: string[] = [];
     if (damageString) {
       const parts = damageString.split('; ');
-      console.log(parts);
       localDamageList = parts.length > 1 ? [parts[1]] : [];
       localDamageList = localDamageList.concat(parts[0].split(','));
     }
     if (localDamageList.length > 0) {
       for (const damageType of localDamageList) {
-        console.log(damageType);
         allDamageTypes.add(damageType.trim().toLowerCase());
       }
     }
@@ -46,7 +44,7 @@ export async function SeedDamageType() {
               id: damageType
             }
           })
-          .catch((error) => {
+          .catch(() => {
             // console.error(`Failed to create damage type "${damageType}":`, error);
           })
       );

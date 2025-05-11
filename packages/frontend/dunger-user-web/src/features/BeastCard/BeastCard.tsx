@@ -134,7 +134,7 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
                   ? savedThrows.map((s, index) => (
                       <Fragment key={s.key}>
                         {s}
-                        {index + 1 !== skills.length && ', '}
+                        {index + 1 !== savedThrows.length ? ', ' : ''}
                       </Fragment>
                     ))
                   : 'Не указано'

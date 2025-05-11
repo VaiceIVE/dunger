@@ -1,243 +1,271 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
-import { UpdateCreatureDto } from './dto/update-creature.dto';
-import { PrismaClient } from '@prisma/client';
-import { PaginationQureiedQuery } from 'src/app/dto/queries/paginationQueriedQuery';
-import { PaginationQuery } from 'src/app/dto/queries/paginationQuery';
+import { Prisma, PrismaClient } from '@dunger/prisma';
 import { ApiCreatureInput } from './dto/stolen_types/ApiCreatureInput';
-import { skip } from 'node:test';
-import { ApiCreature } from './dto/stolen_types/ApiCreature';
 import { nullSkillsObject } from './objects/nullSkills.object';
 import { nullSpeedObject } from './objects/nullSpeed.object';
-import { nullStatObject } from './objects/nullStat.objecxt';
+import { nullStatObject } from './objects/nullStat.object';
 import { nullSensesObject } from './objects/nullSenses.object';
+import { PaginationQueryDto } from 'src/common/dto';
+import { ApiCreatureList } from './dto/stolen_types/ApiCreatureList';
+import { ApiPaginatedResult } from './dto/stolen_types/_common';
+import { ConfigService } from '@nestjs/config';
+import { ApiCreature } from './dto/stolen_types/ApiCreature';
+import { creatureInclude } from './includes/creature.include';
+import { AppError } from 'src/common/errors';
+import { HttpStatus } from '@dunger/common-enums';
+
+/**
+ * Фильтры SQL запроса существ
+ */
+type CreaturesFilterArgs = {
+  userId?: string;
+  excludeSourceId?: number;
+  searchName?: string;
+  limit: number;
+  offset: number;
+};
 
 @Injectable()
 export class CreaturesService {
-  constructor(private readonly prisma: PrismaClient) {}
+  private readonly customContentSource: string;
 
-  async initCreature(createCreatureDto: CreateCreatureManualDto) {
-    if (
-      createCreatureDto.template_id != null &&
-      createCreatureDto.template_id != undefined
-    ) {
+  constructor(
+    private readonly prisma: PrismaClient,
+    private readonly configService: ConfigService,
+  ) {
+    this.customContentSource = this.configService.get<string>(
+      'CUSTOM_CONTENT_SOURCE',
+    );
+  }
+
+  /**
+   * Создаёт существо вручную, опционально на основе шаблона.
+   * Устанавливает источник как кастомный (по shortName из this.customContentSource).
+   *
+   * @param createCreatureDto - Данные для создания существа вручную.
+   * @param userId - id пользователя, который создает существо.
+   * @returns id созданного существа.
+   */
+  async initCreature(
+    createCreatureDto: CreateCreatureManualDto,
+    userId: string,
+  ) {
+    const { template_id, name, challenge_rating } = createCreatureDto;
+
+    // Получаем id кастомного источника (например, "DUNGER")
+    const customSourceId = (
+      await this.prisma.source.findUnique({
+        where: { shortName: this.customContentSource },
+        select: { id: true },
+      })
+    )?.id;
+
+    const creatureData = {
+      name,
+      challenge_rating,
+      source_id: customSourceId,
+      creator_id: userId,
+    };
+
+    // Если указан шаблон — копируем все поля, кроме id, и переопределяем имя/CR/source
+    if (template_id) {
       const template = await this.prisma.creature.findUnique({
-        where: { id: createCreatureDto.template_id },
+        where: { id: template_id },
       });
-      delete template.id;
-      template.name = createCreatureDto.name;
-      template.challenge_rating = createCreatureDto.challenge_rating;
-      return await this.prisma.creature.create({
-        data: template,
-        select: {
-          id: true,
-        },
-      });
+
+      if (template) {
+        const { id: _, ...templateData } = template;
+        return this.prisma.creature.create({
+          data: { ...templateData, ...creatureData },
+          select: { id: true },
+        });
+      }
     }
-    return await this.prisma.creature.create({
-      data: {
-        name: createCreatureDto.name,
-        challenge_rating: createCreatureDto.challenge_rating,
-      },
-      select: {
-        id: true,
-      },
+
+    // Если шаблона нет — создаём существо с переданными полями
+    return this.prisma.creature.create({
+      data: creatureData,
+      select: { id: true },
     });
   }
 
-  findAll() {
-    return `This action returns all creatures`;
+  /**
+   * Возвращает список существ из книги с пагинацией и фильтрацией по имени.
+   * Исключает существа, источник которых соответствует кастомному контенту (shortName берётся из configService).
+   *
+   * @param query - Объект с параметрами пагинации и поиска.
+   * @returns Существа + информация о пагинации.
+   */
+  async findAllPublic(
+    query: PaginationQueryDto,
+  ): Promise<{ creatures: ApiCreatureList } & ApiPaginatedResult> {
+    const { query: search, offset, limit } = query;
+
+    // Получаем id кастомного источника (например, 'DUNGER'), чтобы исключить его из выборки
+    const dungerSource = await this.prisma.source.findUnique({
+      where: { shortName: this.customContentSource },
+      select: { id: true },
+    });
+
+    const excludeSourceId = dungerSource?.id;
+
+    const where = {
+      ...(search ? { name: { contains: search } } : {}),
+      ...(excludeSourceId ? { source_id: { not: excludeSourceId } } : {}),
+    };
+
+    const [creaturesRaw, totalCount] = await Promise.all([
+      this.prisma.$queryRaw<
+        Array<{
+          id: string;
+          name: string;
+          challenge_rating: string;
+          type_name: string;
+          alignment_name: string;
+        }>
+      >(
+        this.sql_queryCreatures({
+          limit,
+          offset,
+          searchName: search,
+          excludeSourceId,
+        }),
+      ),
+      this.prisma.creature.count({ where }),
+    ]);
+
+    return {
+      pagination: { limit, offset, totalCount },
+      creatures: creaturesRaw,
+    };
   }
 
-  async findSome(query: PaginationQureiedQuery){
-    let results = []
-    let total = 0
-    if(query.query){
-      results = await this.prisma.creature.findMany({
-        select: {
-          id: true
-        },
-        where: {
-          name: {
-            contains: query.query
-          }
-        },
-        skip: query.offset,
-        take: query.limit
-      })
-      total = await this.prisma.creature.count({
-        where: {
-          name: {
-            contains: query.query
-          }
-        }
-      })
-    }else{
-      results = await this.prisma.creature.findMany({
-        select: {
-          id: true
-        },
-        skip: query.offset,
-        take: query.limit
-      })
-      total = await this.prisma.creature.count()
-    }
+  /**
+   * Возвращает список существ, которых создал пользователь, с пагинацией и фильтрацией по имени.
+   *
+   * @param query - Объект с параметрами пагинации и поиска.
+   * @param userId - id пользователя, который создал существ.
+   * @returns Существа + информация о пагинации.
+   */
+  async findAllUser(
+    query: PaginationQueryDto,
+    userId: string,
+  ): Promise<{ creatures: ApiCreatureList } & ApiPaginatedResult> {
+    const { query: search, offset, limit } = query;
 
-    let final_results = []
+    const where = {
+      ...(search ? { name: { contains: search } } : {}),
+      creator_id: userId,
+    };
 
-    for(const result of results){
-      final_results.push(await this.selectCreatureForCard(result.id))
-    }
+    const [creaturesRaw, totalCount] = await Promise.all([
+      this.prisma.$queryRaw<
+        Array<{
+          id: string;
+          name: string;
+          challenge_rating: string;
+          type_name: string;
+          alignment_name: string;
+        }>
+      >(
+        this.sql_queryCreatures({
+          limit,
+          offset,
+          searchName: search,
+          userId,
+        }),
+      ),
+      this.prisma.creature.count({ where }),
+    ]);
 
-    console.log('this was final results')
+    return {
+      pagination: { limit, offset, totalCount },
+      creatures: creaturesRaw,
+    };
+  }
+
+  private sql_queryCreatures = (args: CreaturesFilterArgs): Prisma.Sql => {
+    const likePattern = `%${args.searchName ?? ''}%`;
+    const offset = Number(args.offset ?? 0);
+    const limit = Number(args.limit ?? 20);
+
+    return Prisma.sql`
+      SELECT 
+        c.id, 
+        c.name, 
+        c.challenge_rating, 
+        t.name AS type_name, 
+        a.name AS alignment_name
+      FROM "Creature" c
+      LEFT JOIN "Type" t ON c.type_id = t.id
+      LEFT JOIN "Alignment" a ON c.alignment_id = a.id
+      WHERE True
+      ${args.userId ? Prisma.sql`AND c.creator_id = ${args.userId}` : Prisma.sql``}
+      ${args.excludeSourceId ? Prisma.sql`AND c.source_id != ${args.excludeSourceId}` : Prisma.sql``}
+      ${args.searchName ? Prisma.sql`AND c.name ILIKE ${likePattern}` : Prisma.sql``}
+      ORDER BY 
+        CASE c.challenge_rating
+          WHEN '0' THEN 0
+          WHEN '1/8' THEN 0.125
+          WHEN '1/4' THEN 0.25
+          WHEN '1/2' THEN 0.5
+          ELSE CAST(c.challenge_rating AS DOUBLE PRECISION)
+        END,
+        c.id
+      OFFSET ${offset}
+      LIMIT ${limit};
+    `;
+  };
+
+  /**
+   * Возвращает список шаблонов с пагинацией и фильтрацией по имени.
+   * Исключает шаблоны, источник которых соответствует кастомному контенту (shortName берётся из configService).
+   *
+   * @param query - Объект с параметрами пагинации и поиска.
+   * @returns Шаблоны + информация о пагинации.
+   */
+  async findTemplates(query: PaginationQueryDto) {
+    const { query: search, offset, limit } = query;
+
+    // Получаем id кастомного источника (например, 'DUNGER'), чтобы исключить его из выборки
+    const dungerSource = await this.prisma.source.findUnique({
+      where: { shortName: this.customContentSource },
+      select: { id: true },
+    });
+
+    const excludeSourceId = dungerSource?.id;
+
+    const where = {
+      ...(search ? { name: { contains: search } } : {}),
+      ...(excludeSourceId ? { source_id: { not: excludeSourceId } } : {}),
+    };
+
+    const [templatesRaw, total] = await this.prisma.$transaction([
+      this.prisma.creature.findMany({
+        where,
+        select: { id: true, name: true },
+        skip: offset,
+        take: limit,
+      }),
+      this.prisma.creature.count({ where }),
+    ]);
+
     return {
       pagination: {
-        limit: query.limit,
-        offset: query.offset,
-        totalCount: total
+        limit,
+        offset,
+        totalCount: total,
       },
-      results: final_results,
-    }
-    
-  }
-
-  async findTemplates(query: PaginationQureiedQuery){
-    let results = []
-    let total = 0
-    if(query.query){
-      results = await this.prisma.creature.findMany({
-        where: {
-          name: {
-            contains: query.query
-          }
-        },
-        select: {
-          name: true,
-          id: true
-        },
-        skip: query.offset,
-        take: query.limit
-      })
-      total = await this.prisma.creature.count({
-        where: {
-          name: {
-            contains: query.query
-          }
-        }
-      })
-    }else{
-      results = await this.prisma.creature.findMany({
-        select: {
-          name: true,
-          id: true
-        },
-        skip: query.offset,
-        take: query.limit
-      })
-      total = await this.prisma.creature.count()
-    }
-
-    let final_results = []
-
-    for(const result of results){
-      final_results.push(await this.selectCreatureForCard(result.id))
-    }
-
-    console.log('this was final results')
-    return {
-      pagination: {
-        limit: query.limit,
-        offset: query.offset,
-        totalCount: total
-      },
-      results: results,
-    }
-    
-  }
-
-  async findTypes(){
-    return await this.prisma.type.findMany({
-      select: {
-        id: true,
-        name: true
-      }
-    })
-  }
-
-  async findAlignment(){
-    return await this.prisma.alignment.findMany()
-  }
-
-  async findSizes() {
-    return await this.prisma.size.findMany();
-  }
-
-  async findBimes() {
-    return await this.prisma.biome.findMany({});
-  }
-
-  async findDamageType() {
-    return await this.prisma.damageType.findMany();
+      templates: templatesRaw,
+    };
   }
 
   async findOne(id: string) {
     return this.selectCreatureForCard(id);
   }
-  async findLanguages(query: PaginationQureiedQuery) {
-    let results = [];
-    let total = 0;
-    if (query.query) {
-      results = await this.prisma.language.findMany({
-        where: {
-          name: {
-            contains: query.query,
-          },
-        },
-        select: {
-          name: true,
-          id: true,
-        },
-        skip: query.offset,
-        take: query.limit,
-      });
-      total = await this.prisma.language.count({
-        where: {
-          name: {
-            contains: query.query,
-          },
-        },
-      });
-    } else {
-      results = await this.prisma.language.findMany({
-        select: {
-          name: true,
-          id: true,
-        },
-        skip: query.offset,
-        take: query.limit,
-      });
-      total = await this.prisma.language.count();
-    }
 
-    return {
-      pagination: {
-        limit: query.limit,
-        offset: query.offset,
-        totalCount: total,
-      },
-      results: results,
-    };
-  }
-
-  async findCR() {
-    return await this.prisma.challengeRating.findMany();
-  }
-
-  async findSkills() {
-    return await this.prisma.skillsList.findMany();
-  }
-
-  async findTraitsGroups(query: PaginationQureiedQuery) {
+  async findTraitsGroups(query: PaginationQueryDto) {
     let results;
     let total;
     if (query.query) {
@@ -245,9 +273,9 @@ export class CreaturesService {
         by: ['name'],
         where: {
           name: {
-            contains: query.query
+            contains: query.query,
           },
-          is_template: true
+          is_template: true,
         },
         _count: {
           id: true,
@@ -267,7 +295,7 @@ export class CreaturesService {
       results = await this.prisma.trait.groupBy({
         by: ['name'],
         where: {
-          is_template: true
+          is_template: true,
         },
         _count: {
           id: true,
@@ -296,62 +324,43 @@ export class CreaturesService {
     };
   }
 
-  async findActionsGroups(query: PaginationQureiedQuery) {
-    let results;
-    let total;
-    if (query.query) {
-      results = await this.prisma.action.groupBy({
-        by: ['name'],
-        where: {
-          name: {
-            contains: query.query
-          },
-          is_template: true
-        },
-        _count: {
-          id: true,
-        },
-        orderBy: {
-          _count: {
-            id: 'desc',
-          },
-        },
-      });
-      total = await this.prisma.action.groupBy({
-        by: ['name'],
-        _count: true,
-      });
-      total = total.length;
-    } else {
-      results = await this.prisma.action.groupBy({
-        by: ['name'],
-        _count: {
-          id: true
-        },
-        where: {
-          is_template: true
-        },
-        orderBy: {
-          _count: {
-            id: 'desc',
-          },
-        },
-      });
-      total = await this.prisma.action.groupBy({
-        by: ['name'],
-      });
-      total = total.length;
-    }
+  async findActionsGroups(query: PaginationQueryDto) {
+    const { query: search, limit, offset } = query;
 
-    results = results.slice(query.offset, query.offset + query.limit);
+    const where: Prisma.ActionWhereInput = {
+      is_template: true,
+      ...(search && {
+        name: {
+          contains: search,
+        },
+      }),
+    };
+
+    const groups = await this.prisma.action.groupBy({
+      by: ['name'],
+      where,
+      _count: {
+        id: true,
+      },
+      orderBy: {
+        _count: {
+          id: 'desc',
+        },
+      },
+    });
+
+    const paginated = groups.slice(offset, offset + limit);
 
     return {
       pagination: {
-        limit: query.limit,
-        offset: query.offset,
-        totalCount: total,
+        limit,
+        offset,
+        totalCount: groups.length,
       },
-      results: results.map((res) => ({ count: res._count.id, name: res.name })),
+      results: paginated.map((group) => ({
+        name: group.name,
+        count: group._count.id,
+      })),
     };
   }
 
@@ -359,18 +368,18 @@ export class CreaturesService {
     return await this.prisma.trait.findMany({
       where: {
         name: groupName,
-        is_template: true
-      }
-    })
+        is_template: true,
+      },
+    });
   }
 
   async findActionsGroup(groupName: string) {
     return await this.prisma.action.findMany({
       where: {
         name: groupName,
-        is_template: true
-      }
-    })
+        is_template: true,
+      },
+    });
   }
 
   private cleanObj(obj) {
@@ -492,15 +501,15 @@ export class CreaturesService {
           data: {
             biome_relation: {
               connect: {
-                title: biome.title,
+                name: biome.name,
               },
             },
           },
         });
       }
     }
-    if(updateCreatureDto.biomes_ids){
-      for(const biome_id of updateCreatureDto.biomes_ids){
+    if (updateCreatureDto.biomes_ids) {
+      for (const biome_id of updateCreatureDto.biomes_ids) {
         await this.prisma.creature.update({
           where: { id: id },
           data: {
@@ -1026,257 +1035,61 @@ export class CreaturesService {
     return this.selectCreatureForCard(id);
   }
 
-  private async selectCreatureForCard(creatureId: string) {
-    let result = await this.prisma.creature.findUnique({
-      where: {
-        id: creatureId,
-      },
-      include: {
-        alignment_relation: true,
-        biome_relation: true,
-        race_relation: true,
-        size_relation: true,
-        type_relation: true,
-        immunities: true,
-        resistances: true,
-        vulnerabilities: true,
-        speed: {
-          omit: {
-            id: true,
-          },
-        },
-        skills: {
-          omit: {
-            id: true,
-          },
-          include: {
-            charisma: {
-              include: {
-                deception: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                intimidation: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                performance: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                persuasion: {
-                  omit: {
-                    id: true,
-                  },
-                },
-              },
-              omit: {
-                id: true,
-              },
-            },
-            dexterity: {
-              include: {
-                acrobatics: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                sleight_of_hand: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                stealth: {
-                  omit: {
-                    id: true,
-                  },
-                },
-              },
-              omit: {
-                id: true,
-              },
-            },
-            intelligence: {
-              include: {
-                arcana: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                history: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                investigation: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                nature: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                religion: {
-                  omit: {
-                    id: true,
-                  },
-                },
-              },
-              omit: {
-                id: true,
-              },
-            },
-            strength: {
-              include: {
-                athletics: {
-                  omit: {
-                    id: true,
-                  },
-                },
-              },
-              omit: {
-                id: true,
-              },
-            },
-            wisdom: {
-              include: {
-                animal_handling: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                insight: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                medicine: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                perception: {
-                  omit: {
-                    id: true,
-                  },
-                },
-                survival: {
-                  omit: {
-                    id: true,
-                  },
-                },
-              },
-              omit: {
-                id: true,
-              },
-            },
-          },
-        },
-        stats: {
-          omit: {
-            id: true,
-          },
-          include: {
-            charisma: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-            constitution: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-            dexterity: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-            intelligence: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-            strength: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-            wisdom: {
-              omit: {
-                statblock_id: true,
-              },
-            },
-          },
-        },
-        senses: {
-          omit: {
-            creature_id: true,
-          },
-        },
-        actions: true,
-        traits: true,
-        languages: true,
-      },
+  private async mapCreatureToApiCreature(creature): Promise<ApiCreature> {
+    const creature_biomes = await this.prisma.biome.findMany({
+      where: { id: { in: creature.biomes_ids } },
     });
 
-    console.log(result);
-
     return {
-      actions: result.actions ? result.actions : [],
-      alignment_id: result.alignment_relation
-        ? result.alignment_relation.id
-        : null,
-      alignment_name: result.alignment_relation
-        ? result.alignment_relation.name
-        : null,
-      armor_class: result.armor_class,
-      armor_type_id: null, //TODO
-      armor_type_name: null, //TODO
-      biomes: result.biome_relation
-        ? result.biome_relation.map((biome) => ({
-            id: biome.id,
-            name: biome.title,
-          }))
-        : [],
-      biomes_ids: result.biome_relation
-        ? result.biome_relation.map((biome) => biome.id)
-        : [],
-      challenge_rating: result.challenge_rating,
-      description: result.description,
+      id: creature.id,
+      name: creature.name,
+      description: creature.description,
+      alignment_id: creature.alignment_relation?.id ?? null,
+      alignment_name: creature.alignment_relation?.name ?? null,
+      size_id: creature.size_relation?.id ?? null,
+      size_name: creature.size_relation?.name ?? null,
+      type_id: creature.type_relation?.id ?? null,
+      type_name: creature.type_relation?.name ?? null,
+      armor_class: creature.armor_class,
+      armor_type_id: null, // TODO
+      armor_type_name: null, // TODO
+      biomes_ids: creature.biomes_ids,
+      biomes: creature_biomes,
+      challenge_rating: creature.challenge_rating,
+      hit_points: creature.hit_points,
       generation_info: null,
-      hit_points: result.hit_points,
-      id: result.id,
-      immunities: result.immunities,
-      immunities_ids: result.immunities
-        ? result.immunities.map((imm) => imm.id)
-        : [],
-      languages: result.languages ? result.languages : [],
-      languages_ids: result.languages
-        ? result.languages.map((lang) => lang.id)
-        : [],
-      name: result.name,
-      resistances: result.resistances,
-      resistances_ids: result.resistances
-        ? result.resistances.map((res) => res.id)
-        : [],
-      senses: result.senses ?? nullSensesObject,
-      size_id: result.size_relation ? result.size_relation.id : null,
-      size_name: result.size_relation ? result.size_relation.name : null,
-      skills: result.skills ? result.skills : nullSkillsObject,
-      speed: result.speed ? result.speed : nullSpeedObject,
-      stats: result.stats ? result.stats : nullStatObject,
-      traits: result.traits ? result.traits : [],
-      type_id: result.type_relation ? result.type_relation.id : null,
-      type_name: result.type_relation ? result.type_relation.name : null,
-      vulnerabilities: result.vulnerabilities ? result.vulnerabilities : [],
-      vulnerabilities_ids: result.vulnerabilities ? result.vulnerabilities.map(vun => vun.id) : []
-    } //as ApiCreature
+      languages: creature.languages ?? [],
+      languages_ids: creature.languages?.map((l) => l.id) ?? [],
+      immunities: creature.immunities ?? [],
+      immunities_ids: creature.immunities?.map((i) => i.id) ?? [],
+      resistances: creature.resistances ?? [],
+      resistances_ids: creature.resistances?.map((r) => r.id) ?? [],
+      vulnerabilities: creature.vulnerabilities ?? [],
+      vulnerabilities_ids: creature.vulnerabilities?.map((v) => v.id) ?? [],
+      senses: creature.senses ?? nullSensesObject,
+      skills: creature.skills ?? nullSkillsObject,
+      stats: creature.stats ?? nullStatObject,
+      speed: creature.speed ?? nullSpeedObject,
+      traits: creature.traits ?? [],
+      actions: creature.actions ?? [],
+    };
+  }
+
+  private async selectCreatureForCard(
+    creatureId: string,
+  ): Promise<ApiCreature> {
+    const creature = await this.prisma.creature.findUnique({
+      where: { id: creatureId },
+      include: creatureInclude,
+    });
+
+    if (!creature)
+      throw new AppError({
+        statusCode: HttpStatus.NOT_FOUND,
+        errorText: `Creature not found: ${creatureId}`,
+      });
+
+    return this.mapCreatureToApiCreature(creature);
   }
 
   remove(id: number) {
