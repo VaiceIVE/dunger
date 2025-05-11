@@ -15,6 +15,17 @@ import { creatureInclude } from './includes/creature.include';
 import { AppError } from 'src/common/errors';
 import { HttpStatus } from '@dunger/common-enums';
 
+/**
+ * Фильтры SQL запроса существ
+ */
+type CreaturesFilterArgs = {
+  userId?: string;
+  excludeSourceId?: number;
+  searchName?: string;
+  limit: number;
+  offset: number;
+};
+
 @Injectable()
 export class CreaturesService {
   private readonly customContentSource: string;
@@ -105,36 +116,28 @@ export class CreaturesService {
     };
 
     const [creaturesRaw, totalCount] = await Promise.all([
-      this.prisma.creature.findMany({
-        select: {
-          id: true,
-          name: true,
-          challenge_rating: true,
-          type_relation: {
-            select: { name: true },
-          },
-          alignment_relation: {
-            select: { name: true },
-          },
-        },
-        where,
-        skip: offset,
-        take: limit,
-      }),
+      this.prisma.$queryRaw<
+        Array<{
+          id: string;
+          name: string;
+          challenge_rating: string;
+          type_name: string;
+          alignment_name: string;
+        }>
+      >(
+        this.sql_queryCreatures({
+          limit,
+          offset,
+          searchName: search,
+          excludeSourceId,
+        }),
+      ),
       this.prisma.creature.count({ where }),
     ]);
 
-    const creatures = creaturesRaw.map(
-      ({ type_relation, alignment_relation, ...rest }) => ({
-        ...rest,
-        type_name: type_relation.name,
-        alignment_name: alignment_relation?.name,
-      }),
-    );
-
     return {
       pagination: { limit, offset, totalCount },
-      creatures,
+      creatures: creaturesRaw,
     };
   }
 
@@ -157,38 +160,63 @@ export class CreaturesService {
     };
 
     const [creaturesRaw, totalCount] = await Promise.all([
-      this.prisma.creature.findMany({
-        select: {
-          id: true,
-          name: true,
-          challenge_rating: true,
-          type_relation: {
-            select: { name: true },
-          },
-          alignment_relation: {
-            select: { name: true },
-          },
-        },
-        where,
-        skip: offset,
-        take: limit,
-      }),
+      this.prisma.$queryRaw<
+        Array<{
+          id: string;
+          name: string;
+          challenge_rating: string;
+          type_name: string;
+          alignment_name: string;
+        }>
+      >(
+        this.sql_queryCreatures({
+          limit,
+          offset,
+          searchName: search,
+          userId,
+        }),
+      ),
       this.prisma.creature.count({ where }),
     ]);
 
-    const creatures = creaturesRaw.map(
-      ({ type_relation, alignment_relation, ...rest }) => ({
-        ...rest,
-        type_name: type_relation?.name,
-        alignment_name: alignment_relation?.name,
-      }),
-    );
-
     return {
       pagination: { limit, offset, totalCount },
-      creatures,
+      creatures: creaturesRaw,
     };
   }
+
+  private sql_queryCreatures = (args: CreaturesFilterArgs): Prisma.Sql => {
+    const likePattern = `%${args.searchName ?? ''}%`;
+    const offset = Number(args.offset ?? 0);
+    const limit = Number(args.limit ?? 20);
+
+    return Prisma.sql`
+      SELECT 
+        c.id, 
+        c.name, 
+        c.challenge_rating, 
+        t.name AS type_name, 
+        a.name AS alignment_name
+      FROM "Creature" c
+      LEFT JOIN "Type" t ON c.type_id = t.id
+      LEFT JOIN "Alignment" a ON c.alignment_id = a.id
+      WHERE True
+      ${args.userId ? Prisma.sql`AND c.creator_id = ${args.userId}` : Prisma.sql``}
+      ${args.excludeSourceId ? Prisma.sql`AND c.source_id != ${args.excludeSourceId}` : Prisma.sql``}
+      ${args.searchName ? Prisma.sql`AND c.name ILIKE ${likePattern}` : Prisma.sql``}
+      ORDER BY 
+        CASE c.challenge_rating
+          WHEN '0' THEN 0
+          WHEN '1/8' THEN 0.125
+          WHEN '1/4' THEN 0.25
+          WHEN '1/2' THEN 0.5
+          ELSE CAST(c.challenge_rating AS DOUBLE PRECISION)
+        END,
+        c.id
+      OFFSET ${offset}
+      LIMIT ${limit};
+    `;
+  };
 
   /**
    * Возвращает список шаблонов с пагинацией и фильтрацией по имени.
