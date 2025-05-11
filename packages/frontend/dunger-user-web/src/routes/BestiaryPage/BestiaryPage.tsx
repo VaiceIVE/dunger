@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
 import {
@@ -63,7 +63,8 @@ export const BestiaryPage = () => {
   const { data: beast } = useQuery({
     queryKey: ['creatures', { id }],
     queryFn: () => authFetch<ApiCreature>(`/creatures/${id ?? ''}`),
-    enabled: isActiveCreature
+    enabled: isActiveCreature,
+    placeholderData: keepPreviousData
   });
 
   const creatures = data?.pages.flatMap((p) => p.creatures) ?? [];
@@ -95,7 +96,7 @@ export const BestiaryPage = () => {
                 </Grid>
 
                 <InfiniteScroll hasMore={hasMoreCreatures} next={fetchMoreCreatures}>
-                  <BestiaryList creatures={creatures} isActiveCreature={isActiveCreature} />
+                  <BestiaryList creatureId={id} creatures={creatures} isActiveCreature={isActiveCreature} />
                 </InfiniteScroll>
               </Stack>
             </Stack>
