@@ -12,10 +12,9 @@ import {
 } from '@nestjs/common';
 import { CreaturesService } from './creatures.service';
 import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
-import { ApiCreatureInput } from './dto/stolen_types/ApiCreatureInput';
 import axios from 'axios';
 import { ConfigService } from '@nestjs/config';
-import { PaginationQueryDto } from 'src/common/dto';
+import { ApiCreatureInput, PaginationQueryDto } from 'src/common/dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 

@@ -1,4 +1,4 @@
-import { ApiStatsInput } from '../dto/stolen_types/ApiStatsInput';
+import { ApiStatsInput } from 'src/common/dto';
 
 export const nullStatObject: ApiStatsInput = {
   strength: { mastery: false, value: 8 },
