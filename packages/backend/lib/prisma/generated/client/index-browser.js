@@ -421,6 +421,32 @@ exports.Prisma.GPTMessageScalarFieldEnum = {
   role: 'role'
 };
 
+exports.Prisma.AdventureScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  planned_parties: 'planned_parties',
+  genre_id: 'genre_id',
+  creator_id: 'creator_id',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.GenreScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.KeywordScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  genre_id: 'genre_id'
+};
+
+exports.Prisma.AdventureKeywordScalarFieldEnum = {
+  adventure_id: 'adventure_id',
+  keyword_id: 'keyword_id'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -485,7 +511,11 @@ exports.Prisma.ModelName = {
   DamageType: 'DamageType',
   ChallengeRating: 'ChallengeRating',
   GPTMessageHistory: 'GPTMessageHistory',
-  GPTMessage: 'GPTMessage'
+  GPTMessage: 'GPTMessage',
+  Adventure: 'Adventure',
+  Genre: 'Genre',
+  Keyword: 'Keyword',
+  AdventureKeyword: 'AdventureKeyword'
 };
 
 /**

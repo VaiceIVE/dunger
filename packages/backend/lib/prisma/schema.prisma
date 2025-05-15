@@ -449,3 +449,40 @@ enum Stat {
   Charisma
 }
 
+model Adventure {
+  id              String    @id @default(uuid())
+  title           String
+  planned_parties Int
+  genre_id        String
+  genre           Genre     @relation(fields: [genre_id], references: [id])
+  keywords        AdventureKeyword[]
+  creator_id      String
+  created_at      DateTime  @default(now())
+  updated_at      DateTime  @updatedAt
+}
+
+model Genre {
+  id       String    @id @default(uuid())
+  name     String
+  keywords Keyword[]
+  adventures Adventure[]
+}
+
+model Keyword {
+  id       String   @id @default(uuid())
+  name     String
+  genre_id String
+  genre    Genre    @relation(fields: [genre_id], references: [id])
+  adventures AdventureKeyword[]
+}
+
+model AdventureKeyword {
+  adventure_id String
+  keyword_id   String
+
+  adventure    Adventure @relation(fields: [adventure_id], references: [id])
+  keyword      Keyword   @relation(fields: [keyword_id], references: [id])
+
+  @@id([adventure_id, keyword_id])
+}
+
