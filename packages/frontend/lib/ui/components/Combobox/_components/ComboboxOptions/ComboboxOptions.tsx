@@ -32,6 +32,14 @@ function ComboboxOptionsImpl({ children, style, ...props }: ComboboxOptionsProps
   const { open, setOpen, targetElement } = useComboboxContext();
   const ref = useRef<HTMLDivElement>(null);
 
+  function getVisualScrollY(): number {
+    const top = document.body.style.top;
+    if (document.body.style.position === 'fixed' && top) {
+      return -parseInt(top || '0', 10);
+    }
+    return window.scrollY;
+  }
+
   useEffect(() => {
     const handleClick = (e: MouseEvent | TouchEvent) => {
       const target = e.target as Node | null;
@@ -66,7 +74,7 @@ function ComboboxOptionsImpl({ children, style, ...props }: ComboboxOptionsProps
   const position = targetElement.getBoundingClientRect();
 
   // Прибавляется текущее положение скролла страницы
-  const top = position.top + position.height + window.scrollY + 4;
+  const top = position.top + position.height + getVisualScrollY() + 4;
   const left = position.left;
 
   const width = position.width;
@@ -105,7 +113,7 @@ const styles = stylex.create({
     top,
     visibility: { default: 'visible', ':not(:has(> [role="option"]))': 'hidden' },
     width,
-    zIndex: 1,
+    zIndex: 30,
     '::-webkit-scrollbar': { background: 'transparent', display: 'none', height: 0, width: 0 }
   })
 });
