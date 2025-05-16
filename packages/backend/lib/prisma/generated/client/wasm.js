@@ -423,17 +423,11 @@ exports.Prisma.GPTMessageScalarFieldEnum = {
 
 exports.Prisma.AdventureScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  planned_parties: 'planned_parties',
+  name: 'name',
   genre_id: 'genre_id',
   creator_id: 'creator_id',
   created_at: 'created_at',
   updated_at: 'updated_at'
-};
-
-exports.Prisma.GenreScalarFieldEnum = {
-  id: 'id',
-  name: 'name'
 };
 
 exports.Prisma.KeywordScalarFieldEnum = {
@@ -442,9 +436,9 @@ exports.Prisma.KeywordScalarFieldEnum = {
   genre_id: 'genre_id'
 };
 
-exports.Prisma.AdventureKeywordScalarFieldEnum = {
-  adventure_id: 'adventure_id',
-  keyword_id: 'keyword_id'
+exports.Prisma.GenreScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
 };
 
 exports.Prisma.SortOrder = {
@@ -513,9 +507,8 @@ exports.Prisma.ModelName = {
   GPTMessageHistory: 'GPTMessageHistory',
   GPTMessage: 'GPTMessage',
   Adventure: 'Adventure',
-  Genre: 'Genre',
   Keyword: 'Keyword',
-  AdventureKeyword: 'AdventureKeyword'
+  Genre: 'Genre'
 };
 
 /**
