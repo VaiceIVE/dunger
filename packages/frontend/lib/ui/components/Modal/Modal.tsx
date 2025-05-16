@@ -33,30 +33,23 @@ export const Modal = ({ withOverlay = true, withCloseButton = true, open, onOpen
     if (_open) {
       scrollYRef.current = window.scrollY;
 
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollYRef.current.toString()}px`;
-      document.body.style.left = '0';
-      document.body.style.right = '0';
-      document.body.style.overflowY = 'scroll';
+      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+      document.body.style.overflowY = 'hidden';
+      document.body.style.width = `calc(100% - ${scrollBarWidth.toString()}px)`;
     } else {
       // Восстанавливаем прокрутку перед сбросом стилей
       window.scrollTo(0, scrollYRef.current);
 
       // Очищаем стили
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
       document.body.style.overflowY = '';
+      document.body.style.width = '';
     }
 
     return () => {
       // Очистка при размонтировании (на всякий случай)
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
       document.body.style.overflowY = '';
+      document.body.style.width = '';
     };
   }, [_open]);
 
