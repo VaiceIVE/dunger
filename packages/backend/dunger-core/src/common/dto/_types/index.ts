@@ -26,3 +26,5 @@ export type { ApiBiomes } from './ApiBiomes';
 export type { ApiMagicItem } from './ApiMagicItem';
 
 // Типы взаимодействия с приключениями
+export type { ApiAdventure } from './ApiAdventure';
+export type { ApiAdventureList } from './ApiAdventureList';
