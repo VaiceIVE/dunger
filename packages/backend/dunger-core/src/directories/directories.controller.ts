@@ -77,4 +77,20 @@ export class DirectoriesController {
   ) {
     return await this.directoriesService.findLanguages(query);
   }
+
+  /**
+   * GET, Получение жанров приключений
+   */
+  @Get('/genres')
+  async findGenres() {
+    return await this.directoriesService.findGenres();
+  }
+
+  /**
+   * GET, Получение ключевых слов для приключений
+   */
+  @Get('/keywords')
+  async findKeywords() {
+    return await this.directoriesService.findKeywords();
+  }
 }
