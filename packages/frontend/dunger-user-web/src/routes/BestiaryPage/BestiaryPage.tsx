@@ -38,7 +38,7 @@ export const BestiaryPage = () => {
   const authFetch = useAuthFetch();
 
   const {
-    data: data,
+    data,
     fetchNextPage: fetchMoreCreatures,
     hasNextPage: hasMoreCreatures
   } = useInfiniteQuery({

@@ -2,7 +2,8 @@ import { createBrowserRouter, createRoutesFromElements, Navigate, Route } from '
 import { BaseLayout } from './_layouts/BaseLayout';
 import { PublicLayout } from './_layouts/PublicLayout';
 import { UserLayout } from './_layouts/UserLayout';
-import { AdventuresPage } from './AdventuresPage';
+import { AdventurePage } from './AdventurePage';
+import { AdventuresListPage } from './AdventuresListPage';
 import { BackgroundsPage } from './BackgroundsPage';
 import { BeastPage } from './BeastPage';
 import { BestiaryPage } from './BestiaryPage';
@@ -38,7 +39,8 @@ export const router = createBrowserRouter(
 
           <Route path={'/my-bestiary/:id?'} Component={MyBestiaryPage} />
 
-          <Route path={'/adventures'} Component={AdventuresPage} />
+          <Route path={'/adventures'} Component={AdventuresListPage} />
+          <Route path={'/adventures/:id'} Component={AdventurePage} />
 
           <Route path={'/profile'} Component={ProfilePage} />
         </Route>
