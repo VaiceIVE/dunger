@@ -5,25 +5,29 @@ import { UpdateAdventureDto } from './dto/update-adventure.dto';
 import { AppError } from 'src/common/errors';
 import { HttpStatus } from '@dunger/common-enums';
 import {
-  ApiPaginatedResult,
   PaginationQueryDto,
   ApiAdventure,
   ApiAdventureList,
+  ApiAdventureListResult,
 } from 'src/common/dto';
+import { CreaturesService } from 'src/creatures/creatures.service';
 
 @Injectable()
 export class AdventureService {
-  constructor(private readonly prisma: PrismaClient) {}
+  constructor(
+    private readonly prisma: PrismaClient,
+    private readonly creaturesService: CreaturesService,
+  ) {}
 
   async create(
     dto: CreateAdventureDto,
-    creatorId: string,
+    userId: string,
   ): Promise<{ id: string }> {
     return this.prisma.adventure.create({
       data: {
         name: dto.name,
         genre_id: dto.genre_id,
-        creator_id: creatorId,
+        creator_id: userId,
 
         keywords: dto.keyword_ids
           ? {
@@ -39,13 +43,13 @@ export class AdventureService {
 
   async findAll(
     query: PaginationQueryDto,
-    creatorId: string,
-  ): Promise<{ adventures: ApiAdventureList } & ApiPaginatedResult> {
+    userId: string,
+  ): Promise<ApiAdventureListResult> {
     const { query: searchQuery, offset, limit } = query;
 
     const where = searchQuery
-      ? { name: { contains: searchQuery, creator_id: creatorId } }
-      : { creator_id: creatorId };
+      ? { name: { contains: searchQuery }, creator_id: userId }
+      : { creator_id: userId };
 
     const [adventuresRaw, totalCount] = await Promise.all([
       this.prisma.adventure.findMany({
@@ -70,6 +74,9 @@ export class AdventureService {
       }),
     );
 
+    const creaturesCount =
+      await this.creaturesService.countUserCreatures(userId);
+
     return {
       pagination: {
         limit,
@@ -77,10 +84,13 @@ export class AdventureService {
         totalCount,
       },
       adventures,
+      workshopMaterials: {
+        creaturesCount,
+      },
     };
   }
 
-  async findOne(id: string, creatorId: string): Promise<ApiAdventure> {
+  async findOne(id: string, userId: string): Promise<ApiAdventure> {
     const adventureRaw = await this.prisma.adventure.findUnique({
       where: { id },
       select: {
@@ -102,7 +112,7 @@ export class AdventureService {
 
     const { creator_id, ...rest } = adventureRaw;
 
-    if (creator_id !== creatorId)
+    if (creator_id !== userId)
       throw new AppError({
         errorText: 'Access denied',
         statusCode: HttpStatus.FORBIDDEN,
@@ -111,8 +121,8 @@ export class AdventureService {
     return rest;
   }
 
-  async update(id: string, dto: UpdateAdventureDto, creatorId: string) {
-    const existing = await this.findOne(id, creatorId);
+  async update(id: string, dto: UpdateAdventureDto, userId: string) {
+    const existing = await this.findOne(id, userId);
 
     return this.prisma.adventure.update({
       where: { id },
@@ -133,8 +143,8 @@ export class AdventureService {
     });
   }
 
-  async remove(id: string, creatorId: string) {
-    await this.findOne(id, creatorId); // проверка на доступ
+  async remove(id: string, userId: string) {
+    await this.findOne(id, userId); // проверка на доступ
 
     return this.prisma.adventure.delete({
       where: { id },

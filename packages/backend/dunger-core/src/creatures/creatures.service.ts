@@ -187,6 +187,22 @@ export class CreaturesService {
     };
   }
 
+  /**
+   * Возвращает количество существ, созданных пользователем.
+   *
+   * @param userId - id пользователя.
+   * @param search - Поисковый запрос (опционально).
+   * @returns Количество существ.
+   */
+  async countUserCreatures(userId: string, search?: string): Promise<number> {
+    const where = {
+      ...(search ? { name: { contains: search } } : {}),
+      creator_id: userId,
+    };
+
+    return this.prisma.creature.count({ where });
+  }
+
   private sql_queryCreatures = (args: CreaturesFilterArgs): Prisma.Sql => {
     const likePattern = `%${args.searchName ?? ''}%`;
     const offset = Number(args.offset ?? 0);
