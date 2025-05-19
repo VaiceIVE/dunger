@@ -2,7 +2,21 @@ import * as stylex from '@stylexjs/stylex';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
-import { Container, Flex, Grid, headers, IconButton, PencilIcon, PlusIcon, Stack, Tag, text } from '@dunger/ui';
+import {
+  BatIcon,
+  BeachIcon,
+  Container,
+  Flex,
+  Grid,
+  headers,
+  IconButton,
+  PencilIcon,
+  PlusIcon,
+  Stack,
+  Tag,
+  text,
+  WandIcon
+} from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { AdventureMaterials } from 'features/AdventureMaterials';
 import { ApiAdventure } from 'store/_types/ApiAdventure';
@@ -51,7 +65,20 @@ export const AdventurePage = () => {
             <Grid.Col style={styles.section} span={4}>
               <Stack gap={16}>
                 <div {...stylex.props(text.subheaderSemibold)}>Раздел 1</div>
-                <Flex gap={10} rowGap={10}></Flex>
+                <Flex gap={10} rowGap={10}>
+                  <div {...stylex.props(styles.tag(colors.brand80, colors.orange10))}>
+                    <div {...stylex.props(text.defaultMedium, styles.tagCount)}>0</div>
+                    <BeachIcon {...stylex.props(styles.tagIcon)} />
+                  </div>
+                  <div {...stylex.props(styles.tag(colors.red60, colors.red5))}>
+                    <div {...stylex.props(text.defaultMedium, styles.tagCount)}>0</div>
+                    <BatIcon {...stylex.props(styles.tagIcon)} />
+                  </div>
+                  <div {...stylex.props(styles.tag(colors.purple70, colors.purple20))}>
+                    <div {...stylex.props(text.defaultMedium, styles.tagCount)}>0</div>
+                    <WandIcon {...stylex.props(styles.tagIcon)} />
+                  </div>
+                </Flex>
               </Stack>
             </Grid.Col>
           </Grid>
@@ -87,5 +114,22 @@ const styles = stylex.create({
     gap: 16,
     justifyContent: 'space-between',
     padding: 16
+  },
+  tag: (color: string, backgroundColor: string) => ({
+    alignItems: 'center',
+    backgroundColor,
+    borderRadius: 8,
+    color,
+    display: 'flex',
+    gap: 4,
+    padding: '2px 6px',
+    width: 'fit-content'
+  }),
+  tagIcon: {
+    height: '14px',
+    width: '14px'
+  },
+  tagCount: {
+    color: colors.textPrimaryDefault
   }
 });
