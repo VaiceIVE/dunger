@@ -80,7 +80,7 @@ const styles = stylex.create({
   },
   secondary: {
     backgroundColor: {
-      default: 'transparent',
+      default: 'white',
       ':disabled': colors.backgroundNeutralDefault
     },
     borderColor: {

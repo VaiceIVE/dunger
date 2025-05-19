@@ -63,4 +63,12 @@ export class DirectoriesService {
       results,
     };
   }
+
+  async findGenres() {
+    return await this.prisma.genre.findMany();
+  }
+
+  async findKeywords() {
+    return await this.prisma.keyword.findMany();
+  }
 }

@@ -1,16 +1,18 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
 import { Prisma, PrismaClient } from '@dunger/prisma';
-import { ApiCreatureInput } from './dto/stolen_types/ApiCreatureInput';
 import { nullSkillsObject } from './objects/nullSkills.object';
 import { nullSpeedObject } from './objects/nullSpeed.object';
 import { nullStatObject } from './objects/nullStat.object';
 import { nullSensesObject } from './objects/nullSenses.object';
-import { PaginationQueryDto } from 'src/common/dto';
-import { ApiCreatureList } from './dto/stolen_types/ApiCreatureList';
-import { ApiPaginatedResult } from './dto/stolen_types/_common';
+import {
+  ApiCreature,
+  ApiCreatureInput,
+  ApiCreatureList,
+  ApiPaginatedResult,
+  PaginationQueryDto,
+} from 'src/common/dto';
 import { ConfigService } from '@nestjs/config';
-import { ApiCreature } from './dto/stolen_types/ApiCreature';
 import { creatureInclude } from './includes/creature.include';
 import { AppError } from 'src/common/errors';
 import { HttpStatus } from '@dunger/common-enums';
@@ -183,6 +185,22 @@ export class CreaturesService {
       pagination: { limit, offset, totalCount },
       creatures: creaturesRaw,
     };
+  }
+
+  /**
+   * Возвращает количество существ, созданных пользователем.
+   *
+   * @param userId - id пользователя.
+   * @param search - Поисковый запрос (опционально).
+   * @returns Количество существ.
+   */
+  async countUserCreatures(userId: string, search?: string): Promise<number> {
+    const where = {
+      ...(search ? { name: { contains: search } } : {}),
+      creator_id: userId,
+    };
+
+    return this.prisma.creature.count({ where });
   }
 
   private sql_queryCreatures = (args: CreaturesFilterArgs): Prisma.Sql => {

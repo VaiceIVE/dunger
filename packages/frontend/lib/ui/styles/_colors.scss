@@ -1,20 +1,20 @@
 // Basic colors
 
-$black-100: '#1D1D1D';
-$black-90: '#292929';
-$black-80: '#4A4A4A';
-$black-70: '#545454';
-$black-60: '#656565';
-$black-50: '#757575';
-$black-40: '#828282';
-$black-30: '#939393';
-$black-20: '#A6A6A6';
-$black-10: '#B5B5B5';
-$black-5: '#CACACA';
-$black-4: '#DDDDDD';
-$black-3: '#E9E9E9';
-$black-2: '#F3F3F3';
-$black-1: '#F9F9F9';
+$black-100: '#202435';
+$black-90: '#262D40';
+$black-80: '#2E364D';
+$black-70: '#3F4861';
+$black-60: '#4B5570';
+$black-50: '#65708C';
+$black-40: '#737D99';
+$black-30: '#8994B0';
+$black-20: '#A3ADC7';
+$black-10: '#B6BDCF';
+$black-5: '#CACFDB';
+$black-4: '#DADEE8';
+$black-3: '#E4E6ED';
+$black-2: '#EBEDF2';
+$black-1: '#F5F6FA';
 
 $brand-100: '#F35521';
 $brand-90: '#F46738';
@@ -102,7 +102,7 @@ $yellow-60: '#E3B766';
 $yellow-50: '#E7C27F';
 $yellow-40: '#ECCF99';
 $yellow-30: '#F1DBB3';
-$yellow-20: '#F6E7C';
+$yellow-20: '#F6E7CC';
 $yellow-10: '#F9F0E0';
 $yellow-5: '#FCF6ED';
 $yellow-1: '#FDFAF5';
@@ -200,7 +200,7 @@ $button-tertiary-accent-active: $blue-20;
 
 // Background colors
 
-$background-universal: '#F6F6F7';
+$background-universal: $black-1;
 
 $background-neutral-default: $black-2;
 $background-neutral-hover: $black-3;

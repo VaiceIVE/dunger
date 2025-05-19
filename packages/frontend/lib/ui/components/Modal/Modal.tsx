@@ -1,4 +1,4 @@
-import { ComponentProps, Fragment, ReactNode } from 'react';
+import { ComponentProps, Fragment, ReactNode, useEffect, useRef } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { StyleXStyles } from '@stylexjs/stylex';
 import { createPortal } from 'react-dom';
@@ -26,6 +26,32 @@ export const Modal = ({ withOverlay = true, withCloseButton = true, open, onOpen
     finalValue: false,
     onChange: onOpenChange
   });
+
+  const scrollYRef = useRef(0);
+
+  useEffect(() => {
+    if (_open) {
+      scrollYRef.current = window.scrollY;
+
+      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+      document.body.style.overflowY = 'hidden';
+      document.body.style.width = `calc(100% - ${scrollBarWidth.toString()}px)`;
+    } else {
+      // Восстанавливаем прокрутку перед сбросом стилей
+      window.scrollTo(0, scrollYRef.current);
+
+      // Очищаем стили
+      document.body.style.overflowY = '';
+      document.body.style.width = '';
+    }
+
+    return () => {
+      // Очистка при размонтировании (на всякий случай)
+      document.body.style.overflowY = '';
+      document.body.style.width = '';
+    };
+  }, [_open]);
 
   const handleOpen = () => {
     setOpen(true);

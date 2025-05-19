@@ -3,17 +3,17 @@ import * as stylex from '@stylexjs/stylex';
 export const colors = stylex.defineVars({
   // Text&Icon colors
 
-  textPrimaryDefault: '#292929', // black-90
-  textPrimaryHover: '#4A4A4A', // black-80
-  textPrimaryActive: '#1D1D1D', // black-100
+  textPrimaryDefault: '#262D40', // black-90
+  textPrimaryHover: '#2E364D', // black-80
+  textPrimaryActive: '#202435', // black-100
 
-  textSecondaryDefault: '#545454', // black-70
-  textSecondaryHover: '#656565', // black-60
-  textSecondaryActive: '#4A4A4A', // black-80
+  textSecondaryDefault: '#3F4861', // black-70
+  textSecondaryHover: '#4B5570', // black-60
+  textSecondaryActive: '#2E364D', // black-80
 
-  textTertiaryDefault: '#828282', // black-40
-  textTertiaryHover: '#939393', // black-30
-  textTertiaryActive: '#757575', // black-50
+  textTertiaryDefault: '#737D99', // black-40
+  textTertiaryHover: '#8994B0', // black-30
+  textTertiaryActive: '#65708C', // black-50
 
   textErrorDefault: '#C70505', // red-90
   textErrorHover: '#D30808', // red-80
@@ -23,9 +23,9 @@ export const colors = stylex.defineVars({
 
   // Outline colors
 
-  outlinePrimaryDefault: '#E9E9E9', // black-3
-  outlinePrimaryHover: '#DDDDDD', // black-4
-  outlinePrimaryActive: '#CACACA', // black-5
+  outlinePrimaryDefault: '#E4E6ED', // black-3
+  outlinePrimaryHover: '#DADEE8', // black-4
+  outlinePrimaryActive: '#CACFDB', // black-5
 
   outlineErrorDefault: '#E72B2B', // red-60
   outlineErrorHover: '#EF4747', // red-50
@@ -37,9 +37,9 @@ export const colors = stylex.defineVars({
 
   // Button colors
 
-  buttonPrimaryDefault: '#292929', // black-90
-  buttonPrimaryHover: '#4A4A4A', // black-80
-  buttonPrimaryActive: '#1D1D1D', // black-100
+  buttonPrimaryDefault: '#262D40', // black-90
+  buttonPrimaryHover: '#2E364D', // black-80
+  buttonPrimaryActive: '#202435', // black-100
 
   buttonAccentDefault: '#F46738', // brand-90
   buttonAccentHover: '#F5764C', // brand-80
@@ -55,11 +55,11 @@ export const colors = stylex.defineVars({
 
   // Background colors
 
-  backgroundUniversal: '#F6F6F7',
+  backgroundUniversal: '#F5F6FA', // black-1
 
-  backgroundNeutralDefault: '#F3F3F3', // black-2
-  backgroundNeutralHover: '#E9E9E9', // black-3
-  backgroundNeutralActive: '#DDDDDD', // black-4
+  backgroundNeutralDefault: '#EBEDF2', // black-2
+  backgroundNeutralHover: '#E4E6ED', // black-3
+  backgroundNeutralActive: '#DADEE8', // black-4
 
   backgroundBlueDefault: '#F1F4FF', // blue-10
   backgroundBlueHover: '#DAE3FF', // blue-5
@@ -71,21 +71,21 @@ export const colors = stylex.defineVars({
 
   // Basic colors
 
-  black100: '#1D1D1D',
-  black90: '#292929',
-  black80: '#4A4A4A',
-  black70: '#545454',
-  black60: '#656565',
-  black50: '#757575',
-  black40: '#828282',
-  black30: '#939393',
-  black20: '#A6A6A6',
-  black10: '#B5B5B5',
-  black5: '#CACACA',
-  black4: '#DDDDDD',
-  black3: '#E9E9E9',
-  black2: '#F3F3F3',
-  black1: '#F9F9F9',
+  black100: '#202435',
+  black90: '#262D40',
+  black80: '#2E364D',
+  black70: '#3F4861',
+  black60: '#4B5570',
+  black50: '#65708C',
+  black40: '#737D99',
+  black30: '#8994B0',
+  black20: '#A3ADC7',
+  black10: '#B6BDCF',
+  black5: '#CACFDB',
+  black4: '#DADEE8',
+  black3: '#E4E6ED',
+  black2: '#EBEDF2',
+  black1: '#F5F6FA',
 
   brand100: '#F35521',
   brand90: '#F46738',

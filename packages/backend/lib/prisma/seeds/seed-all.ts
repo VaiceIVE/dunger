@@ -4,6 +4,7 @@ import { SeedBiomes } from './biomes.seed.ts';
 import { SeedCR } from './cr.seed.ts';
 import { SeedCreatures } from './creatures.seed.ts';
 import { SeedDamageType } from './damageType.seed.ts';
+import { SeedGenreKeywords } from './genre-keywords.seed.ts';
 import { SeedLanguages } from './languages.seed.ts';
 import { SeedRaces } from './races.seed.ts';
 import { SeedSizes } from './size.seed.ts';
@@ -23,6 +24,7 @@ async function main() {
     .then(SeedTraits)
     .then(SeedActions)
     .then(SeedLanguages)
-    .then(SeedCreatures);
+    .then(SeedCreatures)
+    .then(SeedGenreKeywords);
 }
 main();

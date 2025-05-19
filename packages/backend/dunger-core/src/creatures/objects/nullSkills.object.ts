@@ -1,4 +1,4 @@
-import { ApiSkills } from '../dto/stolen_types/ApiSkills';
+import { ApiSkills } from 'src/common/dto/_types/ApiSkills';
 
 export const nullSkillsObject: ApiSkills = {
   strength: {

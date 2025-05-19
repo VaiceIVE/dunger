@@ -253,6 +253,21 @@ export type GPTMessageHistory = $Result.DefaultSelection<Prisma.$GPTMessageHisto
  * 
  */
 export type GPTMessage = $Result.DefaultSelection<Prisma.$GPTMessagePayload>
+/**
+ * Model Adventure
+ * 
+ */
+export type Adventure = $Result.DefaultSelection<Prisma.$AdventurePayload>
+/**
+ * Model Keyword
+ * 
+ */
+export type Keyword = $Result.DefaultSelection<Prisma.$KeywordPayload>
+/**
+ * Model Genre
+ * 
+ */
+export type Genre = $Result.DefaultSelection<Prisma.$GenrePayload>
 
 /**
  * Enums
@@ -879,6 +894,36 @@ export class PrismaClient<
     * ```
     */
   get gPTMessage(): Prisma.GPTMessageDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adventure`: Exposes CRUD operations for the **Adventure** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Adventures
+    * const adventures = await prisma.adventure.findMany()
+    * ```
+    */
+  get adventure(): Prisma.AdventureDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.keyword`: Exposes CRUD operations for the **Keyword** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Keywords
+    * const keywords = await prisma.keyword.findMany()
+    * ```
+    */
+  get keyword(): Prisma.KeywordDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.genre`: Exposes CRUD operations for the **Genre** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Genres
+    * const genres = await prisma.genre.findMany()
+    * ```
+    */
+  get genre(): Prisma.GenreDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1366,7 +1411,10 @@ export namespace Prisma {
     DamageType: 'DamageType',
     ChallengeRating: 'ChallengeRating',
     GPTMessageHistory: 'GPTMessageHistory',
-    GPTMessage: 'GPTMessage'
+    GPTMessage: 'GPTMessage',
+    Adventure: 'Adventure',
+    Keyword: 'Keyword',
+    Genre: 'Genre'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1382,7 +1430,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "size" | "source" | "language" | "biome" | "type" | "alignment" | "speed_stat" | "creature_stats" | "strength_stat_details" | "dexterity_stat_details" | "constitution_stat_details" | "intelligence_stat_details" | "wisdom_stat_details" | "charisma_stat_details" | "skillsList" | "strengthBasedSkills" | "dexterityBasedSkills" | "intellengenceBasedSkills" | "wisdomBasedSkills" | "charismaBasedSkills" | "athleticsSkill" | "acrobaticsSkill" | "sleightOfHandSkill" | "stealthSkill" | "arcanaSkill" | "historySkill" | "investigationSkill" | "natureSkill" | "religionSkill" | "animalHandlingSkill" | "insightSkill" | "medicineSkill" | "perceptionSkill" | "survivalSkill" | "deceptionSkill" | "intimidationSkill" | "performanceSkill" | "persuasionSkill" | "creature" | "senses" | "action" | "trait" | "creatureRace" | "genrationRequest" | "damageType" | "challengeRating" | "gPTMessageHistory" | "gPTMessage"
+      modelProps: "size" | "source" | "language" | "biome" | "type" | "alignment" | "speed_stat" | "creature_stats" | "strength_stat_details" | "dexterity_stat_details" | "constitution_stat_details" | "intelligence_stat_details" | "wisdom_stat_details" | "charisma_stat_details" | "skillsList" | "strengthBasedSkills" | "dexterityBasedSkills" | "intellengenceBasedSkills" | "wisdomBasedSkills" | "charismaBasedSkills" | "athleticsSkill" | "acrobaticsSkill" | "sleightOfHandSkill" | "stealthSkill" | "arcanaSkill" | "historySkill" | "investigationSkill" | "natureSkill" | "religionSkill" | "animalHandlingSkill" | "insightSkill" | "medicineSkill" | "perceptionSkill" | "survivalSkill" | "deceptionSkill" | "intimidationSkill" | "performanceSkill" | "persuasionSkill" | "creature" | "senses" | "action" | "trait" | "creatureRace" | "genrationRequest" | "damageType" | "challengeRating" | "gPTMessageHistory" | "gPTMessage" | "adventure" | "keyword" | "genre"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -4938,6 +4986,228 @@ export namespace Prisma {
           }
         }
       }
+      Adventure: {
+        payload: Prisma.$AdventurePayload<ExtArgs>
+        fields: Prisma.AdventureFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdventureFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdventurePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdventureFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdventurePayload>
+          }
+          findFirst: {
+            args: Prisma.AdventureFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdventurePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdventureFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdventurePayload>
+          }
+          findMany: {
+            args: Prisma.AdventureFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdventurePayload>[]
+          }
+          create: {
+            args: Prisma.AdventureCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdventurePayload>
+          }
+          createMany: {
+            args: Prisma.AdventureCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdventureCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdventurePayload>[]
+          }
+          delete: {
+            args: Prisma.AdventureDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdventurePayload>
+          }
+          update: {
+            args: Prisma.AdventureUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdventurePayload>
+          }
+          deleteMany: {
+            args: Prisma.AdventureDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdventureUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdventureUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdventurePayload>[]
+          }
+          upsert: {
+            args: Prisma.AdventureUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdventurePayload>
+          }
+          aggregate: {
+            args: Prisma.AdventureAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdventure>
+          }
+          groupBy: {
+            args: Prisma.AdventureGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdventureGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdventureCountArgs<ExtArgs>
+            result: $Utils.Optional<AdventureCountAggregateOutputType> | number
+          }
+        }
+      }
+      Keyword: {
+        payload: Prisma.$KeywordPayload<ExtArgs>
+        fields: Prisma.KeywordFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.KeywordFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KeywordPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.KeywordFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KeywordPayload>
+          }
+          findFirst: {
+            args: Prisma.KeywordFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KeywordPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.KeywordFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KeywordPayload>
+          }
+          findMany: {
+            args: Prisma.KeywordFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KeywordPayload>[]
+          }
+          create: {
+            args: Prisma.KeywordCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KeywordPayload>
+          }
+          createMany: {
+            args: Prisma.KeywordCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.KeywordCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KeywordPayload>[]
+          }
+          delete: {
+            args: Prisma.KeywordDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KeywordPayload>
+          }
+          update: {
+            args: Prisma.KeywordUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KeywordPayload>
+          }
+          deleteMany: {
+            args: Prisma.KeywordDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.KeywordUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.KeywordUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KeywordPayload>[]
+          }
+          upsert: {
+            args: Prisma.KeywordUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$KeywordPayload>
+          }
+          aggregate: {
+            args: Prisma.KeywordAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateKeyword>
+          }
+          groupBy: {
+            args: Prisma.KeywordGroupByArgs<ExtArgs>
+            result: $Utils.Optional<KeywordGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.KeywordCountArgs<ExtArgs>
+            result: $Utils.Optional<KeywordCountAggregateOutputType> | number
+          }
+        }
+      }
+      Genre: {
+        payload: Prisma.$GenrePayload<ExtArgs>
+        fields: Prisma.GenreFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.GenreFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.GenreFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          findFirst: {
+            args: Prisma.GenreFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.GenreFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          findMany: {
+            args: Prisma.GenreFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>[]
+          }
+          create: {
+            args: Prisma.GenreCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          createMany: {
+            args: Prisma.GenreCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.GenreCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>[]
+          }
+          delete: {
+            args: Prisma.GenreDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          update: {
+            args: Prisma.GenreUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          deleteMany: {
+            args: Prisma.GenreDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.GenreUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.GenreUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>[]
+          }
+          upsert: {
+            args: Prisma.GenreUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GenrePayload>
+          }
+          aggregate: {
+            args: Prisma.GenreAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGenre>
+          }
+          groupBy: {
+            args: Prisma.GenreGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GenreGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.GenreCountArgs<ExtArgs>
+            result: $Utils.Optional<GenreCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -5070,6 +5340,9 @@ export namespace Prisma {
     challengeRating?: ChallengeRatingOmit
     gPTMessageHistory?: GPTMessageHistoryOmit
     gPTMessage?: GPTMessageOmit
+    adventure?: AdventureOmit
+    keyword?: KeywordOmit
+    genre?: GenreOmit
   }
 
   /* Types for Logging */
@@ -5636,6 +5909,108 @@ export namespace Prisma {
    */
   export type GPTMessageHistoryCountOutputTypeCountMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: GPTMessageWhereInput
+  }
+
+
+  /**
+   * Count Type AdventureCountOutputType
+   */
+
+  export type AdventureCountOutputType = {
+    keywords: number
+  }
+
+  export type AdventureCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    keywords?: boolean | AdventureCountOutputTypeCountKeywordsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AdventureCountOutputType without action
+   */
+  export type AdventureCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdventureCountOutputType
+     */
+    select?: AdventureCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AdventureCountOutputType without action
+   */
+  export type AdventureCountOutputTypeCountKeywordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KeywordWhereInput
+  }
+
+
+  /**
+   * Count Type KeywordCountOutputType
+   */
+
+  export type KeywordCountOutputType = {
+    adventures: number
+  }
+
+  export type KeywordCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    adventures?: boolean | KeywordCountOutputTypeCountAdventuresArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * KeywordCountOutputType without action
+   */
+  export type KeywordCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the KeywordCountOutputType
+     */
+    select?: KeywordCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * KeywordCountOutputType without action
+   */
+  export type KeywordCountOutputTypeCountAdventuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdventureWhereInput
+  }
+
+
+  /**
+   * Count Type GenreCountOutputType
+   */
+
+  export type GenreCountOutputType = {
+    keywords: number
+    adventures: number
+  }
+
+  export type GenreCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    keywords?: boolean | GenreCountOutputTypeCountKeywordsArgs
+    adventures?: boolean | GenreCountOutputTypeCountAdventuresArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * GenreCountOutputType without action
+   */
+  export type GenreCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GenreCountOutputType
+     */
+    select?: GenreCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * GenreCountOutputType without action
+   */
+  export type GenreCountOutputTypeCountKeywordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KeywordWhereInput
+  }
+
+  /**
+   * GenreCountOutputType without action
+   */
+  export type GenreCountOutputTypeCountAdventuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdventureWhereInput
   }
 
 
@@ -57936,6 +58311,3228 @@ export namespace Prisma {
 
 
   /**
+   * Model Adventure
+   */
+
+  export type AggregateAdventure = {
+    _count: AdventureCountAggregateOutputType | null
+    _min: AdventureMinAggregateOutputType | null
+    _max: AdventureMaxAggregateOutputType | null
+  }
+
+  export type AdventureMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    genre_id: string | null
+    creator_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type AdventureMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    genre_id: string | null
+    creator_id: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type AdventureCountAggregateOutputType = {
+    id: number
+    name: number
+    genre_id: number
+    creator_id: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type AdventureMinAggregateInputType = {
+    id?: true
+    name?: true
+    genre_id?: true
+    creator_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type AdventureMaxAggregateInputType = {
+    id?: true
+    name?: true
+    genre_id?: true
+    creator_id?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type AdventureCountAggregateInputType = {
+    id?: true
+    name?: true
+    genre_id?: true
+    creator_id?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type AdventureAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Adventure to aggregate.
+     */
+    where?: AdventureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Adventures to fetch.
+     */
+    orderBy?: AdventureOrderByWithRelationInput | AdventureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdventureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Adventures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Adventures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Adventures
+    **/
+    _count?: true | AdventureCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdventureMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdventureMaxAggregateInputType
+  }
+
+  export type GetAdventureAggregateType<T extends AdventureAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdventure]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdventure[P]>
+      : GetScalarType<T[P], AggregateAdventure[P]>
+  }
+
+
+
+
+  export type AdventureGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdventureWhereInput
+    orderBy?: AdventureOrderByWithAggregationInput | AdventureOrderByWithAggregationInput[]
+    by: AdventureScalarFieldEnum[] | AdventureScalarFieldEnum
+    having?: AdventureScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdventureCountAggregateInputType | true
+    _min?: AdventureMinAggregateInputType
+    _max?: AdventureMaxAggregateInputType
+  }
+
+  export type AdventureGroupByOutputType = {
+    id: string
+    name: string
+    genre_id: string
+    creator_id: string
+    created_at: Date
+    updated_at: Date
+    _count: AdventureCountAggregateOutputType | null
+    _min: AdventureMinAggregateOutputType | null
+    _max: AdventureMaxAggregateOutputType | null
+  }
+
+  type GetAdventureGroupByPayload<T extends AdventureGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdventureGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdventureGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdventureGroupByOutputType[P]>
+            : GetScalarType<T[P], AdventureGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdventureSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    genre_id?: boolean
+    creator_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    keywords?: boolean | Adventure$keywordsArgs<ExtArgs>
+    _count?: boolean | AdventureCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adventure"]>
+
+  export type AdventureSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    genre_id?: boolean
+    creator_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adventure"]>
+
+  export type AdventureSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    genre_id?: boolean
+    creator_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adventure"]>
+
+  export type AdventureSelectScalar = {
+    id?: boolean
+    name?: boolean
+    genre_id?: boolean
+    creator_id?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type AdventureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "genre_id" | "creator_id" | "created_at" | "updated_at", ExtArgs["result"]["adventure"]>
+  export type AdventureInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    keywords?: boolean | Adventure$keywordsArgs<ExtArgs>
+    _count?: boolean | AdventureCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AdventureIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }
+  export type AdventureIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }
+
+  export type $AdventurePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Adventure"
+    objects: {
+      genre: Prisma.$GenrePayload<ExtArgs>
+      keywords: Prisma.$KeywordPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      genre_id: string
+      creator_id: string
+      created_at: Date
+      updated_at: Date
+    }, ExtArgs["result"]["adventure"]>
+    composites: {}
+  }
+
+  type AdventureGetPayload<S extends boolean | null | undefined | AdventureDefaultArgs> = $Result.GetResult<Prisma.$AdventurePayload, S>
+
+  type AdventureCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdventureFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdventureCountAggregateInputType | true
+    }
+
+  export interface AdventureDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Adventure'], meta: { name: 'Adventure' } }
+    /**
+     * Find zero or one Adventure that matches the filter.
+     * @param {AdventureFindUniqueArgs} args - Arguments to find a Adventure
+     * @example
+     * // Get one Adventure
+     * const adventure = await prisma.adventure.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdventureFindUniqueArgs>(args: SelectSubset<T, AdventureFindUniqueArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Adventure that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdventureFindUniqueOrThrowArgs} args - Arguments to find a Adventure
+     * @example
+     * // Get one Adventure
+     * const adventure = await prisma.adventure.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdventureFindUniqueOrThrowArgs>(args: SelectSubset<T, AdventureFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Adventure that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdventureFindFirstArgs} args - Arguments to find a Adventure
+     * @example
+     * // Get one Adventure
+     * const adventure = await prisma.adventure.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdventureFindFirstArgs>(args?: SelectSubset<T, AdventureFindFirstArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Adventure that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdventureFindFirstOrThrowArgs} args - Arguments to find a Adventure
+     * @example
+     * // Get one Adventure
+     * const adventure = await prisma.adventure.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdventureFindFirstOrThrowArgs>(args?: SelectSubset<T, AdventureFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Adventures that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdventureFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Adventures
+     * const adventures = await prisma.adventure.findMany()
+     * 
+     * // Get first 10 Adventures
+     * const adventures = await prisma.adventure.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adventureWithIdOnly = await prisma.adventure.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdventureFindManyArgs>(args?: SelectSubset<T, AdventureFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Adventure.
+     * @param {AdventureCreateArgs} args - Arguments to create a Adventure.
+     * @example
+     * // Create one Adventure
+     * const Adventure = await prisma.adventure.create({
+     *   data: {
+     *     // ... data to create a Adventure
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdventureCreateArgs>(args: SelectSubset<T, AdventureCreateArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Adventures.
+     * @param {AdventureCreateManyArgs} args - Arguments to create many Adventures.
+     * @example
+     * // Create many Adventures
+     * const adventure = await prisma.adventure.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdventureCreateManyArgs>(args?: SelectSubset<T, AdventureCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Adventures and returns the data saved in the database.
+     * @param {AdventureCreateManyAndReturnArgs} args - Arguments to create many Adventures.
+     * @example
+     * // Create many Adventures
+     * const adventure = await prisma.adventure.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Adventures and only return the `id`
+     * const adventureWithIdOnly = await prisma.adventure.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdventureCreateManyAndReturnArgs>(args?: SelectSubset<T, AdventureCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Adventure.
+     * @param {AdventureDeleteArgs} args - Arguments to delete one Adventure.
+     * @example
+     * // Delete one Adventure
+     * const Adventure = await prisma.adventure.delete({
+     *   where: {
+     *     // ... filter to delete one Adventure
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdventureDeleteArgs>(args: SelectSubset<T, AdventureDeleteArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Adventure.
+     * @param {AdventureUpdateArgs} args - Arguments to update one Adventure.
+     * @example
+     * // Update one Adventure
+     * const adventure = await prisma.adventure.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdventureUpdateArgs>(args: SelectSubset<T, AdventureUpdateArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Adventures.
+     * @param {AdventureDeleteManyArgs} args - Arguments to filter Adventures to delete.
+     * @example
+     * // Delete a few Adventures
+     * const { count } = await prisma.adventure.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdventureDeleteManyArgs>(args?: SelectSubset<T, AdventureDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Adventures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdventureUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Adventures
+     * const adventure = await prisma.adventure.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdventureUpdateManyArgs>(args: SelectSubset<T, AdventureUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Adventures and returns the data updated in the database.
+     * @param {AdventureUpdateManyAndReturnArgs} args - Arguments to update many Adventures.
+     * @example
+     * // Update many Adventures
+     * const adventure = await prisma.adventure.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Adventures and only return the `id`
+     * const adventureWithIdOnly = await prisma.adventure.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdventureUpdateManyAndReturnArgs>(args: SelectSubset<T, AdventureUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Adventure.
+     * @param {AdventureUpsertArgs} args - Arguments to update or create a Adventure.
+     * @example
+     * // Update or create a Adventure
+     * const adventure = await prisma.adventure.upsert({
+     *   create: {
+     *     // ... data to create a Adventure
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Adventure we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdventureUpsertArgs>(args: SelectSubset<T, AdventureUpsertArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Adventures.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdventureCountArgs} args - Arguments to filter Adventures to count.
+     * @example
+     * // Count the number of Adventures
+     * const count = await prisma.adventure.count({
+     *   where: {
+     *     // ... the filter for the Adventures we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdventureCountArgs>(
+      args?: Subset<T, AdventureCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdventureCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Adventure.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdventureAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdventureAggregateArgs>(args: Subset<T, AdventureAggregateArgs>): Prisma.PrismaPromise<GetAdventureAggregateType<T>>
+
+    /**
+     * Group by Adventure.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdventureGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdventureGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdventureGroupByArgs['orderBy'] }
+        : { orderBy?: AdventureGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdventureGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdventureGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Adventure model
+   */
+  readonly fields: AdventureFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Adventure.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdventureClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    genre<T extends GenreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GenreDefaultArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    keywords<T extends Adventure$keywordsArgs<ExtArgs> = {}>(args?: Subset<T, Adventure$keywordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Adventure model
+   */ 
+  interface AdventureFieldRefs {
+    readonly id: FieldRef<"Adventure", 'String'>
+    readonly name: FieldRef<"Adventure", 'String'>
+    readonly genre_id: FieldRef<"Adventure", 'String'>
+    readonly creator_id: FieldRef<"Adventure", 'String'>
+    readonly created_at: FieldRef<"Adventure", 'DateTime'>
+    readonly updated_at: FieldRef<"Adventure", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Adventure findUnique
+   */
+  export type AdventureFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+    /**
+     * Filter, which Adventure to fetch.
+     */
+    where: AdventureWhereUniqueInput
+  }
+
+  /**
+   * Adventure findUniqueOrThrow
+   */
+  export type AdventureFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+    /**
+     * Filter, which Adventure to fetch.
+     */
+    where: AdventureWhereUniqueInput
+  }
+
+  /**
+   * Adventure findFirst
+   */
+  export type AdventureFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+    /**
+     * Filter, which Adventure to fetch.
+     */
+    where?: AdventureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Adventures to fetch.
+     */
+    orderBy?: AdventureOrderByWithRelationInput | AdventureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Adventures.
+     */
+    cursor?: AdventureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Adventures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Adventures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Adventures.
+     */
+    distinct?: AdventureScalarFieldEnum | AdventureScalarFieldEnum[]
+  }
+
+  /**
+   * Adventure findFirstOrThrow
+   */
+  export type AdventureFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+    /**
+     * Filter, which Adventure to fetch.
+     */
+    where?: AdventureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Adventures to fetch.
+     */
+    orderBy?: AdventureOrderByWithRelationInput | AdventureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Adventures.
+     */
+    cursor?: AdventureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Adventures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Adventures.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Adventures.
+     */
+    distinct?: AdventureScalarFieldEnum | AdventureScalarFieldEnum[]
+  }
+
+  /**
+   * Adventure findMany
+   */
+  export type AdventureFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+    /**
+     * Filter, which Adventures to fetch.
+     */
+    where?: AdventureWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Adventures to fetch.
+     */
+    orderBy?: AdventureOrderByWithRelationInput | AdventureOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Adventures.
+     */
+    cursor?: AdventureWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Adventures from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Adventures.
+     */
+    skip?: number
+    distinct?: AdventureScalarFieldEnum | AdventureScalarFieldEnum[]
+  }
+
+  /**
+   * Adventure create
+   */
+  export type AdventureCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Adventure.
+     */
+    data: XOR<AdventureCreateInput, AdventureUncheckedCreateInput>
+  }
+
+  /**
+   * Adventure createMany
+   */
+  export type AdventureCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Adventures.
+     */
+    data: AdventureCreateManyInput | AdventureCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Adventure createManyAndReturn
+   */
+  export type AdventureCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * The data used to create many Adventures.
+     */
+    data: AdventureCreateManyInput | AdventureCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Adventure update
+   */
+  export type AdventureUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Adventure.
+     */
+    data: XOR<AdventureUpdateInput, AdventureUncheckedUpdateInput>
+    /**
+     * Choose, which Adventure to update.
+     */
+    where: AdventureWhereUniqueInput
+  }
+
+  /**
+   * Adventure updateMany
+   */
+  export type AdventureUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Adventures.
+     */
+    data: XOR<AdventureUpdateManyMutationInput, AdventureUncheckedUpdateManyInput>
+    /**
+     * Filter which Adventures to update
+     */
+    where?: AdventureWhereInput
+    /**
+     * Limit how many Adventures to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Adventure updateManyAndReturn
+   */
+  export type AdventureUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * The data used to update Adventures.
+     */
+    data: XOR<AdventureUpdateManyMutationInput, AdventureUncheckedUpdateManyInput>
+    /**
+     * Filter which Adventures to update
+     */
+    where?: AdventureWhereInput
+    /**
+     * Limit how many Adventures to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Adventure upsert
+   */
+  export type AdventureUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Adventure to update in case it exists.
+     */
+    where: AdventureWhereUniqueInput
+    /**
+     * In case the Adventure found by the `where` argument doesn't exist, create a new Adventure with this data.
+     */
+    create: XOR<AdventureCreateInput, AdventureUncheckedCreateInput>
+    /**
+     * In case the Adventure was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdventureUpdateInput, AdventureUncheckedUpdateInput>
+  }
+
+  /**
+   * Adventure delete
+   */
+  export type AdventureDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+    /**
+     * Filter which Adventure to delete.
+     */
+    where: AdventureWhereUniqueInput
+  }
+
+  /**
+   * Adventure deleteMany
+   */
+  export type AdventureDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Adventures to delete
+     */
+    where?: AdventureWhereInput
+    /**
+     * Limit how many Adventures to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Adventure.keywords
+   */
+  export type Adventure$keywordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+    where?: KeywordWhereInput
+    orderBy?: KeywordOrderByWithRelationInput | KeywordOrderByWithRelationInput[]
+    cursor?: KeywordWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: KeywordScalarFieldEnum | KeywordScalarFieldEnum[]
+  }
+
+  /**
+   * Adventure without action
+   */
+  export type AdventureDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Keyword
+   */
+
+  export type AggregateKeyword = {
+    _count: KeywordCountAggregateOutputType | null
+    _min: KeywordMinAggregateOutputType | null
+    _max: KeywordMaxAggregateOutputType | null
+  }
+
+  export type KeywordMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    genre_id: string | null
+  }
+
+  export type KeywordMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    genre_id: string | null
+  }
+
+  export type KeywordCountAggregateOutputType = {
+    id: number
+    name: number
+    genre_id: number
+    _all: number
+  }
+
+
+  export type KeywordMinAggregateInputType = {
+    id?: true
+    name?: true
+    genre_id?: true
+  }
+
+  export type KeywordMaxAggregateInputType = {
+    id?: true
+    name?: true
+    genre_id?: true
+  }
+
+  export type KeywordCountAggregateInputType = {
+    id?: true
+    name?: true
+    genre_id?: true
+    _all?: true
+  }
+
+  export type KeywordAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Keyword to aggregate.
+     */
+    where?: KeywordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Keywords to fetch.
+     */
+    orderBy?: KeywordOrderByWithRelationInput | KeywordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: KeywordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Keywords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Keywords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Keywords
+    **/
+    _count?: true | KeywordCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: KeywordMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: KeywordMaxAggregateInputType
+  }
+
+  export type GetKeywordAggregateType<T extends KeywordAggregateArgs> = {
+        [P in keyof T & keyof AggregateKeyword]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateKeyword[P]>
+      : GetScalarType<T[P], AggregateKeyword[P]>
+  }
+
+
+
+
+  export type KeywordGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: KeywordWhereInput
+    orderBy?: KeywordOrderByWithAggregationInput | KeywordOrderByWithAggregationInput[]
+    by: KeywordScalarFieldEnum[] | KeywordScalarFieldEnum
+    having?: KeywordScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: KeywordCountAggregateInputType | true
+    _min?: KeywordMinAggregateInputType
+    _max?: KeywordMaxAggregateInputType
+  }
+
+  export type KeywordGroupByOutputType = {
+    id: string
+    name: string
+    genre_id: string
+    _count: KeywordCountAggregateOutputType | null
+    _min: KeywordMinAggregateOutputType | null
+    _max: KeywordMaxAggregateOutputType | null
+  }
+
+  type GetKeywordGroupByPayload<T extends KeywordGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<KeywordGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof KeywordGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], KeywordGroupByOutputType[P]>
+            : GetScalarType<T[P], KeywordGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type KeywordSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    genre_id?: boolean
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    adventures?: boolean | Keyword$adventuresArgs<ExtArgs>
+    _count?: boolean | KeywordCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["keyword"]>
+
+  export type KeywordSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    genre_id?: boolean
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["keyword"]>
+
+  export type KeywordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    genre_id?: boolean
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["keyword"]>
+
+  export type KeywordSelectScalar = {
+    id?: boolean
+    name?: boolean
+    genre_id?: boolean
+  }
+
+  export type KeywordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "genre_id", ExtArgs["result"]["keyword"]>
+  export type KeywordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    adventures?: boolean | Keyword$adventuresArgs<ExtArgs>
+    _count?: boolean | KeywordCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type KeywordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }
+  export type KeywordIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    genre?: boolean | GenreDefaultArgs<ExtArgs>
+  }
+
+  export type $KeywordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Keyword"
+    objects: {
+      genre: Prisma.$GenrePayload<ExtArgs>
+      adventures: Prisma.$AdventurePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      genre_id: string
+    }, ExtArgs["result"]["keyword"]>
+    composites: {}
+  }
+
+  type KeywordGetPayload<S extends boolean | null | undefined | KeywordDefaultArgs> = $Result.GetResult<Prisma.$KeywordPayload, S>
+
+  type KeywordCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<KeywordFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: KeywordCountAggregateInputType | true
+    }
+
+  export interface KeywordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Keyword'], meta: { name: 'Keyword' } }
+    /**
+     * Find zero or one Keyword that matches the filter.
+     * @param {KeywordFindUniqueArgs} args - Arguments to find a Keyword
+     * @example
+     * // Get one Keyword
+     * const keyword = await prisma.keyword.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends KeywordFindUniqueArgs>(args: SelectSubset<T, KeywordFindUniqueArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Keyword that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {KeywordFindUniqueOrThrowArgs} args - Arguments to find a Keyword
+     * @example
+     * // Get one Keyword
+     * const keyword = await prisma.keyword.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends KeywordFindUniqueOrThrowArgs>(args: SelectSubset<T, KeywordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Keyword that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KeywordFindFirstArgs} args - Arguments to find a Keyword
+     * @example
+     * // Get one Keyword
+     * const keyword = await prisma.keyword.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends KeywordFindFirstArgs>(args?: SelectSubset<T, KeywordFindFirstArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Keyword that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KeywordFindFirstOrThrowArgs} args - Arguments to find a Keyword
+     * @example
+     * // Get one Keyword
+     * const keyword = await prisma.keyword.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends KeywordFindFirstOrThrowArgs>(args?: SelectSubset<T, KeywordFindFirstOrThrowArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Keywords that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KeywordFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Keywords
+     * const keywords = await prisma.keyword.findMany()
+     * 
+     * // Get first 10 Keywords
+     * const keywords = await prisma.keyword.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const keywordWithIdOnly = await prisma.keyword.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends KeywordFindManyArgs>(args?: SelectSubset<T, KeywordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Keyword.
+     * @param {KeywordCreateArgs} args - Arguments to create a Keyword.
+     * @example
+     * // Create one Keyword
+     * const Keyword = await prisma.keyword.create({
+     *   data: {
+     *     // ... data to create a Keyword
+     *   }
+     * })
+     * 
+     */
+    create<T extends KeywordCreateArgs>(args: SelectSubset<T, KeywordCreateArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Keywords.
+     * @param {KeywordCreateManyArgs} args - Arguments to create many Keywords.
+     * @example
+     * // Create many Keywords
+     * const keyword = await prisma.keyword.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends KeywordCreateManyArgs>(args?: SelectSubset<T, KeywordCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Keywords and returns the data saved in the database.
+     * @param {KeywordCreateManyAndReturnArgs} args - Arguments to create many Keywords.
+     * @example
+     * // Create many Keywords
+     * const keyword = await prisma.keyword.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Keywords and only return the `id`
+     * const keywordWithIdOnly = await prisma.keyword.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends KeywordCreateManyAndReturnArgs>(args?: SelectSubset<T, KeywordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Keyword.
+     * @param {KeywordDeleteArgs} args - Arguments to delete one Keyword.
+     * @example
+     * // Delete one Keyword
+     * const Keyword = await prisma.keyword.delete({
+     *   where: {
+     *     // ... filter to delete one Keyword
+     *   }
+     * })
+     * 
+     */
+    delete<T extends KeywordDeleteArgs>(args: SelectSubset<T, KeywordDeleteArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Keyword.
+     * @param {KeywordUpdateArgs} args - Arguments to update one Keyword.
+     * @example
+     * // Update one Keyword
+     * const keyword = await prisma.keyword.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends KeywordUpdateArgs>(args: SelectSubset<T, KeywordUpdateArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Keywords.
+     * @param {KeywordDeleteManyArgs} args - Arguments to filter Keywords to delete.
+     * @example
+     * // Delete a few Keywords
+     * const { count } = await prisma.keyword.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends KeywordDeleteManyArgs>(args?: SelectSubset<T, KeywordDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Keywords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KeywordUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Keywords
+     * const keyword = await prisma.keyword.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends KeywordUpdateManyArgs>(args: SelectSubset<T, KeywordUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Keywords and returns the data updated in the database.
+     * @param {KeywordUpdateManyAndReturnArgs} args - Arguments to update many Keywords.
+     * @example
+     * // Update many Keywords
+     * const keyword = await prisma.keyword.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Keywords and only return the `id`
+     * const keywordWithIdOnly = await prisma.keyword.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends KeywordUpdateManyAndReturnArgs>(args: SelectSubset<T, KeywordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Keyword.
+     * @param {KeywordUpsertArgs} args - Arguments to update or create a Keyword.
+     * @example
+     * // Update or create a Keyword
+     * const keyword = await prisma.keyword.upsert({
+     *   create: {
+     *     // ... data to create a Keyword
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Keyword we want to update
+     *   }
+     * })
+     */
+    upsert<T extends KeywordUpsertArgs>(args: SelectSubset<T, KeywordUpsertArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Keywords.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KeywordCountArgs} args - Arguments to filter Keywords to count.
+     * @example
+     * // Count the number of Keywords
+     * const count = await prisma.keyword.count({
+     *   where: {
+     *     // ... the filter for the Keywords we want to count
+     *   }
+     * })
+    **/
+    count<T extends KeywordCountArgs>(
+      args?: Subset<T, KeywordCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], KeywordCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Keyword.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KeywordAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends KeywordAggregateArgs>(args: Subset<T, KeywordAggregateArgs>): Prisma.PrismaPromise<GetKeywordAggregateType<T>>
+
+    /**
+     * Group by Keyword.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {KeywordGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends KeywordGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: KeywordGroupByArgs['orderBy'] }
+        : { orderBy?: KeywordGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, KeywordGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetKeywordGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Keyword model
+   */
+  readonly fields: KeywordFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Keyword.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__KeywordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    genre<T extends GenreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GenreDefaultArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    adventures<T extends Keyword$adventuresArgs<ExtArgs> = {}>(args?: Subset<T, Keyword$adventuresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Keyword model
+   */ 
+  interface KeywordFieldRefs {
+    readonly id: FieldRef<"Keyword", 'String'>
+    readonly name: FieldRef<"Keyword", 'String'>
+    readonly genre_id: FieldRef<"Keyword", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Keyword findUnique
+   */
+  export type KeywordFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+    /**
+     * Filter, which Keyword to fetch.
+     */
+    where: KeywordWhereUniqueInput
+  }
+
+  /**
+   * Keyword findUniqueOrThrow
+   */
+  export type KeywordFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+    /**
+     * Filter, which Keyword to fetch.
+     */
+    where: KeywordWhereUniqueInput
+  }
+
+  /**
+   * Keyword findFirst
+   */
+  export type KeywordFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+    /**
+     * Filter, which Keyword to fetch.
+     */
+    where?: KeywordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Keywords to fetch.
+     */
+    orderBy?: KeywordOrderByWithRelationInput | KeywordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Keywords.
+     */
+    cursor?: KeywordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Keywords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Keywords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Keywords.
+     */
+    distinct?: KeywordScalarFieldEnum | KeywordScalarFieldEnum[]
+  }
+
+  /**
+   * Keyword findFirstOrThrow
+   */
+  export type KeywordFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+    /**
+     * Filter, which Keyword to fetch.
+     */
+    where?: KeywordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Keywords to fetch.
+     */
+    orderBy?: KeywordOrderByWithRelationInput | KeywordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Keywords.
+     */
+    cursor?: KeywordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Keywords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Keywords.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Keywords.
+     */
+    distinct?: KeywordScalarFieldEnum | KeywordScalarFieldEnum[]
+  }
+
+  /**
+   * Keyword findMany
+   */
+  export type KeywordFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+    /**
+     * Filter, which Keywords to fetch.
+     */
+    where?: KeywordWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Keywords to fetch.
+     */
+    orderBy?: KeywordOrderByWithRelationInput | KeywordOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Keywords.
+     */
+    cursor?: KeywordWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Keywords from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Keywords.
+     */
+    skip?: number
+    distinct?: KeywordScalarFieldEnum | KeywordScalarFieldEnum[]
+  }
+
+  /**
+   * Keyword create
+   */
+  export type KeywordCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Keyword.
+     */
+    data: XOR<KeywordCreateInput, KeywordUncheckedCreateInput>
+  }
+
+  /**
+   * Keyword createMany
+   */
+  export type KeywordCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Keywords.
+     */
+    data: KeywordCreateManyInput | KeywordCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Keyword createManyAndReturn
+   */
+  export type KeywordCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * The data used to create many Keywords.
+     */
+    data: KeywordCreateManyInput | KeywordCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Keyword update
+   */
+  export type KeywordUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Keyword.
+     */
+    data: XOR<KeywordUpdateInput, KeywordUncheckedUpdateInput>
+    /**
+     * Choose, which Keyword to update.
+     */
+    where: KeywordWhereUniqueInput
+  }
+
+  /**
+   * Keyword updateMany
+   */
+  export type KeywordUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Keywords.
+     */
+    data: XOR<KeywordUpdateManyMutationInput, KeywordUncheckedUpdateManyInput>
+    /**
+     * Filter which Keywords to update
+     */
+    where?: KeywordWhereInput
+    /**
+     * Limit how many Keywords to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Keyword updateManyAndReturn
+   */
+  export type KeywordUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * The data used to update Keywords.
+     */
+    data: XOR<KeywordUpdateManyMutationInput, KeywordUncheckedUpdateManyInput>
+    /**
+     * Filter which Keywords to update
+     */
+    where?: KeywordWhereInput
+    /**
+     * Limit how many Keywords to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Keyword upsert
+   */
+  export type KeywordUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Keyword to update in case it exists.
+     */
+    where: KeywordWhereUniqueInput
+    /**
+     * In case the Keyword found by the `where` argument doesn't exist, create a new Keyword with this data.
+     */
+    create: XOR<KeywordCreateInput, KeywordUncheckedCreateInput>
+    /**
+     * In case the Keyword was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<KeywordUpdateInput, KeywordUncheckedUpdateInput>
+  }
+
+  /**
+   * Keyword delete
+   */
+  export type KeywordDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+    /**
+     * Filter which Keyword to delete.
+     */
+    where: KeywordWhereUniqueInput
+  }
+
+  /**
+   * Keyword deleteMany
+   */
+  export type KeywordDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Keywords to delete
+     */
+    where?: KeywordWhereInput
+    /**
+     * Limit how many Keywords to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Keyword.adventures
+   */
+  export type Keyword$adventuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+    where?: AdventureWhereInput
+    orderBy?: AdventureOrderByWithRelationInput | AdventureOrderByWithRelationInput[]
+    cursor?: AdventureWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdventureScalarFieldEnum | AdventureScalarFieldEnum[]
+  }
+
+  /**
+   * Keyword without action
+   */
+  export type KeywordDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Genre
+   */
+
+  export type AggregateGenre = {
+    _count: GenreCountAggregateOutputType | null
+    _min: GenreMinAggregateOutputType | null
+    _max: GenreMaxAggregateOutputType | null
+  }
+
+  export type GenreMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type GenreMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+  }
+
+  export type GenreCountAggregateOutputType = {
+    id: number
+    name: number
+    _all: number
+  }
+
+
+  export type GenreMinAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type GenreMaxAggregateInputType = {
+    id?: true
+    name?: true
+  }
+
+  export type GenreCountAggregateInputType = {
+    id?: true
+    name?: true
+    _all?: true
+  }
+
+  export type GenreAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Genre to aggregate.
+     */
+    where?: GenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenreOrderByWithRelationInput | GenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: GenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Genres
+    **/
+    _count?: true | GenreCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: GenreMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: GenreMaxAggregateInputType
+  }
+
+  export type GetGenreAggregateType<T extends GenreAggregateArgs> = {
+        [P in keyof T & keyof AggregateGenre]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateGenre[P]>
+      : GetScalarType<T[P], AggregateGenre[P]>
+  }
+
+
+
+
+  export type GenreGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GenreWhereInput
+    orderBy?: GenreOrderByWithAggregationInput | GenreOrderByWithAggregationInput[]
+    by: GenreScalarFieldEnum[] | GenreScalarFieldEnum
+    having?: GenreScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: GenreCountAggregateInputType | true
+    _min?: GenreMinAggregateInputType
+    _max?: GenreMaxAggregateInputType
+  }
+
+  export type GenreGroupByOutputType = {
+    id: string
+    name: string
+    _count: GenreCountAggregateOutputType | null
+    _min: GenreMinAggregateOutputType | null
+    _max: GenreMaxAggregateOutputType | null
+  }
+
+  type GetGenreGroupByPayload<T extends GenreGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<GenreGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof GenreGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], GenreGroupByOutputType[P]>
+            : GetScalarType<T[P], GenreGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type GenreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    keywords?: boolean | Genre$keywordsArgs<ExtArgs>
+    adventures?: boolean | Genre$adventuresArgs<ExtArgs>
+    _count?: boolean | GenreCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["genre"]>
+
+  export type GenreSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["genre"]>
+
+  export type GenreSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+  }, ExtArgs["result"]["genre"]>
+
+  export type GenreSelectScalar = {
+    id?: boolean
+    name?: boolean
+  }
+
+  export type GenreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["genre"]>
+  export type GenreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    keywords?: boolean | Genre$keywordsArgs<ExtArgs>
+    adventures?: boolean | Genre$adventuresArgs<ExtArgs>
+    _count?: boolean | GenreCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type GenreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type GenreIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $GenrePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Genre"
+    objects: {
+      keywords: Prisma.$KeywordPayload<ExtArgs>[]
+      adventures: Prisma.$AdventurePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+    }, ExtArgs["result"]["genre"]>
+    composites: {}
+  }
+
+  type GenreGetPayload<S extends boolean | null | undefined | GenreDefaultArgs> = $Result.GetResult<Prisma.$GenrePayload, S>
+
+  type GenreCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GenreFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GenreCountAggregateInputType | true
+    }
+
+  export interface GenreDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Genre'], meta: { name: 'Genre' } }
+    /**
+     * Find zero or one Genre that matches the filter.
+     * @param {GenreFindUniqueArgs} args - Arguments to find a Genre
+     * @example
+     * // Get one Genre
+     * const genre = await prisma.genre.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends GenreFindUniqueArgs>(args: SelectSubset<T, GenreFindUniqueArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Genre that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {GenreFindUniqueOrThrowArgs} args - Arguments to find a Genre
+     * @example
+     * // Get one Genre
+     * const genre = await prisma.genre.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends GenreFindUniqueOrThrowArgs>(args: SelectSubset<T, GenreFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Genre that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreFindFirstArgs} args - Arguments to find a Genre
+     * @example
+     * // Get one Genre
+     * const genre = await prisma.genre.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends GenreFindFirstArgs>(args?: SelectSubset<T, GenreFindFirstArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Genre that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreFindFirstOrThrowArgs} args - Arguments to find a Genre
+     * @example
+     * // Get one Genre
+     * const genre = await prisma.genre.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends GenreFindFirstOrThrowArgs>(args?: SelectSubset<T, GenreFindFirstOrThrowArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Genres that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Genres
+     * const genres = await prisma.genre.findMany()
+     * 
+     * // Get first 10 Genres
+     * const genres = await prisma.genre.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const genreWithIdOnly = await prisma.genre.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends GenreFindManyArgs>(args?: SelectSubset<T, GenreFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Genre.
+     * @param {GenreCreateArgs} args - Arguments to create a Genre.
+     * @example
+     * // Create one Genre
+     * const Genre = await prisma.genre.create({
+     *   data: {
+     *     // ... data to create a Genre
+     *   }
+     * })
+     * 
+     */
+    create<T extends GenreCreateArgs>(args: SelectSubset<T, GenreCreateArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Genres.
+     * @param {GenreCreateManyArgs} args - Arguments to create many Genres.
+     * @example
+     * // Create many Genres
+     * const genre = await prisma.genre.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends GenreCreateManyArgs>(args?: SelectSubset<T, GenreCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Genres and returns the data saved in the database.
+     * @param {GenreCreateManyAndReturnArgs} args - Arguments to create many Genres.
+     * @example
+     * // Create many Genres
+     * const genre = await prisma.genre.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Genres and only return the `id`
+     * const genreWithIdOnly = await prisma.genre.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends GenreCreateManyAndReturnArgs>(args?: SelectSubset<T, GenreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Genre.
+     * @param {GenreDeleteArgs} args - Arguments to delete one Genre.
+     * @example
+     * // Delete one Genre
+     * const Genre = await prisma.genre.delete({
+     *   where: {
+     *     // ... filter to delete one Genre
+     *   }
+     * })
+     * 
+     */
+    delete<T extends GenreDeleteArgs>(args: SelectSubset<T, GenreDeleteArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Genre.
+     * @param {GenreUpdateArgs} args - Arguments to update one Genre.
+     * @example
+     * // Update one Genre
+     * const genre = await prisma.genre.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends GenreUpdateArgs>(args: SelectSubset<T, GenreUpdateArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Genres.
+     * @param {GenreDeleteManyArgs} args - Arguments to filter Genres to delete.
+     * @example
+     * // Delete a few Genres
+     * const { count } = await prisma.genre.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends GenreDeleteManyArgs>(args?: SelectSubset<T, GenreDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Genres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Genres
+     * const genre = await prisma.genre.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends GenreUpdateManyArgs>(args: SelectSubset<T, GenreUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Genres and returns the data updated in the database.
+     * @param {GenreUpdateManyAndReturnArgs} args - Arguments to update many Genres.
+     * @example
+     * // Update many Genres
+     * const genre = await prisma.genre.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Genres and only return the `id`
+     * const genreWithIdOnly = await prisma.genre.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends GenreUpdateManyAndReturnArgs>(args: SelectSubset<T, GenreUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Genre.
+     * @param {GenreUpsertArgs} args - Arguments to update or create a Genre.
+     * @example
+     * // Update or create a Genre
+     * const genre = await prisma.genre.upsert({
+     *   create: {
+     *     // ... data to create a Genre
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Genre we want to update
+     *   }
+     * })
+     */
+    upsert<T extends GenreUpsertArgs>(args: SelectSubset<T, GenreUpsertArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Genres.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreCountArgs} args - Arguments to filter Genres to count.
+     * @example
+     * // Count the number of Genres
+     * const count = await prisma.genre.count({
+     *   where: {
+     *     // ... the filter for the Genres we want to count
+     *   }
+     * })
+    **/
+    count<T extends GenreCountArgs>(
+      args?: Subset<T, GenreCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], GenreCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Genre.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends GenreAggregateArgs>(args: Subset<T, GenreAggregateArgs>): Prisma.PrismaPromise<GetGenreAggregateType<T>>
+
+    /**
+     * Group by Genre.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {GenreGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends GenreGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: GenreGroupByArgs['orderBy'] }
+        : { orderBy?: GenreGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, GenreGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGenreGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Genre model
+   */
+  readonly fields: GenreFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Genre.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__GenreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    keywords<T extends Genre$keywordsArgs<ExtArgs> = {}>(args?: Subset<T, Genre$keywordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    adventures<T extends Genre$adventuresArgs<ExtArgs> = {}>(args?: Subset<T, Genre$adventuresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Genre model
+   */ 
+  interface GenreFieldRefs {
+    readonly id: FieldRef<"Genre", 'String'>
+    readonly name: FieldRef<"Genre", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Genre findUnique
+   */
+  export type GenreFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter, which Genre to fetch.
+     */
+    where: GenreWhereUniqueInput
+  }
+
+  /**
+   * Genre findUniqueOrThrow
+   */
+  export type GenreFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter, which Genre to fetch.
+     */
+    where: GenreWhereUniqueInput
+  }
+
+  /**
+   * Genre findFirst
+   */
+  export type GenreFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter, which Genre to fetch.
+     */
+    where?: GenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenreOrderByWithRelationInput | GenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Genres.
+     */
+    cursor?: GenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Genres.
+     */
+    distinct?: GenreScalarFieldEnum | GenreScalarFieldEnum[]
+  }
+
+  /**
+   * Genre findFirstOrThrow
+   */
+  export type GenreFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter, which Genre to fetch.
+     */
+    where?: GenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenreOrderByWithRelationInput | GenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Genres.
+     */
+    cursor?: GenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Genres.
+     */
+    distinct?: GenreScalarFieldEnum | GenreScalarFieldEnum[]
+  }
+
+  /**
+   * Genre findMany
+   */
+  export type GenreFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter, which Genres to fetch.
+     */
+    where?: GenreWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Genres to fetch.
+     */
+    orderBy?: GenreOrderByWithRelationInput | GenreOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Genres.
+     */
+    cursor?: GenreWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Genres from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Genres.
+     */
+    skip?: number
+    distinct?: GenreScalarFieldEnum | GenreScalarFieldEnum[]
+  }
+
+  /**
+   * Genre create
+   */
+  export type GenreCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Genre.
+     */
+    data: XOR<GenreCreateInput, GenreUncheckedCreateInput>
+  }
+
+  /**
+   * Genre createMany
+   */
+  export type GenreCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Genres.
+     */
+    data: GenreCreateManyInput | GenreCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Genre createManyAndReturn
+   */
+  export type GenreCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * The data used to create many Genres.
+     */
+    data: GenreCreateManyInput | GenreCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Genre update
+   */
+  export type GenreUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Genre.
+     */
+    data: XOR<GenreUpdateInput, GenreUncheckedUpdateInput>
+    /**
+     * Choose, which Genre to update.
+     */
+    where: GenreWhereUniqueInput
+  }
+
+  /**
+   * Genre updateMany
+   */
+  export type GenreUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Genres.
+     */
+    data: XOR<GenreUpdateManyMutationInput, GenreUncheckedUpdateManyInput>
+    /**
+     * Filter which Genres to update
+     */
+    where?: GenreWhereInput
+    /**
+     * Limit how many Genres to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Genre updateManyAndReturn
+   */
+  export type GenreUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * The data used to update Genres.
+     */
+    data: XOR<GenreUpdateManyMutationInput, GenreUncheckedUpdateManyInput>
+    /**
+     * Filter which Genres to update
+     */
+    where?: GenreWhereInput
+    /**
+     * Limit how many Genres to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Genre upsert
+   */
+  export type GenreUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Genre to update in case it exists.
+     */
+    where: GenreWhereUniqueInput
+    /**
+     * In case the Genre found by the `where` argument doesn't exist, create a new Genre with this data.
+     */
+    create: XOR<GenreCreateInput, GenreUncheckedCreateInput>
+    /**
+     * In case the Genre was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<GenreUpdateInput, GenreUncheckedUpdateInput>
+  }
+
+  /**
+   * Genre delete
+   */
+  export type GenreDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+    /**
+     * Filter which Genre to delete.
+     */
+    where: GenreWhereUniqueInput
+  }
+
+  /**
+   * Genre deleteMany
+   */
+  export type GenreDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Genres to delete
+     */
+    where?: GenreWhereInput
+    /**
+     * Limit how many Genres to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Genre.keywords
+   */
+  export type Genre$keywordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Keyword
+     */
+    select?: KeywordSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Keyword
+     */
+    omit?: KeywordOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: KeywordInclude<ExtArgs> | null
+    where?: KeywordWhereInput
+    orderBy?: KeywordOrderByWithRelationInput | KeywordOrderByWithRelationInput[]
+    cursor?: KeywordWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: KeywordScalarFieldEnum | KeywordScalarFieldEnum[]
+  }
+
+  /**
+   * Genre.adventures
+   */
+  export type Genre$adventuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Adventure
+     */
+    select?: AdventureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Adventure
+     */
+    omit?: AdventureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdventureInclude<ExtArgs> | null
+    where?: AdventureWhereInput
+    orderBy?: AdventureOrderByWithRelationInput | AdventureOrderByWithRelationInput[]
+    cursor?: AdventureWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdventureScalarFieldEnum | AdventureScalarFieldEnum[]
+  }
+
+  /**
+   * Genre without action
+   */
+  export type GenreDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Genre
+     */
+    select?: GenreSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Genre
+     */
+    omit?: GenreOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenreInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -58397,6 +61994,35 @@ export namespace Prisma {
   export type GPTMessageScalarFieldEnum = (typeof GPTMessageScalarFieldEnum)[keyof typeof GPTMessageScalarFieldEnum]
 
 
+  export const AdventureScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    genre_id: 'genre_id',
+    creator_id: 'creator_id',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type AdventureScalarFieldEnum = (typeof AdventureScalarFieldEnum)[keyof typeof AdventureScalarFieldEnum]
+
+
+  export const KeywordScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    genre_id: 'genre_id'
+  };
+
+  export type KeywordScalarFieldEnum = (typeof KeywordScalarFieldEnum)[keyof typeof KeywordScalarFieldEnum]
+
+
+  export const GenreScalarFieldEnum: {
+    id: 'id',
+    name: 'name'
+  };
+
+  export type GenreScalarFieldEnum = (typeof GenreScalarFieldEnum)[keyof typeof GenreScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -58458,6 +62084,20 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -60937,6 +64577,160 @@ export namespace Prisma {
     role?: StringWithAggregatesFilter<"GPTMessage"> | string
   }
 
+  export type AdventureWhereInput = {
+    AND?: AdventureWhereInput | AdventureWhereInput[]
+    OR?: AdventureWhereInput[]
+    NOT?: AdventureWhereInput | AdventureWhereInput[]
+    id?: StringFilter<"Adventure"> | string
+    name?: StringFilter<"Adventure"> | string
+    genre_id?: StringFilter<"Adventure"> | string
+    creator_id?: StringFilter<"Adventure"> | string
+    created_at?: DateTimeFilter<"Adventure"> | Date | string
+    updated_at?: DateTimeFilter<"Adventure"> | Date | string
+    genre?: XOR<GenreScalarRelationFilter, GenreWhereInput>
+    keywords?: KeywordListRelationFilter
+  }
+
+  export type AdventureOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    genre_id?: SortOrder
+    creator_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    genre?: GenreOrderByWithRelationInput
+    keywords?: KeywordOrderByRelationAggregateInput
+  }
+
+  export type AdventureWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: AdventureWhereInput | AdventureWhereInput[]
+    OR?: AdventureWhereInput[]
+    NOT?: AdventureWhereInput | AdventureWhereInput[]
+    name?: StringFilter<"Adventure"> | string
+    genre_id?: StringFilter<"Adventure"> | string
+    creator_id?: StringFilter<"Adventure"> | string
+    created_at?: DateTimeFilter<"Adventure"> | Date | string
+    updated_at?: DateTimeFilter<"Adventure"> | Date | string
+    genre?: XOR<GenreScalarRelationFilter, GenreWhereInput>
+    keywords?: KeywordListRelationFilter
+  }, "id">
+
+  export type AdventureOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    genre_id?: SortOrder
+    creator_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+    _count?: AdventureCountOrderByAggregateInput
+    _max?: AdventureMaxOrderByAggregateInput
+    _min?: AdventureMinOrderByAggregateInput
+  }
+
+  export type AdventureScalarWhereWithAggregatesInput = {
+    AND?: AdventureScalarWhereWithAggregatesInput | AdventureScalarWhereWithAggregatesInput[]
+    OR?: AdventureScalarWhereWithAggregatesInput[]
+    NOT?: AdventureScalarWhereWithAggregatesInput | AdventureScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Adventure"> | string
+    name?: StringWithAggregatesFilter<"Adventure"> | string
+    genre_id?: StringWithAggregatesFilter<"Adventure"> | string
+    creator_id?: StringWithAggregatesFilter<"Adventure"> | string
+    created_at?: DateTimeWithAggregatesFilter<"Adventure"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Adventure"> | Date | string
+  }
+
+  export type KeywordWhereInput = {
+    AND?: KeywordWhereInput | KeywordWhereInput[]
+    OR?: KeywordWhereInput[]
+    NOT?: KeywordWhereInput | KeywordWhereInput[]
+    id?: StringFilter<"Keyword"> | string
+    name?: StringFilter<"Keyword"> | string
+    genre_id?: StringFilter<"Keyword"> | string
+    genre?: XOR<GenreScalarRelationFilter, GenreWhereInput>
+    adventures?: AdventureListRelationFilter
+  }
+
+  export type KeywordOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    genre_id?: SortOrder
+    genre?: GenreOrderByWithRelationInput
+    adventures?: AdventureOrderByRelationAggregateInput
+  }
+
+  export type KeywordWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: KeywordWhereInput | KeywordWhereInput[]
+    OR?: KeywordWhereInput[]
+    NOT?: KeywordWhereInput | KeywordWhereInput[]
+    name?: StringFilter<"Keyword"> | string
+    genre_id?: StringFilter<"Keyword"> | string
+    genre?: XOR<GenreScalarRelationFilter, GenreWhereInput>
+    adventures?: AdventureListRelationFilter
+  }, "id">
+
+  export type KeywordOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    genre_id?: SortOrder
+    _count?: KeywordCountOrderByAggregateInput
+    _max?: KeywordMaxOrderByAggregateInput
+    _min?: KeywordMinOrderByAggregateInput
+  }
+
+  export type KeywordScalarWhereWithAggregatesInput = {
+    AND?: KeywordScalarWhereWithAggregatesInput | KeywordScalarWhereWithAggregatesInput[]
+    OR?: KeywordScalarWhereWithAggregatesInput[]
+    NOT?: KeywordScalarWhereWithAggregatesInput | KeywordScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Keyword"> | string
+    name?: StringWithAggregatesFilter<"Keyword"> | string
+    genre_id?: StringWithAggregatesFilter<"Keyword"> | string
+  }
+
+  export type GenreWhereInput = {
+    AND?: GenreWhereInput | GenreWhereInput[]
+    OR?: GenreWhereInput[]
+    NOT?: GenreWhereInput | GenreWhereInput[]
+    id?: StringFilter<"Genre"> | string
+    name?: StringFilter<"Genre"> | string
+    keywords?: KeywordListRelationFilter
+    adventures?: AdventureListRelationFilter
+  }
+
+  export type GenreOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    keywords?: KeywordOrderByRelationAggregateInput
+    adventures?: AdventureOrderByRelationAggregateInput
+  }
+
+  export type GenreWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: GenreWhereInput | GenreWhereInput[]
+    OR?: GenreWhereInput[]
+    NOT?: GenreWhereInput | GenreWhereInput[]
+    name?: StringFilter<"Genre"> | string
+    keywords?: KeywordListRelationFilter
+    adventures?: AdventureListRelationFilter
+  }, "id">
+
+  export type GenreOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    _count?: GenreCountOrderByAggregateInput
+    _max?: GenreMaxOrderByAggregateInput
+    _min?: GenreMinOrderByAggregateInput
+  }
+
+  export type GenreScalarWhereWithAggregatesInput = {
+    AND?: GenreScalarWhereWithAggregatesInput | GenreScalarWhereWithAggregatesInput[]
+    OR?: GenreScalarWhereWithAggregatesInput[]
+    NOT?: GenreScalarWhereWithAggregatesInput | GenreScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Genre"> | string
+    name?: StringWithAggregatesFilter<"Genre"> | string
+  }
+
   export type SizeCreateInput = {
     id: string
     name: string
@@ -63234,6 +67028,160 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
   }
 
+  export type AdventureCreateInput = {
+    id?: string
+    name: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    genre: GenreCreateNestedOneWithoutAdventuresInput
+    keywords?: KeywordCreateNestedManyWithoutAdventuresInput
+  }
+
+  export type AdventureUncheckedCreateInput = {
+    id?: string
+    name: string
+    genre_id: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    keywords?: KeywordUncheckedCreateNestedManyWithoutAdventuresInput
+  }
+
+  export type AdventureUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    genre?: GenreUpdateOneRequiredWithoutAdventuresNestedInput
+    keywords?: KeywordUpdateManyWithoutAdventuresNestedInput
+  }
+
+  export type AdventureUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    keywords?: KeywordUncheckedUpdateManyWithoutAdventuresNestedInput
+  }
+
+  export type AdventureCreateManyInput = {
+    id?: string
+    name: string
+    genre_id: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AdventureUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdventureUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KeywordCreateInput = {
+    id?: string
+    name: string
+    genre: GenreCreateNestedOneWithoutKeywordsInput
+    adventures?: AdventureCreateNestedManyWithoutKeywordsInput
+  }
+
+  export type KeywordUncheckedCreateInput = {
+    id?: string
+    name: string
+    genre_id: string
+    adventures?: AdventureUncheckedCreateNestedManyWithoutKeywordsInput
+  }
+
+  export type KeywordUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre?: GenreUpdateOneRequiredWithoutKeywordsNestedInput
+    adventures?: AdventureUpdateManyWithoutKeywordsNestedInput
+  }
+
+  export type KeywordUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre_id?: StringFieldUpdateOperationsInput | string
+    adventures?: AdventureUncheckedUpdateManyWithoutKeywordsNestedInput
+  }
+
+  export type KeywordCreateManyInput = {
+    id?: string
+    name: string
+    genre_id: string
+  }
+
+  export type KeywordUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type KeywordUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type GenreCreateInput = {
+    id?: string
+    name: string
+    keywords?: KeywordCreateNestedManyWithoutGenreInput
+    adventures?: AdventureCreateNestedManyWithoutGenreInput
+  }
+
+  export type GenreUncheckedCreateInput = {
+    id?: string
+    name: string
+    keywords?: KeywordUncheckedCreateNestedManyWithoutGenreInput
+    adventures?: AdventureUncheckedCreateNestedManyWithoutGenreInput
+  }
+
+  export type GenreUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    keywords?: KeywordUpdateManyWithoutGenreNestedInput
+    adventures?: AdventureUpdateManyWithoutGenreNestedInput
+  }
+
+  export type GenreUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    keywords?: KeywordUncheckedUpdateManyWithoutGenreNestedInput
+    adventures?: AdventureUncheckedUpdateManyWithoutGenreNestedInput
+  }
+
+  export type GenreCreateManyInput = {
+    id?: string
+    name: string
+  }
+
+  export type GenreUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type GenreUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -64943,6 +68891,116 @@ export namespace Prisma {
 
   export type GPTMessageSumOrderByAggregateInput = {
     number?: SortOrder
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type GenreScalarRelationFilter = {
+    is?: GenreWhereInput
+    isNot?: GenreWhereInput
+  }
+
+  export type KeywordListRelationFilter = {
+    every?: KeywordWhereInput
+    some?: KeywordWhereInput
+    none?: KeywordWhereInput
+  }
+
+  export type KeywordOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AdventureCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    genre_id?: SortOrder
+    creator_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AdventureMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    genre_id?: SortOrder
+    creator_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AdventureMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    genre_id?: SortOrder
+    creator_id?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type AdventureListRelationFilter = {
+    every?: AdventureWhereInput
+    some?: AdventureWhereInput
+    none?: AdventureWhereInput
+  }
+
+  export type AdventureOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type KeywordCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    genre_id?: SortOrder
+  }
+
+  export type KeywordMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    genre_id?: SortOrder
+  }
+
+  export type KeywordMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    genre_id?: SortOrder
+  }
+
+  export type GenreCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type GenreMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+  }
+
+  export type GenreMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
   }
 
   export type CreatureCreateNestedManyWithoutSize_relationInput = {
@@ -67543,6 +71601,198 @@ export namespace Prisma {
     update?: XOR<XOR<GPTMessageHistoryUpdateToOneWithWhereWithoutMessagesInput, GPTMessageHistoryUpdateWithoutMessagesInput>, GPTMessageHistoryUncheckedUpdateWithoutMessagesInput>
   }
 
+  export type GenreCreateNestedOneWithoutAdventuresInput = {
+    create?: XOR<GenreCreateWithoutAdventuresInput, GenreUncheckedCreateWithoutAdventuresInput>
+    connectOrCreate?: GenreCreateOrConnectWithoutAdventuresInput
+    connect?: GenreWhereUniqueInput
+  }
+
+  export type KeywordCreateNestedManyWithoutAdventuresInput = {
+    create?: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput> | KeywordCreateWithoutAdventuresInput[] | KeywordUncheckedCreateWithoutAdventuresInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutAdventuresInput | KeywordCreateOrConnectWithoutAdventuresInput[]
+    connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+  }
+
+  export type KeywordUncheckedCreateNestedManyWithoutAdventuresInput = {
+    create?: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput> | KeywordCreateWithoutAdventuresInput[] | KeywordUncheckedCreateWithoutAdventuresInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutAdventuresInput | KeywordCreateOrConnectWithoutAdventuresInput[]
+    connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
+  }
+
+  export type GenreUpdateOneRequiredWithoutAdventuresNestedInput = {
+    create?: XOR<GenreCreateWithoutAdventuresInput, GenreUncheckedCreateWithoutAdventuresInput>
+    connectOrCreate?: GenreCreateOrConnectWithoutAdventuresInput
+    upsert?: GenreUpsertWithoutAdventuresInput
+    connect?: GenreWhereUniqueInput
+    update?: XOR<XOR<GenreUpdateToOneWithWhereWithoutAdventuresInput, GenreUpdateWithoutAdventuresInput>, GenreUncheckedUpdateWithoutAdventuresInput>
+  }
+
+  export type KeywordUpdateManyWithoutAdventuresNestedInput = {
+    create?: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput> | KeywordCreateWithoutAdventuresInput[] | KeywordUncheckedCreateWithoutAdventuresInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutAdventuresInput | KeywordCreateOrConnectWithoutAdventuresInput[]
+    upsert?: KeywordUpsertWithWhereUniqueWithoutAdventuresInput | KeywordUpsertWithWhereUniqueWithoutAdventuresInput[]
+    set?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    disconnect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    delete?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    update?: KeywordUpdateWithWhereUniqueWithoutAdventuresInput | KeywordUpdateWithWhereUniqueWithoutAdventuresInput[]
+    updateMany?: KeywordUpdateManyWithWhereWithoutAdventuresInput | KeywordUpdateManyWithWhereWithoutAdventuresInput[]
+    deleteMany?: KeywordScalarWhereInput | KeywordScalarWhereInput[]
+  }
+
+  export type KeywordUncheckedUpdateManyWithoutAdventuresNestedInput = {
+    create?: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput> | KeywordCreateWithoutAdventuresInput[] | KeywordUncheckedCreateWithoutAdventuresInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutAdventuresInput | KeywordCreateOrConnectWithoutAdventuresInput[]
+    upsert?: KeywordUpsertWithWhereUniqueWithoutAdventuresInput | KeywordUpsertWithWhereUniqueWithoutAdventuresInput[]
+    set?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    disconnect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    delete?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    update?: KeywordUpdateWithWhereUniqueWithoutAdventuresInput | KeywordUpdateWithWhereUniqueWithoutAdventuresInput[]
+    updateMany?: KeywordUpdateManyWithWhereWithoutAdventuresInput | KeywordUpdateManyWithWhereWithoutAdventuresInput[]
+    deleteMany?: KeywordScalarWhereInput | KeywordScalarWhereInput[]
+  }
+
+  export type GenreCreateNestedOneWithoutKeywordsInput = {
+    create?: XOR<GenreCreateWithoutKeywordsInput, GenreUncheckedCreateWithoutKeywordsInput>
+    connectOrCreate?: GenreCreateOrConnectWithoutKeywordsInput
+    connect?: GenreWhereUniqueInput
+  }
+
+  export type AdventureCreateNestedManyWithoutKeywordsInput = {
+    create?: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput> | AdventureCreateWithoutKeywordsInput[] | AdventureUncheckedCreateWithoutKeywordsInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutKeywordsInput | AdventureCreateOrConnectWithoutKeywordsInput[]
+    connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+  }
+
+  export type AdventureUncheckedCreateNestedManyWithoutKeywordsInput = {
+    create?: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput> | AdventureCreateWithoutKeywordsInput[] | AdventureUncheckedCreateWithoutKeywordsInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutKeywordsInput | AdventureCreateOrConnectWithoutKeywordsInput[]
+    connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+  }
+
+  export type GenreUpdateOneRequiredWithoutKeywordsNestedInput = {
+    create?: XOR<GenreCreateWithoutKeywordsInput, GenreUncheckedCreateWithoutKeywordsInput>
+    connectOrCreate?: GenreCreateOrConnectWithoutKeywordsInput
+    upsert?: GenreUpsertWithoutKeywordsInput
+    connect?: GenreWhereUniqueInput
+    update?: XOR<XOR<GenreUpdateToOneWithWhereWithoutKeywordsInput, GenreUpdateWithoutKeywordsInput>, GenreUncheckedUpdateWithoutKeywordsInput>
+  }
+
+  export type AdventureUpdateManyWithoutKeywordsNestedInput = {
+    create?: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput> | AdventureCreateWithoutKeywordsInput[] | AdventureUncheckedCreateWithoutKeywordsInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutKeywordsInput | AdventureCreateOrConnectWithoutKeywordsInput[]
+    upsert?: AdventureUpsertWithWhereUniqueWithoutKeywordsInput | AdventureUpsertWithWhereUniqueWithoutKeywordsInput[]
+    set?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    disconnect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    delete?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    update?: AdventureUpdateWithWhereUniqueWithoutKeywordsInput | AdventureUpdateWithWhereUniqueWithoutKeywordsInput[]
+    updateMany?: AdventureUpdateManyWithWhereWithoutKeywordsInput | AdventureUpdateManyWithWhereWithoutKeywordsInput[]
+    deleteMany?: AdventureScalarWhereInput | AdventureScalarWhereInput[]
+  }
+
+  export type AdventureUncheckedUpdateManyWithoutKeywordsNestedInput = {
+    create?: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput> | AdventureCreateWithoutKeywordsInput[] | AdventureUncheckedCreateWithoutKeywordsInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutKeywordsInput | AdventureCreateOrConnectWithoutKeywordsInput[]
+    upsert?: AdventureUpsertWithWhereUniqueWithoutKeywordsInput | AdventureUpsertWithWhereUniqueWithoutKeywordsInput[]
+    set?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    disconnect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    delete?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    update?: AdventureUpdateWithWhereUniqueWithoutKeywordsInput | AdventureUpdateWithWhereUniqueWithoutKeywordsInput[]
+    updateMany?: AdventureUpdateManyWithWhereWithoutKeywordsInput | AdventureUpdateManyWithWhereWithoutKeywordsInput[]
+    deleteMany?: AdventureScalarWhereInput | AdventureScalarWhereInput[]
+  }
+
+  export type KeywordCreateNestedManyWithoutGenreInput = {
+    create?: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput> | KeywordCreateWithoutGenreInput[] | KeywordUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutGenreInput | KeywordCreateOrConnectWithoutGenreInput[]
+    createMany?: KeywordCreateManyGenreInputEnvelope
+    connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+  }
+
+  export type AdventureCreateNestedManyWithoutGenreInput = {
+    create?: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput> | AdventureCreateWithoutGenreInput[] | AdventureUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutGenreInput | AdventureCreateOrConnectWithoutGenreInput[]
+    createMany?: AdventureCreateManyGenreInputEnvelope
+    connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+  }
+
+  export type KeywordUncheckedCreateNestedManyWithoutGenreInput = {
+    create?: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput> | KeywordCreateWithoutGenreInput[] | KeywordUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutGenreInput | KeywordCreateOrConnectWithoutGenreInput[]
+    createMany?: KeywordCreateManyGenreInputEnvelope
+    connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+  }
+
+  export type AdventureUncheckedCreateNestedManyWithoutGenreInput = {
+    create?: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput> | AdventureCreateWithoutGenreInput[] | AdventureUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutGenreInput | AdventureCreateOrConnectWithoutGenreInput[]
+    createMany?: AdventureCreateManyGenreInputEnvelope
+    connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+  }
+
+  export type KeywordUpdateManyWithoutGenreNestedInput = {
+    create?: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput> | KeywordCreateWithoutGenreInput[] | KeywordUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutGenreInput | KeywordCreateOrConnectWithoutGenreInput[]
+    upsert?: KeywordUpsertWithWhereUniqueWithoutGenreInput | KeywordUpsertWithWhereUniqueWithoutGenreInput[]
+    createMany?: KeywordCreateManyGenreInputEnvelope
+    set?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    disconnect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    delete?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    update?: KeywordUpdateWithWhereUniqueWithoutGenreInput | KeywordUpdateWithWhereUniqueWithoutGenreInput[]
+    updateMany?: KeywordUpdateManyWithWhereWithoutGenreInput | KeywordUpdateManyWithWhereWithoutGenreInput[]
+    deleteMany?: KeywordScalarWhereInput | KeywordScalarWhereInput[]
+  }
+
+  export type AdventureUpdateManyWithoutGenreNestedInput = {
+    create?: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput> | AdventureCreateWithoutGenreInput[] | AdventureUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutGenreInput | AdventureCreateOrConnectWithoutGenreInput[]
+    upsert?: AdventureUpsertWithWhereUniqueWithoutGenreInput | AdventureUpsertWithWhereUniqueWithoutGenreInput[]
+    createMany?: AdventureCreateManyGenreInputEnvelope
+    set?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    disconnect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    delete?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    update?: AdventureUpdateWithWhereUniqueWithoutGenreInput | AdventureUpdateWithWhereUniqueWithoutGenreInput[]
+    updateMany?: AdventureUpdateManyWithWhereWithoutGenreInput | AdventureUpdateManyWithWhereWithoutGenreInput[]
+    deleteMany?: AdventureScalarWhereInput | AdventureScalarWhereInput[]
+  }
+
+  export type KeywordUncheckedUpdateManyWithoutGenreNestedInput = {
+    create?: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput> | KeywordCreateWithoutGenreInput[] | KeywordUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutGenreInput | KeywordCreateOrConnectWithoutGenreInput[]
+    upsert?: KeywordUpsertWithWhereUniqueWithoutGenreInput | KeywordUpsertWithWhereUniqueWithoutGenreInput[]
+    createMany?: KeywordCreateManyGenreInputEnvelope
+    set?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    disconnect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    delete?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
+    update?: KeywordUpdateWithWhereUniqueWithoutGenreInput | KeywordUpdateWithWhereUniqueWithoutGenreInput[]
+    updateMany?: KeywordUpdateManyWithWhereWithoutGenreInput | KeywordUpdateManyWithWhereWithoutGenreInput[]
+    deleteMany?: KeywordScalarWhereInput | KeywordScalarWhereInput[]
+  }
+
+  export type AdventureUncheckedUpdateManyWithoutGenreNestedInput = {
+    create?: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput> | AdventureCreateWithoutGenreInput[] | AdventureUncheckedCreateWithoutGenreInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutGenreInput | AdventureCreateOrConnectWithoutGenreInput[]
+    upsert?: AdventureUpsertWithWhereUniqueWithoutGenreInput | AdventureUpsertWithWhereUniqueWithoutGenreInput[]
+    createMany?: AdventureCreateManyGenreInputEnvelope
+    set?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    disconnect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    delete?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
+    update?: AdventureUpdateWithWhereUniqueWithoutGenreInput | AdventureUpdateWithWhereUniqueWithoutGenreInput[]
+    updateMany?: AdventureUpdateManyWithWhereWithoutGenreInput | AdventureUpdateManyWithWhereWithoutGenreInput[]
+    deleteMany?: AdventureScalarWhereInput | AdventureScalarWhereInput[]
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -67705,6 +71955,31 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type CreatureCreateWithoutSize_relationInput = {
@@ -72596,6 +76871,261 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
   }
 
+  export type GenreCreateWithoutAdventuresInput = {
+    id?: string
+    name: string
+    keywords?: KeywordCreateNestedManyWithoutGenreInput
+  }
+
+  export type GenreUncheckedCreateWithoutAdventuresInput = {
+    id?: string
+    name: string
+    keywords?: KeywordUncheckedCreateNestedManyWithoutGenreInput
+  }
+
+  export type GenreCreateOrConnectWithoutAdventuresInput = {
+    where: GenreWhereUniqueInput
+    create: XOR<GenreCreateWithoutAdventuresInput, GenreUncheckedCreateWithoutAdventuresInput>
+  }
+
+  export type KeywordCreateWithoutAdventuresInput = {
+    id?: string
+    name: string
+    genre: GenreCreateNestedOneWithoutKeywordsInput
+  }
+
+  export type KeywordUncheckedCreateWithoutAdventuresInput = {
+    id?: string
+    name: string
+    genre_id: string
+  }
+
+  export type KeywordCreateOrConnectWithoutAdventuresInput = {
+    where: KeywordWhereUniqueInput
+    create: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput>
+  }
+
+  export type GenreUpsertWithoutAdventuresInput = {
+    update: XOR<GenreUpdateWithoutAdventuresInput, GenreUncheckedUpdateWithoutAdventuresInput>
+    create: XOR<GenreCreateWithoutAdventuresInput, GenreUncheckedCreateWithoutAdventuresInput>
+    where?: GenreWhereInput
+  }
+
+  export type GenreUpdateToOneWithWhereWithoutAdventuresInput = {
+    where?: GenreWhereInput
+    data: XOR<GenreUpdateWithoutAdventuresInput, GenreUncheckedUpdateWithoutAdventuresInput>
+  }
+
+  export type GenreUpdateWithoutAdventuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    keywords?: KeywordUpdateManyWithoutGenreNestedInput
+  }
+
+  export type GenreUncheckedUpdateWithoutAdventuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    keywords?: KeywordUncheckedUpdateManyWithoutGenreNestedInput
+  }
+
+  export type KeywordUpsertWithWhereUniqueWithoutAdventuresInput = {
+    where: KeywordWhereUniqueInput
+    update: XOR<KeywordUpdateWithoutAdventuresInput, KeywordUncheckedUpdateWithoutAdventuresInput>
+    create: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput>
+  }
+
+  export type KeywordUpdateWithWhereUniqueWithoutAdventuresInput = {
+    where: KeywordWhereUniqueInput
+    data: XOR<KeywordUpdateWithoutAdventuresInput, KeywordUncheckedUpdateWithoutAdventuresInput>
+  }
+
+  export type KeywordUpdateManyWithWhereWithoutAdventuresInput = {
+    where: KeywordScalarWhereInput
+    data: XOR<KeywordUpdateManyMutationInput, KeywordUncheckedUpdateManyWithoutAdventuresInput>
+  }
+
+  export type KeywordScalarWhereInput = {
+    AND?: KeywordScalarWhereInput | KeywordScalarWhereInput[]
+    OR?: KeywordScalarWhereInput[]
+    NOT?: KeywordScalarWhereInput | KeywordScalarWhereInput[]
+    id?: StringFilter<"Keyword"> | string
+    name?: StringFilter<"Keyword"> | string
+    genre_id?: StringFilter<"Keyword"> | string
+  }
+
+  export type GenreCreateWithoutKeywordsInput = {
+    id?: string
+    name: string
+    adventures?: AdventureCreateNestedManyWithoutGenreInput
+  }
+
+  export type GenreUncheckedCreateWithoutKeywordsInput = {
+    id?: string
+    name: string
+    adventures?: AdventureUncheckedCreateNestedManyWithoutGenreInput
+  }
+
+  export type GenreCreateOrConnectWithoutKeywordsInput = {
+    where: GenreWhereUniqueInput
+    create: XOR<GenreCreateWithoutKeywordsInput, GenreUncheckedCreateWithoutKeywordsInput>
+  }
+
+  export type AdventureCreateWithoutKeywordsInput = {
+    id?: string
+    name: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    genre: GenreCreateNestedOneWithoutAdventuresInput
+  }
+
+  export type AdventureUncheckedCreateWithoutKeywordsInput = {
+    id?: string
+    name: string
+    genre_id: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type AdventureCreateOrConnectWithoutKeywordsInput = {
+    where: AdventureWhereUniqueInput
+    create: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput>
+  }
+
+  export type GenreUpsertWithoutKeywordsInput = {
+    update: XOR<GenreUpdateWithoutKeywordsInput, GenreUncheckedUpdateWithoutKeywordsInput>
+    create: XOR<GenreCreateWithoutKeywordsInput, GenreUncheckedCreateWithoutKeywordsInput>
+    where?: GenreWhereInput
+  }
+
+  export type GenreUpdateToOneWithWhereWithoutKeywordsInput = {
+    where?: GenreWhereInput
+    data: XOR<GenreUpdateWithoutKeywordsInput, GenreUncheckedUpdateWithoutKeywordsInput>
+  }
+
+  export type GenreUpdateWithoutKeywordsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    adventures?: AdventureUpdateManyWithoutGenreNestedInput
+  }
+
+  export type GenreUncheckedUpdateWithoutKeywordsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    adventures?: AdventureUncheckedUpdateManyWithoutGenreNestedInput
+  }
+
+  export type AdventureUpsertWithWhereUniqueWithoutKeywordsInput = {
+    where: AdventureWhereUniqueInput
+    update: XOR<AdventureUpdateWithoutKeywordsInput, AdventureUncheckedUpdateWithoutKeywordsInput>
+    create: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput>
+  }
+
+  export type AdventureUpdateWithWhereUniqueWithoutKeywordsInput = {
+    where: AdventureWhereUniqueInput
+    data: XOR<AdventureUpdateWithoutKeywordsInput, AdventureUncheckedUpdateWithoutKeywordsInput>
+  }
+
+  export type AdventureUpdateManyWithWhereWithoutKeywordsInput = {
+    where: AdventureScalarWhereInput
+    data: XOR<AdventureUpdateManyMutationInput, AdventureUncheckedUpdateManyWithoutKeywordsInput>
+  }
+
+  export type AdventureScalarWhereInput = {
+    AND?: AdventureScalarWhereInput | AdventureScalarWhereInput[]
+    OR?: AdventureScalarWhereInput[]
+    NOT?: AdventureScalarWhereInput | AdventureScalarWhereInput[]
+    id?: StringFilter<"Adventure"> | string
+    name?: StringFilter<"Adventure"> | string
+    genre_id?: StringFilter<"Adventure"> | string
+    creator_id?: StringFilter<"Adventure"> | string
+    created_at?: DateTimeFilter<"Adventure"> | Date | string
+    updated_at?: DateTimeFilter<"Adventure"> | Date | string
+  }
+
+  export type KeywordCreateWithoutGenreInput = {
+    id?: string
+    name: string
+    adventures?: AdventureCreateNestedManyWithoutKeywordsInput
+  }
+
+  export type KeywordUncheckedCreateWithoutGenreInput = {
+    id?: string
+    name: string
+    adventures?: AdventureUncheckedCreateNestedManyWithoutKeywordsInput
+  }
+
+  export type KeywordCreateOrConnectWithoutGenreInput = {
+    where: KeywordWhereUniqueInput
+    create: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput>
+  }
+
+  export type KeywordCreateManyGenreInputEnvelope = {
+    data: KeywordCreateManyGenreInput | KeywordCreateManyGenreInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AdventureCreateWithoutGenreInput = {
+    id?: string
+    name: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    keywords?: KeywordCreateNestedManyWithoutAdventuresInput
+  }
+
+  export type AdventureUncheckedCreateWithoutGenreInput = {
+    id?: string
+    name: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    keywords?: KeywordUncheckedCreateNestedManyWithoutAdventuresInput
+  }
+
+  export type AdventureCreateOrConnectWithoutGenreInput = {
+    where: AdventureWhereUniqueInput
+    create: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput>
+  }
+
+  export type AdventureCreateManyGenreInputEnvelope = {
+    data: AdventureCreateManyGenreInput | AdventureCreateManyGenreInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type KeywordUpsertWithWhereUniqueWithoutGenreInput = {
+    where: KeywordWhereUniqueInput
+    update: XOR<KeywordUpdateWithoutGenreInput, KeywordUncheckedUpdateWithoutGenreInput>
+    create: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput>
+  }
+
+  export type KeywordUpdateWithWhereUniqueWithoutGenreInput = {
+    where: KeywordWhereUniqueInput
+    data: XOR<KeywordUpdateWithoutGenreInput, KeywordUncheckedUpdateWithoutGenreInput>
+  }
+
+  export type KeywordUpdateManyWithWhereWithoutGenreInput = {
+    where: KeywordScalarWhereInput
+    data: XOR<KeywordUpdateManyMutationInput, KeywordUncheckedUpdateManyWithoutGenreInput>
+  }
+
+  export type AdventureUpsertWithWhereUniqueWithoutGenreInput = {
+    where: AdventureWhereUniqueInput
+    update: XOR<AdventureUpdateWithoutGenreInput, AdventureUncheckedUpdateWithoutGenreInput>
+    create: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput>
+  }
+
+  export type AdventureUpdateWithWhereUniqueWithoutGenreInput = {
+    where: AdventureWhereUniqueInput
+    data: XOR<AdventureUpdateWithoutGenreInput, AdventureUncheckedUpdateWithoutGenreInput>
+  }
+
+  export type AdventureUpdateManyWithWhereWithoutGenreInput = {
+    where: AdventureScalarWhereInput
+    data: XOR<AdventureUpdateManyMutationInput, AdventureUncheckedUpdateManyWithoutGenreInput>
+  }
+
   export type CreatureCreateManySize_relationInput = {
     id?: string
     name: string
@@ -73816,6 +78346,107 @@ export namespace Prisma {
     number?: IntFieldUpdateOperationsInput | number
     text?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type KeywordUpdateWithoutAdventuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre?: GenreUpdateOneRequiredWithoutKeywordsNestedInput
+  }
+
+  export type KeywordUncheckedUpdateWithoutAdventuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type KeywordUncheckedUpdateManyWithoutAdventuresInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AdventureUpdateWithoutKeywordsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    genre?: GenreUpdateOneRequiredWithoutAdventuresNestedInput
+  }
+
+  export type AdventureUncheckedUpdateWithoutKeywordsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdventureUncheckedUpdateManyWithoutKeywordsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KeywordCreateManyGenreInput = {
+    id?: string
+    name: string
+  }
+
+  export type AdventureCreateManyGenreInput = {
+    id?: string
+    name: string
+    creator_id: string
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type KeywordUpdateWithoutGenreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    adventures?: AdventureUpdateManyWithoutKeywordsNestedInput
+  }
+
+  export type KeywordUncheckedUpdateWithoutGenreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    adventures?: AdventureUncheckedUpdateManyWithoutKeywordsNestedInput
+  }
+
+  export type KeywordUncheckedUpdateManyWithoutGenreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AdventureUpdateWithoutGenreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    keywords?: KeywordUpdateManyWithoutAdventuresNestedInput
+  }
+
+  export type AdventureUncheckedUpdateWithoutGenreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    keywords?: KeywordUncheckedUpdateManyWithoutAdventuresNestedInput
+  }
+
+  export type AdventureUncheckedUpdateManyWithoutGenreInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
