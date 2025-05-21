@@ -124,7 +124,7 @@ exports.Prisma.SizeScalarFieldEnum = {
 
 exports.Prisma.SourceScalarFieldEnum = {
   id: 'id',
-  shortName: 'shortName',
+  short_name: 'short_name',
   name: 'name'
 };
 
@@ -441,6 +441,40 @@ exports.Prisma.GenreScalarFieldEnum = {
   name: 'name'
 };
 
+exports.Prisma.MagicItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  type_id: 'type_id',
+  rarity_id: 'rarity_id',
+  source_id: 'source_id'
+};
+
+exports.Prisma.MagicItemRarityScalarFieldEnum = {
+  id: 'id',
+  cost: 'cost',
+  name: 'name',
+  name_he: 'name_he',
+  name_she: 'name_she',
+  name_it: 'name_it'
+};
+
+exports.Prisma.MagicItemTypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  gender: 'gender'
+};
+
+exports.Prisma.AttunementConditionScalarFieldEnum = {
+  id: 'id',
+  label: 'label'
+};
+
+exports.Prisma.MagicItemAttunementScalarFieldEnum = {
+  magicItemId: 'magicItemId',
+  attunementId: 'attunementId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -455,7 +489,11 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.Gender = exports.$Enums.Gender = {
+  HE: 'HE',
+  SHE: 'SHE',
+  IT: 'IT'
+};
 
 exports.Prisma.ModelName = {
   Size: 'Size',
@@ -508,7 +546,12 @@ exports.Prisma.ModelName = {
   GPTMessage: 'GPTMessage',
   Adventure: 'Adventure',
   Keyword: 'Keyword',
-  Genre: 'Genre'
+  Genre: 'Genre',
+  MagicItem: 'MagicItem',
+  MagicItemRarity: 'MagicItemRarity',
+  MagicItemType: 'MagicItemType',
+  AttunementCondition: 'AttunementCondition',
+  MagicItemAttunement: 'MagicItemAttunement'
 };
 
 /**

@@ -268,6 +268,31 @@ export type Keyword = $Result.DefaultSelection<Prisma.$KeywordPayload>
  * 
  */
 export type Genre = $Result.DefaultSelection<Prisma.$GenrePayload>
+/**
+ * Model MagicItem
+ * 
+ */
+export type MagicItem = $Result.DefaultSelection<Prisma.$MagicItemPayload>
+/**
+ * Model MagicItemRarity
+ * 
+ */
+export type MagicItemRarity = $Result.DefaultSelection<Prisma.$MagicItemRarityPayload>
+/**
+ * Model MagicItemType
+ * 
+ */
+export type MagicItemType = $Result.DefaultSelection<Prisma.$MagicItemTypePayload>
+/**
+ * Model AttunementCondition
+ * 
+ */
+export type AttunementCondition = $Result.DefaultSelection<Prisma.$AttunementConditionPayload>
+/**
+ * Model MagicItemAttunement
+ * 
+ */
+export type MagicItemAttunement = $Result.DefaultSelection<Prisma.$MagicItemAttunementPayload>
 
 /**
  * Enums
@@ -284,11 +309,24 @@ export namespace $Enums {
 
 export type Stat = (typeof Stat)[keyof typeof Stat]
 
+
+export const Gender: {
+  HE: 'HE',
+  SHE: 'SHE',
+  IT: 'IT'
+};
+
+export type Gender = (typeof Gender)[keyof typeof Gender]
+
 }
 
 export type Stat = $Enums.Stat
 
 export const Stat: typeof $Enums.Stat
+
+export type Gender = $Enums.Gender
+
+export const Gender: typeof $Enums.Gender
 
 /**
  * ##  Prisma Client ʲˢ
@@ -924,6 +962,56 @@ export class PrismaClient<
     * ```
     */
   get genre(): Prisma.GenreDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.magicItem`: Exposes CRUD operations for the **MagicItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MagicItems
+    * const magicItems = await prisma.magicItem.findMany()
+    * ```
+    */
+  get magicItem(): Prisma.MagicItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.magicItemRarity`: Exposes CRUD operations for the **MagicItemRarity** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MagicItemRarities
+    * const magicItemRarities = await prisma.magicItemRarity.findMany()
+    * ```
+    */
+  get magicItemRarity(): Prisma.MagicItemRarityDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.magicItemType`: Exposes CRUD operations for the **MagicItemType** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MagicItemTypes
+    * const magicItemTypes = await prisma.magicItemType.findMany()
+    * ```
+    */
+  get magicItemType(): Prisma.MagicItemTypeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.attunementCondition`: Exposes CRUD operations for the **AttunementCondition** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AttunementConditions
+    * const attunementConditions = await prisma.attunementCondition.findMany()
+    * ```
+    */
+  get attunementCondition(): Prisma.AttunementConditionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.magicItemAttunement`: Exposes CRUD operations for the **MagicItemAttunement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MagicItemAttunements
+    * const magicItemAttunements = await prisma.magicItemAttunement.findMany()
+    * ```
+    */
+  get magicItemAttunement(): Prisma.MagicItemAttunementDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1414,7 +1502,12 @@ export namespace Prisma {
     GPTMessage: 'GPTMessage',
     Adventure: 'Adventure',
     Keyword: 'Keyword',
-    Genre: 'Genre'
+    Genre: 'Genre',
+    MagicItem: 'MagicItem',
+    MagicItemRarity: 'MagicItemRarity',
+    MagicItemType: 'MagicItemType',
+    AttunementCondition: 'AttunementCondition',
+    MagicItemAttunement: 'MagicItemAttunement'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1430,7 +1523,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "size" | "source" | "language" | "biome" | "type" | "alignment" | "speed_stat" | "creature_stats" | "strength_stat_details" | "dexterity_stat_details" | "constitution_stat_details" | "intelligence_stat_details" | "wisdom_stat_details" | "charisma_stat_details" | "skillsList" | "strengthBasedSkills" | "dexterityBasedSkills" | "intellengenceBasedSkills" | "wisdomBasedSkills" | "charismaBasedSkills" | "athleticsSkill" | "acrobaticsSkill" | "sleightOfHandSkill" | "stealthSkill" | "arcanaSkill" | "historySkill" | "investigationSkill" | "natureSkill" | "religionSkill" | "animalHandlingSkill" | "insightSkill" | "medicineSkill" | "perceptionSkill" | "survivalSkill" | "deceptionSkill" | "intimidationSkill" | "performanceSkill" | "persuasionSkill" | "creature" | "senses" | "action" | "trait" | "creatureRace" | "genrationRequest" | "damageType" | "challengeRating" | "gPTMessageHistory" | "gPTMessage" | "adventure" | "keyword" | "genre"
+      modelProps: "size" | "source" | "language" | "biome" | "type" | "alignment" | "speed_stat" | "creature_stats" | "strength_stat_details" | "dexterity_stat_details" | "constitution_stat_details" | "intelligence_stat_details" | "wisdom_stat_details" | "charisma_stat_details" | "skillsList" | "strengthBasedSkills" | "dexterityBasedSkills" | "intellengenceBasedSkills" | "wisdomBasedSkills" | "charismaBasedSkills" | "athleticsSkill" | "acrobaticsSkill" | "sleightOfHandSkill" | "stealthSkill" | "arcanaSkill" | "historySkill" | "investigationSkill" | "natureSkill" | "religionSkill" | "animalHandlingSkill" | "insightSkill" | "medicineSkill" | "perceptionSkill" | "survivalSkill" | "deceptionSkill" | "intimidationSkill" | "performanceSkill" | "persuasionSkill" | "creature" | "senses" | "action" | "trait" | "creatureRace" | "genrationRequest" | "damageType" | "challengeRating" | "gPTMessageHistory" | "gPTMessage" | "adventure" | "keyword" | "genre" | "magicItem" | "magicItemRarity" | "magicItemType" | "attunementCondition" | "magicItemAttunement"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -5208,6 +5301,376 @@ export namespace Prisma {
           }
         }
       }
+      MagicItem: {
+        payload: Prisma.$MagicItemPayload<ExtArgs>
+        fields: Prisma.MagicItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MagicItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MagicItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemPayload>
+          }
+          findFirst: {
+            args: Prisma.MagicItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MagicItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemPayload>
+          }
+          findMany: {
+            args: Prisma.MagicItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemPayload>[]
+          }
+          create: {
+            args: Prisma.MagicItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemPayload>
+          }
+          createMany: {
+            args: Prisma.MagicItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MagicItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemPayload>[]
+          }
+          delete: {
+            args: Prisma.MagicItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemPayload>
+          }
+          update: {
+            args: Prisma.MagicItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.MagicItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MagicItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MagicItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.MagicItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemPayload>
+          }
+          aggregate: {
+            args: Prisma.MagicItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMagicItem>
+          }
+          groupBy: {
+            args: Prisma.MagicItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MagicItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MagicItemCountArgs<ExtArgs>
+            result: $Utils.Optional<MagicItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      MagicItemRarity: {
+        payload: Prisma.$MagicItemRarityPayload<ExtArgs>
+        fields: Prisma.MagicItemRarityFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MagicItemRarityFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemRarityPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MagicItemRarityFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemRarityPayload>
+          }
+          findFirst: {
+            args: Prisma.MagicItemRarityFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemRarityPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MagicItemRarityFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemRarityPayload>
+          }
+          findMany: {
+            args: Prisma.MagicItemRarityFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemRarityPayload>[]
+          }
+          create: {
+            args: Prisma.MagicItemRarityCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemRarityPayload>
+          }
+          createMany: {
+            args: Prisma.MagicItemRarityCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MagicItemRarityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemRarityPayload>[]
+          }
+          delete: {
+            args: Prisma.MagicItemRarityDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemRarityPayload>
+          }
+          update: {
+            args: Prisma.MagicItemRarityUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemRarityPayload>
+          }
+          deleteMany: {
+            args: Prisma.MagicItemRarityDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MagicItemRarityUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MagicItemRarityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemRarityPayload>[]
+          }
+          upsert: {
+            args: Prisma.MagicItemRarityUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemRarityPayload>
+          }
+          aggregate: {
+            args: Prisma.MagicItemRarityAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMagicItemRarity>
+          }
+          groupBy: {
+            args: Prisma.MagicItemRarityGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MagicItemRarityGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MagicItemRarityCountArgs<ExtArgs>
+            result: $Utils.Optional<MagicItemRarityCountAggregateOutputType> | number
+          }
+        }
+      }
+      MagicItemType: {
+        payload: Prisma.$MagicItemTypePayload<ExtArgs>
+        fields: Prisma.MagicItemTypeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MagicItemTypeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemTypePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MagicItemTypeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemTypePayload>
+          }
+          findFirst: {
+            args: Prisma.MagicItemTypeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemTypePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MagicItemTypeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemTypePayload>
+          }
+          findMany: {
+            args: Prisma.MagicItemTypeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemTypePayload>[]
+          }
+          create: {
+            args: Prisma.MagicItemTypeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemTypePayload>
+          }
+          createMany: {
+            args: Prisma.MagicItemTypeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MagicItemTypeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemTypePayload>[]
+          }
+          delete: {
+            args: Prisma.MagicItemTypeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemTypePayload>
+          }
+          update: {
+            args: Prisma.MagicItemTypeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemTypePayload>
+          }
+          deleteMany: {
+            args: Prisma.MagicItemTypeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MagicItemTypeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MagicItemTypeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemTypePayload>[]
+          }
+          upsert: {
+            args: Prisma.MagicItemTypeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemTypePayload>
+          }
+          aggregate: {
+            args: Prisma.MagicItemTypeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMagicItemType>
+          }
+          groupBy: {
+            args: Prisma.MagicItemTypeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MagicItemTypeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MagicItemTypeCountArgs<ExtArgs>
+            result: $Utils.Optional<MagicItemTypeCountAggregateOutputType> | number
+          }
+        }
+      }
+      AttunementCondition: {
+        payload: Prisma.$AttunementConditionPayload<ExtArgs>
+        fields: Prisma.AttunementConditionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AttunementConditionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttunementConditionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AttunementConditionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttunementConditionPayload>
+          }
+          findFirst: {
+            args: Prisma.AttunementConditionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttunementConditionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AttunementConditionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttunementConditionPayload>
+          }
+          findMany: {
+            args: Prisma.AttunementConditionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttunementConditionPayload>[]
+          }
+          create: {
+            args: Prisma.AttunementConditionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttunementConditionPayload>
+          }
+          createMany: {
+            args: Prisma.AttunementConditionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AttunementConditionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttunementConditionPayload>[]
+          }
+          delete: {
+            args: Prisma.AttunementConditionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttunementConditionPayload>
+          }
+          update: {
+            args: Prisma.AttunementConditionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttunementConditionPayload>
+          }
+          deleteMany: {
+            args: Prisma.AttunementConditionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AttunementConditionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AttunementConditionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttunementConditionPayload>[]
+          }
+          upsert: {
+            args: Prisma.AttunementConditionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AttunementConditionPayload>
+          }
+          aggregate: {
+            args: Prisma.AttunementConditionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAttunementCondition>
+          }
+          groupBy: {
+            args: Prisma.AttunementConditionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AttunementConditionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AttunementConditionCountArgs<ExtArgs>
+            result: $Utils.Optional<AttunementConditionCountAggregateOutputType> | number
+          }
+        }
+      }
+      MagicItemAttunement: {
+        payload: Prisma.$MagicItemAttunementPayload<ExtArgs>
+        fields: Prisma.MagicItemAttunementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MagicItemAttunementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemAttunementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MagicItemAttunementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemAttunementPayload>
+          }
+          findFirst: {
+            args: Prisma.MagicItemAttunementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemAttunementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MagicItemAttunementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemAttunementPayload>
+          }
+          findMany: {
+            args: Prisma.MagicItemAttunementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemAttunementPayload>[]
+          }
+          create: {
+            args: Prisma.MagicItemAttunementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemAttunementPayload>
+          }
+          createMany: {
+            args: Prisma.MagicItemAttunementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MagicItemAttunementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemAttunementPayload>[]
+          }
+          delete: {
+            args: Prisma.MagicItemAttunementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemAttunementPayload>
+          }
+          update: {
+            args: Prisma.MagicItemAttunementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemAttunementPayload>
+          }
+          deleteMany: {
+            args: Prisma.MagicItemAttunementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MagicItemAttunementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MagicItemAttunementUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemAttunementPayload>[]
+          }
+          upsert: {
+            args: Prisma.MagicItemAttunementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MagicItemAttunementPayload>
+          }
+          aggregate: {
+            args: Prisma.MagicItemAttunementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMagicItemAttunement>
+          }
+          groupBy: {
+            args: Prisma.MagicItemAttunementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MagicItemAttunementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MagicItemAttunementCountArgs<ExtArgs>
+            result: $Utils.Optional<MagicItemAttunementCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -5343,6 +5806,11 @@ export namespace Prisma {
     adventure?: AdventureOmit
     keyword?: KeywordOmit
     genre?: GenreOmit
+    magicItem?: MagicItemOmit
+    magicItemRarity?: MagicItemRarityOmit
+    magicItemType?: MagicItemTypeOmit
+    attunementCondition?: AttunementConditionOmit
+    magicItemAttunement?: MagicItemAttunementOmit
   }
 
   /* Types for Logging */
@@ -5469,10 +5937,12 @@ export namespace Prisma {
 
   export type SourceCountOutputType = {
     creatures: number
+    magicItems: number
   }
 
   export type SourceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creatures?: boolean | SourceCountOutputTypeCountCreaturesArgs
+    magicItems?: boolean | SourceCountOutputTypeCountMagicItemsArgs
   }
 
   // Custom InputTypes
@@ -5491,6 +5961,13 @@ export namespace Prisma {
    */
   export type SourceCountOutputTypeCountCreaturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CreatureWhereInput
+  }
+
+  /**
+   * SourceCountOutputType without action
+   */
+  export type SourceCountOutputTypeCountMagicItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MagicItemWhereInput
   }
 
 
@@ -5917,11 +6394,11 @@ export namespace Prisma {
    */
 
   export type AdventureCountOutputType = {
-    keywords: number
+    keywords_relation: number
   }
 
   export type AdventureCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    keywords?: boolean | AdventureCountOutputTypeCountKeywordsArgs
+    keywords_relation?: boolean | AdventureCountOutputTypeCountKeywords_relationArgs
   }
 
   // Custom InputTypes
@@ -5938,7 +6415,7 @@ export namespace Prisma {
   /**
    * AdventureCountOutputType without action
    */
-  export type AdventureCountOutputTypeCountKeywordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type AdventureCountOutputTypeCountKeywords_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: KeywordWhereInput
   }
 
@@ -5948,11 +6425,11 @@ export namespace Prisma {
    */
 
   export type KeywordCountOutputType = {
-    adventures: number
+    adventures_relation: number
   }
 
   export type KeywordCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    adventures?: boolean | KeywordCountOutputTypeCountAdventuresArgs
+    adventures_relation?: boolean | KeywordCountOutputTypeCountAdventures_relationArgs
   }
 
   // Custom InputTypes
@@ -5969,7 +6446,7 @@ export namespace Prisma {
   /**
    * KeywordCountOutputType without action
    */
-  export type KeywordCountOutputTypeCountAdventuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type KeywordCountOutputTypeCountAdventures_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AdventureWhereInput
   }
 
@@ -5979,13 +6456,13 @@ export namespace Prisma {
    */
 
   export type GenreCountOutputType = {
-    keywords: number
-    adventures: number
+    keywords_relation: number
+    adventures_relation: number
   }
 
   export type GenreCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    keywords?: boolean | GenreCountOutputTypeCountKeywordsArgs
-    adventures?: boolean | GenreCountOutputTypeCountAdventuresArgs
+    keywords_relation?: boolean | GenreCountOutputTypeCountKeywords_relationArgs
+    adventures_relation?: boolean | GenreCountOutputTypeCountAdventures_relationArgs
   }
 
   // Custom InputTypes
@@ -6002,15 +6479,139 @@ export namespace Prisma {
   /**
    * GenreCountOutputType without action
    */
-  export type GenreCountOutputTypeCountKeywordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GenreCountOutputTypeCountKeywords_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: KeywordWhereInput
   }
 
   /**
    * GenreCountOutputType without action
    */
-  export type GenreCountOutputTypeCountAdventuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GenreCountOutputTypeCountAdventures_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AdventureWhereInput
+  }
+
+
+  /**
+   * Count Type MagicItemCountOutputType
+   */
+
+  export type MagicItemCountOutputType = {
+    attunements_relation: number
+  }
+
+  export type MagicItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    attunements_relation?: boolean | MagicItemCountOutputTypeCountAttunements_relationArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MagicItemCountOutputType without action
+   */
+  export type MagicItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemCountOutputType
+     */
+    select?: MagicItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MagicItemCountOutputType without action
+   */
+  export type MagicItemCountOutputTypeCountAttunements_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MagicItemAttunementWhereInput
+  }
+
+
+  /**
+   * Count Type MagicItemRarityCountOutputType
+   */
+
+  export type MagicItemRarityCountOutputType = {
+    magicItems: number
+  }
+
+  export type MagicItemRarityCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    magicItems?: boolean | MagicItemRarityCountOutputTypeCountMagicItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MagicItemRarityCountOutputType without action
+   */
+  export type MagicItemRarityCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarityCountOutputType
+     */
+    select?: MagicItemRarityCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MagicItemRarityCountOutputType without action
+   */
+  export type MagicItemRarityCountOutputTypeCountMagicItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MagicItemWhereInput
+  }
+
+
+  /**
+   * Count Type MagicItemTypeCountOutputType
+   */
+
+  export type MagicItemTypeCountOutputType = {
+    magicItems: number
+  }
+
+  export type MagicItemTypeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    magicItems?: boolean | MagicItemTypeCountOutputTypeCountMagicItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MagicItemTypeCountOutputType without action
+   */
+  export type MagicItemTypeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemTypeCountOutputType
+     */
+    select?: MagicItemTypeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MagicItemTypeCountOutputType without action
+   */
+  export type MagicItemTypeCountOutputTypeCountMagicItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MagicItemWhereInput
+  }
+
+
+  /**
+   * Count Type AttunementConditionCountOutputType
+   */
+
+  export type AttunementConditionCountOutputType = {
+    magicItems: number
+  }
+
+  export type AttunementConditionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    magicItems?: boolean | AttunementConditionCountOutputTypeCountMagicItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AttunementConditionCountOutputType without action
+   */
+  export type AttunementConditionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementConditionCountOutputType
+     */
+    select?: AttunementConditionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AttunementConditionCountOutputType without action
+   */
+  export type AttunementConditionCountOutputTypeCountMagicItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MagicItemAttunementWhereInput
   }
 
 
@@ -7071,19 +7672,19 @@ export namespace Prisma {
 
   export type SourceMinAggregateOutputType = {
     id: number | null
-    shortName: string | null
+    short_name: string | null
     name: string | null
   }
 
   export type SourceMaxAggregateOutputType = {
     id: number | null
-    shortName: string | null
+    short_name: string | null
     name: string | null
   }
 
   export type SourceCountAggregateOutputType = {
     id: number
-    shortName: number
+    short_name: number
     name: number
     _all: number
   }
@@ -7099,19 +7700,19 @@ export namespace Prisma {
 
   export type SourceMinAggregateInputType = {
     id?: true
-    shortName?: true
+    short_name?: true
     name?: true
   }
 
   export type SourceMaxAggregateInputType = {
     id?: true
-    shortName?: true
+    short_name?: true
     name?: true
   }
 
   export type SourceCountAggregateInputType = {
     id?: true
-    shortName?: true
+    short_name?: true
     name?: true
     _all?: true
   }
@@ -7204,7 +7805,7 @@ export namespace Prisma {
 
   export type SourceGroupByOutputType = {
     id: number
-    shortName: string
+    short_name: string
     name: string
     _count: SourceCountAggregateOutputType | null
     _avg: SourceAvgAggregateOutputType | null
@@ -7229,33 +7830,35 @@ export namespace Prisma {
 
   export type SourceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    shortName?: boolean
+    short_name?: boolean
     name?: boolean
     creatures?: boolean | Source$creaturesArgs<ExtArgs>
+    magicItems?: boolean | Source$magicItemsArgs<ExtArgs>
     _count?: boolean | SourceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["source"]>
 
   export type SourceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    shortName?: boolean
+    short_name?: boolean
     name?: boolean
   }, ExtArgs["result"]["source"]>
 
   export type SourceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    shortName?: boolean
+    short_name?: boolean
     name?: boolean
   }, ExtArgs["result"]["source"]>
 
   export type SourceSelectScalar = {
     id?: boolean
-    shortName?: boolean
+    short_name?: boolean
     name?: boolean
   }
 
-  export type SourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "shortName" | "name", ExtArgs["result"]["source"]>
+  export type SourceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "short_name" | "name", ExtArgs["result"]["source"]>
   export type SourceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creatures?: boolean | Source$creaturesArgs<ExtArgs>
+    magicItems?: boolean | Source$magicItemsArgs<ExtArgs>
     _count?: boolean | SourceCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SourceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -7265,10 +7868,11 @@ export namespace Prisma {
     name: "Source"
     objects: {
       creatures: Prisma.$CreaturePayload<ExtArgs>[]
+      magicItems: Prisma.$MagicItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      shortName: string
+      short_name: string
       name: string
     }, ExtArgs["result"]["source"]>
     composites: {}
@@ -7665,6 +8269,7 @@ export namespace Prisma {
   export interface Prisma__SourceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     creatures<T extends Source$creaturesArgs<ExtArgs> = {}>(args?: Subset<T, Source$creaturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    magicItems<T extends Source$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, Source$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7695,7 +8300,7 @@ export namespace Prisma {
    */ 
   interface SourceFieldRefs {
     readonly id: FieldRef<"Source", 'Int'>
-    readonly shortName: FieldRef<"Source", 'String'>
+    readonly short_name: FieldRef<"Source", 'String'>
     readonly name: FieldRef<"Source", 'String'>
   }
     
@@ -8106,6 +8711,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: CreatureScalarFieldEnum | CreatureScalarFieldEnum[]
+  }
+
+  /**
+   * Source.magicItems
+   */
+  export type Source$magicItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    where?: MagicItemWhereInput
+    orderBy?: MagicItemOrderByWithRelationInput | MagicItemOrderByWithRelationInput[]
+    cursor?: MagicItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MagicItemScalarFieldEnum | MagicItemScalarFieldEnum[]
   }
 
   /**
@@ -58482,8 +59111,8 @@ export namespace Prisma {
     creator_id?: boolean
     created_at?: boolean
     updated_at?: boolean
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
-    keywords?: boolean | Adventure$keywordsArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
+    keywords_relation?: boolean | Adventure$keywords_relationArgs<ExtArgs>
     _count?: boolean | AdventureCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["adventure"]>
 
@@ -58494,7 +59123,7 @@ export namespace Prisma {
     creator_id?: boolean
     created_at?: boolean
     updated_at?: boolean
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["adventure"]>
 
   export type AdventureSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -58504,7 +59133,7 @@ export namespace Prisma {
     creator_id?: boolean
     created_at?: boolean
     updated_at?: boolean
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["adventure"]>
 
   export type AdventureSelectScalar = {
@@ -58518,22 +59147,22 @@ export namespace Prisma {
 
   export type AdventureOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "genre_id" | "creator_id" | "created_at" | "updated_at", ExtArgs["result"]["adventure"]>
   export type AdventureInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
-    keywords?: boolean | Adventure$keywordsArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
+    keywords_relation?: boolean | Adventure$keywords_relationArgs<ExtArgs>
     _count?: boolean | AdventureCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AdventureIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
   }
   export type AdventureIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
   }
 
   export type $AdventurePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Adventure"
     objects: {
-      genre: Prisma.$GenrePayload<ExtArgs>
-      keywords: Prisma.$KeywordPayload<ExtArgs>[]
+      genre_relation: Prisma.$GenrePayload<ExtArgs>
+      keywords_relation: Prisma.$KeywordPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -58936,8 +59565,8 @@ export namespace Prisma {
    */
   export interface Prisma__AdventureClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    genre<T extends GenreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GenreDefaultArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    keywords<T extends Adventure$keywordsArgs<ExtArgs> = {}>(args?: Subset<T, Adventure$keywordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    genre_relation<T extends GenreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GenreDefaultArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    keywords_relation<T extends Adventure$keywords_relationArgs<ExtArgs> = {}>(args?: Subset<T, Adventure$keywords_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -59369,9 +59998,9 @@ export namespace Prisma {
   }
 
   /**
-   * Adventure.keywords
+   * Adventure.keywords_relation
    */
-  export type Adventure$keywordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Adventure$keywords_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Keyword
      */
@@ -59559,8 +60188,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     genre_id?: boolean
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
-    adventures?: boolean | Keyword$adventuresArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
+    adventures_relation?: boolean | Keyword$adventures_relationArgs<ExtArgs>
     _count?: boolean | KeywordCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["keyword"]>
 
@@ -59568,14 +60197,14 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     genre_id?: boolean
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["keyword"]>
 
   export type KeywordSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     genre_id?: boolean
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["keyword"]>
 
   export type KeywordSelectScalar = {
@@ -59586,22 +60215,22 @@ export namespace Prisma {
 
   export type KeywordOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "genre_id", ExtArgs["result"]["keyword"]>
   export type KeywordInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
-    adventures?: boolean | Keyword$adventuresArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
+    adventures_relation?: boolean | Keyword$adventures_relationArgs<ExtArgs>
     _count?: boolean | KeywordCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type KeywordIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
   }
   export type KeywordIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    genre?: boolean | GenreDefaultArgs<ExtArgs>
+    genre_relation?: boolean | GenreDefaultArgs<ExtArgs>
   }
 
   export type $KeywordPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Keyword"
     objects: {
-      genre: Prisma.$GenrePayload<ExtArgs>
-      adventures: Prisma.$AdventurePayload<ExtArgs>[]
+      genre_relation: Prisma.$GenrePayload<ExtArgs>
+      adventures_relation: Prisma.$AdventurePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -60001,8 +60630,8 @@ export namespace Prisma {
    */
   export interface Prisma__KeywordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    genre<T extends GenreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GenreDefaultArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    adventures<T extends Keyword$adventuresArgs<ExtArgs> = {}>(args?: Subset<T, Keyword$adventuresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    genre_relation<T extends GenreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GenreDefaultArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    adventures_relation<T extends Keyword$adventures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Keyword$adventures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -60431,9 +61060,9 @@ export namespace Prisma {
   }
 
   /**
-   * Keyword.adventures
+   * Keyword.adventures_relation
    */
-  export type Keyword$adventuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Keyword$adventures_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Adventure
      */
@@ -60613,8 +61242,8 @@ export namespace Prisma {
   export type GenreSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    keywords?: boolean | Genre$keywordsArgs<ExtArgs>
-    adventures?: boolean | Genre$adventuresArgs<ExtArgs>
+    keywords_relation?: boolean | Genre$keywords_relationArgs<ExtArgs>
+    adventures_relation?: boolean | Genre$adventures_relationArgs<ExtArgs>
     _count?: boolean | GenreCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["genre"]>
 
@@ -60635,8 +61264,8 @@ export namespace Prisma {
 
   export type GenreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["genre"]>
   export type GenreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    keywords?: boolean | Genre$keywordsArgs<ExtArgs>
-    adventures?: boolean | Genre$adventuresArgs<ExtArgs>
+    keywords_relation?: boolean | Genre$keywords_relationArgs<ExtArgs>
+    adventures_relation?: boolean | Genre$adventures_relationArgs<ExtArgs>
     _count?: boolean | GenreCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type GenreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -60645,8 +61274,8 @@ export namespace Prisma {
   export type $GenrePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Genre"
     objects: {
-      keywords: Prisma.$KeywordPayload<ExtArgs>[]
-      adventures: Prisma.$AdventurePayload<ExtArgs>[]
+      keywords_relation: Prisma.$KeywordPayload<ExtArgs>[]
+      adventures_relation: Prisma.$AdventurePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -61045,8 +61674,8 @@ export namespace Prisma {
    */
   export interface Prisma__GenreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    keywords<T extends Genre$keywordsArgs<ExtArgs> = {}>(args?: Subset<T, Genre$keywordsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    adventures<T extends Genre$adventuresArgs<ExtArgs> = {}>(args?: Subset<T, Genre$adventuresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    keywords_relation<T extends Genre$keywords_relationArgs<ExtArgs> = {}>(args?: Subset<T, Genre$keywords_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    adventures_relation<T extends Genre$adventures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Genre$adventures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -61466,9 +62095,9 @@ export namespace Prisma {
   }
 
   /**
-   * Genre.keywords
+   * Genre.keywords_relation
    */
-  export type Genre$keywordsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Genre$keywords_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Keyword
      */
@@ -61490,9 +62119,9 @@ export namespace Prisma {
   }
 
   /**
-   * Genre.adventures
+   * Genre.adventures_relation
    */
-  export type Genre$adventuresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Genre$adventures_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Adventure
      */
@@ -61533,6 +62162,5342 @@ export namespace Prisma {
 
 
   /**
+   * Model MagicItem
+   */
+
+  export type AggregateMagicItem = {
+    _count: MagicItemCountAggregateOutputType | null
+    _avg: MagicItemAvgAggregateOutputType | null
+    _sum: MagicItemSumAggregateOutputType | null
+    _min: MagicItemMinAggregateOutputType | null
+    _max: MagicItemMaxAggregateOutputType | null
+  }
+
+  export type MagicItemAvgAggregateOutputType = {
+    source_id: number | null
+  }
+
+  export type MagicItemSumAggregateOutputType = {
+    source_id: number | null
+  }
+
+  export type MagicItemMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    type_id: string | null
+    rarity_id: string | null
+    source_id: number | null
+  }
+
+  export type MagicItemMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    description: string | null
+    type_id: string | null
+    rarity_id: string | null
+    source_id: number | null
+  }
+
+  export type MagicItemCountAggregateOutputType = {
+    id: number
+    name: number
+    description: number
+    type_id: number
+    rarity_id: number
+    source_id: number
+    _all: number
+  }
+
+
+  export type MagicItemAvgAggregateInputType = {
+    source_id?: true
+  }
+
+  export type MagicItemSumAggregateInputType = {
+    source_id?: true
+  }
+
+  export type MagicItemMinAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    type_id?: true
+    rarity_id?: true
+    source_id?: true
+  }
+
+  export type MagicItemMaxAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    type_id?: true
+    rarity_id?: true
+    source_id?: true
+  }
+
+  export type MagicItemCountAggregateInputType = {
+    id?: true
+    name?: true
+    description?: true
+    type_id?: true
+    rarity_id?: true
+    source_id?: true
+    _all?: true
+  }
+
+  export type MagicItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MagicItem to aggregate.
+     */
+    where?: MagicItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItems to fetch.
+     */
+    orderBy?: MagicItemOrderByWithRelationInput | MagicItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MagicItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MagicItems
+    **/
+    _count?: true | MagicItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MagicItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MagicItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MagicItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MagicItemMaxAggregateInputType
+  }
+
+  export type GetMagicItemAggregateType<T extends MagicItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateMagicItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMagicItem[P]>
+      : GetScalarType<T[P], AggregateMagicItem[P]>
+  }
+
+
+
+
+  export type MagicItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MagicItemWhereInput
+    orderBy?: MagicItemOrderByWithAggregationInput | MagicItemOrderByWithAggregationInput[]
+    by: MagicItemScalarFieldEnum[] | MagicItemScalarFieldEnum
+    having?: MagicItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MagicItemCountAggregateInputType | true
+    _avg?: MagicItemAvgAggregateInputType
+    _sum?: MagicItemSumAggregateInputType
+    _min?: MagicItemMinAggregateInputType
+    _max?: MagicItemMaxAggregateInputType
+  }
+
+  export type MagicItemGroupByOutputType = {
+    id: string
+    name: string
+    description: string
+    type_id: string
+    rarity_id: string
+    source_id: number
+    _count: MagicItemCountAggregateOutputType | null
+    _avg: MagicItemAvgAggregateOutputType | null
+    _sum: MagicItemSumAggregateOutputType | null
+    _min: MagicItemMinAggregateOutputType | null
+    _max: MagicItemMaxAggregateOutputType | null
+  }
+
+  type GetMagicItemGroupByPayload<T extends MagicItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MagicItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MagicItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MagicItemGroupByOutputType[P]>
+            : GetScalarType<T[P], MagicItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MagicItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    type_id?: boolean
+    rarity_id?: boolean
+    source_id?: boolean
+    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
+    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+    attunements_relation?: boolean | MagicItem$attunements_relationArgs<ExtArgs>
+    _count?: boolean | MagicItemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["magicItem"]>
+
+  export type MagicItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    type_id?: boolean
+    rarity_id?: boolean
+    source_id?: boolean
+    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
+    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["magicItem"]>
+
+  export type MagicItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    type_id?: boolean
+    rarity_id?: boolean
+    source_id?: boolean
+    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
+    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["magicItem"]>
+
+  export type MagicItemSelectScalar = {
+    id?: boolean
+    name?: boolean
+    description?: boolean
+    type_id?: boolean
+    rarity_id?: boolean
+    source_id?: boolean
+  }
+
+  export type MagicItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "type_id" | "rarity_id" | "source_id", ExtArgs["result"]["magicItem"]>
+  export type MagicItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
+    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+    attunements_relation?: boolean | MagicItem$attunements_relationArgs<ExtArgs>
+    _count?: boolean | MagicItemCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MagicItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
+    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+  }
+  export type MagicItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
+    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+  }
+
+  export type $MagicItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MagicItem"
+    objects: {
+      type_relation: Prisma.$MagicItemTypePayload<ExtArgs>
+      rarity_relation: Prisma.$MagicItemRarityPayload<ExtArgs>
+      source_relation: Prisma.$SourcePayload<ExtArgs>
+      attunements_relation: Prisma.$MagicItemAttunementPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      description: string
+      type_id: string
+      rarity_id: string
+      source_id: number
+    }, ExtArgs["result"]["magicItem"]>
+    composites: {}
+  }
+
+  type MagicItemGetPayload<S extends boolean | null | undefined | MagicItemDefaultArgs> = $Result.GetResult<Prisma.$MagicItemPayload, S>
+
+  type MagicItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MagicItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MagicItemCountAggregateInputType | true
+    }
+
+  export interface MagicItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MagicItem'], meta: { name: 'MagicItem' } }
+    /**
+     * Find zero or one MagicItem that matches the filter.
+     * @param {MagicItemFindUniqueArgs} args - Arguments to find a MagicItem
+     * @example
+     * // Get one MagicItem
+     * const magicItem = await prisma.magicItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MagicItemFindUniqueArgs>(args: SelectSubset<T, MagicItemFindUniqueArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one MagicItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MagicItemFindUniqueOrThrowArgs} args - Arguments to find a MagicItem
+     * @example
+     * // Get one MagicItem
+     * const magicItem = await prisma.magicItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MagicItemFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MagicItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemFindFirstArgs} args - Arguments to find a MagicItem
+     * @example
+     * // Get one MagicItem
+     * const magicItem = await prisma.magicItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MagicItemFindFirstArgs>(args?: SelectSubset<T, MagicItemFindFirstArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MagicItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemFindFirstOrThrowArgs} args - Arguments to find a MagicItem
+     * @example
+     * // Get one MagicItem
+     * const magicItem = await prisma.magicItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MagicItemFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more MagicItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MagicItems
+     * const magicItems = await prisma.magicItem.findMany()
+     * 
+     * // Get first 10 MagicItems
+     * const magicItems = await prisma.magicItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const magicItemWithIdOnly = await prisma.magicItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MagicItemFindManyArgs>(args?: SelectSubset<T, MagicItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a MagicItem.
+     * @param {MagicItemCreateArgs} args - Arguments to create a MagicItem.
+     * @example
+     * // Create one MagicItem
+     * const MagicItem = await prisma.magicItem.create({
+     *   data: {
+     *     // ... data to create a MagicItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends MagicItemCreateArgs>(args: SelectSubset<T, MagicItemCreateArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many MagicItems.
+     * @param {MagicItemCreateManyArgs} args - Arguments to create many MagicItems.
+     * @example
+     * // Create many MagicItems
+     * const magicItem = await prisma.magicItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MagicItemCreateManyArgs>(args?: SelectSubset<T, MagicItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MagicItems and returns the data saved in the database.
+     * @param {MagicItemCreateManyAndReturnArgs} args - Arguments to create many MagicItems.
+     * @example
+     * // Create many MagicItems
+     * const magicItem = await prisma.magicItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MagicItems and only return the `id`
+     * const magicItemWithIdOnly = await prisma.magicItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MagicItemCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a MagicItem.
+     * @param {MagicItemDeleteArgs} args - Arguments to delete one MagicItem.
+     * @example
+     * // Delete one MagicItem
+     * const MagicItem = await prisma.magicItem.delete({
+     *   where: {
+     *     // ... filter to delete one MagicItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MagicItemDeleteArgs>(args: SelectSubset<T, MagicItemDeleteArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one MagicItem.
+     * @param {MagicItemUpdateArgs} args - Arguments to update one MagicItem.
+     * @example
+     * // Update one MagicItem
+     * const magicItem = await prisma.magicItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MagicItemUpdateArgs>(args: SelectSubset<T, MagicItemUpdateArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more MagicItems.
+     * @param {MagicItemDeleteManyArgs} args - Arguments to filter MagicItems to delete.
+     * @example
+     * // Delete a few MagicItems
+     * const { count } = await prisma.magicItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MagicItemDeleteManyArgs>(args?: SelectSubset<T, MagicItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MagicItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MagicItems
+     * const magicItem = await prisma.magicItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MagicItemUpdateManyArgs>(args: SelectSubset<T, MagicItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MagicItems and returns the data updated in the database.
+     * @param {MagicItemUpdateManyAndReturnArgs} args - Arguments to update many MagicItems.
+     * @example
+     * // Update many MagicItems
+     * const magicItem = await prisma.magicItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MagicItems and only return the `id`
+     * const magicItemWithIdOnly = await prisma.magicItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MagicItemUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one MagicItem.
+     * @param {MagicItemUpsertArgs} args - Arguments to update or create a MagicItem.
+     * @example
+     * // Update or create a MagicItem
+     * const magicItem = await prisma.magicItem.upsert({
+     *   create: {
+     *     // ... data to create a MagicItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MagicItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MagicItemUpsertArgs>(args: SelectSubset<T, MagicItemUpsertArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of MagicItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemCountArgs} args - Arguments to filter MagicItems to count.
+     * @example
+     * // Count the number of MagicItems
+     * const count = await prisma.magicItem.count({
+     *   where: {
+     *     // ... the filter for the MagicItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends MagicItemCountArgs>(
+      args?: Subset<T, MagicItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MagicItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MagicItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MagicItemAggregateArgs>(args: Subset<T, MagicItemAggregateArgs>): Prisma.PrismaPromise<GetMagicItemAggregateType<T>>
+
+    /**
+     * Group by MagicItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MagicItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MagicItemGroupByArgs['orderBy'] }
+        : { orderBy?: MagicItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MagicItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMagicItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MagicItem model
+   */
+  readonly fields: MagicItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MagicItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MagicItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    type_relation<T extends MagicItemTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemTypeDefaultArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    rarity_relation<T extends MagicItemRarityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemRarityDefaultArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    source_relation<T extends SourceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SourceDefaultArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    attunements_relation<T extends MagicItem$attunements_relationArgs<ExtArgs> = {}>(args?: Subset<T, MagicItem$attunements_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MagicItem model
+   */ 
+  interface MagicItemFieldRefs {
+    readonly id: FieldRef<"MagicItem", 'String'>
+    readonly name: FieldRef<"MagicItem", 'String'>
+    readonly description: FieldRef<"MagicItem", 'String'>
+    readonly type_id: FieldRef<"MagicItem", 'String'>
+    readonly rarity_id: FieldRef<"MagicItem", 'String'>
+    readonly source_id: FieldRef<"MagicItem", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MagicItem findUnique
+   */
+  export type MagicItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItem to fetch.
+     */
+    where: MagicItemWhereUniqueInput
+  }
+
+  /**
+   * MagicItem findUniqueOrThrow
+   */
+  export type MagicItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItem to fetch.
+     */
+    where: MagicItemWhereUniqueInput
+  }
+
+  /**
+   * MagicItem findFirst
+   */
+  export type MagicItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItem to fetch.
+     */
+    where?: MagicItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItems to fetch.
+     */
+    orderBy?: MagicItemOrderByWithRelationInput | MagicItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MagicItems.
+     */
+    cursor?: MagicItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MagicItems.
+     */
+    distinct?: MagicItemScalarFieldEnum | MagicItemScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItem findFirstOrThrow
+   */
+  export type MagicItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItem to fetch.
+     */
+    where?: MagicItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItems to fetch.
+     */
+    orderBy?: MagicItemOrderByWithRelationInput | MagicItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MagicItems.
+     */
+    cursor?: MagicItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MagicItems.
+     */
+    distinct?: MagicItemScalarFieldEnum | MagicItemScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItem findMany
+   */
+  export type MagicItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItems to fetch.
+     */
+    where?: MagicItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItems to fetch.
+     */
+    orderBy?: MagicItemOrderByWithRelationInput | MagicItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MagicItems.
+     */
+    cursor?: MagicItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItems.
+     */
+    skip?: number
+    distinct?: MagicItemScalarFieldEnum | MagicItemScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItem create
+   */
+  export type MagicItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MagicItem.
+     */
+    data: XOR<MagicItemCreateInput, MagicItemUncheckedCreateInput>
+  }
+
+  /**
+   * MagicItem createMany
+   */
+  export type MagicItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MagicItems.
+     */
+    data: MagicItemCreateManyInput | MagicItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MagicItem createManyAndReturn
+   */
+  export type MagicItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many MagicItems.
+     */
+    data: MagicItemCreateManyInput | MagicItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MagicItem update
+   */
+  export type MagicItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MagicItem.
+     */
+    data: XOR<MagicItemUpdateInput, MagicItemUncheckedUpdateInput>
+    /**
+     * Choose, which MagicItem to update.
+     */
+    where: MagicItemWhereUniqueInput
+  }
+
+  /**
+   * MagicItem updateMany
+   */
+  export type MagicItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MagicItems.
+     */
+    data: XOR<MagicItemUpdateManyMutationInput, MagicItemUncheckedUpdateManyInput>
+    /**
+     * Filter which MagicItems to update
+     */
+    where?: MagicItemWhereInput
+    /**
+     * Limit how many MagicItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MagicItem updateManyAndReturn
+   */
+  export type MagicItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * The data used to update MagicItems.
+     */
+    data: XOR<MagicItemUpdateManyMutationInput, MagicItemUncheckedUpdateManyInput>
+    /**
+     * Filter which MagicItems to update
+     */
+    where?: MagicItemWhereInput
+    /**
+     * Limit how many MagicItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MagicItem upsert
+   */
+  export type MagicItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MagicItem to update in case it exists.
+     */
+    where: MagicItemWhereUniqueInput
+    /**
+     * In case the MagicItem found by the `where` argument doesn't exist, create a new MagicItem with this data.
+     */
+    create: XOR<MagicItemCreateInput, MagicItemUncheckedCreateInput>
+    /**
+     * In case the MagicItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MagicItemUpdateInput, MagicItemUncheckedUpdateInput>
+  }
+
+  /**
+   * MagicItem delete
+   */
+  export type MagicItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    /**
+     * Filter which MagicItem to delete.
+     */
+    where: MagicItemWhereUniqueInput
+  }
+
+  /**
+   * MagicItem deleteMany
+   */
+  export type MagicItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MagicItems to delete
+     */
+    where?: MagicItemWhereInput
+    /**
+     * Limit how many MagicItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MagicItem.attunements_relation
+   */
+  export type MagicItem$attunements_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+    where?: MagicItemAttunementWhereInput
+    orderBy?: MagicItemAttunementOrderByWithRelationInput | MagicItemAttunementOrderByWithRelationInput[]
+    cursor?: MagicItemAttunementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MagicItemAttunementScalarFieldEnum | MagicItemAttunementScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItem without action
+   */
+  export type MagicItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MagicItemRarity
+   */
+
+  export type AggregateMagicItemRarity = {
+    _count: MagicItemRarityCountAggregateOutputType | null
+    _min: MagicItemRarityMinAggregateOutputType | null
+    _max: MagicItemRarityMaxAggregateOutputType | null
+  }
+
+  export type MagicItemRarityMinAggregateOutputType = {
+    id: string | null
+    cost: string | null
+    name: string | null
+    name_he: string | null
+    name_she: string | null
+    name_it: string | null
+  }
+
+  export type MagicItemRarityMaxAggregateOutputType = {
+    id: string | null
+    cost: string | null
+    name: string | null
+    name_he: string | null
+    name_she: string | null
+    name_it: string | null
+  }
+
+  export type MagicItemRarityCountAggregateOutputType = {
+    id: number
+    cost: number
+    name: number
+    name_he: number
+    name_she: number
+    name_it: number
+    _all: number
+  }
+
+
+  export type MagicItemRarityMinAggregateInputType = {
+    id?: true
+    cost?: true
+    name?: true
+    name_he?: true
+    name_she?: true
+    name_it?: true
+  }
+
+  export type MagicItemRarityMaxAggregateInputType = {
+    id?: true
+    cost?: true
+    name?: true
+    name_he?: true
+    name_she?: true
+    name_it?: true
+  }
+
+  export type MagicItemRarityCountAggregateInputType = {
+    id?: true
+    cost?: true
+    name?: true
+    name_he?: true
+    name_she?: true
+    name_it?: true
+    _all?: true
+  }
+
+  export type MagicItemRarityAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MagicItemRarity to aggregate.
+     */
+    where?: MagicItemRarityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemRarities to fetch.
+     */
+    orderBy?: MagicItemRarityOrderByWithRelationInput | MagicItemRarityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MagicItemRarityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemRarities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemRarities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MagicItemRarities
+    **/
+    _count?: true | MagicItemRarityCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MagicItemRarityMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MagicItemRarityMaxAggregateInputType
+  }
+
+  export type GetMagicItemRarityAggregateType<T extends MagicItemRarityAggregateArgs> = {
+        [P in keyof T & keyof AggregateMagicItemRarity]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMagicItemRarity[P]>
+      : GetScalarType<T[P], AggregateMagicItemRarity[P]>
+  }
+
+
+
+
+  export type MagicItemRarityGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MagicItemRarityWhereInput
+    orderBy?: MagicItemRarityOrderByWithAggregationInput | MagicItemRarityOrderByWithAggregationInput[]
+    by: MagicItemRarityScalarFieldEnum[] | MagicItemRarityScalarFieldEnum
+    having?: MagicItemRarityScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MagicItemRarityCountAggregateInputType | true
+    _min?: MagicItemRarityMinAggregateInputType
+    _max?: MagicItemRarityMaxAggregateInputType
+  }
+
+  export type MagicItemRarityGroupByOutputType = {
+    id: string
+    cost: string
+    name: string
+    name_he: string
+    name_she: string
+    name_it: string
+    _count: MagicItemRarityCountAggregateOutputType | null
+    _min: MagicItemRarityMinAggregateOutputType | null
+    _max: MagicItemRarityMaxAggregateOutputType | null
+  }
+
+  type GetMagicItemRarityGroupByPayload<T extends MagicItemRarityGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MagicItemRarityGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MagicItemRarityGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MagicItemRarityGroupByOutputType[P]>
+            : GetScalarType<T[P], MagicItemRarityGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MagicItemRaritySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    cost?: boolean
+    name?: boolean
+    name_he?: boolean
+    name_she?: boolean
+    name_it?: boolean
+    magicItems?: boolean | MagicItemRarity$magicItemsArgs<ExtArgs>
+    _count?: boolean | MagicItemRarityCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["magicItemRarity"]>
+
+  export type MagicItemRaritySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    cost?: boolean
+    name?: boolean
+    name_he?: boolean
+    name_she?: boolean
+    name_it?: boolean
+  }, ExtArgs["result"]["magicItemRarity"]>
+
+  export type MagicItemRaritySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    cost?: boolean
+    name?: boolean
+    name_he?: boolean
+    name_she?: boolean
+    name_it?: boolean
+  }, ExtArgs["result"]["magicItemRarity"]>
+
+  export type MagicItemRaritySelectScalar = {
+    id?: boolean
+    cost?: boolean
+    name?: boolean
+    name_he?: boolean
+    name_she?: boolean
+    name_it?: boolean
+  }
+
+  export type MagicItemRarityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cost" | "name" | "name_he" | "name_she" | "name_it", ExtArgs["result"]["magicItemRarity"]>
+  export type MagicItemRarityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    magicItems?: boolean | MagicItemRarity$magicItemsArgs<ExtArgs>
+    _count?: boolean | MagicItemRarityCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MagicItemRarityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type MagicItemRarityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $MagicItemRarityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MagicItemRarity"
+    objects: {
+      magicItems: Prisma.$MagicItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      cost: string
+      name: string
+      name_he: string
+      name_she: string
+      name_it: string
+    }, ExtArgs["result"]["magicItemRarity"]>
+    composites: {}
+  }
+
+  type MagicItemRarityGetPayload<S extends boolean | null | undefined | MagicItemRarityDefaultArgs> = $Result.GetResult<Prisma.$MagicItemRarityPayload, S>
+
+  type MagicItemRarityCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MagicItemRarityFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MagicItemRarityCountAggregateInputType | true
+    }
+
+  export interface MagicItemRarityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MagicItemRarity'], meta: { name: 'MagicItemRarity' } }
+    /**
+     * Find zero or one MagicItemRarity that matches the filter.
+     * @param {MagicItemRarityFindUniqueArgs} args - Arguments to find a MagicItemRarity
+     * @example
+     * // Get one MagicItemRarity
+     * const magicItemRarity = await prisma.magicItemRarity.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MagicItemRarityFindUniqueArgs>(args: SelectSubset<T, MagicItemRarityFindUniqueArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one MagicItemRarity that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MagicItemRarityFindUniqueOrThrowArgs} args - Arguments to find a MagicItemRarity
+     * @example
+     * // Get one MagicItemRarity
+     * const magicItemRarity = await prisma.magicItemRarity.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MagicItemRarityFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemRarityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MagicItemRarity that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemRarityFindFirstArgs} args - Arguments to find a MagicItemRarity
+     * @example
+     * // Get one MagicItemRarity
+     * const magicItemRarity = await prisma.magicItemRarity.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MagicItemRarityFindFirstArgs>(args?: SelectSubset<T, MagicItemRarityFindFirstArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MagicItemRarity that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemRarityFindFirstOrThrowArgs} args - Arguments to find a MagicItemRarity
+     * @example
+     * // Get one MagicItemRarity
+     * const magicItemRarity = await prisma.magicItemRarity.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MagicItemRarityFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemRarityFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more MagicItemRarities that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemRarityFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MagicItemRarities
+     * const magicItemRarities = await prisma.magicItemRarity.findMany()
+     * 
+     * // Get first 10 MagicItemRarities
+     * const magicItemRarities = await prisma.magicItemRarity.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const magicItemRarityWithIdOnly = await prisma.magicItemRarity.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MagicItemRarityFindManyArgs>(args?: SelectSubset<T, MagicItemRarityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a MagicItemRarity.
+     * @param {MagicItemRarityCreateArgs} args - Arguments to create a MagicItemRarity.
+     * @example
+     * // Create one MagicItemRarity
+     * const MagicItemRarity = await prisma.magicItemRarity.create({
+     *   data: {
+     *     // ... data to create a MagicItemRarity
+     *   }
+     * })
+     * 
+     */
+    create<T extends MagicItemRarityCreateArgs>(args: SelectSubset<T, MagicItemRarityCreateArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many MagicItemRarities.
+     * @param {MagicItemRarityCreateManyArgs} args - Arguments to create many MagicItemRarities.
+     * @example
+     * // Create many MagicItemRarities
+     * const magicItemRarity = await prisma.magicItemRarity.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MagicItemRarityCreateManyArgs>(args?: SelectSubset<T, MagicItemRarityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MagicItemRarities and returns the data saved in the database.
+     * @param {MagicItemRarityCreateManyAndReturnArgs} args - Arguments to create many MagicItemRarities.
+     * @example
+     * // Create many MagicItemRarities
+     * const magicItemRarity = await prisma.magicItemRarity.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MagicItemRarities and only return the `id`
+     * const magicItemRarityWithIdOnly = await prisma.magicItemRarity.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MagicItemRarityCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemRarityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a MagicItemRarity.
+     * @param {MagicItemRarityDeleteArgs} args - Arguments to delete one MagicItemRarity.
+     * @example
+     * // Delete one MagicItemRarity
+     * const MagicItemRarity = await prisma.magicItemRarity.delete({
+     *   where: {
+     *     // ... filter to delete one MagicItemRarity
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MagicItemRarityDeleteArgs>(args: SelectSubset<T, MagicItemRarityDeleteArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one MagicItemRarity.
+     * @param {MagicItemRarityUpdateArgs} args - Arguments to update one MagicItemRarity.
+     * @example
+     * // Update one MagicItemRarity
+     * const magicItemRarity = await prisma.magicItemRarity.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MagicItemRarityUpdateArgs>(args: SelectSubset<T, MagicItemRarityUpdateArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more MagicItemRarities.
+     * @param {MagicItemRarityDeleteManyArgs} args - Arguments to filter MagicItemRarities to delete.
+     * @example
+     * // Delete a few MagicItemRarities
+     * const { count } = await prisma.magicItemRarity.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MagicItemRarityDeleteManyArgs>(args?: SelectSubset<T, MagicItemRarityDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MagicItemRarities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemRarityUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MagicItemRarities
+     * const magicItemRarity = await prisma.magicItemRarity.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MagicItemRarityUpdateManyArgs>(args: SelectSubset<T, MagicItemRarityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MagicItemRarities and returns the data updated in the database.
+     * @param {MagicItemRarityUpdateManyAndReturnArgs} args - Arguments to update many MagicItemRarities.
+     * @example
+     * // Update many MagicItemRarities
+     * const magicItemRarity = await prisma.magicItemRarity.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MagicItemRarities and only return the `id`
+     * const magicItemRarityWithIdOnly = await prisma.magicItemRarity.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MagicItemRarityUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemRarityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one MagicItemRarity.
+     * @param {MagicItemRarityUpsertArgs} args - Arguments to update or create a MagicItemRarity.
+     * @example
+     * // Update or create a MagicItemRarity
+     * const magicItemRarity = await prisma.magicItemRarity.upsert({
+     *   create: {
+     *     // ... data to create a MagicItemRarity
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MagicItemRarity we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MagicItemRarityUpsertArgs>(args: SelectSubset<T, MagicItemRarityUpsertArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of MagicItemRarities.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemRarityCountArgs} args - Arguments to filter MagicItemRarities to count.
+     * @example
+     * // Count the number of MagicItemRarities
+     * const count = await prisma.magicItemRarity.count({
+     *   where: {
+     *     // ... the filter for the MagicItemRarities we want to count
+     *   }
+     * })
+    **/
+    count<T extends MagicItemRarityCountArgs>(
+      args?: Subset<T, MagicItemRarityCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MagicItemRarityCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MagicItemRarity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemRarityAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MagicItemRarityAggregateArgs>(args: Subset<T, MagicItemRarityAggregateArgs>): Prisma.PrismaPromise<GetMagicItemRarityAggregateType<T>>
+
+    /**
+     * Group by MagicItemRarity.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemRarityGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MagicItemRarityGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MagicItemRarityGroupByArgs['orderBy'] }
+        : { orderBy?: MagicItemRarityGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MagicItemRarityGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMagicItemRarityGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MagicItemRarity model
+   */
+  readonly fields: MagicItemRarityFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MagicItemRarity.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MagicItemRarityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    magicItems<T extends MagicItemRarity$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemRarity$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MagicItemRarity model
+   */ 
+  interface MagicItemRarityFieldRefs {
+    readonly id: FieldRef<"MagicItemRarity", 'String'>
+    readonly cost: FieldRef<"MagicItemRarity", 'String'>
+    readonly name: FieldRef<"MagicItemRarity", 'String'>
+    readonly name_he: FieldRef<"MagicItemRarity", 'String'>
+    readonly name_she: FieldRef<"MagicItemRarity", 'String'>
+    readonly name_it: FieldRef<"MagicItemRarity", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MagicItemRarity findUnique
+   */
+  export type MagicItemRarityFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemRarityInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemRarity to fetch.
+     */
+    where: MagicItemRarityWhereUniqueInput
+  }
+
+  /**
+   * MagicItemRarity findUniqueOrThrow
+   */
+  export type MagicItemRarityFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemRarityInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemRarity to fetch.
+     */
+    where: MagicItemRarityWhereUniqueInput
+  }
+
+  /**
+   * MagicItemRarity findFirst
+   */
+  export type MagicItemRarityFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemRarityInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemRarity to fetch.
+     */
+    where?: MagicItemRarityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemRarities to fetch.
+     */
+    orderBy?: MagicItemRarityOrderByWithRelationInput | MagicItemRarityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MagicItemRarities.
+     */
+    cursor?: MagicItemRarityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemRarities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemRarities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MagicItemRarities.
+     */
+    distinct?: MagicItemRarityScalarFieldEnum | MagicItemRarityScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItemRarity findFirstOrThrow
+   */
+  export type MagicItemRarityFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemRarityInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemRarity to fetch.
+     */
+    where?: MagicItemRarityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemRarities to fetch.
+     */
+    orderBy?: MagicItemRarityOrderByWithRelationInput | MagicItemRarityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MagicItemRarities.
+     */
+    cursor?: MagicItemRarityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemRarities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemRarities.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MagicItemRarities.
+     */
+    distinct?: MagicItemRarityScalarFieldEnum | MagicItemRarityScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItemRarity findMany
+   */
+  export type MagicItemRarityFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemRarityInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemRarities to fetch.
+     */
+    where?: MagicItemRarityWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemRarities to fetch.
+     */
+    orderBy?: MagicItemRarityOrderByWithRelationInput | MagicItemRarityOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MagicItemRarities.
+     */
+    cursor?: MagicItemRarityWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemRarities from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemRarities.
+     */
+    skip?: number
+    distinct?: MagicItemRarityScalarFieldEnum | MagicItemRarityScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItemRarity create
+   */
+  export type MagicItemRarityCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemRarityInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MagicItemRarity.
+     */
+    data: XOR<MagicItemRarityCreateInput, MagicItemRarityUncheckedCreateInput>
+  }
+
+  /**
+   * MagicItemRarity createMany
+   */
+  export type MagicItemRarityCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MagicItemRarities.
+     */
+    data: MagicItemRarityCreateManyInput | MagicItemRarityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MagicItemRarity createManyAndReturn
+   */
+  export type MagicItemRarityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * The data used to create many MagicItemRarities.
+     */
+    data: MagicItemRarityCreateManyInput | MagicItemRarityCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MagicItemRarity update
+   */
+  export type MagicItemRarityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemRarityInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MagicItemRarity.
+     */
+    data: XOR<MagicItemRarityUpdateInput, MagicItemRarityUncheckedUpdateInput>
+    /**
+     * Choose, which MagicItemRarity to update.
+     */
+    where: MagicItemRarityWhereUniqueInput
+  }
+
+  /**
+   * MagicItemRarity updateMany
+   */
+  export type MagicItemRarityUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MagicItemRarities.
+     */
+    data: XOR<MagicItemRarityUpdateManyMutationInput, MagicItemRarityUncheckedUpdateManyInput>
+    /**
+     * Filter which MagicItemRarities to update
+     */
+    where?: MagicItemRarityWhereInput
+    /**
+     * Limit how many MagicItemRarities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MagicItemRarity updateManyAndReturn
+   */
+  export type MagicItemRarityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * The data used to update MagicItemRarities.
+     */
+    data: XOR<MagicItemRarityUpdateManyMutationInput, MagicItemRarityUncheckedUpdateManyInput>
+    /**
+     * Filter which MagicItemRarities to update
+     */
+    where?: MagicItemRarityWhereInput
+    /**
+     * Limit how many MagicItemRarities to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MagicItemRarity upsert
+   */
+  export type MagicItemRarityUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemRarityInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MagicItemRarity to update in case it exists.
+     */
+    where: MagicItemRarityWhereUniqueInput
+    /**
+     * In case the MagicItemRarity found by the `where` argument doesn't exist, create a new MagicItemRarity with this data.
+     */
+    create: XOR<MagicItemRarityCreateInput, MagicItemRarityUncheckedCreateInput>
+    /**
+     * In case the MagicItemRarity was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MagicItemRarityUpdateInput, MagicItemRarityUncheckedUpdateInput>
+  }
+
+  /**
+   * MagicItemRarity delete
+   */
+  export type MagicItemRarityDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemRarityInclude<ExtArgs> | null
+    /**
+     * Filter which MagicItemRarity to delete.
+     */
+    where: MagicItemRarityWhereUniqueInput
+  }
+
+  /**
+   * MagicItemRarity deleteMany
+   */
+  export type MagicItemRarityDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MagicItemRarities to delete
+     */
+    where?: MagicItemRarityWhereInput
+    /**
+     * Limit how many MagicItemRarities to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MagicItemRarity.magicItems
+   */
+  export type MagicItemRarity$magicItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    where?: MagicItemWhereInput
+    orderBy?: MagicItemOrderByWithRelationInput | MagicItemOrderByWithRelationInput[]
+    cursor?: MagicItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MagicItemScalarFieldEnum | MagicItemScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItemRarity without action
+   */
+  export type MagicItemRarityDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemRarityInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MagicItemType
+   */
+
+  export type AggregateMagicItemType = {
+    _count: MagicItemTypeCountAggregateOutputType | null
+    _min: MagicItemTypeMinAggregateOutputType | null
+    _max: MagicItemTypeMaxAggregateOutputType | null
+  }
+
+  export type MagicItemTypeMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    gender: $Enums.Gender | null
+  }
+
+  export type MagicItemTypeMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    gender: $Enums.Gender | null
+  }
+
+  export type MagicItemTypeCountAggregateOutputType = {
+    id: number
+    name: number
+    gender: number
+    _all: number
+  }
+
+
+  export type MagicItemTypeMinAggregateInputType = {
+    id?: true
+    name?: true
+    gender?: true
+  }
+
+  export type MagicItemTypeMaxAggregateInputType = {
+    id?: true
+    name?: true
+    gender?: true
+  }
+
+  export type MagicItemTypeCountAggregateInputType = {
+    id?: true
+    name?: true
+    gender?: true
+    _all?: true
+  }
+
+  export type MagicItemTypeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MagicItemType to aggregate.
+     */
+    where?: MagicItemTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemTypes to fetch.
+     */
+    orderBy?: MagicItemTypeOrderByWithRelationInput | MagicItemTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MagicItemTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MagicItemTypes
+    **/
+    _count?: true | MagicItemTypeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MagicItemTypeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MagicItemTypeMaxAggregateInputType
+  }
+
+  export type GetMagicItemTypeAggregateType<T extends MagicItemTypeAggregateArgs> = {
+        [P in keyof T & keyof AggregateMagicItemType]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMagicItemType[P]>
+      : GetScalarType<T[P], AggregateMagicItemType[P]>
+  }
+
+
+
+
+  export type MagicItemTypeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MagicItemTypeWhereInput
+    orderBy?: MagicItemTypeOrderByWithAggregationInput | MagicItemTypeOrderByWithAggregationInput[]
+    by: MagicItemTypeScalarFieldEnum[] | MagicItemTypeScalarFieldEnum
+    having?: MagicItemTypeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MagicItemTypeCountAggregateInputType | true
+    _min?: MagicItemTypeMinAggregateInputType
+    _max?: MagicItemTypeMaxAggregateInputType
+  }
+
+  export type MagicItemTypeGroupByOutputType = {
+    id: string
+    name: string
+    gender: $Enums.Gender
+    _count: MagicItemTypeCountAggregateOutputType | null
+    _min: MagicItemTypeMinAggregateOutputType | null
+    _max: MagicItemTypeMaxAggregateOutputType | null
+  }
+
+  type GetMagicItemTypeGroupByPayload<T extends MagicItemTypeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MagicItemTypeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MagicItemTypeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MagicItemTypeGroupByOutputType[P]>
+            : GetScalarType<T[P], MagicItemTypeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MagicItemTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    gender?: boolean
+    magicItems?: boolean | MagicItemType$magicItemsArgs<ExtArgs>
+    _count?: boolean | MagicItemTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["magicItemType"]>
+
+  export type MagicItemTypeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    gender?: boolean
+  }, ExtArgs["result"]["magicItemType"]>
+
+  export type MagicItemTypeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    gender?: boolean
+  }, ExtArgs["result"]["magicItemType"]>
+
+  export type MagicItemTypeSelectScalar = {
+    id?: boolean
+    name?: boolean
+    gender?: boolean
+  }
+
+  export type MagicItemTypeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "gender", ExtArgs["result"]["magicItemType"]>
+  export type MagicItemTypeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    magicItems?: boolean | MagicItemType$magicItemsArgs<ExtArgs>
+    _count?: boolean | MagicItemTypeCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type MagicItemTypeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type MagicItemTypeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $MagicItemTypePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MagicItemType"
+    objects: {
+      magicItems: Prisma.$MagicItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      gender: $Enums.Gender
+    }, ExtArgs["result"]["magicItemType"]>
+    composites: {}
+  }
+
+  type MagicItemTypeGetPayload<S extends boolean | null | undefined | MagicItemTypeDefaultArgs> = $Result.GetResult<Prisma.$MagicItemTypePayload, S>
+
+  type MagicItemTypeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MagicItemTypeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MagicItemTypeCountAggregateInputType | true
+    }
+
+  export interface MagicItemTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MagicItemType'], meta: { name: 'MagicItemType' } }
+    /**
+     * Find zero or one MagicItemType that matches the filter.
+     * @param {MagicItemTypeFindUniqueArgs} args - Arguments to find a MagicItemType
+     * @example
+     * // Get one MagicItemType
+     * const magicItemType = await prisma.magicItemType.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MagicItemTypeFindUniqueArgs>(args: SelectSubset<T, MagicItemTypeFindUniqueArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one MagicItemType that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MagicItemTypeFindUniqueOrThrowArgs} args - Arguments to find a MagicItemType
+     * @example
+     * // Get one MagicItemType
+     * const magicItemType = await prisma.magicItemType.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MagicItemTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MagicItemType that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemTypeFindFirstArgs} args - Arguments to find a MagicItemType
+     * @example
+     * // Get one MagicItemType
+     * const magicItemType = await prisma.magicItemType.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MagicItemTypeFindFirstArgs>(args?: SelectSubset<T, MagicItemTypeFindFirstArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MagicItemType that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemTypeFindFirstOrThrowArgs} args - Arguments to find a MagicItemType
+     * @example
+     * // Get one MagicItemType
+     * const magicItemType = await prisma.magicItemType.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MagicItemTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more MagicItemTypes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemTypeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MagicItemTypes
+     * const magicItemTypes = await prisma.magicItemType.findMany()
+     * 
+     * // Get first 10 MagicItemTypes
+     * const magicItemTypes = await prisma.magicItemType.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const magicItemTypeWithIdOnly = await prisma.magicItemType.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MagicItemTypeFindManyArgs>(args?: SelectSubset<T, MagicItemTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a MagicItemType.
+     * @param {MagicItemTypeCreateArgs} args - Arguments to create a MagicItemType.
+     * @example
+     * // Create one MagicItemType
+     * const MagicItemType = await prisma.magicItemType.create({
+     *   data: {
+     *     // ... data to create a MagicItemType
+     *   }
+     * })
+     * 
+     */
+    create<T extends MagicItemTypeCreateArgs>(args: SelectSubset<T, MagicItemTypeCreateArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many MagicItemTypes.
+     * @param {MagicItemTypeCreateManyArgs} args - Arguments to create many MagicItemTypes.
+     * @example
+     * // Create many MagicItemTypes
+     * const magicItemType = await prisma.magicItemType.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MagicItemTypeCreateManyArgs>(args?: SelectSubset<T, MagicItemTypeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MagicItemTypes and returns the data saved in the database.
+     * @param {MagicItemTypeCreateManyAndReturnArgs} args - Arguments to create many MagicItemTypes.
+     * @example
+     * // Create many MagicItemTypes
+     * const magicItemType = await prisma.magicItemType.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MagicItemTypes and only return the `id`
+     * const magicItemTypeWithIdOnly = await prisma.magicItemType.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MagicItemTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a MagicItemType.
+     * @param {MagicItemTypeDeleteArgs} args - Arguments to delete one MagicItemType.
+     * @example
+     * // Delete one MagicItemType
+     * const MagicItemType = await prisma.magicItemType.delete({
+     *   where: {
+     *     // ... filter to delete one MagicItemType
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MagicItemTypeDeleteArgs>(args: SelectSubset<T, MagicItemTypeDeleteArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one MagicItemType.
+     * @param {MagicItemTypeUpdateArgs} args - Arguments to update one MagicItemType.
+     * @example
+     * // Update one MagicItemType
+     * const magicItemType = await prisma.magicItemType.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MagicItemTypeUpdateArgs>(args: SelectSubset<T, MagicItemTypeUpdateArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more MagicItemTypes.
+     * @param {MagicItemTypeDeleteManyArgs} args - Arguments to filter MagicItemTypes to delete.
+     * @example
+     * // Delete a few MagicItemTypes
+     * const { count } = await prisma.magicItemType.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MagicItemTypeDeleteManyArgs>(args?: SelectSubset<T, MagicItemTypeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MagicItemTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemTypeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MagicItemTypes
+     * const magicItemType = await prisma.magicItemType.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MagicItemTypeUpdateManyArgs>(args: SelectSubset<T, MagicItemTypeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MagicItemTypes and returns the data updated in the database.
+     * @param {MagicItemTypeUpdateManyAndReturnArgs} args - Arguments to update many MagicItemTypes.
+     * @example
+     * // Update many MagicItemTypes
+     * const magicItemType = await prisma.magicItemType.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MagicItemTypes and only return the `id`
+     * const magicItemTypeWithIdOnly = await prisma.magicItemType.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MagicItemTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one MagicItemType.
+     * @param {MagicItemTypeUpsertArgs} args - Arguments to update or create a MagicItemType.
+     * @example
+     * // Update or create a MagicItemType
+     * const magicItemType = await prisma.magicItemType.upsert({
+     *   create: {
+     *     // ... data to create a MagicItemType
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MagicItemType we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MagicItemTypeUpsertArgs>(args: SelectSubset<T, MagicItemTypeUpsertArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of MagicItemTypes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemTypeCountArgs} args - Arguments to filter MagicItemTypes to count.
+     * @example
+     * // Count the number of MagicItemTypes
+     * const count = await prisma.magicItemType.count({
+     *   where: {
+     *     // ... the filter for the MagicItemTypes we want to count
+     *   }
+     * })
+    **/
+    count<T extends MagicItemTypeCountArgs>(
+      args?: Subset<T, MagicItemTypeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MagicItemTypeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MagicItemType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemTypeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MagicItemTypeAggregateArgs>(args: Subset<T, MagicItemTypeAggregateArgs>): Prisma.PrismaPromise<GetMagicItemTypeAggregateType<T>>
+
+    /**
+     * Group by MagicItemType.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemTypeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MagicItemTypeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MagicItemTypeGroupByArgs['orderBy'] }
+        : { orderBy?: MagicItemTypeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MagicItemTypeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMagicItemTypeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MagicItemType model
+   */
+  readonly fields: MagicItemTypeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MagicItemType.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MagicItemTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    magicItems<T extends MagicItemType$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemType$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MagicItemType model
+   */ 
+  interface MagicItemTypeFieldRefs {
+    readonly id: FieldRef<"MagicItemType", 'String'>
+    readonly name: FieldRef<"MagicItemType", 'String'>
+    readonly gender: FieldRef<"MagicItemType", 'Gender'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MagicItemType findUnique
+   */
+  export type MagicItemTypeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemType to fetch.
+     */
+    where: MagicItemTypeWhereUniqueInput
+  }
+
+  /**
+   * MagicItemType findUniqueOrThrow
+   */
+  export type MagicItemTypeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemType to fetch.
+     */
+    where: MagicItemTypeWhereUniqueInput
+  }
+
+  /**
+   * MagicItemType findFirst
+   */
+  export type MagicItemTypeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemType to fetch.
+     */
+    where?: MagicItemTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemTypes to fetch.
+     */
+    orderBy?: MagicItemTypeOrderByWithRelationInput | MagicItemTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MagicItemTypes.
+     */
+    cursor?: MagicItemTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MagicItemTypes.
+     */
+    distinct?: MagicItemTypeScalarFieldEnum | MagicItemTypeScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItemType findFirstOrThrow
+   */
+  export type MagicItemTypeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemType to fetch.
+     */
+    where?: MagicItemTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemTypes to fetch.
+     */
+    orderBy?: MagicItemTypeOrderByWithRelationInput | MagicItemTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MagicItemTypes.
+     */
+    cursor?: MagicItemTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemTypes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MagicItemTypes.
+     */
+    distinct?: MagicItemTypeScalarFieldEnum | MagicItemTypeScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItemType findMany
+   */
+  export type MagicItemTypeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemTypes to fetch.
+     */
+    where?: MagicItemTypeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemTypes to fetch.
+     */
+    orderBy?: MagicItemTypeOrderByWithRelationInput | MagicItemTypeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MagicItemTypes.
+     */
+    cursor?: MagicItemTypeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemTypes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemTypes.
+     */
+    skip?: number
+    distinct?: MagicItemTypeScalarFieldEnum | MagicItemTypeScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItemType create
+   */
+  export type MagicItemTypeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MagicItemType.
+     */
+    data: XOR<MagicItemTypeCreateInput, MagicItemTypeUncheckedCreateInput>
+  }
+
+  /**
+   * MagicItemType createMany
+   */
+  export type MagicItemTypeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MagicItemTypes.
+     */
+    data: MagicItemTypeCreateManyInput | MagicItemTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MagicItemType createManyAndReturn
+   */
+  export type MagicItemTypeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * The data used to create many MagicItemTypes.
+     */
+    data: MagicItemTypeCreateManyInput | MagicItemTypeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MagicItemType update
+   */
+  export type MagicItemTypeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemTypeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MagicItemType.
+     */
+    data: XOR<MagicItemTypeUpdateInput, MagicItemTypeUncheckedUpdateInput>
+    /**
+     * Choose, which MagicItemType to update.
+     */
+    where: MagicItemTypeWhereUniqueInput
+  }
+
+  /**
+   * MagicItemType updateMany
+   */
+  export type MagicItemTypeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MagicItemTypes.
+     */
+    data: XOR<MagicItemTypeUpdateManyMutationInput, MagicItemTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which MagicItemTypes to update
+     */
+    where?: MagicItemTypeWhereInput
+    /**
+     * Limit how many MagicItemTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MagicItemType updateManyAndReturn
+   */
+  export type MagicItemTypeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * The data used to update MagicItemTypes.
+     */
+    data: XOR<MagicItemTypeUpdateManyMutationInput, MagicItemTypeUncheckedUpdateManyInput>
+    /**
+     * Filter which MagicItemTypes to update
+     */
+    where?: MagicItemTypeWhereInput
+    /**
+     * Limit how many MagicItemTypes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MagicItemType upsert
+   */
+  export type MagicItemTypeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemTypeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MagicItemType to update in case it exists.
+     */
+    where: MagicItemTypeWhereUniqueInput
+    /**
+     * In case the MagicItemType found by the `where` argument doesn't exist, create a new MagicItemType with this data.
+     */
+    create: XOR<MagicItemTypeCreateInput, MagicItemTypeUncheckedCreateInput>
+    /**
+     * In case the MagicItemType was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MagicItemTypeUpdateInput, MagicItemTypeUncheckedUpdateInput>
+  }
+
+  /**
+   * MagicItemType delete
+   */
+  export type MagicItemTypeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemTypeInclude<ExtArgs> | null
+    /**
+     * Filter which MagicItemType to delete.
+     */
+    where: MagicItemTypeWhereUniqueInput
+  }
+
+  /**
+   * MagicItemType deleteMany
+   */
+  export type MagicItemTypeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MagicItemTypes to delete
+     */
+    where?: MagicItemTypeWhereInput
+    /**
+     * Limit how many MagicItemTypes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MagicItemType.magicItems
+   */
+  export type MagicItemType$magicItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItem
+     */
+    select?: MagicItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItem
+     */
+    omit?: MagicItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemInclude<ExtArgs> | null
+    where?: MagicItemWhereInput
+    orderBy?: MagicItemOrderByWithRelationInput | MagicItemOrderByWithRelationInput[]
+    cursor?: MagicItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MagicItemScalarFieldEnum | MagicItemScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItemType without action
+   */
+  export type MagicItemTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemTypeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AttunementCondition
+   */
+
+  export type AggregateAttunementCondition = {
+    _count: AttunementConditionCountAggregateOutputType | null
+    _min: AttunementConditionMinAggregateOutputType | null
+    _max: AttunementConditionMaxAggregateOutputType | null
+  }
+
+  export type AttunementConditionMinAggregateOutputType = {
+    id: string | null
+    label: string | null
+  }
+
+  export type AttunementConditionMaxAggregateOutputType = {
+    id: string | null
+    label: string | null
+  }
+
+  export type AttunementConditionCountAggregateOutputType = {
+    id: number
+    label: number
+    _all: number
+  }
+
+
+  export type AttunementConditionMinAggregateInputType = {
+    id?: true
+    label?: true
+  }
+
+  export type AttunementConditionMaxAggregateInputType = {
+    id?: true
+    label?: true
+  }
+
+  export type AttunementConditionCountAggregateInputType = {
+    id?: true
+    label?: true
+    _all?: true
+  }
+
+  export type AttunementConditionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AttunementCondition to aggregate.
+     */
+    where?: AttunementConditionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AttunementConditions to fetch.
+     */
+    orderBy?: AttunementConditionOrderByWithRelationInput | AttunementConditionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AttunementConditionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AttunementConditions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AttunementConditions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AttunementConditions
+    **/
+    _count?: true | AttunementConditionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AttunementConditionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AttunementConditionMaxAggregateInputType
+  }
+
+  export type GetAttunementConditionAggregateType<T extends AttunementConditionAggregateArgs> = {
+        [P in keyof T & keyof AggregateAttunementCondition]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAttunementCondition[P]>
+      : GetScalarType<T[P], AggregateAttunementCondition[P]>
+  }
+
+
+
+
+  export type AttunementConditionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AttunementConditionWhereInput
+    orderBy?: AttunementConditionOrderByWithAggregationInput | AttunementConditionOrderByWithAggregationInput[]
+    by: AttunementConditionScalarFieldEnum[] | AttunementConditionScalarFieldEnum
+    having?: AttunementConditionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AttunementConditionCountAggregateInputType | true
+    _min?: AttunementConditionMinAggregateInputType
+    _max?: AttunementConditionMaxAggregateInputType
+  }
+
+  export type AttunementConditionGroupByOutputType = {
+    id: string
+    label: string
+    _count: AttunementConditionCountAggregateOutputType | null
+    _min: AttunementConditionMinAggregateOutputType | null
+    _max: AttunementConditionMaxAggregateOutputType | null
+  }
+
+  type GetAttunementConditionGroupByPayload<T extends AttunementConditionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AttunementConditionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AttunementConditionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AttunementConditionGroupByOutputType[P]>
+            : GetScalarType<T[P], AttunementConditionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AttunementConditionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    label?: boolean
+    magicItems?: boolean | AttunementCondition$magicItemsArgs<ExtArgs>
+    _count?: boolean | AttunementConditionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["attunementCondition"]>
+
+  export type AttunementConditionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    label?: boolean
+  }, ExtArgs["result"]["attunementCondition"]>
+
+  export type AttunementConditionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    label?: boolean
+  }, ExtArgs["result"]["attunementCondition"]>
+
+  export type AttunementConditionSelectScalar = {
+    id?: boolean
+    label?: boolean
+  }
+
+  export type AttunementConditionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label", ExtArgs["result"]["attunementCondition"]>
+  export type AttunementConditionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    magicItems?: boolean | AttunementCondition$magicItemsArgs<ExtArgs>
+    _count?: boolean | AttunementConditionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AttunementConditionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AttunementConditionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AttunementConditionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AttunementCondition"
+    objects: {
+      magicItems: Prisma.$MagicItemAttunementPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      label: string
+    }, ExtArgs["result"]["attunementCondition"]>
+    composites: {}
+  }
+
+  type AttunementConditionGetPayload<S extends boolean | null | undefined | AttunementConditionDefaultArgs> = $Result.GetResult<Prisma.$AttunementConditionPayload, S>
+
+  type AttunementConditionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AttunementConditionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AttunementConditionCountAggregateInputType | true
+    }
+
+  export interface AttunementConditionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AttunementCondition'], meta: { name: 'AttunementCondition' } }
+    /**
+     * Find zero or one AttunementCondition that matches the filter.
+     * @param {AttunementConditionFindUniqueArgs} args - Arguments to find a AttunementCondition
+     * @example
+     * // Get one AttunementCondition
+     * const attunementCondition = await prisma.attunementCondition.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AttunementConditionFindUniqueArgs>(args: SelectSubset<T, AttunementConditionFindUniqueArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one AttunementCondition that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AttunementConditionFindUniqueOrThrowArgs} args - Arguments to find a AttunementCondition
+     * @example
+     * // Get one AttunementCondition
+     * const attunementCondition = await prisma.attunementCondition.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AttunementConditionFindUniqueOrThrowArgs>(args: SelectSubset<T, AttunementConditionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first AttunementCondition that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttunementConditionFindFirstArgs} args - Arguments to find a AttunementCondition
+     * @example
+     * // Get one AttunementCondition
+     * const attunementCondition = await prisma.attunementCondition.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AttunementConditionFindFirstArgs>(args?: SelectSubset<T, AttunementConditionFindFirstArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first AttunementCondition that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttunementConditionFindFirstOrThrowArgs} args - Arguments to find a AttunementCondition
+     * @example
+     * // Get one AttunementCondition
+     * const attunementCondition = await prisma.attunementCondition.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AttunementConditionFindFirstOrThrowArgs>(args?: SelectSubset<T, AttunementConditionFindFirstOrThrowArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more AttunementConditions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttunementConditionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AttunementConditions
+     * const attunementConditions = await prisma.attunementCondition.findMany()
+     * 
+     * // Get first 10 AttunementConditions
+     * const attunementConditions = await prisma.attunementCondition.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const attunementConditionWithIdOnly = await prisma.attunementCondition.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AttunementConditionFindManyArgs>(args?: SelectSubset<T, AttunementConditionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a AttunementCondition.
+     * @param {AttunementConditionCreateArgs} args - Arguments to create a AttunementCondition.
+     * @example
+     * // Create one AttunementCondition
+     * const AttunementCondition = await prisma.attunementCondition.create({
+     *   data: {
+     *     // ... data to create a AttunementCondition
+     *   }
+     * })
+     * 
+     */
+    create<T extends AttunementConditionCreateArgs>(args: SelectSubset<T, AttunementConditionCreateArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many AttunementConditions.
+     * @param {AttunementConditionCreateManyArgs} args - Arguments to create many AttunementConditions.
+     * @example
+     * // Create many AttunementConditions
+     * const attunementCondition = await prisma.attunementCondition.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AttunementConditionCreateManyArgs>(args?: SelectSubset<T, AttunementConditionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AttunementConditions and returns the data saved in the database.
+     * @param {AttunementConditionCreateManyAndReturnArgs} args - Arguments to create many AttunementConditions.
+     * @example
+     * // Create many AttunementConditions
+     * const attunementCondition = await prisma.attunementCondition.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AttunementConditions and only return the `id`
+     * const attunementConditionWithIdOnly = await prisma.attunementCondition.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AttunementConditionCreateManyAndReturnArgs>(args?: SelectSubset<T, AttunementConditionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a AttunementCondition.
+     * @param {AttunementConditionDeleteArgs} args - Arguments to delete one AttunementCondition.
+     * @example
+     * // Delete one AttunementCondition
+     * const AttunementCondition = await prisma.attunementCondition.delete({
+     *   where: {
+     *     // ... filter to delete one AttunementCondition
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AttunementConditionDeleteArgs>(args: SelectSubset<T, AttunementConditionDeleteArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one AttunementCondition.
+     * @param {AttunementConditionUpdateArgs} args - Arguments to update one AttunementCondition.
+     * @example
+     * // Update one AttunementCondition
+     * const attunementCondition = await prisma.attunementCondition.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AttunementConditionUpdateArgs>(args: SelectSubset<T, AttunementConditionUpdateArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more AttunementConditions.
+     * @param {AttunementConditionDeleteManyArgs} args - Arguments to filter AttunementConditions to delete.
+     * @example
+     * // Delete a few AttunementConditions
+     * const { count } = await prisma.attunementCondition.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AttunementConditionDeleteManyArgs>(args?: SelectSubset<T, AttunementConditionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AttunementConditions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttunementConditionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AttunementConditions
+     * const attunementCondition = await prisma.attunementCondition.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AttunementConditionUpdateManyArgs>(args: SelectSubset<T, AttunementConditionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AttunementConditions and returns the data updated in the database.
+     * @param {AttunementConditionUpdateManyAndReturnArgs} args - Arguments to update many AttunementConditions.
+     * @example
+     * // Update many AttunementConditions
+     * const attunementCondition = await prisma.attunementCondition.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AttunementConditions and only return the `id`
+     * const attunementConditionWithIdOnly = await prisma.attunementCondition.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AttunementConditionUpdateManyAndReturnArgs>(args: SelectSubset<T, AttunementConditionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one AttunementCondition.
+     * @param {AttunementConditionUpsertArgs} args - Arguments to update or create a AttunementCondition.
+     * @example
+     * // Update or create a AttunementCondition
+     * const attunementCondition = await prisma.attunementCondition.upsert({
+     *   create: {
+     *     // ... data to create a AttunementCondition
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AttunementCondition we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AttunementConditionUpsertArgs>(args: SelectSubset<T, AttunementConditionUpsertArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of AttunementConditions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttunementConditionCountArgs} args - Arguments to filter AttunementConditions to count.
+     * @example
+     * // Count the number of AttunementConditions
+     * const count = await prisma.attunementCondition.count({
+     *   where: {
+     *     // ... the filter for the AttunementConditions we want to count
+     *   }
+     * })
+    **/
+    count<T extends AttunementConditionCountArgs>(
+      args?: Subset<T, AttunementConditionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AttunementConditionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AttunementCondition.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttunementConditionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AttunementConditionAggregateArgs>(args: Subset<T, AttunementConditionAggregateArgs>): Prisma.PrismaPromise<GetAttunementConditionAggregateType<T>>
+
+    /**
+     * Group by AttunementCondition.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AttunementConditionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AttunementConditionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AttunementConditionGroupByArgs['orderBy'] }
+        : { orderBy?: AttunementConditionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AttunementConditionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAttunementConditionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AttunementCondition model
+   */
+  readonly fields: AttunementConditionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AttunementCondition.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AttunementConditionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    magicItems<T extends AttunementCondition$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, AttunementCondition$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AttunementCondition model
+   */ 
+  interface AttunementConditionFieldRefs {
+    readonly id: FieldRef<"AttunementCondition", 'String'>
+    readonly label: FieldRef<"AttunementCondition", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AttunementCondition findUnique
+   */
+  export type AttunementConditionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttunementConditionInclude<ExtArgs> | null
+    /**
+     * Filter, which AttunementCondition to fetch.
+     */
+    where: AttunementConditionWhereUniqueInput
+  }
+
+  /**
+   * AttunementCondition findUniqueOrThrow
+   */
+  export type AttunementConditionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttunementConditionInclude<ExtArgs> | null
+    /**
+     * Filter, which AttunementCondition to fetch.
+     */
+    where: AttunementConditionWhereUniqueInput
+  }
+
+  /**
+   * AttunementCondition findFirst
+   */
+  export type AttunementConditionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttunementConditionInclude<ExtArgs> | null
+    /**
+     * Filter, which AttunementCondition to fetch.
+     */
+    where?: AttunementConditionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AttunementConditions to fetch.
+     */
+    orderBy?: AttunementConditionOrderByWithRelationInput | AttunementConditionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AttunementConditions.
+     */
+    cursor?: AttunementConditionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AttunementConditions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AttunementConditions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AttunementConditions.
+     */
+    distinct?: AttunementConditionScalarFieldEnum | AttunementConditionScalarFieldEnum[]
+  }
+
+  /**
+   * AttunementCondition findFirstOrThrow
+   */
+  export type AttunementConditionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttunementConditionInclude<ExtArgs> | null
+    /**
+     * Filter, which AttunementCondition to fetch.
+     */
+    where?: AttunementConditionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AttunementConditions to fetch.
+     */
+    orderBy?: AttunementConditionOrderByWithRelationInput | AttunementConditionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AttunementConditions.
+     */
+    cursor?: AttunementConditionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AttunementConditions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AttunementConditions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AttunementConditions.
+     */
+    distinct?: AttunementConditionScalarFieldEnum | AttunementConditionScalarFieldEnum[]
+  }
+
+  /**
+   * AttunementCondition findMany
+   */
+  export type AttunementConditionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttunementConditionInclude<ExtArgs> | null
+    /**
+     * Filter, which AttunementConditions to fetch.
+     */
+    where?: AttunementConditionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AttunementConditions to fetch.
+     */
+    orderBy?: AttunementConditionOrderByWithRelationInput | AttunementConditionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AttunementConditions.
+     */
+    cursor?: AttunementConditionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AttunementConditions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AttunementConditions.
+     */
+    skip?: number
+    distinct?: AttunementConditionScalarFieldEnum | AttunementConditionScalarFieldEnum[]
+  }
+
+  /**
+   * AttunementCondition create
+   */
+  export type AttunementConditionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttunementConditionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AttunementCondition.
+     */
+    data: XOR<AttunementConditionCreateInput, AttunementConditionUncheckedCreateInput>
+  }
+
+  /**
+   * AttunementCondition createMany
+   */
+  export type AttunementConditionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AttunementConditions.
+     */
+    data: AttunementConditionCreateManyInput | AttunementConditionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AttunementCondition createManyAndReturn
+   */
+  export type AttunementConditionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * The data used to create many AttunementConditions.
+     */
+    data: AttunementConditionCreateManyInput | AttunementConditionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AttunementCondition update
+   */
+  export type AttunementConditionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttunementConditionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AttunementCondition.
+     */
+    data: XOR<AttunementConditionUpdateInput, AttunementConditionUncheckedUpdateInput>
+    /**
+     * Choose, which AttunementCondition to update.
+     */
+    where: AttunementConditionWhereUniqueInput
+  }
+
+  /**
+   * AttunementCondition updateMany
+   */
+  export type AttunementConditionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AttunementConditions.
+     */
+    data: XOR<AttunementConditionUpdateManyMutationInput, AttunementConditionUncheckedUpdateManyInput>
+    /**
+     * Filter which AttunementConditions to update
+     */
+    where?: AttunementConditionWhereInput
+    /**
+     * Limit how many AttunementConditions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AttunementCondition updateManyAndReturn
+   */
+  export type AttunementConditionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * The data used to update AttunementConditions.
+     */
+    data: XOR<AttunementConditionUpdateManyMutationInput, AttunementConditionUncheckedUpdateManyInput>
+    /**
+     * Filter which AttunementConditions to update
+     */
+    where?: AttunementConditionWhereInput
+    /**
+     * Limit how many AttunementConditions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AttunementCondition upsert
+   */
+  export type AttunementConditionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttunementConditionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AttunementCondition to update in case it exists.
+     */
+    where: AttunementConditionWhereUniqueInput
+    /**
+     * In case the AttunementCondition found by the `where` argument doesn't exist, create a new AttunementCondition with this data.
+     */
+    create: XOR<AttunementConditionCreateInput, AttunementConditionUncheckedCreateInput>
+    /**
+     * In case the AttunementCondition was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AttunementConditionUpdateInput, AttunementConditionUncheckedUpdateInput>
+  }
+
+  /**
+   * AttunementCondition delete
+   */
+  export type AttunementConditionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttunementConditionInclude<ExtArgs> | null
+    /**
+     * Filter which AttunementCondition to delete.
+     */
+    where: AttunementConditionWhereUniqueInput
+  }
+
+  /**
+   * AttunementCondition deleteMany
+   */
+  export type AttunementConditionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AttunementConditions to delete
+     */
+    where?: AttunementConditionWhereInput
+    /**
+     * Limit how many AttunementConditions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AttunementCondition.magicItems
+   */
+  export type AttunementCondition$magicItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+    where?: MagicItemAttunementWhereInput
+    orderBy?: MagicItemAttunementOrderByWithRelationInput | MagicItemAttunementOrderByWithRelationInput[]
+    cursor?: MagicItemAttunementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MagicItemAttunementScalarFieldEnum | MagicItemAttunementScalarFieldEnum[]
+  }
+
+  /**
+   * AttunementCondition without action
+   */
+  export type AttunementConditionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AttunementCondition
+     */
+    select?: AttunementConditionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AttunementCondition
+     */
+    omit?: AttunementConditionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AttunementConditionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MagicItemAttunement
+   */
+
+  export type AggregateMagicItemAttunement = {
+    _count: MagicItemAttunementCountAggregateOutputType | null
+    _min: MagicItemAttunementMinAggregateOutputType | null
+    _max: MagicItemAttunementMaxAggregateOutputType | null
+  }
+
+  export type MagicItemAttunementMinAggregateOutputType = {
+    magicItemId: string | null
+    attunementId: string | null
+  }
+
+  export type MagicItemAttunementMaxAggregateOutputType = {
+    magicItemId: string | null
+    attunementId: string | null
+  }
+
+  export type MagicItemAttunementCountAggregateOutputType = {
+    magicItemId: number
+    attunementId: number
+    _all: number
+  }
+
+
+  export type MagicItemAttunementMinAggregateInputType = {
+    magicItemId?: true
+    attunementId?: true
+  }
+
+  export type MagicItemAttunementMaxAggregateInputType = {
+    magicItemId?: true
+    attunementId?: true
+  }
+
+  export type MagicItemAttunementCountAggregateInputType = {
+    magicItemId?: true
+    attunementId?: true
+    _all?: true
+  }
+
+  export type MagicItemAttunementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MagicItemAttunement to aggregate.
+     */
+    where?: MagicItemAttunementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemAttunements to fetch.
+     */
+    orderBy?: MagicItemAttunementOrderByWithRelationInput | MagicItemAttunementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MagicItemAttunementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemAttunements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemAttunements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MagicItemAttunements
+    **/
+    _count?: true | MagicItemAttunementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MagicItemAttunementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MagicItemAttunementMaxAggregateInputType
+  }
+
+  export type GetMagicItemAttunementAggregateType<T extends MagicItemAttunementAggregateArgs> = {
+        [P in keyof T & keyof AggregateMagicItemAttunement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMagicItemAttunement[P]>
+      : GetScalarType<T[P], AggregateMagicItemAttunement[P]>
+  }
+
+
+
+
+  export type MagicItemAttunementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MagicItemAttunementWhereInput
+    orderBy?: MagicItemAttunementOrderByWithAggregationInput | MagicItemAttunementOrderByWithAggregationInput[]
+    by: MagicItemAttunementScalarFieldEnum[] | MagicItemAttunementScalarFieldEnum
+    having?: MagicItemAttunementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MagicItemAttunementCountAggregateInputType | true
+    _min?: MagicItemAttunementMinAggregateInputType
+    _max?: MagicItemAttunementMaxAggregateInputType
+  }
+
+  export type MagicItemAttunementGroupByOutputType = {
+    magicItemId: string
+    attunementId: string
+    _count: MagicItemAttunementCountAggregateOutputType | null
+    _min: MagicItemAttunementMinAggregateOutputType | null
+    _max: MagicItemAttunementMaxAggregateOutputType | null
+  }
+
+  type GetMagicItemAttunementGroupByPayload<T extends MagicItemAttunementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MagicItemAttunementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MagicItemAttunementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MagicItemAttunementGroupByOutputType[P]>
+            : GetScalarType<T[P], MagicItemAttunementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MagicItemAttunementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    magicItemId?: boolean
+    attunementId?: boolean
+    magicItem?: boolean | MagicItemDefaultArgs<ExtArgs>
+    attunement?: boolean | AttunementConditionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["magicItemAttunement"]>
+
+  export type MagicItemAttunementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    magicItemId?: boolean
+    attunementId?: boolean
+    magicItem?: boolean | MagicItemDefaultArgs<ExtArgs>
+    attunement?: boolean | AttunementConditionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["magicItemAttunement"]>
+
+  export type MagicItemAttunementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    magicItemId?: boolean
+    attunementId?: boolean
+    magicItem?: boolean | MagicItemDefaultArgs<ExtArgs>
+    attunement?: boolean | AttunementConditionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["magicItemAttunement"]>
+
+  export type MagicItemAttunementSelectScalar = {
+    magicItemId?: boolean
+    attunementId?: boolean
+  }
+
+  export type MagicItemAttunementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"magicItemId" | "attunementId", ExtArgs["result"]["magicItemAttunement"]>
+  export type MagicItemAttunementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    magicItem?: boolean | MagicItemDefaultArgs<ExtArgs>
+    attunement?: boolean | AttunementConditionDefaultArgs<ExtArgs>
+  }
+  export type MagicItemAttunementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    magicItem?: boolean | MagicItemDefaultArgs<ExtArgs>
+    attunement?: boolean | AttunementConditionDefaultArgs<ExtArgs>
+  }
+  export type MagicItemAttunementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    magicItem?: boolean | MagicItemDefaultArgs<ExtArgs>
+    attunement?: boolean | AttunementConditionDefaultArgs<ExtArgs>
+  }
+
+  export type $MagicItemAttunementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MagicItemAttunement"
+    objects: {
+      magicItem: Prisma.$MagicItemPayload<ExtArgs>
+      attunement: Prisma.$AttunementConditionPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      magicItemId: string
+      attunementId: string
+    }, ExtArgs["result"]["magicItemAttunement"]>
+    composites: {}
+  }
+
+  type MagicItemAttunementGetPayload<S extends boolean | null | undefined | MagicItemAttunementDefaultArgs> = $Result.GetResult<Prisma.$MagicItemAttunementPayload, S>
+
+  type MagicItemAttunementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MagicItemAttunementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MagicItemAttunementCountAggregateInputType | true
+    }
+
+  export interface MagicItemAttunementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MagicItemAttunement'], meta: { name: 'MagicItemAttunement' } }
+    /**
+     * Find zero or one MagicItemAttunement that matches the filter.
+     * @param {MagicItemAttunementFindUniqueArgs} args - Arguments to find a MagicItemAttunement
+     * @example
+     * // Get one MagicItemAttunement
+     * const magicItemAttunement = await prisma.magicItemAttunement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MagicItemAttunementFindUniqueArgs>(args: SelectSubset<T, MagicItemAttunementFindUniqueArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one MagicItemAttunement that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MagicItemAttunementFindUniqueOrThrowArgs} args - Arguments to find a MagicItemAttunement
+     * @example
+     * // Get one MagicItemAttunement
+     * const magicItemAttunement = await prisma.magicItemAttunement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MagicItemAttunementFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemAttunementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MagicItemAttunement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemAttunementFindFirstArgs} args - Arguments to find a MagicItemAttunement
+     * @example
+     * // Get one MagicItemAttunement
+     * const magicItemAttunement = await prisma.magicItemAttunement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MagicItemAttunementFindFirstArgs>(args?: SelectSubset<T, MagicItemAttunementFindFirstArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first MagicItemAttunement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemAttunementFindFirstOrThrowArgs} args - Arguments to find a MagicItemAttunement
+     * @example
+     * // Get one MagicItemAttunement
+     * const magicItemAttunement = await prisma.magicItemAttunement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MagicItemAttunementFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemAttunementFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more MagicItemAttunements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemAttunementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MagicItemAttunements
+     * const magicItemAttunements = await prisma.magicItemAttunement.findMany()
+     * 
+     * // Get first 10 MagicItemAttunements
+     * const magicItemAttunements = await prisma.magicItemAttunement.findMany({ take: 10 })
+     * 
+     * // Only select the `magicItemId`
+     * const magicItemAttunementWithMagicItemIdOnly = await prisma.magicItemAttunement.findMany({ select: { magicItemId: true } })
+     * 
+     */
+    findMany<T extends MagicItemAttunementFindManyArgs>(args?: SelectSubset<T, MagicItemAttunementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a MagicItemAttunement.
+     * @param {MagicItemAttunementCreateArgs} args - Arguments to create a MagicItemAttunement.
+     * @example
+     * // Create one MagicItemAttunement
+     * const MagicItemAttunement = await prisma.magicItemAttunement.create({
+     *   data: {
+     *     // ... data to create a MagicItemAttunement
+     *   }
+     * })
+     * 
+     */
+    create<T extends MagicItemAttunementCreateArgs>(args: SelectSubset<T, MagicItemAttunementCreateArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many MagicItemAttunements.
+     * @param {MagicItemAttunementCreateManyArgs} args - Arguments to create many MagicItemAttunements.
+     * @example
+     * // Create many MagicItemAttunements
+     * const magicItemAttunement = await prisma.magicItemAttunement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MagicItemAttunementCreateManyArgs>(args?: SelectSubset<T, MagicItemAttunementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MagicItemAttunements and returns the data saved in the database.
+     * @param {MagicItemAttunementCreateManyAndReturnArgs} args - Arguments to create many MagicItemAttunements.
+     * @example
+     * // Create many MagicItemAttunements
+     * const magicItemAttunement = await prisma.magicItemAttunement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MagicItemAttunements and only return the `magicItemId`
+     * const magicItemAttunementWithMagicItemIdOnly = await prisma.magicItemAttunement.createManyAndReturn({
+     *   select: { magicItemId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MagicItemAttunementCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemAttunementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a MagicItemAttunement.
+     * @param {MagicItemAttunementDeleteArgs} args - Arguments to delete one MagicItemAttunement.
+     * @example
+     * // Delete one MagicItemAttunement
+     * const MagicItemAttunement = await prisma.magicItemAttunement.delete({
+     *   where: {
+     *     // ... filter to delete one MagicItemAttunement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MagicItemAttunementDeleteArgs>(args: SelectSubset<T, MagicItemAttunementDeleteArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one MagicItemAttunement.
+     * @param {MagicItemAttunementUpdateArgs} args - Arguments to update one MagicItemAttunement.
+     * @example
+     * // Update one MagicItemAttunement
+     * const magicItemAttunement = await prisma.magicItemAttunement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MagicItemAttunementUpdateArgs>(args: SelectSubset<T, MagicItemAttunementUpdateArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more MagicItemAttunements.
+     * @param {MagicItemAttunementDeleteManyArgs} args - Arguments to filter MagicItemAttunements to delete.
+     * @example
+     * // Delete a few MagicItemAttunements
+     * const { count } = await prisma.magicItemAttunement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MagicItemAttunementDeleteManyArgs>(args?: SelectSubset<T, MagicItemAttunementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MagicItemAttunements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemAttunementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MagicItemAttunements
+     * const magicItemAttunement = await prisma.magicItemAttunement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MagicItemAttunementUpdateManyArgs>(args: SelectSubset<T, MagicItemAttunementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MagicItemAttunements and returns the data updated in the database.
+     * @param {MagicItemAttunementUpdateManyAndReturnArgs} args - Arguments to update many MagicItemAttunements.
+     * @example
+     * // Update many MagicItemAttunements
+     * const magicItemAttunement = await prisma.magicItemAttunement.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MagicItemAttunements and only return the `magicItemId`
+     * const magicItemAttunementWithMagicItemIdOnly = await prisma.magicItemAttunement.updateManyAndReturn({
+     *   select: { magicItemId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MagicItemAttunementUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemAttunementUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one MagicItemAttunement.
+     * @param {MagicItemAttunementUpsertArgs} args - Arguments to update or create a MagicItemAttunement.
+     * @example
+     * // Update or create a MagicItemAttunement
+     * const magicItemAttunement = await prisma.magicItemAttunement.upsert({
+     *   create: {
+     *     // ... data to create a MagicItemAttunement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MagicItemAttunement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MagicItemAttunementUpsertArgs>(args: SelectSubset<T, MagicItemAttunementUpsertArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of MagicItemAttunements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemAttunementCountArgs} args - Arguments to filter MagicItemAttunements to count.
+     * @example
+     * // Count the number of MagicItemAttunements
+     * const count = await prisma.magicItemAttunement.count({
+     *   where: {
+     *     // ... the filter for the MagicItemAttunements we want to count
+     *   }
+     * })
+    **/
+    count<T extends MagicItemAttunementCountArgs>(
+      args?: Subset<T, MagicItemAttunementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MagicItemAttunementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MagicItemAttunement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemAttunementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MagicItemAttunementAggregateArgs>(args: Subset<T, MagicItemAttunementAggregateArgs>): Prisma.PrismaPromise<GetMagicItemAttunementAggregateType<T>>
+
+    /**
+     * Group by MagicItemAttunement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MagicItemAttunementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MagicItemAttunementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MagicItemAttunementGroupByArgs['orderBy'] }
+        : { orderBy?: MagicItemAttunementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MagicItemAttunementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMagicItemAttunementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MagicItemAttunement model
+   */
+  readonly fields: MagicItemAttunementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MagicItemAttunement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MagicItemAttunementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    magicItem<T extends MagicItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemDefaultArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    attunement<T extends AttunementConditionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AttunementConditionDefaultArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MagicItemAttunement model
+   */ 
+  interface MagicItemAttunementFieldRefs {
+    readonly magicItemId: FieldRef<"MagicItemAttunement", 'String'>
+    readonly attunementId: FieldRef<"MagicItemAttunement", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MagicItemAttunement findUnique
+   */
+  export type MagicItemAttunementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemAttunement to fetch.
+     */
+    where: MagicItemAttunementWhereUniqueInput
+  }
+
+  /**
+   * MagicItemAttunement findUniqueOrThrow
+   */
+  export type MagicItemAttunementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemAttunement to fetch.
+     */
+    where: MagicItemAttunementWhereUniqueInput
+  }
+
+  /**
+   * MagicItemAttunement findFirst
+   */
+  export type MagicItemAttunementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemAttunement to fetch.
+     */
+    where?: MagicItemAttunementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemAttunements to fetch.
+     */
+    orderBy?: MagicItemAttunementOrderByWithRelationInput | MagicItemAttunementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MagicItemAttunements.
+     */
+    cursor?: MagicItemAttunementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemAttunements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemAttunements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MagicItemAttunements.
+     */
+    distinct?: MagicItemAttunementScalarFieldEnum | MagicItemAttunementScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItemAttunement findFirstOrThrow
+   */
+  export type MagicItemAttunementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemAttunement to fetch.
+     */
+    where?: MagicItemAttunementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemAttunements to fetch.
+     */
+    orderBy?: MagicItemAttunementOrderByWithRelationInput | MagicItemAttunementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MagicItemAttunements.
+     */
+    cursor?: MagicItemAttunementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemAttunements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemAttunements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MagicItemAttunements.
+     */
+    distinct?: MagicItemAttunementScalarFieldEnum | MagicItemAttunementScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItemAttunement findMany
+   */
+  export type MagicItemAttunementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+    /**
+     * Filter, which MagicItemAttunements to fetch.
+     */
+    where?: MagicItemAttunementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MagicItemAttunements to fetch.
+     */
+    orderBy?: MagicItemAttunementOrderByWithRelationInput | MagicItemAttunementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MagicItemAttunements.
+     */
+    cursor?: MagicItemAttunementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MagicItemAttunements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MagicItemAttunements.
+     */
+    skip?: number
+    distinct?: MagicItemAttunementScalarFieldEnum | MagicItemAttunementScalarFieldEnum[]
+  }
+
+  /**
+   * MagicItemAttunement create
+   */
+  export type MagicItemAttunementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MagicItemAttunement.
+     */
+    data: XOR<MagicItemAttunementCreateInput, MagicItemAttunementUncheckedCreateInput>
+  }
+
+  /**
+   * MagicItemAttunement createMany
+   */
+  export type MagicItemAttunementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MagicItemAttunements.
+     */
+    data: MagicItemAttunementCreateManyInput | MagicItemAttunementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MagicItemAttunement createManyAndReturn
+   */
+  export type MagicItemAttunementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * The data used to create many MagicItemAttunements.
+     */
+    data: MagicItemAttunementCreateManyInput | MagicItemAttunementCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MagicItemAttunement update
+   */
+  export type MagicItemAttunementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MagicItemAttunement.
+     */
+    data: XOR<MagicItemAttunementUpdateInput, MagicItemAttunementUncheckedUpdateInput>
+    /**
+     * Choose, which MagicItemAttunement to update.
+     */
+    where: MagicItemAttunementWhereUniqueInput
+  }
+
+  /**
+   * MagicItemAttunement updateMany
+   */
+  export type MagicItemAttunementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MagicItemAttunements.
+     */
+    data: XOR<MagicItemAttunementUpdateManyMutationInput, MagicItemAttunementUncheckedUpdateManyInput>
+    /**
+     * Filter which MagicItemAttunements to update
+     */
+    where?: MagicItemAttunementWhereInput
+    /**
+     * Limit how many MagicItemAttunements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MagicItemAttunement updateManyAndReturn
+   */
+  export type MagicItemAttunementUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * The data used to update MagicItemAttunements.
+     */
+    data: XOR<MagicItemAttunementUpdateManyMutationInput, MagicItemAttunementUncheckedUpdateManyInput>
+    /**
+     * Filter which MagicItemAttunements to update
+     */
+    where?: MagicItemAttunementWhereInput
+    /**
+     * Limit how many MagicItemAttunements to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MagicItemAttunement upsert
+   */
+  export type MagicItemAttunementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MagicItemAttunement to update in case it exists.
+     */
+    where: MagicItemAttunementWhereUniqueInput
+    /**
+     * In case the MagicItemAttunement found by the `where` argument doesn't exist, create a new MagicItemAttunement with this data.
+     */
+    create: XOR<MagicItemAttunementCreateInput, MagicItemAttunementUncheckedCreateInput>
+    /**
+     * In case the MagicItemAttunement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MagicItemAttunementUpdateInput, MagicItemAttunementUncheckedUpdateInput>
+  }
+
+  /**
+   * MagicItemAttunement delete
+   */
+  export type MagicItemAttunementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+    /**
+     * Filter which MagicItemAttunement to delete.
+     */
+    where: MagicItemAttunementWhereUniqueInput
+  }
+
+  /**
+   * MagicItemAttunement deleteMany
+   */
+  export type MagicItemAttunementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MagicItemAttunements to delete
+     */
+    where?: MagicItemAttunementWhereInput
+    /**
+     * Limit how many MagicItemAttunements to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MagicItemAttunement without action
+   */
+  export type MagicItemAttunementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemAttunement
+     */
+    select?: MagicItemAttunementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemAttunement
+     */
+    omit?: MagicItemAttunementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemAttunementInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -61556,7 +67521,7 @@ export namespace Prisma {
 
   export const SourceScalarFieldEnum: {
     id: 'id',
-    shortName: 'shortName',
+    short_name: 'short_name',
     name: 'name'
   };
 
@@ -62023,6 +67988,55 @@ export namespace Prisma {
   export type GenreScalarFieldEnum = (typeof GenreScalarFieldEnum)[keyof typeof GenreScalarFieldEnum]
 
 
+  export const MagicItemScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    type_id: 'type_id',
+    rarity_id: 'rarity_id',
+    source_id: 'source_id'
+  };
+
+  export type MagicItemScalarFieldEnum = (typeof MagicItemScalarFieldEnum)[keyof typeof MagicItemScalarFieldEnum]
+
+
+  export const MagicItemRarityScalarFieldEnum: {
+    id: 'id',
+    cost: 'cost',
+    name: 'name',
+    name_he: 'name_he',
+    name_she: 'name_she',
+    name_it: 'name_it'
+  };
+
+  export type MagicItemRarityScalarFieldEnum = (typeof MagicItemRarityScalarFieldEnum)[keyof typeof MagicItemRarityScalarFieldEnum]
+
+
+  export const MagicItemTypeScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    gender: 'gender'
+  };
+
+  export type MagicItemTypeScalarFieldEnum = (typeof MagicItemTypeScalarFieldEnum)[keyof typeof MagicItemTypeScalarFieldEnum]
+
+
+  export const AttunementConditionScalarFieldEnum: {
+    id: 'id',
+    label: 'label'
+  };
+
+  export type AttunementConditionScalarFieldEnum = (typeof AttunementConditionScalarFieldEnum)[keyof typeof AttunementConditionScalarFieldEnum]
+
+
+  export const MagicItemAttunementScalarFieldEnum: {
+    magicItemId: 'magicItemId',
+    attunementId: 'attunementId'
+  };
+
+  export type MagicItemAttunementScalarFieldEnum = (typeof MagicItemAttunementScalarFieldEnum)[keyof typeof MagicItemAttunementScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -62102,6 +68116,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Gender'
+   */
+  export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
+    
+
+
+  /**
+   * Reference to a field of type 'Gender[]'
+   */
+  export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -62163,31 +68191,34 @@ export namespace Prisma {
     OR?: SourceWhereInput[]
     NOT?: SourceWhereInput | SourceWhereInput[]
     id?: IntFilter<"Source"> | number
-    shortName?: StringFilter<"Source"> | string
+    short_name?: StringFilter<"Source"> | string
     name?: StringFilter<"Source"> | string
     creatures?: CreatureListRelationFilter
+    magicItems?: MagicItemListRelationFilter
   }
 
   export type SourceOrderByWithRelationInput = {
     id?: SortOrder
-    shortName?: SortOrder
+    short_name?: SortOrder
     name?: SortOrder
     creatures?: CreatureOrderByRelationAggregateInput
+    magicItems?: MagicItemOrderByRelationAggregateInput
   }
 
   export type SourceWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    shortName?: string
+    short_name?: string
     AND?: SourceWhereInput | SourceWhereInput[]
     OR?: SourceWhereInput[]
     NOT?: SourceWhereInput | SourceWhereInput[]
     name?: StringFilter<"Source"> | string
     creatures?: CreatureListRelationFilter
-  }, "id" | "shortName">
+    magicItems?: MagicItemListRelationFilter
+  }, "id" | "short_name">
 
   export type SourceOrderByWithAggregationInput = {
     id?: SortOrder
-    shortName?: SortOrder
+    short_name?: SortOrder
     name?: SortOrder
     _count?: SourceCountOrderByAggregateInput
     _avg?: SourceAvgOrderByAggregateInput
@@ -62201,7 +68232,7 @@ export namespace Prisma {
     OR?: SourceScalarWhereWithAggregatesInput[]
     NOT?: SourceScalarWhereWithAggregatesInput | SourceScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Source"> | number
-    shortName?: StringWithAggregatesFilter<"Source"> | string
+    short_name?: StringWithAggregatesFilter<"Source"> | string
     name?: StringWithAggregatesFilter<"Source"> | string
   }
 
@@ -64587,8 +70618,8 @@ export namespace Prisma {
     creator_id?: StringFilter<"Adventure"> | string
     created_at?: DateTimeFilter<"Adventure"> | Date | string
     updated_at?: DateTimeFilter<"Adventure"> | Date | string
-    genre?: XOR<GenreScalarRelationFilter, GenreWhereInput>
-    keywords?: KeywordListRelationFilter
+    genre_relation?: XOR<GenreScalarRelationFilter, GenreWhereInput>
+    keywords_relation?: KeywordListRelationFilter
   }
 
   export type AdventureOrderByWithRelationInput = {
@@ -64598,8 +70629,8 @@ export namespace Prisma {
     creator_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    genre?: GenreOrderByWithRelationInput
-    keywords?: KeywordOrderByRelationAggregateInput
+    genre_relation?: GenreOrderByWithRelationInput
+    keywords_relation?: KeywordOrderByRelationAggregateInput
   }
 
   export type AdventureWhereUniqueInput = Prisma.AtLeast<{
@@ -64612,8 +70643,8 @@ export namespace Prisma {
     creator_id?: StringFilter<"Adventure"> | string
     created_at?: DateTimeFilter<"Adventure"> | Date | string
     updated_at?: DateTimeFilter<"Adventure"> | Date | string
-    genre?: XOR<GenreScalarRelationFilter, GenreWhereInput>
-    keywords?: KeywordListRelationFilter
+    genre_relation?: XOR<GenreScalarRelationFilter, GenreWhereInput>
+    keywords_relation?: KeywordListRelationFilter
   }, "id">
 
   export type AdventureOrderByWithAggregationInput = {
@@ -64647,16 +70678,16 @@ export namespace Prisma {
     id?: StringFilter<"Keyword"> | string
     name?: StringFilter<"Keyword"> | string
     genre_id?: StringFilter<"Keyword"> | string
-    genre?: XOR<GenreScalarRelationFilter, GenreWhereInput>
-    adventures?: AdventureListRelationFilter
+    genre_relation?: XOR<GenreScalarRelationFilter, GenreWhereInput>
+    adventures_relation?: AdventureListRelationFilter
   }
 
   export type KeywordOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     genre_id?: SortOrder
-    genre?: GenreOrderByWithRelationInput
-    adventures?: AdventureOrderByRelationAggregateInput
+    genre_relation?: GenreOrderByWithRelationInput
+    adventures_relation?: AdventureOrderByRelationAggregateInput
   }
 
   export type KeywordWhereUniqueInput = Prisma.AtLeast<{
@@ -64666,8 +70697,8 @@ export namespace Prisma {
     NOT?: KeywordWhereInput | KeywordWhereInput[]
     name?: StringFilter<"Keyword"> | string
     genre_id?: StringFilter<"Keyword"> | string
-    genre?: XOR<GenreScalarRelationFilter, GenreWhereInput>
-    adventures?: AdventureListRelationFilter
+    genre_relation?: XOR<GenreScalarRelationFilter, GenreWhereInput>
+    adventures_relation?: AdventureListRelationFilter
   }, "id">
 
   export type KeywordOrderByWithAggregationInput = {
@@ -64694,15 +70725,15 @@ export namespace Prisma {
     NOT?: GenreWhereInput | GenreWhereInput[]
     id?: StringFilter<"Genre"> | string
     name?: StringFilter<"Genre"> | string
-    keywords?: KeywordListRelationFilter
-    adventures?: AdventureListRelationFilter
+    keywords_relation?: KeywordListRelationFilter
+    adventures_relation?: AdventureListRelationFilter
   }
 
   export type GenreOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    keywords?: KeywordOrderByRelationAggregateInput
-    adventures?: AdventureOrderByRelationAggregateInput
+    keywords_relation?: KeywordOrderByRelationAggregateInput
+    adventures_relation?: AdventureOrderByRelationAggregateInput
   }
 
   export type GenreWhereUniqueInput = Prisma.AtLeast<{
@@ -64711,8 +70742,8 @@ export namespace Prisma {
     OR?: GenreWhereInput[]
     NOT?: GenreWhereInput | GenreWhereInput[]
     name?: StringFilter<"Genre"> | string
-    keywords?: KeywordListRelationFilter
-    adventures?: AdventureListRelationFilter
+    keywords_relation?: KeywordListRelationFilter
+    adventures_relation?: AdventureListRelationFilter
   }, "id">
 
   export type GenreOrderByWithAggregationInput = {
@@ -64729,6 +70760,266 @@ export namespace Prisma {
     NOT?: GenreScalarWhereWithAggregatesInput | GenreScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Genre"> | string
     name?: StringWithAggregatesFilter<"Genre"> | string
+  }
+
+  export type MagicItemWhereInput = {
+    AND?: MagicItemWhereInput | MagicItemWhereInput[]
+    OR?: MagicItemWhereInput[]
+    NOT?: MagicItemWhereInput | MagicItemWhereInput[]
+    id?: StringFilter<"MagicItem"> | string
+    name?: StringFilter<"MagicItem"> | string
+    description?: StringFilter<"MagicItem"> | string
+    type_id?: StringFilter<"MagicItem"> | string
+    rarity_id?: StringFilter<"MagicItem"> | string
+    source_id?: IntFilter<"MagicItem"> | number
+    type_relation?: XOR<MagicItemTypeScalarRelationFilter, MagicItemTypeWhereInput>
+    rarity_relation?: XOR<MagicItemRarityScalarRelationFilter, MagicItemRarityWhereInput>
+    source_relation?: XOR<SourceScalarRelationFilter, SourceWhereInput>
+    attunements_relation?: MagicItemAttunementListRelationFilter
+  }
+
+  export type MagicItemOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    type_id?: SortOrder
+    rarity_id?: SortOrder
+    source_id?: SortOrder
+    type_relation?: MagicItemTypeOrderByWithRelationInput
+    rarity_relation?: MagicItemRarityOrderByWithRelationInput
+    source_relation?: SourceOrderByWithRelationInput
+    attunements_relation?: MagicItemAttunementOrderByRelationAggregateInput
+  }
+
+  export type MagicItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MagicItemWhereInput | MagicItemWhereInput[]
+    OR?: MagicItemWhereInput[]
+    NOT?: MagicItemWhereInput | MagicItemWhereInput[]
+    name?: StringFilter<"MagicItem"> | string
+    description?: StringFilter<"MagicItem"> | string
+    type_id?: StringFilter<"MagicItem"> | string
+    rarity_id?: StringFilter<"MagicItem"> | string
+    source_id?: IntFilter<"MagicItem"> | number
+    type_relation?: XOR<MagicItemTypeScalarRelationFilter, MagicItemTypeWhereInput>
+    rarity_relation?: XOR<MagicItemRarityScalarRelationFilter, MagicItemRarityWhereInput>
+    source_relation?: XOR<SourceScalarRelationFilter, SourceWhereInput>
+    attunements_relation?: MagicItemAttunementListRelationFilter
+  }, "id">
+
+  export type MagicItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    type_id?: SortOrder
+    rarity_id?: SortOrder
+    source_id?: SortOrder
+    _count?: MagicItemCountOrderByAggregateInput
+    _avg?: MagicItemAvgOrderByAggregateInput
+    _max?: MagicItemMaxOrderByAggregateInput
+    _min?: MagicItemMinOrderByAggregateInput
+    _sum?: MagicItemSumOrderByAggregateInput
+  }
+
+  export type MagicItemScalarWhereWithAggregatesInput = {
+    AND?: MagicItemScalarWhereWithAggregatesInput | MagicItemScalarWhereWithAggregatesInput[]
+    OR?: MagicItemScalarWhereWithAggregatesInput[]
+    NOT?: MagicItemScalarWhereWithAggregatesInput | MagicItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MagicItem"> | string
+    name?: StringWithAggregatesFilter<"MagicItem"> | string
+    description?: StringWithAggregatesFilter<"MagicItem"> | string
+    type_id?: StringWithAggregatesFilter<"MagicItem"> | string
+    rarity_id?: StringWithAggregatesFilter<"MagicItem"> | string
+    source_id?: IntWithAggregatesFilter<"MagicItem"> | number
+  }
+
+  export type MagicItemRarityWhereInput = {
+    AND?: MagicItemRarityWhereInput | MagicItemRarityWhereInput[]
+    OR?: MagicItemRarityWhereInput[]
+    NOT?: MagicItemRarityWhereInput | MagicItemRarityWhereInput[]
+    id?: StringFilter<"MagicItemRarity"> | string
+    cost?: StringFilter<"MagicItemRarity"> | string
+    name?: StringFilter<"MagicItemRarity"> | string
+    name_he?: StringFilter<"MagicItemRarity"> | string
+    name_she?: StringFilter<"MagicItemRarity"> | string
+    name_it?: StringFilter<"MagicItemRarity"> | string
+    magicItems?: MagicItemListRelationFilter
+  }
+
+  export type MagicItemRarityOrderByWithRelationInput = {
+    id?: SortOrder
+    cost?: SortOrder
+    name?: SortOrder
+    name_he?: SortOrder
+    name_she?: SortOrder
+    name_it?: SortOrder
+    magicItems?: MagicItemOrderByRelationAggregateInput
+  }
+
+  export type MagicItemRarityWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MagicItemRarityWhereInput | MagicItemRarityWhereInput[]
+    OR?: MagicItemRarityWhereInput[]
+    NOT?: MagicItemRarityWhereInput | MagicItemRarityWhereInput[]
+    cost?: StringFilter<"MagicItemRarity"> | string
+    name?: StringFilter<"MagicItemRarity"> | string
+    name_he?: StringFilter<"MagicItemRarity"> | string
+    name_she?: StringFilter<"MagicItemRarity"> | string
+    name_it?: StringFilter<"MagicItemRarity"> | string
+    magicItems?: MagicItemListRelationFilter
+  }, "id">
+
+  export type MagicItemRarityOrderByWithAggregationInput = {
+    id?: SortOrder
+    cost?: SortOrder
+    name?: SortOrder
+    name_he?: SortOrder
+    name_she?: SortOrder
+    name_it?: SortOrder
+    _count?: MagicItemRarityCountOrderByAggregateInput
+    _max?: MagicItemRarityMaxOrderByAggregateInput
+    _min?: MagicItemRarityMinOrderByAggregateInput
+  }
+
+  export type MagicItemRarityScalarWhereWithAggregatesInput = {
+    AND?: MagicItemRarityScalarWhereWithAggregatesInput | MagicItemRarityScalarWhereWithAggregatesInput[]
+    OR?: MagicItemRarityScalarWhereWithAggregatesInput[]
+    NOT?: MagicItemRarityScalarWhereWithAggregatesInput | MagicItemRarityScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MagicItemRarity"> | string
+    cost?: StringWithAggregatesFilter<"MagicItemRarity"> | string
+    name?: StringWithAggregatesFilter<"MagicItemRarity"> | string
+    name_he?: StringWithAggregatesFilter<"MagicItemRarity"> | string
+    name_she?: StringWithAggregatesFilter<"MagicItemRarity"> | string
+    name_it?: StringWithAggregatesFilter<"MagicItemRarity"> | string
+  }
+
+  export type MagicItemTypeWhereInput = {
+    AND?: MagicItemTypeWhereInput | MagicItemTypeWhereInput[]
+    OR?: MagicItemTypeWhereInput[]
+    NOT?: MagicItemTypeWhereInput | MagicItemTypeWhereInput[]
+    id?: StringFilter<"MagicItemType"> | string
+    name?: StringFilter<"MagicItemType"> | string
+    gender?: EnumGenderFilter<"MagicItemType"> | $Enums.Gender
+    magicItems?: MagicItemListRelationFilter
+  }
+
+  export type MagicItemTypeOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    gender?: SortOrder
+    magicItems?: MagicItemOrderByRelationAggregateInput
+  }
+
+  export type MagicItemTypeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: MagicItemTypeWhereInput | MagicItemTypeWhereInput[]
+    OR?: MagicItemTypeWhereInput[]
+    NOT?: MagicItemTypeWhereInput | MagicItemTypeWhereInput[]
+    name?: StringFilter<"MagicItemType"> | string
+    gender?: EnumGenderFilter<"MagicItemType"> | $Enums.Gender
+    magicItems?: MagicItemListRelationFilter
+  }, "id">
+
+  export type MagicItemTypeOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    gender?: SortOrder
+    _count?: MagicItemTypeCountOrderByAggregateInput
+    _max?: MagicItemTypeMaxOrderByAggregateInput
+    _min?: MagicItemTypeMinOrderByAggregateInput
+  }
+
+  export type MagicItemTypeScalarWhereWithAggregatesInput = {
+    AND?: MagicItemTypeScalarWhereWithAggregatesInput | MagicItemTypeScalarWhereWithAggregatesInput[]
+    OR?: MagicItemTypeScalarWhereWithAggregatesInput[]
+    NOT?: MagicItemTypeScalarWhereWithAggregatesInput | MagicItemTypeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MagicItemType"> | string
+    name?: StringWithAggregatesFilter<"MagicItemType"> | string
+    gender?: EnumGenderWithAggregatesFilter<"MagicItemType"> | $Enums.Gender
+  }
+
+  export type AttunementConditionWhereInput = {
+    AND?: AttunementConditionWhereInput | AttunementConditionWhereInput[]
+    OR?: AttunementConditionWhereInput[]
+    NOT?: AttunementConditionWhereInput | AttunementConditionWhereInput[]
+    id?: StringFilter<"AttunementCondition"> | string
+    label?: StringFilter<"AttunementCondition"> | string
+    magicItems?: MagicItemAttunementListRelationFilter
+  }
+
+  export type AttunementConditionOrderByWithRelationInput = {
+    id?: SortOrder
+    label?: SortOrder
+    magicItems?: MagicItemAttunementOrderByRelationAggregateInput
+  }
+
+  export type AttunementConditionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    label?: string
+    AND?: AttunementConditionWhereInput | AttunementConditionWhereInput[]
+    OR?: AttunementConditionWhereInput[]
+    NOT?: AttunementConditionWhereInput | AttunementConditionWhereInput[]
+    magicItems?: MagicItemAttunementListRelationFilter
+  }, "id" | "label">
+
+  export type AttunementConditionOrderByWithAggregationInput = {
+    id?: SortOrder
+    label?: SortOrder
+    _count?: AttunementConditionCountOrderByAggregateInput
+    _max?: AttunementConditionMaxOrderByAggregateInput
+    _min?: AttunementConditionMinOrderByAggregateInput
+  }
+
+  export type AttunementConditionScalarWhereWithAggregatesInput = {
+    AND?: AttunementConditionScalarWhereWithAggregatesInput | AttunementConditionScalarWhereWithAggregatesInput[]
+    OR?: AttunementConditionScalarWhereWithAggregatesInput[]
+    NOT?: AttunementConditionScalarWhereWithAggregatesInput | AttunementConditionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"AttunementCondition"> | string
+    label?: StringWithAggregatesFilter<"AttunementCondition"> | string
+  }
+
+  export type MagicItemAttunementWhereInput = {
+    AND?: MagicItemAttunementWhereInput | MagicItemAttunementWhereInput[]
+    OR?: MagicItemAttunementWhereInput[]
+    NOT?: MagicItemAttunementWhereInput | MagicItemAttunementWhereInput[]
+    magicItemId?: StringFilter<"MagicItemAttunement"> | string
+    attunementId?: StringFilter<"MagicItemAttunement"> | string
+    magicItem?: XOR<MagicItemScalarRelationFilter, MagicItemWhereInput>
+    attunement?: XOR<AttunementConditionScalarRelationFilter, AttunementConditionWhereInput>
+  }
+
+  export type MagicItemAttunementOrderByWithRelationInput = {
+    magicItemId?: SortOrder
+    attunementId?: SortOrder
+    magicItem?: MagicItemOrderByWithRelationInput
+    attunement?: AttunementConditionOrderByWithRelationInput
+  }
+
+  export type MagicItemAttunementWhereUniqueInput = Prisma.AtLeast<{
+    magicItemId_attunementId?: MagicItemAttunementMagicItemIdAttunementIdCompoundUniqueInput
+    AND?: MagicItemAttunementWhereInput | MagicItemAttunementWhereInput[]
+    OR?: MagicItemAttunementWhereInput[]
+    NOT?: MagicItemAttunementWhereInput | MagicItemAttunementWhereInput[]
+    magicItemId?: StringFilter<"MagicItemAttunement"> | string
+    attunementId?: StringFilter<"MagicItemAttunement"> | string
+    magicItem?: XOR<MagicItemScalarRelationFilter, MagicItemWhereInput>
+    attunement?: XOR<AttunementConditionScalarRelationFilter, AttunementConditionWhereInput>
+  }, "magicItemId_attunementId">
+
+  export type MagicItemAttunementOrderByWithAggregationInput = {
+    magicItemId?: SortOrder
+    attunementId?: SortOrder
+    _count?: MagicItemAttunementCountOrderByAggregateInput
+    _max?: MagicItemAttunementMaxOrderByAggregateInput
+    _min?: MagicItemAttunementMinOrderByAggregateInput
+  }
+
+  export type MagicItemAttunementScalarWhereWithAggregatesInput = {
+    AND?: MagicItemAttunementScalarWhereWithAggregatesInput | MagicItemAttunementScalarWhereWithAggregatesInput[]
+    OR?: MagicItemAttunementScalarWhereWithAggregatesInput[]
+    NOT?: MagicItemAttunementScalarWhereWithAggregatesInput | MagicItemAttunementScalarWhereWithAggregatesInput[]
+    magicItemId?: StringWithAggregatesFilter<"MagicItemAttunement"> | string
+    attunementId?: StringWithAggregatesFilter<"MagicItemAttunement"> | string
   }
 
   export type SizeCreateInput = {
@@ -64771,45 +71062,49 @@ export namespace Prisma {
   }
 
   export type SourceCreateInput = {
-    shortName: string
+    short_name: string
     name: string
     creatures?: CreatureCreateNestedManyWithoutSource_relationInput
+    magicItems?: MagicItemCreateNestedManyWithoutSource_relationInput
   }
 
   export type SourceUncheckedCreateInput = {
     id?: number
-    shortName: string
+    short_name: string
     name: string
     creatures?: CreatureUncheckedCreateNestedManyWithoutSource_relationInput
+    magicItems?: MagicItemUncheckedCreateNestedManyWithoutSource_relationInput
   }
 
   export type SourceUpdateInput = {
-    shortName?: StringFieldUpdateOperationsInput | string
+    short_name?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     creatures?: CreatureUpdateManyWithoutSource_relationNestedInput
+    magicItems?: MagicItemUpdateManyWithoutSource_relationNestedInput
   }
 
   export type SourceUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    shortName?: StringFieldUpdateOperationsInput | string
+    short_name?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     creatures?: CreatureUncheckedUpdateManyWithoutSource_relationNestedInput
+    magicItems?: MagicItemUncheckedUpdateManyWithoutSource_relationNestedInput
   }
 
   export type SourceCreateManyInput = {
     id?: number
-    shortName: string
+    short_name: string
     name: string
   }
 
   export type SourceUpdateManyMutationInput = {
-    shortName?: StringFieldUpdateOperationsInput | string
+    short_name?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type SourceUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    shortName?: StringFieldUpdateOperationsInput | string
+    short_name?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
   }
 
@@ -67034,8 +73329,8 @@ export namespace Prisma {
     creator_id: string
     created_at?: Date | string
     updated_at?: Date | string
-    genre: GenreCreateNestedOneWithoutAdventuresInput
-    keywords?: KeywordCreateNestedManyWithoutAdventuresInput
+    genre_relation: GenreCreateNestedOneWithoutAdventures_relationInput
+    keywords_relation?: KeywordCreateNestedManyWithoutAdventures_relationInput
   }
 
   export type AdventureUncheckedCreateInput = {
@@ -67045,7 +73340,7 @@ export namespace Prisma {
     creator_id: string
     created_at?: Date | string
     updated_at?: Date | string
-    keywords?: KeywordUncheckedCreateNestedManyWithoutAdventuresInput
+    keywords_relation?: KeywordUncheckedCreateNestedManyWithoutAdventures_relationInput
   }
 
   export type AdventureUpdateInput = {
@@ -67054,8 +73349,8 @@ export namespace Prisma {
     creator_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    genre?: GenreUpdateOneRequiredWithoutAdventuresNestedInput
-    keywords?: KeywordUpdateManyWithoutAdventuresNestedInput
+    genre_relation?: GenreUpdateOneRequiredWithoutAdventures_relationNestedInput
+    keywords_relation?: KeywordUpdateManyWithoutAdventures_relationNestedInput
   }
 
   export type AdventureUncheckedUpdateInput = {
@@ -67065,7 +73360,7 @@ export namespace Prisma {
     creator_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    keywords?: KeywordUncheckedUpdateManyWithoutAdventuresNestedInput
+    keywords_relation?: KeywordUncheckedUpdateManyWithoutAdventures_relationNestedInput
   }
 
   export type AdventureCreateManyInput = {
@@ -67097,29 +73392,29 @@ export namespace Prisma {
   export type KeywordCreateInput = {
     id?: string
     name: string
-    genre: GenreCreateNestedOneWithoutKeywordsInput
-    adventures?: AdventureCreateNestedManyWithoutKeywordsInput
+    genre_relation: GenreCreateNestedOneWithoutKeywords_relationInput
+    adventures_relation?: AdventureCreateNestedManyWithoutKeywords_relationInput
   }
 
   export type KeywordUncheckedCreateInput = {
     id?: string
     name: string
     genre_id: string
-    adventures?: AdventureUncheckedCreateNestedManyWithoutKeywordsInput
+    adventures_relation?: AdventureUncheckedCreateNestedManyWithoutKeywords_relationInput
   }
 
   export type KeywordUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    genre?: GenreUpdateOneRequiredWithoutKeywordsNestedInput
-    adventures?: AdventureUpdateManyWithoutKeywordsNestedInput
+    genre_relation?: GenreUpdateOneRequiredWithoutKeywords_relationNestedInput
+    adventures_relation?: AdventureUpdateManyWithoutKeywords_relationNestedInput
   }
 
   export type KeywordUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     genre_id?: StringFieldUpdateOperationsInput | string
-    adventures?: AdventureUncheckedUpdateManyWithoutKeywordsNestedInput
+    adventures_relation?: AdventureUncheckedUpdateManyWithoutKeywords_relationNestedInput
   }
 
   export type KeywordCreateManyInput = {
@@ -67142,29 +73437,29 @@ export namespace Prisma {
   export type GenreCreateInput = {
     id?: string
     name: string
-    keywords?: KeywordCreateNestedManyWithoutGenreInput
-    adventures?: AdventureCreateNestedManyWithoutGenreInput
+    keywords_relation?: KeywordCreateNestedManyWithoutGenre_relationInput
+    adventures_relation?: AdventureCreateNestedManyWithoutGenre_relationInput
   }
 
   export type GenreUncheckedCreateInput = {
     id?: string
     name: string
-    keywords?: KeywordUncheckedCreateNestedManyWithoutGenreInput
-    adventures?: AdventureUncheckedCreateNestedManyWithoutGenreInput
+    keywords_relation?: KeywordUncheckedCreateNestedManyWithoutGenre_relationInput
+    adventures_relation?: AdventureUncheckedCreateNestedManyWithoutGenre_relationInput
   }
 
   export type GenreUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    keywords?: KeywordUpdateManyWithoutGenreNestedInput
-    adventures?: AdventureUpdateManyWithoutGenreNestedInput
+    keywords_relation?: KeywordUpdateManyWithoutGenre_relationNestedInput
+    adventures_relation?: AdventureUpdateManyWithoutGenre_relationNestedInput
   }
 
   export type GenreUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    keywords?: KeywordUncheckedUpdateManyWithoutGenreNestedInput
-    adventures?: AdventureUncheckedUpdateManyWithoutGenreNestedInput
+    keywords_relation?: KeywordUncheckedUpdateManyWithoutGenre_relationNestedInput
+    adventures_relation?: AdventureUncheckedUpdateManyWithoutGenre_relationNestedInput
   }
 
   export type GenreCreateManyInput = {
@@ -67180,6 +73475,256 @@ export namespace Prisma {
   export type GenreUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MagicItemCreateInput = {
+    id?: string
+    name: string
+    description: string
+    type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
+    rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
+    source_relation: SourceCreateNestedOneWithoutMagicItemsInput
+    attunements_relation?: MagicItemAttunementCreateNestedManyWithoutMagicItemInput
+  }
+
+  export type MagicItemUncheckedCreateInput = {
+    id?: string
+    name: string
+    description: string
+    type_id: string
+    rarity_id: string
+    source_id: number
+    attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
+  }
+
+  export type MagicItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
+    rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
+    source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
+    attunements_relation?: MagicItemAttunementUpdateManyWithoutMagicItemNestedInput
+  }
+
+  export type MagicItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type_id?: StringFieldUpdateOperationsInput | string
+    rarity_id?: StringFieldUpdateOperationsInput | string
+    source_id?: IntFieldUpdateOperationsInput | number
+    attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
+  }
+
+  export type MagicItemCreateManyInput = {
+    id?: string
+    name: string
+    description: string
+    type_id: string
+    rarity_id: string
+    source_id: number
+  }
+
+  export type MagicItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MagicItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type_id?: StringFieldUpdateOperationsInput | string
+    rarity_id?: StringFieldUpdateOperationsInput | string
+    source_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MagicItemRarityCreateInput = {
+    id: string
+    cost: string
+    name: string
+    name_he: string
+    name_she: string
+    name_it: string
+    magicItems?: MagicItemCreateNestedManyWithoutRarity_relationInput
+  }
+
+  export type MagicItemRarityUncheckedCreateInput = {
+    id: string
+    cost: string
+    name: string
+    name_he: string
+    name_she: string
+    name_it: string
+    magicItems?: MagicItemUncheckedCreateNestedManyWithoutRarity_relationInput
+  }
+
+  export type MagicItemRarityUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cost?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    name_he?: StringFieldUpdateOperationsInput | string
+    name_she?: StringFieldUpdateOperationsInput | string
+    name_it?: StringFieldUpdateOperationsInput | string
+    magicItems?: MagicItemUpdateManyWithoutRarity_relationNestedInput
+  }
+
+  export type MagicItemRarityUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cost?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    name_he?: StringFieldUpdateOperationsInput | string
+    name_she?: StringFieldUpdateOperationsInput | string
+    name_it?: StringFieldUpdateOperationsInput | string
+    magicItems?: MagicItemUncheckedUpdateManyWithoutRarity_relationNestedInput
+  }
+
+  export type MagicItemRarityCreateManyInput = {
+    id: string
+    cost: string
+    name: string
+    name_he: string
+    name_she: string
+    name_it: string
+  }
+
+  export type MagicItemRarityUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cost?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    name_he?: StringFieldUpdateOperationsInput | string
+    name_she?: StringFieldUpdateOperationsInput | string
+    name_it?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MagicItemRarityUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cost?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    name_he?: StringFieldUpdateOperationsInput | string
+    name_she?: StringFieldUpdateOperationsInput | string
+    name_it?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MagicItemTypeCreateInput = {
+    id: string
+    name: string
+    gender: $Enums.Gender
+    magicItems?: MagicItemCreateNestedManyWithoutType_relationInput
+  }
+
+  export type MagicItemTypeUncheckedCreateInput = {
+    id: string
+    name: string
+    gender: $Enums.Gender
+    magicItems?: MagicItemUncheckedCreateNestedManyWithoutType_relationInput
+  }
+
+  export type MagicItemTypeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    magicItems?: MagicItemUpdateManyWithoutType_relationNestedInput
+  }
+
+  export type MagicItemTypeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    magicItems?: MagicItemUncheckedUpdateManyWithoutType_relationNestedInput
+  }
+
+  export type MagicItemTypeCreateManyInput = {
+    id: string
+    name: string
+    gender: $Enums.Gender
+  }
+
+  export type MagicItemTypeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  }
+
+  export type MagicItemTypeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  }
+
+  export type AttunementConditionCreateInput = {
+    id?: string
+    label: string
+    magicItems?: MagicItemAttunementCreateNestedManyWithoutAttunementInput
+  }
+
+  export type AttunementConditionUncheckedCreateInput = {
+    id?: string
+    label: string
+    magicItems?: MagicItemAttunementUncheckedCreateNestedManyWithoutAttunementInput
+  }
+
+  export type AttunementConditionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    magicItems?: MagicItemAttunementUpdateManyWithoutAttunementNestedInput
+  }
+
+  export type AttunementConditionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+    magicItems?: MagicItemAttunementUncheckedUpdateManyWithoutAttunementNestedInput
+  }
+
+  export type AttunementConditionCreateManyInput = {
+    id?: string
+    label: string
+  }
+
+  export type AttunementConditionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AttunementConditionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MagicItemAttunementCreateInput = {
+    magicItem: MagicItemCreateNestedOneWithoutAttunements_relationInput
+    attunement: AttunementConditionCreateNestedOneWithoutMagicItemsInput
+  }
+
+  export type MagicItemAttunementUncheckedCreateInput = {
+    magicItemId: string
+    attunementId: string
+  }
+
+  export type MagicItemAttunementUpdateInput = {
+    magicItem?: MagicItemUpdateOneRequiredWithoutAttunements_relationNestedInput
+    attunement?: AttunementConditionUpdateOneRequiredWithoutMagicItemsNestedInput
+  }
+
+  export type MagicItemAttunementUncheckedUpdateInput = {
+    magicItemId?: StringFieldUpdateOperationsInput | string
+    attunementId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MagicItemAttunementCreateManyInput = {
+    magicItemId: string
+    attunementId: string
+  }
+
+  export type MagicItemAttunementUpdateManyMutationInput = {
+
+  }
+
+  export type MagicItemAttunementUncheckedUpdateManyInput = {
+    magicItemId?: StringFieldUpdateOperationsInput | string
+    attunementId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -67251,9 +73796,19 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type MagicItemListRelationFilter = {
+    every?: MagicItemWhereInput
+    some?: MagicItemWhereInput
+    none?: MagicItemWhereInput
+  }
+
+  export type MagicItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type SourceCountOrderByAggregateInput = {
     id?: SortOrder
-    shortName?: SortOrder
+    short_name?: SortOrder
     name?: SortOrder
   }
 
@@ -67263,13 +73818,13 @@ export namespace Prisma {
 
   export type SourceMaxOrderByAggregateInput = {
     id?: SortOrder
-    shortName?: SortOrder
+    short_name?: SortOrder
     name?: SortOrder
   }
 
   export type SourceMinOrderByAggregateInput = {
     id?: SortOrder
-    shortName?: SortOrder
+    short_name?: SortOrder
     name?: SortOrder
   }
 
@@ -69003,6 +75558,173 @@ export namespace Prisma {
     name?: SortOrder
   }
 
+  export type MagicItemTypeScalarRelationFilter = {
+    is?: MagicItemTypeWhereInput
+    isNot?: MagicItemTypeWhereInput
+  }
+
+  export type MagicItemRarityScalarRelationFilter = {
+    is?: MagicItemRarityWhereInput
+    isNot?: MagicItemRarityWhereInput
+  }
+
+  export type SourceScalarRelationFilter = {
+    is?: SourceWhereInput
+    isNot?: SourceWhereInput
+  }
+
+  export type MagicItemAttunementListRelationFilter = {
+    every?: MagicItemAttunementWhereInput
+    some?: MagicItemAttunementWhereInput
+    none?: MagicItemAttunementWhereInput
+  }
+
+  export type MagicItemAttunementOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type MagicItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    type_id?: SortOrder
+    rarity_id?: SortOrder
+    source_id?: SortOrder
+  }
+
+  export type MagicItemAvgOrderByAggregateInput = {
+    source_id?: SortOrder
+  }
+
+  export type MagicItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    type_id?: SortOrder
+    rarity_id?: SortOrder
+    source_id?: SortOrder
+  }
+
+  export type MagicItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    type_id?: SortOrder
+    rarity_id?: SortOrder
+    source_id?: SortOrder
+  }
+
+  export type MagicItemSumOrderByAggregateInput = {
+    source_id?: SortOrder
+  }
+
+  export type MagicItemRarityCountOrderByAggregateInput = {
+    id?: SortOrder
+    cost?: SortOrder
+    name?: SortOrder
+    name_he?: SortOrder
+    name_she?: SortOrder
+    name_it?: SortOrder
+  }
+
+  export type MagicItemRarityMaxOrderByAggregateInput = {
+    id?: SortOrder
+    cost?: SortOrder
+    name?: SortOrder
+    name_he?: SortOrder
+    name_she?: SortOrder
+    name_it?: SortOrder
+  }
+
+  export type MagicItemRarityMinOrderByAggregateInput = {
+    id?: SortOrder
+    cost?: SortOrder
+    name?: SortOrder
+    name_he?: SortOrder
+    name_she?: SortOrder
+    name_it?: SortOrder
+  }
+
+  export type EnumGenderFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
+  }
+
+  export type MagicItemTypeCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    gender?: SortOrder
+  }
+
+  export type MagicItemTypeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    gender?: SortOrder
+  }
+
+  export type MagicItemTypeMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    gender?: SortOrder
+  }
+
+  export type EnumGenderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderWithAggregatesFilter<$PrismaModel> | $Enums.Gender
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGenderFilter<$PrismaModel>
+    _max?: NestedEnumGenderFilter<$PrismaModel>
+  }
+
+  export type AttunementConditionCountOrderByAggregateInput = {
+    id?: SortOrder
+    label?: SortOrder
+  }
+
+  export type AttunementConditionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    label?: SortOrder
+  }
+
+  export type AttunementConditionMinOrderByAggregateInput = {
+    id?: SortOrder
+    label?: SortOrder
+  }
+
+  export type MagicItemScalarRelationFilter = {
+    is?: MagicItemWhereInput
+    isNot?: MagicItemWhereInput
+  }
+
+  export type AttunementConditionScalarRelationFilter = {
+    is?: AttunementConditionWhereInput
+    isNot?: AttunementConditionWhereInput
+  }
+
+  export type MagicItemAttunementMagicItemIdAttunementIdCompoundUniqueInput = {
+    magicItemId: string
+    attunementId: string
+  }
+
+  export type MagicItemAttunementCountOrderByAggregateInput = {
+    magicItemId?: SortOrder
+    attunementId?: SortOrder
+  }
+
+  export type MagicItemAttunementMaxOrderByAggregateInput = {
+    magicItemId?: SortOrder
+    attunementId?: SortOrder
+  }
+
+  export type MagicItemAttunementMinOrderByAggregateInput = {
+    magicItemId?: SortOrder
+    attunementId?: SortOrder
+  }
+
   export type CreatureCreateNestedManyWithoutSize_relationInput = {
     create?: XOR<CreatureCreateWithoutSize_relationInput, CreatureUncheckedCreateWithoutSize_relationInput> | CreatureCreateWithoutSize_relationInput[] | CreatureUncheckedCreateWithoutSize_relationInput[]
     connectOrCreate?: CreatureCreateOrConnectWithoutSize_relationInput | CreatureCreateOrConnectWithoutSize_relationInput[]
@@ -69056,11 +75778,25 @@ export namespace Prisma {
     connect?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
   }
 
+  export type MagicItemCreateNestedManyWithoutSource_relationInput = {
+    create?: XOR<MagicItemCreateWithoutSource_relationInput, MagicItemUncheckedCreateWithoutSource_relationInput> | MagicItemCreateWithoutSource_relationInput[] | MagicItemUncheckedCreateWithoutSource_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutSource_relationInput | MagicItemCreateOrConnectWithoutSource_relationInput[]
+    createMany?: MagicItemCreateManySource_relationInputEnvelope
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+  }
+
   export type CreatureUncheckedCreateNestedManyWithoutSource_relationInput = {
     create?: XOR<CreatureCreateWithoutSource_relationInput, CreatureUncheckedCreateWithoutSource_relationInput> | CreatureCreateWithoutSource_relationInput[] | CreatureUncheckedCreateWithoutSource_relationInput[]
     connectOrCreate?: CreatureCreateOrConnectWithoutSource_relationInput | CreatureCreateOrConnectWithoutSource_relationInput[]
     createMany?: CreatureCreateManySource_relationInputEnvelope
     connect?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
+  }
+
+  export type MagicItemUncheckedCreateNestedManyWithoutSource_relationInput = {
+    create?: XOR<MagicItemCreateWithoutSource_relationInput, MagicItemUncheckedCreateWithoutSource_relationInput> | MagicItemCreateWithoutSource_relationInput[] | MagicItemUncheckedCreateWithoutSource_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutSource_relationInput | MagicItemCreateOrConnectWithoutSource_relationInput[]
+    createMany?: MagicItemCreateManySource_relationInputEnvelope
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
   }
 
   export type CreatureUpdateManyWithoutSource_relationNestedInput = {
@@ -69075,6 +75811,20 @@ export namespace Prisma {
     update?: CreatureUpdateWithWhereUniqueWithoutSource_relationInput | CreatureUpdateWithWhereUniqueWithoutSource_relationInput[]
     updateMany?: CreatureUpdateManyWithWhereWithoutSource_relationInput | CreatureUpdateManyWithWhereWithoutSource_relationInput[]
     deleteMany?: CreatureScalarWhereInput | CreatureScalarWhereInput[]
+  }
+
+  export type MagicItemUpdateManyWithoutSource_relationNestedInput = {
+    create?: XOR<MagicItemCreateWithoutSource_relationInput, MagicItemUncheckedCreateWithoutSource_relationInput> | MagicItemCreateWithoutSource_relationInput[] | MagicItemUncheckedCreateWithoutSource_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutSource_relationInput | MagicItemCreateOrConnectWithoutSource_relationInput[]
+    upsert?: MagicItemUpsertWithWhereUniqueWithoutSource_relationInput | MagicItemUpsertWithWhereUniqueWithoutSource_relationInput[]
+    createMany?: MagicItemCreateManySource_relationInputEnvelope
+    set?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    disconnect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    delete?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    update?: MagicItemUpdateWithWhereUniqueWithoutSource_relationInput | MagicItemUpdateWithWhereUniqueWithoutSource_relationInput[]
+    updateMany?: MagicItemUpdateManyWithWhereWithoutSource_relationInput | MagicItemUpdateManyWithWhereWithoutSource_relationInput[]
+    deleteMany?: MagicItemScalarWhereInput | MagicItemScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -69097,6 +75847,20 @@ export namespace Prisma {
     update?: CreatureUpdateWithWhereUniqueWithoutSource_relationInput | CreatureUpdateWithWhereUniqueWithoutSource_relationInput[]
     updateMany?: CreatureUpdateManyWithWhereWithoutSource_relationInput | CreatureUpdateManyWithWhereWithoutSource_relationInput[]
     deleteMany?: CreatureScalarWhereInput | CreatureScalarWhereInput[]
+  }
+
+  export type MagicItemUncheckedUpdateManyWithoutSource_relationNestedInput = {
+    create?: XOR<MagicItemCreateWithoutSource_relationInput, MagicItemUncheckedCreateWithoutSource_relationInput> | MagicItemCreateWithoutSource_relationInput[] | MagicItemUncheckedCreateWithoutSource_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutSource_relationInput | MagicItemCreateOrConnectWithoutSource_relationInput[]
+    upsert?: MagicItemUpsertWithWhereUniqueWithoutSource_relationInput | MagicItemUpsertWithWhereUniqueWithoutSource_relationInput[]
+    createMany?: MagicItemCreateManySource_relationInputEnvelope
+    set?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    disconnect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    delete?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    update?: MagicItemUpdateWithWhereUniqueWithoutSource_relationInput | MagicItemUpdateWithWhereUniqueWithoutSource_relationInput[]
+    updateMany?: MagicItemUpdateManyWithWhereWithoutSource_relationInput | MagicItemUpdateManyWithWhereWithoutSource_relationInput[]
+    deleteMany?: MagicItemScalarWhereInput | MagicItemScalarWhereInput[]
   }
 
   export type CreatureCreateNestedManyWithoutLanguagesInput = {
@@ -71601,21 +78365,21 @@ export namespace Prisma {
     update?: XOR<XOR<GPTMessageHistoryUpdateToOneWithWhereWithoutMessagesInput, GPTMessageHistoryUpdateWithoutMessagesInput>, GPTMessageHistoryUncheckedUpdateWithoutMessagesInput>
   }
 
-  export type GenreCreateNestedOneWithoutAdventuresInput = {
-    create?: XOR<GenreCreateWithoutAdventuresInput, GenreUncheckedCreateWithoutAdventuresInput>
-    connectOrCreate?: GenreCreateOrConnectWithoutAdventuresInput
+  export type GenreCreateNestedOneWithoutAdventures_relationInput = {
+    create?: XOR<GenreCreateWithoutAdventures_relationInput, GenreUncheckedCreateWithoutAdventures_relationInput>
+    connectOrCreate?: GenreCreateOrConnectWithoutAdventures_relationInput
     connect?: GenreWhereUniqueInput
   }
 
-  export type KeywordCreateNestedManyWithoutAdventuresInput = {
-    create?: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput> | KeywordCreateWithoutAdventuresInput[] | KeywordUncheckedCreateWithoutAdventuresInput[]
-    connectOrCreate?: KeywordCreateOrConnectWithoutAdventuresInput | KeywordCreateOrConnectWithoutAdventuresInput[]
+  export type KeywordCreateNestedManyWithoutAdventures_relationInput = {
+    create?: XOR<KeywordCreateWithoutAdventures_relationInput, KeywordUncheckedCreateWithoutAdventures_relationInput> | KeywordCreateWithoutAdventures_relationInput[] | KeywordUncheckedCreateWithoutAdventures_relationInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutAdventures_relationInput | KeywordCreateOrConnectWithoutAdventures_relationInput[]
     connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
   }
 
-  export type KeywordUncheckedCreateNestedManyWithoutAdventuresInput = {
-    create?: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput> | KeywordCreateWithoutAdventuresInput[] | KeywordUncheckedCreateWithoutAdventuresInput[]
-    connectOrCreate?: KeywordCreateOrConnectWithoutAdventuresInput | KeywordCreateOrConnectWithoutAdventuresInput[]
+  export type KeywordUncheckedCreateNestedManyWithoutAdventures_relationInput = {
+    create?: XOR<KeywordCreateWithoutAdventures_relationInput, KeywordUncheckedCreateWithoutAdventures_relationInput> | KeywordCreateWithoutAdventures_relationInput[] | KeywordUncheckedCreateWithoutAdventures_relationInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutAdventures_relationInput | KeywordCreateOrConnectWithoutAdventures_relationInput[]
     connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
   }
 
@@ -71623,174 +78387,416 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type GenreUpdateOneRequiredWithoutAdventuresNestedInput = {
-    create?: XOR<GenreCreateWithoutAdventuresInput, GenreUncheckedCreateWithoutAdventuresInput>
-    connectOrCreate?: GenreCreateOrConnectWithoutAdventuresInput
-    upsert?: GenreUpsertWithoutAdventuresInput
+  export type GenreUpdateOneRequiredWithoutAdventures_relationNestedInput = {
+    create?: XOR<GenreCreateWithoutAdventures_relationInput, GenreUncheckedCreateWithoutAdventures_relationInput>
+    connectOrCreate?: GenreCreateOrConnectWithoutAdventures_relationInput
+    upsert?: GenreUpsertWithoutAdventures_relationInput
     connect?: GenreWhereUniqueInput
-    update?: XOR<XOR<GenreUpdateToOneWithWhereWithoutAdventuresInput, GenreUpdateWithoutAdventuresInput>, GenreUncheckedUpdateWithoutAdventuresInput>
+    update?: XOR<XOR<GenreUpdateToOneWithWhereWithoutAdventures_relationInput, GenreUpdateWithoutAdventures_relationInput>, GenreUncheckedUpdateWithoutAdventures_relationInput>
   }
 
-  export type KeywordUpdateManyWithoutAdventuresNestedInput = {
-    create?: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput> | KeywordCreateWithoutAdventuresInput[] | KeywordUncheckedCreateWithoutAdventuresInput[]
-    connectOrCreate?: KeywordCreateOrConnectWithoutAdventuresInput | KeywordCreateOrConnectWithoutAdventuresInput[]
-    upsert?: KeywordUpsertWithWhereUniqueWithoutAdventuresInput | KeywordUpsertWithWhereUniqueWithoutAdventuresInput[]
+  export type KeywordUpdateManyWithoutAdventures_relationNestedInput = {
+    create?: XOR<KeywordCreateWithoutAdventures_relationInput, KeywordUncheckedCreateWithoutAdventures_relationInput> | KeywordCreateWithoutAdventures_relationInput[] | KeywordUncheckedCreateWithoutAdventures_relationInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutAdventures_relationInput | KeywordCreateOrConnectWithoutAdventures_relationInput[]
+    upsert?: KeywordUpsertWithWhereUniqueWithoutAdventures_relationInput | KeywordUpsertWithWhereUniqueWithoutAdventures_relationInput[]
     set?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     disconnect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     delete?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
-    update?: KeywordUpdateWithWhereUniqueWithoutAdventuresInput | KeywordUpdateWithWhereUniqueWithoutAdventuresInput[]
-    updateMany?: KeywordUpdateManyWithWhereWithoutAdventuresInput | KeywordUpdateManyWithWhereWithoutAdventuresInput[]
+    update?: KeywordUpdateWithWhereUniqueWithoutAdventures_relationInput | KeywordUpdateWithWhereUniqueWithoutAdventures_relationInput[]
+    updateMany?: KeywordUpdateManyWithWhereWithoutAdventures_relationInput | KeywordUpdateManyWithWhereWithoutAdventures_relationInput[]
     deleteMany?: KeywordScalarWhereInput | KeywordScalarWhereInput[]
   }
 
-  export type KeywordUncheckedUpdateManyWithoutAdventuresNestedInput = {
-    create?: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput> | KeywordCreateWithoutAdventuresInput[] | KeywordUncheckedCreateWithoutAdventuresInput[]
-    connectOrCreate?: KeywordCreateOrConnectWithoutAdventuresInput | KeywordCreateOrConnectWithoutAdventuresInput[]
-    upsert?: KeywordUpsertWithWhereUniqueWithoutAdventuresInput | KeywordUpsertWithWhereUniqueWithoutAdventuresInput[]
+  export type KeywordUncheckedUpdateManyWithoutAdventures_relationNestedInput = {
+    create?: XOR<KeywordCreateWithoutAdventures_relationInput, KeywordUncheckedCreateWithoutAdventures_relationInput> | KeywordCreateWithoutAdventures_relationInput[] | KeywordUncheckedCreateWithoutAdventures_relationInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutAdventures_relationInput | KeywordCreateOrConnectWithoutAdventures_relationInput[]
+    upsert?: KeywordUpsertWithWhereUniqueWithoutAdventures_relationInput | KeywordUpsertWithWhereUniqueWithoutAdventures_relationInput[]
     set?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     disconnect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     delete?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
-    update?: KeywordUpdateWithWhereUniqueWithoutAdventuresInput | KeywordUpdateWithWhereUniqueWithoutAdventuresInput[]
-    updateMany?: KeywordUpdateManyWithWhereWithoutAdventuresInput | KeywordUpdateManyWithWhereWithoutAdventuresInput[]
+    update?: KeywordUpdateWithWhereUniqueWithoutAdventures_relationInput | KeywordUpdateWithWhereUniqueWithoutAdventures_relationInput[]
+    updateMany?: KeywordUpdateManyWithWhereWithoutAdventures_relationInput | KeywordUpdateManyWithWhereWithoutAdventures_relationInput[]
     deleteMany?: KeywordScalarWhereInput | KeywordScalarWhereInput[]
   }
 
-  export type GenreCreateNestedOneWithoutKeywordsInput = {
-    create?: XOR<GenreCreateWithoutKeywordsInput, GenreUncheckedCreateWithoutKeywordsInput>
-    connectOrCreate?: GenreCreateOrConnectWithoutKeywordsInput
+  export type GenreCreateNestedOneWithoutKeywords_relationInput = {
+    create?: XOR<GenreCreateWithoutKeywords_relationInput, GenreUncheckedCreateWithoutKeywords_relationInput>
+    connectOrCreate?: GenreCreateOrConnectWithoutKeywords_relationInput
     connect?: GenreWhereUniqueInput
   }
 
-  export type AdventureCreateNestedManyWithoutKeywordsInput = {
-    create?: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput> | AdventureCreateWithoutKeywordsInput[] | AdventureUncheckedCreateWithoutKeywordsInput[]
-    connectOrCreate?: AdventureCreateOrConnectWithoutKeywordsInput | AdventureCreateOrConnectWithoutKeywordsInput[]
+  export type AdventureCreateNestedManyWithoutKeywords_relationInput = {
+    create?: XOR<AdventureCreateWithoutKeywords_relationInput, AdventureUncheckedCreateWithoutKeywords_relationInput> | AdventureCreateWithoutKeywords_relationInput[] | AdventureUncheckedCreateWithoutKeywords_relationInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutKeywords_relationInput | AdventureCreateOrConnectWithoutKeywords_relationInput[]
     connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
   }
 
-  export type AdventureUncheckedCreateNestedManyWithoutKeywordsInput = {
-    create?: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput> | AdventureCreateWithoutKeywordsInput[] | AdventureUncheckedCreateWithoutKeywordsInput[]
-    connectOrCreate?: AdventureCreateOrConnectWithoutKeywordsInput | AdventureCreateOrConnectWithoutKeywordsInput[]
+  export type AdventureUncheckedCreateNestedManyWithoutKeywords_relationInput = {
+    create?: XOR<AdventureCreateWithoutKeywords_relationInput, AdventureUncheckedCreateWithoutKeywords_relationInput> | AdventureCreateWithoutKeywords_relationInput[] | AdventureUncheckedCreateWithoutKeywords_relationInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutKeywords_relationInput | AdventureCreateOrConnectWithoutKeywords_relationInput[]
     connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
   }
 
-  export type GenreUpdateOneRequiredWithoutKeywordsNestedInput = {
-    create?: XOR<GenreCreateWithoutKeywordsInput, GenreUncheckedCreateWithoutKeywordsInput>
-    connectOrCreate?: GenreCreateOrConnectWithoutKeywordsInput
-    upsert?: GenreUpsertWithoutKeywordsInput
+  export type GenreUpdateOneRequiredWithoutKeywords_relationNestedInput = {
+    create?: XOR<GenreCreateWithoutKeywords_relationInput, GenreUncheckedCreateWithoutKeywords_relationInput>
+    connectOrCreate?: GenreCreateOrConnectWithoutKeywords_relationInput
+    upsert?: GenreUpsertWithoutKeywords_relationInput
     connect?: GenreWhereUniqueInput
-    update?: XOR<XOR<GenreUpdateToOneWithWhereWithoutKeywordsInput, GenreUpdateWithoutKeywordsInput>, GenreUncheckedUpdateWithoutKeywordsInput>
+    update?: XOR<XOR<GenreUpdateToOneWithWhereWithoutKeywords_relationInput, GenreUpdateWithoutKeywords_relationInput>, GenreUncheckedUpdateWithoutKeywords_relationInput>
   }
 
-  export type AdventureUpdateManyWithoutKeywordsNestedInput = {
-    create?: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput> | AdventureCreateWithoutKeywordsInput[] | AdventureUncheckedCreateWithoutKeywordsInput[]
-    connectOrCreate?: AdventureCreateOrConnectWithoutKeywordsInput | AdventureCreateOrConnectWithoutKeywordsInput[]
-    upsert?: AdventureUpsertWithWhereUniqueWithoutKeywordsInput | AdventureUpsertWithWhereUniqueWithoutKeywordsInput[]
+  export type AdventureUpdateManyWithoutKeywords_relationNestedInput = {
+    create?: XOR<AdventureCreateWithoutKeywords_relationInput, AdventureUncheckedCreateWithoutKeywords_relationInput> | AdventureCreateWithoutKeywords_relationInput[] | AdventureUncheckedCreateWithoutKeywords_relationInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutKeywords_relationInput | AdventureCreateOrConnectWithoutKeywords_relationInput[]
+    upsert?: AdventureUpsertWithWhereUniqueWithoutKeywords_relationInput | AdventureUpsertWithWhereUniqueWithoutKeywords_relationInput[]
     set?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     disconnect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     delete?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
-    update?: AdventureUpdateWithWhereUniqueWithoutKeywordsInput | AdventureUpdateWithWhereUniqueWithoutKeywordsInput[]
-    updateMany?: AdventureUpdateManyWithWhereWithoutKeywordsInput | AdventureUpdateManyWithWhereWithoutKeywordsInput[]
+    update?: AdventureUpdateWithWhereUniqueWithoutKeywords_relationInput | AdventureUpdateWithWhereUniqueWithoutKeywords_relationInput[]
+    updateMany?: AdventureUpdateManyWithWhereWithoutKeywords_relationInput | AdventureUpdateManyWithWhereWithoutKeywords_relationInput[]
     deleteMany?: AdventureScalarWhereInput | AdventureScalarWhereInput[]
   }
 
-  export type AdventureUncheckedUpdateManyWithoutKeywordsNestedInput = {
-    create?: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput> | AdventureCreateWithoutKeywordsInput[] | AdventureUncheckedCreateWithoutKeywordsInput[]
-    connectOrCreate?: AdventureCreateOrConnectWithoutKeywordsInput | AdventureCreateOrConnectWithoutKeywordsInput[]
-    upsert?: AdventureUpsertWithWhereUniqueWithoutKeywordsInput | AdventureUpsertWithWhereUniqueWithoutKeywordsInput[]
+  export type AdventureUncheckedUpdateManyWithoutKeywords_relationNestedInput = {
+    create?: XOR<AdventureCreateWithoutKeywords_relationInput, AdventureUncheckedCreateWithoutKeywords_relationInput> | AdventureCreateWithoutKeywords_relationInput[] | AdventureUncheckedCreateWithoutKeywords_relationInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutKeywords_relationInput | AdventureCreateOrConnectWithoutKeywords_relationInput[]
+    upsert?: AdventureUpsertWithWhereUniqueWithoutKeywords_relationInput | AdventureUpsertWithWhereUniqueWithoutKeywords_relationInput[]
     set?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     disconnect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     delete?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
-    update?: AdventureUpdateWithWhereUniqueWithoutKeywordsInput | AdventureUpdateWithWhereUniqueWithoutKeywordsInput[]
-    updateMany?: AdventureUpdateManyWithWhereWithoutKeywordsInput | AdventureUpdateManyWithWhereWithoutKeywordsInput[]
+    update?: AdventureUpdateWithWhereUniqueWithoutKeywords_relationInput | AdventureUpdateWithWhereUniqueWithoutKeywords_relationInput[]
+    updateMany?: AdventureUpdateManyWithWhereWithoutKeywords_relationInput | AdventureUpdateManyWithWhereWithoutKeywords_relationInput[]
     deleteMany?: AdventureScalarWhereInput | AdventureScalarWhereInput[]
   }
 
-  export type KeywordCreateNestedManyWithoutGenreInput = {
-    create?: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput> | KeywordCreateWithoutGenreInput[] | KeywordUncheckedCreateWithoutGenreInput[]
-    connectOrCreate?: KeywordCreateOrConnectWithoutGenreInput | KeywordCreateOrConnectWithoutGenreInput[]
-    createMany?: KeywordCreateManyGenreInputEnvelope
+  export type KeywordCreateNestedManyWithoutGenre_relationInput = {
+    create?: XOR<KeywordCreateWithoutGenre_relationInput, KeywordUncheckedCreateWithoutGenre_relationInput> | KeywordCreateWithoutGenre_relationInput[] | KeywordUncheckedCreateWithoutGenre_relationInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutGenre_relationInput | KeywordCreateOrConnectWithoutGenre_relationInput[]
+    createMany?: KeywordCreateManyGenre_relationInputEnvelope
     connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
   }
 
-  export type AdventureCreateNestedManyWithoutGenreInput = {
-    create?: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput> | AdventureCreateWithoutGenreInput[] | AdventureUncheckedCreateWithoutGenreInput[]
-    connectOrCreate?: AdventureCreateOrConnectWithoutGenreInput | AdventureCreateOrConnectWithoutGenreInput[]
-    createMany?: AdventureCreateManyGenreInputEnvelope
+  export type AdventureCreateNestedManyWithoutGenre_relationInput = {
+    create?: XOR<AdventureCreateWithoutGenre_relationInput, AdventureUncheckedCreateWithoutGenre_relationInput> | AdventureCreateWithoutGenre_relationInput[] | AdventureUncheckedCreateWithoutGenre_relationInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutGenre_relationInput | AdventureCreateOrConnectWithoutGenre_relationInput[]
+    createMany?: AdventureCreateManyGenre_relationInputEnvelope
     connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
   }
 
-  export type KeywordUncheckedCreateNestedManyWithoutGenreInput = {
-    create?: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput> | KeywordCreateWithoutGenreInput[] | KeywordUncheckedCreateWithoutGenreInput[]
-    connectOrCreate?: KeywordCreateOrConnectWithoutGenreInput | KeywordCreateOrConnectWithoutGenreInput[]
-    createMany?: KeywordCreateManyGenreInputEnvelope
+  export type KeywordUncheckedCreateNestedManyWithoutGenre_relationInput = {
+    create?: XOR<KeywordCreateWithoutGenre_relationInput, KeywordUncheckedCreateWithoutGenre_relationInput> | KeywordCreateWithoutGenre_relationInput[] | KeywordUncheckedCreateWithoutGenre_relationInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutGenre_relationInput | KeywordCreateOrConnectWithoutGenre_relationInput[]
+    createMany?: KeywordCreateManyGenre_relationInputEnvelope
     connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
   }
 
-  export type AdventureUncheckedCreateNestedManyWithoutGenreInput = {
-    create?: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput> | AdventureCreateWithoutGenreInput[] | AdventureUncheckedCreateWithoutGenreInput[]
-    connectOrCreate?: AdventureCreateOrConnectWithoutGenreInput | AdventureCreateOrConnectWithoutGenreInput[]
-    createMany?: AdventureCreateManyGenreInputEnvelope
+  export type AdventureUncheckedCreateNestedManyWithoutGenre_relationInput = {
+    create?: XOR<AdventureCreateWithoutGenre_relationInput, AdventureUncheckedCreateWithoutGenre_relationInput> | AdventureCreateWithoutGenre_relationInput[] | AdventureUncheckedCreateWithoutGenre_relationInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutGenre_relationInput | AdventureCreateOrConnectWithoutGenre_relationInput[]
+    createMany?: AdventureCreateManyGenre_relationInputEnvelope
     connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
   }
 
-  export type KeywordUpdateManyWithoutGenreNestedInput = {
-    create?: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput> | KeywordCreateWithoutGenreInput[] | KeywordUncheckedCreateWithoutGenreInput[]
-    connectOrCreate?: KeywordCreateOrConnectWithoutGenreInput | KeywordCreateOrConnectWithoutGenreInput[]
-    upsert?: KeywordUpsertWithWhereUniqueWithoutGenreInput | KeywordUpsertWithWhereUniqueWithoutGenreInput[]
-    createMany?: KeywordCreateManyGenreInputEnvelope
+  export type KeywordUpdateManyWithoutGenre_relationNestedInput = {
+    create?: XOR<KeywordCreateWithoutGenre_relationInput, KeywordUncheckedCreateWithoutGenre_relationInput> | KeywordCreateWithoutGenre_relationInput[] | KeywordUncheckedCreateWithoutGenre_relationInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutGenre_relationInput | KeywordCreateOrConnectWithoutGenre_relationInput[]
+    upsert?: KeywordUpsertWithWhereUniqueWithoutGenre_relationInput | KeywordUpsertWithWhereUniqueWithoutGenre_relationInput[]
+    createMany?: KeywordCreateManyGenre_relationInputEnvelope
     set?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     disconnect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     delete?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
-    update?: KeywordUpdateWithWhereUniqueWithoutGenreInput | KeywordUpdateWithWhereUniqueWithoutGenreInput[]
-    updateMany?: KeywordUpdateManyWithWhereWithoutGenreInput | KeywordUpdateManyWithWhereWithoutGenreInput[]
+    update?: KeywordUpdateWithWhereUniqueWithoutGenre_relationInput | KeywordUpdateWithWhereUniqueWithoutGenre_relationInput[]
+    updateMany?: KeywordUpdateManyWithWhereWithoutGenre_relationInput | KeywordUpdateManyWithWhereWithoutGenre_relationInput[]
     deleteMany?: KeywordScalarWhereInput | KeywordScalarWhereInput[]
   }
 
-  export type AdventureUpdateManyWithoutGenreNestedInput = {
-    create?: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput> | AdventureCreateWithoutGenreInput[] | AdventureUncheckedCreateWithoutGenreInput[]
-    connectOrCreate?: AdventureCreateOrConnectWithoutGenreInput | AdventureCreateOrConnectWithoutGenreInput[]
-    upsert?: AdventureUpsertWithWhereUniqueWithoutGenreInput | AdventureUpsertWithWhereUniqueWithoutGenreInput[]
-    createMany?: AdventureCreateManyGenreInputEnvelope
+  export type AdventureUpdateManyWithoutGenre_relationNestedInput = {
+    create?: XOR<AdventureCreateWithoutGenre_relationInput, AdventureUncheckedCreateWithoutGenre_relationInput> | AdventureCreateWithoutGenre_relationInput[] | AdventureUncheckedCreateWithoutGenre_relationInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutGenre_relationInput | AdventureCreateOrConnectWithoutGenre_relationInput[]
+    upsert?: AdventureUpsertWithWhereUniqueWithoutGenre_relationInput | AdventureUpsertWithWhereUniqueWithoutGenre_relationInput[]
+    createMany?: AdventureCreateManyGenre_relationInputEnvelope
     set?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     disconnect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     delete?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
-    update?: AdventureUpdateWithWhereUniqueWithoutGenreInput | AdventureUpdateWithWhereUniqueWithoutGenreInput[]
-    updateMany?: AdventureUpdateManyWithWhereWithoutGenreInput | AdventureUpdateManyWithWhereWithoutGenreInput[]
+    update?: AdventureUpdateWithWhereUniqueWithoutGenre_relationInput | AdventureUpdateWithWhereUniqueWithoutGenre_relationInput[]
+    updateMany?: AdventureUpdateManyWithWhereWithoutGenre_relationInput | AdventureUpdateManyWithWhereWithoutGenre_relationInput[]
     deleteMany?: AdventureScalarWhereInput | AdventureScalarWhereInput[]
   }
 
-  export type KeywordUncheckedUpdateManyWithoutGenreNestedInput = {
-    create?: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput> | KeywordCreateWithoutGenreInput[] | KeywordUncheckedCreateWithoutGenreInput[]
-    connectOrCreate?: KeywordCreateOrConnectWithoutGenreInput | KeywordCreateOrConnectWithoutGenreInput[]
-    upsert?: KeywordUpsertWithWhereUniqueWithoutGenreInput | KeywordUpsertWithWhereUniqueWithoutGenreInput[]
-    createMany?: KeywordCreateManyGenreInputEnvelope
+  export type KeywordUncheckedUpdateManyWithoutGenre_relationNestedInput = {
+    create?: XOR<KeywordCreateWithoutGenre_relationInput, KeywordUncheckedCreateWithoutGenre_relationInput> | KeywordCreateWithoutGenre_relationInput[] | KeywordUncheckedCreateWithoutGenre_relationInput[]
+    connectOrCreate?: KeywordCreateOrConnectWithoutGenre_relationInput | KeywordCreateOrConnectWithoutGenre_relationInput[]
+    upsert?: KeywordUpsertWithWhereUniqueWithoutGenre_relationInput | KeywordUpsertWithWhereUniqueWithoutGenre_relationInput[]
+    createMany?: KeywordCreateManyGenre_relationInputEnvelope
     set?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     disconnect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     delete?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
     connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
-    update?: KeywordUpdateWithWhereUniqueWithoutGenreInput | KeywordUpdateWithWhereUniqueWithoutGenreInput[]
-    updateMany?: KeywordUpdateManyWithWhereWithoutGenreInput | KeywordUpdateManyWithWhereWithoutGenreInput[]
+    update?: KeywordUpdateWithWhereUniqueWithoutGenre_relationInput | KeywordUpdateWithWhereUniqueWithoutGenre_relationInput[]
+    updateMany?: KeywordUpdateManyWithWhereWithoutGenre_relationInput | KeywordUpdateManyWithWhereWithoutGenre_relationInput[]
     deleteMany?: KeywordScalarWhereInput | KeywordScalarWhereInput[]
   }
 
-  export type AdventureUncheckedUpdateManyWithoutGenreNestedInput = {
-    create?: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput> | AdventureCreateWithoutGenreInput[] | AdventureUncheckedCreateWithoutGenreInput[]
-    connectOrCreate?: AdventureCreateOrConnectWithoutGenreInput | AdventureCreateOrConnectWithoutGenreInput[]
-    upsert?: AdventureUpsertWithWhereUniqueWithoutGenreInput | AdventureUpsertWithWhereUniqueWithoutGenreInput[]
-    createMany?: AdventureCreateManyGenreInputEnvelope
+  export type AdventureUncheckedUpdateManyWithoutGenre_relationNestedInput = {
+    create?: XOR<AdventureCreateWithoutGenre_relationInput, AdventureUncheckedCreateWithoutGenre_relationInput> | AdventureCreateWithoutGenre_relationInput[] | AdventureUncheckedCreateWithoutGenre_relationInput[]
+    connectOrCreate?: AdventureCreateOrConnectWithoutGenre_relationInput | AdventureCreateOrConnectWithoutGenre_relationInput[]
+    upsert?: AdventureUpsertWithWhereUniqueWithoutGenre_relationInput | AdventureUpsertWithWhereUniqueWithoutGenre_relationInput[]
+    createMany?: AdventureCreateManyGenre_relationInputEnvelope
     set?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     disconnect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     delete?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
     connect?: AdventureWhereUniqueInput | AdventureWhereUniqueInput[]
-    update?: AdventureUpdateWithWhereUniqueWithoutGenreInput | AdventureUpdateWithWhereUniqueWithoutGenreInput[]
-    updateMany?: AdventureUpdateManyWithWhereWithoutGenreInput | AdventureUpdateManyWithWhereWithoutGenreInput[]
+    update?: AdventureUpdateWithWhereUniqueWithoutGenre_relationInput | AdventureUpdateWithWhereUniqueWithoutGenre_relationInput[]
+    updateMany?: AdventureUpdateManyWithWhereWithoutGenre_relationInput | AdventureUpdateManyWithWhereWithoutGenre_relationInput[]
     deleteMany?: AdventureScalarWhereInput | AdventureScalarWhereInput[]
+  }
+
+  export type MagicItemTypeCreateNestedOneWithoutMagicItemsInput = {
+    create?: XOR<MagicItemTypeCreateWithoutMagicItemsInput, MagicItemTypeUncheckedCreateWithoutMagicItemsInput>
+    connectOrCreate?: MagicItemTypeCreateOrConnectWithoutMagicItemsInput
+    connect?: MagicItemTypeWhereUniqueInput
+  }
+
+  export type MagicItemRarityCreateNestedOneWithoutMagicItemsInput = {
+    create?: XOR<MagicItemRarityCreateWithoutMagicItemsInput, MagicItemRarityUncheckedCreateWithoutMagicItemsInput>
+    connectOrCreate?: MagicItemRarityCreateOrConnectWithoutMagicItemsInput
+    connect?: MagicItemRarityWhereUniqueInput
+  }
+
+  export type SourceCreateNestedOneWithoutMagicItemsInput = {
+    create?: XOR<SourceCreateWithoutMagicItemsInput, SourceUncheckedCreateWithoutMagicItemsInput>
+    connectOrCreate?: SourceCreateOrConnectWithoutMagicItemsInput
+    connect?: SourceWhereUniqueInput
+  }
+
+  export type MagicItemAttunementCreateNestedManyWithoutMagicItemInput = {
+    create?: XOR<MagicItemAttunementCreateWithoutMagicItemInput, MagicItemAttunementUncheckedCreateWithoutMagicItemInput> | MagicItemAttunementCreateWithoutMagicItemInput[] | MagicItemAttunementUncheckedCreateWithoutMagicItemInput[]
+    connectOrCreate?: MagicItemAttunementCreateOrConnectWithoutMagicItemInput | MagicItemAttunementCreateOrConnectWithoutMagicItemInput[]
+    createMany?: MagicItemAttunementCreateManyMagicItemInputEnvelope
+    connect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+  }
+
+  export type MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput = {
+    create?: XOR<MagicItemAttunementCreateWithoutMagicItemInput, MagicItemAttunementUncheckedCreateWithoutMagicItemInput> | MagicItemAttunementCreateWithoutMagicItemInput[] | MagicItemAttunementUncheckedCreateWithoutMagicItemInput[]
+    connectOrCreate?: MagicItemAttunementCreateOrConnectWithoutMagicItemInput | MagicItemAttunementCreateOrConnectWithoutMagicItemInput[]
+    createMany?: MagicItemAttunementCreateManyMagicItemInputEnvelope
+    connect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+  }
+
+  export type MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput = {
+    create?: XOR<MagicItemTypeCreateWithoutMagicItemsInput, MagicItemTypeUncheckedCreateWithoutMagicItemsInput>
+    connectOrCreate?: MagicItemTypeCreateOrConnectWithoutMagicItemsInput
+    upsert?: MagicItemTypeUpsertWithoutMagicItemsInput
+    connect?: MagicItemTypeWhereUniqueInput
+    update?: XOR<XOR<MagicItemTypeUpdateToOneWithWhereWithoutMagicItemsInput, MagicItemTypeUpdateWithoutMagicItemsInput>, MagicItemTypeUncheckedUpdateWithoutMagicItemsInput>
+  }
+
+  export type MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput = {
+    create?: XOR<MagicItemRarityCreateWithoutMagicItemsInput, MagicItemRarityUncheckedCreateWithoutMagicItemsInput>
+    connectOrCreate?: MagicItemRarityCreateOrConnectWithoutMagicItemsInput
+    upsert?: MagicItemRarityUpsertWithoutMagicItemsInput
+    connect?: MagicItemRarityWhereUniqueInput
+    update?: XOR<XOR<MagicItemRarityUpdateToOneWithWhereWithoutMagicItemsInput, MagicItemRarityUpdateWithoutMagicItemsInput>, MagicItemRarityUncheckedUpdateWithoutMagicItemsInput>
+  }
+
+  export type SourceUpdateOneRequiredWithoutMagicItemsNestedInput = {
+    create?: XOR<SourceCreateWithoutMagicItemsInput, SourceUncheckedCreateWithoutMagicItemsInput>
+    connectOrCreate?: SourceCreateOrConnectWithoutMagicItemsInput
+    upsert?: SourceUpsertWithoutMagicItemsInput
+    connect?: SourceWhereUniqueInput
+    update?: XOR<XOR<SourceUpdateToOneWithWhereWithoutMagicItemsInput, SourceUpdateWithoutMagicItemsInput>, SourceUncheckedUpdateWithoutMagicItemsInput>
+  }
+
+  export type MagicItemAttunementUpdateManyWithoutMagicItemNestedInput = {
+    create?: XOR<MagicItemAttunementCreateWithoutMagicItemInput, MagicItemAttunementUncheckedCreateWithoutMagicItemInput> | MagicItemAttunementCreateWithoutMagicItemInput[] | MagicItemAttunementUncheckedCreateWithoutMagicItemInput[]
+    connectOrCreate?: MagicItemAttunementCreateOrConnectWithoutMagicItemInput | MagicItemAttunementCreateOrConnectWithoutMagicItemInput[]
+    upsert?: MagicItemAttunementUpsertWithWhereUniqueWithoutMagicItemInput | MagicItemAttunementUpsertWithWhereUniqueWithoutMagicItemInput[]
+    createMany?: MagicItemAttunementCreateManyMagicItemInputEnvelope
+    set?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    disconnect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    delete?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    connect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    update?: MagicItemAttunementUpdateWithWhereUniqueWithoutMagicItemInput | MagicItemAttunementUpdateWithWhereUniqueWithoutMagicItemInput[]
+    updateMany?: MagicItemAttunementUpdateManyWithWhereWithoutMagicItemInput | MagicItemAttunementUpdateManyWithWhereWithoutMagicItemInput[]
+    deleteMany?: MagicItemAttunementScalarWhereInput | MagicItemAttunementScalarWhereInput[]
+  }
+
+  export type MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput = {
+    create?: XOR<MagicItemAttunementCreateWithoutMagicItemInput, MagicItemAttunementUncheckedCreateWithoutMagicItemInput> | MagicItemAttunementCreateWithoutMagicItemInput[] | MagicItemAttunementUncheckedCreateWithoutMagicItemInput[]
+    connectOrCreate?: MagicItemAttunementCreateOrConnectWithoutMagicItemInput | MagicItemAttunementCreateOrConnectWithoutMagicItemInput[]
+    upsert?: MagicItemAttunementUpsertWithWhereUniqueWithoutMagicItemInput | MagicItemAttunementUpsertWithWhereUniqueWithoutMagicItemInput[]
+    createMany?: MagicItemAttunementCreateManyMagicItemInputEnvelope
+    set?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    disconnect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    delete?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    connect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    update?: MagicItemAttunementUpdateWithWhereUniqueWithoutMagicItemInput | MagicItemAttunementUpdateWithWhereUniqueWithoutMagicItemInput[]
+    updateMany?: MagicItemAttunementUpdateManyWithWhereWithoutMagicItemInput | MagicItemAttunementUpdateManyWithWhereWithoutMagicItemInput[]
+    deleteMany?: MagicItemAttunementScalarWhereInput | MagicItemAttunementScalarWhereInput[]
+  }
+
+  export type MagicItemCreateNestedManyWithoutRarity_relationInput = {
+    create?: XOR<MagicItemCreateWithoutRarity_relationInput, MagicItemUncheckedCreateWithoutRarity_relationInput> | MagicItemCreateWithoutRarity_relationInput[] | MagicItemUncheckedCreateWithoutRarity_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutRarity_relationInput | MagicItemCreateOrConnectWithoutRarity_relationInput[]
+    createMany?: MagicItemCreateManyRarity_relationInputEnvelope
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+  }
+
+  export type MagicItemUncheckedCreateNestedManyWithoutRarity_relationInput = {
+    create?: XOR<MagicItemCreateWithoutRarity_relationInput, MagicItemUncheckedCreateWithoutRarity_relationInput> | MagicItemCreateWithoutRarity_relationInput[] | MagicItemUncheckedCreateWithoutRarity_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutRarity_relationInput | MagicItemCreateOrConnectWithoutRarity_relationInput[]
+    createMany?: MagicItemCreateManyRarity_relationInputEnvelope
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+  }
+
+  export type MagicItemUpdateManyWithoutRarity_relationNestedInput = {
+    create?: XOR<MagicItemCreateWithoutRarity_relationInput, MagicItemUncheckedCreateWithoutRarity_relationInput> | MagicItemCreateWithoutRarity_relationInput[] | MagicItemUncheckedCreateWithoutRarity_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutRarity_relationInput | MagicItemCreateOrConnectWithoutRarity_relationInput[]
+    upsert?: MagicItemUpsertWithWhereUniqueWithoutRarity_relationInput | MagicItemUpsertWithWhereUniqueWithoutRarity_relationInput[]
+    createMany?: MagicItemCreateManyRarity_relationInputEnvelope
+    set?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    disconnect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    delete?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    update?: MagicItemUpdateWithWhereUniqueWithoutRarity_relationInput | MagicItemUpdateWithWhereUniqueWithoutRarity_relationInput[]
+    updateMany?: MagicItemUpdateManyWithWhereWithoutRarity_relationInput | MagicItemUpdateManyWithWhereWithoutRarity_relationInput[]
+    deleteMany?: MagicItemScalarWhereInput | MagicItemScalarWhereInput[]
+  }
+
+  export type MagicItemUncheckedUpdateManyWithoutRarity_relationNestedInput = {
+    create?: XOR<MagicItemCreateWithoutRarity_relationInput, MagicItemUncheckedCreateWithoutRarity_relationInput> | MagicItemCreateWithoutRarity_relationInput[] | MagicItemUncheckedCreateWithoutRarity_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutRarity_relationInput | MagicItemCreateOrConnectWithoutRarity_relationInput[]
+    upsert?: MagicItemUpsertWithWhereUniqueWithoutRarity_relationInput | MagicItemUpsertWithWhereUniqueWithoutRarity_relationInput[]
+    createMany?: MagicItemCreateManyRarity_relationInputEnvelope
+    set?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    disconnect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    delete?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    update?: MagicItemUpdateWithWhereUniqueWithoutRarity_relationInput | MagicItemUpdateWithWhereUniqueWithoutRarity_relationInput[]
+    updateMany?: MagicItemUpdateManyWithWhereWithoutRarity_relationInput | MagicItemUpdateManyWithWhereWithoutRarity_relationInput[]
+    deleteMany?: MagicItemScalarWhereInput | MagicItemScalarWhereInput[]
+  }
+
+  export type MagicItemCreateNestedManyWithoutType_relationInput = {
+    create?: XOR<MagicItemCreateWithoutType_relationInput, MagicItemUncheckedCreateWithoutType_relationInput> | MagicItemCreateWithoutType_relationInput[] | MagicItemUncheckedCreateWithoutType_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutType_relationInput | MagicItemCreateOrConnectWithoutType_relationInput[]
+    createMany?: MagicItemCreateManyType_relationInputEnvelope
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+  }
+
+  export type MagicItemUncheckedCreateNestedManyWithoutType_relationInput = {
+    create?: XOR<MagicItemCreateWithoutType_relationInput, MagicItemUncheckedCreateWithoutType_relationInput> | MagicItemCreateWithoutType_relationInput[] | MagicItemUncheckedCreateWithoutType_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutType_relationInput | MagicItemCreateOrConnectWithoutType_relationInput[]
+    createMany?: MagicItemCreateManyType_relationInputEnvelope
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+  }
+
+  export type EnumGenderFieldUpdateOperationsInput = {
+    set?: $Enums.Gender
+  }
+
+  export type MagicItemUpdateManyWithoutType_relationNestedInput = {
+    create?: XOR<MagicItemCreateWithoutType_relationInput, MagicItemUncheckedCreateWithoutType_relationInput> | MagicItemCreateWithoutType_relationInput[] | MagicItemUncheckedCreateWithoutType_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutType_relationInput | MagicItemCreateOrConnectWithoutType_relationInput[]
+    upsert?: MagicItemUpsertWithWhereUniqueWithoutType_relationInput | MagicItemUpsertWithWhereUniqueWithoutType_relationInput[]
+    createMany?: MagicItemCreateManyType_relationInputEnvelope
+    set?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    disconnect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    delete?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    update?: MagicItemUpdateWithWhereUniqueWithoutType_relationInput | MagicItemUpdateWithWhereUniqueWithoutType_relationInput[]
+    updateMany?: MagicItemUpdateManyWithWhereWithoutType_relationInput | MagicItemUpdateManyWithWhereWithoutType_relationInput[]
+    deleteMany?: MagicItemScalarWhereInput | MagicItemScalarWhereInput[]
+  }
+
+  export type MagicItemUncheckedUpdateManyWithoutType_relationNestedInput = {
+    create?: XOR<MagicItemCreateWithoutType_relationInput, MagicItemUncheckedCreateWithoutType_relationInput> | MagicItemCreateWithoutType_relationInput[] | MagicItemUncheckedCreateWithoutType_relationInput[]
+    connectOrCreate?: MagicItemCreateOrConnectWithoutType_relationInput | MagicItemCreateOrConnectWithoutType_relationInput[]
+    upsert?: MagicItemUpsertWithWhereUniqueWithoutType_relationInput | MagicItemUpsertWithWhereUniqueWithoutType_relationInput[]
+    createMany?: MagicItemCreateManyType_relationInputEnvelope
+    set?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    disconnect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    delete?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    connect?: MagicItemWhereUniqueInput | MagicItemWhereUniqueInput[]
+    update?: MagicItemUpdateWithWhereUniqueWithoutType_relationInput | MagicItemUpdateWithWhereUniqueWithoutType_relationInput[]
+    updateMany?: MagicItemUpdateManyWithWhereWithoutType_relationInput | MagicItemUpdateManyWithWhereWithoutType_relationInput[]
+    deleteMany?: MagicItemScalarWhereInput | MagicItemScalarWhereInput[]
+  }
+
+  export type MagicItemAttunementCreateNestedManyWithoutAttunementInput = {
+    create?: XOR<MagicItemAttunementCreateWithoutAttunementInput, MagicItemAttunementUncheckedCreateWithoutAttunementInput> | MagicItemAttunementCreateWithoutAttunementInput[] | MagicItemAttunementUncheckedCreateWithoutAttunementInput[]
+    connectOrCreate?: MagicItemAttunementCreateOrConnectWithoutAttunementInput | MagicItemAttunementCreateOrConnectWithoutAttunementInput[]
+    createMany?: MagicItemAttunementCreateManyAttunementInputEnvelope
+    connect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+  }
+
+  export type MagicItemAttunementUncheckedCreateNestedManyWithoutAttunementInput = {
+    create?: XOR<MagicItemAttunementCreateWithoutAttunementInput, MagicItemAttunementUncheckedCreateWithoutAttunementInput> | MagicItemAttunementCreateWithoutAttunementInput[] | MagicItemAttunementUncheckedCreateWithoutAttunementInput[]
+    connectOrCreate?: MagicItemAttunementCreateOrConnectWithoutAttunementInput | MagicItemAttunementCreateOrConnectWithoutAttunementInput[]
+    createMany?: MagicItemAttunementCreateManyAttunementInputEnvelope
+    connect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+  }
+
+  export type MagicItemAttunementUpdateManyWithoutAttunementNestedInput = {
+    create?: XOR<MagicItemAttunementCreateWithoutAttunementInput, MagicItemAttunementUncheckedCreateWithoutAttunementInput> | MagicItemAttunementCreateWithoutAttunementInput[] | MagicItemAttunementUncheckedCreateWithoutAttunementInput[]
+    connectOrCreate?: MagicItemAttunementCreateOrConnectWithoutAttunementInput | MagicItemAttunementCreateOrConnectWithoutAttunementInput[]
+    upsert?: MagicItemAttunementUpsertWithWhereUniqueWithoutAttunementInput | MagicItemAttunementUpsertWithWhereUniqueWithoutAttunementInput[]
+    createMany?: MagicItemAttunementCreateManyAttunementInputEnvelope
+    set?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    disconnect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    delete?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    connect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    update?: MagicItemAttunementUpdateWithWhereUniqueWithoutAttunementInput | MagicItemAttunementUpdateWithWhereUniqueWithoutAttunementInput[]
+    updateMany?: MagicItemAttunementUpdateManyWithWhereWithoutAttunementInput | MagicItemAttunementUpdateManyWithWhereWithoutAttunementInput[]
+    deleteMany?: MagicItemAttunementScalarWhereInput | MagicItemAttunementScalarWhereInput[]
+  }
+
+  export type MagicItemAttunementUncheckedUpdateManyWithoutAttunementNestedInput = {
+    create?: XOR<MagicItemAttunementCreateWithoutAttunementInput, MagicItemAttunementUncheckedCreateWithoutAttunementInput> | MagicItemAttunementCreateWithoutAttunementInput[] | MagicItemAttunementUncheckedCreateWithoutAttunementInput[]
+    connectOrCreate?: MagicItemAttunementCreateOrConnectWithoutAttunementInput | MagicItemAttunementCreateOrConnectWithoutAttunementInput[]
+    upsert?: MagicItemAttunementUpsertWithWhereUniqueWithoutAttunementInput | MagicItemAttunementUpsertWithWhereUniqueWithoutAttunementInput[]
+    createMany?: MagicItemAttunementCreateManyAttunementInputEnvelope
+    set?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    disconnect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    delete?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    connect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
+    update?: MagicItemAttunementUpdateWithWhereUniqueWithoutAttunementInput | MagicItemAttunementUpdateWithWhereUniqueWithoutAttunementInput[]
+    updateMany?: MagicItemAttunementUpdateManyWithWhereWithoutAttunementInput | MagicItemAttunementUpdateManyWithWhereWithoutAttunementInput[]
+    deleteMany?: MagicItemAttunementScalarWhereInput | MagicItemAttunementScalarWhereInput[]
+  }
+
+  export type MagicItemCreateNestedOneWithoutAttunements_relationInput = {
+    create?: XOR<MagicItemCreateWithoutAttunements_relationInput, MagicItemUncheckedCreateWithoutAttunements_relationInput>
+    connectOrCreate?: MagicItemCreateOrConnectWithoutAttunements_relationInput
+    connect?: MagicItemWhereUniqueInput
+  }
+
+  export type AttunementConditionCreateNestedOneWithoutMagicItemsInput = {
+    create?: XOR<AttunementConditionCreateWithoutMagicItemsInput, AttunementConditionUncheckedCreateWithoutMagicItemsInput>
+    connectOrCreate?: AttunementConditionCreateOrConnectWithoutMagicItemsInput
+    connect?: AttunementConditionWhereUniqueInput
+  }
+
+  export type MagicItemUpdateOneRequiredWithoutAttunements_relationNestedInput = {
+    create?: XOR<MagicItemCreateWithoutAttunements_relationInput, MagicItemUncheckedCreateWithoutAttunements_relationInput>
+    connectOrCreate?: MagicItemCreateOrConnectWithoutAttunements_relationInput
+    upsert?: MagicItemUpsertWithoutAttunements_relationInput
+    connect?: MagicItemWhereUniqueInput
+    update?: XOR<XOR<MagicItemUpdateToOneWithWhereWithoutAttunements_relationInput, MagicItemUpdateWithoutAttunements_relationInput>, MagicItemUncheckedUpdateWithoutAttunements_relationInput>
+  }
+
+  export type AttunementConditionUpdateOneRequiredWithoutMagicItemsNestedInput = {
+    create?: XOR<AttunementConditionCreateWithoutMagicItemsInput, AttunementConditionUncheckedCreateWithoutMagicItemsInput>
+    connectOrCreate?: AttunementConditionCreateOrConnectWithoutMagicItemsInput
+    upsert?: AttunementConditionUpsertWithoutMagicItemsInput
+    connect?: AttunementConditionWhereUniqueInput
+    update?: XOR<XOR<AttunementConditionUpdateToOneWithWhereWithoutMagicItemsInput, AttunementConditionUpdateWithoutMagicItemsInput>, AttunementConditionUncheckedUpdateWithoutMagicItemsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -71982,6 +78988,23 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumGenderFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderFilter<$PrismaModel> | $Enums.Gender
+  }
+
+  export type NestedEnumGenderWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Gender | EnumGenderFieldRefInput<$PrismaModel>
+    in?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Gender[] | ListEnumGenderFieldRefInput<$PrismaModel>
+    not?: NestedEnumGenderWithAggregatesFilter<$PrismaModel> | $Enums.Gender
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumGenderFilter<$PrismaModel>
+    _max?: NestedEnumGenderFilter<$PrismaModel>
+  }
+
   export type CreatureCreateWithoutSize_relationInput = {
     id?: string
     name: string
@@ -72151,6 +79174,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type MagicItemCreateWithoutSource_relationInput = {
+    id?: string
+    name: string
+    description: string
+    type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
+    rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
+    attunements_relation?: MagicItemAttunementCreateNestedManyWithoutMagicItemInput
+  }
+
+  export type MagicItemUncheckedCreateWithoutSource_relationInput = {
+    id?: string
+    name: string
+    description: string
+    type_id: string
+    rarity_id: string
+    attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
+  }
+
+  export type MagicItemCreateOrConnectWithoutSource_relationInput = {
+    where: MagicItemWhereUniqueInput
+    create: XOR<MagicItemCreateWithoutSource_relationInput, MagicItemUncheckedCreateWithoutSource_relationInput>
+  }
+
+  export type MagicItemCreateManySource_relationInputEnvelope = {
+    data: MagicItemCreateManySource_relationInput | MagicItemCreateManySource_relationInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CreatureUpsertWithWhereUniqueWithoutSource_relationInput = {
     where: CreatureWhereUniqueInput
     update: XOR<CreatureUpdateWithoutSource_relationInput, CreatureUncheckedUpdateWithoutSource_relationInput>
@@ -72165,6 +79216,34 @@ export namespace Prisma {
   export type CreatureUpdateManyWithWhereWithoutSource_relationInput = {
     where: CreatureScalarWhereInput
     data: XOR<CreatureUpdateManyMutationInput, CreatureUncheckedUpdateManyWithoutSource_relationInput>
+  }
+
+  export type MagicItemUpsertWithWhereUniqueWithoutSource_relationInput = {
+    where: MagicItemWhereUniqueInput
+    update: XOR<MagicItemUpdateWithoutSource_relationInput, MagicItemUncheckedUpdateWithoutSource_relationInput>
+    create: XOR<MagicItemCreateWithoutSource_relationInput, MagicItemUncheckedCreateWithoutSource_relationInput>
+  }
+
+  export type MagicItemUpdateWithWhereUniqueWithoutSource_relationInput = {
+    where: MagicItemWhereUniqueInput
+    data: XOR<MagicItemUpdateWithoutSource_relationInput, MagicItemUncheckedUpdateWithoutSource_relationInput>
+  }
+
+  export type MagicItemUpdateManyWithWhereWithoutSource_relationInput = {
+    where: MagicItemScalarWhereInput
+    data: XOR<MagicItemUpdateManyMutationInput, MagicItemUncheckedUpdateManyWithoutSource_relationInput>
+  }
+
+  export type MagicItemScalarWhereInput = {
+    AND?: MagicItemScalarWhereInput | MagicItemScalarWhereInput[]
+    OR?: MagicItemScalarWhereInput[]
+    NOT?: MagicItemScalarWhereInput | MagicItemScalarWhereInput[]
+    id?: StringFilter<"MagicItem"> | string
+    name?: StringFilter<"MagicItem"> | string
+    description?: StringFilter<"MagicItem"> | string
+    type_id?: StringFilter<"MagicItem"> | string
+    rarity_id?: StringFilter<"MagicItem"> | string
+    source_id?: IntFilter<"MagicItem"> | number
   }
 
   export type CreatureCreateWithoutLanguagesInput = {
@@ -75650,14 +82729,16 @@ export namespace Prisma {
   }
 
   export type SourceCreateWithoutCreaturesInput = {
-    shortName: string
+    short_name: string
     name: string
+    magicItems?: MagicItemCreateNestedManyWithoutSource_relationInput
   }
 
   export type SourceUncheckedCreateWithoutCreaturesInput = {
     id?: number
-    shortName: string
+    short_name: string
     name: string
+    magicItems?: MagicItemUncheckedCreateNestedManyWithoutSource_relationInput
   }
 
   export type SourceCreateOrConnectWithoutCreaturesInput = {
@@ -76025,14 +83106,16 @@ export namespace Prisma {
   }
 
   export type SourceUpdateWithoutCreaturesInput = {
-    shortName?: StringFieldUpdateOperationsInput | string
+    short_name?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    magicItems?: MagicItemUpdateManyWithoutSource_relationNestedInput
   }
 
   export type SourceUncheckedUpdateWithoutCreaturesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    shortName?: StringFieldUpdateOperationsInput | string
+    short_name?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    magicItems?: MagicItemUncheckedUpdateManyWithoutSource_relationNestedInput
   }
 
   export type CreatureCreateWithoutSensesInput = {
@@ -76871,77 +83954,77 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
   }
 
-  export type GenreCreateWithoutAdventuresInput = {
+  export type GenreCreateWithoutAdventures_relationInput = {
     id?: string
     name: string
-    keywords?: KeywordCreateNestedManyWithoutGenreInput
+    keywords_relation?: KeywordCreateNestedManyWithoutGenre_relationInput
   }
 
-  export type GenreUncheckedCreateWithoutAdventuresInput = {
+  export type GenreUncheckedCreateWithoutAdventures_relationInput = {
     id?: string
     name: string
-    keywords?: KeywordUncheckedCreateNestedManyWithoutGenreInput
+    keywords_relation?: KeywordUncheckedCreateNestedManyWithoutGenre_relationInput
   }
 
-  export type GenreCreateOrConnectWithoutAdventuresInput = {
+  export type GenreCreateOrConnectWithoutAdventures_relationInput = {
     where: GenreWhereUniqueInput
-    create: XOR<GenreCreateWithoutAdventuresInput, GenreUncheckedCreateWithoutAdventuresInput>
+    create: XOR<GenreCreateWithoutAdventures_relationInput, GenreUncheckedCreateWithoutAdventures_relationInput>
   }
 
-  export type KeywordCreateWithoutAdventuresInput = {
+  export type KeywordCreateWithoutAdventures_relationInput = {
     id?: string
     name: string
-    genre: GenreCreateNestedOneWithoutKeywordsInput
+    genre_relation: GenreCreateNestedOneWithoutKeywords_relationInput
   }
 
-  export type KeywordUncheckedCreateWithoutAdventuresInput = {
+  export type KeywordUncheckedCreateWithoutAdventures_relationInput = {
     id?: string
     name: string
     genre_id: string
   }
 
-  export type KeywordCreateOrConnectWithoutAdventuresInput = {
+  export type KeywordCreateOrConnectWithoutAdventures_relationInput = {
     where: KeywordWhereUniqueInput
-    create: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput>
+    create: XOR<KeywordCreateWithoutAdventures_relationInput, KeywordUncheckedCreateWithoutAdventures_relationInput>
   }
 
-  export type GenreUpsertWithoutAdventuresInput = {
-    update: XOR<GenreUpdateWithoutAdventuresInput, GenreUncheckedUpdateWithoutAdventuresInput>
-    create: XOR<GenreCreateWithoutAdventuresInput, GenreUncheckedCreateWithoutAdventuresInput>
+  export type GenreUpsertWithoutAdventures_relationInput = {
+    update: XOR<GenreUpdateWithoutAdventures_relationInput, GenreUncheckedUpdateWithoutAdventures_relationInput>
+    create: XOR<GenreCreateWithoutAdventures_relationInput, GenreUncheckedCreateWithoutAdventures_relationInput>
     where?: GenreWhereInput
   }
 
-  export type GenreUpdateToOneWithWhereWithoutAdventuresInput = {
+  export type GenreUpdateToOneWithWhereWithoutAdventures_relationInput = {
     where?: GenreWhereInput
-    data: XOR<GenreUpdateWithoutAdventuresInput, GenreUncheckedUpdateWithoutAdventuresInput>
+    data: XOR<GenreUpdateWithoutAdventures_relationInput, GenreUncheckedUpdateWithoutAdventures_relationInput>
   }
 
-  export type GenreUpdateWithoutAdventuresInput = {
+  export type GenreUpdateWithoutAdventures_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    keywords?: KeywordUpdateManyWithoutGenreNestedInput
+    keywords_relation?: KeywordUpdateManyWithoutGenre_relationNestedInput
   }
 
-  export type GenreUncheckedUpdateWithoutAdventuresInput = {
+  export type GenreUncheckedUpdateWithoutAdventures_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    keywords?: KeywordUncheckedUpdateManyWithoutGenreNestedInput
+    keywords_relation?: KeywordUncheckedUpdateManyWithoutGenre_relationNestedInput
   }
 
-  export type KeywordUpsertWithWhereUniqueWithoutAdventuresInput = {
+  export type KeywordUpsertWithWhereUniqueWithoutAdventures_relationInput = {
     where: KeywordWhereUniqueInput
-    update: XOR<KeywordUpdateWithoutAdventuresInput, KeywordUncheckedUpdateWithoutAdventuresInput>
-    create: XOR<KeywordCreateWithoutAdventuresInput, KeywordUncheckedCreateWithoutAdventuresInput>
+    update: XOR<KeywordUpdateWithoutAdventures_relationInput, KeywordUncheckedUpdateWithoutAdventures_relationInput>
+    create: XOR<KeywordCreateWithoutAdventures_relationInput, KeywordUncheckedCreateWithoutAdventures_relationInput>
   }
 
-  export type KeywordUpdateWithWhereUniqueWithoutAdventuresInput = {
+  export type KeywordUpdateWithWhereUniqueWithoutAdventures_relationInput = {
     where: KeywordWhereUniqueInput
-    data: XOR<KeywordUpdateWithoutAdventuresInput, KeywordUncheckedUpdateWithoutAdventuresInput>
+    data: XOR<KeywordUpdateWithoutAdventures_relationInput, KeywordUncheckedUpdateWithoutAdventures_relationInput>
   }
 
-  export type KeywordUpdateManyWithWhereWithoutAdventuresInput = {
+  export type KeywordUpdateManyWithWhereWithoutAdventures_relationInput = {
     where: KeywordScalarWhereInput
-    data: XOR<KeywordUpdateManyMutationInput, KeywordUncheckedUpdateManyWithoutAdventuresInput>
+    data: XOR<KeywordUpdateManyMutationInput, KeywordUncheckedUpdateManyWithoutAdventures_relationInput>
   }
 
   export type KeywordScalarWhereInput = {
@@ -76953,33 +84036,33 @@ export namespace Prisma {
     genre_id?: StringFilter<"Keyword"> | string
   }
 
-  export type GenreCreateWithoutKeywordsInput = {
+  export type GenreCreateWithoutKeywords_relationInput = {
     id?: string
     name: string
-    adventures?: AdventureCreateNestedManyWithoutGenreInput
+    adventures_relation?: AdventureCreateNestedManyWithoutGenre_relationInput
   }
 
-  export type GenreUncheckedCreateWithoutKeywordsInput = {
+  export type GenreUncheckedCreateWithoutKeywords_relationInput = {
     id?: string
     name: string
-    adventures?: AdventureUncheckedCreateNestedManyWithoutGenreInput
+    adventures_relation?: AdventureUncheckedCreateNestedManyWithoutGenre_relationInput
   }
 
-  export type GenreCreateOrConnectWithoutKeywordsInput = {
+  export type GenreCreateOrConnectWithoutKeywords_relationInput = {
     where: GenreWhereUniqueInput
-    create: XOR<GenreCreateWithoutKeywordsInput, GenreUncheckedCreateWithoutKeywordsInput>
+    create: XOR<GenreCreateWithoutKeywords_relationInput, GenreUncheckedCreateWithoutKeywords_relationInput>
   }
 
-  export type AdventureCreateWithoutKeywordsInput = {
+  export type AdventureCreateWithoutKeywords_relationInput = {
     id?: string
     name: string
     creator_id: string
     created_at?: Date | string
     updated_at?: Date | string
-    genre: GenreCreateNestedOneWithoutAdventuresInput
+    genre_relation: GenreCreateNestedOneWithoutAdventures_relationInput
   }
 
-  export type AdventureUncheckedCreateWithoutKeywordsInput = {
+  export type AdventureUncheckedCreateWithoutKeywords_relationInput = {
     id?: string
     name: string
     genre_id: string
@@ -76988,48 +84071,48 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type AdventureCreateOrConnectWithoutKeywordsInput = {
+  export type AdventureCreateOrConnectWithoutKeywords_relationInput = {
     where: AdventureWhereUniqueInput
-    create: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput>
+    create: XOR<AdventureCreateWithoutKeywords_relationInput, AdventureUncheckedCreateWithoutKeywords_relationInput>
   }
 
-  export type GenreUpsertWithoutKeywordsInput = {
-    update: XOR<GenreUpdateWithoutKeywordsInput, GenreUncheckedUpdateWithoutKeywordsInput>
-    create: XOR<GenreCreateWithoutKeywordsInput, GenreUncheckedCreateWithoutKeywordsInput>
+  export type GenreUpsertWithoutKeywords_relationInput = {
+    update: XOR<GenreUpdateWithoutKeywords_relationInput, GenreUncheckedUpdateWithoutKeywords_relationInput>
+    create: XOR<GenreCreateWithoutKeywords_relationInput, GenreUncheckedCreateWithoutKeywords_relationInput>
     where?: GenreWhereInput
   }
 
-  export type GenreUpdateToOneWithWhereWithoutKeywordsInput = {
+  export type GenreUpdateToOneWithWhereWithoutKeywords_relationInput = {
     where?: GenreWhereInput
-    data: XOR<GenreUpdateWithoutKeywordsInput, GenreUncheckedUpdateWithoutKeywordsInput>
+    data: XOR<GenreUpdateWithoutKeywords_relationInput, GenreUncheckedUpdateWithoutKeywords_relationInput>
   }
 
-  export type GenreUpdateWithoutKeywordsInput = {
+  export type GenreUpdateWithoutKeywords_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    adventures?: AdventureUpdateManyWithoutGenreNestedInput
+    adventures_relation?: AdventureUpdateManyWithoutGenre_relationNestedInput
   }
 
-  export type GenreUncheckedUpdateWithoutKeywordsInput = {
+  export type GenreUncheckedUpdateWithoutKeywords_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    adventures?: AdventureUncheckedUpdateManyWithoutGenreNestedInput
+    adventures_relation?: AdventureUncheckedUpdateManyWithoutGenre_relationNestedInput
   }
 
-  export type AdventureUpsertWithWhereUniqueWithoutKeywordsInput = {
+  export type AdventureUpsertWithWhereUniqueWithoutKeywords_relationInput = {
     where: AdventureWhereUniqueInput
-    update: XOR<AdventureUpdateWithoutKeywordsInput, AdventureUncheckedUpdateWithoutKeywordsInput>
-    create: XOR<AdventureCreateWithoutKeywordsInput, AdventureUncheckedCreateWithoutKeywordsInput>
+    update: XOR<AdventureUpdateWithoutKeywords_relationInput, AdventureUncheckedUpdateWithoutKeywords_relationInput>
+    create: XOR<AdventureCreateWithoutKeywords_relationInput, AdventureUncheckedCreateWithoutKeywords_relationInput>
   }
 
-  export type AdventureUpdateWithWhereUniqueWithoutKeywordsInput = {
+  export type AdventureUpdateWithWhereUniqueWithoutKeywords_relationInput = {
     where: AdventureWhereUniqueInput
-    data: XOR<AdventureUpdateWithoutKeywordsInput, AdventureUncheckedUpdateWithoutKeywordsInput>
+    data: XOR<AdventureUpdateWithoutKeywords_relationInput, AdventureUncheckedUpdateWithoutKeywords_relationInput>
   }
 
-  export type AdventureUpdateManyWithWhereWithoutKeywordsInput = {
+  export type AdventureUpdateManyWithWhereWithoutKeywords_relationInput = {
     where: AdventureScalarWhereInput
-    data: XOR<AdventureUpdateManyMutationInput, AdventureUncheckedUpdateManyWithoutKeywordsInput>
+    data: XOR<AdventureUpdateManyMutationInput, AdventureUncheckedUpdateManyWithoutKeywords_relationInput>
   }
 
   export type AdventureScalarWhereInput = {
@@ -77044,86 +84127,472 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"Adventure"> | Date | string
   }
 
-  export type KeywordCreateWithoutGenreInput = {
+  export type KeywordCreateWithoutGenre_relationInput = {
     id?: string
     name: string
-    adventures?: AdventureCreateNestedManyWithoutKeywordsInput
+    adventures_relation?: AdventureCreateNestedManyWithoutKeywords_relationInput
   }
 
-  export type KeywordUncheckedCreateWithoutGenreInput = {
+  export type KeywordUncheckedCreateWithoutGenre_relationInput = {
     id?: string
     name: string
-    adventures?: AdventureUncheckedCreateNestedManyWithoutKeywordsInput
+    adventures_relation?: AdventureUncheckedCreateNestedManyWithoutKeywords_relationInput
   }
 
-  export type KeywordCreateOrConnectWithoutGenreInput = {
+  export type KeywordCreateOrConnectWithoutGenre_relationInput = {
     where: KeywordWhereUniqueInput
-    create: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput>
+    create: XOR<KeywordCreateWithoutGenre_relationInput, KeywordUncheckedCreateWithoutGenre_relationInput>
   }
 
-  export type KeywordCreateManyGenreInputEnvelope = {
-    data: KeywordCreateManyGenreInput | KeywordCreateManyGenreInput[]
+  export type KeywordCreateManyGenre_relationInputEnvelope = {
+    data: KeywordCreateManyGenre_relationInput | KeywordCreateManyGenre_relationInput[]
     skipDuplicates?: boolean
   }
 
-  export type AdventureCreateWithoutGenreInput = {
+  export type AdventureCreateWithoutGenre_relationInput = {
     id?: string
     name: string
     creator_id: string
     created_at?: Date | string
     updated_at?: Date | string
-    keywords?: KeywordCreateNestedManyWithoutAdventuresInput
+    keywords_relation?: KeywordCreateNestedManyWithoutAdventures_relationInput
   }
 
-  export type AdventureUncheckedCreateWithoutGenreInput = {
+  export type AdventureUncheckedCreateWithoutGenre_relationInput = {
     id?: string
     name: string
     creator_id: string
     created_at?: Date | string
     updated_at?: Date | string
-    keywords?: KeywordUncheckedCreateNestedManyWithoutAdventuresInput
+    keywords_relation?: KeywordUncheckedCreateNestedManyWithoutAdventures_relationInput
   }
 
-  export type AdventureCreateOrConnectWithoutGenreInput = {
+  export type AdventureCreateOrConnectWithoutGenre_relationInput = {
     where: AdventureWhereUniqueInput
-    create: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput>
+    create: XOR<AdventureCreateWithoutGenre_relationInput, AdventureUncheckedCreateWithoutGenre_relationInput>
   }
 
-  export type AdventureCreateManyGenreInputEnvelope = {
-    data: AdventureCreateManyGenreInput | AdventureCreateManyGenreInput[]
+  export type AdventureCreateManyGenre_relationInputEnvelope = {
+    data: AdventureCreateManyGenre_relationInput | AdventureCreateManyGenre_relationInput[]
     skipDuplicates?: boolean
   }
 
-  export type KeywordUpsertWithWhereUniqueWithoutGenreInput = {
+  export type KeywordUpsertWithWhereUniqueWithoutGenre_relationInput = {
     where: KeywordWhereUniqueInput
-    update: XOR<KeywordUpdateWithoutGenreInput, KeywordUncheckedUpdateWithoutGenreInput>
-    create: XOR<KeywordCreateWithoutGenreInput, KeywordUncheckedCreateWithoutGenreInput>
+    update: XOR<KeywordUpdateWithoutGenre_relationInput, KeywordUncheckedUpdateWithoutGenre_relationInput>
+    create: XOR<KeywordCreateWithoutGenre_relationInput, KeywordUncheckedCreateWithoutGenre_relationInput>
   }
 
-  export type KeywordUpdateWithWhereUniqueWithoutGenreInput = {
+  export type KeywordUpdateWithWhereUniqueWithoutGenre_relationInput = {
     where: KeywordWhereUniqueInput
-    data: XOR<KeywordUpdateWithoutGenreInput, KeywordUncheckedUpdateWithoutGenreInput>
+    data: XOR<KeywordUpdateWithoutGenre_relationInput, KeywordUncheckedUpdateWithoutGenre_relationInput>
   }
 
-  export type KeywordUpdateManyWithWhereWithoutGenreInput = {
+  export type KeywordUpdateManyWithWhereWithoutGenre_relationInput = {
     where: KeywordScalarWhereInput
-    data: XOR<KeywordUpdateManyMutationInput, KeywordUncheckedUpdateManyWithoutGenreInput>
+    data: XOR<KeywordUpdateManyMutationInput, KeywordUncheckedUpdateManyWithoutGenre_relationInput>
   }
 
-  export type AdventureUpsertWithWhereUniqueWithoutGenreInput = {
+  export type AdventureUpsertWithWhereUniqueWithoutGenre_relationInput = {
     where: AdventureWhereUniqueInput
-    update: XOR<AdventureUpdateWithoutGenreInput, AdventureUncheckedUpdateWithoutGenreInput>
-    create: XOR<AdventureCreateWithoutGenreInput, AdventureUncheckedCreateWithoutGenreInput>
+    update: XOR<AdventureUpdateWithoutGenre_relationInput, AdventureUncheckedUpdateWithoutGenre_relationInput>
+    create: XOR<AdventureCreateWithoutGenre_relationInput, AdventureUncheckedCreateWithoutGenre_relationInput>
   }
 
-  export type AdventureUpdateWithWhereUniqueWithoutGenreInput = {
+  export type AdventureUpdateWithWhereUniqueWithoutGenre_relationInput = {
     where: AdventureWhereUniqueInput
-    data: XOR<AdventureUpdateWithoutGenreInput, AdventureUncheckedUpdateWithoutGenreInput>
+    data: XOR<AdventureUpdateWithoutGenre_relationInput, AdventureUncheckedUpdateWithoutGenre_relationInput>
   }
 
-  export type AdventureUpdateManyWithWhereWithoutGenreInput = {
+  export type AdventureUpdateManyWithWhereWithoutGenre_relationInput = {
     where: AdventureScalarWhereInput
-    data: XOR<AdventureUpdateManyMutationInput, AdventureUncheckedUpdateManyWithoutGenreInput>
+    data: XOR<AdventureUpdateManyMutationInput, AdventureUncheckedUpdateManyWithoutGenre_relationInput>
+  }
+
+  export type MagicItemTypeCreateWithoutMagicItemsInput = {
+    id: string
+    name: string
+    gender: $Enums.Gender
+  }
+
+  export type MagicItemTypeUncheckedCreateWithoutMagicItemsInput = {
+    id: string
+    name: string
+    gender: $Enums.Gender
+  }
+
+  export type MagicItemTypeCreateOrConnectWithoutMagicItemsInput = {
+    where: MagicItemTypeWhereUniqueInput
+    create: XOR<MagicItemTypeCreateWithoutMagicItemsInput, MagicItemTypeUncheckedCreateWithoutMagicItemsInput>
+  }
+
+  export type MagicItemRarityCreateWithoutMagicItemsInput = {
+    id: string
+    cost: string
+    name: string
+    name_he: string
+    name_she: string
+    name_it: string
+  }
+
+  export type MagicItemRarityUncheckedCreateWithoutMagicItemsInput = {
+    id: string
+    cost: string
+    name: string
+    name_he: string
+    name_she: string
+    name_it: string
+  }
+
+  export type MagicItemRarityCreateOrConnectWithoutMagicItemsInput = {
+    where: MagicItemRarityWhereUniqueInput
+    create: XOR<MagicItemRarityCreateWithoutMagicItemsInput, MagicItemRarityUncheckedCreateWithoutMagicItemsInput>
+  }
+
+  export type SourceCreateWithoutMagicItemsInput = {
+    short_name: string
+    name: string
+    creatures?: CreatureCreateNestedManyWithoutSource_relationInput
+  }
+
+  export type SourceUncheckedCreateWithoutMagicItemsInput = {
+    id?: number
+    short_name: string
+    name: string
+    creatures?: CreatureUncheckedCreateNestedManyWithoutSource_relationInput
+  }
+
+  export type SourceCreateOrConnectWithoutMagicItemsInput = {
+    where: SourceWhereUniqueInput
+    create: XOR<SourceCreateWithoutMagicItemsInput, SourceUncheckedCreateWithoutMagicItemsInput>
+  }
+
+  export type MagicItemAttunementCreateWithoutMagicItemInput = {
+    attunement: AttunementConditionCreateNestedOneWithoutMagicItemsInput
+  }
+
+  export type MagicItemAttunementUncheckedCreateWithoutMagicItemInput = {
+    attunementId: string
+  }
+
+  export type MagicItemAttunementCreateOrConnectWithoutMagicItemInput = {
+    where: MagicItemAttunementWhereUniqueInput
+    create: XOR<MagicItemAttunementCreateWithoutMagicItemInput, MagicItemAttunementUncheckedCreateWithoutMagicItemInput>
+  }
+
+  export type MagicItemAttunementCreateManyMagicItemInputEnvelope = {
+    data: MagicItemAttunementCreateManyMagicItemInput | MagicItemAttunementCreateManyMagicItemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MagicItemTypeUpsertWithoutMagicItemsInput = {
+    update: XOR<MagicItemTypeUpdateWithoutMagicItemsInput, MagicItemTypeUncheckedUpdateWithoutMagicItemsInput>
+    create: XOR<MagicItemTypeCreateWithoutMagicItemsInput, MagicItemTypeUncheckedCreateWithoutMagicItemsInput>
+    where?: MagicItemTypeWhereInput
+  }
+
+  export type MagicItemTypeUpdateToOneWithWhereWithoutMagicItemsInput = {
+    where?: MagicItemTypeWhereInput
+    data: XOR<MagicItemTypeUpdateWithoutMagicItemsInput, MagicItemTypeUncheckedUpdateWithoutMagicItemsInput>
+  }
+
+  export type MagicItemTypeUpdateWithoutMagicItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  }
+
+  export type MagicItemTypeUncheckedUpdateWithoutMagicItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+  }
+
+  export type MagicItemRarityUpsertWithoutMagicItemsInput = {
+    update: XOR<MagicItemRarityUpdateWithoutMagicItemsInput, MagicItemRarityUncheckedUpdateWithoutMagicItemsInput>
+    create: XOR<MagicItemRarityCreateWithoutMagicItemsInput, MagicItemRarityUncheckedCreateWithoutMagicItemsInput>
+    where?: MagicItemRarityWhereInput
+  }
+
+  export type MagicItemRarityUpdateToOneWithWhereWithoutMagicItemsInput = {
+    where?: MagicItemRarityWhereInput
+    data: XOR<MagicItemRarityUpdateWithoutMagicItemsInput, MagicItemRarityUncheckedUpdateWithoutMagicItemsInput>
+  }
+
+  export type MagicItemRarityUpdateWithoutMagicItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cost?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    name_he?: StringFieldUpdateOperationsInput | string
+    name_she?: StringFieldUpdateOperationsInput | string
+    name_it?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MagicItemRarityUncheckedUpdateWithoutMagicItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    cost?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    name_he?: StringFieldUpdateOperationsInput | string
+    name_she?: StringFieldUpdateOperationsInput | string
+    name_it?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SourceUpsertWithoutMagicItemsInput = {
+    update: XOR<SourceUpdateWithoutMagicItemsInput, SourceUncheckedUpdateWithoutMagicItemsInput>
+    create: XOR<SourceCreateWithoutMagicItemsInput, SourceUncheckedCreateWithoutMagicItemsInput>
+    where?: SourceWhereInput
+  }
+
+  export type SourceUpdateToOneWithWhereWithoutMagicItemsInput = {
+    where?: SourceWhereInput
+    data: XOR<SourceUpdateWithoutMagicItemsInput, SourceUncheckedUpdateWithoutMagicItemsInput>
+  }
+
+  export type SourceUpdateWithoutMagicItemsInput = {
+    short_name?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creatures?: CreatureUpdateManyWithoutSource_relationNestedInput
+  }
+
+  export type SourceUncheckedUpdateWithoutMagicItemsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    short_name?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creatures?: CreatureUncheckedUpdateManyWithoutSource_relationNestedInput
+  }
+
+  export type MagicItemAttunementUpsertWithWhereUniqueWithoutMagicItemInput = {
+    where: MagicItemAttunementWhereUniqueInput
+    update: XOR<MagicItemAttunementUpdateWithoutMagicItemInput, MagicItemAttunementUncheckedUpdateWithoutMagicItemInput>
+    create: XOR<MagicItemAttunementCreateWithoutMagicItemInput, MagicItemAttunementUncheckedCreateWithoutMagicItemInput>
+  }
+
+  export type MagicItemAttunementUpdateWithWhereUniqueWithoutMagicItemInput = {
+    where: MagicItemAttunementWhereUniqueInput
+    data: XOR<MagicItemAttunementUpdateWithoutMagicItemInput, MagicItemAttunementUncheckedUpdateWithoutMagicItemInput>
+  }
+
+  export type MagicItemAttunementUpdateManyWithWhereWithoutMagicItemInput = {
+    where: MagicItemAttunementScalarWhereInput
+    data: XOR<MagicItemAttunementUpdateManyMutationInput, MagicItemAttunementUncheckedUpdateManyWithoutMagicItemInput>
+  }
+
+  export type MagicItemAttunementScalarWhereInput = {
+    AND?: MagicItemAttunementScalarWhereInput | MagicItemAttunementScalarWhereInput[]
+    OR?: MagicItemAttunementScalarWhereInput[]
+    NOT?: MagicItemAttunementScalarWhereInput | MagicItemAttunementScalarWhereInput[]
+    magicItemId?: StringFilter<"MagicItemAttunement"> | string
+    attunementId?: StringFilter<"MagicItemAttunement"> | string
+  }
+
+  export type MagicItemCreateWithoutRarity_relationInput = {
+    id?: string
+    name: string
+    description: string
+    type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
+    source_relation: SourceCreateNestedOneWithoutMagicItemsInput
+    attunements_relation?: MagicItemAttunementCreateNestedManyWithoutMagicItemInput
+  }
+
+  export type MagicItemUncheckedCreateWithoutRarity_relationInput = {
+    id?: string
+    name: string
+    description: string
+    type_id: string
+    source_id: number
+    attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
+  }
+
+  export type MagicItemCreateOrConnectWithoutRarity_relationInput = {
+    where: MagicItemWhereUniqueInput
+    create: XOR<MagicItemCreateWithoutRarity_relationInput, MagicItemUncheckedCreateWithoutRarity_relationInput>
+  }
+
+  export type MagicItemCreateManyRarity_relationInputEnvelope = {
+    data: MagicItemCreateManyRarity_relationInput | MagicItemCreateManyRarity_relationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MagicItemUpsertWithWhereUniqueWithoutRarity_relationInput = {
+    where: MagicItemWhereUniqueInput
+    update: XOR<MagicItemUpdateWithoutRarity_relationInput, MagicItemUncheckedUpdateWithoutRarity_relationInput>
+    create: XOR<MagicItemCreateWithoutRarity_relationInput, MagicItemUncheckedCreateWithoutRarity_relationInput>
+  }
+
+  export type MagicItemUpdateWithWhereUniqueWithoutRarity_relationInput = {
+    where: MagicItemWhereUniqueInput
+    data: XOR<MagicItemUpdateWithoutRarity_relationInput, MagicItemUncheckedUpdateWithoutRarity_relationInput>
+  }
+
+  export type MagicItemUpdateManyWithWhereWithoutRarity_relationInput = {
+    where: MagicItemScalarWhereInput
+    data: XOR<MagicItemUpdateManyMutationInput, MagicItemUncheckedUpdateManyWithoutRarity_relationInput>
+  }
+
+  export type MagicItemCreateWithoutType_relationInput = {
+    id?: string
+    name: string
+    description: string
+    rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
+    source_relation: SourceCreateNestedOneWithoutMagicItemsInput
+    attunements_relation?: MagicItemAttunementCreateNestedManyWithoutMagicItemInput
+  }
+
+  export type MagicItemUncheckedCreateWithoutType_relationInput = {
+    id?: string
+    name: string
+    description: string
+    rarity_id: string
+    source_id: number
+    attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
+  }
+
+  export type MagicItemCreateOrConnectWithoutType_relationInput = {
+    where: MagicItemWhereUniqueInput
+    create: XOR<MagicItemCreateWithoutType_relationInput, MagicItemUncheckedCreateWithoutType_relationInput>
+  }
+
+  export type MagicItemCreateManyType_relationInputEnvelope = {
+    data: MagicItemCreateManyType_relationInput | MagicItemCreateManyType_relationInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MagicItemUpsertWithWhereUniqueWithoutType_relationInput = {
+    where: MagicItemWhereUniqueInput
+    update: XOR<MagicItemUpdateWithoutType_relationInput, MagicItemUncheckedUpdateWithoutType_relationInput>
+    create: XOR<MagicItemCreateWithoutType_relationInput, MagicItemUncheckedCreateWithoutType_relationInput>
+  }
+
+  export type MagicItemUpdateWithWhereUniqueWithoutType_relationInput = {
+    where: MagicItemWhereUniqueInput
+    data: XOR<MagicItemUpdateWithoutType_relationInput, MagicItemUncheckedUpdateWithoutType_relationInput>
+  }
+
+  export type MagicItemUpdateManyWithWhereWithoutType_relationInput = {
+    where: MagicItemScalarWhereInput
+    data: XOR<MagicItemUpdateManyMutationInput, MagicItemUncheckedUpdateManyWithoutType_relationInput>
+  }
+
+  export type MagicItemAttunementCreateWithoutAttunementInput = {
+    magicItem: MagicItemCreateNestedOneWithoutAttunements_relationInput
+  }
+
+  export type MagicItemAttunementUncheckedCreateWithoutAttunementInput = {
+    magicItemId: string
+  }
+
+  export type MagicItemAttunementCreateOrConnectWithoutAttunementInput = {
+    where: MagicItemAttunementWhereUniqueInput
+    create: XOR<MagicItemAttunementCreateWithoutAttunementInput, MagicItemAttunementUncheckedCreateWithoutAttunementInput>
+  }
+
+  export type MagicItemAttunementCreateManyAttunementInputEnvelope = {
+    data: MagicItemAttunementCreateManyAttunementInput | MagicItemAttunementCreateManyAttunementInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MagicItemAttunementUpsertWithWhereUniqueWithoutAttunementInput = {
+    where: MagicItemAttunementWhereUniqueInput
+    update: XOR<MagicItemAttunementUpdateWithoutAttunementInput, MagicItemAttunementUncheckedUpdateWithoutAttunementInput>
+    create: XOR<MagicItemAttunementCreateWithoutAttunementInput, MagicItemAttunementUncheckedCreateWithoutAttunementInput>
+  }
+
+  export type MagicItemAttunementUpdateWithWhereUniqueWithoutAttunementInput = {
+    where: MagicItemAttunementWhereUniqueInput
+    data: XOR<MagicItemAttunementUpdateWithoutAttunementInput, MagicItemAttunementUncheckedUpdateWithoutAttunementInput>
+  }
+
+  export type MagicItemAttunementUpdateManyWithWhereWithoutAttunementInput = {
+    where: MagicItemAttunementScalarWhereInput
+    data: XOR<MagicItemAttunementUpdateManyMutationInput, MagicItemAttunementUncheckedUpdateManyWithoutAttunementInput>
+  }
+
+  export type MagicItemCreateWithoutAttunements_relationInput = {
+    id?: string
+    name: string
+    description: string
+    type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
+    rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
+    source_relation: SourceCreateNestedOneWithoutMagicItemsInput
+  }
+
+  export type MagicItemUncheckedCreateWithoutAttunements_relationInput = {
+    id?: string
+    name: string
+    description: string
+    type_id: string
+    rarity_id: string
+    source_id: number
+  }
+
+  export type MagicItemCreateOrConnectWithoutAttunements_relationInput = {
+    where: MagicItemWhereUniqueInput
+    create: XOR<MagicItemCreateWithoutAttunements_relationInput, MagicItemUncheckedCreateWithoutAttunements_relationInput>
+  }
+
+  export type AttunementConditionCreateWithoutMagicItemsInput = {
+    id?: string
+    label: string
+  }
+
+  export type AttunementConditionUncheckedCreateWithoutMagicItemsInput = {
+    id?: string
+    label: string
+  }
+
+  export type AttunementConditionCreateOrConnectWithoutMagicItemsInput = {
+    where: AttunementConditionWhereUniqueInput
+    create: XOR<AttunementConditionCreateWithoutMagicItemsInput, AttunementConditionUncheckedCreateWithoutMagicItemsInput>
+  }
+
+  export type MagicItemUpsertWithoutAttunements_relationInput = {
+    update: XOR<MagicItemUpdateWithoutAttunements_relationInput, MagicItemUncheckedUpdateWithoutAttunements_relationInput>
+    create: XOR<MagicItemCreateWithoutAttunements_relationInput, MagicItemUncheckedCreateWithoutAttunements_relationInput>
+    where?: MagicItemWhereInput
+  }
+
+  export type MagicItemUpdateToOneWithWhereWithoutAttunements_relationInput = {
+    where?: MagicItemWhereInput
+    data: XOR<MagicItemUpdateWithoutAttunements_relationInput, MagicItemUncheckedUpdateWithoutAttunements_relationInput>
+  }
+
+  export type MagicItemUpdateWithoutAttunements_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
+    rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
+    source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
+  }
+
+  export type MagicItemUncheckedUpdateWithoutAttunements_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type_id?: StringFieldUpdateOperationsInput | string
+    rarity_id?: StringFieldUpdateOperationsInput | string
+    source_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type AttunementConditionUpsertWithoutMagicItemsInput = {
+    update: XOR<AttunementConditionUpdateWithoutMagicItemsInput, AttunementConditionUncheckedUpdateWithoutMagicItemsInput>
+    create: XOR<AttunementConditionCreateWithoutMagicItemsInput, AttunementConditionUncheckedCreateWithoutMagicItemsInput>
+    where?: AttunementConditionWhereInput
+  }
+
+  export type AttunementConditionUpdateToOneWithWhereWithoutMagicItemsInput = {
+    where?: AttunementConditionWhereInput
+    data: XOR<AttunementConditionUpdateWithoutMagicItemsInput, AttunementConditionUncheckedUpdateWithoutMagicItemsInput>
+  }
+
+  export type AttunementConditionUpdateWithoutMagicItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AttunementConditionUncheckedUpdateWithoutMagicItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    label?: StringFieldUpdateOperationsInput | string
   }
 
   export type CreatureCreateManySize_relationInput = {
@@ -77233,6 +84702,14 @@ export namespace Prisma {
     aSubTypes?: CreatureCreateaSubTypesInput | string[]
   }
 
+  export type MagicItemCreateManySource_relationInput = {
+    id?: string
+    name: string
+    description: string
+    type_id: string
+    rarity_id: string
+  }
+
   export type CreatureUpdateWithoutSource_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -77304,6 +84781,32 @@ export namespace Prisma {
     biomes_ids?: CreatureUpdatebiomes_idsInput | number[]
     type_id?: NullableIntFieldUpdateOperationsInput | number | null
     aSubTypes?: CreatureUpdateaSubTypesInput | string[]
+  }
+
+  export type MagicItemUpdateWithoutSource_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
+    rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
+    attunements_relation?: MagicItemAttunementUpdateManyWithoutMagicItemNestedInput
+  }
+
+  export type MagicItemUncheckedUpdateWithoutSource_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type_id?: StringFieldUpdateOperationsInput | string
+    rarity_id?: StringFieldUpdateOperationsInput | string
+    attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
+  }
+
+  export type MagicItemUncheckedUpdateManyWithoutSource_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type_id?: StringFieldUpdateOperationsInput | string
+    rarity_id?: StringFieldUpdateOperationsInput | string
   }
 
   export type CreatureUpdateWithoutLanguagesInput = {
@@ -78348,43 +85851,34 @@ export namespace Prisma {
     role?: StringFieldUpdateOperationsInput | string
   }
 
-  export type KeywordUpdateWithoutAdventuresInput = {
+  export type KeywordUpdateWithoutAdventures_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    genre?: GenreUpdateOneRequiredWithoutKeywordsNestedInput
+    genre_relation?: GenreUpdateOneRequiredWithoutKeywords_relationNestedInput
   }
 
-  export type KeywordUncheckedUpdateWithoutAdventuresInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    genre_id?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type KeywordUncheckedUpdateManyWithoutAdventuresInput = {
+  export type KeywordUncheckedUpdateWithoutAdventures_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     genre_id?: StringFieldUpdateOperationsInput | string
   }
 
-  export type AdventureUpdateWithoutKeywordsInput = {
+  export type KeywordUncheckedUpdateManyWithoutAdventures_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre_id?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AdventureUpdateWithoutKeywords_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     creator_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    genre?: GenreUpdateOneRequiredWithoutAdventuresNestedInput
+    genre_relation?: GenreUpdateOneRequiredWithoutAdventures_relationNestedInput
   }
 
-  export type AdventureUncheckedUpdateWithoutKeywordsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    genre_id?: StringFieldUpdateOperationsInput | string
-    creator_id?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type AdventureUncheckedUpdateManyWithoutKeywordsInput = {
+  export type AdventureUncheckedUpdateWithoutKeywords_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     genre_id?: StringFieldUpdateOperationsInput | string
@@ -78393,12 +85887,21 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type KeywordCreateManyGenreInput = {
+  export type AdventureUncheckedUpdateManyWithoutKeywords_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    genre_id?: StringFieldUpdateOperationsInput | string
+    creator_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type KeywordCreateManyGenre_relationInput = {
     id?: string
     name: string
   }
 
-  export type AdventureCreateManyGenreInput = {
+  export type AdventureCreateManyGenre_relationInput = {
     id?: string
     name: string
     creator_id: string
@@ -78406,47 +85909,147 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type KeywordUpdateWithoutGenreInput = {
+  export type KeywordUpdateWithoutGenre_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    adventures?: AdventureUpdateManyWithoutKeywordsNestedInput
+    adventures_relation?: AdventureUpdateManyWithoutKeywords_relationNestedInput
   }
 
-  export type KeywordUncheckedUpdateWithoutGenreInput = {
+  export type KeywordUncheckedUpdateWithoutGenre_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    adventures?: AdventureUncheckedUpdateManyWithoutKeywordsNestedInput
+    adventures_relation?: AdventureUncheckedUpdateManyWithoutKeywords_relationNestedInput
   }
 
-  export type KeywordUncheckedUpdateManyWithoutGenreInput = {
+  export type KeywordUncheckedUpdateManyWithoutGenre_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
   }
 
-  export type AdventureUpdateWithoutGenreInput = {
+  export type AdventureUpdateWithoutGenre_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     creator_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    keywords?: KeywordUpdateManyWithoutAdventuresNestedInput
+    keywords_relation?: KeywordUpdateManyWithoutAdventures_relationNestedInput
   }
 
-  export type AdventureUncheckedUpdateWithoutGenreInput = {
+  export type AdventureUncheckedUpdateWithoutGenre_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     creator_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    keywords?: KeywordUncheckedUpdateManyWithoutAdventuresNestedInput
+    keywords_relation?: KeywordUncheckedUpdateManyWithoutAdventures_relationNestedInput
   }
 
-  export type AdventureUncheckedUpdateManyWithoutGenreInput = {
+  export type AdventureUncheckedUpdateManyWithoutGenre_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     creator_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MagicItemAttunementCreateManyMagicItemInput = {
+    attunementId: string
+  }
+
+  export type MagicItemAttunementUpdateWithoutMagicItemInput = {
+    attunement?: AttunementConditionUpdateOneRequiredWithoutMagicItemsNestedInput
+  }
+
+  export type MagicItemAttunementUncheckedUpdateWithoutMagicItemInput = {
+    attunementId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MagicItemAttunementUncheckedUpdateManyWithoutMagicItemInput = {
+    attunementId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MagicItemCreateManyRarity_relationInput = {
+    id?: string
+    name: string
+    description: string
+    type_id: string
+    source_id: number
+  }
+
+  export type MagicItemUpdateWithoutRarity_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
+    source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
+    attunements_relation?: MagicItemAttunementUpdateManyWithoutMagicItemNestedInput
+  }
+
+  export type MagicItemUncheckedUpdateWithoutRarity_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type_id?: StringFieldUpdateOperationsInput | string
+    source_id?: IntFieldUpdateOperationsInput | number
+    attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
+  }
+
+  export type MagicItemUncheckedUpdateManyWithoutRarity_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    type_id?: StringFieldUpdateOperationsInput | string
+    source_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MagicItemCreateManyType_relationInput = {
+    id?: string
+    name: string
+    description: string
+    rarity_id: string
+    source_id: number
+  }
+
+  export type MagicItemUpdateWithoutType_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
+    source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
+    attunements_relation?: MagicItemAttunementUpdateManyWithoutMagicItemNestedInput
+  }
+
+  export type MagicItemUncheckedUpdateWithoutType_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    rarity_id?: StringFieldUpdateOperationsInput | string
+    source_id?: IntFieldUpdateOperationsInput | number
+    attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
+  }
+
+  export type MagicItemUncheckedUpdateManyWithoutType_relationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    rarity_id?: StringFieldUpdateOperationsInput | string
+    source_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MagicItemAttunementCreateManyAttunementInput = {
+    magicItemId: string
+  }
+
+  export type MagicItemAttunementUpdateWithoutAttunementInput = {
+    magicItem?: MagicItemUpdateOneRequiredWithoutAttunements_relationNestedInput
+  }
+
+  export type MagicItemAttunementUncheckedUpdateWithoutAttunementInput = {
+    magicItemId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MagicItemAttunementUncheckedUpdateManyWithoutAttunementInput = {
+    magicItemId?: StringFieldUpdateOperationsInput | string
   }
 
 
