@@ -29,7 +29,7 @@ export class AdventureService {
         genre_id: dto.genre_id,
         creator_id: userId,
 
-        keywords: dto.keyword_ids
+        keywords_relation: dto.keyword_ids
           ? {
               connect: dto.keyword_ids.map((id) => ({ id })),
             }
@@ -54,8 +54,8 @@ export class AdventureService {
     const [adventuresRaw, totalCount] = await Promise.all([
       this.prisma.adventure.findMany({
         select: {
-          genre: { omit: { id: true } },
-          keywords: { omit: { id: true, genre_id: true } },
+          genre_relation: { omit: { id: true } },
+          keywords_relation: { omit: { id: true, genre_id: true } },
           name: true,
           id: true,
         },
@@ -67,10 +67,10 @@ export class AdventureService {
     ]);
 
     const adventures: ApiAdventureList = adventuresRaw.map(
-      ({ genre, ...a }) => ({
+      ({ genre_relation, keywords_relation, ...a }) => ({
         ...a,
-        keywords: a.keywords.map((k) => k.name),
-        genre_name: genre.name,
+        keywords: keywords_relation.map((k) => k.name),
+        genre_name: genre_relation.name,
       }),
     );
 
@@ -96,8 +96,8 @@ export class AdventureService {
       select: {
         id: true,
         name: true,
-        genre: true,
-        keywords: true,
+        genre_relation: true,
+        keywords_relation: true,
         created_at: true,
         updated_at: true,
         creator_id: true,
@@ -110,7 +110,8 @@ export class AdventureService {
         statusCode: HttpStatus.NOT_FOUND,
       });
 
-    const { creator_id, ...rest } = adventureRaw;
+    const { creator_id, genre_relation, keywords_relation, ...rest } =
+      adventureRaw;
 
     if (creator_id !== userId)
       throw new AppError({
@@ -118,7 +119,7 @@ export class AdventureService {
         statusCode: HttpStatus.FORBIDDEN,
       });
 
-    return rest;
+    return { ...rest, genre: genre_relation, keywords: keywords_relation };
   }
 
   async update(id: string, dto: UpdateAdventureDto, userId: string) {
@@ -130,15 +131,15 @@ export class AdventureService {
         name: dto.name ?? existing.name,
         genre_id: dto.genre_id ?? existing.genre.id,
 
-        keywords: dto.keyword_ids
+        keywords_relation: dto.keyword_ids
           ? {
               set: dto.keyword_ids.map((id) => ({ id })),
             }
           : null,
       },
       include: {
-        genre: true,
-        keywords: true,
+        genre_relation: true,
+        keywords_relation: true,
       },
     });
   }

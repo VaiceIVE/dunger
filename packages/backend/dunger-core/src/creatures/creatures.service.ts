@@ -58,7 +58,7 @@ export class CreaturesService {
     // Получаем id кастомного источника (например, "DUNGER")
     const customSourceId = (
       await this.prisma.source.findUnique({
-        where: { shortName: this.customContentSource },
+        where: { short_name: this.customContentSource },
         select: { id: true },
       })
     )?.id;
@@ -106,7 +106,7 @@ export class CreaturesService {
 
     // Получаем id кастомного источника (например, 'DUNGER'), чтобы исключить его из выборки
     const dungerSource = await this.prisma.source.findUnique({
-      where: { shortName: this.customContentSource },
+      where: { short_name: this.customContentSource },
       select: { id: true },
     });
 
@@ -248,7 +248,7 @@ export class CreaturesService {
 
     // Получаем id кастомного источника (например, 'DUNGER'), чтобы исключить его из выборки
     const dungerSource = await this.prisma.source.findUnique({
-      where: { shortName: this.customContentSource },
+      where: { short_name: this.customContentSource },
       select: { id: true },
     });
 
