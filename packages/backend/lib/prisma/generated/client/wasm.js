@@ -467,7 +467,7 @@ exports.Prisma.MagicItemTypeScalarFieldEnum = {
 
 exports.Prisma.AttunementConditionScalarFieldEnum = {
   id: 'id',
-  label: 'label'
+  name: 'name'
 };
 
 exports.Prisma.MagicItemAttunementScalarFieldEnum = {

@@ -65451,34 +65451,34 @@ export namespace Prisma {
 
   export type AttunementConditionMinAggregateOutputType = {
     id: string | null
-    label: string | null
+    name: string | null
   }
 
   export type AttunementConditionMaxAggregateOutputType = {
     id: string | null
-    label: string | null
+    name: string | null
   }
 
   export type AttunementConditionCountAggregateOutputType = {
     id: number
-    label: number
+    name: number
     _all: number
   }
 
 
   export type AttunementConditionMinAggregateInputType = {
     id?: true
-    label?: true
+    name?: true
   }
 
   export type AttunementConditionMaxAggregateInputType = {
     id?: true
-    label?: true
+    name?: true
   }
 
   export type AttunementConditionCountAggregateInputType = {
     id?: true
-    label?: true
+    name?: true
     _all?: true
   }
 
@@ -65556,7 +65556,7 @@ export namespace Prisma {
 
   export type AttunementConditionGroupByOutputType = {
     id: string
-    label: string
+    name: string
     _count: AttunementConditionCountAggregateOutputType | null
     _min: AttunementConditionMinAggregateOutputType | null
     _max: AttunementConditionMaxAggregateOutputType | null
@@ -65578,27 +65578,27 @@ export namespace Prisma {
 
   export type AttunementConditionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    label?: boolean
+    name?: boolean
     magicItems?: boolean | AttunementCondition$magicItemsArgs<ExtArgs>
     _count?: boolean | AttunementConditionCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["attunementCondition"]>
 
   export type AttunementConditionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    label?: boolean
+    name?: boolean
   }, ExtArgs["result"]["attunementCondition"]>
 
   export type AttunementConditionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    label?: boolean
+    name?: boolean
   }, ExtArgs["result"]["attunementCondition"]>
 
   export type AttunementConditionSelectScalar = {
     id?: boolean
-    label?: boolean
+    name?: boolean
   }
 
-  export type AttunementConditionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label", ExtArgs["result"]["attunementCondition"]>
+  export type AttunementConditionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["attunementCondition"]>
   export type AttunementConditionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     magicItems?: boolean | AttunementCondition$magicItemsArgs<ExtArgs>
     _count?: boolean | AttunementConditionCountOutputTypeDefaultArgs<ExtArgs>
@@ -65613,7 +65613,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      label: string
+      name: string
     }, ExtArgs["result"]["attunementCondition"]>
     composites: {}
   }
@@ -66039,7 +66039,7 @@ export namespace Prisma {
    */ 
   interface AttunementConditionFieldRefs {
     readonly id: FieldRef<"AttunementCondition", 'String'>
-    readonly label: FieldRef<"AttunementCondition", 'String'>
+    readonly name: FieldRef<"AttunementCondition", 'String'>
   }
     
 
@@ -68023,7 +68023,7 @@ export namespace Prisma {
 
   export const AttunementConditionScalarFieldEnum: {
     id: 'id',
-    label: 'label'
+    name: 'name'
   };
 
   export type AttunementConditionScalarFieldEnum = (typeof AttunementConditionScalarFieldEnum)[keyof typeof AttunementConditionScalarFieldEnum]
@@ -70943,28 +70943,28 @@ export namespace Prisma {
     OR?: AttunementConditionWhereInput[]
     NOT?: AttunementConditionWhereInput | AttunementConditionWhereInput[]
     id?: StringFilter<"AttunementCondition"> | string
-    label?: StringFilter<"AttunementCondition"> | string
+    name?: StringFilter<"AttunementCondition"> | string
     magicItems?: MagicItemAttunementListRelationFilter
   }
 
   export type AttunementConditionOrderByWithRelationInput = {
     id?: SortOrder
-    label?: SortOrder
+    name?: SortOrder
     magicItems?: MagicItemAttunementOrderByRelationAggregateInput
   }
 
   export type AttunementConditionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    label?: string
+    name?: string
     AND?: AttunementConditionWhereInput | AttunementConditionWhereInput[]
     OR?: AttunementConditionWhereInput[]
     NOT?: AttunementConditionWhereInput | AttunementConditionWhereInput[]
     magicItems?: MagicItemAttunementListRelationFilter
-  }, "id" | "label">
+  }, "id" | "name">
 
   export type AttunementConditionOrderByWithAggregationInput = {
     id?: SortOrder
-    label?: SortOrder
+    name?: SortOrder
     _count?: AttunementConditionCountOrderByAggregateInput
     _max?: AttunementConditionMaxOrderByAggregateInput
     _min?: AttunementConditionMinOrderByAggregateInput
@@ -70975,7 +70975,7 @@ export namespace Prisma {
     OR?: AttunementConditionScalarWhereWithAggregatesInput[]
     NOT?: AttunementConditionScalarWhereWithAggregatesInput | AttunementConditionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AttunementCondition"> | string
-    label?: StringWithAggregatesFilter<"AttunementCondition"> | string
+    name?: StringWithAggregatesFilter<"AttunementCondition"> | string
   }
 
   export type MagicItemAttunementWhereInput = {
@@ -73656,41 +73656,41 @@ export namespace Prisma {
 
   export type AttunementConditionCreateInput = {
     id?: string
-    label: string
+    name: string
     magicItems?: MagicItemAttunementCreateNestedManyWithoutAttunementInput
   }
 
   export type AttunementConditionUncheckedCreateInput = {
     id?: string
-    label: string
+    name: string
     magicItems?: MagicItemAttunementUncheckedCreateNestedManyWithoutAttunementInput
   }
 
   export type AttunementConditionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     magicItems?: MagicItemAttunementUpdateManyWithoutAttunementNestedInput
   }
 
   export type AttunementConditionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
     magicItems?: MagicItemAttunementUncheckedUpdateManyWithoutAttunementNestedInput
   }
 
   export type AttunementConditionCreateManyInput = {
     id?: string
-    label: string
+    name: string
   }
 
   export type AttunementConditionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AttunementConditionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type MagicItemAttunementCreateInput = {
@@ -75682,17 +75682,17 @@ export namespace Prisma {
 
   export type AttunementConditionCountOrderByAggregateInput = {
     id?: SortOrder
-    label?: SortOrder
+    name?: SortOrder
   }
 
   export type AttunementConditionMaxOrderByAggregateInput = {
     id?: SortOrder
-    label?: SortOrder
+    name?: SortOrder
   }
 
   export type AttunementConditionMinOrderByAggregateInput = {
     id?: SortOrder
-    label?: SortOrder
+    name?: SortOrder
   }
 
   export type MagicItemScalarRelationFilter = {
@@ -84532,12 +84532,12 @@ export namespace Prisma {
 
   export type AttunementConditionCreateWithoutMagicItemsInput = {
     id?: string
-    label: string
+    name: string
   }
 
   export type AttunementConditionUncheckedCreateWithoutMagicItemsInput = {
     id?: string
-    label: string
+    name: string
   }
 
   export type AttunementConditionCreateOrConnectWithoutMagicItemsInput = {
@@ -84587,12 +84587,12 @@ export namespace Prisma {
 
   export type AttunementConditionUpdateWithoutMagicItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type AttunementConditionUncheckedUpdateWithoutMagicItemsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    label?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
   }
 
   export type CreatureCreateManySize_relationInput = {

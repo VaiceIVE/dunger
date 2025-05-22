@@ -18,22 +18,18 @@ export async function SeedBiomes() {
     const normalizedKey = biome.text.key.trim().toLowerCase();
 
     promises.push(
-      prisma.biome
-        .upsert({
-          where: { key: normalizedKey },
-          update: {},
-          create: {
-            key: biome.text.key,
-            name: biome.text.name
-          }
-        })
-        .catch((error) => {
-          // console.error(`Failed to upsert biome "${biome.text.key}":`, error);
-        })
+      prisma.biome.upsert({
+        where: { key: normalizedKey },
+        update: {},
+        create: {
+          key: biome.text.key,
+          name: biome.text.name
+        }
+      })
     );
   }
 
-  Promise.all(promises).then(() => {
-    return 1;
+  Promise.all(promises).finally(async () => {
+    await prisma.$disconnect();
   });
 }

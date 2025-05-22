@@ -539,7 +539,7 @@ model MagicItemType {
 
 model AttunementCondition {
   id         String                @id @default(uuid()) @map("id")
-  label      String                @unique @map("label")
+  name       String                @unique @map("name")
   magicItems MagicItemAttunement[] @relation("AttunementToMagicItem")
 
   @@map("attunement_conditions")

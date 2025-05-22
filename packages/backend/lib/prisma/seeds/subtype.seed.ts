@@ -36,7 +36,7 @@ export async function SeedTypes() {
         })
     );
   }
-  Promise.all(promises).then(() => {
-    return 1;
+  Promise.all(promises).finally(async () => {
+    await prisma.$disconnect();
   });
 }
