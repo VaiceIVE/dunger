@@ -20,11 +20,11 @@ import { PaginationQueryDto } from 'src/common/dto';
 @UseGuards(JwtAuthGuard)
 @Controller('adventures')
 export class AdventuresController {
-  constructor(private readonly adventureService: AdventuresService) {}
+  constructor(private readonly adventuresService: AdventuresService) {}
 
   @Post()
   create(@Body() dto: CreateAdventureDto, @CurrentUser() user) {
-    return this.adventureService.create(dto, user.id);
+    return this.adventuresService.create(dto, user.id);
   }
 
   @Get()
@@ -38,12 +38,12 @@ export class AdventuresController {
     query: PaginationQueryDto,
     @CurrentUser() user,
   ) {
-    return this.adventureService.findAll(query, user.id);
+    return this.adventuresService.findAll(query, user.id);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string, @CurrentUser() user) {
-    return this.adventureService.findOne(id, user.id);
+    return this.adventuresService.findOne(id, user.id);
   }
 
   @Patch(':id')
@@ -52,11 +52,11 @@ export class AdventuresController {
     @Body() dto: UpdateAdventureDto,
     @CurrentUser() user,
   ) {
-    return this.adventureService.update(id, dto, user.id);
+    return this.adventuresService.update(id, dto, user.id);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string, @CurrentUser() user) {
-    return this.adventureService.remove(id, user.id);
+    return this.adventuresService.remove(id, user.id);
   }
 }
