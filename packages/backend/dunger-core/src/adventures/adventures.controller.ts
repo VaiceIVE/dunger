@@ -10,7 +10,7 @@ import {
   UseGuards,
   ValidationPipe,
 } from '@nestjs/common';
-import { AdventureService } from './adventure.service';
+import { AdventuresService } from './adventures.service';
 import { CreateAdventureDto } from './dto/create-adventure.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { UpdateAdventureDto } from './dto/update-adventure.dto';
@@ -18,9 +18,9 @@ import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { PaginationQueryDto } from 'src/common/dto';
 
 @UseGuards(JwtAuthGuard)
-@Controller('adventure')
-export class AdventureController {
-  constructor(private readonly adventureService: AdventureService) {}
+@Controller('adventures')
+export class AdventuresController {
+  constructor(private readonly adventureService: AdventuresService) {}
 
   @Post()
   create(@Body() dto: CreateAdventureDto, @CurrentUser() user) {

@@ -13,7 +13,7 @@ import {
 import { CreaturesService } from 'src/creatures/creatures.service';
 
 @Injectable()
-export class AdventureService {
+export class AdventuresService {
   constructor(
     private readonly prisma: PrismaClient,
     private readonly creaturesService: CreaturesService,
