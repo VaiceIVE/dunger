@@ -1,6 +1,8 @@
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
+import { keepPreviousData, useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
+import { useAuthFetch } from '@dunger/auth-fetch';
 import {
   Button,
   ButtonVariant,
@@ -8,6 +10,7 @@ import {
   Grid,
   headers,
   IconButton,
+  InfiniteScroll,
   LinkIcon,
   PencilIcon,
   SearchIcon,
@@ -16,6 +19,9 @@ import {
   XIcon
 } from '@dunger/ui';
 import { SplitViewLayout } from 'features/SplitViewLayout';
+import { ApiMagicItem } from 'store/_types/magic-item/ApiMagicItem';
+import { ApiMagicItemListResult } from 'store/_types/magic-item/ApiMagicItemList';
+import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
 import { MagicItemCard } from './_components/MagicItemCard';
 import { MagicItemList } from './_components/MagicItemList';
 
@@ -23,6 +29,43 @@ export const MagicItemsPage = () => {
   const { id } = useParams();
 
   const isActiveItem = !!id;
+
+  const [nameQuery, setNameQuery] = useState('');
+  const debouncedQuery = useDebouncedValue(nameQuery, 500);
+
+  const authFetch = useAuthFetch();
+
+  const {
+    data,
+    fetchNextPage: fetchMoreMagicItems,
+    hasNextPage: hasMoreMagicItems
+  } = useInfiniteQuery({
+    queryKey: ['magic-items', { query: debouncedQuery }],
+    queryFn: async ({ pageParam = 0 }) => {
+      const params = new URLSearchParams({ offset: pageParam.toString() });
+
+      if (debouncedQuery) {
+        params.set('query', debouncedQuery);
+      }
+
+      return authFetch<ApiMagicItemListResult>(`/magic-items?${params.toString()}`);
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      const { offset, limit, totalCount } = lastPage.pagination;
+      const nextOffset = offset + limit;
+      return nextOffset < totalCount ? nextOffset : undefined;
+    }
+  });
+
+  const { data: magicItem } = useQuery({
+    queryKey: ['magic-items', { id }],
+    queryFn: () => authFetch<ApiMagicItem>(`/magic-items/${id ?? ''}`),
+    enabled: isActiveItem,
+    placeholderData: keepPreviousData
+  });
+
+  const magicItems = data?.pages.flatMap((p) => p.magicItems) ?? [];
 
   return (
     <main>
@@ -35,14 +78,24 @@ export const MagicItemsPage = () => {
               <Stack gap={24}>
                 <Grid gap={16}>
                   <Grid.Col span={isActiveItem ? 11 : 6}>
-                    <TextInput style={styles.input} placeholder="Поиск" leftSection={<SearchIcon />} />
+                    <TextInput
+                      value={nameQuery}
+                      onChange={(e) => {
+                        setNameQuery(e.target.value);
+                      }}
+                      style={styles.input}
+                      placeholder="Поиск"
+                      leftSection={<SearchIcon />}
+                    />
                   </Grid.Col>
                   <Grid.Col span={isActiveItem ? 1 : 6}>
                     <Button variant={ButtonVariant.accentSecondary}>Фильтры</Button>
                   </Grid.Col>
                 </Grid>
 
-                <MagicItemList isActiveItem={isActiveItem} />
+                <InfiniteScroll hasMore={hasMoreMagicItems} next={fetchMoreMagicItems}>
+                  <MagicItemList magicItems={magicItems} isActiveItem={isActiveItem} />
+                </InfiniteScroll>
               </Stack>
             </Stack>
           </SplitViewLayout.Master>

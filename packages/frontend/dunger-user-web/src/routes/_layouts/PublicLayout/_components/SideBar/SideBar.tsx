@@ -120,6 +120,7 @@ export const SideBar = () => {
               <section {...stylex.props(styles.section)}>
                 <div {...stylex.props(text.subheaderBold, styles.sectionTitle)}>Для мастера</div>
                 <Tab to={'bestiary'}>Бестиарий</Tab>
+                <Tab to={'magic-items'}>Магические предметы</Tab>
               </section>
             </Stack>
           </Stack>
