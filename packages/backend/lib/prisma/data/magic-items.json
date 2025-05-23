@@ -38,8 +38,8 @@
           "title": "Armor"
         },
         "ru": {
-          "title": "броня",
-          "gender": "SHE"
+          "title": "доспех",
+          "gender": "HE"
         }
       },
       "img": "type_armor.jpg"
