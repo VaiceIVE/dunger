@@ -7,6 +7,7 @@ import { AuthModule } from 'src/auth/auth.module';
 import { UserModule } from 'src/user/user.module';
 import { DirectoriesModule } from 'src/directories/directories.module';
 import { AdventuresModule } from 'src/adventures/adventures.module';
+import { MagicItemsModule } from 'src/magic-items/magic-items.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AdventuresModule } from 'src/adventures/adventures.module';
     UserModule,
     DirectoriesModule,
     AdventuresModule,
+    MagicItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaClient],
