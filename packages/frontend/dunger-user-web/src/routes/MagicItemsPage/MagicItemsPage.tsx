@@ -7,6 +7,7 @@ import {
   Button,
   ButtonVariant,
   Container,
+  Flex,
   Grid,
   headers,
   IconButton,
@@ -15,15 +16,16 @@ import {
   PencilIcon,
   SearchIcon,
   Stack,
+  Tag,
   TextInput,
   XIcon
 } from '@dunger/ui';
+import { Directory, DirectoryItem } from 'components/Directory';
 import { SplitViewLayout } from 'features/SplitViewLayout';
 import { ApiMagicItem } from 'store/_types/magic-item/ApiMagicItem';
 import { ApiMagicItemListResult } from 'store/_types/magic-item/ApiMagicItemList';
 import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
 import { MagicItemCard } from './_components/MagicItemCard';
-import { MagicItemList } from './_components/MagicItemList';
 
 export const MagicItemsPage = () => {
   const { id } = useParams();
@@ -94,7 +96,23 @@ export const MagicItemsPage = () => {
                 </Grid>
 
                 <InfiniteScroll hasMore={hasMoreMagicItems} next={fetchMoreMagicItems}>
-                  <MagicItemList magicItems={magicItems} isActiveItem={isActiveItem} />
+                  <Directory>
+                    {magicItems.map((i) => (
+                      <DirectoryItem
+                        active={i.id === id}
+                        fullWidth={isActiveItem}
+                        key={i.id}
+                        to={`/magic-items/${i.id}`}>
+                        <DirectoryItem.Title>{i.name}</DirectoryItem.Title>
+                        <DirectoryItem.Content>
+                          <Flex gap={8}>
+                            <Tag color="yellow">{i.cost}</Tag>
+                            <Tag color="black">{i.type_name}</Tag>
+                          </Flex>
+                        </DirectoryItem.Content>
+                      </DirectoryItem>
+                    ))}
+                  </Directory>
                 </InfiniteScroll>
               </Stack>
             </Stack>
