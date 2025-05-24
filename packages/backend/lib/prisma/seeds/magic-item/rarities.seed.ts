@@ -14,6 +14,7 @@ type RarityItem = {
       he: string;
       she?: string;
       it: string;
+      order: number;
     };
   };
 };
@@ -40,7 +41,8 @@ export async function SeedRarities() {
             name: rarity.text.ru.title,
             name_he: rarity.text.ru.he,
             name_she: rarity.text.ru.she ?? rarity.text.ru.title,
-            name_it: rarity.text.ru.it
+            name_it: rarity.text.ru.it,
+            order: rarity.text.ru.order
           }
         })
       )

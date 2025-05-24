@@ -63331,8 +63331,18 @@ export namespace Prisma {
 
   export type AggregateMagicItemRarity = {
     _count: MagicItemRarityCountAggregateOutputType | null
+    _avg: MagicItemRarityAvgAggregateOutputType | null
+    _sum: MagicItemRaritySumAggregateOutputType | null
     _min: MagicItemRarityMinAggregateOutputType | null
     _max: MagicItemRarityMaxAggregateOutputType | null
+  }
+
+  export type MagicItemRarityAvgAggregateOutputType = {
+    order: number | null
+  }
+
+  export type MagicItemRaritySumAggregateOutputType = {
+    order: number | null
   }
 
   export type MagicItemRarityMinAggregateOutputType = {
@@ -63342,6 +63352,7 @@ export namespace Prisma {
     name_he: string | null
     name_she: string | null
     name_it: string | null
+    order: number | null
   }
 
   export type MagicItemRarityMaxAggregateOutputType = {
@@ -63351,6 +63362,7 @@ export namespace Prisma {
     name_he: string | null
     name_she: string | null
     name_it: string | null
+    order: number | null
   }
 
   export type MagicItemRarityCountAggregateOutputType = {
@@ -63360,9 +63372,18 @@ export namespace Prisma {
     name_he: number
     name_she: number
     name_it: number
+    order: number
     _all: number
   }
 
+
+  export type MagicItemRarityAvgAggregateInputType = {
+    order?: true
+  }
+
+  export type MagicItemRaritySumAggregateInputType = {
+    order?: true
+  }
 
   export type MagicItemRarityMinAggregateInputType = {
     id?: true
@@ -63371,6 +63392,7 @@ export namespace Prisma {
     name_he?: true
     name_she?: true
     name_it?: true
+    order?: true
   }
 
   export type MagicItemRarityMaxAggregateInputType = {
@@ -63380,6 +63402,7 @@ export namespace Prisma {
     name_he?: true
     name_she?: true
     name_it?: true
+    order?: true
   }
 
   export type MagicItemRarityCountAggregateInputType = {
@@ -63389,6 +63412,7 @@ export namespace Prisma {
     name_he?: true
     name_she?: true
     name_it?: true
+    order?: true
     _all?: true
   }
 
@@ -63430,6 +63454,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: MagicItemRarityAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MagicItemRaritySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: MagicItemRarityMinAggregateInputType
@@ -63460,6 +63496,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: MagicItemRarityCountAggregateInputType | true
+    _avg?: MagicItemRarityAvgAggregateInputType
+    _sum?: MagicItemRaritySumAggregateInputType
     _min?: MagicItemRarityMinAggregateInputType
     _max?: MagicItemRarityMaxAggregateInputType
   }
@@ -63471,7 +63509,10 @@ export namespace Prisma {
     name_he: string
     name_she: string
     name_it: string
+    order: number
     _count: MagicItemRarityCountAggregateOutputType | null
+    _avg: MagicItemRarityAvgAggregateOutputType | null
+    _sum: MagicItemRaritySumAggregateOutputType | null
     _min: MagicItemRarityMinAggregateOutputType | null
     _max: MagicItemRarityMaxAggregateOutputType | null
   }
@@ -63497,6 +63538,7 @@ export namespace Prisma {
     name_he?: boolean
     name_she?: boolean
     name_it?: boolean
+    order?: boolean
     magicItems?: boolean | MagicItemRarity$magicItemsArgs<ExtArgs>
     _count?: boolean | MagicItemRarityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["magicItemRarity"]>
@@ -63508,6 +63550,7 @@ export namespace Prisma {
     name_he?: boolean
     name_she?: boolean
     name_it?: boolean
+    order?: boolean
   }, ExtArgs["result"]["magicItemRarity"]>
 
   export type MagicItemRaritySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -63517,6 +63560,7 @@ export namespace Prisma {
     name_he?: boolean
     name_she?: boolean
     name_it?: boolean
+    order?: boolean
   }, ExtArgs["result"]["magicItemRarity"]>
 
   export type MagicItemRaritySelectScalar = {
@@ -63526,9 +63570,10 @@ export namespace Prisma {
     name_he?: boolean
     name_she?: boolean
     name_it?: boolean
+    order?: boolean
   }
 
-  export type MagicItemRarityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cost" | "name" | "name_he" | "name_she" | "name_it", ExtArgs["result"]["magicItemRarity"]>
+  export type MagicItemRarityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cost" | "name" | "name_he" | "name_she" | "name_it" | "order", ExtArgs["result"]["magicItemRarity"]>
   export type MagicItemRarityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     magicItems?: boolean | MagicItemRarity$magicItemsArgs<ExtArgs>
     _count?: boolean | MagicItemRarityCountOutputTypeDefaultArgs<ExtArgs>
@@ -63548,6 +63593,7 @@ export namespace Prisma {
       name_he: string
       name_she: string
       name_it: string
+      order: number
     }, ExtArgs["result"]["magicItemRarity"]>
     composites: {}
   }
@@ -63978,6 +64024,7 @@ export namespace Prisma {
     readonly name_he: FieldRef<"MagicItemRarity", 'String'>
     readonly name_she: FieldRef<"MagicItemRarity", 'String'>
     readonly name_it: FieldRef<"MagicItemRarity", 'String'>
+    readonly order: FieldRef<"MagicItemRarity", 'Int'>
   }
     
 
@@ -68020,7 +68067,8 @@ export namespace Prisma {
     name: 'name',
     name_he: 'name_he',
     name_she: 'name_she',
-    name_it: 'name_it'
+    name_it: 'name_it',
+    order: 'order'
   };
 
   export type MagicItemRarityScalarFieldEnum = (typeof MagicItemRarityScalarFieldEnum)[keyof typeof MagicItemRarityScalarFieldEnum]
@@ -70862,6 +70910,7 @@ export namespace Prisma {
     name_he?: StringFilter<"MagicItemRarity"> | string
     name_she?: StringFilter<"MagicItemRarity"> | string
     name_it?: StringFilter<"MagicItemRarity"> | string
+    order?: IntFilter<"MagicItemRarity"> | number
     magicItems?: MagicItemListRelationFilter
   }
 
@@ -70872,6 +70921,7 @@ export namespace Prisma {
     name_he?: SortOrder
     name_she?: SortOrder
     name_it?: SortOrder
+    order?: SortOrder
     magicItems?: MagicItemOrderByRelationAggregateInput
   }
 
@@ -70885,6 +70935,7 @@ export namespace Prisma {
     name_he?: StringFilter<"MagicItemRarity"> | string
     name_she?: StringFilter<"MagicItemRarity"> | string
     name_it?: StringFilter<"MagicItemRarity"> | string
+    order?: IntFilter<"MagicItemRarity"> | number
     magicItems?: MagicItemListRelationFilter
   }, "id">
 
@@ -70895,9 +70946,12 @@ export namespace Prisma {
     name_he?: SortOrder
     name_she?: SortOrder
     name_it?: SortOrder
+    order?: SortOrder
     _count?: MagicItemRarityCountOrderByAggregateInput
+    _avg?: MagicItemRarityAvgOrderByAggregateInput
     _max?: MagicItemRarityMaxOrderByAggregateInput
     _min?: MagicItemRarityMinOrderByAggregateInput
+    _sum?: MagicItemRaritySumOrderByAggregateInput
   }
 
   export type MagicItemRarityScalarWhereWithAggregatesInput = {
@@ -70910,6 +70964,7 @@ export namespace Prisma {
     name_he?: StringWithAggregatesFilter<"MagicItemRarity"> | string
     name_she?: StringWithAggregatesFilter<"MagicItemRarity"> | string
     name_it?: StringWithAggregatesFilter<"MagicItemRarity"> | string
+    order?: IntWithAggregatesFilter<"MagicItemRarity"> | number
   }
 
   export type MagicItemTypeWhereInput = {
@@ -73574,6 +73629,7 @@ export namespace Prisma {
     name_he: string
     name_she: string
     name_it: string
+    order: number
     magicItems?: MagicItemCreateNestedManyWithoutRarity_relationInput
   }
 
@@ -73584,6 +73640,7 @@ export namespace Prisma {
     name_he: string
     name_she: string
     name_it: string
+    order: number
     magicItems?: MagicItemUncheckedCreateNestedManyWithoutRarity_relationInput
   }
 
@@ -73594,6 +73651,7 @@ export namespace Prisma {
     name_he?: StringFieldUpdateOperationsInput | string
     name_she?: StringFieldUpdateOperationsInput | string
     name_it?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     magicItems?: MagicItemUpdateManyWithoutRarity_relationNestedInput
   }
 
@@ -73604,6 +73662,7 @@ export namespace Prisma {
     name_he?: StringFieldUpdateOperationsInput | string
     name_she?: StringFieldUpdateOperationsInput | string
     name_it?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
     magicItems?: MagicItemUncheckedUpdateManyWithoutRarity_relationNestedInput
   }
 
@@ -73614,6 +73673,7 @@ export namespace Prisma {
     name_he: string
     name_she: string
     name_it: string
+    order: number
   }
 
   export type MagicItemRarityUpdateManyMutationInput = {
@@ -73623,6 +73683,7 @@ export namespace Prisma {
     name_he?: StringFieldUpdateOperationsInput | string
     name_she?: StringFieldUpdateOperationsInput | string
     name_it?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type MagicItemRarityUncheckedUpdateManyInput = {
@@ -73632,6 +73693,7 @@ export namespace Prisma {
     name_he?: StringFieldUpdateOperationsInput | string
     name_she?: StringFieldUpdateOperationsInput | string
     name_it?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type MagicItemTypeCreateInput = {
@@ -75654,6 +75716,11 @@ export namespace Prisma {
     name_he?: SortOrder
     name_she?: SortOrder
     name_it?: SortOrder
+    order?: SortOrder
+  }
+
+  export type MagicItemRarityAvgOrderByAggregateInput = {
+    order?: SortOrder
   }
 
   export type MagicItemRarityMaxOrderByAggregateInput = {
@@ -75663,6 +75730,7 @@ export namespace Prisma {
     name_he?: SortOrder
     name_she?: SortOrder
     name_it?: SortOrder
+    order?: SortOrder
   }
 
   export type MagicItemRarityMinOrderByAggregateInput = {
@@ -75672,6 +75740,11 @@ export namespace Prisma {
     name_he?: SortOrder
     name_she?: SortOrder
     name_it?: SortOrder
+    order?: SortOrder
+  }
+
+  export type MagicItemRaritySumOrderByAggregateInput = {
+    order?: SortOrder
   }
 
   export type EnumGenderFilter<$PrismaModel = never> = {
@@ -84265,6 +84338,7 @@ export namespace Prisma {
     name_he: string
     name_she: string
     name_it: string
+    order: number
   }
 
   export type MagicItemRarityUncheckedCreateWithoutMagicItemsInput = {
@@ -84274,6 +84348,7 @@ export namespace Prisma {
     name_he: string
     name_she: string
     name_it: string
+    order: number
   }
 
   export type MagicItemRarityCreateOrConnectWithoutMagicItemsInput = {
@@ -84358,6 +84433,7 @@ export namespace Prisma {
     name_he?: StringFieldUpdateOperationsInput | string
     name_she?: StringFieldUpdateOperationsInput | string
     name_it?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type MagicItemRarityUncheckedUpdateWithoutMagicItemsInput = {
@@ -84367,6 +84443,7 @@ export namespace Prisma {
     name_he?: StringFieldUpdateOperationsInput | string
     name_she?: StringFieldUpdateOperationsInput | string
     name_it?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
   }
 
   export type SourceUpsertWithoutMagicItemsInput = {

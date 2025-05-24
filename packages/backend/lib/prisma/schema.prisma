@@ -517,6 +517,7 @@ model MagicItemRarity {
   name_he   String
   name_she  String
   name_it   String
+  order     Int
 
   magicItems  MagicItem[]
 

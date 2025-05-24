@@ -457,7 +457,8 @@ exports.Prisma.MagicItemRarityScalarFieldEnum = {
   name: 'name',
   name_he: 'name_he',
   name_she: 'name_she',
-  name_it: 'name_it'
+  name_it: 'name_it',
+  order: 'order'
 };
 
 exports.Prisma.MagicItemTypeScalarFieldEnum = {
