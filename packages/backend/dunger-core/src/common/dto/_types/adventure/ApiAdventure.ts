@@ -1,6 +1,6 @@
 import { ApiKeyword } from './ApiKeyword';
 
-export type ApiAdventure = {
+export interface ApiAdventure {
   id: string;
   name: string;
   genre: {
@@ -10,4 +10,4 @@ export type ApiAdventure = {
   keywords: ApiKeyword[];
   created_at: Date;
   updated_at: Date;
-};
+}

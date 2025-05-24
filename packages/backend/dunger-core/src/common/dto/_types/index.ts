@@ -1,19 +1,23 @@
 // Общие типы
 export * from './_common';
 
+// Типы пользователя
+export type { ApiUser } from './user';
+
 // Типы взаимодействия с существом
 export type { ApiCreature } from './ApiCreature';
-export type { ApiCreatureAiInput, ApiCreatureRole } from './ApiCreatureAiInput';
+export type { ApiCreatureAiInput } from './ApiCreatureAiInput';
+export { ApiCreatureRole } from './ApiCreatureAiInput';
 export type { ApiCreatureInput } from './ApiCreatureInput';
-export type { ApiCreatureList } from './ApiCreatureList';
+export type { ApiCreatureList, ApiCreatureListResult } from './ApiCreatureList';
 export type { ApiCreatureManualInput } from './ApiCreatureManualInput';
 
 export type { ApiAction } from './ApiAction';
 export type { ApiSenses } from './ApiSenses';
-export type { ApiSkill } from './ApiSkills';
+export type { ApiSkill, ApiSkills } from './ApiSkills';
 export type { ApiSkillInput, ApiSkillsInput } from './ApiSkillsInput';
 export type { ApiSpeedStat } from './ApiSpeedStat';
-export type { ApiStats } from './ApiStats';
+export type { ApiStats, ApiStat } from './ApiStats';
 export type { ApiStatsInput } from './ApiStatsInput';
 export type { ApiTrait } from './ApiTrait';
 
@@ -23,15 +27,13 @@ export type { ApiLanguages } from './ApiLanguages';
 export type { ApiBiomes } from './ApiBiomes';
 
 // Тип магических предметов
-export type { ApiMagicItem } from './magic-item/ApiMagicItem';
-export type {
-  ApiMagicItemList,
-  ApiMagicItemListResult,
-} from './magic-item/ApiMagicItemList';
+export type { ApiMagicItemList, ApiMagicItemListResult, ApiMagicItem } from './magic-item';
 
 // Типы взаимодействия с приключениями
-export type { ApiAdventure } from './ApiAdventure';
 export type {
+  ApiAdventure,
   ApiAdventureList,
   ApiAdventureListResult,
-} from './ApiAdventureList';
+  ApiKeyword,
+  ApiAdventureInput
+} from './adventure';
