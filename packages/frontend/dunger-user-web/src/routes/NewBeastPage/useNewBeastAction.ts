@@ -1,8 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
-import { ApiCreatureAiInput, ApiCreatureRole } from 'store/_types/ApiCreatureAiInput';
-import { ApiCreatureManualInput } from 'store/_types/ApiCreatureManualInput';
+import { ApiCreatureAiInput, ApiCreatureRole, ApiCreatureManualInput } from 'store/_types';
 
 export const useNewBeastAction = () => {
   const authFetch = useAuthFetch();

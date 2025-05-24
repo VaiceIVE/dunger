@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { Checkbox, Flex, Grid, MultiSelect, NumberInput, Select, Stack, text, TextInput } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { ApiStats } from 'store/_types/ApiStats';
+import { ApiStats } from 'store/_types';
 import { useDirectoryOptions } from '../../useDirectoryOptions';
 import { AddSkills } from '../AddSkills';
 import { SectionProps } from '../BeastForm/BeastForm';

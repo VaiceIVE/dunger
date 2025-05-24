@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
-import { ApiAdventureInput } from 'store/_types/ApiAdventureInput';
+import { ApiAdventureInput } from 'store/_types';
 
 export const useAddAdventureAction = () => {
   const authFetch = useAuthFetch();

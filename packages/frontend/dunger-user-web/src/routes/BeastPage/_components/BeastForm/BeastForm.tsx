@@ -2,7 +2,7 @@ import { FC, Fragment } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { Accordion, ChevronDownIcon, ChevronUpIcon, headers, IconButton } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { ApiCreature } from 'store/_types/ApiCreature';
+import { ApiCreature } from 'store/_types';
 import { ActionsSection } from '../ActionsSection';
 import { CommonSection } from '../CommonSection';
 import { StatblockSection } from '../StatblockSection';

@@ -5,10 +5,7 @@ import { Accordion, ChevronDownIcon, ChevronUpIcon, Flex, Stack, Tag, text } fro
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Card } from 'components/Card';
 import { KeyValue } from 'components/KeyValue';
-import { ApiCreature } from 'store/_types/ApiCreature';
-import { ApiSkill, ApiSkills } from 'store/_types/ApiSkills';
-import { ApiSpeedStat } from 'store/_types/ApiSpeedStat';
-import { ApiStat, ApiStats } from 'store/_types/ApiStats';
+import { ApiCreature, ApiSkill, ApiSkills, ApiSpeedStat, ApiStat, ApiStats } from 'store/_types';
 import { formatModifier } from 'utils/formatModifier';
 import { getProficiencyBonusByCR } from 'utils/getProficiencyBonusByCR';
 import { StatsTable } from './_components/StatsTable';

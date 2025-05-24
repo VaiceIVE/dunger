@@ -22,8 +22,7 @@ import {
 import { Directory, DirectoryItem } from 'components/Directory';
 import { MagicItemCard } from 'features/MagicItemCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
-import { ApiMagicItem } from 'store/_types/magic-item/ApiMagicItem';
-import { ApiMagicItemListResult } from 'store/_types/magic-item/ApiMagicItemList';
+import { ApiMagicItem, ApiMagicItemListResult } from 'store/_types';
 import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
 
 export const MagicItemsPage = () => {

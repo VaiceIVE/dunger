@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useAuthFetch } from '@dunger/auth-fetch';
 import { Flex, Radio, Spinner, Stack, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { ApiTrait } from 'store/_types/ApiTrait';
+import { ApiTrait } from 'store/_types';
 
 interface ActionListProps {
   style?: StyleXStyles;

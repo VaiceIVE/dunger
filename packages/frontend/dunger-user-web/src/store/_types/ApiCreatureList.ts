@@ -1,3 +1,5 @@
+import { ApiPaginatedResult } from './_common/ApiPagination';
+
 export type ApiCreatureList = {
   id: string;
   name: string;
@@ -5,3 +7,7 @@ export type ApiCreatureList = {
   type_name: string | null;
   alignment_name: string | null;
 }[];
+
+export type ApiCreatureListResult = {
+  creatures: ApiCreatureList;
+} & ApiPaginatedResult;

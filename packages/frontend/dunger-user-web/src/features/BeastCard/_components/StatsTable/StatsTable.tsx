@@ -1,7 +1,7 @@
 import * as stylex from '@stylexjs/stylex';
 import { Flex, Stack, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { ApiStats } from 'store/_types/ApiStats';
+import { ApiStats } from 'store/_types';
 import { formatModifier } from 'utils/formatModifier';
 
 const statsMap: { title: string; key: keyof ApiStats }[] = [

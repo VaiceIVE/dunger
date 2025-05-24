@@ -17,8 +17,7 @@ import {
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Banner } from 'components/Banner';
-import { ApiDirectory, ApiPaginatedResult } from 'store/_types/_common';
-import { ApiCreatureRole } from 'store/_types/ApiCreatureAiInput';
+import { ApiDirectory, ApiPaginatedResult, ApiCreatureRole } from 'store/_types';
 import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
 import { CreateMode } from '../../NewBeastPage.types';
 import { useDirectoryOptions } from '../../useDirectoryOptions';
