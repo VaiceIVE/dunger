@@ -19,10 +19,10 @@ export async function SeedBiomes() {
 
     promises.push(
       prisma.biome.upsert({
-        where: { key: normalizedKey },
+        where: { short_name: normalizedKey },
         update: {},
         create: {
-          key: biome.text.key,
+          short_name: biome.text.key,
           name: biome.text.name
         }
       })

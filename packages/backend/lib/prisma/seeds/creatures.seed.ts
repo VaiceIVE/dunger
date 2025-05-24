@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-import { PrismaClient } from '@dunger/prisma';
+import { Ability, PrismaClient, Skill } from '@dunger/prisma';
 
 import type { Creature } from '../types/Creature.ts';
 
@@ -113,7 +113,7 @@ export async function SeedCreatures() {
     }
     const biomes = await prisma.biome.findMany({
       where: {
-        key: {
+        short_name: {
           in: creature_biomes
         }
       }
@@ -244,7 +244,7 @@ export async function SeedCreatures() {
               }
             }
           : {},
-        actions: creature_actions
+        actions_relation: creature_actions
           ? {
               connectOrCreate: creature_actions.map((action) => ({
                 where: { description: action.text },
@@ -252,7 +252,7 @@ export async function SeedCreatures() {
               }))
             }
           : {},
-        traits: creature_traits
+        traits_relation: creature_traits
           ? {
               connectOrCreate: creature_traits.map((trait) => ({
                 where: { description: trait.text },
@@ -271,7 +271,9 @@ export async function SeedCreatures() {
               connect: creature_vunlerabilities.map((vunlarability) => ({ name: vunlarability.trim().toLowerCase() }))
             }
           : {},
-        biomes_ids: biomes.map((b) => b.id),
+        biomes_relation: {
+          connect: biomes.map((b) => ({ id: b.id }))
+        },
         senses: {
           create: {
             passive_perception: +creature_data.passive
@@ -279,132 +281,100 @@ export async function SeedCreatures() {
         },
         skills: {
           create: {
-            charisma: {
-              create: {
-                deception: {
-                  create: {
-                    value: creature_skills.deception ?? null,
-                    mastery: creature_skills.deception ? true : false
-                  }
-                },
-                intimidation: {
-                  create: {
-                    value: creature_skills.intimidation ?? null,
-                    mastery: creature_skills.intimidation ? true : false
-                  }
-                },
-                performance: {
-                  create: {
-                    value: creature_skills.performance ?? null,
-                    mastery: creature_skills.performance ? true : false
-                  }
-                },
-                persuasion: {
-                  create: {
-                    value: creature_skills.persuasion ?? null,
-                    mastery: creature_skills.persuasion ? true : false
-                  }
-                }
-              }
-            },
-            dexterity: {
-              create: {
-                acrobatics: {
-                  create: {
-                    value: creature_skills.acrobatics ?? null,
-                    mastery: creature_skills.acrobatics ? true : false
-                  }
-                },
-                sleight_of_hand: {
-                  create: {
-                    value: creature_skills.sleight_of_hand ?? null,
-                    mastery: creature_skills.sleight_of_hand ? true : false
-                  }
-                },
-                stealth: {
-                  create: {
-                    value: creature_skills.stealth ?? null,
-                    mastery: creature_skills.stealth ? true : false
-                  }
-                }
-              }
-            },
-            intelligence: {
-              create: {
-                arcana: {
-                  create: {
-                    value: creature_skills.arcana ?? null,
-                    mastery: creature_skills.arcana ? true : false
-                  }
-                },
-                history: {
-                  create: {
-                    value: creature_skills.history ?? null,
-                    mastery: creature_skills.history ? true : false
-                  }
-                },
-                investigation: {
-                  create: {
-                    value: creature_skills.investigation ?? null,
-                    mastery: creature_skills.investigation ? true : false
-                  }
-                },
-                nature: {
-                  create: {
-                    value: creature_skills.nature ?? null,
-                    mastery: creature_skills.nature ? true : false
-                  }
-                },
-                religion: {
-                  create: {
-                    value: creature_skills.religion ?? null,
-                    mastery: creature_skills.religion ? true : false
-                  }
-                }
-              }
-            },
-            strength: {
-              create: {
-                athletics: {
-                  create: {
+            skills: {
+              createMany: {
+                data: [
+                  {
+                    skill: Skill.ATHLETICS,
                     value: creature_skills.athletics ?? null,
-                    mastery: creature_skills.athletics ? true : false
-                  }
-                }
-              }
-            },
-            wisdom: {
-              create: {
-                animal_handling: {
-                  create: {
+                    mastery: !!creature_skills.athletics
+                  },
+                  {
+                    skill: Skill.ACROBATICS,
+                    value: creature_skills.acrobatics ?? null,
+                    mastery: !!creature_skills.acrobatics
+                  },
+                  {
+                    skill: Skill.SLEIGHT_OF_HAND,
+                    value: creature_skills.sleight_of_hand ?? null,
+                    mastery: !!creature_skills.sleight_of_hand
+                  },
+                  {
+                    skill: Skill.STEALTH,
+                    value: creature_skills.stealth ?? null,
+                    mastery: !!creature_skills.stealth
+                  },
+                  {
+                    skill: Skill.ARCANA,
+                    value: creature_skills.arcana ?? null,
+                    mastery: !!creature_skills.arcana
+                  },
+                  {
+                    skill: Skill.HISTORY,
+                    value: creature_skills.history ?? null,
+                    mastery: !!creature_skills.history
+                  },
+                  {
+                    skill: Skill.INVESTIGATION,
+                    value: creature_skills.investigation ?? null,
+                    mastery: !!creature_skills.investigation
+                  },
+                  {
+                    skill: Skill.NATURE,
+                    value: creature_skills.nature ?? null,
+                    mastery: !!creature_skills.nature
+                  },
+                  {
+                    skill: Skill.RELIGION,
+                    value: creature_skills.religion ?? null,
+                    mastery: !!creature_skills.religion
+                  },
+                  {
+                    skill: Skill.ANIMAL_HANDLING,
                     value: creature_skills.animal_handling ?? null,
-                    mastery: creature_skills.animal_handling ? true : false
-                  }
-                },
-                insight: {
-                  create: {
+                    mastery: !!creature_skills.animal_handling
+                  },
+                  {
+                    skill: Skill.INSIGHT,
                     value: creature_skills.insight ?? null,
-                    mastery: creature_skills.insight ? true : false
-                  }
-                },
-                medicine: {
-                  create: {
+                    mastery: !!creature_skills.insight
+                  },
+                  {
+                    skill: Skill.MEDICINE,
                     value: creature_skills.medicine ?? null,
-                    mastery: creature_skills.medicine ? true : false
-                  }
-                },
-                perception: {
-                  create: {
+                    mastery: !!creature_skills.medicine
+                  },
+                  {
+                    skill: Skill.PERCEPTION,
                     value: creature_skills.perception ?? null,
-                    mastery: creature_skills.perception ? true : false
-                  }
-                },
-                survival: {
-                  create: {
+                    mastery: !!creature_skills.perception
+                  },
+                  {
+                    skill: Skill.SURVIVAL,
                     value: creature_skills.survival ?? null,
-                    mastery: creature_skills.survival ? true : false
+                    mastery: !!creature_skills.survival
+                  },
+                  {
+                    skill: Skill.DECEPTION,
+                    value: creature_skills.deception ?? null,
+                    mastery: !!creature_skills.deception
+                  },
+                  {
+                    skill: Skill.INTIMIDATION,
+                    value: creature_skills.intimidation ?? null,
+                    mastery: !!creature_skills.intimidation
+                  },
+                  {
+                    skill: Skill.PERFORMANCE,
+                    value: creature_skills.performance ?? null,
+                    mastery: !!creature_skills.performance
+                  },
+                  {
+                    skill: Skill.PERSUASION,
+                    value: creature_skills.persuasion ?? null,
+                    mastery: !!creature_skills.persuasion
                   }
-                }
+                ]
               }
             }
           }
@@ -416,40 +386,40 @@ export async function SeedCreatures() {
           : {},
         stats: {
           create: {
-            charisma: {
-              create: {
-                value: +creature_data.cha,
-                mastery: getStatMastery('charisma', creature_data.save)
-              }
-            },
-            constitution: {
-              create: {
-                value: +creature_data.con,
-                mastery: getStatMastery('constitution', creature_data.save)
-              }
-            },
-            dexterity: {
-              create: {
-                value: +creature_data.dex,
-                mastery: getStatMastery('dexterity', creature_data.save)
-              }
-            },
-            intelligence: {
-              create: {
-                value: +creature_data.int,
-                mastery: getStatMastery('intelligence', creature_data.save)
-              }
-            },
-            strength: {
-              create: {
-                value: +creature_data.str,
-                mastery: getStatMastery('strength', creature_data.save)
-              }
-            },
-            wisdom: {
-              create: {
-                value: +creature_data.wis,
-                mastery: getStatMastery('wisdom', creature_data.save)
+            stats: {
+              createMany: {
+                data: [
+                  {
+                    ability: Ability.STRENGTH,
+                    value: +creature_data.str,
+                    mastery: getStatMastery('strength', creature_data.save)
+                  },
+                  {
+                    ability: Ability.DEXTERITY,
+                    value: +creature_data.dex,
+                    mastery: getStatMastery('dexterity', creature_data.save)
+                  },
+                  {
+                    ability: Ability.CONSTITUTION,
+                    value: +creature_data.con,
+                    mastery: getStatMastery('constitution', creature_data.save)
+                  },
+                  {
+                    ability: Ability.INTELLIGENCE,
+                    value: +creature_data.int,
+                    mastery: getStatMastery('intelligence', creature_data.save)
+                  },
+                  {
+                    ability: Ability.WISDOM,
+                    value: +creature_data.wis,
+                    mastery: getStatMastery('wisdom', creature_data.save)
+                  },
+                  {
+                    ability: Ability.CHARISMA,
+                    value: +creature_data.cha,
+                    mastery: getStatMastery('charisma', creature_data.save)
+                  }
+                ]
               }
             }
           }

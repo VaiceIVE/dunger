@@ -135,7 +135,7 @@ exports.Prisma.LanguageScalarFieldEnum = {
 
 exports.Prisma.BiomeScalarFieldEnum = {
   id: 'id',
-  key: 'key',
+  short_name: 'short_name',
   name: 'name'
 };
 
@@ -149,7 +149,7 @@ exports.Prisma.AlignmentScalarFieldEnum = {
   name: 'name'
 };
 
-exports.Prisma.Speed_statScalarFieldEnum = {
+exports.Prisma.CreatureSpeedScalarFieldEnum = {
   id: 'id',
   walk: 'walk',
   fly: 'fly',
@@ -158,215 +158,53 @@ exports.Prisma.Speed_statScalarFieldEnum = {
   climb: 'climb'
 };
 
-exports.Prisma.Creature_statsScalarFieldEnum = {
+exports.Prisma.CreatureStatsScalarFieldEnum = {
   id: 'id'
 };
 
-exports.Prisma.Strength_stat_detailsScalarFieldEnum = {
-  statblock_id: 'statblock_id',
+exports.Prisma.CreatureStatDetailScalarFieldEnum = {
+  id: 'id',
+  ability: 'ability',
   value: 'value',
-  mastery: 'mastery'
+  mastery: 'mastery',
+  creature_stats_id: 'creature_stats_id'
 };
 
-exports.Prisma.Dexterity_stat_detailsScalarFieldEnum = {
-  statblock_id: 'statblock_id',
-  value: 'value',
-  mastery: 'mastery'
-};
-
-exports.Prisma.Constitution_stat_detailsScalarFieldEnum = {
-  statblock_id: 'statblock_id',
-  value: 'value',
-  mastery: 'mastery'
-};
-
-exports.Prisma.Intelligence_stat_detailsScalarFieldEnum = {
-  statblock_id: 'statblock_id',
-  value: 'value',
-  mastery: 'mastery'
-};
-
-exports.Prisma.Wisdom_stat_detailsScalarFieldEnum = {
-  statblock_id: 'statblock_id',
-  value: 'value',
-  mastery: 'mastery'
-};
-
-exports.Prisma.Charisma_stat_detailsScalarFieldEnum = {
-  statblock_id: 'statblock_id',
-  value: 'value',
-  mastery: 'mastery'
-};
-
-exports.Prisma.SkillsListScalarFieldEnum = {
+exports.Prisma.CreatureSkillsScalarFieldEnum = {
   id: 'id'
 };
 
-exports.Prisma.StrengthBasedSkillsScalarFieldEnum = {
-  id: 'id'
-};
-
-exports.Prisma.DexterityBasedSkillsScalarFieldEnum = {
-  id: 'id'
-};
-
-exports.Prisma.IntellengenceBasedSkillsScalarFieldEnum = {
-  id: 'id'
-};
-
-exports.Prisma.WisdomBasedSkillsScalarFieldEnum = {
-  id: 'id'
-};
-
-exports.Prisma.CharismaBasedSkillsScalarFieldEnum = {
-  id: 'id'
-};
-
-exports.Prisma.AthleticsSkillScalarFieldEnum = {
+exports.Prisma.CreatureSkillDetailScalarFieldEnum = {
   id: 'id',
+  skill: 'skill',
   value: 'value',
   mastery: 'mastery',
-  name: 'name'
+  creature_skills_id: 'creature_skills_id'
 };
 
-exports.Prisma.AcrobaticsSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.SleightOfHandSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.StealthSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.ArcanaSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.HistorySkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.InvestigationSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.NatureSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.ReligionSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.AnimalHandlingSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.InsightSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.MedicineSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.PerceptionSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.SurvivalSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.DeceptionSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.IntimidationSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.PerformanceSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
-};
-
-exports.Prisma.PersuasionSkillScalarFieldEnum = {
-  id: 'id',
-  value: 'value',
-  mastery: 'mastery',
-  name: 'name'
+exports.Prisma.SkillMetadataScalarFieldEnum = {
+  skill: 'skill',
+  display_name: 'display_name',
+  ability: 'ability'
 };
 
 exports.Prisma.CreatureScalarFieldEnum = {
   id: 'id',
   name: 'name',
   creator_id: 'creator_id',
-  image_uri: 'image_uri',
   description: 'description',
   size: 'size',
   race_id: 'race_id',
+  type_id: 'type_id',
   source_id: 'source_id',
   alignment_id: 'alignment_id',
   armor_class: 'armor_class',
   hit_points: 'hit_points',
-  challenge_rating: 'challenge_rating',
-  biomes_ids: 'biomes_ids',
-  type_id: 'type_id',
-  aSubTypes: 'aSubTypes'
+  challenge_rating: 'challenge_rating'
 };
 
-exports.Prisma.SensesScalarFieldEnum = {
+exports.Prisma.CreatureSensesScalarFieldEnum = {
+  id: 'id',
   creature_id: 'creature_id',
   passive_perception: 'passive_perception'
 };
@@ -393,20 +231,23 @@ exports.Prisma.CreatureRaceScalarFieldEnum = {
   description: 'description'
 };
 
-exports.Prisma.GenrationRequestScalarFieldEnum = {
-  id: 'id',
-  request: 'request',
-  danger: 'danger',
-  name: 'name'
-};
-
 exports.Prisma.DamageTypeScalarFieldEnum = {
   id: 'id',
   name: 'name'
 };
 
-exports.Prisma.ChallengeRatingScalarFieldEnum = {
-  id: 'id'
+exports.Prisma.ChallengeRatingMetadataScalarFieldEnum = {
+  cr: 'cr',
+  display: 'display',
+  numeric: 'numeric',
+  xp_reward: 'xp_reward'
+};
+
+exports.Prisma.GenrationRequestScalarFieldEnum = {
+  id: 'id',
+  request: 'request',
+  danger: 'danger',
+  name: 'name'
 };
 
 exports.Prisma.GPTMessageHistoryScalarFieldEnum = {
@@ -415,8 +256,8 @@ exports.Prisma.GPTMessageHistoryScalarFieldEnum = {
 };
 
 exports.Prisma.GPTMessageScalarFieldEnum = {
-  number: 'number',
   message_history_id: 'message_history_id',
+  number: 'number',
   text: 'text',
   role: 'role'
 };
@@ -491,6 +332,73 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.Ability = exports.$Enums.Ability = {
+  STRENGTH: 'STRENGTH',
+  DEXTERITY: 'DEXTERITY',
+  CONSTITUTION: 'CONSTITUTION',
+  INTELLIGENCE: 'INTELLIGENCE',
+  WISDOM: 'WISDOM',
+  CHARISMA: 'CHARISMA'
+};
+
+exports.Skill = exports.$Enums.Skill = {
+  ATHLETICS: 'ATHLETICS',
+  ACROBATICS: 'ACROBATICS',
+  SLEIGHT_OF_HAND: 'SLEIGHT_OF_HAND',
+  STEALTH: 'STEALTH',
+  ARCANA: 'ARCANA',
+  HISTORY: 'HISTORY',
+  INVESTIGATION: 'INVESTIGATION',
+  NATURE: 'NATURE',
+  RELIGION: 'RELIGION',
+  ANIMAL_HANDLING: 'ANIMAL_HANDLING',
+  INSIGHT: 'INSIGHT',
+  MEDICINE: 'MEDICINE',
+  PERCEPTION: 'PERCEPTION',
+  SURVIVAL: 'SURVIVAL',
+  DECEPTION: 'DECEPTION',
+  INTIMIDATION: 'INTIMIDATION',
+  PERFORMANCE: 'PERFORMANCE',
+  PERSUASION: 'PERSUASION'
+};
+
+exports.ChallengeRatingEnum = exports.$Enums.ChallengeRatingEnum = {
+  CR_0: 'CR_0',
+  CR_1_8: 'CR_1_8',
+  CR_1_4: 'CR_1_4',
+  CR_1_2: 'CR_1_2',
+  CR_1: 'CR_1',
+  CR_2: 'CR_2',
+  CR_3: 'CR_3',
+  CR_4: 'CR_4',
+  CR_5: 'CR_5',
+  CR_6: 'CR_6',
+  CR_7: 'CR_7',
+  CR_8: 'CR_8',
+  CR_9: 'CR_9',
+  CR_10: 'CR_10',
+  CR_11: 'CR_11',
+  CR_12: 'CR_12',
+  CR_13: 'CR_13',
+  CR_14: 'CR_14',
+  CR_15: 'CR_15',
+  CR_16: 'CR_16',
+  CR_17: 'CR_17',
+  CR_18: 'CR_18',
+  CR_19: 'CR_19',
+  CR_20: 'CR_20',
+  CR_21: 'CR_21',
+  CR_22: 'CR_22',
+  CR_23: 'CR_23',
+  CR_24: 'CR_24',
+  CR_25: 'CR_25',
+  CR_26: 'CR_26',
+  CR_27: 'CR_27',
+  CR_28: 'CR_28',
+  CR_29: 'CR_29',
+  CR_30: 'CR_30'
+};
+
 exports.Gender = exports.$Enums.Gender = {
   HE: 'HE',
   SHE: 'SHE',
@@ -504,46 +412,20 @@ exports.Prisma.ModelName = {
   Biome: 'Biome',
   Type: 'Type',
   Alignment: 'Alignment',
-  Speed_stat: 'Speed_stat',
-  Creature_stats: 'Creature_stats',
-  Strength_stat_details: 'Strength_stat_details',
-  Dexterity_stat_details: 'Dexterity_stat_details',
-  Constitution_stat_details: 'Constitution_stat_details',
-  Intelligence_stat_details: 'Intelligence_stat_details',
-  Wisdom_stat_details: 'Wisdom_stat_details',
-  Charisma_stat_details: 'Charisma_stat_details',
-  SkillsList: 'SkillsList',
-  StrengthBasedSkills: 'StrengthBasedSkills',
-  DexterityBasedSkills: 'DexterityBasedSkills',
-  IntellengenceBasedSkills: 'IntellengenceBasedSkills',
-  WisdomBasedSkills: 'WisdomBasedSkills',
-  CharismaBasedSkills: 'CharismaBasedSkills',
-  AthleticsSkill: 'AthleticsSkill',
-  AcrobaticsSkill: 'AcrobaticsSkill',
-  SleightOfHandSkill: 'SleightOfHandSkill',
-  StealthSkill: 'StealthSkill',
-  ArcanaSkill: 'ArcanaSkill',
-  HistorySkill: 'HistorySkill',
-  InvestigationSkill: 'InvestigationSkill',
-  NatureSkill: 'NatureSkill',
-  ReligionSkill: 'ReligionSkill',
-  AnimalHandlingSkill: 'AnimalHandlingSkill',
-  InsightSkill: 'InsightSkill',
-  MedicineSkill: 'MedicineSkill',
-  PerceptionSkill: 'PerceptionSkill',
-  SurvivalSkill: 'SurvivalSkill',
-  DeceptionSkill: 'DeceptionSkill',
-  IntimidationSkill: 'IntimidationSkill',
-  PerformanceSkill: 'PerformanceSkill',
-  PersuasionSkill: 'PersuasionSkill',
+  CreatureSpeed: 'CreatureSpeed',
+  CreatureStats: 'CreatureStats',
+  CreatureStatDetail: 'CreatureStatDetail',
+  CreatureSkills: 'CreatureSkills',
+  CreatureSkillDetail: 'CreatureSkillDetail',
+  SkillMetadata: 'SkillMetadata',
   Creature: 'Creature',
-  Senses: 'Senses',
+  CreatureSenses: 'CreatureSenses',
   Action: 'Action',
   Trait: 'Trait',
   CreatureRace: 'CreatureRace',
-  GenrationRequest: 'GenrationRequest',
   DamageType: 'DamageType',
-  ChallengeRating: 'ChallengeRating',
+  ChallengeRatingMetadata: 'ChallengeRatingMetadata',
+  GenrationRequest: 'GenrationRequest',
   GPTMessageHistory: 'GPTMessageHistory',
   GPTMessage: 'GPTMessage',
   Adventure: 'Adventure',
