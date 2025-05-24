@@ -447,7 +447,8 @@ exports.Prisma.MagicItemScalarFieldEnum = {
   description: 'description',
   type_id: 'type_id',
   rarity_id: 'rarity_id',
-  source_id: 'source_id'
+  source_id: 'source_id',
+  requires_attunement: 'requires_attunement'
 };
 
 exports.Prisma.MagicItemRarityScalarFieldEnum = {

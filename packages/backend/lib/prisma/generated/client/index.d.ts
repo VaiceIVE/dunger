@@ -62188,6 +62188,7 @@ export namespace Prisma {
     type_id: string | null
     rarity_id: string | null
     source_id: number | null
+    requires_attunement: boolean | null
   }
 
   export type MagicItemMaxAggregateOutputType = {
@@ -62197,6 +62198,7 @@ export namespace Prisma {
     type_id: string | null
     rarity_id: string | null
     source_id: number | null
+    requires_attunement: boolean | null
   }
 
   export type MagicItemCountAggregateOutputType = {
@@ -62206,6 +62208,7 @@ export namespace Prisma {
     type_id: number
     rarity_id: number
     source_id: number
+    requires_attunement: number
     _all: number
   }
 
@@ -62225,6 +62228,7 @@ export namespace Prisma {
     type_id?: true
     rarity_id?: true
     source_id?: true
+    requires_attunement?: true
   }
 
   export type MagicItemMaxAggregateInputType = {
@@ -62234,6 +62238,7 @@ export namespace Prisma {
     type_id?: true
     rarity_id?: true
     source_id?: true
+    requires_attunement?: true
   }
 
   export type MagicItemCountAggregateInputType = {
@@ -62243,6 +62248,7 @@ export namespace Prisma {
     type_id?: true
     rarity_id?: true
     source_id?: true
+    requires_attunement?: true
     _all?: true
   }
 
@@ -62339,6 +62345,7 @@ export namespace Prisma {
     type_id: string
     rarity_id: string
     source_id: number
+    requires_attunement: boolean
     _count: MagicItemCountAggregateOutputType | null
     _avg: MagicItemAvgAggregateOutputType | null
     _sum: MagicItemSumAggregateOutputType | null
@@ -62367,6 +62374,7 @@ export namespace Prisma {
     type_id?: boolean
     rarity_id?: boolean
     source_id?: boolean
+    requires_attunement?: boolean
     type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
     rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
     source_relation?: boolean | SourceDefaultArgs<ExtArgs>
@@ -62381,6 +62389,7 @@ export namespace Prisma {
     type_id?: boolean
     rarity_id?: boolean
     source_id?: boolean
+    requires_attunement?: boolean
     type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
     rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
     source_relation?: boolean | SourceDefaultArgs<ExtArgs>
@@ -62393,6 +62402,7 @@ export namespace Prisma {
     type_id?: boolean
     rarity_id?: boolean
     source_id?: boolean
+    requires_attunement?: boolean
     type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
     rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
     source_relation?: boolean | SourceDefaultArgs<ExtArgs>
@@ -62405,9 +62415,10 @@ export namespace Prisma {
     type_id?: boolean
     rarity_id?: boolean
     source_id?: boolean
+    requires_attunement?: boolean
   }
 
-  export type MagicItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "type_id" | "rarity_id" | "source_id", ExtArgs["result"]["magicItem"]>
+  export type MagicItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "type_id" | "rarity_id" | "source_id" | "requires_attunement", ExtArgs["result"]["magicItem"]>
   export type MagicItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
     rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
@@ -62441,6 +62452,7 @@ export namespace Prisma {
       type_id: string
       rarity_id: string
       source_id: number
+      requires_attunement: boolean
     }, ExtArgs["result"]["magicItem"]>
     composites: {}
   }
@@ -62874,6 +62886,7 @@ export namespace Prisma {
     readonly type_id: FieldRef<"MagicItem", 'String'>
     readonly rarity_id: FieldRef<"MagicItem", 'String'>
     readonly source_id: FieldRef<"MagicItem", 'Int'>
+    readonly requires_attunement: FieldRef<"MagicItem", 'Boolean'>
   }
     
 
@@ -67994,7 +68007,8 @@ export namespace Prisma {
     description: 'description',
     type_id: 'type_id',
     rarity_id: 'rarity_id',
-    source_id: 'source_id'
+    source_id: 'source_id',
+    requires_attunement: 'requires_attunement'
   };
 
   export type MagicItemScalarFieldEnum = (typeof MagicItemScalarFieldEnum)[keyof typeof MagicItemScalarFieldEnum]
@@ -70772,6 +70786,7 @@ export namespace Prisma {
     type_id?: StringFilter<"MagicItem"> | string
     rarity_id?: StringFilter<"MagicItem"> | string
     source_id?: IntFilter<"MagicItem"> | number
+    requires_attunement?: BoolFilter<"MagicItem"> | boolean
     type_relation?: XOR<MagicItemTypeScalarRelationFilter, MagicItemTypeWhereInput>
     rarity_relation?: XOR<MagicItemRarityScalarRelationFilter, MagicItemRarityWhereInput>
     source_relation?: XOR<SourceScalarRelationFilter, SourceWhereInput>
@@ -70785,6 +70800,7 @@ export namespace Prisma {
     type_id?: SortOrder
     rarity_id?: SortOrder
     source_id?: SortOrder
+    requires_attunement?: SortOrder
     type_relation?: MagicItemTypeOrderByWithRelationInput
     rarity_relation?: MagicItemRarityOrderByWithRelationInput
     source_relation?: SourceOrderByWithRelationInput
@@ -70801,6 +70817,7 @@ export namespace Prisma {
     type_id?: StringFilter<"MagicItem"> | string
     rarity_id?: StringFilter<"MagicItem"> | string
     source_id?: IntFilter<"MagicItem"> | number
+    requires_attunement?: BoolFilter<"MagicItem"> | boolean
     type_relation?: XOR<MagicItemTypeScalarRelationFilter, MagicItemTypeWhereInput>
     rarity_relation?: XOR<MagicItemRarityScalarRelationFilter, MagicItemRarityWhereInput>
     source_relation?: XOR<SourceScalarRelationFilter, SourceWhereInput>
@@ -70814,6 +70831,7 @@ export namespace Prisma {
     type_id?: SortOrder
     rarity_id?: SortOrder
     source_id?: SortOrder
+    requires_attunement?: SortOrder
     _count?: MagicItemCountOrderByAggregateInput
     _avg?: MagicItemAvgOrderByAggregateInput
     _max?: MagicItemMaxOrderByAggregateInput
@@ -70831,6 +70849,7 @@ export namespace Prisma {
     type_id?: StringWithAggregatesFilter<"MagicItem"> | string
     rarity_id?: StringWithAggregatesFilter<"MagicItem"> | string
     source_id?: IntWithAggregatesFilter<"MagicItem"> | number
+    requires_attunement?: BoolWithAggregatesFilter<"MagicItem"> | boolean
   }
 
   export type MagicItemRarityWhereInput = {
@@ -73481,6 +73500,7 @@ export namespace Prisma {
     id?: string
     name: string
     description: string
+    requires_attunement?: boolean
     type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
     rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
     source_relation: SourceCreateNestedOneWithoutMagicItemsInput
@@ -73494,6 +73514,7 @@ export namespace Prisma {
     type_id: string
     rarity_id: string
     source_id: number
+    requires_attunement?: boolean
     attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
   }
 
@@ -73501,6 +73522,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
     type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
     rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
     source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
@@ -73514,6 +73536,7 @@ export namespace Prisma {
     type_id?: StringFieldUpdateOperationsInput | string
     rarity_id?: StringFieldUpdateOperationsInput | string
     source_id?: IntFieldUpdateOperationsInput | number
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
     attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
   }
 
@@ -73524,12 +73547,14 @@ export namespace Prisma {
     type_id: string
     rarity_id: string
     source_id: number
+    requires_attunement?: boolean
   }
 
   export type MagicItemUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MagicItemUncheckedUpdateManyInput = {
@@ -73539,6 +73564,7 @@ export namespace Prisma {
     type_id?: StringFieldUpdateOperationsInput | string
     rarity_id?: StringFieldUpdateOperationsInput | string
     source_id?: IntFieldUpdateOperationsInput | number
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MagicItemRarityCreateInput = {
@@ -75590,6 +75616,7 @@ export namespace Prisma {
     type_id?: SortOrder
     rarity_id?: SortOrder
     source_id?: SortOrder
+    requires_attunement?: SortOrder
   }
 
   export type MagicItemAvgOrderByAggregateInput = {
@@ -75603,6 +75630,7 @@ export namespace Prisma {
     type_id?: SortOrder
     rarity_id?: SortOrder
     source_id?: SortOrder
+    requires_attunement?: SortOrder
   }
 
   export type MagicItemMinOrderByAggregateInput = {
@@ -75612,6 +75640,7 @@ export namespace Prisma {
     type_id?: SortOrder
     rarity_id?: SortOrder
     source_id?: SortOrder
+    requires_attunement?: SortOrder
   }
 
   export type MagicItemSumOrderByAggregateInput = {
@@ -79178,6 +79207,7 @@ export namespace Prisma {
     id?: string
     name: string
     description: string
+    requires_attunement?: boolean
     type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
     rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
     attunements_relation?: MagicItemAttunementCreateNestedManyWithoutMagicItemInput
@@ -79189,6 +79219,7 @@ export namespace Prisma {
     description: string
     type_id: string
     rarity_id: string
+    requires_attunement?: boolean
     attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
   }
 
@@ -79244,6 +79275,7 @@ export namespace Prisma {
     type_id?: StringFilter<"MagicItem"> | string
     rarity_id?: StringFilter<"MagicItem"> | string
     source_id?: IntFilter<"MagicItem"> | number
+    requires_attunement?: BoolFilter<"MagicItem"> | boolean
   }
 
   export type CreatureCreateWithoutLanguagesInput = {
@@ -84389,6 +84421,7 @@ export namespace Prisma {
     id?: string
     name: string
     description: string
+    requires_attunement?: boolean
     type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
     source_relation: SourceCreateNestedOneWithoutMagicItemsInput
     attunements_relation?: MagicItemAttunementCreateNestedManyWithoutMagicItemInput
@@ -84400,6 +84433,7 @@ export namespace Prisma {
     description: string
     type_id: string
     source_id: number
+    requires_attunement?: boolean
     attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
   }
 
@@ -84433,6 +84467,7 @@ export namespace Prisma {
     id?: string
     name: string
     description: string
+    requires_attunement?: boolean
     rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
     source_relation: SourceCreateNestedOneWithoutMagicItemsInput
     attunements_relation?: MagicItemAttunementCreateNestedManyWithoutMagicItemInput
@@ -84444,6 +84479,7 @@ export namespace Prisma {
     description: string
     rarity_id: string
     source_id: number
+    requires_attunement?: boolean
     attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
   }
 
@@ -84511,6 +84547,7 @@ export namespace Prisma {
     id?: string
     name: string
     description: string
+    requires_attunement?: boolean
     type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
     rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
     source_relation: SourceCreateNestedOneWithoutMagicItemsInput
@@ -84523,6 +84560,7 @@ export namespace Prisma {
     type_id: string
     rarity_id: string
     source_id: number
+    requires_attunement?: boolean
   }
 
   export type MagicItemCreateOrConnectWithoutAttunements_relationInput = {
@@ -84560,6 +84598,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
     type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
     rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
     source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
@@ -84572,6 +84611,7 @@ export namespace Prisma {
     type_id?: StringFieldUpdateOperationsInput | string
     rarity_id?: StringFieldUpdateOperationsInput | string
     source_id?: IntFieldUpdateOperationsInput | number
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type AttunementConditionUpsertWithoutMagicItemsInput = {
@@ -84708,6 +84748,7 @@ export namespace Prisma {
     description: string
     type_id: string
     rarity_id: string
+    requires_attunement?: boolean
   }
 
   export type CreatureUpdateWithoutSource_relationInput = {
@@ -84787,6 +84828,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
     type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
     rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
     attunements_relation?: MagicItemAttunementUpdateManyWithoutMagicItemNestedInput
@@ -84798,6 +84840,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     type_id?: StringFieldUpdateOperationsInput | string
     rarity_id?: StringFieldUpdateOperationsInput | string
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
     attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
   }
 
@@ -84807,6 +84850,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     type_id?: StringFieldUpdateOperationsInput | string
     rarity_id?: StringFieldUpdateOperationsInput | string
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CreatureUpdateWithoutLanguagesInput = {
@@ -85974,12 +86018,14 @@ export namespace Prisma {
     description: string
     type_id: string
     source_id: number
+    requires_attunement?: boolean
   }
 
   export type MagicItemUpdateWithoutRarity_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
     type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
     source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
     attunements_relation?: MagicItemAttunementUpdateManyWithoutMagicItemNestedInput
@@ -85991,6 +86037,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     type_id?: StringFieldUpdateOperationsInput | string
     source_id?: IntFieldUpdateOperationsInput | number
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
     attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
   }
 
@@ -86000,6 +86047,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     type_id?: StringFieldUpdateOperationsInput | string
     source_id?: IntFieldUpdateOperationsInput | number
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MagicItemCreateManyType_relationInput = {
@@ -86008,12 +86056,14 @@ export namespace Prisma {
     description: string
     rarity_id: string
     source_id: number
+    requires_attunement?: boolean
   }
 
   export type MagicItemUpdateWithoutType_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
     rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
     source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
     attunements_relation?: MagicItemAttunementUpdateManyWithoutMagicItemNestedInput
@@ -86025,6 +86075,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     rarity_id?: StringFieldUpdateOperationsInput | string
     source_id?: IntFieldUpdateOperationsInput | number
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
     attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
   }
 
@@ -86034,6 +86085,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     rarity_id?: StringFieldUpdateOperationsInput | string
     source_id?: IntFieldUpdateOperationsInput | number
+    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MagicItemAttunementCreateManyAttunementInput = {

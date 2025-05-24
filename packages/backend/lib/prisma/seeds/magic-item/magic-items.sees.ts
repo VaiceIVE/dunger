@@ -43,6 +43,7 @@ export async function SeedMagicItems() {
         data: {
           name: item.ru.name,
           description: item.ru.text,
+          requires_attunement: !!item.ru.attunement,
           type_relation: { connect: { id: item.en.type } },
           rarity_relation: { connect: { id: item.en.rarity } },
           source_relation: { connect: { id: sourceId } }

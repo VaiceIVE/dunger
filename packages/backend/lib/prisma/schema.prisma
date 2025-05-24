@@ -500,6 +500,7 @@ model MagicItem {
   type_id                 String
   rarity_id               String
   source_id               Int
+  requires_attunement     Boolean                 @default(false)
 
   type_relation           MagicItemType           @relation(fields: [type_id], references: [id])
   rarity_relation         MagicItemRarity         @relation(fields: [rarity_id], references: [id])
