@@ -26,11 +26,19 @@ export const MagicItemCard = ({ magicItem, controls, style }: magicItemCardProps
         <Stack gap={24}>
           <Flex gap={16}>
             <Stack gap={12} style={styles.common}>
-              <div {...stylex.props(styles.personality, text.defaultMedium)}>
-                <div>{magicItem?.name ?? 'Не выбрано'}</div>
-              </div>
               <Stack gap={4}>
-                <KeyValue keyLabel={'Цена:'} value={magicItem?.price ?? 'Не указано'} />
+                <KeyValue keyLabel={'Тип:'} value={magicItem?.type_name ?? 'Не указано'} />
+                <KeyValue
+                  keyLabel={'Настройка:'}
+                  value={
+                    magicItem?.requires_attunement
+                      ? magicItem.attunements.length
+                        ? `требуется настройка (${magicItem.attunements.join(', ')})`
+                        : 'требуется настройка'
+                      : 'Нет'
+                  }
+                />
+                <KeyValue keyLabel={'Цена:'} value={magicItem?.cost ?? 'Не указано'} />
                 <KeyValue keyLabel={'Редкость:'} value={magicItem?.rarity_name ?? 'Не указано'} />
               </Stack>
             </Stack>
@@ -45,7 +53,7 @@ export const MagicItemCard = ({ magicItem, controls, style }: magicItemCardProps
                 <Fragment>
                   Описание{' '}
                   {open ? (
-                    <ChevronUpIcon {...stylex.props(styles.chevron)} />
+                    <ChevronUpIcon aria-selected={true} {...stylex.props(styles.chevron)} />
                   ) : (
                     <ChevronDownIcon {...stylex.props(styles.chevron)} />
                   )}
@@ -53,7 +61,10 @@ export const MagicItemCard = ({ magicItem, controls, style }: magicItemCardProps
               )}
             </Accordion.Control>
             <Accordion.Panel>
-              <div {...stylex.props(styles.panel, text.defaultRegular)}>{magicItem?.description ?? 'Не указано'}</div>
+              <div
+                {...stylex.props(styles.panel, text.defaultRegular)}
+                dangerouslySetInnerHTML={{ __html: magicItem?.description ?? 'Не указано' }}
+              />
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
@@ -78,15 +89,6 @@ const styles = stylex.create({
   common: {
     flex: '1'
   },
-  personality: {
-    alignItems: 'center',
-    backgroundColor: colors.backgroundNeutralDefault,
-    borderRadius: 10,
-    color: colors.textSecondaryDefault,
-    display: 'flex',
-    gap: 4,
-    padding: 8
-  },
   key: {
     color: colors.textPrimaryDefault
   },
@@ -102,32 +104,11 @@ const styles = stylex.create({
     padding: 16
   },
   chevron: {
-    color: colors.brand90
+    backgroundColor: { default: 'transparent', ':is([aria-selected=true])': 'transparent' },
+    color: { default: colors.textTertiaryDefault, ':is([aria-selected=true])': colors.brand90 }
   },
   panel: {
     paddingBottom: 16,
     paddingInline: 16
-  },
-  list: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8,
-    listStyle: 'none',
-    margin: 0,
-    padding: 0
-  },
-  card: {
-    backgroundColor: colors.backgroundUniversal,
-    borderLeftStyle: 'solid',
-    borderLeftWidth: 4,
-    borderRadius: 6,
-    padding: '8px 12px',
-    width: '100%'
-  },
-  trait: {
-    borderLeftColor: colors.brand80
-  },
-  action: {
-    borderLeftColor: colors.textTertiaryDefault
   }
 });

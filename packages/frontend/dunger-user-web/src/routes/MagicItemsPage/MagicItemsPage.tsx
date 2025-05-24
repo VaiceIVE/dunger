@@ -13,7 +13,6 @@ import {
   IconButton,
   InfiniteScroll,
   LinkIcon,
-  PencilIcon,
   SearchIcon,
   Stack,
   Tag,
@@ -21,11 +20,11 @@ import {
   XIcon
 } from '@dunger/ui';
 import { Directory, DirectoryItem } from 'components/Directory';
+import { MagicItemCard } from 'features/MagicItemCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
 import { ApiMagicItem } from 'store/_types/magic-item/ApiMagicItem';
 import { ApiMagicItemListResult } from 'store/_types/magic-item/ApiMagicItemList';
 import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
-import { MagicItemCard } from './_components/MagicItemCard';
 
 export const MagicItemsPage = () => {
   const { id } = useParams();
@@ -107,7 +106,7 @@ export const MagicItemsPage = () => {
                         <DirectoryItem.Content>
                           <Flex gap={8}>
                             <Tag color="yellow">{i.cost}</Tag>
-                            <Tag color="black">{i.type_name}</Tag>
+                            <Tag color="black">{i.rarity_name}</Tag>
                           </Flex>
                         </DirectoryItem.Content>
                       </DirectoryItem>
@@ -120,14 +119,12 @@ export const MagicItemsPage = () => {
 
           <SplitViewLayout.Detail>
             <MagicItemCard
+              magicItem={magicItem}
               style={styles.card}
               controls={
                 <Fragment>
                   <IconButton size="sm">
                     <LinkIcon />
-                  </IconButton>
-                  <IconButton size="sm">
-                    <PencilIcon />
                   </IconButton>
 
                   <Link to={'/magic-items'}>
