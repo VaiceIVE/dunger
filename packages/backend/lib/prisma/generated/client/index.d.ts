@@ -4127,6 +4127,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type ChallengeRatingMetadataCountOutputType
+   */
+
+  export type ChallengeRatingMetadataCountOutputType = {
+    creatures: number
+  }
+
+  export type ChallengeRatingMetadataCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    creatures?: boolean | ChallengeRatingMetadataCountOutputTypeCountCreaturesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ChallengeRatingMetadataCountOutputType without action
+   */
+  export type ChallengeRatingMetadataCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChallengeRatingMetadataCountOutputType
+     */
+    select?: ChallengeRatingMetadataCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ChallengeRatingMetadataCountOutputType without action
+   */
+  export type ChallengeRatingMetadataCountOutputTypeCountCreaturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CreatureWhereInput
+  }
+
+
+  /**
    * Count Type GPTMessageHistoryCountOutputType
    */
 
@@ -17421,6 +17452,7 @@ export namespace Prisma {
     stats?: boolean | Creature$statsArgs<ExtArgs>
     skills?: boolean | Creature$skillsArgs<ExtArgs>
     senses?: boolean | Creature$sensesArgs<ExtArgs>
+    challenge_rating_meta?: boolean | ChallengeRatingMetadataDefaultArgs<ExtArgs>
     alignment_relation?: boolean | Creature$alignment_relationArgs<ExtArgs>
     race_relation?: boolean | Creature$race_relationArgs<ExtArgs>
     type_relation?: boolean | Creature$type_relationArgs<ExtArgs>
@@ -17449,6 +17481,7 @@ export namespace Prisma {
     armor_class?: boolean
     hit_points?: boolean
     challenge_rating?: boolean
+    challenge_rating_meta?: boolean | ChallengeRatingMetadataDefaultArgs<ExtArgs>
     alignment_relation?: boolean | Creature$alignment_relationArgs<ExtArgs>
     race_relation?: boolean | Creature$race_relationArgs<ExtArgs>
     type_relation?: boolean | Creature$type_relationArgs<ExtArgs>
@@ -17469,6 +17502,7 @@ export namespace Prisma {
     armor_class?: boolean
     hit_points?: boolean
     challenge_rating?: boolean
+    challenge_rating_meta?: boolean | ChallengeRatingMetadataDefaultArgs<ExtArgs>
     alignment_relation?: boolean | Creature$alignment_relationArgs<ExtArgs>
     race_relation?: boolean | Creature$race_relationArgs<ExtArgs>
     type_relation?: boolean | Creature$type_relationArgs<ExtArgs>
@@ -17497,6 +17531,7 @@ export namespace Prisma {
     stats?: boolean | Creature$statsArgs<ExtArgs>
     skills?: boolean | Creature$skillsArgs<ExtArgs>
     senses?: boolean | Creature$sensesArgs<ExtArgs>
+    challenge_rating_meta?: boolean | ChallengeRatingMetadataDefaultArgs<ExtArgs>
     alignment_relation?: boolean | Creature$alignment_relationArgs<ExtArgs>
     race_relation?: boolean | Creature$race_relationArgs<ExtArgs>
     type_relation?: boolean | Creature$type_relationArgs<ExtArgs>
@@ -17512,6 +17547,7 @@ export namespace Prisma {
     _count?: boolean | CreatureCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CreatureIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    challenge_rating_meta?: boolean | ChallengeRatingMetadataDefaultArgs<ExtArgs>
     alignment_relation?: boolean | Creature$alignment_relationArgs<ExtArgs>
     race_relation?: boolean | Creature$race_relationArgs<ExtArgs>
     type_relation?: boolean | Creature$type_relationArgs<ExtArgs>
@@ -17519,6 +17555,7 @@ export namespace Prisma {
     source_relation?: boolean | Creature$source_relationArgs<ExtArgs>
   }
   export type CreatureIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    challenge_rating_meta?: boolean | ChallengeRatingMetadataDefaultArgs<ExtArgs>
     alignment_relation?: boolean | Creature$alignment_relationArgs<ExtArgs>
     race_relation?: boolean | Creature$race_relationArgs<ExtArgs>
     type_relation?: boolean | Creature$type_relationArgs<ExtArgs>
@@ -17533,6 +17570,7 @@ export namespace Prisma {
       stats: Prisma.$CreatureStatsPayload<ExtArgs> | null
       skills: Prisma.$CreatureSkillsPayload<ExtArgs> | null
       senses: Prisma.$CreatureSensesPayload<ExtArgs> | null
+      challenge_rating_meta: Prisma.$ChallengeRatingMetadataPayload<ExtArgs>
       alignment_relation: Prisma.$AlignmentPayload<ExtArgs> | null
       race_relation: Prisma.$CreatureRacePayload<ExtArgs> | null
       type_relation: Prisma.$TypePayload<ExtArgs> | null
@@ -17957,6 +17995,7 @@ export namespace Prisma {
     stats<T extends Creature$statsArgs<ExtArgs> = {}>(args?: Subset<T, Creature$statsArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     skills<T extends Creature$skillsArgs<ExtArgs> = {}>(args?: Subset<T, Creature$skillsArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     senses<T extends Creature$sensesArgs<ExtArgs> = {}>(args?: Subset<T, Creature$sensesArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    challenge_rating_meta<T extends ChallengeRatingMetadataDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChallengeRatingMetadataDefaultArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     alignment_relation<T extends Creature$alignment_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$alignment_relationArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     race_relation<T extends Creature$race_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$race_relationArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     type_relation<T extends Creature$type_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$type_relationArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
@@ -24508,6 +24547,8 @@ export namespace Prisma {
     display?: boolean
     numeric?: boolean
     xp_reward?: boolean
+    creatures?: boolean | ChallengeRatingMetadata$creaturesArgs<ExtArgs>
+    _count?: boolean | ChallengeRatingMetadataCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["challengeRatingMetadata"]>
 
   export type ChallengeRatingMetadataSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -24532,10 +24573,18 @@ export namespace Prisma {
   }
 
   export type ChallengeRatingMetadataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"cr" | "display" | "numeric" | "xp_reward", ExtArgs["result"]["challengeRatingMetadata"]>
+  export type ChallengeRatingMetadataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    creatures?: boolean | ChallengeRatingMetadata$creaturesArgs<ExtArgs>
+    _count?: boolean | ChallengeRatingMetadataCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ChallengeRatingMetadataIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ChallengeRatingMetadataIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $ChallengeRatingMetadataPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ChallengeRatingMetadata"
-    objects: {}
+    objects: {
+      creatures: Prisma.$CreaturePayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       cr: $Enums.ChallengeRatingEnum
       display: string
@@ -24935,6 +24984,7 @@ export namespace Prisma {
    */
   export interface Prisma__ChallengeRatingMetadataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    creatures<T extends ChallengeRatingMetadata$creaturesArgs<ExtArgs> = {}>(args?: Subset<T, ChallengeRatingMetadata$creaturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -24985,6 +25035,10 @@ export namespace Prisma {
      */
     omit?: ChallengeRatingMetadataOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeRatingMetadataInclude<ExtArgs> | null
+    /**
      * Filter, which ChallengeRatingMetadata to fetch.
      */
     where: ChallengeRatingMetadataWhereUniqueInput
@@ -25003,6 +25057,10 @@ export namespace Prisma {
      */
     omit?: ChallengeRatingMetadataOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeRatingMetadataInclude<ExtArgs> | null
+    /**
      * Filter, which ChallengeRatingMetadata to fetch.
      */
     where: ChallengeRatingMetadataWhereUniqueInput
@@ -25020,6 +25078,10 @@ export namespace Prisma {
      * Omit specific fields from the ChallengeRatingMetadata
      */
     omit?: ChallengeRatingMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeRatingMetadataInclude<ExtArgs> | null
     /**
      * Filter, which ChallengeRatingMetadata to fetch.
      */
@@ -25069,6 +25131,10 @@ export namespace Prisma {
      */
     omit?: ChallengeRatingMetadataOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeRatingMetadataInclude<ExtArgs> | null
+    /**
      * Filter, which ChallengeRatingMetadata to fetch.
      */
     where?: ChallengeRatingMetadataWhereInput
@@ -25117,6 +25183,10 @@ export namespace Prisma {
      */
     omit?: ChallengeRatingMetadataOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeRatingMetadataInclude<ExtArgs> | null
+    /**
      * Filter, which ChallengeRatingMetadata to fetch.
      */
     where?: ChallengeRatingMetadataWhereInput
@@ -25159,6 +25229,10 @@ export namespace Prisma {
      * Omit specific fields from the ChallengeRatingMetadata
      */
     omit?: ChallengeRatingMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeRatingMetadataInclude<ExtArgs> | null
     /**
      * The data needed to create a ChallengeRatingMetadata.
      */
@@ -25207,6 +25281,10 @@ export namespace Prisma {
      * Omit specific fields from the ChallengeRatingMetadata
      */
     omit?: ChallengeRatingMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeRatingMetadataInclude<ExtArgs> | null
     /**
      * The data needed to update a ChallengeRatingMetadata.
      */
@@ -25274,6 +25352,10 @@ export namespace Prisma {
      */
     omit?: ChallengeRatingMetadataOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeRatingMetadataInclude<ExtArgs> | null
+    /**
      * The filter to search for the ChallengeRatingMetadata to update in case it exists.
      */
     where: ChallengeRatingMetadataWhereUniqueInput
@@ -25300,6 +25382,10 @@ export namespace Prisma {
      */
     omit?: ChallengeRatingMetadataOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeRatingMetadataInclude<ExtArgs> | null
+    /**
      * Filter which ChallengeRatingMetadata to delete.
      */
     where: ChallengeRatingMetadataWhereUniqueInput
@@ -25320,6 +25406,30 @@ export namespace Prisma {
   }
 
   /**
+   * ChallengeRatingMetadata.creatures
+   */
+  export type ChallengeRatingMetadata$creaturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Creature
+     */
+    select?: CreatureSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Creature
+     */
+    omit?: CreatureOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CreatureInclude<ExtArgs> | null
+    where?: CreatureWhereInput
+    orderBy?: CreatureOrderByWithRelationInput | CreatureOrderByWithRelationInput[]
+    cursor?: CreatureWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CreatureScalarFieldEnum | CreatureScalarFieldEnum[]
+  }
+
+  /**
    * ChallengeRatingMetadata without action
    */
   export type ChallengeRatingMetadataDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -25331,6 +25441,10 @@ export namespace Prisma {
      * Omit specific fields from the ChallengeRatingMetadata
      */
     omit?: ChallengeRatingMetadataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChallengeRatingMetadataInclude<ExtArgs> | null
   }
 
 
@@ -38113,6 +38227,7 @@ export namespace Prisma {
     stats?: XOR<CreatureStatsNullableScalarRelationFilter, CreatureStatsWhereInput> | null
     skills?: XOR<CreatureSkillsNullableScalarRelationFilter, CreatureSkillsWhereInput> | null
     senses?: XOR<CreatureSensesNullableScalarRelationFilter, CreatureSensesWhereInput> | null
+    challenge_rating_meta?: XOR<ChallengeRatingMetadataScalarRelationFilter, ChallengeRatingMetadataWhereInput>
     alignment_relation?: XOR<AlignmentNullableScalarRelationFilter, AlignmentWhereInput> | null
     race_relation?: XOR<CreatureRaceNullableScalarRelationFilter, CreatureRaceWhereInput> | null
     type_relation?: XOR<TypeNullableScalarRelationFilter, TypeWhereInput> | null
@@ -38144,6 +38259,7 @@ export namespace Prisma {
     stats?: CreatureStatsOrderByWithRelationInput
     skills?: CreatureSkillsOrderByWithRelationInput
     senses?: CreatureSensesOrderByWithRelationInput
+    challenge_rating_meta?: ChallengeRatingMetadataOrderByWithRelationInput
     alignment_relation?: AlignmentOrderByWithRelationInput
     race_relation?: CreatureRaceOrderByWithRelationInput
     type_relation?: TypeOrderByWithRelationInput
@@ -38178,6 +38294,7 @@ export namespace Prisma {
     stats?: XOR<CreatureStatsNullableScalarRelationFilter, CreatureStatsWhereInput> | null
     skills?: XOR<CreatureSkillsNullableScalarRelationFilter, CreatureSkillsWhereInput> | null
     senses?: XOR<CreatureSensesNullableScalarRelationFilter, CreatureSensesWhereInput> | null
+    challenge_rating_meta?: XOR<ChallengeRatingMetadataScalarRelationFilter, ChallengeRatingMetadataWhereInput>
     alignment_relation?: XOR<AlignmentNullableScalarRelationFilter, AlignmentWhereInput> | null
     race_relation?: XOR<CreatureRaceNullableScalarRelationFilter, CreatureRaceWhereInput> | null
     type_relation?: XOR<TypeNullableScalarRelationFilter, TypeWhereInput> | null
@@ -38504,6 +38621,7 @@ export namespace Prisma {
     display?: StringFilter<"ChallengeRatingMetadata"> | string
     numeric?: FloatFilter<"ChallengeRatingMetadata"> | number
     xp_reward?: IntFilter<"ChallengeRatingMetadata"> | number
+    creatures?: CreatureListRelationFilter
   }
 
   export type ChallengeRatingMetadataOrderByWithRelationInput = {
@@ -38511,17 +38629,19 @@ export namespace Prisma {
     display?: SortOrder
     numeric?: SortOrder
     xp_reward?: SortOrder
+    creatures?: CreatureOrderByRelationAggregateInput
   }
 
   export type ChallengeRatingMetadataWhereUniqueInput = Prisma.AtLeast<{
     cr?: $Enums.ChallengeRatingEnum
+    display?: string
     AND?: ChallengeRatingMetadataWhereInput | ChallengeRatingMetadataWhereInput[]
     OR?: ChallengeRatingMetadataWhereInput[]
     NOT?: ChallengeRatingMetadataWhereInput | ChallengeRatingMetadataWhereInput[]
-    display?: StringFilter<"ChallengeRatingMetadata"> | string
     numeric?: FloatFilter<"ChallengeRatingMetadata"> | number
     xp_reward?: IntFilter<"ChallengeRatingMetadata"> | number
-  }, "cr">
+    creatures?: CreatureListRelationFilter
+  }, "cr" | "display">
 
   export type ChallengeRatingMetadataOrderByWithAggregationInput = {
     cr?: SortOrder
@@ -39635,11 +39755,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -39687,11 +39807,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -39754,7 +39874,6 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
   }
 
   export type CreatureUncheckedUpdateManyInput = {
@@ -40038,6 +40157,7 @@ export namespace Prisma {
     display: string
     numeric: number
     xp_reward: number
+    creatures?: CreatureCreateNestedManyWithoutChallenge_rating_metaInput
   }
 
   export type ChallengeRatingMetadataUncheckedCreateInput = {
@@ -40045,6 +40165,7 @@ export namespace Prisma {
     display: string
     numeric: number
     xp_reward: number
+    creatures?: CreatureUncheckedCreateNestedManyWithoutChallenge_rating_metaInput
   }
 
   export type ChallengeRatingMetadataUpdateInput = {
@@ -40052,6 +40173,7 @@ export namespace Prisma {
     display?: StringFieldUpdateOperationsInput | string
     numeric?: FloatFieldUpdateOperationsInput | number
     xp_reward?: IntFieldUpdateOperationsInput | number
+    creatures?: CreatureUpdateManyWithoutChallenge_rating_metaNestedInput
   }
 
   export type ChallengeRatingMetadataUncheckedUpdateInput = {
@@ -40059,6 +40181,7 @@ export namespace Prisma {
     display?: StringFieldUpdateOperationsInput | string
     numeric?: FloatFieldUpdateOperationsInput | number
     xp_reward?: IntFieldUpdateOperationsInput | number
+    creatures?: CreatureUncheckedUpdateManyWithoutChallenge_rating_metaNestedInput
   }
 
   export type ChallengeRatingMetadataCreateManyInput = {
@@ -41155,6 +41278,11 @@ export namespace Prisma {
   export type CreatureSensesNullableScalarRelationFilter = {
     is?: CreatureSensesWhereInput | null
     isNot?: CreatureSensesWhereInput | null
+  }
+
+  export type ChallengeRatingMetadataScalarRelationFilter = {
+    is?: ChallengeRatingMetadataWhereInput
+    isNot?: ChallengeRatingMetadataWhereInput
   }
 
   export type AlignmentNullableScalarRelationFilter = {
@@ -42422,6 +42550,12 @@ export namespace Prisma {
     connect?: CreatureSensesWhereUniqueInput
   }
 
+  export type ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput = {
+    create?: XOR<ChallengeRatingMetadataCreateWithoutCreaturesInput, ChallengeRatingMetadataUncheckedCreateWithoutCreaturesInput>
+    connectOrCreate?: ChallengeRatingMetadataCreateOrConnectWithoutCreaturesInput
+    connect?: ChallengeRatingMetadataWhereUniqueInput
+  }
+
   export type AlignmentCreateNestedOneWithoutCreaturesInput = {
     create?: XOR<AlignmentCreateWithoutCreaturesInput, AlignmentUncheckedCreateWithoutCreaturesInput>
     connectOrCreate?: AlignmentCreateOrConnectWithoutCreaturesInput
@@ -42602,6 +42736,14 @@ export namespace Prisma {
     delete?: CreatureSensesWhereInput | boolean
     connect?: CreatureSensesWhereUniqueInput
     update?: XOR<XOR<CreatureSensesUpdateToOneWithWhereWithoutCreature_relationInput, CreatureSensesUpdateWithoutCreature_relationInput>, CreatureSensesUncheckedUpdateWithoutCreature_relationInput>
+  }
+
+  export type ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput = {
+    create?: XOR<ChallengeRatingMetadataCreateWithoutCreaturesInput, ChallengeRatingMetadataUncheckedCreateWithoutCreaturesInput>
+    connectOrCreate?: ChallengeRatingMetadataCreateOrConnectWithoutCreaturesInput
+    upsert?: ChallengeRatingMetadataUpsertWithoutCreaturesInput
+    connect?: ChallengeRatingMetadataWhereUniqueInput
+    update?: XOR<XOR<ChallengeRatingMetadataUpdateToOneWithWhereWithoutCreaturesInput, ChallengeRatingMetadataUpdateWithoutCreaturesInput>, ChallengeRatingMetadataUncheckedUpdateWithoutCreaturesInput>
   }
 
   export type AlignmentUpdateOneWithoutCreaturesNestedInput = {
@@ -43278,6 +43420,20 @@ export namespace Prisma {
     deleteMany?: CreatureScalarWhereInput | CreatureScalarWhereInput[]
   }
 
+  export type CreatureCreateNestedManyWithoutChallenge_rating_metaInput = {
+    create?: XOR<CreatureCreateWithoutChallenge_rating_metaInput, CreatureUncheckedCreateWithoutChallenge_rating_metaInput> | CreatureCreateWithoutChallenge_rating_metaInput[] | CreatureUncheckedCreateWithoutChallenge_rating_metaInput[]
+    connectOrCreate?: CreatureCreateOrConnectWithoutChallenge_rating_metaInput | CreatureCreateOrConnectWithoutChallenge_rating_metaInput[]
+    createMany?: CreatureCreateManyChallenge_rating_metaInputEnvelope
+    connect?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
+  }
+
+  export type CreatureUncheckedCreateNestedManyWithoutChallenge_rating_metaInput = {
+    create?: XOR<CreatureCreateWithoutChallenge_rating_metaInput, CreatureUncheckedCreateWithoutChallenge_rating_metaInput> | CreatureCreateWithoutChallenge_rating_metaInput[] | CreatureUncheckedCreateWithoutChallenge_rating_metaInput[]
+    connectOrCreate?: CreatureCreateOrConnectWithoutChallenge_rating_metaInput | CreatureCreateOrConnectWithoutChallenge_rating_metaInput[]
+    createMany?: CreatureCreateManyChallenge_rating_metaInputEnvelope
+    connect?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
+  }
+
   export type EnumChallengeRatingEnumFieldUpdateOperationsInput = {
     set?: $Enums.ChallengeRatingEnum
   }
@@ -43288,6 +43444,34 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type CreatureUpdateManyWithoutChallenge_rating_metaNestedInput = {
+    create?: XOR<CreatureCreateWithoutChallenge_rating_metaInput, CreatureUncheckedCreateWithoutChallenge_rating_metaInput> | CreatureCreateWithoutChallenge_rating_metaInput[] | CreatureUncheckedCreateWithoutChallenge_rating_metaInput[]
+    connectOrCreate?: CreatureCreateOrConnectWithoutChallenge_rating_metaInput | CreatureCreateOrConnectWithoutChallenge_rating_metaInput[]
+    upsert?: CreatureUpsertWithWhereUniqueWithoutChallenge_rating_metaInput | CreatureUpsertWithWhereUniqueWithoutChallenge_rating_metaInput[]
+    createMany?: CreatureCreateManyChallenge_rating_metaInputEnvelope
+    set?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
+    disconnect?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
+    delete?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
+    connect?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
+    update?: CreatureUpdateWithWhereUniqueWithoutChallenge_rating_metaInput | CreatureUpdateWithWhereUniqueWithoutChallenge_rating_metaInput[]
+    updateMany?: CreatureUpdateManyWithWhereWithoutChallenge_rating_metaInput | CreatureUpdateManyWithWhereWithoutChallenge_rating_metaInput[]
+    deleteMany?: CreatureScalarWhereInput | CreatureScalarWhereInput[]
+  }
+
+  export type CreatureUncheckedUpdateManyWithoutChallenge_rating_metaNestedInput = {
+    create?: XOR<CreatureCreateWithoutChallenge_rating_metaInput, CreatureUncheckedCreateWithoutChallenge_rating_metaInput> | CreatureCreateWithoutChallenge_rating_metaInput[] | CreatureUncheckedCreateWithoutChallenge_rating_metaInput[]
+    connectOrCreate?: CreatureCreateOrConnectWithoutChallenge_rating_metaInput | CreatureCreateOrConnectWithoutChallenge_rating_metaInput[]
+    upsert?: CreatureUpsertWithWhereUniqueWithoutChallenge_rating_metaInput | CreatureUpsertWithWhereUniqueWithoutChallenge_rating_metaInput[]
+    createMany?: CreatureCreateManyChallenge_rating_metaInputEnvelope
+    set?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
+    disconnect?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
+    delete?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
+    connect?: CreatureWhereUniqueInput | CreatureWhereUniqueInput[]
+    update?: CreatureUpdateWithWhereUniqueWithoutChallenge_rating_metaInput | CreatureUpdateWithWhereUniqueWithoutChallenge_rating_metaInput[]
+    updateMany?: CreatureUpdateManyWithWhereWithoutChallenge_rating_metaInput | CreatureUpdateManyWithWhereWithoutChallenge_rating_metaInput[]
+    deleteMany?: CreatureScalarWhereInput | CreatureScalarWhereInput[]
   }
 
   export type GPTMessageCreateNestedManyWithoutMessage_history_relationInput = {
@@ -44060,11 +44244,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -44154,11 +44338,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -44289,11 +44473,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -44360,11 +44544,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -44431,11 +44615,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     size_relation?: SizeCreateNestedOneWithoutCreatureInput
@@ -44507,11 +44691,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
     size_relation?: SizeCreateNestedOneWithoutCreatureInput
@@ -44583,10 +44767,10 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -44649,10 +44833,10 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -44723,10 +44907,10 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -44816,10 +45000,10 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -44922,10 +45106,10 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -45015,10 +45199,10 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -45150,6 +45334,25 @@ export namespace Prisma {
   export type CreatureSensesCreateOrConnectWithoutCreature_relationInput = {
     where: CreatureSensesWhereUniqueInput
     create: XOR<CreatureSensesCreateWithoutCreature_relationInput, CreatureSensesUncheckedCreateWithoutCreature_relationInput>
+  }
+
+  export type ChallengeRatingMetadataCreateWithoutCreaturesInput = {
+    cr: $Enums.ChallengeRatingEnum
+    display: string
+    numeric: number
+    xp_reward: number
+  }
+
+  export type ChallengeRatingMetadataUncheckedCreateWithoutCreaturesInput = {
+    cr: $Enums.ChallengeRatingEnum
+    display: string
+    numeric: number
+    xp_reward: number
+  }
+
+  export type ChallengeRatingMetadataCreateOrConnectWithoutCreaturesInput = {
+    where: ChallengeRatingMetadataWhereUniqueInput
+    create: XOR<ChallengeRatingMetadataCreateWithoutCreaturesInput, ChallengeRatingMetadataUncheckedCreateWithoutCreaturesInput>
   }
 
   export type AlignmentCreateWithoutCreaturesInput = {
@@ -45450,6 +45653,31 @@ export namespace Prisma {
     passive_perception?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
+  export type ChallengeRatingMetadataUpsertWithoutCreaturesInput = {
+    update: XOR<ChallengeRatingMetadataUpdateWithoutCreaturesInput, ChallengeRatingMetadataUncheckedUpdateWithoutCreaturesInput>
+    create: XOR<ChallengeRatingMetadataCreateWithoutCreaturesInput, ChallengeRatingMetadataUncheckedCreateWithoutCreaturesInput>
+    where?: ChallengeRatingMetadataWhereInput
+  }
+
+  export type ChallengeRatingMetadataUpdateToOneWithWhereWithoutCreaturesInput = {
+    where?: ChallengeRatingMetadataWhereInput
+    data: XOR<ChallengeRatingMetadataUpdateWithoutCreaturesInput, ChallengeRatingMetadataUncheckedUpdateWithoutCreaturesInput>
+  }
+
+  export type ChallengeRatingMetadataUpdateWithoutCreaturesInput = {
+    cr?: EnumChallengeRatingEnumFieldUpdateOperationsInput | $Enums.ChallengeRatingEnum
+    display?: StringFieldUpdateOperationsInput | string
+    numeric?: FloatFieldUpdateOperationsInput | number
+    xp_reward?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ChallengeRatingMetadataUncheckedUpdateWithoutCreaturesInput = {
+    cr?: EnumChallengeRatingEnumFieldUpdateOperationsInput | $Enums.ChallengeRatingEnum
+    display?: StringFieldUpdateOperationsInput | string
+    numeric?: FloatFieldUpdateOperationsInput | number
+    xp_reward?: IntFieldUpdateOperationsInput | number
+  }
+
   export type AlignmentUpsertWithoutCreaturesInput = {
     update: XOR<AlignmentUpdateWithoutCreaturesInput, AlignmentUncheckedUpdateWithoutCreaturesInput>
     create: XOR<AlignmentCreateWithoutCreaturesInput, AlignmentUncheckedCreateWithoutCreaturesInput>
@@ -45727,10 +45955,10 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -45793,10 +46021,10 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -45843,11 +46071,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -45959,11 +46187,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -46110,11 +46338,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
     size_relation?: SizeCreateNestedOneWithoutCreatureInput
@@ -46218,11 +46446,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -46273,11 +46501,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -46328,11 +46556,11 @@ export namespace Prisma {
     description?: string | null
     armor_class?: number | null
     hit_points?: number | null
-    challenge_rating: string
     speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
     stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
     skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
     senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
     alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
     race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
     type_relation?: TypeCreateNestedOneWithoutCreaturesInput
@@ -46422,6 +46650,82 @@ export namespace Prisma {
   export type CreatureUpdateManyWithWhereWithoutVulnerabilitiesInput = {
     where: CreatureScalarWhereInput
     data: XOR<CreatureUpdateManyMutationInput, CreatureUncheckedUpdateManyWithoutVulnerabilitiesInput>
+  }
+
+  export type CreatureCreateWithoutChallenge_rating_metaInput = {
+    id?: string
+    name: string
+    creator_id?: string | null
+    description?: string | null
+    armor_class?: number | null
+    hit_points?: number | null
+    speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
+    stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
+    skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
+    senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
+    race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
+    type_relation?: TypeCreateNestedOneWithoutCreaturesInput
+    size_relation?: SizeCreateNestedOneWithoutCreatureInput
+    source_relation?: SourceCreateNestedOneWithoutCreaturesInput
+    resistances?: DamageTypeCreateNestedManyWithoutResistant_creatures_relationInput
+    immunities?: DamageTypeCreateNestedManyWithoutImmune_creatures_relationInput
+    vulnerabilities?: DamageTypeCreateNestedManyWithoutVulnerable_creatures_relationInput
+    languages_relation?: LanguageCreateNestedManyWithoutCreatures_relationInput
+    biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
+    actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
+    traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+  }
+
+  export type CreatureUncheckedCreateWithoutChallenge_rating_metaInput = {
+    id?: string
+    name: string
+    creator_id?: string | null
+    description?: string | null
+    size?: string | null
+    race_id?: number | null
+    type_id?: number | null
+    source_id?: number | null
+    alignment_id?: number | null
+    armor_class?: number | null
+    hit_points?: number | null
+    speed?: CreatureSpeedUncheckedCreateNestedOneWithoutCreature_relationInput
+    stats?: CreatureStatsUncheckedCreateNestedOneWithoutCreature_relationInput
+    skills?: CreatureSkillsUncheckedCreateNestedOneWithoutCreature_relationInput
+    senses?: CreatureSensesUncheckedCreateNestedOneWithoutCreature_relationInput
+    resistances?: DamageTypeUncheckedCreateNestedManyWithoutResistant_creatures_relationInput
+    immunities?: DamageTypeUncheckedCreateNestedManyWithoutImmune_creatures_relationInput
+    vulnerabilities?: DamageTypeUncheckedCreateNestedManyWithoutVulnerable_creatures_relationInput
+    languages_relation?: LanguageUncheckedCreateNestedManyWithoutCreatures_relationInput
+    biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
+    actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
+    traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+  }
+
+  export type CreatureCreateOrConnectWithoutChallenge_rating_metaInput = {
+    where: CreatureWhereUniqueInput
+    create: XOR<CreatureCreateWithoutChallenge_rating_metaInput, CreatureUncheckedCreateWithoutChallenge_rating_metaInput>
+  }
+
+  export type CreatureCreateManyChallenge_rating_metaInputEnvelope = {
+    data: CreatureCreateManyChallenge_rating_metaInput | CreatureCreateManyChallenge_rating_metaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CreatureUpsertWithWhereUniqueWithoutChallenge_rating_metaInput = {
+    where: CreatureWhereUniqueInput
+    update: XOR<CreatureUpdateWithoutChallenge_rating_metaInput, CreatureUncheckedUpdateWithoutChallenge_rating_metaInput>
+    create: XOR<CreatureCreateWithoutChallenge_rating_metaInput, CreatureUncheckedCreateWithoutChallenge_rating_metaInput>
+  }
+
+  export type CreatureUpdateWithWhereUniqueWithoutChallenge_rating_metaInput = {
+    where: CreatureWhereUniqueInput
+    data: XOR<CreatureUpdateWithoutChallenge_rating_metaInput, CreatureUncheckedUpdateWithoutChallenge_rating_metaInput>
+  }
+
+  export type CreatureUpdateManyWithWhereWithoutChallenge_rating_metaInput = {
+    where: CreatureScalarWhereInput
+    data: XOR<CreatureUpdateManyMutationInput, CreatureUncheckedUpdateManyWithoutChallenge_rating_metaInput>
   }
 
   export type GPTMessageCreateWithoutMessage_history_relationInput = {
@@ -47182,11 +47486,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -47269,11 +47573,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -47362,11 +47666,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -47427,11 +47731,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -47506,11 +47810,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     size_relation?: SizeUpdateOneWithoutCreatureNestedInput
@@ -47584,11 +47888,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
     size_relation?: SizeUpdateOneWithoutCreatureNestedInput
@@ -47842,11 +48146,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -47928,11 +48232,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -48078,11 +48382,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
     size_relation?: SizeUpdateOneWithoutCreatureNestedInput
@@ -48142,11 +48446,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -48207,11 +48511,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -48272,11 +48576,11 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-    challenge_rating?: StringFieldUpdateOperationsInput | string
     speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
     stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
     skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
     senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
     alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
     race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
     type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
@@ -48328,6 +48632,84 @@ export namespace Prisma {
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
     challenge_rating?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CreatureCreateManyChallenge_rating_metaInput = {
+    id?: string
+    name: string
+    creator_id?: string | null
+    description?: string | null
+    size?: string | null
+    race_id?: number | null
+    type_id?: number | null
+    source_id?: number | null
+    alignment_id?: number | null
+    armor_class?: number | null
+    hit_points?: number | null
+  }
+
+  export type CreatureUpdateWithoutChallenge_rating_metaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    armor_class?: NullableIntFieldUpdateOperationsInput | number | null
+    hit_points?: NullableIntFieldUpdateOperationsInput | number | null
+    speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
+    stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
+    skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
+    senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
+    race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
+    type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
+    size_relation?: SizeUpdateOneWithoutCreatureNestedInput
+    source_relation?: SourceUpdateOneWithoutCreaturesNestedInput
+    resistances?: DamageTypeUpdateManyWithoutResistant_creatures_relationNestedInput
+    immunities?: DamageTypeUpdateManyWithoutImmune_creatures_relationNestedInput
+    vulnerabilities?: DamageTypeUpdateManyWithoutVulnerable_creatures_relationNestedInput
+    languages_relation?: LanguageUpdateManyWithoutCreatures_relationNestedInput
+    biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
+    actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
+    traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+  }
+
+  export type CreatureUncheckedUpdateWithoutChallenge_rating_metaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableStringFieldUpdateOperationsInput | string | null
+    race_id?: NullableIntFieldUpdateOperationsInput | number | null
+    type_id?: NullableIntFieldUpdateOperationsInput | number | null
+    source_id?: NullableIntFieldUpdateOperationsInput | number | null
+    alignment_id?: NullableIntFieldUpdateOperationsInput | number | null
+    armor_class?: NullableIntFieldUpdateOperationsInput | number | null
+    hit_points?: NullableIntFieldUpdateOperationsInput | number | null
+    speed?: CreatureSpeedUncheckedUpdateOneWithoutCreature_relationNestedInput
+    stats?: CreatureStatsUncheckedUpdateOneWithoutCreature_relationNestedInput
+    skills?: CreatureSkillsUncheckedUpdateOneWithoutCreature_relationNestedInput
+    senses?: CreatureSensesUncheckedUpdateOneWithoutCreature_relationNestedInput
+    resistances?: DamageTypeUncheckedUpdateManyWithoutResistant_creatures_relationNestedInput
+    immunities?: DamageTypeUncheckedUpdateManyWithoutImmune_creatures_relationNestedInput
+    vulnerabilities?: DamageTypeUncheckedUpdateManyWithoutVulnerable_creatures_relationNestedInput
+    languages_relation?: LanguageUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+  }
+
+  export type CreatureUncheckedUpdateManyWithoutChallenge_rating_metaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableStringFieldUpdateOperationsInput | string | null
+    race_id?: NullableIntFieldUpdateOperationsInput | number | null
+    type_id?: NullableIntFieldUpdateOperationsInput | number | null
+    source_id?: NullableIntFieldUpdateOperationsInput | number | null
+    alignment_id?: NullableIntFieldUpdateOperationsInput | number | null
+    armor_class?: NullableIntFieldUpdateOperationsInput | number | null
+    hit_points?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type GPTMessageCreateManyMessage_history_relationInput = {

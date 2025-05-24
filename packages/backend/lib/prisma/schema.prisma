@@ -188,6 +188,7 @@ model Creature {
   senses          CreatureSenses?             @relation
 
   // Отношения к справочникам
+  challenge_rating_meta ChallengeRatingMetadata @relation(fields: [challenge_rating], references: [display])
   alignment_relation Alignment?      @relation(fields: [alignment_id], references: [id])
   race_relation      CreatureRace?   @relation(fields: [race_id], references: [id])
   type_relation      Type?           @relation(fields: [type_id], references: [id])
@@ -308,9 +309,11 @@ enum ChallengeRatingEnum {
 
 model ChallengeRatingMetadata {
   cr         ChallengeRatingEnum @id
-  display    String              
+  display    String     @unique         
   numeric    Float               
-  xp_reward  Int                
+  xp_reward  Int  
+
+  creatures Creature[]              
 
   @@map("challenge_rating_metadata")
 }

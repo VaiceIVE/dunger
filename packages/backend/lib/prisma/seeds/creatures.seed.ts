@@ -228,7 +228,11 @@ export async function SeedCreatures() {
       data: {
         name: creature_data.name,
         description: creature_data.fiction,
-        challenge_rating: creature_data.cr,
+        challenge_rating_meta: {
+          connect: {
+            display: creature_data.cr
+          }
+        },
         armor_class: +creature_data.ac.split(' ')[0],
         hit_points: +creature_data.hp.split(' ')[0],
         source_relation: { connect: { id: sources.find((s) => s.short_name === creature_data.source)!.id } },
