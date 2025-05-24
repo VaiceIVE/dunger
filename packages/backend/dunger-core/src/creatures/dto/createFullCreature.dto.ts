@@ -1,20 +1,20 @@
 import {
   Action,
-  Creature_stats,
-  SkillsList,
-  Speed_stat,
+  CreatureSkills,
+  CreatureSpeed,
+  CreatureStats,
   Trait,
 } from '@dunger/prisma';
 
 export class FullCreatureDTO {
   name: string;
   description: string;
-  speed: Omit<Speed_stat, 'id'>;
-  stats: Creature_stats;
+  speed: Omit<CreatureSpeed, 'id'>;
+  stats: CreatureStats;
   hit_points: number;
   armor_class: number;
   challenge_rating: string;
-  skills?: SkillsList;
+  skills?: CreatureSkills;
   passive_perception: number;
   alignment_name: string;
   size_key: SizeKey;

@@ -32,11 +32,14 @@ export class DirectoriesService {
   }
 
   async findCR() {
-    return await this.prisma.challengeRating.findMany();
-  }
+    const challengeRatingMetadata =
+      await this.prisma.challengeRatingMetadata.findMany();
+    const cr = challengeRatingMetadata.map((c) => ({
+      id: c.display,
+      name: c.display,
+    }));
 
-  async findSkills() {
-    return await this.prisma.skillsList.findMany();
+    return cr;
   }
 
   async findLanguages(query: PaginationQueryDto) {

@@ -1,6 +1,10 @@
 export const creatureInclude = {
   alignment_relation: true,
-  biome_relation: true,
+  biomes_relation: {
+    omit: {
+      short_name: true,
+    },
+  },
   race_relation: true,
   size_relation: true,
   type_relation: true,
@@ -10,69 +14,34 @@ export const creatureInclude = {
   speed: {
     omit: { id: true },
   },
-  skills: {
-    omit: { id: true },
-    include: {
-      charisma: {
-        include: {
-          deception: { omit: { id: true } },
-          intimidation: { omit: { id: true } },
-          performance: { omit: { id: true } },
-          persuasion: { omit: { id: true } },
-        },
-        omit: { id: true },
-      },
-      dexterity: {
-        include: {
-          acrobatics: { omit: { id: true } },
-          sleight_of_hand: { omit: { id: true } },
-          stealth: { omit: { id: true } },
-        },
-        omit: { id: true },
-      },
-      intelligence: {
-        include: {
-          arcana: { omit: { id: true } },
-          history: { omit: { id: true } },
-          investigation: { omit: { id: true } },
-          nature: { omit: { id: true } },
-          religion: { omit: { id: true } },
-        },
-        omit: { id: true },
-      },
-      strength: {
-        include: {
-          athletics: { omit: { id: true } },
-        },
-        omit: { id: true },
-      },
-      wisdom: {
-        include: {
-          animal_handling: { omit: { id: true } },
-          insight: { omit: { id: true } },
-          medicine: { omit: { id: true } },
-          perception: { omit: { id: true } },
-          survival: { omit: { id: true } },
-        },
-        omit: { id: true },
-      },
-    },
-  },
-  stats: {
-    omit: { id: true },
-    include: {
-      charisma: { omit: { statblock_id: true } },
-      constitution: { omit: { statblock_id: true } },
-      dexterity: { omit: { statblock_id: true } },
-      intelligence: { omit: { statblock_id: true } },
-      strength: { omit: { statblock_id: true } },
-      wisdom: { omit: { statblock_id: true } },
-    },
-  },
   senses: {
-    omit: { creature_id: true },
+    omit: { creature_id: true, id: true },
   },
-  actions: true,
-  traits: true,
-  languages: true,
+  actions_relation: {
+    omit: {
+      is_template: true,
+    },
+  },
+  traits_relation: {
+    omit: {
+      is_template: true,
+    },
+  },
+  languages_relation: true,
+  id: true,
+  name: true,
+  armor_class: true,
+  hit_points: true,
+  challenge_rating: true,
+  description: true,
+  stats: {
+    select: {
+      stats: true,
+    },
+  },
+  skills: {
+    select: {
+      skills: true,
+    },
+  },
 };

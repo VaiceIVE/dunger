@@ -1,9 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
-import { Prisma, PrismaClient } from '@dunger/prisma';
-import { nullSkillsObject } from './objects/nullSkills.object';
+import { Ability, Prisma, PrismaClient, Skill } from '@dunger/prisma';
 import { nullSpeedObject } from './objects/nullSpeed.object';
-import { nullStatObject } from './objects/nullStat.object';
 import { nullSensesObject } from './objects/nullSenses.object';
 import {
   ApiCreature,
@@ -16,6 +14,8 @@ import { ConfigService } from '@nestjs/config';
 import { creatureInclude } from './includes/creature.include';
 import { AppError } from 'src/common/errors';
 import { HttpStatus } from '@dunger/common-enums';
+import { mapAbilitiesToApiStats } from './utils/stats.mapper';
+import { mapAbilitiesToApiSkills } from './utils/skills.mapper';
 
 /**
  * Фильтры SQL запроса существ
@@ -113,33 +113,48 @@ export class CreaturesService {
     const excludeSourceId = dungerSource?.id;
 
     const where = {
-      ...(search ? { name: { contains: search } } : {}),
+      ...(search
+        ? { name: { contains: search, mode: 'insensitive' as const } }
+        : {}),
       ...(excludeSourceId ? { source_id: { not: excludeSourceId } } : {}),
     };
 
     const [creaturesRaw, totalCount] = await Promise.all([
-      this.prisma.$queryRaw<
-        Array<{
-          id: string;
-          name: string;
-          challenge_rating: string;
-          type_name: string;
-          alignment_name: string;
-        }>
-      >(
-        this.sql_queryCreatures({
-          limit,
-          offset,
-          searchName: search,
-          excludeSourceId,
-        }),
-      ),
+      this.prisma.creature.findMany({
+        select: {
+          id: true,
+          name: true,
+          challenge_rating: true,
+          type_relation: {
+            select: {
+              name: true,
+            },
+          },
+          alignment_relation: {
+            select: {
+              name: true,
+            },
+          },
+        },
+        orderBy: [{ challenge_rating_meta: { numeric: 'asc' } }, { id: 'asc' }],
+        where,
+        skip: offset,
+        take: limit,
+      }),
       this.prisma.creature.count({ where }),
     ]);
 
+    const creatures: ApiCreatureList = creaturesRaw.map(
+      ({ alignment_relation, type_relation, ...rest }) => ({
+        ...rest,
+        type_name: type_relation?.name,
+        alignment_name: alignment_relation?.name,
+      }),
+    );
+
     return {
       pagination: { limit, offset, totalCount },
-      creatures: creaturesRaw,
+      creatures,
     };
   }
 
@@ -157,33 +172,48 @@ export class CreaturesService {
     const { query: search, offset, limit } = query;
 
     const where = {
-      ...(search ? { name: { contains: search } } : {}),
+      ...(search
+        ? { name: { contains: search, mode: 'insensitive' as const } }
+        : {}),
       creator_id: userId,
     };
 
     const [creaturesRaw, totalCount] = await Promise.all([
-      this.prisma.$queryRaw<
-        Array<{
-          id: string;
-          name: string;
-          challenge_rating: string;
-          type_name: string;
-          alignment_name: string;
-        }>
-      >(
-        this.sql_queryCreatures({
-          limit,
-          offset,
-          searchName: search,
-          userId,
-        }),
-      ),
+      this.prisma.creature.findMany({
+        select: {
+          id: true,
+          name: true,
+          challenge_rating: true,
+          type_relation: {
+            select: {
+              name: true,
+            },
+          },
+          alignment_relation: {
+            select: {
+              name: true,
+            },
+          },
+        },
+        orderBy: [{ challenge_rating_meta: { numeric: 'asc' } }, { id: 'asc' }],
+        where,
+        skip: offset,
+        take: limit,
+      }),
       this.prisma.creature.count({ where }),
     ]);
 
+    const creatures: ApiCreatureList = creaturesRaw.map(
+      ({ alignment_relation, type_relation, ...rest }) => ({
+        ...rest,
+        type_name: type_relation?.name,
+        alignment_name: alignment_relation?.name,
+      }),
+    );
+
     return {
       pagination: { limit, offset, totalCount },
-      creatures: creaturesRaw,
+      creatures,
     };
   }
 
@@ -196,45 +226,14 @@ export class CreaturesService {
    */
   async countUserCreatures(userId: string, search?: string): Promise<number> {
     const where = {
-      ...(search ? { name: { contains: search } } : {}),
+      ...(search
+        ? { name: { contains: search, mode: 'insensitive' as const } }
+        : {}),
       creator_id: userId,
     };
 
     return this.prisma.creature.count({ where });
   }
-
-  private sql_queryCreatures = (args: CreaturesFilterArgs): Prisma.Sql => {
-    const likePattern = `%${args.searchName ?? ''}%`;
-    const offset = Number(args.offset ?? 0);
-    const limit = Number(args.limit ?? 20);
-
-    return Prisma.sql`
-      SELECT 
-        c.id, 
-        c.name, 
-        c.challenge_rating, 
-        t.name AS type_name, 
-        a.name AS alignment_name
-      FROM "Creature" c
-      LEFT JOIN "Type" t ON c.type_id = t.id
-      LEFT JOIN "Alignment" a ON c.alignment_id = a.id
-      WHERE True
-      ${args.userId ? Prisma.sql`AND c.creator_id = ${args.userId}` : Prisma.sql``}
-      ${args.excludeSourceId ? Prisma.sql`AND c.source_id != ${args.excludeSourceId}` : Prisma.sql``}
-      ${args.searchName ? Prisma.sql`AND c.name ILIKE ${likePattern}` : Prisma.sql``}
-      ORDER BY 
-        CASE c.challenge_rating
-          WHEN '0' THEN 0
-          WHEN '1/8' THEN 0.125
-          WHEN '1/4' THEN 0.25
-          WHEN '1/2' THEN 0.5
-          ELSE CAST(c.challenge_rating AS DOUBLE PRECISION)
-        END,
-        c.id
-      OFFSET ${offset}
-      LIMIT ${limit};
-    `;
-  };
 
   /**
    * Возвращает список шаблонов с пагинацией и фильтрацией по имени.
@@ -417,11 +416,12 @@ export class CreaturesService {
       'immunities',
       'vulnerabilities',
       'senses',
-      'languages',
+      'languages_relation',
       'alignment_relation',
       'type_relation',
       'size_relation',
-      'biome_relation',
+      'biomes_relation',
+      'biomes_ids',
       'race_relation',
     ];
     for (var propname in obj) {
@@ -460,6 +460,7 @@ export class CreaturesService {
         },
       });
     }
+
     if (updateCreatureDto.senses) {
       await this.prisma.creature.update({
         where: { id: id },
@@ -476,6 +477,7 @@ export class CreaturesService {
         },
       });
     }
+
     if (updateCreatureDto.alignment_relation) {
       await this.prisma.creature.update({
         where: { id: id },
@@ -517,7 +519,7 @@ export class CreaturesService {
         await this.prisma.creature.update({
           where: { id: id },
           data: {
-            biome_relation: {
+            biomes_relation: {
               connect: {
                 name: biome.title,
               },
@@ -526,12 +528,13 @@ export class CreaturesService {
         });
       }
     }
+
     if (updateCreatureDto.biomes_ids) {
       for (const biome_id of updateCreatureDto.biomes_ids) {
         await this.prisma.creature.update({
           where: { id: id },
           data: {
-            biome_relation: {
+            biomes_relation: {
               connect: {
                 id: biome_id,
               },
@@ -545,7 +548,7 @@ export class CreaturesService {
         await this.prisma.creature.update({
           where: { id: id },
           data: {
-            languages: {
+            languages_relation: {
               set: [],
               connectOrCreate: {
                 create: {
@@ -567,7 +570,7 @@ export class CreaturesService {
           speed: {
             upsert: {
               where: {
-                id_relation: {
+                creature_relation: {
                   id: id,
                 },
               },
@@ -578,7 +581,53 @@ export class CreaturesService {
         },
       });
     }
+
     if (updateCreatureDto.stats) {
+      const statsData = [
+        {
+          where: { ability: Ability.STRENGTH },
+          data: {
+            value: +updateCreatureDto.stats.strength.value,
+            mastery: updateCreatureDto.stats.strength.mastery,
+          },
+        },
+        {
+          where: { ability: Ability.DEXTERITY },
+          data: {
+            value: +updateCreatureDto.stats.dexterity.value,
+            mastery: updateCreatureDto.stats.dexterity.mastery,
+          },
+        },
+        {
+          where: { ability: Ability.CONSTITUTION },
+          data: {
+            value: +updateCreatureDto.stats.constitution.value,
+            mastery: updateCreatureDto.stats.constitution.mastery,
+          },
+        },
+        {
+          where: { ability: Ability.INTELLIGENCE },
+          data: {
+            value: +updateCreatureDto.stats.intelligence.value,
+            mastery: updateCreatureDto.stats.intelligence.mastery,
+          },
+        },
+        {
+          where: { ability: Ability.WISDOM },
+          data: {
+            value: +updateCreatureDto.stats.wisdom.value,
+            mastery: updateCreatureDto.stats.wisdom.mastery,
+          },
+        },
+        {
+          where: { ability: Ability.CHARISMA },
+          data: {
+            value: +updateCreatureDto.stats.charisma.value,
+            mastery: updateCreatureDto.stats.charisma.mastery,
+          },
+        },
+      ];
+
       await this.prisma.creature.update({
         where: { id: id },
         data: {
@@ -586,79 +635,15 @@ export class CreaturesService {
             upsert: {
               where: { id: id },
               create: {
-                strength: {
-                  create: {
-                    mastery: updateCreatureDto.stats.strength.mastery,
-                    value: updateCreatureDto.stats.strength.value,
-                  },
-                },
-                dexterity: {
-                  create: {
-                    mastery: updateCreatureDto.stats.dexterity.mastery,
-                    value: updateCreatureDto.stats.dexterity.value,
-                  },
-                },
-                constitution: {
-                  create: {
-                    mastery: updateCreatureDto.stats.constitution.mastery,
-                    value: updateCreatureDto.stats.constitution.value,
-                  },
-                },
-                intelligence: {
-                  create: {
-                    mastery: updateCreatureDto.stats.intelligence.mastery,
-                    value: updateCreatureDto.stats.intelligence.value,
-                  },
-                },
-                wisdom: {
-                  create: {
-                    mastery: updateCreatureDto.stats.wisdom.mastery,
-                    value: updateCreatureDto.stats.wisdom.value,
-                  },
-                },
-                charisma: {
-                  create: {
-                    mastery: updateCreatureDto.stats.charisma.mastery,
-                    value: updateCreatureDto.stats.charisma.value,
+                stats: {
+                  createMany: {
+                    data: statsData.map((s) => ({ ...s.where, ...s.data })),
                   },
                 },
               },
               update: {
-                strength: {
-                  update: {
-                    mastery: updateCreatureDto.stats.strength.mastery,
-                    value: updateCreatureDto.stats.strength.value,
-                  },
-                },
-                dexterity: {
-                  update: {
-                    mastery: updateCreatureDto.stats.dexterity.mastery,
-                    value: updateCreatureDto.stats.dexterity.value,
-                  },
-                },
-                constitution: {
-                  update: {
-                    mastery: updateCreatureDto.stats.constitution.mastery,
-                    value: updateCreatureDto.stats.constitution.value,
-                  },
-                },
-                intelligence: {
-                  update: {
-                    mastery: updateCreatureDto.stats.intelligence.mastery,
-                    value: updateCreatureDto.stats.intelligence.value,
-                  },
-                },
-                wisdom: {
-                  update: {
-                    mastery: updateCreatureDto.stats.wisdom.mastery,
-                    value: updateCreatureDto.stats.wisdom.value,
-                  },
-                },
-                charisma: {
-                  update: {
-                    mastery: updateCreatureDto.stats.charisma.mastery,
-                    value: updateCreatureDto.stats.charisma.value,
-                  },
+                stats: {
+                  updateMany: statsData,
                 },
               },
             },
@@ -666,241 +651,155 @@ export class CreaturesService {
         },
       });
     }
+
     if (updateCreatureDto.skills) {
+      const skillsData = [
+        {
+          where: { skill: Skill.ATHLETICS },
+          data: {
+            value: +updateCreatureDto.skills.strength.athletics.value,
+            mastery: updateCreatureDto.skills.strength.athletics.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.ACROBATICS },
+          data: {
+            value: +updateCreatureDto.skills.dexterity.acrobatics.value,
+            mastery: updateCreatureDto.skills.dexterity.acrobatics.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.SLEIGHT_OF_HAND },
+          data: {
+            value: +updateCreatureDto.skills.dexterity.sleight_of_hand.value,
+            mastery: updateCreatureDto.skills.dexterity.sleight_of_hand.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.STEALTH },
+          data: {
+            value: +updateCreatureDto.skills.dexterity.stealth.value,
+            mastery: updateCreatureDto.skills.dexterity.stealth.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.ARCANA },
+          data: {
+            value: +updateCreatureDto.skills.intelligence.arcana.value,
+            mastery: updateCreatureDto.skills.intelligence.arcana.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.HISTORY },
+          data: {
+            value: +updateCreatureDto.skills.intelligence.history.value,
+            mastery: updateCreatureDto.skills.intelligence.history.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.INVESTIGATION },
+          data: {
+            value: +updateCreatureDto.skills.intelligence.investigation.value,
+            mastery:
+              updateCreatureDto.skills.intelligence.investigation.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.NATURE },
+          data: {
+            value: +updateCreatureDto.skills.intelligence.nature.value,
+            mastery: updateCreatureDto.skills.intelligence.nature.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.RELIGION },
+          data: {
+            value: +updateCreatureDto.skills.intelligence.religion.value,
+            mastery: updateCreatureDto.skills.intelligence.religion.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.ANIMAL_HANDLING },
+          data: {
+            value: +updateCreatureDto.skills.wisdom.animal_handling.value,
+            mastery: updateCreatureDto.skills.wisdom.animal_handling.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.INSIGHT },
+          data: {
+            value: +updateCreatureDto.skills.wisdom.insight.value,
+            mastery: updateCreatureDto.skills.wisdom.insight.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.MEDICINE },
+          data: {
+            value: +updateCreatureDto.skills.wisdom.medicine.value,
+            mastery: updateCreatureDto.skills.wisdom.medicine.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.PERCEPTION },
+          data: {
+            value: +updateCreatureDto.skills.wisdom.perception.value,
+            mastery: updateCreatureDto.skills.wisdom.perception.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.SURVIVAL },
+          data: {
+            value: +updateCreatureDto.skills.wisdom.survival.value,
+            mastery: updateCreatureDto.skills.wisdom.survival.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.DECEPTION },
+          data: {
+            value: +updateCreatureDto.skills.charisma.deception.value,
+            mastery: updateCreatureDto.skills.charisma.deception.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.INTIMIDATION },
+          data: {
+            value: +updateCreatureDto.skills.charisma.intimidation.value,
+            mastery: updateCreatureDto.skills.charisma.intimidation.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.PERFORMANCE },
+          data: {
+            value: +updateCreatureDto.skills.charisma.performance.value,
+            mastery: updateCreatureDto.skills.charisma.performance.mastery,
+          },
+        },
+        {
+          where: { skill: Skill.PERSUASION },
+          data: {
+            value: +updateCreatureDto.skills.charisma.persuasion.value,
+            mastery: updateCreatureDto.skills.charisma.persuasion.mastery,
+          },
+        },
+      ];
+
       await this.prisma.creature.update({
         where: { id: id },
         data: {
           skills: {
             upsert: {
               where: { id: id },
+
               create: {
-                charisma: {
-                  create: {
-                    deception: {
-                      create: updateCreatureDto.skills.charisma.deception,
-                    },
-                    intimidation: {
-                      create: updateCreatureDto.skills.charisma.intimidation,
-                    },
-                    performance: {
-                      create: updateCreatureDto.skills.charisma.performance,
-                    },
-                    persuasion: {
-                      create: updateCreatureDto.skills.charisma.persuasion,
-                    },
-                  },
-                },
-                dexterity: {
-                  create: {
-                    acrobatics: {
-                      create: updateCreatureDto.skills.dexterity.acrobatics,
-                    },
-                    sleight_of_hand: {
-                      create:
-                        updateCreatureDto.skills.dexterity.sleight_of_hand,
-                    },
-                    stealth: {
-                      create: updateCreatureDto.skills.dexterity.stealth,
-                    },
-                  },
-                },
-                intelligence: {
-                  create: {
-                    arcana: {
-                      create: updateCreatureDto.skills.intelligence.arcana,
-                    },
-                    history: {
-                      create: updateCreatureDto.skills.intelligence.history,
-                    },
-                    investigation: {
-                      create:
-                        updateCreatureDto.skills.intelligence.investigation,
-                    },
-                    nature: {
-                      create: updateCreatureDto.skills.intelligence.nature,
-                    },
-                    religion: {
-                      create: updateCreatureDto.skills.intelligence.religion,
-                    },
-                  },
-                },
-                strength: {
-                  create: {
-                    athletics: {
-                      create: updateCreatureDto.skills.strength.athletics,
-                    },
-                  },
-                },
-                wisdom: {
-                  create: {
-                    animal_handling: {
-                      create: updateCreatureDto.skills.wisdom.animal_handling,
-                    },
-                    insight: {
-                      create: updateCreatureDto.skills.wisdom.insight,
-                    },
-                    medicine: {
-                      create: updateCreatureDto.skills.wisdom.medicine,
-                    },
-                    perception: {
-                      create: updateCreatureDto.skills.wisdom.perception,
-                    },
-                    survival: {
-                      create: updateCreatureDto.skills.wisdom.survival,
-                    },
+                skills: {
+                  createMany: {
+                    data: skillsData.map((s) => ({ ...s.data, ...s.where })),
                   },
                 },
               },
               update: {
-                charisma: {
-                  update: {
-                    deception: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.charisma.deception,
-                        update: updateCreatureDto.skills.charisma.deception,
-                      },
-                    },
-                    intimidation: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.charisma.intimidation,
-                        update: updateCreatureDto.skills.charisma.intimidation,
-                      },
-                    },
-                    performance: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.charisma.performance,
-                        update: updateCreatureDto.skills.charisma.performance,
-                      },
-                    },
-                    persuasion: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.charisma.persuasion,
-                        update: updateCreatureDto.skills.charisma.persuasion,
-                      },
-                    },
-                  },
-                },
-                dexterity: {
-                  update: {
-                    acrobatics: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.dexterity.acrobatics,
-                        update: updateCreatureDto.skills.dexterity.acrobatics,
-                      },
-                    },
-                    sleight_of_hand: {
-                      upsert: {
-                        where: { id: id },
-                        create:
-                          updateCreatureDto.skills.dexterity.sleight_of_hand,
-                        update:
-                          updateCreatureDto.skills.dexterity.sleight_of_hand,
-                      },
-                    },
-                    stealth: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.dexterity.stealth,
-                        update: updateCreatureDto.skills.dexterity.stealth,
-                      },
-                    },
-                  },
-                },
-                intelligence: {
-                  update: {
-                    arcana: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.intelligence.arcana,
-                        update: updateCreatureDto.skills.intelligence.arcana,
-                      },
-                    },
-                    history: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.intelligence.history,
-                        update: updateCreatureDto.skills.intelligence.history,
-                      },
-                    },
-                    investigation: {
-                      upsert: {
-                        where: { id: id },
-                        create:
-                          updateCreatureDto.skills.intelligence.investigation,
-                        update:
-                          updateCreatureDto.skills.intelligence.investigation,
-                      },
-                    },
-                    nature: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.intelligence.nature,
-                        update: updateCreatureDto.skills.intelligence.nature,
-                      },
-                    },
-                    religion: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.intelligence.religion,
-                        update: updateCreatureDto.skills.intelligence.religion,
-                      },
-                    },
-                  },
-                },
-                strength: {
-                  update: {
-                    athletics: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.strength.athletics,
-                        update: updateCreatureDto.skills.strength.athletics,
-                      },
-                    },
-                  },
-                },
-                wisdom: {
-                  update: {
-                    animal_handling: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.wisdom.animal_handling,
-                        update: updateCreatureDto.skills.wisdom.animal_handling,
-                      },
-                    },
-                    insight: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.wisdom.insight,
-                        update: updateCreatureDto.skills.wisdom.insight,
-                      },
-                    },
-                    medicine: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.wisdom.medicine,
-                        update: updateCreatureDto.skills.wisdom.medicine,
-                      },
-                    },
-                    perception: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.wisdom.perception,
-                        update: updateCreatureDto.skills.wisdom.perception,
-                      },
-                    },
-                    survival: {
-                      upsert: {
-                        where: { id: id },
-                        create: updateCreatureDto.skills.wisdom.survival,
-                        update: updateCreatureDto.skills.wisdom.survival,
-                      },
-                    },
-                  },
+                skills: {
+                  updateMany: skillsData,
                 },
               },
             },
@@ -908,13 +807,14 @@ export class CreaturesService {
         },
       });
     }
+
     if (updateCreatureDto.languages_ids) {
       await this.prisma.creature.update({
         where: {
           id: id,
         },
         data: {
-          languages: {
+          languages_relation: {
             set: [],
           },
         },
@@ -923,7 +823,7 @@ export class CreaturesService {
         await this.prisma.creature.update({
           where: { id: id },
           data: {
-            languages: {
+            languages_relation: {
               connect: {
                 id: language_id,
               },
@@ -1010,7 +910,7 @@ export class CreaturesService {
       await this.prisma.creature.update({
         where: { id: id },
         data: {
-          actions: {
+          actions_relation: {
             set: [],
           },
         },
@@ -1019,7 +919,7 @@ export class CreaturesService {
         await this.prisma.creature.update({
           where: { id: id },
           data: {
-            actions: {
+            actions_relation: {
               connect: {
                 id: action_id,
               },
@@ -1032,7 +932,7 @@ export class CreaturesService {
       await this.prisma.creature.update({
         where: { id: id },
         data: {
-          traits: {
+          traits_relation: {
             set: [],
           },
         },
@@ -1041,7 +941,7 @@ export class CreaturesService {
         await this.prisma.creature.update({
           where: { id: id },
           data: {
-            traits: {
+            traits_relation: {
               connect: {
                 id: trait_id,
               },
@@ -1054,9 +954,7 @@ export class CreaturesService {
   }
 
   private async mapCreatureToApiCreature(creature): Promise<ApiCreature> {
-    const creature_biomes = await this.prisma.biome.findMany({
-      where: { id: { in: creature.biomes_ids } },
-    });
+    const metadata = await this.prisma.skillMetadata.findMany();
 
     return {
       id: creature.id,
@@ -1071,13 +969,13 @@ export class CreaturesService {
       armor_class: creature.armor_class,
       armor_type_id: null, // TODO
       armor_type_name: null, // TODO
-      biomes_ids: creature.biomes_ids,
-      biomes: creature_biomes,
+      biomes_ids: creature.biomes_relation.map((b) => b.id),
+      biomes: creature.biomes_relation,
       challenge_rating: creature.challenge_rating,
       hit_points: creature.hit_points,
       generation_info: null,
-      languages: creature.languages ?? [],
-      languages_ids: creature.languages?.map((l) => l.id) ?? [],
+      languages: creature.languages_relation ?? [],
+      languages_ids: creature.languages_relation?.map((l) => l.id) ?? [],
       immunities: creature.immunities ?? [],
       immunities_ids: creature.immunities?.map((i) => i.id) ?? [],
       resistances: creature.resistances ?? [],
@@ -1085,11 +983,11 @@ export class CreaturesService {
       vulnerabilities: creature.vulnerabilities ?? [],
       vulnerabilities_ids: creature.vulnerabilities?.map((v) => v.id) ?? [],
       senses: creature.senses ?? nullSensesObject,
-      skills: creature.skills ?? nullSkillsObject,
-      stats: creature.stats ?? nullStatObject,
+      skills: mapAbilitiesToApiSkills(metadata, creature.skills?.skills),
+      stats: mapAbilitiesToApiStats(creature.stats?.stats),
       speed: creature.speed ?? nullSpeedObject,
-      traits: creature.traits ?? [],
-      actions: creature.actions ?? [],
+      traits: creature.traits_relation ?? [],
+      actions: creature.actions_relation ?? [],
     };
   }
 
@@ -1098,7 +996,7 @@ export class CreaturesService {
   ): Promise<ApiCreature> {
     const creature = await this.prisma.creature.findUnique({
       where: { id: creatureId },
-      include: creatureInclude,
+      select: creatureInclude,
     });
 
     if (!creature)
