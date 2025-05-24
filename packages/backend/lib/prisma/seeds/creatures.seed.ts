@@ -32,7 +32,7 @@ export async function SeedCreatures() {
   const defaultValuesFile = await readFile(filePath, { encoding: 'utf-8' });
   const creatures_data: Creature[] = JSON.parse(defaultValuesFile);
 
-  const sources: { id: number; name: string; shortName: string }[] = await prisma.source.findMany();
+  const sources: { id: number; name: string; short_name: string }[] = await prisma.source.findMany();
 
   for (const creature_data of creatures_data) {
     const creature_actions = [];
@@ -231,7 +231,7 @@ export async function SeedCreatures() {
         challenge_rating: creature_data.cr,
         armor_class: +creature_data.ac.split(' ')[0],
         hit_points: +creature_data.hp.split(' ')[0],
-        source_relation: { connect: { id: sources.find((s) => s.shortName === creature_data.source)!.id } },
+        source_relation: { connect: { id: sources.find((s) => s.short_name === creature_data.source)!.id } },
         size_relation: {
           connect: {
             id: creature_data.size

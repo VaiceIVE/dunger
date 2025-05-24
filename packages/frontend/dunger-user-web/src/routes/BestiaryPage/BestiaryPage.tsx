@@ -7,6 +7,7 @@ import {
   Button,
   ButtonVariant,
   Container,
+  Flex,
   Grid,
   headers,
   IconButton,
@@ -15,9 +16,11 @@ import {
   PencilIcon,
   SearchIcon,
   Stack,
+  text,
   TextInput,
   XIcon
 } from '@dunger/ui';
+import { Directory, DirectoryItem } from 'components/Directory';
 import { BeastCard } from 'features/BeastCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
 import { ApiPaginatedResult } from 'store/_types/_common';
@@ -25,7 +28,6 @@ import { ApiCreature } from 'store/_types/ApiCreature';
 import { ApiCreatureList } from 'store/_types/ApiCreatureList';
 import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
 import { AddToCampaign } from './_components/AddToCampaign';
-import { BestiaryList } from './_components/BestiaryList';
 
 export const BestiaryPage = () => {
   const { id } = useParams();
@@ -96,7 +98,25 @@ export const BestiaryPage = () => {
                 </Grid>
 
                 <InfiniteScroll hasMore={hasMoreCreatures} next={fetchMoreCreatures}>
-                  <BestiaryList creatureId={id} creatures={creatures} isActiveCreature={isActiveCreature} />
+                  <Directory>
+                    {creatures.map((c) => (
+                      <DirectoryItem
+                        active={c.id === id}
+                        fullWidth={isActiveCreature}
+                        key={c.id}
+                        to={`/bestiary/${c.id}`}>
+                        <DirectoryItem.Title>{c.name}</DirectoryItem.Title>
+                        <DirectoryItem.Content>
+                          <Flex gap={5}>
+                            <div {...stylex.props(text.defaultSemibold)}>{c.challenge_rating},</div>
+                            <div {...stylex.props(text.defaultMedium)}>
+                              {c.type_name ?? 'тип не выбран'}, {c.alignment_name ?? 'мировозрение не выбрано'}
+                            </div>
+                          </Flex>
+                        </DirectoryItem.Content>
+                      </DirectoryItem>
+                    ))}
+                  </Directory>
                 </InfiniteScroll>
               </Stack>
             </Stack>

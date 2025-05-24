@@ -32,7 +32,7 @@ export const AdventuresListPage = () => {
   const authFetch = useAuthFetch();
 
   const { data, isLoading } = useInfiniteQuery({
-    queryKey: ['adventure', { query: debouncedQuery }],
+    queryKey: ['adventures', { query: debouncedQuery }],
     queryFn: async ({ pageParam = 0 }) => {
       const params = new URLSearchParams({ offset: pageParam.toString() });
 
@@ -40,7 +40,7 @@ export const AdventuresListPage = () => {
         params.set('query', debouncedQuery);
       }
 
-      return authFetch<ApiAdventureListResult>(`/adventure?${params.toString()}`);
+      return authFetch<ApiAdventureListResult>(`/adventures?${params.toString()}`);
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {

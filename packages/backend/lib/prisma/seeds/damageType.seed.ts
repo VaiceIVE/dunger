@@ -51,7 +51,7 @@ export async function SeedDamageType() {
     }
   }
 
-  Promise.all(promises).then(() => {
-    return 1;
+  Promise.all(promises).finally(async () => {
+    await prisma.$disconnect();
   });
 }

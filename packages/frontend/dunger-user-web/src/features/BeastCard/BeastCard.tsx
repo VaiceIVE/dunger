@@ -183,7 +183,7 @@ export const BeastCard = ({ beast, controls, style }: BeastCardProps) => {
                 <Fragment>
                   Описание
                   {open ? (
-                    <ChevronUpIcon {...stylex.props(styles.chevron)} />
+                    <ChevronUpIcon aria-selected={true} {...stylex.props(styles.chevron)} />
                   ) : (
                     <ChevronDownIcon {...stylex.props(styles.chevron)} />
                   )}
@@ -257,7 +257,8 @@ const styles = stylex.create({
     padding: 16
   },
   chevron: {
-    color: colors.brand90
+    backgroundColor: { default: 'transparent', ':is([aria-selected=true])': 'transparent' },
+    color: { default: colors.textTertiaryDefault, ':is([aria-selected=true])': colors.brand90 }
   },
   panel: {
     paddingBottom: 16,

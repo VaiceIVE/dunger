@@ -6,7 +6,8 @@ import { PrismaClient } from '@dunger/prisma';
 import { AuthModule } from 'src/auth/auth.module';
 import { UserModule } from 'src/user/user.module';
 import { DirectoriesModule } from 'src/directories/directories.module';
-import { AdventureModule } from 'src/adventure/adventure.module';
+import { AdventuresModule } from 'src/adventures/adventures.module';
+import { MagicItemsModule } from 'src/magic-items/magic-items.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { AdventureModule } from 'src/adventure/adventure.module';
     AuthModule,
     UserModule,
     DirectoriesModule,
-    AdventureModule,
+    AdventuresModule,
+    MagicItemsModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaClient],

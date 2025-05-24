@@ -29,8 +29,8 @@ export const AdventurePage = () => {
 
   const authFetch = useAuthFetch();
   const { data: adventure } = useSuspenseQuery({
-    queryKey: ['creatures', { id }],
-    queryFn: () => authFetch<ApiAdventure>(`/adventure/${id}`)
+    queryKey: ['adventures', { id }],
+    queryFn: () => authFetch<ApiAdventure>(`/adventures/${id}`)
   });
 
   return (

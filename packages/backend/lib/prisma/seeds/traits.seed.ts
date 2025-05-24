@@ -27,7 +27,7 @@ export async function SeedTraits() {
     );
   }
 
-  Promise.all(promises).then(() => {
-    return 1;
+  Promise.all(promises).finally(async () => {
+    await prisma.$disconnect();
   });
 }

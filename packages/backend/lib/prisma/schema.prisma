@@ -22,10 +22,11 @@ model Size {
 
 model Source {
   id Int @default(autoincrement()) @id()
-  shortName String @unique
+  short_name String @unique
   name String 
 
   creatures Creature[]
+  magicItems  MagicItem[]
 }
 
 model Language {
@@ -450,34 +451,104 @@ enum Stat {
 }
 
 model Adventure {
-  id              String     @id @default(uuid())
-  name           String
-  genre_id        String
-  creator_id      String
+  id                  String     @id @default(uuid())
+  name                String
+  genre_id            String
+  creator_id          String
 
-  genre           Genre      @relation(fields: [genre_id], references: [id])
-  keywords        Keyword[]  @relation("AdventureKeywords")
+  genre_relation      Genre      @relation(fields: [genre_id], references: [id])
+  keywords_relation   Keyword[]  @relation("AdventureKeywords")
 
-  created_at      DateTime   @default(now())
-  updated_at      DateTime   @updatedAt
+  created_at          DateTime   @default(now())
+  updated_at          DateTime   @updatedAt
+
+  @@map("adventures")
 }
 
 model Keyword {
-  id         String       @id @default(uuid())
-  name       String
+  id                  String       @id @default(uuid())
+  name                String
+  genre_id            String
 
-  genre_id String
-  genre    Genre    @relation(fields: [genre_id], references: [id])
+  genre_relation      Genre        @relation(fields: [genre_id], references: [id])
+  adventures_relation Adventure[]  @relation("AdventureKeywords")
 
-  adventures Adventure[]  @relation("AdventureKeywords")
+  @@map("keywords")
 }
 
 model Genre {
-  id       String    @id @default(uuid())
-  name     String
-  keywords Keyword[]
-  adventures Adventure[]
+  id                  String       @id @default(uuid())
+  name                String
+
+  keywords_relation   Keyword[]
+  adventures_relation Adventure[]
+
+  @@map("genres")
 }
 
 
+enum Gender {
+  HE
+  SHE
+  IT
+}
 
+model MagicItem {
+  id                      String                  @id @default(uuid())
+  name                    String
+  description             String
+  type_id                 String
+  rarity_id               String
+  source_id               Int
+  requires_attunement     Boolean                 @default(false)
+
+  type_relation           MagicItemType           @relation(fields: [type_id], references: [id])
+  rarity_relation         MagicItemRarity         @relation(fields: [rarity_id], references: [id])
+  source_relation         Source                  @relation(fields: [source_id], references: [id])
+  attunements_relation    MagicItemAttunement[]   @relation("MagicItemToAttunement")
+
+  @@map("magic_items")
+}
+
+model MagicItemRarity {
+  id        String  @id
+  cost      String
+  name      String
+  name_he   String
+  name_she  String
+  name_it   String
+  order     Int
+
+  magicItems  MagicItem[]
+
+  @@map("magic_item_rarities")
+}
+
+model MagicItemType {
+  id      String  @id
+  name    String
+  gender  Gender
+
+  magicItems  MagicItem[]
+
+  @@map("magic_item_types")
+}
+
+model AttunementCondition {
+  id         String                @id @default(uuid()) @map("id")
+  name       String                @unique @map("name")
+  magicItems MagicItemAttunement[] @relation("AttunementToMagicItem")
+
+  @@map("attunement_conditions")
+}
+
+model MagicItemAttunement {
+  magicItemId   String
+  attunementId  String
+
+  magicItem     MagicItem           @relation("MagicItemToAttunement", fields: [magicItemId], references: [id])
+  attunement    AttunementCondition @relation("AttunementToMagicItem", fields: [attunementId], references: [id])
+
+  @@id([magicItemId, attunementId])
+  @@map("magic_item_attunements")
+}

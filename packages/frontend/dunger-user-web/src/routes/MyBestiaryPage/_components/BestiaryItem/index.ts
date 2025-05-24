@@ -1,1 +1,0 @@
-export { BestiaryItem } from './BestiaryItem';
