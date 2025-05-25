@@ -11,7 +11,7 @@ function getStatMastery(statName: string, stats: string | undefined): boolean {
   if (!stats) return false;
   // Маппинг на русском и английском для статов
   const statMap: { [key: string]: string[] } = {
-    charisma: ['Хар', 'Char'],
+    charisma: ['Хар', 'Char', 'Cha'],
     constitution: ['Тел', 'Con'],
     dexterity: ['Лов', 'Dex'],
     intelligence: ['Инт', 'Int'],
