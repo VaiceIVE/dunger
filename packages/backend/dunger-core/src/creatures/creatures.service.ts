@@ -56,34 +56,34 @@ export class CreaturesService {
     const { template_id, name, challenge_rating } = createCreatureDto;
 
     // Получаем id кастомного источника (например, "DUNGER")
-    const customSourceId = (
-      await this.prisma.source.findUnique({
-        where: { short_name: this.customContentSource },
-        select: { id: true },
-      })
-    )?.id;
+    // const customSourceId = (
+    //   await this.prisma.source.findUnique({
+    //     where: { short_name: this.customContentSource },
+    //     select: { id: true },
+    //   })
+    // )?.id;
 
     const creatureData = {
       name,
       challenge_rating,
-      source_id: customSourceId,
-      creator_id: userId,
+      // source_id: customSourceId,
+      // creator_id: userId,
     };
 
     // Если указан шаблон — копируем все поля, кроме id, и переопределяем имя/CR/source
-    if (template_id) {
-      const template = await this.prisma.creature.findUnique({
-        where: { id: template_id },
-      });
+    // if (template_id) {
+    //   const template = await this.prisma.creature.findUnique({
+    //     where: { id: template_id },
+    //   });
 
-      if (template) {
-        const { id: _, ...templateData } = template;
-        return this.prisma.creature.create({
-          data: { ...templateData, ...creatureData },
-          select: { id: true },
-        });
-      }
-    }
+    //   if (template) {
+    //     const { id: _, ...templateData } = template;
+    //     return this.prisma.creature.create({
+    //       data: { ...templateData, ...creatureData },
+    //       select: { id: true },
+    //     });
+    //   }
+    // }
 
     // Если шаблона нет — создаём существо с переданными полями
     return this.prisma.creature.create({
@@ -519,7 +519,7 @@ export class CreaturesService {
           data: {
             biome_relation: {
               connect: {
-                name: biome.name,
+                name: biome.title,
               },
             },
           },

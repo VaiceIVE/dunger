@@ -4,12 +4,12 @@ services:
     ports: 
       - 3000:3000
     volumes:
-      - ./shared/prisma:/nest-app/prisma
-      - ./dunger-core:/nest-app/
-    working_dir: /nest-app/
-    entrypoint: bash -c "yarn install && npx prisma generate && npx prisma migrate deploy && npx ts-node --transpile-only ./prisma/seeds/seed-all.ts &&  npm run b:start"
+      - ../../:/monorepo/
+    working_dir: /monorepo/
+    entrypoint: bash -c "yarn prisma:gen && yarn prisma:migrate && yarn c:start"
     networks:
       - dunger_backend_net
+    env_file: ./dunger-core/.env
     depends_on:
       keycloak:
           condition: service_healthy
@@ -50,7 +50,7 @@ services:
       - ./shared/prisma:/nest-app/prisma
       - ./dunger-gpt:/nest-app/
     working_dir: /nest-app/
-    entrypoint: bash -c "yarn install && npx prisma generate && npm run g:start"
+    entrypoint: bash -c "npm run g:start"
     networks:
       - dunger_backend_net
 

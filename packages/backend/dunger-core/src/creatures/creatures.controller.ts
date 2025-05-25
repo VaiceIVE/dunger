@@ -39,15 +39,16 @@ export class CreaturesController {
     return this.creaturesService.initCreature(createCreatureDto, user.id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post('/generate')
   async generateCreature(
-    @Body() createCreatureDto: CreateCreatureManualDto,
-    @CurrentUser() user,
+    @Body() createCreatureDto: CreateCreatureManualDto
+    // @CurrentUser() user,
   ) {
     const creatureId = await this.creaturesService.initCreature(
       createCreatureDto,
-      user.id,
+      "asd"
+      // user.id,
     );
 
     const aiCretureData = (
@@ -66,15 +67,16 @@ export class CreaturesController {
     return aiCretureData;
   }
 
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post('/generate/debug')
   async generateCreatureDebug(
-    @Body() createCreatureDto: CreateCreatureManualDto,
-    @CurrentUser() user,
+    @Body() createCreatureDto: CreateCreatureManualDto
+    // @CurrentUser() user,
   ) {
     const creatureId = await this.creaturesService.initCreature(
       createCreatureDto,
-      user.id,
+      "asd"
+      // user.id,
     );
 
     const aiCretureData = (
