@@ -420,7 +420,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/monorepo/packages/backend/lib/prisma/generated/client",
+      "value": "/Users/romai/Documents/projects/dunger/packages/backend/lib/prisma/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -429,12 +429,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "darwin-arm64",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/monorepo/packages/backend/lib/prisma/schema.prisma",
+    "sourceFilePath": "/Users/romai/Documents/projects/dunger/packages/backend/lib/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -448,7 +448,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
