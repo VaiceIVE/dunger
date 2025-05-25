@@ -1,0 +1,322 @@
+{
+  "info": {
+    "_postman_id": "5b768336-4047-49db-81a6-c32b9bf27fe8",
+    "name": "core",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "37045373"
+  },
+  "item": [
+    {
+      "name": "S3",
+      "item": [
+        {
+          "name": "GET Presigned url",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{core_url}}/s3/presignedUrl?object_key=20250404_88aa8a7fd89e41ba9ebe10c34c0eda60.pdf",
+              "host": ["{{core_url}}"],
+              "path": ["s3", "presignedUrl"],
+              "query": [
+                {
+                  "key": "object_key",
+                  "value": "20250404_88aa8a7fd89e41ba9ebe10c34c0eda60.pdf"
+                },
+                {
+                  "key": "auto_download_attachment",
+                  "value": "true",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT Presigned url",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"fileName\": \"dunger_logo.png\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{core_url}}/s3/presignedUrl",
+              "host": ["{{core_url}}"],
+              "path": ["s3", "presignedUrl"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT example",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-amz-meta-source",
+                "value": "dunger-admin",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "file",
+              "file": {
+                "src": "/C:/Users/evgen/work/sk-connect-data/sk_connect_file_example.pdf"
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9000/box/20250407_18ef17ce4b464f5dad22146cacaae143.pdf?X-Amz-Expires=172800&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=c731CeGj3bSgaBZ5E7V9%2F20250407%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250407T104735Z&X-Amz-SignedHeaders=host%3Bx-amz-meta-source&X-Amz-Signature=069ddc0e660c66be8b4c9144b6129faeb1661cdb96c146c1c96012654d6af83a",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "9000",
+              "path": ["box", "20250407_18ef17ce4b464f5dad22146cacaae143.pdf"],
+              "query": [
+                {
+                  "key": "X-Amz-Expires",
+                  "value": "172800"
+                },
+                {
+                  "key": "X-Amz-Algorithm",
+                  "value": "AWS4-HMAC-SHA256"
+                },
+                {
+                  "key": "X-Amz-Credential",
+                  "value": "c731CeGj3bSgaBZ5E7V9%2F20250407%2Fus-east-1%2Fs3%2Faws4_request"
+                },
+                {
+                  "key": "X-Amz-Date",
+                  "value": "20250407T104735Z"
+                },
+                {
+                  "key": "X-Amz-SignedHeaders",
+                  "value": "host%3Bx-amz-meta-source"
+                },
+                {
+                  "key": "X-Amz-Signature",
+                  "value": "069ddc0e660c66be8b4c9144b6129faeb1661cdb96c146c1c96012654d6af83a"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT example Copy",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "x-amz-meta-source",
+                "value": "dunger-admin",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "file",
+              "file": {
+                "src": "/C:/Users/evgen/work/sk-connect-data/sk_connect_file_example.pdf"
+              }
+            },
+            "url": {
+              "raw": "http://localhost:9000/box/20250407_3bdecb529cfc46d59f80c13dc6059557.pdf?X-Amz-Expires=172800&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=c731CeGj3bSgaBZ5E7V9%2F20250407%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250407T121020Z&X-Amz-SignedHeaders=host%3Bx-amz-meta-source&X-Amz-Signature=389f4086d12b387eac7e8efd24db810bb55e3ada1bae3813c249a4681a97faaf",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "9000",
+              "path": ["box", "20250407_3bdecb529cfc46d59f80c13dc6059557.pdf"],
+              "query": [
+                {
+                  "key": "X-Amz-Expires",
+                  "value": "172800"
+                },
+                {
+                  "key": "X-Amz-Algorithm",
+                  "value": "AWS4-HMAC-SHA256"
+                },
+                {
+                  "key": "X-Amz-Credential",
+                  "value": "c731CeGj3bSgaBZ5E7V9%2F20250407%2Fus-east-1%2Fs3%2Faws4_request"
+                },
+                {
+                  "key": "X-Amz-Date",
+                  "value": "20250407T121020Z"
+                },
+                {
+                  "key": "X-Amz-SignedHeaders",
+                  "value": "host%3Bx-amz-meta-source"
+                },
+                {
+                  "key": "X-Amz-Signature",
+                  "value": "389f4086d12b387eac7e8efd24db810bb55e3ada1bae3813c249a4681a97faaf"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "/signup -  инциализация пользователя в системе",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"user\",\n  \"email\": \"user@mail.ru\",\n  \"password\": \"password\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{core_url}}/auth/signup",
+              "host": ["{{core_url}}"],
+              "path": ["auth", "signup"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/login -  aвторизация в системе",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"user\",\n  \"password\": \"password\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{core_url}}/auth/login",
+              "host": ["{{core_url}}"],
+              "path": ["auth", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "/refresh -  обновление токенов авторизации",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI2MDYxMGNmYy0yMTc0LTRlY2MtOGQ4Ni05ZWVjMmRiOTI2YzIifQ.eyJleHAiOjE3NDgxNzgyMTgsImlhdCI6MTc0ODE3NjQxOCwianRpIjoiOTM1YjI1NzEtYzliMy00ZmYyLWFmNDgtYTE2MGZmOTg3OTY5IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL21hc3RlciIsInN1YiI6IjEyODM4Mjg4LWU5OWMtNDMyNy04ZTY4LWVkZGVjMzA1MWUyYyIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJkdW5nZXItY2xpIiwic2lkIjoiNjQyMjRiZWUtYzVmMS00ZWU2LTgxNDktNWU1ZDdjYTcyMTI0Iiwic2NvcGUiOiJiYXNpYyB3ZWItb3JpZ2lucyByb2xlcyBlbWFpbCBhY3IgcHJvZmlsZSJ9.QBPWfL5kdW0b8JCb0evEYLrtVGkfGCqM1bqGV7jeszaXZjY7jF734_-KT8r7EMo59_T6QQVf6FmsHSyP0FKPOA\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{core_url}}/auth/refresh",
+              "host": ["{{core_url}}"],
+              "path": ["auth", "refresh"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "справочники (directories/)",
+      "item": [
+        {
+          "name": "/types - типы существ",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{accessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{core_url}}/directories/types",
+              "host": ["{{core_url}}"],
+              "path": ["directories", "types"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
