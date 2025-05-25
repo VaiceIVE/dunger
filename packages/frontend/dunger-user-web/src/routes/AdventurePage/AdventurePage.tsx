@@ -19,7 +19,7 @@ import {
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { AdventureMaterials } from 'features/AdventureMaterials';
-import { ApiAdventure } from 'store/_types/ApiAdventure';
+import { ApiAdventure } from 'store/_types';
 import { invariant } from 'utils/invariant';
 import { genreBanners } from './genreBanners';
 

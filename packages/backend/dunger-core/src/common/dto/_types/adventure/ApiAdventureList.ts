@@ -1,4 +1,4 @@
-import { ApiPaginatedResult } from './_common';
+import { ApiPaginatedResult } from '../_common';
 
 export type ApiAdventureList = {
   id: string;

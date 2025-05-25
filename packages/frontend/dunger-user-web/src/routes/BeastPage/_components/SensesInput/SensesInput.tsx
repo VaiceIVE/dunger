@@ -15,7 +15,7 @@ import {
   TrashXIcon
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { ApiSenses } from 'store/_types/ApiSenses';
+import { ApiSenses } from 'store/_types';
 
 const senseTypes: { id: keyof ApiSenses; name: string }[] = [
   { id: 'passive_perception', name: 'Пассивная внимательность' }

@@ -15,7 +15,7 @@ import {
   TrashXIcon
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { ApiSpeedStat } from 'store/_types/ApiSpeedStat';
+import { ApiSpeedStat } from 'store/_types';
 
 const speeds: { id: keyof ApiSpeedStat; name: string }[] = [
   { id: 'walk', name: 'Хождения' },

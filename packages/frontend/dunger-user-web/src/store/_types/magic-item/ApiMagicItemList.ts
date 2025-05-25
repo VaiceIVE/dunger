@@ -9,7 +9,4 @@ export type ApiMagicItemList = {
 
 export type ApiMagicItemListResult = {
   magicItems: ApiMagicItemList;
-  workshopMaterials: {
-    creaturesCount: number;
-  };
 } & ApiPaginatedResult;

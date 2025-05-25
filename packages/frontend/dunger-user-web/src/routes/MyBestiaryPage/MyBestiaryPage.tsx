@@ -23,9 +23,7 @@ import {
 import { Directory, DirectoryItem } from 'components/Directory';
 import { BeastCard } from 'features/BeastCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
-import { ApiPaginatedResult } from 'store/_types/_common';
-import { ApiCreature } from 'store/_types/ApiCreature';
-import { ApiCreatureList } from 'store/_types/ApiCreatureList';
+import { ApiCreature, ApiCreatureListResult } from 'store/_types';
 import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
 import { AddToCampaign } from './_components/AddToCampaign';
 
@@ -52,7 +50,7 @@ export const MyBestiaryPage = () => {
         params.set('query', debouncedQuery);
       }
 
-      return authFetch<{ creatures: ApiCreatureList } & ApiPaginatedResult>(`/creatures/user?${params.toString()}`);
+      return authFetch<ApiCreatureListResult>(`/creatures/user?${params.toString()}`);
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {

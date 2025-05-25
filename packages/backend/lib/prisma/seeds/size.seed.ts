@@ -1,50 +1,30 @@
 import { PrismaClient } from '@dunger/prisma';
 
 const prisma = new PrismaClient();
-export async function SeedSizes() {
-  const promises = [];
 
-  promises.push(
-    (async () => {
-      try {
-        await Promise.all([
-          prisma.size.upsert({
-            where: { id: 'T' },
-            update: {},
-            create: { id: 'T', name: 'Крошечный' }
-          }),
-          prisma.size.upsert({
-            where: { id: 'S' },
-            update: {},
-            create: { id: 'S', name: 'Маленький' }
-          }),
-          prisma.size.upsert({
-            where: { id: 'M' },
-            update: {},
-            create: { id: 'M', name: 'Средний' }
-          }),
-          prisma.size.upsert({
-            where: { id: 'L' },
-            update: {},
-            create: { id: 'L', name: 'Большой' }
-          }),
-          prisma.size.upsert({
-            where: { id: 'H' },
-            update: {},
-            create: { id: 'H', name: 'Огромный' }
-          }),
-          prisma.size.upsert({
-            where: { id: 'G' },
-            update: {},
-            create: { id: 'G', name: 'Колоссальный' }
-          })
-        ]);
-      } catch (error) {
-        // console.error('Error in size upsert operations:', error);
-      }
-    })()
-  );
-  Promise.all(promises).finally(async () => {
+export async function SeedSizes() {
+  const sizes = [
+    { id: 'T', name: 'Крошечный' },
+    { id: 'S', name: 'Маленький' },
+    { id: 'M', name: 'Средний' },
+    { id: 'L', name: 'Большой' },
+    { id: 'H', name: 'Огромный' },
+    { id: 'G', name: 'Громадный' }
+  ];
+
+  try {
+    await Promise.all(
+      sizes.map((size) =>
+        prisma.size.upsert({
+          where: { id: size.id },
+          update: {},
+          create: size
+        })
+      )
+    );
+  } catch (error) {
+    console.error('Error seeding sizes:', error);
+  } finally {
     await prisma.$disconnect();
-  });
+  }
 }

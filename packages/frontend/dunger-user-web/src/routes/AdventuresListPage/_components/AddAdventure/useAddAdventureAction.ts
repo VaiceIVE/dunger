@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
-import { ApiAdventureInput } from 'store/_types/ApiAdventureInput';
+import { ApiAdventureInput } from 'store/_types';
 
 export const useAddAdventureAction = () => {
   const authFetch = useAuthFetch();
@@ -10,7 +10,7 @@ export const useAddAdventureAction = () => {
 
   const { mutateAsync: createManualCreature } = useMutation<{ id: string }, Error, ApiAdventureInput>({
     mutationFn: (input) =>
-      authFetch('/adventure', {
+      authFetch('/adventures', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { 'Content-Type': 'application/json' }

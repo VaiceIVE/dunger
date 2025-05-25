@@ -18,8 +18,7 @@ import {
   XIcon
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { ApiSkill, ApiSkills } from 'store/_types/ApiSkills';
-import { ApiStats } from 'store/_types/ApiStats';
+import { ApiStats, ApiSkill, ApiSkills } from 'store/_types';
 import { formatModifier } from 'utils/formatModifier';
 
 interface AddSkillsProps {

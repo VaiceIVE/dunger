@@ -39,14 +39,6 @@ export class DirectoriesController {
   }
 
   /**
-   * GET, Получение навыков
-   */
-  @Get('/skills')
-  async findSkills() {
-    return await this.directoriesService.findSkills();
-  }
-
-  /**
    * GET, Получение типов урона
    */
   @Get('/damage-types')

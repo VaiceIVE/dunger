@@ -3,7 +3,7 @@ import * as stylex from '@stylexjs/stylex';
 import { createPortal } from 'react-dom';
 import { Accordion, ChevronDownIcon, ChevronUpIcon, CopyIcon, Flex, RadioGroup, Spinner, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { ApiAction } from 'store/_types/ApiAction';
+import { ApiAction } from 'store/_types';
 import { ActionList } from '../ActionList';
 
 interface GroupListProps {

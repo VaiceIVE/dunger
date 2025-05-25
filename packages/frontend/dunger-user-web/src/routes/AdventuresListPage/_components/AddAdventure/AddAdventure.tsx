@@ -14,8 +14,7 @@ import {
   text
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { ApiDirectory } from 'store/_types/_common';
-import { ApiKeyword } from 'store/_types/ApiKeyword';
+import { ApiDirectory, ApiKeyword } from 'store/_types';
 import { useAddAdventureAction } from './useAddAdventureAction';
 
 interface AddAdventureProps {

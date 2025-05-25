@@ -22,8 +22,7 @@ import {
   XIcon
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { ApiPaginatedResult } from 'store/_types/_common';
-import { ApiTrait } from 'store/_types/ApiTrait';
+import { ApiTrait, ApiPaginatedResult } from 'store/_types';
 import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
 import { getWordForm } from 'utils/getWordForm';
 import { SectionProps } from '../BeastForm/BeastForm';

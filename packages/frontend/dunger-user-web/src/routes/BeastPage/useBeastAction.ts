@@ -1,10 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useAuthFetch } from '@dunger/auth-fetch';
-import { ApiCreature } from 'store/_types/ApiCreature';
-import { ApiCreatureInput } from 'store/_types/ApiCreatureInput';
-import { ApiSkillsInput } from 'store/_types/ApiSkillsInput';
-import { ApiSpeedStat } from 'store/_types/ApiSpeedStat';
-import { ApiStatsInput } from 'store/_types/ApiStatsInput';
+import { ApiCreature, ApiCreatureInput, ApiSkillsInput, ApiSpeedStat, ApiStatsInput } from 'store/_types';
 import { getAbilityModifier } from 'utils/getAbilityModifier';
 
 const SKILL_TO_ABILITY: Record<string, keyof ApiSkillsInput> = {

@@ -7,7 +7,7 @@ import { Button, ButtonVariant, ChevronsUpIcon, Container, Flex, Footer, IconBut
 import { colors } from '@dunger/ui/tokens.stylex';
 import { BeastCard } from 'features/BeastCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
-import { ApiCreature } from 'store/_types/ApiCreature';
+import { ApiCreature } from 'store/_types';
 import { invariant } from 'utils/invariant';
 import { updateNestedField } from 'utils/updateNestedField';
 import { BeastForm } from './_components/BeastForm';

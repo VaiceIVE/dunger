@@ -4,7 +4,7 @@ import { StyleXStyles } from '@stylexjs/stylex';
 import { Accordion, ChevronDownIcon, ChevronUpIcon, Flex, Stack, text } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Card } from 'components/Card';
-import { ApiMagicItem } from 'store/_types/magic-item/ApiMagicItem';
+import { ApiMagicItem } from 'store/_types';
 
 interface magicItemCardProps {
   magicItem?: ApiMagicItem | null;

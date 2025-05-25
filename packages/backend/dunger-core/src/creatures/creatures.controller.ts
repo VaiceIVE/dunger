@@ -47,8 +47,7 @@ export class CreaturesController {
   ) {
     const creatureId = await this.creaturesService.initCreature(
       createCreatureDto,
-      "asd"
-      // user.id,
+      user.id,
     );
 
     const aiCretureData = (
@@ -63,19 +62,18 @@ export class CreaturesController {
       aiCretureData,
     );
 
-    return updatedCreature.id
+    return updatedCreature.id;
   }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post('/generate/debug')
   async generateCreatureDebug(
-    @Body() createCreatureDto: CreateCreatureManualDto
-    // @CurrentUser() user,
+    @Body() createCreatureDto: CreateCreatureManualDto,
+    @CurrentUser() user,
   ) {
     const creatureId = await this.creaturesService.initCreature(
       createCreatureDto,
-      "asd"
-      // user.id,
+      user.id,
     );
 
     const aiCretureData = (
