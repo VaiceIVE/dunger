@@ -17,10 +17,10 @@ import {
   text
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
+import { AddAdventure } from 'features/AddAdventure';
 import { AdventureMaterials } from 'features/AdventureMaterials';
 import { ApiAdventureListResult } from 'store/_types';
 import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';
-import { AddAdventure } from './_components/AddAdventure';
 import { EmptyAdventuresList } from './_components/EmptyAdventuresList';
 
 export const AdventuresListPage = () => {

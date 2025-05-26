@@ -3,7 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
 import { ApiAdventureInput } from 'store/_types';
 
-export const useAddAdventureAction = () => {
+interface UseAddAdventureActionProps {
+  onSuccess?: () => void;
+}
+
+export const useAddAdventureAction = ({ onSuccess }: UseAddAdventureActionProps) => {
   const authFetch = useAuthFetch();
 
   const navigate = useNavigate();
@@ -30,6 +34,8 @@ export const useAddAdventureAction = () => {
 
     try {
       const response = await createManualCreature(input);
+
+      onSuccess?.();
 
       void navigate(`/adventures/${response.id}`);
     } catch (error) {

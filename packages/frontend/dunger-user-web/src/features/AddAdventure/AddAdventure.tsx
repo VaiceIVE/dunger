@@ -18,15 +18,19 @@ import { ApiDirectory, ApiKeyword } from 'store/_types';
 import { useAddAdventureAction } from './useAddAdventureAction';
 
 interface AddAdventureProps {
-  open: boolean;
+  open?: boolean;
 
-  setOpen: (open: boolean) => void;
+  setOpen?: (open: boolean) => void;
 }
 
 export const AddAdventure = ({ open, setOpen }: AddAdventureProps) => {
   const authFetch = useAuthFetch();
 
-  const { action } = useAddAdventureAction();
+  const { action } = useAddAdventureAction({
+    onSuccess: () => {
+      setOpen?.(false);
+    }
+  });
 
   const { data: genres } = useSuspenseQuery<ApiDirectory[]>({
     queryKey: ['directories', 'genres'],
