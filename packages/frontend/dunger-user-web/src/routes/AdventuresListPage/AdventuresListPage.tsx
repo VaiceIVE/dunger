@@ -17,7 +17,7 @@ import {
   text
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { AddAdventure } from 'features/AddAdventure';
+import { AddAdventure } from 'features/_entity/AddAdventure';
 import { AdventureMaterials } from 'features/AdventureMaterials';
 import { ApiAdventureListResult } from 'store/_types';
 import { useDebouncedValue } from 'utils/_hooks/useDebouncedValue';

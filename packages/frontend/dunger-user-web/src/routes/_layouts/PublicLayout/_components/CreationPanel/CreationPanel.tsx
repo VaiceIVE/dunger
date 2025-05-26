@@ -3,7 +3,9 @@ import * as stylex from '@stylexjs/stylex';
 import { Link } from 'react-router-dom';
 import { CatIcon, FolderIcon, IconButton, MoneybagIcon, PlusFilledIcon, TreesIcon, UserIcon } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
-import { AddAdventure } from 'features/AddAdventure';
+import { AddAdventure } from 'features/_entity/AddAdventure';
+import { AddLocation } from 'features/_entity/AddLocation';
+import { AddMagicItem } from 'features/_entity/AddMagicItem';
 import { Tab } from '../Tab';
 
 interface CreationPanelProps {
@@ -71,6 +73,20 @@ export const CreationPanel = ({ isAuthenticated }: CreationPanelProps) => {
         }}
       />
 
+      <AddMagicItem
+        open={createdEntity === 'magicItem'}
+        setOpen={(open) => {
+          if (!open) setCreatedEntity(null);
+        }}
+      />
+
+      <AddLocation
+        open={createdEntity === 'location'}
+        setOpen={(open) => {
+          if (!open) setCreatedEntity(null);
+        }}
+      />
+
       {open && (
         <nav
           onClick={() => {
@@ -93,16 +109,14 @@ export const CreationPanel = ({ isAuthenticated }: CreationPanelProps) => {
           <Tab
             onClick={() => {
               setCreatedEntity('location');
-            }}
-            disabled
-            to={'feats'}>
-            Создать окружение <TreesIcon />
+            }}>
+            Создать локацию <TreesIcon />
           </Tab>
           <Tab
             onClick={() => {
               setCreatedEntity('adventure');
             }}>
-            Создать приклюение <FolderIcon />
+            Создать приключение <FolderIcon />
           </Tab>
         </nav>
       )}
