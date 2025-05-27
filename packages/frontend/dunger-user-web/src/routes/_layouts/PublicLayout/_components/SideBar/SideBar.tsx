@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '@dunger/auth-fetch';
 import {
   BellFilledIcon,
+  BinaryTreeIcon,
   Button,
   ButtonVariant,
   ButtonWidth,
@@ -12,13 +13,13 @@ import {
   IconButtonVariant,
   LogoSmall,
   MenuIcon,
-  PlusFilledIcon,
   Stack,
   text,
   XIcon
 } from '@dunger/ui';
 import { LoginButton } from 'features/LoginButton';
 import { AuthBar } from '../AuthBar';
+import { CreationPanel } from '../CreationPanel';
 import { ModalFooter } from '../ModalFooter';
 import { Tab } from '../Tab';
 
@@ -75,15 +76,14 @@ export const SideBar = () => {
             <IconButton variant={IconButtonVariant.ghost}>
               <BellFilledIcon />
             </IconButton>
+            <IconButton variant={IconButtonVariant.ghost}>
+              <BinaryTreeIcon />
+            </IconButton>
           </Stack>
         </Stack>
 
         <Stack gap={16}>
-          <Link to={isAuthenticated ? '/beast/new' : '/no-auth'}>
-            <IconButton>
-              <PlusFilledIcon />
-            </IconButton>
-          </Link>
+          <CreationPanel isAuthenticated={isAuthenticated} />
 
           <IconButton>
             <DiceD20Icon />
@@ -145,7 +145,7 @@ const styles = stylex.create({
     padding: '20px 16px',
     position: 'sticky',
     top: 0,
-    zIndex: 0
+    zIndex: 20
   },
   nav: {
     background: 'white',
