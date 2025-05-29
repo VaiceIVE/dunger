@@ -66,7 +66,7 @@ function ComboboxOptionsImpl({ children, style, ...props }: ComboboxOptionsProps
       window.removeEventListener('mousedown', handleClick);
       window.removeEventListener('touchstart', handleClick);
     };
-  });
+  }, [ref, targetElement, setOpen]);
 
   if (!targetElement) {
     throw new Error('There must be a target element');
