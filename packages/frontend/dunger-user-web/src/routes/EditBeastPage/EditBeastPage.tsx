@@ -3,7 +3,18 @@ import * as stylex from '@stylexjs/stylex';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
-import { Button, ButtonVariant, ChevronsUpIcon, Container, Flex, Footer, IconButton, text } from '@dunger/ui';
+import {
+  Button,
+  ButtonVariant,
+  ChevronsUpIcon,
+  Container,
+  Flex,
+  Footer,
+  headers,
+  IconButton,
+  Stack,
+  text
+} from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { BeastCard } from 'features/BeastCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
@@ -74,8 +85,11 @@ export const EditBeastPage = () => {
         <Container style={styles.root}>
           <SplitViewLayout isLayoutSplit gap={16}>
             <SplitViewLayout.Master span={6}>
-              <input type={'hidden'} name={'id'} value={id} />
-              <BeastForm handleFieldChange={handleFieldChange} formState={formState} />
+              <Stack gap={32}>
+                <h2 {...stylex.props(headers.h2Bold)}>Редактирование существа</h2>
+                <input type={'hidden'} name={'id'} value={id} />
+                <BeastForm handleFieldChange={handleFieldChange} formState={formState} />
+              </Stack>
             </SplitViewLayout.Master>
 
             <SplitViewLayout.Detail span={6}>
@@ -105,7 +119,7 @@ export const EditBeastPage = () => {
 };
 
 const styles = stylex.create({
-  root: { paddingBottom: 84 },
+  root: { color: colors.textPrimaryDefault, paddingBottom: 84 },
   card: { height: 'calc(100dvh - 116px)', position: 'sticky', right: 0, top: 32 },
   footer: { left: 'unset', right: 0, width: 'calc(100% - 77px)' },
   container: { alignItems: 'center', display: 'flex', justifyContent: 'space-between', paddingBlock: 12 },

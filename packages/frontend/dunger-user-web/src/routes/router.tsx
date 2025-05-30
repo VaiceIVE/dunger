@@ -8,6 +8,7 @@ import { BackgroundsPage } from './BackgroundsPage';
 import { BestiaryPage } from './BestiaryPage';
 import { ClassesPage } from './ClassesPage';
 import { EditBeastPage } from './EditBeastPage';
+import { EditMagicItemPage } from './EditMagicItemPage';
 import { FeatsPage } from './FeatsPage';
 import { HomePage } from './HomePage';
 import { MagicItemsPage } from './MagicItemsPage';

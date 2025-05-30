@@ -1,1 +1,1 @@
-export { EditBeastPage } from './BeastPage';
+export { EditBeastPage } from './EditBeastPage';
