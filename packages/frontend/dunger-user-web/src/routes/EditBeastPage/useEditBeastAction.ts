@@ -50,7 +50,7 @@ const getSkills = (formData: FormData, stats: ApiStatsInput) => {
   return skills as ApiSkillsInput;
 };
 
-export const useBeastAction = () => {
+export const useEditBeastAction = () => {
   const authFetch = useAuthFetch();
 
   const { mutateAsync: updateCreature } = useMutation<ApiCreature, Error, ApiCreatureInput>({
