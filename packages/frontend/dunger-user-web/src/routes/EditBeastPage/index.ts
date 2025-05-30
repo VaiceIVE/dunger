@@ -1,0 +1,1 @@
+export { EditBeastPage } from './BeastPage';

@@ -11,9 +11,9 @@ import { ApiCreature } from 'store/_types';
 import { invariant } from 'utils/invariant';
 import { updateNestedField } from 'utils/updateNestedField';
 import { BeastForm } from './_components/BeastForm';
-import { useBeastAction } from './useBeastAction';
+import { useEditBeastAction } from './useEditBeastAction';
 
-export const BeastPage = () => {
+export const EditBeastPage = () => {
   const { id } = useParams();
   invariant(id);
 
@@ -31,7 +31,7 @@ export const BeastPage = () => {
     biomes_string_ids: creature.biomes_ids.map(String)
   });
 
-  const { saveAction } = useBeastAction();
+  const { saveAction } = useEditBeastAction();
 
   const [changed, setChanged] = useState(false);
   const [isSaved, setIsSaved] = useState(false);

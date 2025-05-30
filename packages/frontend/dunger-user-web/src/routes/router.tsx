@@ -5,9 +5,9 @@ import { UserLayout } from './_layouts/UserLayout';
 import { AdventurePage } from './AdventurePage';
 import { AdventuresListPage } from './AdventuresListPage';
 import { BackgroundsPage } from './BackgroundsPage';
-import { BeastPage } from './BeastPage';
 import { BestiaryPage } from './BestiaryPage';
 import { ClassesPage } from './ClassesPage';
+import { EditBeastPage } from './EditBeastPage';
 import { FeatsPage } from './FeatsPage';
 import { HomePage } from './HomePage';
 import { MagicItemsPage } from './MagicItemsPage';
@@ -35,9 +35,12 @@ export const router = createBrowserRouter(
 
         <Route Component={UserLayout}>
           <Route path="/beast/new" Component={NewBeastPage} />
-          <Route path="/beast/:id" Component={BeastPage} />
+          <Route path="/beast/:id" Component={EditBeastPage} />
+
+          <Route path={'/magic-items/:id?/edit'} Component={EditMagicItemPage} />
 
           <Route path={'/my-bestiary/:id?'} Component={MyBestiaryPage} />
+          <Route path={'/my-magic-items/:id?'} Component={MagicItemsPage} />
 
           <Route path={'/adventures'} Component={AdventuresListPage} />
           <Route path={'/adventures/:id'} Component={AdventurePage} />
