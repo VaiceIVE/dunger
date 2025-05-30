@@ -16,8 +16,14 @@ import {
   TextInput
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
+import { ApiMagicItem } from 'store/_types';
 
-export const MagicItemForm = () => {
+interface MagicItemFormProps {
+  formState: ApiMagicItem;
+  handleFieldChange: (value: unknown, name: string) => void;
+}
+
+export const MagicItemForm = ({ formState }: MagicItemFormProps) => {
   return (
     <Accordion transitionDuration={600} multiple style={styles.root}>
       <Accordion.Item style={styles.section} value="common">
@@ -34,7 +40,7 @@ export const MagicItemForm = () => {
 
         <Accordion.Panel>
           <div {...stylex.props(styles.panel)}>
-            <TextInput label="Название" placeholder="Меч тысячи истин" />
+            <TextInput value={formState.name} label="Название" placeholder="Меч тысячи истин" />
             <Select label="Тип предмета" placeholder="Выберите тип" />
             <Select label="Редкость предмета" placeholder="Выберите редкость" />
             <Textarea

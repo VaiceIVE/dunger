@@ -20,6 +20,7 @@ import { MagicItemCard } from 'features/MagicItemCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
 import { ApiMagicItem } from 'store/_types';
 import { invariant } from 'utils/invariant';
+import { updateNestedField } from 'utils/updateNestedField';
 import { MagicItemForm } from './_components/MagicItemForm';
 import { useEditMagicItemAction } from './useEditMagicItemAction';
 
@@ -32,6 +33,8 @@ export const EditMagicItemPage = () => {
     queryKey: ['magic-items', { id }],
     queryFn: () => authFetch<ApiMagicItem>(`/magic-items/${id}`)
   });
+
+  const [formState, setFormState] = useState<ApiMagicItem>(magicItem);
 
   const { saveAction } = useEditMagicItemAction();
 
@@ -64,6 +67,12 @@ export const EditMagicItemPage = () => {
     setIsFailed(false);
   };
 
+  const handleFieldChange = (value: unknown, path: string) => {
+    setFormState((prev) => updateNestedField(prev, path, value));
+
+    handleChange();
+  };
+
   return (
     <main>
       <form onSubmit={handleSubmit}>
@@ -73,7 +82,7 @@ export const EditMagicItemPage = () => {
               <Stack gap={32}>
                 <h2 {...stylex.props(headers.h2Bold)}>Редактирование магического предмета</h2>
                 <input type={'hidden'} name={'id'} value={id} />
-                <MagicItemForm />
+                <MagicItemForm handleFieldChange={handleFieldChange} formState={formState} />
               </Stack>
             </SplitViewLayout.Master>
 
