@@ -25,7 +25,7 @@ interface MagicItemFormProps {
 
 export const MagicItemForm = ({ formState }: MagicItemFormProps) => {
   return (
-    <Accordion transitionDuration={600} multiple style={styles.root}>
+    <Accordion defaultValue={'common'} transitionDuration={600} multiple style={styles.root}>
       <Accordion.Item style={styles.section} value="common">
         <Accordion.Control style={[headers.h3Semibold, styles.control]}>
           {(open: boolean) => (

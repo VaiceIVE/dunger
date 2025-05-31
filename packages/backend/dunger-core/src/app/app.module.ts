@@ -8,6 +8,7 @@ import { UserModule } from 'src/user/user.module';
 import { DirectoriesModule } from 'src/directories/directories.module';
 import { AdventuresModule } from 'src/adventures/adventures.module';
 import { MagicItemsModule } from 'src/magic-items/magic-items.module';
+import { S3Module } from 'src/s3/s3.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { MagicItemsModule } from 'src/magic-items/magic-items.module';
     DirectoriesModule,
     AdventuresModule,
     MagicItemsModule,
+    S3Module,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaClient],
