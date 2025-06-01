@@ -11,9 +11,11 @@ interface SwitchProps {
   defaultValue?: string;
 
   options?: { value: string; label: string }[] | string[];
+
+  disabled?: boolean;
 }
 
-export const Switch = ({ options = [], value, defaultValue, onChange }: SwitchProps) => {
+export const Switch = ({ options = [], value, defaultValue, onChange, disabled }: SwitchProps) => {
   const [_value, setValue] = useUncontrolled({
     value,
     defaultValue,
@@ -61,7 +63,7 @@ export const Switch = ({ options = [], value, defaultValue, onChange }: SwitchPr
             {...stylex.props(styles.option, text.defaultMedium)}
             aria-selected={optionValue === _value}
             onClick={() => {
-              setValue(optionValue);
+              if (!disabled) setValue(optionValue);
             }}
             key={optionValue}>
             {optionLabel}

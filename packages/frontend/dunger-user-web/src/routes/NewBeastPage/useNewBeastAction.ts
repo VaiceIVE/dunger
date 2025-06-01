@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
@@ -7,6 +8,8 @@ export const useNewBeastAction = () => {
   const authFetch = useAuthFetch();
 
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(false);
 
   const { mutateAsync: createManualCreature } = useMutation<{ id: string }, Error, ApiCreatureManualInput>({
     mutationFn: (input) =>
@@ -19,7 +22,7 @@ export const useNewBeastAction = () => {
 
   const { mutateAsync: createAiCreature } = useMutation<{ id: string }, Error, ApiCreatureAiInput>({
     mutationFn: (input) =>
-      authFetch('/creatures/init', {
+      authFetch('/creatures/generate', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { 'Content-Type': 'application/json' }
@@ -38,18 +41,22 @@ export const useNewBeastAction = () => {
     };
 
     try {
+      setLoading(true);
+
       const response = await createManualCreature(input);
 
       void navigate(`/beast/${response.id}`);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
   const generateAction = async (formData: FormData) => {
     const name = (formData.get('name') as string).toString();
     const challenge_rating = (formData.get('challenge_rating') as string).toString();
-    const role = formData.get('challenge_rating') as ApiCreatureRole | 'BALANCE';
+    const role = formData.get('role') as ApiCreatureRole | 'BALANCE';
     const creation_description = (formData.get('creation_description') as string).toString();
     const type = (formData.get('type') as string).toString();
 
@@ -62,13 +69,17 @@ export const useNewBeastAction = () => {
     };
 
     try {
+      setLoading(true);
+
       const response = await createAiCreature(input);
 
       void navigate(`/beast/${response.id}`);
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return { createAction, generateAction };
+  return { createAction, generateAction, loading };
 };
