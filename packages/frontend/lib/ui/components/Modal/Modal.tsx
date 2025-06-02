@@ -119,6 +119,7 @@ Modal.Target = ModalTarget;
 
 const styles = stylex.create({
   overlay: {
+    backdropFilter: 'blur(2px)',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     inset: 0,
     position: 'fixed',

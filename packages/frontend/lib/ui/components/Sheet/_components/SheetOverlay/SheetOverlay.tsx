@@ -13,6 +13,7 @@ export function SheetOverlay() {
 
 const styles = stylex.create({
   root: {
+    backdropFilter: 'blur(2px)',
     left: 0,
     position: 'fixed',
     top: 0,
