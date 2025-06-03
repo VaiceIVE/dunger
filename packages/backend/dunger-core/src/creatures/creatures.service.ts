@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
+import { CreateCreatureManualDto } from './dto/create-creature-manual.dto';
 import { Ability, Prisma, PrismaClient, Skill } from '@dunger/prisma';
 import { nullSpeedObject } from './objects/nullSpeed.object';
 import { nullSensesObject } from './objects/nullSenses.object';
@@ -388,9 +388,9 @@ export class CreaturesService {
     });
   }
 
-  private cleanObj(obj) {
-    var newobj = {};
-    const complexPropnames = [
+  private cleanObj(obj: ApiCreatureInput) {
+    const newobj = {};
+    const complexPropnames: (keyof ApiCreatureInput)[] = [
       'speed',
       'stats',
       'skills',
@@ -405,20 +405,20 @@ export class CreaturesService {
       'immunities',
       'vulnerabilities',
       'senses',
-      'languages_relation',
+      'languages',
       'alignment_relation',
       'type_relation',
       'size_relation',
-      'biomes_relation',
+      'biome_relation',
       'biomes_ids',
       'race_relation',
     ];
-    for (var propname in obj) {
+    for (const propname in obj) {
       if (
         !(
           obj[propname] === null ||
           obj[propname] === undefined ||
-          complexPropnames.includes(propname)
+          complexPropnames.includes(propname as keyof ApiCreatureInput)
         )
       ) {
         newobj[propname] = obj[propname];
@@ -473,7 +473,7 @@ export class CreaturesService {
         data: {
           alignment_relation: {
             connect: {
-              name: updateCreatureDto.alignment_relation.name.toLowerCase(),
+              name: updateCreatureDto.alignment_relation.name,
             },
           },
         },
@@ -485,7 +485,7 @@ export class CreaturesService {
         data: {
           type_relation: {
             connect: {
-              name: updateCreatureDto.type_relation.name.toLowerCase(),
+              id: +updateCreatureDto.type_relation.id,
             },
           },
         },
@@ -510,7 +510,7 @@ export class CreaturesService {
           data: {
             biomes_relation: {
               connect: {
-                name: biome.title,
+                name: biome.name,
               },
             },
           },
@@ -564,7 +564,12 @@ export class CreaturesService {
                 },
               },
               create: updateCreatureDto.speed,
-              update: this.cleanObj(updateCreatureDto.speed),
+              update: {
+                walk: updateCreatureDto.speed?.walk ?? null,
+                fly: updateCreatureDto.speed?.fly ?? null,
+                climb: updateCreatureDto.speed?.climb ?? null,
+                swim: updateCreatureDto.speed?.swim ?? null,
+              },
             },
           },
         },

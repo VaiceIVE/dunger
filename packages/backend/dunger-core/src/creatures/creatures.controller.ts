@@ -11,12 +11,15 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreaturesService } from './creatures.service';
-import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
+import { CreateCreatureManualDto } from './dto/create-creature-manual.dto';
 import axios from 'axios';
 import { ConfigService } from '@nestjs/config';
 import { ApiCreatureInput, PaginationQueryDto } from 'src/common/dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import { CreateCreatureAiDto } from './dto/create-creature-ai.dto';
+import { AppError } from 'src/common/errors';
+import { HttpStatus } from '@dunger/common-enums';
 
 @Controller('creatures')
 export class CreaturesController {
@@ -42,33 +45,37 @@ export class CreaturesController {
   @UseGuards(JwtAuthGuard)
   @Post('/generate')
   async generateCreature(
-    @Body() createCreatureDto: CreateCreatureManualDto,
+    @Body() createCreatureDto: CreateCreatureAiDto,
     @CurrentUser() user,
   ) {
-    const creatureId = await this.creaturesService.initCreature(
-      createCreatureDto,
-      user.id,
-    );
+    let creature: { id: string };
 
-    const aiCretureData = (
-      await axios.post(
+    try {
+      const { data: aiCretureData } = await axios.post(
         `${this.configService.get('GPT_BASE_URL')}/gpt/generate/creature`,
         createCreatureDto,
-      )
-    ).data;
+      );
 
-    const updatedCreature = await this.creaturesService.update(
-      creatureId.id,
-      aiCretureData,
-    );
+      creature = await this.creaturesService.initCreature(
+        createCreatureDto,
+        user.id,
+      );
 
-    return updatedCreature.id;
+      await this.creaturesService.update(creature.id, aiCretureData);
+    } catch {
+      throw new AppError({
+        errorText: 'Failed to AI generation',
+        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+      });
+    }
+
+    return { id: creature.id };
   }
 
   @UseGuards(JwtAuthGuard)
   @Post('/generate/debug')
   async generateCreatureDebug(
-    @Body() createCreatureDto: CreateCreatureManualDto,
+    @Body() createCreatureDto: CreateCreatureAiDto,
     @CurrentUser() user,
   ) {
     const creatureId = await this.creaturesService.initCreature(
@@ -181,11 +188,13 @@ export class CreaturesController {
     return this.creaturesService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCreatureDto: ApiCreatureInput) {
     return this.creaturesService.update(id, updateCreatureDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.creaturesService.remove(+id);
