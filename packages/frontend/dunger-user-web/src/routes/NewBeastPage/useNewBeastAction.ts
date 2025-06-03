@@ -48,7 +48,6 @@ export const useNewBeastAction = () => {
       void navigate(`/beast/${response.id}`);
     } catch (error) {
       console.error(error);
-    } finally {
       setLoading(false);
     }
   };
@@ -76,7 +75,6 @@ export const useNewBeastAction = () => {
       void navigate(`/beast/${response.id}`);
     } catch (error) {
       console.error(error);
-    } finally {
       setLoading(false);
     }
   };

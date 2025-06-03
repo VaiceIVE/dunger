@@ -90,6 +90,7 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
               autosize
               minRows={3}
               maxRows={8}
+              maxLength={300}
             />
           </Fragment>
         ) : (
