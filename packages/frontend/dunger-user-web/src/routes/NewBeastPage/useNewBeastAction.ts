@@ -57,12 +57,12 @@ export const useNewBeastAction = () => {
     const challenge_rating = (formData.get('challenge_rating') as string).toString();
     const role = formData.get('role') as ApiCreatureRole | 'BALANCE';
     const creation_description = (formData.get('creation_description') as string).toString();
-    const type = (formData.get('type') as string).toString();
+    const type_name = (formData.get('type_name') as string).toString();
 
     const input: ApiCreatureAiInput = {
       name,
       challenge_rating,
-      type,
+      type_name,
       role: role === 'BALANCE' ? null : role,
       creation_description: creation_description == '' ? null : creation_description
     };
