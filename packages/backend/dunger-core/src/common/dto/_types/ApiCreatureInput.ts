@@ -29,7 +29,7 @@ export interface ApiCreatureInput {
   immunities?: { name: string }[];
   vulnerabilities?: { name: string }[];
   alignment_relation?: { name: string };
-  type_relation?: { id: string };
+  type_relation?: { name: string };
   size_relation?: { name: string };
   biome_relation?: { name: string }[];
   race_relation?: { name: string; description: string };

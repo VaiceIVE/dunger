@@ -48,26 +48,28 @@ export class CreaturesController {
     @Body() createCreatureDto: CreateCreatureAiDto,
     @CurrentUser() user,
   ) {
-    let creature: { id: string };
+    let aiCretureData: ApiCreatureInput;
 
     try {
-      const { data: aiCretureData } = await axios.post(
+      const { data } = await axios.post(
         `${this.configService.get('GPT_BASE_URL')}/gpt/generate/creature`,
         createCreatureDto,
       );
 
-      creature = await this.creaturesService.initCreature(
-        createCreatureDto,
-        user.id,
-      );
-
-      await this.creaturesService.update(creature.id, aiCretureData);
+      aiCretureData = data;
     } catch {
       throw new AppError({
         errorText: 'Failed to AI generation',
         statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
       });
     }
+
+    const creature = await this.creaturesService.initCreature(
+      createCreatureDto,
+      user.id,
+    );
+
+    await this.creaturesService.update(creature.id, aiCretureData);
 
     return { id: creature.id };
   }
@@ -188,7 +190,7 @@ export class CreaturesController {
     return this.creaturesService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  //@UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCreatureDto: ApiCreatureInput) {
     return this.creaturesService.update(id, updateCreatureDto);
