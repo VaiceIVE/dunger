@@ -1,9 +1,9 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import axios from 'axios';
 import { ConfigService } from '@nestjs/config';
-import { ValidationResultDTO } from 'src/dto/validationResultDTO';
 import { AppService } from './app.service';
 import { CreateCreatureDto } from './dto/create-creature.dto';
+import { ValidationResult } from 'src/types/ValidationResult';
 
 @Controller('/gpt')
 export class AppController {
@@ -13,9 +13,9 @@ export class AppController {
   ) {}
 
   @Post('/generate/creature')
-  async createCreature(@Body() createCreatureDTO: ApiCreatureAiInput) {
-    let modelResponse = await this.gptService.createCreature(createCreatureDTO);
-    let validationResult: ValidationResultDTO;
+  async createCreature(@Body() createCreatureDTO: CreateCreatureDto) {
+    let modelResponse = await this.appService.createCreature(createCreatureDTO);
+    let validationResult: ValidationResult;
     let generation_count = 0;
 
     while (generation_count < 5) {
@@ -29,7 +29,7 @@ export class AppController {
       if (validationResult.is_success) {
         return modelResponse.result;
       } else {
-        modelResponse = await this.gptService.regenerateCreature(
+        modelResponse = await this.appService.regenerateCreature(
           modelResponse.messages,
           validationResult.result,
         );
@@ -41,9 +41,9 @@ export class AppController {
   }
 
   @Post('/generate/creature/debug')
-  async createCreatureDebug(@Body() createCreatureDTO: ApiCreatureAiInput) {
-    let modelResponse = await this.gptService.createCreature(createCreatureDTO);
-    let validationResult: ValidationResultDTO;
+  async createCreatureDebug(@Body() createCreatureDTO: CreateCreatureDto) {
+    let modelResponse = await this.appService.createCreature(createCreatureDTO);
+    let validationResult: ValidationResult;
     let generation_count = 0;
 
     while (generation_count < 5) {
@@ -57,7 +57,7 @@ export class AppController {
       if (validationResult.is_success) {
         return { creatureData: modelResponse.result, validationResult };
       } else {
-        modelResponse = await this.gptService.regenerateCreature(
+        modelResponse = await this.appService.regenerateCreature(
           modelResponse.messages,
           validationResult.result,
         );

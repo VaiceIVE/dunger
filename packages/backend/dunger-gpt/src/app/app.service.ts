@@ -5,6 +5,7 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 import { OpenAiMessage, OpenAiRequest } from 'src/types/OpenAiMessage';
 import { PromptService } from 'src/prompt/prompt.service';
 import { CreateCreatureDto } from './dto/create-creature.dto';
+import { GenerationResultWithHistory } from 'src/types/generationResultWithHistory';
 
 @Injectable()
 export class AppService {
@@ -13,7 +14,9 @@ export class AppService {
     private readonly configService: ConfigService,
   ) {}
 
-  async createCreature(input: CreateCreatureDto) {
+  async createCreature(
+    input: CreateCreatureDto,
+  ): Promise<GenerationResultWithHistory> {
     const creaturePrompt = this.promptService.getCreaturePrompt(
       input.name,
       input.challenge_rating,
@@ -22,16 +25,51 @@ export class AppService {
       input.role,
     );
 
-    const modelResponse = await this.makeRequestToModel(
-      this.generateOpenAiRequest([this.generateFirstMessage(creaturePrompt)]),
+    const messages = [this.generateFirstMessage(creaturePrompt)];
+
+    const request = this.generateOpenAiRequest(messages);
+
+    const modelResponse = await this.makeRequestToModel(request);
+
+    messages.push(this.generateModelMessage(JSON.stringify(modelResponse)));
+
+    return { messages, result: modelResponse };
+  }
+
+  async regenerateCreature(
+    message_history: OpenAiMessage[],
+    validator_feedback: string,
+  ): Promise<GenerationResultWithHistory> {
+    message_history.push(this.generateClientMessage(validator_feedback));
+
+    const request = this.generateOpenAiRequest(message_history);
+
+    const modelResponse = await this.makeRequestToModel(request);
+
+    message_history.push(
+      this.generateModelMessage(JSON.stringify(modelResponse)),
     );
 
-    return modelResponse;
+    return { messages: message_history, result: modelResponse };
   }
 
   private generateFirstMessage(content: string): OpenAiMessage {
     return {
-      role: 'system',
+      role: 'developer',
+      content: content,
+    };
+  }
+
+  private generateClientMessage(content: string): OpenAiMessage {
+    return {
+      role: 'user',
+      content: content,
+    };
+  }
+
+  private generateModelMessage(content: string): OpenAiMessage {
+    return {
+      role: 'assistant',
       content: content,
     };
   }
