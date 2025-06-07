@@ -50,7 +50,7 @@ export class PromptService {
         имя - ${name}, 
         класс опасности - ${challenge_rating}, 
         тип существа - ${type}, 
-        ${creation_description ?? 'входное описание существа: ' + creation_description}, 
+        ${creation_description ? 'входное описание существа: ' + creation_description : ''}, 
         роль существа в бою: ${role ? role : 'обычный рядовой противник'}
         бонус мастерства существа: ${bonus},
         рекомендуемый класс брони существа: ${armor_class},

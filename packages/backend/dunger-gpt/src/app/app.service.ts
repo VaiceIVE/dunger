@@ -107,13 +107,15 @@ export class AppService {
       console.log(error.response.data);
     }
 
-    const responseData = modelResponse.data;
+    const rawText = modelResponse.data.output[0].content[0].text;
 
-    return JSON.parse(
-      responseData.output[0].content[0].text
-        .replace('```', '')
-        .replace('```', '')
-        .replace(`json`, ''),
-    );
+    // Удаляем markdown-обёртки и обрезаем всё до первой {
+    const cleaned = rawText
+      .replace(/```json|```/g, '') // убирает ```` ```json`` и ```` ````
+      .trim();
+
+    const jsonText = cleaned.slice(cleaned.indexOf('{'));
+
+    return JSON.parse(jsonText);
   }
 }
