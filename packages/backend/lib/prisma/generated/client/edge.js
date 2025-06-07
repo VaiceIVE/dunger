@@ -420,7 +420,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/romai/Documents/projects/dunger/packages/backend/lib/prisma/generated/client",
+      "value": "/home/self/study/dnd-diplom/packages/backend/lib/prisma/generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -429,12 +429,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "darwin-arm64",
+        "value": "debian-openssl-1.1.x",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/Users/romai/Documents/projects/dunger/packages/backend/lib/prisma/schema.prisma",
+    "sourceFilePath": "/home/self/study/dnd-diplom/packages/backend/lib/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -448,6 +448,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {

@@ -5,6 +5,7 @@ import { PromptService } from 'src/prompt/prompt.service';
 import { GptService } from 'src/gpt/gpt.service';
 import axios from 'axios';
 import { ConfigService } from '@nestjs/config';
+import { ValidationResultDTO } from 'src/dto/validationResultDTO';
 
 @Controller('/gpt')
 export class AppController {
@@ -22,35 +23,44 @@ export class AppController {
 
   @Post('/generate/creature')
   async createCreature(@Body() createCreatureDTO: ApiCreatureAiInput){
-    const creatureData = await this.gptService.createCreature(createCreatureDTO)
+    let modelResponse = await this.gptService.createCreature(createCreatureDTO)
+    let validationResult: ValidationResultDTO
+    let generation_count = 0
 
-    console.log(creatureData)
+    while(generation_count < 5){
+      validationResult = (await axios.post(`${this.configService.get('VALIDATOR_BASE_URL')}/validate_entity`, {entity_json: modelResponse.result})).data
+      console.log(validationResult)
+      if(validationResult.is_success){
+        return modelResponse.result
+      }
+      else{
+        modelResponse = await this.gptService.regenerateCreature(modelResponse.messages, validationResult.result)
+      }
+      generation_count += 1
+    }
 
-    const validationResult = (await axios.post(`${this.configService.get('VALIDATOR_BASE_URL')}/validate_entity`, {entity_json: creatureData})).data
-
-    console.log(validationResult)
-
-
-
-    //validate creature, if false, retry prompt
-
-    return creatureData
+    return modelResponse.result  
+  
   }
 
   @Post('/generate/creature/debug')
   async createCreatureDebug(@Body() createCreatureDTO: ApiCreatureAiInput){
-    const creatureData = await this.gptService.createCreature(createCreatureDTO)
+    let modelResponse = await this.gptService.createCreature(createCreatureDTO)
+    let validationResult: ValidationResultDTO
+    let generation_count = 0
 
-    console.log(creatureData)
+    while(generation_count < 5){
+      validationResult = (await axios.post(`${this.configService.get('VALIDATOR_BASE_URL')}/validate_entity`, {entity_json: modelResponse.result})).data
+      console.log(validationResult)
+      if(validationResult.is_success){
+        return {creatureData: modelResponse.result, validationResult}
+      }
+      else{
+        modelResponse = await this.gptService.regenerateCreature(modelResponse.messages, validationResult.result)
+      }
+      generation_count += 1
+    }
 
-    const validationResult = (await axios.post(`${this.configService.get('VALIDATOR_BASE_URL')}/validate_entity`, {entity_json: creatureData})).data
-
-    console.log(validationResult)
-
-
-
-    //validate creature, if false, retry prompt
-
-    return {creatureData, validationResult}
+    return {creatureData: modelResponse.result, validationResult}    
   }
 }

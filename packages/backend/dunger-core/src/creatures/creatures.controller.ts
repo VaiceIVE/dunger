@@ -36,7 +36,7 @@ export class CreaturesController {
     @Body() createCreatureDto: CreateCreatureManualDto,
     @CurrentUser() user,
   ) {
-    return this.creaturesService.initCreature(createCreatureDto, user.id);
+    //return this.creaturesService.initCreature(createCreatureDto, user.id);
   }
 
   @UseGuards(JwtAuthGuard)
