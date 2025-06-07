@@ -243,23 +243,15 @@ exports.Prisma.ChallengeRatingMetadataScalarFieldEnum = {
   xp_reward: 'xp_reward'
 };
 
-exports.Prisma.GenrationRequestScalarFieldEnum = {
+exports.Prisma.GPTCreatureRequestScalarFieldEnum = {
   id: 'id',
-  request: 'request',
-  danger: 'danger',
-  name: 'name'
-};
-
-exports.Prisma.GPTMessageHistoryScalarFieldEnum = {
-  id: 'id',
-  type: 'type'
-};
-
-exports.Prisma.GPTMessageScalarFieldEnum = {
-  message_history_id: 'message_history_id',
-  number: 'number',
-  text: 'text',
-  role: 'role'
+  creature_id: 'creature_id',
+  name: 'name',
+  challenge_rating: 'challenge_rating',
+  type_name: 'type_name',
+  creation_description: 'creation_description',
+  role: 'role',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.AdventureScalarFieldEnum = {
@@ -399,6 +391,11 @@ exports.ChallengeRatingEnum = exports.$Enums.ChallengeRatingEnum = {
   CR_30: 'CR_30'
 };
 
+exports.CreatureRole = exports.$Enums.CreatureRole = {
+  OFFENCE: 'OFFENCE',
+  DEFENCE: 'DEFENCE'
+};
+
 exports.Gender = exports.$Enums.Gender = {
   HE: 'HE',
   SHE: 'SHE',
@@ -425,9 +422,7 @@ exports.Prisma.ModelName = {
   CreatureRace: 'CreatureRace',
   DamageType: 'DamageType',
   ChallengeRatingMetadata: 'ChallengeRatingMetadata',
-  GenrationRequest: 'GenrationRequest',
-  GPTMessageHistory: 'GPTMessageHistory',
-  GPTMessage: 'GPTMessage',
+  GPTCreatureRequest: 'GPTCreatureRequest',
   Adventure: 'Adventure',
   Keyword: 'Keyword',
   Genre: 'Genre',

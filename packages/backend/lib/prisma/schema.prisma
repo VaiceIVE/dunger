@@ -43,7 +43,7 @@ model Language {
 }
 
 model Biome {
-  id          Int        @default(autoincrement()) @id()
+  id          Int        @default(autoincrement()) @id
   short_name  String     @unique
   name        String     @unique
 
@@ -184,8 +184,8 @@ model Creature {
   // Отдельные связанные объекты
   speed           CreatureSpeed?      @relation
   stats           CreatureStats?      @relation
-  skills          CreatureSkills?         @relation
-  senses          CreatureSenses?             @relation
+  skills          CreatureSkills?     @relation
+  senses          CreatureSenses?     @relation
 
   // Отношения к справочникам
   challenge_rating_meta ChallengeRatingMetadata @relation(fields: [challenge_rating], references: [display])
@@ -202,7 +202,10 @@ model Creature {
   languages_relation Language[]      @relation("creature_languages")
   biomes_relation    Biome[]         @relation("creature_biomes")
   actions_relation   Action[]        @relation("creature_actions")
-  traits_relation    Trait[]         @relation("creature_traits")   
+  traits_relation    Trait[]         @relation("creature_traits") 
+
+  // История запросов
+  gpt_request_relation  GPTCreatureRequest?  @relation
 
   @@map("creatures")
 }
@@ -318,33 +321,23 @@ model ChallengeRatingMetadata {
   @@map("challenge_rating_metadata")
 }
 
-model GenrationRequest{
-  id Int @default(autoincrement()) @id
-  request String
-  danger String //todo
-  name String
-
-  @@map("generation_requests")
+enum CreatureRole {
+  OFFENCE
+  DEFENCE
 }
+model GPTCreatureRequest {
+  id                   Int              @id @default(autoincrement())
+  creature_id          String           @unique              
+  name                 String
+  challenge_rating     String
+  type_name            String
+  creation_description String?
+  role                 CreatureRole?
+  createdAt            DateTime         @default(now())
 
-model GPTMessageHistory {
-  id        String       @default(uuid()) @id
-  type      String
-  messages_relation GPTMessage[]
+  creature_relation    Creature         @relation(fields: [creature_id], references: [id])    
 
-  @@map("gpt_message_histories")
-}
-
-model GPTMessage {
-  message_history_id String
-  number            Int
-  text              String
-  role              String
-
-  message_history_relation GPTMessageHistory @relation(fields: [message_history_id], references: [id])
-
-  @@id([message_history_id, number])
-  @@map("gpt_messages")
+  @@map("gpt_creature_request")
 }
 model Adventure {
   id                  String     @id @default(uuid())
