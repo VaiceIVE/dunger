@@ -1,9 +1,10 @@
 import { FormEvent, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
 import {
+  ArrowRightIcon,
   Button,
   ButtonVariant,
   ChevronsUpIcon,
@@ -27,6 +28,8 @@ import { useEditBeastAction } from './useEditBeastAction';
 export const EditBeastPage = () => {
   const { id } = useParams();
   invariant(id);
+
+  const navigate = useNavigate();
 
   const authFetch = useAuthFetch();
   const { data: creature } = useSuspenseQuery({
@@ -57,10 +60,15 @@ export const EditBeastPage = () => {
 
     if (!changed) return;
     if (!e.currentTarget.reportValidity()) return;
+
+    const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement;
+
     void saveAction(new FormData(e.currentTarget))
       .then(() => {
         setChanged(false);
         setIsSaved(true);
+
+        if (submitter.value === 'end') void navigate(`/my-bestiary/${id}`);
       })
       .catch(() => {
         setIsFailed(true);
@@ -101,8 +109,11 @@ export const EditBeastPage = () => {
         <Footer style={styles.footer}>
           <Container style={styles.container}>
             <Flex gap={8}>
-              <Button type="submit" disabled={!changed} variant={ButtonVariant.accent}>
-                Закончить редактирование
+              <Button value={'save'} type="submit" disabled={!changed} variant={ButtonVariant.accent}>
+                Сохранить
+              </Button>
+              <Button value={'end'} type="submit" disabled={!changed}>
+                Закончить редактирование <ArrowRightIcon {...stylex.props(styles.arrow)} />
               </Button>
               <IconButton type="button" onClick={scrollToTop} size="lg">
                 <ChevronsUpIcon />
@@ -123,5 +134,9 @@ const styles = stylex.create({
   card: { height: 'calc(100dvh - 116px)', position: 'sticky', right: 0, top: 32 },
   footer: { left: 'unset', right: 0, width: 'calc(100% - 77px)' },
   container: { alignItems: 'center', display: 'flex', justifyContent: 'space-between', paddingBlock: 12 },
-  saved: { color: colors.textTertiaryDefault }
+  saved: { color: colors.textTertiaryDefault },
+  arrow: {
+    height: 16,
+    width: 16
+  }
 });
