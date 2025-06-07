@@ -6,7 +6,8 @@ import { useAccordionItemContext } from '../../AccordionItem.context';
 
 export interface AccordionControlProps extends Omit<ComponentProps<'div'>, 'style' | 'children'> {
   style?: StyleXStyles;
-  children: ReactNode | ((open: boolean) => ReactNode);
+
+  children?: ReactNode | ((open: boolean) => ReactNode);
 }
 
 export const AccordionControl = ({ children, onClick, style }: AccordionControlProps) => {
