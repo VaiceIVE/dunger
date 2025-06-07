@@ -9,12 +9,12 @@
     "seed": "ts-node prisma/seeds/seed-all.ts"
   },
   "scripts": {
-    "c:build": "nest build",
+    "build": "nest build",
+    "prod": "node dist/main",
     "c:format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "c:start": "nest start",
     "c:start:dev": "nest start --watch",
     "c:start:debug": "nest start --debug --watch",
-    "c:start:prod": "node dist/main",
     "c:lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "c:test": "jest",
     "c:test:watch": "jest --watch",
