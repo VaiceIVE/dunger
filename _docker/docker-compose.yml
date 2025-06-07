@@ -17,10 +17,14 @@ services:
     container_name: keycloak
     ports:
       - 8080:8080
-    command: start-dev
     environment:
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KEYCLOAK_FEATURES: authorization,scripts
+    command:
+      - start-dev
+      - --verbose
+      - --import-realm
     networks:
       - dunger_backend_net
     healthcheck:
@@ -33,7 +37,7 @@ services:
       timeout: 10s
       retries: 5
     volumes:
-      - ./keycloak/realm-export.json:/opt/keycloak/data/export
+      - ./keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
 
   # MinIO
   minio:
