@@ -527,6 +527,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@dunger/auth-fetch@workspace:packages/frontend/lib/auth-fetch"
   dependencies:
+    "@dunger/common-enums": "workspace:*"
     "@types/react": "npm:^19.0.0"
     react: "npm:^19.0.0"
     typescript: "npm:~5.5.0"
