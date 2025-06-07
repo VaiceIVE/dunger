@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 import { useAuthFetch } from '@dunger/auth-fetch';
-import { ApiCreature, ApiCreatureInput } from 'store/_types';
+import { ApiCreature } from 'store/_types';
 
 export const useEditMagicItemAction = () => {
   const authFetch = useAuthFetch();
 
-  const { mutateAsync: updateCreature } = useMutation<ApiCreature, Error, ApiCreatureInput>({
+  const { mutateAsync: updateCreature } = useMutation<ApiCreature, Error, { id: string }>({
     mutationFn: (input) =>
       authFetch(`/creatures/${input.id}`, {
         method: 'PATCH',
@@ -17,7 +17,9 @@ export const useEditMagicItemAction = () => {
   });
 
   const saveAction = async (formData: FormData) => {
-    await updateCreature();
+    const id = (formData.get('id') as string).toString();
+
+    await updateCreature({ id });
   };
 
   return {
