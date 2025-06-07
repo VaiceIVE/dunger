@@ -102,7 +102,7 @@ const styles = stylex.create({
       default: '100%',
       '@media (min-width: 540px)': 500
     },
-    zIndex: 200
+    zIndex: 100
   },
   open: {
     right: 0,
