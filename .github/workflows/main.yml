@@ -11,9 +11,7 @@ jobs:
   deploy:
     runs-on: ["self-hosted"]
     environment: prod         
-    permissions:
-      deployments: write 
-      contents: read
+    permissions: read-all
     steps:
       - name: Install jq
         run: |
