@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Setup web env
+      - name: Setup frontend env
         run: |
           {
             echo "VITE_API_URL=${{ vars.VITE_API_URL }}"
@@ -25,11 +25,38 @@ jobs:
         run: |
           docker build -t dunger-user-web -f packages/frontend/dunger-user-web/Dockerfile .
           docker stop dunger-user-web-container || true && docker rm dunger-user-web-container || true
-          docker run -d -p 5173:8080 --name dunger-user-web-container --env-file packages/frontend/dunger-user-web/.env dunger-user-web
-
+          docker run -d -p ${{ vars.FRONTEND_PORT }}:8080 --name dunger-user-web-container --env-file packages/frontend/dunger-user-web/.env dunger-user-web
+      - name: Setup core backend env
+        run: |
+          {
+            echo "DATABASE_URL=${{ vars.DATABASE_URL }}"
+            echo "GPT_BASE_URL=${{ vars.GPT_BASE_URL }}"
+            echo "KEYCLOAK_URL=${{ vars.KEYCLOAK_URL }}"
+            echo "KEYCLOAK_REALM=${{ vars.KEYCLOAK_REALM }}"
+            echo "KEYCLOAK_ADMIN_CLIENT_ID=${{ vars.KEYCLOAK_ADMIN_CLIENT_ID }}"
+            echo "KEYCLOAK_ADMIN_CLIENT_SECRET=${{ secrets.KEYCLOAK_ADMIN_CLIENT_SECRET }}"
+            echo "KEYCLOAK_CLIENT_ID=${{ vars.KEYCLOAK_CLIENT_ID }}"
+            echo "KEYCLOAK_CLIENT_SECRET=${{ secrets.KEYCLOAK_CLIENT_SECRET }}"
+            echo "CUSTOM_CONTENT_SOURCE=${{ vars.CUSTOM_CONTENT_SOURCE }}"
+            echo "S3_ACCESS_KEY=${{ secrets.S3_ACCESS_KEY }}"
+            echo "S3_SECRET_KEY=${{ secrets.S3_SECRET_KEY }}"
+            echo "S3_REGION=us-east-1"
+            echo "S3_BUCKET_URL=${{ vars.S3_BUCKET_URL }}"
+            echo "S3_EXTERNAL_BUCKET_URL=${{ vars.S3_EXTERNAL_BUCKET_URL }}"
+          } > packages/backend/dunger-core/.env
       - name: Build and run Dunger Core
         run: |
           docker build -t dunger-core -f packages/backend/dunger-core/Dockerfile .
           docker stop dunger-core-container || true && docker rm dunger-core-container || true
-          docker network create dunger_backend_net || true
-          docker run -d -p 3000:3000 --name dunger-core-container --network dunger_backend_net --env-file packages/backend/dunger-core/.env dunger-core
+          docker run -d -p ${{ vars.CORE_PORT }}:3000 --name dunger-core-container --network dunger_backend_net --env-file packages/backend/dunger-core/.env dunger-core
+      - name: Setup gpt backend env
+        run: |
+          {        
+            echo "OPENAI_CHAT_API_URL=${{ vars.OPENAI_CHAT_API_URL }}"
+            echo "OPENAI_OAUTH=${{ secrets.OPENAI_OAUTH }}"
+            echo "PROXY_USERNAME=${{ vars.PROXY_USERNAME }}"
+            echo "PROXY_PASSWORD=${{ secrets.PROXY_PASSWORD }}"
+            echo "PROXY_URL=${{ vars.PROXY_URL }}"
+            echo "PROXY_PORT=${{ vars.PROXY_PORT }}"
+            echo "VALIDATOR_BASE_URL=${{ vars.VALIDATOR_BASE_URL }}"
+          } > packages/backend/dunger-core/.env
