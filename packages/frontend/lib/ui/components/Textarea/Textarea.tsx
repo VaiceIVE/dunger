@@ -30,6 +30,7 @@ const TextareaImpl = ({
   maxRows,
   minRows,
   value,
+  defaultValue,
   onInput,
   style,
   maxLength,
@@ -38,7 +39,7 @@ const TextareaImpl = ({
   const textareaRef = useRef<HTMLDivElement>(null);
   const ctx = useInputWrapper();
 
-  const [charCount, setCharCount] = useState(value?.toString().length ?? 0);
+  const [charCount, setCharCount] = useState(value?.toString().length ?? defaultValue?.toString().length ?? 0);
 
   const handleInput: FormEventHandler<HTMLTextAreaElement> = (e) => {
     ctx?.setError(null);
@@ -75,6 +76,7 @@ const TextareaImpl = ({
           onInvalid={handleInvalid}
           aria-invalid={!!ctx?.error}
           value={value}
+          defaultValue={defaultValue}
           {...stylex.props(text.defaultMedium, styles.textarea, style)}
           {...props}
         />
