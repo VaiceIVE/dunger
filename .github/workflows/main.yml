@@ -1,0 +1,31 @@
+name: Deploy Dunger Applications
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_run:
+    branches: [ "master" ]
+
+jobs:
+  deploy:
+    runs-on: ["self-hosted"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup web env
+        run: env > packages/frontend/.env
+
+      - name: Build and run Dunger User Web
+        run: |
+          docker build -t dunger-user-web -f packages/frontend/dunger-user-web/Dockerfile .
+          docker stop dunger-user-web-container || true && docker rm dunger-user-web-container || true
+          docker run -d -p 5173:8080 --name dunger-user-web-container --env-file packages/frontend/dunger-user-web/.env dunger-user-web
+
+      - name: Build and run Dunger Core
+        run: |
+          docker build -t dunger-core -f packages/backend/dunger-core/Dockerfile .
+          docker stop dunger-core-container || true && docker rm dunger-core-container || true
+          docker network create dunger_backend_net || true
+          docker run -d -p 3000:3000 --name dunger-core-container --network dunger_backend_net --env-file packages/backend/dunger-core/.env dunger-core
