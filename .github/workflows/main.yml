@@ -16,11 +16,17 @@ jobs:
       - name: Install jq
         run: |
           sudo apt-get update && sudo apt-get install -y jq
+      - name: Generate App Token
+        uses: tibdex/github-app-token@v1
+        id: generate-token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup web env
         run: |
-          echp | curl -s -H "Authorization: token $GH_TOKEN" \
+          echp | curl -s -H "Authorization: Bearer ${{ steps.generate-token.outputs.token }}" \
           "https://api.github.com/repos/$GITHUB_REPOSITORY/environments/prod/variables" \
           # | jq -r '.variables[] | "\(.name)=\(.value)"' > packages/frontend/dunger-user-web/.env
 
