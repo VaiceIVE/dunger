@@ -20,7 +20,7 @@ jobs:
       - name: Setup web env
         run: |
           echp | curl -s -H "Authorization: token $GH_TOKEN" \
-          "https://api.github.com/repos/dunger/environments/prod/variables" \
+          "https://api.github.com/repos/$GITHUB_REPOSITORY/environments/prod/variables" \
           # | jq -r '.variables[] | "\(.name)=\(.value)"' > packages/frontend/dunger-user-web/.env
 
       - name: Build and run Dunger User Web
