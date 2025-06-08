@@ -13,9 +13,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
+      - name: Echo env
+        run: echo env
       - name: Setup web env
-        run: env | grep -v '^(DB_|APP_|GITHUB_)' > packages/frontend/dunger-user-web/.env
+        run: env | grep -v '^(GITHUB_)' > packages/frontend/dunger-user-web/.env
 
       - name: Build and run Dunger User Web
         run: |
