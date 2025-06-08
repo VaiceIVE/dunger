@@ -12,10 +12,11 @@ jobs:
     runs-on: ["self-hosted"]
     environment: prod
     steps:
+      - name: Install jq
+        run: |
+          sudo apt-get update && sudo apt-get install -y jq
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Echo env
-        run: echo | env
       - name: Setup web env
         run: |
           curl -s -H "Authorization: token $GH_TOKEN" \
