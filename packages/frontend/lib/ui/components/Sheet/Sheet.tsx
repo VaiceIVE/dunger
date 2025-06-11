@@ -23,6 +23,12 @@ export interface SheetProps {
    * По умолчанию true
    */
   unmount?: boolean;
+  /**
+   * Определяет, должен ли компонент закрываться,
+   * когда пользователь щелкает по оверлею
+   * По умолчанию true
+   */
+  closeOnClickOutside?: boolean;
 }
 
 export function Sheet({
@@ -31,7 +37,8 @@ export function Sheet({
   open: openProp,
   onOpenChange,
   withOverlay = true,
-  unmount
+  unmount,
+  closeOnClickOutside = true
 }: PropsWithChildren<SheetProps>) {
   const [open, setOpenState] = useState(defaultOpen ?? openProp ?? false);
 
@@ -76,7 +83,7 @@ export function Sheet({
   }, [open]);
 
   return (
-    <SheetProvider value={{ open, setOpen, unmount }}>
+    <SheetProvider value={{ open, setOpen, unmount, closeOnClickOutside }}>
       {!!withOverlay && <SheetOverlay />}
       {children}
     </SheetProvider>

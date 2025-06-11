@@ -6,11 +6,12 @@ import { useSheetContext } from '../../Sheet.context';
 
 export interface SheetContentProps extends PropsWithChildren {
   style?: StyleXStyles;
-  shouldCloseOnClickOutside?: boolean;
+
+  closeOnClickOutside?: boolean;
 }
 
 export function SheetContent(props: SheetContentProps) {
-  const { open, unmount } = useSheetContext();
+  const { open, unmount, closeOnClickOutside } = useSheetContext();
   const [fragment, setFragment] = useState<DocumentFragment>();
 
   useLayoutEffect(() => {
@@ -26,10 +27,10 @@ export function SheetContent(props: SheetContentProps) {
     return frag ? createPortal(<div>{props.children}</div>, frag) : null;
   }
 
-  return <SheetContentImpl {...props} />;
+  return <SheetContentImpl {...props} closeOnClickOutside={closeOnClickOutside} />;
 }
 
-function SheetContentImpl({ style, children, shouldCloseOnClickOutside = true }: SheetContentProps) {
+function SheetContentImpl({ style, children, closeOnClickOutside }: SheetContentProps) {
   const { open, setOpen } = useSheetContext();
   const ref = useRef<HTMLDivElement>(null);
 
@@ -42,7 +43,7 @@ function SheetContentImpl({ style, children, shouldCloseOnClickOutside = true }:
         return;
       }
 
-      if (shouldCloseOnClickOutside) {
+      if (closeOnClickOutside) {
         if (ref.current && !ref.current.contains(target)) {
           setOpen(false);
         }
@@ -60,7 +61,7 @@ function SheetContentImpl({ style, children, shouldCloseOnClickOutside = true }:
       active = false;
       window.removeEventListener('click', handleClick);
     };
-  }, [open, setOpen, shouldCloseOnClickOutside]);
+  }, [open, setOpen, closeOnClickOutside]);
 
   const containerElement = document.getElementById('root');
   const element = (
@@ -73,7 +74,7 @@ function SheetContentImpl({ style, children, shouldCloseOnClickOutside = true }:
     throw new Error('Your app must has #root element');
   }
 
-  return <>{createPortal(element, containerElement)}</>;
+  return createPortal(element, containerElement);
 }
 
 const styles = stylex.create({
