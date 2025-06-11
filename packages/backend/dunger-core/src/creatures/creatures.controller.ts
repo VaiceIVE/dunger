@@ -175,7 +175,7 @@ export class CreaturesController {
     return this.creaturesService.findOne(id);
   }
 
-  //@UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCreatureDto: ApiCreatureInput) {
     return this.creaturesService.update(id, updateCreatureDto);
