@@ -18,8 +18,6 @@ import { ApiCreatureInput, PaginationQueryDto } from 'src/common/dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { CreateCreatureAiDto } from './dto/create-creature-ai.dto';
-import { AppError } from 'src/common/errors';
-import { HttpStatus } from '@dunger/common-enums';
 
 @Controller('creatures')
 export class CreaturesController {
@@ -42,36 +40,23 @@ export class CreaturesController {
     return this.creaturesService.initCreature(createCreatureDto, user.id);
   }
 
+  /**
+   * POST, Генерирует существо или перегенерирует созданное
+   *
+   * Получает данные для создания из body и данные о пользователе из JWT payload
+   */
   @UseGuards(JwtAuthGuard)
-  @Post('/generate')
+  @Post('/generate/:id?')
   async generateCreature(
     @Body() createCreatureDto: CreateCreatureAiDto,
     @CurrentUser() user,
+    @Param('id') creatureId?: string,
   ) {
-    let aiCretureData: ApiCreatureInput;
-
-    try {
-      const { data } = await axios.post(
-        `${this.configService.get('GPT_BASE_URL')}/gpt/generate/creature`,
-        createCreatureDto,
-      );
-
-      aiCretureData = data;
-    } catch {
-      throw new AppError({
-        errorText: 'Failed to AI generation',
-        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
-      });
-    }
-
-    const creature = await this.creaturesService.initCreature(
+    return this.creaturesService.generateCreature(
       createCreatureDto,
       user.id,
+      creatureId,
     );
-
-    await this.creaturesService.update(creature.id, aiCretureData);
-
-    return { id: creature.id };
   }
 
   @UseGuards(JwtAuthGuard)

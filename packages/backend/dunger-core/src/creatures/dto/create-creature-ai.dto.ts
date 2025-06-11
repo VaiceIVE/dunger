@@ -1,9 +1,9 @@
-import { ApiCreatureRole } from 'src/common/dto';
+import { CreatureRole } from '@dunger/prisma';
 
 export class CreateCreatureAiDto {
   name: string;
   type_name: string;
   challenge_rating: string;
-  role: ApiCreatureRole | null;
+  role: CreatureRole | null;
   creation_description: string | null;
 }

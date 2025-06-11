@@ -16,6 +16,8 @@ import { AppError } from 'src/common/errors';
 import { HttpStatus } from '@dunger/common-enums';
 import { mapAbilitiesToApiStats } from './utils/stats.mapper';
 import { mapAbilitiesToApiSkills } from './utils/skills.mapper';
+import { CreateCreatureAiDto } from './dto/create-creature-ai.dto';
+import axios from 'axios';
 
 @Injectable()
 export class CreaturesService {
@@ -79,6 +81,59 @@ export class CreaturesService {
       data: creatureData,
       select: { id: true },
     });
+  }
+
+  /**
+   * Генерирует существо, создает запись в истории генераций.
+   * Устанавливает источник как кастомный (по shortName из this.customContentSource).
+   *
+   * @param generateCreatureDto - Данные для генерации существа.
+   * @param userId - id пользователя, который создает существо.
+   * @param creatureId - id созданного существа, которое перегенируют.
+   * @returns id созданного существа.
+   */
+  async generateCreature(
+    generateCreatureDto: CreateCreatureAiDto,
+    userId: string,
+    creatureId?: string,
+  ): Promise<{ id: string }> {
+    const gptUrl = `${this.configService.get('GPT_BASE_URL')}/gpt/generate/creature`;
+
+    const aiCreatureData: ApiCreatureInput = await this.requestAiGeneration(
+      gptUrl,
+      generateCreatureDto,
+    );
+
+    const id =
+      creatureId ?? (await this.initCreature(generateCreatureDto, userId)).id;
+
+    await this.update(id, aiCreatureData);
+
+    await this.prisma.gPTCreatureRequest.upsert({
+      where: { creature_id: id },
+      update: generateCreatureDto,
+      create: {
+        creature_id: id,
+        ...generateCreatureDto,
+      },
+    });
+
+    return { id };
+  }
+
+  private async requestAiGeneration(
+    url: string,
+    payload: CreateCreatureAiDto,
+  ): Promise<ApiCreatureInput> {
+    try {
+      const { data } = await axios.post(url, payload);
+      return data;
+    } catch {
+      throw new AppError({
+        errorText: 'Failed to AI generation',
+        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+      });
+    }
   }
 
   /**
@@ -477,20 +532,6 @@ export class CreaturesService {
         connect: { name: updateCreatureDto.type_relation.name },
       };
     }
-    if (
-      updateCreatureDto.biome_relation?.length ||
-      updateCreatureDto.biomes_ids?.length
-    ) {
-      updates.biomes_relation = {
-        set: [],
-        connect: [
-          ...(updateCreatureDto.biome_relation?.map((biome) => ({
-            name: biome.name,
-          })) ?? []),
-          ...(updateCreatureDto.biomes_ids?.map((id) => ({ id })) ?? []),
-        ],
-      };
-    }
 
     if (updateCreatureDto.speed) {
       await this.prisma.creature.update({
@@ -742,65 +783,50 @@ export class CreaturesService {
       });
     }
 
-    if (updateCreatureDto.languages?.length) {
-      updates.languages_relation = {
-        set: [],
-        connectOrCreate: updateCreatureDto.languages.map((lang) => ({
-          where: { name: lang.name },
-          create: { name: lang.name },
-        })),
-      };
-    }
+    updates.biomes_relation = {
+      set: [
+        ...(updateCreatureDto.biome_relation?.map((biome) => ({
+          name: biome.name,
+        })) ?? []),
+        ...(updateCreatureDto.biomes_ids?.map((id) => ({ id })) ?? []),
+      ],
+    };
 
-    if ('languages_ids' in updateCreatureDto) {
-      updates.languages_relation = {
-        set: (updateCreatureDto.languages_ids ?? []).map((id) => ({ id })),
-      };
-    }
-
-    if ('immunities_ids' in updateCreatureDto) {
-      updates.immunities = {
-        set: (updateCreatureDto.immunities_ids ?? []).map((id) => ({ id })),
-      };
-    }
-
-    if ('vulnerabilities_ids' in updateCreatureDto) {
-      updates.vulnerabilities = {
-        set: (updateCreatureDto.vulnerabilities_ids ?? []).map((id) => ({
-          id,
-        })),
-      };
-    }
-
-    if ('resistances_ids' in updateCreatureDto) {
-      updates.resistances = {
-        set: (updateCreatureDto.resistances_ids ?? []).map((id) => ({ id })),
-      };
-    }
-
-    if ('immunities' in updateCreatureDto) {
-      updates.immunities = {
-        set: (updateCreatureDto.immunities ?? []).map((item) => ({
+    updates.languages_relation = {
+      set: [
+        ...(updateCreatureDto?.languages ?? []).map((item) => ({
           name: item.name,
         })),
-      };
-    }
+        ...(updateCreatureDto.languages_ids ?? []).map((id) => ({ id })),
+      ],
+    };
 
-    if ('vulnerabilities' in updateCreatureDto) {
-      updates.vulnerabilities = {
-        set: (updateCreatureDto.vulnerabilities ?? []).map((item) => ({
+    updates.immunities = {
+      set: [
+        ...(updateCreatureDto.immunities ?? []).map((item) => ({
           name: item.name,
         })),
-      };
-    }
+        ...(updateCreatureDto.immunities_ids ?? []).map((id) => ({ id })),
+      ],
+    };
 
-    if ('resistances' in updateCreatureDto) {
-      updates.resistances = {
-        set: (updateCreatureDto.resistances ?? []).map((item) => ({
+    updates.vulnerabilities = {
+      set: [
+        ...(updateCreatureDto?.vulnerabilities ?? []).map((item) => ({
           name: item.name,
         })),
-      };
-    }
+        ...(updateCreatureDto?.vulnerabilities_ids ?? []).map((id) => ({ id })),
+      ],
+    };
+
+    updates.resistances = {
+      set: [
+        ...(updateCreatureDto?.resistances ?? []).map((item) => ({
+          name: item.name,
+        })),
+        ...(updateCreatureDto.resistances_ids ?? []).map((id) => ({ id })),
+      ],
+    };
 
     if ('actions_ids' in updateCreatureDto) {
       updates.actions_relation = {
@@ -824,42 +850,44 @@ export class CreaturesService {
     return this.selectCreatureForCard(id);
   }
 
-  private async mapCreatureToApiCreature(creature): Promise<ApiCreature> {
+  private async mapCreatureToApiCreature(creatureRaw): Promise<ApiCreature> {
     const metadata = await this.prisma.skillMetadata.findMany();
 
-    return {
-      id: creature.id,
-      name: creature.name,
-      description: creature.description,
-      alignment_id: creature.alignment_relation?.id ?? null,
-      alignment_name: creature.alignment_relation?.name ?? null,
-      size_id: creature.size_relation?.id ?? null,
-      size_name: creature.size_relation?.name ?? null,
-      type_id: creature.type_relation?.id ?? null,
-      type_name: creature.type_relation?.name ?? null,
-      armor_class: creature.armor_class,
+    const creature: ApiCreature = {
+      id: creatureRaw.id,
+      name: creatureRaw.name,
+      description: creatureRaw.description,
+      alignment_id: creatureRaw.alignment_relation?.id ?? null,
+      alignment_name: creatureRaw.alignment_relation?.name ?? null,
+      size_id: creatureRaw.size_relation?.id ?? null,
+      size_name: creatureRaw.size_relation?.name ?? null,
+      type_id: creatureRaw.type_relation?.id ?? null,
+      type_name: creatureRaw.type_relation?.name ?? null,
+      armor_class: creatureRaw.armor_class,
       armor_type_id: null, // TODO
       armor_type_name: null, // TODO
-      biomes_ids: creature.biomes_relation.map((b) => b.id),
-      biomes: creature.biomes_relation,
-      challenge_rating: creature.challenge_rating,
-      hit_points: creature.hit_points,
-      generation_info: null,
-      languages: creature.languages_relation ?? [],
-      languages_ids: creature.languages_relation?.map((l) => l.id) ?? [],
-      immunities: creature.immunities ?? [],
-      immunities_ids: creature.immunities?.map((i) => i.id) ?? [],
-      resistances: creature.resistances ?? [],
-      resistances_ids: creature.resistances?.map((r) => r.id) ?? [],
-      vulnerabilities: creature.vulnerabilities ?? [],
-      vulnerabilities_ids: creature.vulnerabilities?.map((v) => v.id) ?? [],
-      senses: creature.senses ?? nullSensesObject,
-      skills: mapAbilitiesToApiSkills(metadata, creature.skills?.skills),
-      stats: mapAbilitiesToApiStats(creature.stats?.stats),
-      speed: creature.speed ?? nullSpeedObject,
-      traits: creature.traits_relation ?? [],
-      actions: creature.actions_relation ?? [],
+      biomes_ids: creatureRaw.biomes_relation.map((b) => b.id),
+      biomes: creatureRaw.biomes_relation,
+      challenge_rating: creatureRaw.challenge_rating,
+      hit_points: creatureRaw.hit_points,
+      generation_info: creatureRaw.gpt_request_relation ?? null,
+      languages: creatureRaw.languages_relation ?? [],
+      languages_ids: creatureRaw.languages_relation?.map((l) => l.id) ?? [],
+      immunities: creatureRaw.immunities ?? [],
+      immunities_ids: creatureRaw.immunities?.map((i) => i.id) ?? [],
+      resistances: creatureRaw.resistances ?? [],
+      resistances_ids: creatureRaw.resistances?.map((r) => r.id) ?? [],
+      vulnerabilities: creatureRaw.vulnerabilities ?? [],
+      vulnerabilities_ids: creatureRaw.vulnerabilities?.map((v) => v.id) ?? [],
+      senses: creatureRaw.senses ?? nullSensesObject,
+      skills: mapAbilitiesToApiSkills(metadata, creatureRaw.skills?.skills),
+      stats: mapAbilitiesToApiStats(creatureRaw.stats?.stats),
+      speed: creatureRaw.speed ?? nullSpeedObject,
+      traits: creatureRaw.traits_relation ?? [],
+      actions: creatureRaw.actions_relation ?? [],
     };
+
+    return creature;
   }
 
   private async selectCreatureForCard(

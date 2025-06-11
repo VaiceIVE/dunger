@@ -5,6 +5,9 @@ export const creatureInclude = {
       short_name: true,
     },
   },
+  gpt_request_relation: {
+    omit: { id: true, creature_id: true, createdAt: true },
+  },
   race_relation: true,
   size_relation: true,
   type_relation: true,

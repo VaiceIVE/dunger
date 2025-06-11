@@ -54,6 +54,4 @@ export interface ApiCreature {
   actions: ApiAction[];
   // Способности и свойства
   traits: ApiTrait[];
-  //s_type: null;
-  //aSubTypes: [];
 }
