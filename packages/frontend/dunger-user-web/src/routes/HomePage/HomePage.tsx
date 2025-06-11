@@ -1,47 +1,45 @@
 import * as stylex from '@stylexjs/stylex';
-import {
-  Button,
-  ButtonVariant,
-  Container,
-  Flex,
-  Grid,
-  headers,
-  PlusIcon,
-  SearchIcon,
-  Stack,
-  text,
-  TextInput
-} from '@dunger/ui';
-import { colors } from '@dunger/ui/tokens.stylex';
-import { AdventureMaterials } from 'features/AdventureMaterials';
+import { Link } from 'react-router-dom';
+import { useAuth } from '@dunger/auth-fetch';
+import { Button, ButtonVariant, Container, Grid, headers, PlusIcon, Stack, text } from '@dunger/ui';
+import bestiary from './_images/bestiary.png';
+import classes from './_images/classes.png';
+import magicItems from './_images/magic-items.png';
+import species from './_images/species.png';
+import s from './HomePage.module.scss';
 
 const cards = [
-  { count: 345, name: 'Бестиарий' },
-  { count: 8, name: 'Классы' },
-  { count: 12, name: 'Расы' },
-  { count: 213, name: 'Предметы' }
+  { count: 345, name: 'Бестиарий', image: bestiary, path: '/bestiary' },
+  { count: 8, name: 'Классы', image: classes },
+  { count: 12, name: 'Расы', image: species },
+  { count: 213, name: 'Предметы', image: magicItems, path: '/magic-items' }
 ];
 
 export function HomePage() {
+  const { isAuthenticated } = useAuth();
+
   return (
-    <main {...stylex.props(styles.root)}>
+    <main className={s.HomePage}>
       <Container>
         <Grid gap={32}>
           <Grid.Col span={9}>
             <Stack gap={40}>
-              <TextInput placeholder="Поиск" leftSection={<SearchIcon />} />
-              <Flex gap={16}>
-                {cards.map((s) => (
-                  <div {...stylex.props(styles.card)} key={s.name}>
-                    <Stack gap={8}>
-                      <h2 {...stylex.props(headers.h2Bold)}>{s.count}</h2>
-                      <div {...stylex.props(text.subheaderSemibold)}>{s.name}</div>
-                    </Stack>
-                  </div>
+              {/* <TextInput placeholder="Поиск" leftSection={<SearchIcon />} /> */}
+              <ul className={s.HomePage__list}>
+                {cards.map((c) => (
+                  <Link key={c.name} to={c.path ?? ''}>
+                    <li className={s.HomePage__card}>
+                      <Stack gap={8}>
+                        <h2 {...stylex.props(headers.h2Bold)}>{c.count}</h2>
+                        <div className={s.HomePage__name}>{c.name}</div>
+                      </Stack>
+                      <img src={c.image} className={s.HomePage__image} />
+                    </li>
+                  </Link>
                 ))}
-              </Flex>
-              <div {...stylex.props(styles.adBanner)}>
-                <Flex gap={20} justify="space-between" style={styles.adBannerContent} align="flex-end">
+              </ul>
+              <div className={s.HomePage__banner}>
+                <div className={s.HomePage__content}>
                   <Stack gap={8}>
                     <h3 {...stylex.props(headers.h3Bold)}>Здесь начинается твой путь!</h3>
                     <div {...stylex.props(text.defaultMedium)}>
@@ -49,14 +47,13 @@ export function HomePage() {
                       Теперь приключение можно построить буквально из кирпичиков, избегая всю рутину!
                     </div>
                   </Stack>
-                  <Button variant={ButtonVariant.accent}>
-                    Создать приключение <PlusIcon width={16} height={16} />
-                  </Button>
-                </Flex>
+                  <Link to={isAuthenticated ? '/adventures' : '/no-auth'}>
+                    <Button variant={ButtonVariant.accent}>
+                      Создать приключение <PlusIcon width={16} height={16} />
+                    </Button>
+                  </Link>
+                </div>
               </div>
-              <Stack gap={24}>
-                <h3 {...stylex.props(headers.h3Bold)}>Мои материалы</h3> <AdventureMaterials />
-              </Stack>
             </Stack>
           </Grid.Col>
           <Grid.Col span={3}></Grid.Col>
@@ -65,34 +62,3 @@ export function HomePage() {
     </main>
   );
 }
-
-const styles = stylex.create({
-  root: {
-    color: colors.textPrimaryDefault
-  },
-  card: {
-    alignItems: 'center',
-    backgroundColor: colors.backgroundUniversal,
-    borderRadius: 16,
-    display: 'flex',
-    flex: '1',
-    height: 138,
-    outlineColor: { default: 'transparent', ':hover': colors.outlinePrimaryHover },
-    outlineStyle: 'solid',
-    outlineWidth: '2px',
-    paddingLeft: 24,
-    transition: 'all 0.2s'
-  },
-  adBanner: {
-    alignItems: 'center',
-    backgroundColor: colors.backgroundUniversal,
-    borderRadius: 12,
-    display: 'flex',
-    flex: '1',
-    height: 138,
-    padding: 24
-  },
-  adBannerContent: {
-    width: '100%'
-  }
-});

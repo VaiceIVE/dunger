@@ -1,0 +1,96 @@
+@use '@dunger/ui/styles' as dn;
+
+.HomePage {
+  color: dn.$color-text-primary-default;
+}
+
+.HomePage__list {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media (width >= 1564px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.HomePage__card {
+  align-items: center;
+  backface-visibility: hidden;
+  background-color: dn.$color-background-universal;
+  border-radius: 16px;
+  display: flex;
+  height: 138px;
+  outline-color: transparent;
+  justify-content: space-between;
+  outline-style: solid;
+  outline-width: 2px;
+  padding-left: 24px;
+  transform: scaleX(1) scaleY(1);
+  transition:
+    transform 0.2s,
+    outline-color 0.2s;
+  will-change: transform;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    outline-color: dn.$color-outline-primary-hover;
+    transform: scaleX(1.02) scaleY(1.04);
+
+    .HomePage__name {
+      color: dn.$color-text-secondary-hover;
+      border-bottom-color: dn.$color-text-secondary-hover;
+    }
+
+    img {
+      opacity: 1;
+    }
+  }
+}
+
+.HomePage__name {
+  color: dn.$color-text-secondary-default;
+  transition: all 0.2s;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: transparent;
+
+  @include dn.text-subheader-semibold;
+}
+
+.HomePage__banner {
+  background-color: dn.$color-button-primary-default;
+  background-image: url('./_images/banner.png');
+  background-size: contain;
+  background-repeat: repeat-x;
+  border-radius: 12px;
+  display: flex;
+  flex: 1;
+  padding: 24px;
+  justify-content: space-between;
+  gap: 20px;
+  color: white;
+}
+
+.HomePage__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex: 1;
+}
+
+.HomePage__image {
+  width: 122px;
+  height: 122px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  position: absolute;
+  right: -7px;
+  bottom: -10px;
+  object-fit: cover;
+}
