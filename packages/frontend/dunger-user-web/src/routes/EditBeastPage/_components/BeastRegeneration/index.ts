@@ -1,0 +1,1 @@
+export { BeastRegeneration } from './BeastRegeneration';
