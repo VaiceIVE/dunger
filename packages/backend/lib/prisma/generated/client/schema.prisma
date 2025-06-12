@@ -384,17 +384,17 @@ enum Gender {
 }
 
 model MagicItem {
-  id                  String  @id @default(uuid())
+  id                  String   @id @default(uuid())
   name                String
-  description         String
-  type_id             String
-  rarity_id           String
-  source_id           Int
-  requires_attunement Boolean @default(false)
+  description         String?
+  type_id             String?
+  rarity_id           String?
+  source_id           Int?
+  requires_attunement Boolean? @default(false)
 
-  type_relation        MagicItemType         @relation(fields: [type_id], references: [id])
-  rarity_relation      MagicItemRarity       @relation(fields: [rarity_id], references: [id])
-  source_relation      Source                @relation(fields: [source_id], references: [id])
+  type_relation        MagicItemType?        @relation(fields: [type_id], references: [id])
+  rarity_relation      MagicItemRarity?      @relation(fields: [rarity_id], references: [id])
+  source_relation      Source?               @relation(fields: [source_id], references: [id])
   attunements_relation MagicItemAttunement[] @relation("MagicItemToAttunement")
 
   @@map("magic_items")
