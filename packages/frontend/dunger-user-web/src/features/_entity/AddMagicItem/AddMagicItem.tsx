@@ -10,7 +10,7 @@ interface AddMagicItemProps {
 }
 
 export const AddMagicItem = ({ open, setOpen }: AddMagicItemProps) => {
-  const { action } = useAddMagicItemAction({
+  const { action, loading } = useAddMagicItemAction({
     onSuccess: () => {
       setOpen?.(false);
     }
@@ -27,6 +27,7 @@ export const AddMagicItem = ({ open, setOpen }: AddMagicItemProps) => {
               Создать
             </Button>
             <Button
+              disabled={loading}
               type="button"
               onClick={() => {
                 setOpen?.(false);

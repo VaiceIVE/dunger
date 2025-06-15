@@ -18,7 +18,7 @@ export const MagicItemCard = ({ magicItem, controls, style }: magicItemCardProps
   return (
     <Card style={[styles.root, style]}>
       <Card.Header>
-        <Card.Title>{magicItem?.name ?? 'Без названия'} </Card.Title>
+        <Card.Title>{magicItem?.name === '' ? 'Без названия' : (magicItem?.name ?? 'Без названия')} </Card.Title>
         {controls}
       </Card.Header>
 
@@ -27,19 +27,19 @@ export const MagicItemCard = ({ magicItem, controls, style }: magicItemCardProps
           <Flex gap={16}>
             <Stack gap={12} style={styles.common}>
               <Stack gap={4}>
-                <KeyValue keyLabel={'Тип:'} value={magicItem?.type_name ?? 'Не указано'} />
+                <KeyValue keyLabel={'Тип:'} value={magicItem?.type?.name ?? 'Не указано'} />
                 <KeyValue
                   keyLabel={'Настройка:'}
                   value={
                     magicItem?.requires_attunement
                       ? magicItem.attunements.length
-                        ? `требуется настройка (${magicItem.attunements.join(', ')})`
+                        ? `требуется настройка (${magicItem.attunements.map((a) => a.name).join(', ')})`
                         : 'требуется настройка'
                       : 'Нет'
                   }
                 />
                 <KeyValue keyLabel={'Цена:'} value={magicItem?.cost ?? 'Не указано'} />
-                <KeyValue keyLabel={'Редкость:'} value={magicItem?.rarity_name ?? 'Не указано'} />
+                <KeyValue keyLabel={'Редкость:'} value={magicItem?.rarity?.name ?? 'Не указано'} />
               </Stack>
             </Stack>
             {/* <Avatar size={120} /> */}
@@ -63,7 +63,9 @@ export const MagicItemCard = ({ magicItem, controls, style }: magicItemCardProps
             <Accordion.Panel>
               <div
                 {...stylex.props(styles.panel, text.defaultRegular)}
-                dangerouslySetInnerHTML={{ __html: magicItem?.description ?? 'Не указано' }}
+                dangerouslySetInnerHTML={{
+                  __html: magicItem?.description === '' ? 'Не указано' : (magicItem?.description ?? 'Не указано')
+                }}
               />
             </Accordion.Panel>
           </Accordion.Item>

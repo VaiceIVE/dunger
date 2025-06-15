@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
@@ -9,11 +10,12 @@ interface UseAddAdventureMagicItemActionProps {
 export const useAddMagicItemAction = ({ onSuccess }: UseAddAdventureMagicItemActionProps) => {
   const authFetch = useAuthFetch();
 
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const { mutateAsync: createMagicItem } = useMutation<{ id: string }, Error, { name: string }>({
     mutationFn: (input) =>
-      authFetch('/magic-tems', {
+      authFetch('/magic-items', {
         method: 'POST',
         body: JSON.stringify(input),
         headers: { 'Content-Type': 'application/json' }
@@ -28,15 +30,19 @@ export const useAddMagicItemAction = ({ onSuccess }: UseAddAdventureMagicItemAct
     };
 
     try {
+      setLoading(true);
       const response = await createMagicItem(input);
 
       onSuccess?.();
 
-      void navigate(`/adventures/${response.id}`);
+      void navigate(`/magic-items/${response.id}/edit`);
+
+      setLoading(false);
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   };
 
-  return { action };
+  return { action, loading };
 };

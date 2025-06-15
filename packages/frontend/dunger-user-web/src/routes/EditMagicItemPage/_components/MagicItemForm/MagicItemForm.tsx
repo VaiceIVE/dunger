@@ -17,13 +17,16 @@ import {
 } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { ApiMagicItem } from 'store/_types';
+import { useDirectoryOptions } from '../../useDirectoryOptions';
 
 interface MagicItemFormProps {
-  formState: ApiMagicItem;
+  formState: ApiMagicItem & { attunement_ids: string[]; type_id: string | null; rarity_id: string | null };
   handleFieldChange: (value: unknown, name: string) => void;
 }
 
-export const MagicItemForm = ({ formState }: MagicItemFormProps) => {
+export const MagicItemForm = ({ formState, handleFieldChange }: MagicItemFormProps) => {
+  const { attunementConditionOptions, magicItemTypeOptions, magicItemRarityOptions } = useDirectoryOptions();
+
   return (
     <Accordion defaultValue={'common'} transitionDuration={600} multiple style={styles.root}>
       <Accordion.Item style={styles.section} value="common">
@@ -40,10 +43,42 @@ export const MagicItemForm = ({ formState }: MagicItemFormProps) => {
 
         <Accordion.Panel>
           <div {...stylex.props(styles.panel)}>
-            <TextInput value={formState.name} label="Название" placeholder="Меч тысячи истин" />
-            <Select label="Тип предмета" placeholder="Выберите тип" />
-            <Select label="Редкость предмета" placeholder="Выберите редкость" />
+            <TextInput
+              value={formState.name}
+              onChange={(e) => {
+                handleFieldChange(e.target.value, 'name');
+              }}
+              name="name"
+              required
+              label="Название"
+              placeholder="Меч тысячи истин"
+            />
+            <Select
+              name="type_id"
+              options={magicItemTypeOptions}
+              value={formState.type_id ?? ''}
+              onChange={(e) => {
+                handleFieldChange(e, 'type_id');
+              }}
+              label="Тип предмета"
+              placeholder="Выберите тип"
+            />
+            <Select
+              name="rarity_id"
+              options={magicItemRarityOptions}
+              value={formState.rarity_id ?? ''}
+              onChange={(e) => {
+                handleFieldChange(e, 'rarity_id');
+              }}
+              label="Редкость предмета"
+              placeholder="Выберите редкость"
+            />
             <Textarea
+              name="description"
+              value={formState.description ?? ''}
+              onChange={(e) => {
+                handleFieldChange(e.target.value, 'description');
+              }}
               label="Описание предмета и его эффектов"
               placeholder="Начните вводить"
               minRows={3}
@@ -52,7 +87,18 @@ export const MagicItemForm = ({ formState }: MagicItemFormProps) => {
               maxLength={400}
             />
             <Input.Wrapper required style={styles.radioGroup} label="Требуется настройка">
-              <RadioGroup defaultValue={'no'}>
+              <RadioGroup
+                name="requires_attunement"
+                onValueChange={(e) => {
+                  handleFieldChange(e === 'yes' ? true : false, 'requires_attunement');
+
+                  if (e == 'no') {
+                    handleFieldChange([], 'attunements');
+                    handleFieldChange([], 'attunement_ids');
+                  }
+                }}
+                value={formState.requires_attunement ? 'yes' : 'no'}
+                defaultValue={'no'}>
                 <div {...stylex.props(styles.radio, text.defaultMedium)}>
                   <Radio size="sm" id="yes" value={'yes'} />
                   <label htmlFor="yes">Да</label>
@@ -63,7 +109,19 @@ export const MagicItemForm = ({ formState }: MagicItemFormProps) => {
                 </div>
               </RadioGroup>
             </Input.Wrapper>
-            <MultiSelect label="Источник настройки" placeholder="Выберите источник" />
+            <MultiSelect
+              name="attunement_ids"
+              disabled={!formState.requires_attunement}
+              value={formState.attunement_ids}
+              onChange={(ids, selectedRecords) => {
+                handleFieldChange(ids, 'attunement_ids');
+                handleFieldChange(selectedRecords, 'attunements');
+              }}
+              selectedRecords={formState.attunements}
+              label="Источник настройки"
+              options={attunementConditionOptions}
+              placeholder="Выберите источник"
+            />
           </div>
         </Accordion.Panel>
       </Accordion.Item>
