@@ -85,4 +85,29 @@ export class DirectoriesController {
   async findKeywords() {
     return await this.directoriesService.findKeywords();
   }
+
+  /**
+   * GET, Получение возможных источников настройки для
+   * магических предметов
+   */
+  @Get('/attunement-conditions')
+  async findAttunementConditions() {
+    return await this.directoriesService.findAttunementConditions();
+  }
+
+  /**
+   * GET, Получение типов магических предметов
+   */
+  @Get('/magic-item-types')
+  async findMagicItemTypes() {
+    return await this.directoriesService.findMagicItemTypes();
+  }
+
+  /**
+   * GET, Получение типов редкости магических предметов
+   */
+  @Get('/magic-item-rarities')
+  async findMagicItemRarities() {
+    return await this.directoriesService.findMagicItemRarities();
+  }
 }
