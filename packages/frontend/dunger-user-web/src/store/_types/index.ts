@@ -27,7 +27,7 @@ export type { ApiLanguages } from './ApiLanguages';
 export type { ApiBiomes } from './ApiBiomes';
 
 // Тип магических предметов
-export type { ApiMagicItemList, ApiMagicItemListResult, ApiMagicItem } from './magic-item';
+export type { ApiMagicItemList, ApiMagicItemListResult, ApiMagicItem, ApiMagicItemInput } from './magic-item';
 
 // Типы взаимодействия с приключениями
 export type {
