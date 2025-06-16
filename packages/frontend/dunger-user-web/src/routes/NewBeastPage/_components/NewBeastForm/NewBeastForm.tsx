@@ -1,4 +1,4 @@
-import { FormEventHandler, Fragment, useState } from 'react';
+import { FormEventHandler, Fragment, useMemo, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useAuthFetch } from '@dunger/auth-fetch';
@@ -30,6 +30,8 @@ interface NewBeastFormProps {
 export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
   const authFetch = useAuthFetch();
 
+  const [typeId, setTypeId] = useState<string | null>(null);
+
   const [templateQuery, setTemplateQuery] = useState('');
   const debouncedQuery = useDebouncedValue(templateQuery);
 
@@ -60,6 +62,8 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
   const templateOptions =
     templates?.pages.flatMap((p) => p.templates).map((t) => ({ value: t.id.toString(), label: t.name })) ?? [];
 
+  const selectedType = useMemo(() => typeOptions.find((t) => t.value === typeId), [typeOptions, typeId]);
+
   return (
     <form key={mode} onSubmit={handleSubmit} {...stylex.props(styles.root)}>
       <Stack gap={24}>
@@ -68,8 +72,19 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
         <TextInput name="name" label="Название существа" placeholder="Например, “Хобгоблин-вожак”" required />
         {mode === CreateMode.generation ? (
           <Fragment>
+            <input type="hidden" name="type_name" value={selectedType?.label ?? ''} />
             <Flex align="flex-start" gap={16}>
-              <Select options={typeOptions} name="type" label="Тип" placeholder="- Не выбрано -" required />
+              <Select
+                value={typeId}
+                onChange={(e) => {
+                  setTypeId(e);
+                }}
+                options={typeOptions}
+                name="type"
+                label="Тип"
+                placeholder="- Не выбрано -"
+                required
+              />
               <Select
                 options={crOptions}
                 name="challenge_rating"
@@ -90,6 +105,7 @@ export const NewBeastForm = ({ mode, handleSubmit }: NewBeastFormProps) => {
               autosize
               minRows={3}
               maxRows={8}
+              maxLength={300}
             />
           </Fragment>
         ) : (

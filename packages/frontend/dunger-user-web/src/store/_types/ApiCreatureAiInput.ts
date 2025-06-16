@@ -6,7 +6,7 @@ export enum ApiCreatureRole {
 export interface ApiCreatureAiInput {
   name: string;
   challenge_rating: string;
-  type: string;
+  type_name: string;
   creation_description: string | null;
   role: ApiCreatureRole | null;
 }

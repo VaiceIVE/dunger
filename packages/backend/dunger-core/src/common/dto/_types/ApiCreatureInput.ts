@@ -25,10 +25,14 @@ export interface ApiCreatureInput {
   resistances_ids: string[];
   immunities_ids: string[];
   vulnerabilities_ids: string[];
+  resistances?: { name: string }[];
+  immunities?: { name: string }[];
+  vulnerabilities?: { name: string }[];
   alignment_relation?: { name: string };
   type_relation?: { name: string };
   size_relation?: { name: string };
-  biome_relation?: { title: string }[];
+  biome_relation?: { name: string }[];
+  race_relation?: { name: string; description: string };
   // Действия
   actions_ids: number[];
   // Способности и свойства

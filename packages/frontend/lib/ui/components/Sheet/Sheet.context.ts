@@ -6,6 +6,8 @@ export interface SheetContext {
   setOpen: (open: boolean) => void;
 
   unmount?: boolean;
+
+  closeOnClickOutside?: boolean;
 }
 
 export const [SheetProvider, useSheetContext] = createSafeContext<SheetContext>(

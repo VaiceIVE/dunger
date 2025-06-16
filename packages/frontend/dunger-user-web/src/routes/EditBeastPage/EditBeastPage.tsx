@@ -1,9 +1,10 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
 import {
+  ArrowRightIcon,
   Button,
   ButtonVariant,
   ChevronsUpIcon,
@@ -22,11 +23,14 @@ import { ApiCreature } from 'store/_types';
 import { invariant } from 'utils/invariant';
 import { updateNestedField } from 'utils/updateNestedField';
 import { BeastForm } from './_components/BeastForm';
+import { GenerationInfo } from './_components/GenerationInfo';
 import { useEditBeastAction } from './useEditBeastAction';
 
 export const EditBeastPage = () => {
   const { id } = useParams();
   invariant(id);
+
+  const navigate = useNavigate();
 
   const authFetch = useAuthFetch();
   const { data: creature } = useSuspenseQuery({
@@ -57,21 +61,26 @@ export const EditBeastPage = () => {
 
     if (!changed) return;
     if (!e.currentTarget.reportValidity()) return;
+
+    const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement;
+
     void saveAction(new FormData(e.currentTarget))
       .then(() => {
         setChanged(false);
         setIsSaved(true);
+
+        if (submitter.value === 'end') void navigate(`/my-bestiary/${id}`);
       })
       .catch(() => {
         setIsFailed(true);
       });
   };
 
-  const handleChange = () => {
+  const handleChange = useCallback(() => {
     setChanged(true);
     setIsSaved(false);
     setIsFailed(false);
-  };
+  }, []);
 
   const handleFieldChange = (value: unknown, path: string) => {
     setFormState((prev) => updateNestedField(prev, path, value));
@@ -79,16 +88,29 @@ export const EditBeastPage = () => {
     handleChange();
   };
 
+  useEffect(() => {
+    setFormState({
+      ...creature,
+      languages_string_ids: creature.languages_ids.map(String),
+      biomes_string_ids: creature.biomes_ids.map(String)
+    });
+
+    setChanged(false);
+  }, [creature]);
+
   return (
-    <main>
+    <main {...stylex.props(styles.root)}>
       <form onSubmit={handleSubmit}>
-        <Container style={styles.root}>
+        <Container style={styles.content}>
           <SplitViewLayout isLayoutSplit gap={16}>
             <SplitViewLayout.Master span={6}>
               <Stack gap={32}>
                 <h2 {...stylex.props(headers.h2Bold)}>Редактирование существа</h2>
-                <input type={'hidden'} name={'id'} value={id} />
-                <BeastForm handleFieldChange={handleFieldChange} formState={formState} />
+                <Stack gap={16}>
+                  {creature.generation_info && <GenerationInfo generation_info={creature.generation_info} id={id} />}
+                  <input type={'hidden'} name={'id'} value={id} />
+                  <BeastForm handleFieldChange={handleFieldChange} formState={formState} />
+                </Stack>
               </Stack>
             </SplitViewLayout.Master>
 
@@ -101,8 +123,11 @@ export const EditBeastPage = () => {
         <Footer style={styles.footer}>
           <Container style={styles.container}>
             <Flex gap={8}>
-              <Button type="submit" disabled={!changed} variant={ButtonVariant.accent}>
-                Закончить редактирование
+              <Button value={'save'} type="submit" disabled={!changed} variant={ButtonVariant.accent}>
+                Сохранить
+              </Button>
+              <Button value={'end'} type="submit" disabled={!changed}>
+                Закончить редактирование <ArrowRightIcon {...stylex.props(styles.arrow)} />
               </Button>
               <IconButton type="button" onClick={scrollToTop} size="lg">
                 <ChevronsUpIcon />
@@ -119,9 +144,14 @@ export const EditBeastPage = () => {
 };
 
 const styles = stylex.create({
-  root: { color: colors.textPrimaryDefault, paddingBottom: 84 },
+  root: { position: 'relative' },
+  content: { color: colors.textPrimaryDefault, paddingBottom: 84 },
   card: { height: 'calc(100dvh - 116px)', position: 'sticky', right: 0, top: 32 },
   footer: { left: 'unset', right: 0, width: 'calc(100% - 77px)' },
   container: { alignItems: 'center', display: 'flex', justifyContent: 'space-between', paddingBlock: 12 },
-  saved: { color: colors.textTertiaryDefault }
+  saved: { color: colors.textTertiaryDefault },
+  arrow: {
+    height: 16,
+    width: 16
+  }
 });

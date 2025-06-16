@@ -1,6 +1,7 @@
 import { ComponentProps } from 'react';
 import { StyleXStyles } from '@stylexjs/stylex';
 import * as stylex from '@stylexjs/stylex';
+import { colors } from '../../tokens.stylex';
 import SpinnerIcon from './spinner.svg?react';
 
 export interface SpinnerProps extends Omit<ComponentProps<'svg'>, 'style'> {
@@ -25,6 +26,7 @@ const styles = stylex.create({
     animationDuration: '0.7s',
     animationIterationCount: 'infinite',
     animationName: rotate,
-    animationTimingFunction: 'linear'
+    animationTimingFunction: 'linear',
+    color: colors.brand80
   }
 });

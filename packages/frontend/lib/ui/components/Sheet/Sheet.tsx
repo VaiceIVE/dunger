@@ -1,4 +1,4 @@
-import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import { SheetClose } from './_components/SheetClose';
 import { SheetContent } from './_components/SheetContent';
 import { SheetFooter } from './_components/SheetFooter';
@@ -23,6 +23,12 @@ export interface SheetProps {
    * По умолчанию true
    */
   unmount?: boolean;
+  /**
+   * Определяет, должен ли компонент закрываться,
+   * когда пользователь щелкает по оверлею
+   * По умолчанию true
+   */
+  closeOnClickOutside?: boolean;
 }
 
 export function Sheet({
@@ -31,7 +37,8 @@ export function Sheet({
   open: openProp,
   onOpenChange,
   withOverlay = true,
-  unmount
+  unmount,
+  closeOnClickOutside = true
 }: PropsWithChildren<SheetProps>) {
   const [open, setOpenState] = useState(defaultOpen ?? openProp ?? false);
 
@@ -49,8 +56,34 @@ export function Sheet({
     [onOpenChange]
   );
 
+  const scrollYRef = useRef(0);
+
+  useEffect(() => {
+    if (open) {
+      scrollYRef.current = window.scrollY;
+
+      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+      document.body.style.overflowY = 'hidden';
+      document.body.style.width = `calc(100% - ${scrollBarWidth.toString()}px)`;
+    } else {
+      // Восстанавливаем прокрутку перед сбросом стилей
+      window.scrollTo(0, scrollYRef.current);
+
+      // Очищаем стили
+      document.body.style.overflowY = '';
+      document.body.style.width = '';
+    }
+
+    return () => {
+      // Очистка при размонтировании (на всякий случай)
+      document.body.style.overflowY = '';
+      document.body.style.width = '';
+    };
+  }, [open]);
+
   return (
-    <SheetProvider value={{ open, setOpen, unmount }}>
+    <SheetProvider value={{ open, setOpen, unmount, closeOnClickOutside }}>
       {!!withOverlay && <SheetOverlay />}
       {children}
     </SheetProvider>

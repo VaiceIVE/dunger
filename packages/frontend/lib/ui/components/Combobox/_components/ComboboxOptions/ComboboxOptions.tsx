@@ -113,7 +113,7 @@ const styles = stylex.create({
     top,
     visibility: { default: 'visible', ':not(:has(> [role="option"]))': 'hidden' },
     width,
-    zIndex: 30,
+    zIndex: 150,
     '::-webkit-scrollbar': { background: 'transparent', display: 'none', height: 0, width: 0 }
   })
 });

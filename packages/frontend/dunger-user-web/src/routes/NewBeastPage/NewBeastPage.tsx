@@ -1,8 +1,9 @@
 import { FormEventHandler, Fragment, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
-import { Container, Stack, text } from '@dunger/ui';
+import { Container, Stack, text, WizardLoader } from '@dunger/ui';
 import { colors } from '@dunger/ui/tokens.stylex';
 import { Banner } from 'components/Banner';
+import { LoadingOverlay } from 'features/LoadingOverlay';
 import { SplitViewLayout } from 'features/SplitViewLayout';
 import { Switch } from 'features/Switch';
 import { NewBeastForm } from './_components/NewBeastForm';
@@ -11,7 +12,7 @@ import { useNewBeastAction } from './useNewBeastAction';
 
 export const NewBeastPage = () => {
   const [mode, setMode] = useState(CreateMode.generation);
-  const { createAction, generateAction } = useNewBeastAction();
+  const { createAction, generateAction, loading } = useNewBeastAction();
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -29,7 +30,14 @@ export const NewBeastPage = () => {
 
   return (
     <main>
-      <Container>
+      <Container style={styles.root}>
+        <LoadingOverlay loading={loading}>
+          <Stack align="center" gap={12}>
+            <WizardLoader />
+            <div {...stylex.props(text.subheaderSemibold)}>Идет создание, подождите</div>
+          </Stack>
+        </LoadingOverlay>
+
         <SplitViewLayout isLayoutSplit>
           <SplitViewLayout.Master span={7}>
             <Stack gap={16}>
@@ -85,4 +93,7 @@ const ExampleBlock = ({ mode }: { mode: CreateMode }) => (
   </Banner>
 );
 
-const styles = stylex.create({ description: { color: colors.textSecondaryDefault } });
+const styles = stylex.create({
+  root: { color: colors.textPrimaryDefault, position: 'relative' },
+  description: { color: colors.textSecondaryDefault }
+});

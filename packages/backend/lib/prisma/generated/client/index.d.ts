@@ -109,20 +109,10 @@ export type DamageType = $Result.DefaultSelection<Prisma.$DamageTypePayload>
  */
 export type ChallengeRatingMetadata = $Result.DefaultSelection<Prisma.$ChallengeRatingMetadataPayload>
 /**
- * Model GenrationRequest
+ * Model GPTCreatureRequest
  * 
  */
-export type GenrationRequest = $Result.DefaultSelection<Prisma.$GenrationRequestPayload>
-/**
- * Model GPTMessageHistory
- * 
- */
-export type GPTMessageHistory = $Result.DefaultSelection<Prisma.$GPTMessageHistoryPayload>
-/**
- * Model GPTMessage
- * 
- */
-export type GPTMessage = $Result.DefaultSelection<Prisma.$GPTMessagePayload>
+export type GPTCreatureRequest = $Result.DefaultSelection<Prisma.$GPTCreatureRequestPayload>
 /**
  * Model Adventure
  * 
@@ -244,6 +234,14 @@ export const ChallengeRatingEnum: {
 export type ChallengeRatingEnum = (typeof ChallengeRatingEnum)[keyof typeof ChallengeRatingEnum]
 
 
+export const CreatureRole: {
+  OFFENCE: 'OFFENCE',
+  DEFENCE: 'DEFENCE'
+};
+
+export type CreatureRole = (typeof CreatureRole)[keyof typeof CreatureRole]
+
+
 export const Gender: {
   HE: 'HE',
   SHE: 'SHE',
@@ -265,6 +263,10 @@ export const Skill: typeof $Enums.Skill
 export type ChallengeRatingEnum = $Enums.ChallengeRatingEnum
 
 export const ChallengeRatingEnum: typeof $Enums.ChallengeRatingEnum
+
+export type CreatureRole = $Enums.CreatureRole
+
+export const CreatureRole: typeof $Enums.CreatureRole
 
 export type Gender = $Enums.Gender
 
@@ -586,34 +588,14 @@ export class PrismaClient<
   get challengeRatingMetadata(): Prisma.ChallengeRatingMetadataDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.genrationRequest`: Exposes CRUD operations for the **GenrationRequest** model.
+   * `prisma.gPTCreatureRequest`: Exposes CRUD operations for the **GPTCreatureRequest** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more GenrationRequests
-    * const genrationRequests = await prisma.genrationRequest.findMany()
+    * // Fetch zero or more GPTCreatureRequests
+    * const gPTCreatureRequests = await prisma.gPTCreatureRequest.findMany()
     * ```
     */
-  get genrationRequest(): Prisma.GenrationRequestDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.gPTMessageHistory`: Exposes CRUD operations for the **GPTMessageHistory** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more GPTMessageHistories
-    * const gPTMessageHistories = await prisma.gPTMessageHistory.findMany()
-    * ```
-    */
-  get gPTMessageHistory(): Prisma.GPTMessageHistoryDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.gPTMessage`: Exposes CRUD operations for the **GPTMessage** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more GPTMessages
-    * const gPTMessages = await prisma.gPTMessage.findMany()
-    * ```
-    */
-  get gPTMessage(): Prisma.GPTMessageDelegate<ExtArgs, ClientOptions>;
+  get gPTCreatureRequest(): Prisma.GPTCreatureRequestDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.adventure`: Exposes CRUD operations for the **Adventure** model.
@@ -1153,9 +1135,7 @@ export namespace Prisma {
     CreatureRace: 'CreatureRace',
     DamageType: 'DamageType',
     ChallengeRatingMetadata: 'ChallengeRatingMetadata',
-    GenrationRequest: 'GenrationRequest',
-    GPTMessageHistory: 'GPTMessageHistory',
-    GPTMessage: 'GPTMessage',
+    GPTCreatureRequest: 'GPTCreatureRequest',
     Adventure: 'Adventure',
     Keyword: 'Keyword',
     Genre: 'Genre',
@@ -1179,7 +1159,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "size" | "source" | "language" | "biome" | "type" | "alignment" | "creatureSpeed" | "creatureStats" | "creatureStatDetail" | "creatureSkills" | "creatureSkillDetail" | "skillMetadata" | "creature" | "creatureSenses" | "action" | "trait" | "creatureRace" | "damageType" | "challengeRatingMetadata" | "genrationRequest" | "gPTMessageHistory" | "gPTMessage" | "adventure" | "keyword" | "genre" | "magicItem" | "magicItemRarity" | "magicItemType" | "attunementCondition" | "magicItemAttunement"
+      modelProps: "size" | "source" | "language" | "biome" | "type" | "alignment" | "creatureSpeed" | "creatureStats" | "creatureStatDetail" | "creatureSkills" | "creatureSkillDetail" | "skillMetadata" | "creature" | "creatureSenses" | "action" | "trait" | "creatureRace" | "damageType" | "challengeRatingMetadata" | "gPTCreatureRequest" | "adventure" | "keyword" | "genre" | "magicItem" | "magicItemRarity" | "magicItemType" | "attunementCondition" | "magicItemAttunement"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2589,225 +2569,77 @@ export namespace Prisma {
           }
         }
       }
-      GenrationRequest: {
-        payload: Prisma.$GenrationRequestPayload<ExtArgs>
-        fields: Prisma.GenrationRequestFieldRefs
+      GPTCreatureRequest: {
+        payload: Prisma.$GPTCreatureRequestPayload<ExtArgs>
+        fields: Prisma.GPTCreatureRequestFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.GenrationRequestFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GenrationRequestPayload> | null
+            args: Prisma.GPTCreatureRequestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GPTCreatureRequestPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.GenrationRequestFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GenrationRequestPayload>
+            args: Prisma.GPTCreatureRequestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GPTCreatureRequestPayload>
           }
           findFirst: {
-            args: Prisma.GenrationRequestFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GenrationRequestPayload> | null
+            args: Prisma.GPTCreatureRequestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GPTCreatureRequestPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.GenrationRequestFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GenrationRequestPayload>
+            args: Prisma.GPTCreatureRequestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GPTCreatureRequestPayload>
           }
           findMany: {
-            args: Prisma.GenrationRequestFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GenrationRequestPayload>[]
+            args: Prisma.GPTCreatureRequestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GPTCreatureRequestPayload>[]
           }
           create: {
-            args: Prisma.GenrationRequestCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GenrationRequestPayload>
+            args: Prisma.GPTCreatureRequestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GPTCreatureRequestPayload>
           }
           createMany: {
-            args: Prisma.GenrationRequestCreateManyArgs<ExtArgs>
+            args: Prisma.GPTCreatureRequestCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.GenrationRequestCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GenrationRequestPayload>[]
+            args: Prisma.GPTCreatureRequestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GPTCreatureRequestPayload>[]
           }
           delete: {
-            args: Prisma.GenrationRequestDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GenrationRequestPayload>
+            args: Prisma.GPTCreatureRequestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GPTCreatureRequestPayload>
           }
           update: {
-            args: Prisma.GenrationRequestUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GenrationRequestPayload>
+            args: Prisma.GPTCreatureRequestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GPTCreatureRequestPayload>
           }
           deleteMany: {
-            args: Prisma.GenrationRequestDeleteManyArgs<ExtArgs>
+            args: Prisma.GPTCreatureRequestDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.GenrationRequestUpdateManyArgs<ExtArgs>
+            args: Prisma.GPTCreatureRequestUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.GenrationRequestUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GenrationRequestPayload>[]
+            args: Prisma.GPTCreatureRequestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GPTCreatureRequestPayload>[]
           }
           upsert: {
-            args: Prisma.GenrationRequestUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GenrationRequestPayload>
+            args: Prisma.GPTCreatureRequestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$GPTCreatureRequestPayload>
           }
           aggregate: {
-            args: Prisma.GenrationRequestAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateGenrationRequest>
+            args: Prisma.GPTCreatureRequestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateGPTCreatureRequest>
           }
           groupBy: {
-            args: Prisma.GenrationRequestGroupByArgs<ExtArgs>
-            result: $Utils.Optional<GenrationRequestGroupByOutputType>[]
+            args: Prisma.GPTCreatureRequestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<GPTCreatureRequestGroupByOutputType>[]
           }
           count: {
-            args: Prisma.GenrationRequestCountArgs<ExtArgs>
-            result: $Utils.Optional<GenrationRequestCountAggregateOutputType> | number
-          }
-        }
-      }
-      GPTMessageHistory: {
-        payload: Prisma.$GPTMessageHistoryPayload<ExtArgs>
-        fields: Prisma.GPTMessageHistoryFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.GPTMessageHistoryFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessageHistoryPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.GPTMessageHistoryFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessageHistoryPayload>
-          }
-          findFirst: {
-            args: Prisma.GPTMessageHistoryFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessageHistoryPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.GPTMessageHistoryFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessageHistoryPayload>
-          }
-          findMany: {
-            args: Prisma.GPTMessageHistoryFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessageHistoryPayload>[]
-          }
-          create: {
-            args: Prisma.GPTMessageHistoryCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessageHistoryPayload>
-          }
-          createMany: {
-            args: Prisma.GPTMessageHistoryCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.GPTMessageHistoryCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessageHistoryPayload>[]
-          }
-          delete: {
-            args: Prisma.GPTMessageHistoryDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessageHistoryPayload>
-          }
-          update: {
-            args: Prisma.GPTMessageHistoryUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessageHistoryPayload>
-          }
-          deleteMany: {
-            args: Prisma.GPTMessageHistoryDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.GPTMessageHistoryUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.GPTMessageHistoryUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessageHistoryPayload>[]
-          }
-          upsert: {
-            args: Prisma.GPTMessageHistoryUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessageHistoryPayload>
-          }
-          aggregate: {
-            args: Prisma.GPTMessageHistoryAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateGPTMessageHistory>
-          }
-          groupBy: {
-            args: Prisma.GPTMessageHistoryGroupByArgs<ExtArgs>
-            result: $Utils.Optional<GPTMessageHistoryGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.GPTMessageHistoryCountArgs<ExtArgs>
-            result: $Utils.Optional<GPTMessageHistoryCountAggregateOutputType> | number
-          }
-        }
-      }
-      GPTMessage: {
-        payload: Prisma.$GPTMessagePayload<ExtArgs>
-        fields: Prisma.GPTMessageFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.GPTMessageFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessagePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.GPTMessageFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessagePayload>
-          }
-          findFirst: {
-            args: Prisma.GPTMessageFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessagePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.GPTMessageFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessagePayload>
-          }
-          findMany: {
-            args: Prisma.GPTMessageFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessagePayload>[]
-          }
-          create: {
-            args: Prisma.GPTMessageCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessagePayload>
-          }
-          createMany: {
-            args: Prisma.GPTMessageCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.GPTMessageCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessagePayload>[]
-          }
-          delete: {
-            args: Prisma.GPTMessageDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessagePayload>
-          }
-          update: {
-            args: Prisma.GPTMessageUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessagePayload>
-          }
-          deleteMany: {
-            args: Prisma.GPTMessageDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.GPTMessageUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.GPTMessageUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessagePayload>[]
-          }
-          upsert: {
-            args: Prisma.GPTMessageUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$GPTMessagePayload>
-          }
-          aggregate: {
-            args: Prisma.GPTMessageAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateGPTMessage>
-          }
-          groupBy: {
-            args: Prisma.GPTMessageGroupByArgs<ExtArgs>
-            result: $Utils.Optional<GPTMessageGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.GPTMessageCountArgs<ExtArgs>
-            result: $Utils.Optional<GPTMessageCountAggregateOutputType> | number
+            args: Prisma.GPTCreatureRequestCountArgs<ExtArgs>
+            result: $Utils.Optional<GPTCreatureRequestCountAggregateOutputType> | number
           }
         }
       }
@@ -3506,9 +3338,7 @@ export namespace Prisma {
     creatureRace?: CreatureRaceOmit
     damageType?: DamageTypeOmit
     challengeRatingMetadata?: ChallengeRatingMetadataOmit
-    genrationRequest?: GenrationRequestOmit
-    gPTMessageHistory?: GPTMessageHistoryOmit
-    gPTMessage?: GPTMessageOmit
+    gPTCreatureRequest?: GPTCreatureRequestOmit
     adventure?: AdventureOmit
     keyword?: KeywordOmit
     genre?: GenreOmit
@@ -4154,37 +3984,6 @@ export namespace Prisma {
    */
   export type ChallengeRatingMetadataCountOutputTypeCountCreaturesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CreatureWhereInput
-  }
-
-
-  /**
-   * Count Type GPTMessageHistoryCountOutputType
-   */
-
-  export type GPTMessageHistoryCountOutputType = {
-    messages_relation: number
-  }
-
-  export type GPTMessageHistoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    messages_relation?: boolean | GPTMessageHistoryCountOutputTypeCountMessages_relationArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * GPTMessageHistoryCountOutputType without action
-   */
-  export type GPTMessageHistoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistoryCountOutputType
-     */
-    select?: GPTMessageHistoryCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * GPTMessageHistoryCountOutputType without action
-   */
-  export type GPTMessageHistoryCountOutputTypeCountMessages_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: GPTMessageWhereInput
   }
 
 
@@ -17465,6 +17264,7 @@ export namespace Prisma {
     biomes_relation?: boolean | Creature$biomes_relationArgs<ExtArgs>
     actions_relation?: boolean | Creature$actions_relationArgs<ExtArgs>
     traits_relation?: boolean | Creature$traits_relationArgs<ExtArgs>
+    gpt_request_relation?: boolean | Creature$gpt_request_relationArgs<ExtArgs>
     _count?: boolean | CreatureCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["creature"]>
 
@@ -17544,6 +17344,7 @@ export namespace Prisma {
     biomes_relation?: boolean | Creature$biomes_relationArgs<ExtArgs>
     actions_relation?: boolean | Creature$actions_relationArgs<ExtArgs>
     traits_relation?: boolean | Creature$traits_relationArgs<ExtArgs>
+    gpt_request_relation?: boolean | Creature$gpt_request_relationArgs<ExtArgs>
     _count?: boolean | CreatureCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CreatureIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17583,6 +17384,7 @@ export namespace Prisma {
       biomes_relation: Prisma.$BiomePayload<ExtArgs>[]
       actions_relation: Prisma.$ActionPayload<ExtArgs>[]
       traits_relation: Prisma.$TraitPayload<ExtArgs>[]
+      gpt_request_relation: Prisma.$GPTCreatureRequestPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -18008,6 +17810,7 @@ export namespace Prisma {
     biomes_relation<T extends Creature$biomes_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$biomes_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     actions_relation<T extends Creature$actions_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$actions_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
     traits_relation<T extends Creature$traits_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$traits_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    gpt_request_relation<T extends Creature$gpt_request_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$gpt_request_relationArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -18781,6 +18584,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TraitScalarFieldEnum | TraitScalarFieldEnum[]
+  }
+
+  /**
+   * Creature.gpt_request_relation
+   */
+  export type Creature$gpt_request_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the GPTCreatureRequest
+     */
+    select?: GPTCreatureRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the GPTCreatureRequest
+     */
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GPTCreatureRequestInclude<ExtArgs> | null
+    where?: GPTCreatureRequestWhereInput
   }
 
   /**
@@ -25449,358 +25271,420 @@ export namespace Prisma {
 
 
   /**
-   * Model GenrationRequest
+   * Model GPTCreatureRequest
    */
 
-  export type AggregateGenrationRequest = {
-    _count: GenrationRequestCountAggregateOutputType | null
-    _avg: GenrationRequestAvgAggregateOutputType | null
-    _sum: GenrationRequestSumAggregateOutputType | null
-    _min: GenrationRequestMinAggregateOutputType | null
-    _max: GenrationRequestMaxAggregateOutputType | null
+  export type AggregateGPTCreatureRequest = {
+    _count: GPTCreatureRequestCountAggregateOutputType | null
+    _avg: GPTCreatureRequestAvgAggregateOutputType | null
+    _sum: GPTCreatureRequestSumAggregateOutputType | null
+    _min: GPTCreatureRequestMinAggregateOutputType | null
+    _max: GPTCreatureRequestMaxAggregateOutputType | null
   }
 
-  export type GenrationRequestAvgAggregateOutputType = {
+  export type GPTCreatureRequestAvgAggregateOutputType = {
     id: number | null
   }
 
-  export type GenrationRequestSumAggregateOutputType = {
+  export type GPTCreatureRequestSumAggregateOutputType = {
     id: number | null
   }
 
-  export type GenrationRequestMinAggregateOutputType = {
+  export type GPTCreatureRequestMinAggregateOutputType = {
     id: number | null
-    request: string | null
-    danger: string | null
+    creature_id: string | null
     name: string | null
+    challenge_rating: string | null
+    type_name: string | null
+    creation_description: string | null
+    role: $Enums.CreatureRole | null
+    createdAt: Date | null
   }
 
-  export type GenrationRequestMaxAggregateOutputType = {
+  export type GPTCreatureRequestMaxAggregateOutputType = {
     id: number | null
-    request: string | null
-    danger: string | null
+    creature_id: string | null
     name: string | null
+    challenge_rating: string | null
+    type_name: string | null
+    creation_description: string | null
+    role: $Enums.CreatureRole | null
+    createdAt: Date | null
   }
 
-  export type GenrationRequestCountAggregateOutputType = {
+  export type GPTCreatureRequestCountAggregateOutputType = {
     id: number
-    request: number
-    danger: number
+    creature_id: number
     name: number
+    challenge_rating: number
+    type_name: number
+    creation_description: number
+    role: number
+    createdAt: number
     _all: number
   }
 
 
-  export type GenrationRequestAvgAggregateInputType = {
+  export type GPTCreatureRequestAvgAggregateInputType = {
     id?: true
   }
 
-  export type GenrationRequestSumAggregateInputType = {
+  export type GPTCreatureRequestSumAggregateInputType = {
     id?: true
   }
 
-  export type GenrationRequestMinAggregateInputType = {
+  export type GPTCreatureRequestMinAggregateInputType = {
     id?: true
-    request?: true
-    danger?: true
+    creature_id?: true
     name?: true
+    challenge_rating?: true
+    type_name?: true
+    creation_description?: true
+    role?: true
+    createdAt?: true
   }
 
-  export type GenrationRequestMaxAggregateInputType = {
+  export type GPTCreatureRequestMaxAggregateInputType = {
     id?: true
-    request?: true
-    danger?: true
+    creature_id?: true
     name?: true
+    challenge_rating?: true
+    type_name?: true
+    creation_description?: true
+    role?: true
+    createdAt?: true
   }
 
-  export type GenrationRequestCountAggregateInputType = {
+  export type GPTCreatureRequestCountAggregateInputType = {
     id?: true
-    request?: true
-    danger?: true
+    creature_id?: true
     name?: true
+    challenge_rating?: true
+    type_name?: true
+    creation_description?: true
+    role?: true
+    createdAt?: true
     _all?: true
   }
 
-  export type GenrationRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which GenrationRequest to aggregate.
+     * Filter which GPTCreatureRequest to aggregate.
      */
-    where?: GenrationRequestWhereInput
+    where?: GPTCreatureRequestWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of GenrationRequests to fetch.
+     * Determine the order of GPTCreatureRequests to fetch.
      */
-    orderBy?: GenrationRequestOrderByWithRelationInput | GenrationRequestOrderByWithRelationInput[]
+    orderBy?: GPTCreatureRequestOrderByWithRelationInput | GPTCreatureRequestOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: GenrationRequestWhereUniqueInput
+    cursor?: GPTCreatureRequestWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` GenrationRequests from the position of the cursor.
+     * Take `±n` GPTCreatureRequests from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` GenrationRequests.
+     * Skip the first `n` GPTCreatureRequests.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned GenrationRequests
+     * Count returned GPTCreatureRequests
     **/
-    _count?: true | GenrationRequestCountAggregateInputType
+    _count?: true | GPTCreatureRequestCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: GenrationRequestAvgAggregateInputType
+    _avg?: GPTCreatureRequestAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: GenrationRequestSumAggregateInputType
+    _sum?: GPTCreatureRequestSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: GenrationRequestMinAggregateInputType
+    _min?: GPTCreatureRequestMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: GenrationRequestMaxAggregateInputType
+    _max?: GPTCreatureRequestMaxAggregateInputType
   }
 
-  export type GetGenrationRequestAggregateType<T extends GenrationRequestAggregateArgs> = {
-        [P in keyof T & keyof AggregateGenrationRequest]: P extends '_count' | 'count'
+  export type GetGPTCreatureRequestAggregateType<T extends GPTCreatureRequestAggregateArgs> = {
+        [P in keyof T & keyof AggregateGPTCreatureRequest]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateGenrationRequest[P]>
-      : GetScalarType<T[P], AggregateGenrationRequest[P]>
+        : GetScalarType<T[P], AggregateGPTCreatureRequest[P]>
+      : GetScalarType<T[P], AggregateGPTCreatureRequest[P]>
   }
 
 
 
 
-  export type GenrationRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: GenrationRequestWhereInput
-    orderBy?: GenrationRequestOrderByWithAggregationInput | GenrationRequestOrderByWithAggregationInput[]
-    by: GenrationRequestScalarFieldEnum[] | GenrationRequestScalarFieldEnum
-    having?: GenrationRequestScalarWhereWithAggregatesInput
+  export type GPTCreatureRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: GPTCreatureRequestWhereInput
+    orderBy?: GPTCreatureRequestOrderByWithAggregationInput | GPTCreatureRequestOrderByWithAggregationInput[]
+    by: GPTCreatureRequestScalarFieldEnum[] | GPTCreatureRequestScalarFieldEnum
+    having?: GPTCreatureRequestScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: GenrationRequestCountAggregateInputType | true
-    _avg?: GenrationRequestAvgAggregateInputType
-    _sum?: GenrationRequestSumAggregateInputType
-    _min?: GenrationRequestMinAggregateInputType
-    _max?: GenrationRequestMaxAggregateInputType
+    _count?: GPTCreatureRequestCountAggregateInputType | true
+    _avg?: GPTCreatureRequestAvgAggregateInputType
+    _sum?: GPTCreatureRequestSumAggregateInputType
+    _min?: GPTCreatureRequestMinAggregateInputType
+    _max?: GPTCreatureRequestMaxAggregateInputType
   }
 
-  export type GenrationRequestGroupByOutputType = {
+  export type GPTCreatureRequestGroupByOutputType = {
     id: number
-    request: string
-    danger: string
+    creature_id: string
     name: string
-    _count: GenrationRequestCountAggregateOutputType | null
-    _avg: GenrationRequestAvgAggregateOutputType | null
-    _sum: GenrationRequestSumAggregateOutputType | null
-    _min: GenrationRequestMinAggregateOutputType | null
-    _max: GenrationRequestMaxAggregateOutputType | null
+    challenge_rating: string
+    type_name: string
+    creation_description: string | null
+    role: $Enums.CreatureRole | null
+    createdAt: Date
+    _count: GPTCreatureRequestCountAggregateOutputType | null
+    _avg: GPTCreatureRequestAvgAggregateOutputType | null
+    _sum: GPTCreatureRequestSumAggregateOutputType | null
+    _min: GPTCreatureRequestMinAggregateOutputType | null
+    _max: GPTCreatureRequestMaxAggregateOutputType | null
   }
 
-  type GetGenrationRequestGroupByPayload<T extends GenrationRequestGroupByArgs> = Prisma.PrismaPromise<
+  type GetGPTCreatureRequestGroupByPayload<T extends GPTCreatureRequestGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<GenrationRequestGroupByOutputType, T['by']> &
+      PickEnumerable<GPTCreatureRequestGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof GenrationRequestGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof GPTCreatureRequestGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], GenrationRequestGroupByOutputType[P]>
-            : GetScalarType<T[P], GenrationRequestGroupByOutputType[P]>
+              : GetScalarType<T[P], GPTCreatureRequestGroupByOutputType[P]>
+            : GetScalarType<T[P], GPTCreatureRequestGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type GenrationRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type GPTCreatureRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    request?: boolean
-    danger?: boolean
+    creature_id?: boolean
     name?: boolean
-  }, ExtArgs["result"]["genrationRequest"]>
+    challenge_rating?: boolean
+    type_name?: boolean
+    creation_description?: boolean
+    role?: boolean
+    createdAt?: boolean
+    creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gPTCreatureRequest"]>
 
-  export type GenrationRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type GPTCreatureRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    request?: boolean
-    danger?: boolean
+    creature_id?: boolean
     name?: boolean
-  }, ExtArgs["result"]["genrationRequest"]>
+    challenge_rating?: boolean
+    type_name?: boolean
+    creation_description?: boolean
+    role?: boolean
+    createdAt?: boolean
+    creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gPTCreatureRequest"]>
 
-  export type GenrationRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type GPTCreatureRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    request?: boolean
-    danger?: boolean
+    creature_id?: boolean
     name?: boolean
-  }, ExtArgs["result"]["genrationRequest"]>
+    challenge_rating?: boolean
+    type_name?: boolean
+    creation_description?: boolean
+    role?: boolean
+    createdAt?: boolean
+    creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["gPTCreatureRequest"]>
 
-  export type GenrationRequestSelectScalar = {
+  export type GPTCreatureRequestSelectScalar = {
     id?: boolean
-    request?: boolean
-    danger?: boolean
+    creature_id?: boolean
     name?: boolean
+    challenge_rating?: boolean
+    type_name?: boolean
+    creation_description?: boolean
+    role?: boolean
+    createdAt?: boolean
   }
 
-  export type GenrationRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "request" | "danger" | "name", ExtArgs["result"]["genrationRequest"]>
+  export type GPTCreatureRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creature_id" | "name" | "challenge_rating" | "type_name" | "creation_description" | "role" | "createdAt", ExtArgs["result"]["gPTCreatureRequest"]>
+  export type GPTCreatureRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
+  }
+  export type GPTCreatureRequestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
+  }
+  export type GPTCreatureRequestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
+  }
 
-  export type $GenrationRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "GenrationRequest"
-    objects: {}
+  export type $GPTCreatureRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "GPTCreatureRequest"
+    objects: {
+      creature_relation: Prisma.$CreaturePayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      request: string
-      danger: string
+      creature_id: string
       name: string
-    }, ExtArgs["result"]["genrationRequest"]>
+      challenge_rating: string
+      type_name: string
+      creation_description: string | null
+      role: $Enums.CreatureRole | null
+      createdAt: Date
+    }, ExtArgs["result"]["gPTCreatureRequest"]>
     composites: {}
   }
 
-  type GenrationRequestGetPayload<S extends boolean | null | undefined | GenrationRequestDefaultArgs> = $Result.GetResult<Prisma.$GenrationRequestPayload, S>
+  type GPTCreatureRequestGetPayload<S extends boolean | null | undefined | GPTCreatureRequestDefaultArgs> = $Result.GetResult<Prisma.$GPTCreatureRequestPayload, S>
 
-  type GenrationRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<GenrationRequestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: GenrationRequestCountAggregateInputType | true
+  type GPTCreatureRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<GPTCreatureRequestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: GPTCreatureRequestCountAggregateInputType | true
     }
 
-  export interface GenrationRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GenrationRequest'], meta: { name: 'GenrationRequest' } }
+  export interface GPTCreatureRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GPTCreatureRequest'], meta: { name: 'GPTCreatureRequest' } }
     /**
-     * Find zero or one GenrationRequest that matches the filter.
-     * @param {GenrationRequestFindUniqueArgs} args - Arguments to find a GenrationRequest
+     * Find zero or one GPTCreatureRequest that matches the filter.
+     * @param {GPTCreatureRequestFindUniqueArgs} args - Arguments to find a GPTCreatureRequest
      * @example
-     * // Get one GenrationRequest
-     * const genrationRequest = await prisma.genrationRequest.findUnique({
+     * // Get one GPTCreatureRequest
+     * const gPTCreatureRequest = await prisma.gPTCreatureRequest.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends GenrationRequestFindUniqueArgs>(args: SelectSubset<T, GenrationRequestFindUniqueArgs<ExtArgs>>): Prisma__GenrationRequestClient<$Result.GetResult<Prisma.$GenrationRequestPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends GPTCreatureRequestFindUniqueArgs>(args: SelectSubset<T, GPTCreatureRequestFindUniqueArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find one GenrationRequest that matches the filter or throw an error with `error.code='P2025'`
+     * Find one GPTCreatureRequest that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {GenrationRequestFindUniqueOrThrowArgs} args - Arguments to find a GenrationRequest
+     * @param {GPTCreatureRequestFindUniqueOrThrowArgs} args - Arguments to find a GPTCreatureRequest
      * @example
-     * // Get one GenrationRequest
-     * const genrationRequest = await prisma.genrationRequest.findUniqueOrThrow({
+     * // Get one GPTCreatureRequest
+     * const gPTCreatureRequest = await prisma.gPTCreatureRequest.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends GenrationRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, GenrationRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GenrationRequestClient<$Result.GetResult<Prisma.$GenrationRequestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends GPTCreatureRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, GPTCreatureRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Find the first GenrationRequest that matches the filter.
+     * Find the first GPTCreatureRequest that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GenrationRequestFindFirstArgs} args - Arguments to find a GenrationRequest
+     * @param {GPTCreatureRequestFindFirstArgs} args - Arguments to find a GPTCreatureRequest
      * @example
-     * // Get one GenrationRequest
-     * const genrationRequest = await prisma.genrationRequest.findFirst({
+     * // Get one GPTCreatureRequest
+     * const gPTCreatureRequest = await prisma.gPTCreatureRequest.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends GenrationRequestFindFirstArgs>(args?: SelectSubset<T, GenrationRequestFindFirstArgs<ExtArgs>>): Prisma__GenrationRequestClient<$Result.GetResult<Prisma.$GenrationRequestPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends GPTCreatureRequestFindFirstArgs>(args?: SelectSubset<T, GPTCreatureRequestFindFirstArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
 
     /**
-     * Find the first GenrationRequest that matches the filter or
+     * Find the first GPTCreatureRequest that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GenrationRequestFindFirstOrThrowArgs} args - Arguments to find a GenrationRequest
+     * @param {GPTCreatureRequestFindFirstOrThrowArgs} args - Arguments to find a GPTCreatureRequest
      * @example
-     * // Get one GenrationRequest
-     * const genrationRequest = await prisma.genrationRequest.findFirstOrThrow({
+     * // Get one GPTCreatureRequest
+     * const gPTCreatureRequest = await prisma.gPTCreatureRequest.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends GenrationRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, GenrationRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__GenrationRequestClient<$Result.GetResult<Prisma.$GenrationRequestPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends GPTCreatureRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, GPTCreatureRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Find zero or more GenrationRequests that matches the filter.
+     * Find zero or more GPTCreatureRequests that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GenrationRequestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {GPTCreatureRequestFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all GenrationRequests
-     * const genrationRequests = await prisma.genrationRequest.findMany()
+     * // Get all GPTCreatureRequests
+     * const gPTCreatureRequests = await prisma.gPTCreatureRequest.findMany()
      * 
-     * // Get first 10 GenrationRequests
-     * const genrationRequests = await prisma.genrationRequest.findMany({ take: 10 })
+     * // Get first 10 GPTCreatureRequests
+     * const gPTCreatureRequests = await prisma.gPTCreatureRequest.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const genrationRequestWithIdOnly = await prisma.genrationRequest.findMany({ select: { id: true } })
+     * const gPTCreatureRequestWithIdOnly = await prisma.gPTCreatureRequest.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends GenrationRequestFindManyArgs>(args?: SelectSubset<T, GenrationRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrationRequestPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends GPTCreatureRequestFindManyArgs>(args?: SelectSubset<T, GPTCreatureRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findMany", ClientOptions>>
 
     /**
-     * Create a GenrationRequest.
-     * @param {GenrationRequestCreateArgs} args - Arguments to create a GenrationRequest.
+     * Create a GPTCreatureRequest.
+     * @param {GPTCreatureRequestCreateArgs} args - Arguments to create a GPTCreatureRequest.
      * @example
-     * // Create one GenrationRequest
-     * const GenrationRequest = await prisma.genrationRequest.create({
+     * // Create one GPTCreatureRequest
+     * const GPTCreatureRequest = await prisma.gPTCreatureRequest.create({
      *   data: {
-     *     // ... data to create a GenrationRequest
+     *     // ... data to create a GPTCreatureRequest
      *   }
      * })
      * 
      */
-    create<T extends GenrationRequestCreateArgs>(args: SelectSubset<T, GenrationRequestCreateArgs<ExtArgs>>): Prisma__GenrationRequestClient<$Result.GetResult<Prisma.$GenrationRequestPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends GPTCreatureRequestCreateArgs>(args: SelectSubset<T, GPTCreatureRequestCreateArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Create many GenrationRequests.
-     * @param {GenrationRequestCreateManyArgs} args - Arguments to create many GenrationRequests.
+     * Create many GPTCreatureRequests.
+     * @param {GPTCreatureRequestCreateManyArgs} args - Arguments to create many GPTCreatureRequests.
      * @example
-     * // Create many GenrationRequests
-     * const genrationRequest = await prisma.genrationRequest.createMany({
+     * // Create many GPTCreatureRequests
+     * const gPTCreatureRequest = await prisma.gPTCreatureRequest.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends GenrationRequestCreateManyArgs>(args?: SelectSubset<T, GenrationRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends GPTCreatureRequestCreateManyArgs>(args?: SelectSubset<T, GPTCreatureRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many GenrationRequests and returns the data saved in the database.
-     * @param {GenrationRequestCreateManyAndReturnArgs} args - Arguments to create many GenrationRequests.
+     * Create many GPTCreatureRequests and returns the data saved in the database.
+     * @param {GPTCreatureRequestCreateManyAndReturnArgs} args - Arguments to create many GPTCreatureRequests.
      * @example
-     * // Create many GenrationRequests
-     * const genrationRequest = await prisma.genrationRequest.createManyAndReturn({
+     * // Create many GPTCreatureRequests
+     * const gPTCreatureRequest = await prisma.gPTCreatureRequest.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many GenrationRequests and only return the `id`
-     * const genrationRequestWithIdOnly = await prisma.genrationRequest.createManyAndReturn({
+     * // Create many GPTCreatureRequests and only return the `id`
+     * const gPTCreatureRequestWithIdOnly = await prisma.gPTCreatureRequest.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -25810,28 +25694,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends GenrationRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, GenrationRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrationRequestPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends GPTCreatureRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, GPTCreatureRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
 
     /**
-     * Delete a GenrationRequest.
-     * @param {GenrationRequestDeleteArgs} args - Arguments to delete one GenrationRequest.
+     * Delete a GPTCreatureRequest.
+     * @param {GPTCreatureRequestDeleteArgs} args - Arguments to delete one GPTCreatureRequest.
      * @example
-     * // Delete one GenrationRequest
-     * const GenrationRequest = await prisma.genrationRequest.delete({
+     * // Delete one GPTCreatureRequest
+     * const GPTCreatureRequest = await prisma.gPTCreatureRequest.delete({
      *   where: {
-     *     // ... filter to delete one GenrationRequest
+     *     // ... filter to delete one GPTCreatureRequest
      *   }
      * })
      * 
      */
-    delete<T extends GenrationRequestDeleteArgs>(args: SelectSubset<T, GenrationRequestDeleteArgs<ExtArgs>>): Prisma__GenrationRequestClient<$Result.GetResult<Prisma.$GenrationRequestPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends GPTCreatureRequestDeleteArgs>(args: SelectSubset<T, GPTCreatureRequestDeleteArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Update one GenrationRequest.
-     * @param {GenrationRequestUpdateArgs} args - Arguments to update one GenrationRequest.
+     * Update one GPTCreatureRequest.
+     * @param {GPTCreatureRequestUpdateArgs} args - Arguments to update one GPTCreatureRequest.
      * @example
-     * // Update one GenrationRequest
-     * const genrationRequest = await prisma.genrationRequest.update({
+     * // Update one GPTCreatureRequest
+     * const gPTCreatureRequest = await prisma.gPTCreatureRequest.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -25841,30 +25725,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends GenrationRequestUpdateArgs>(args: SelectSubset<T, GenrationRequestUpdateArgs<ExtArgs>>): Prisma__GenrationRequestClient<$Result.GetResult<Prisma.$GenrationRequestPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends GPTCreatureRequestUpdateArgs>(args: SelectSubset<T, GPTCreatureRequestUpdateArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
 
     /**
-     * Delete zero or more GenrationRequests.
-     * @param {GenrationRequestDeleteManyArgs} args - Arguments to filter GenrationRequests to delete.
+     * Delete zero or more GPTCreatureRequests.
+     * @param {GPTCreatureRequestDeleteManyArgs} args - Arguments to filter GPTCreatureRequests to delete.
      * @example
-     * // Delete a few GenrationRequests
-     * const { count } = await prisma.genrationRequest.deleteMany({
+     * // Delete a few GPTCreatureRequests
+     * const { count } = await prisma.gPTCreatureRequest.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends GenrationRequestDeleteManyArgs>(args?: SelectSubset<T, GenrationRequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends GPTCreatureRequestDeleteManyArgs>(args?: SelectSubset<T, GPTCreatureRequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more GenrationRequests.
+     * Update zero or more GPTCreatureRequests.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GenrationRequestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {GPTCreatureRequestUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many GenrationRequests
-     * const genrationRequest = await prisma.genrationRequest.updateMany({
+     * // Update many GPTCreatureRequests
+     * const gPTCreatureRequest = await prisma.gPTCreatureRequest.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -25874,14 +25758,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends GenrationRequestUpdateManyArgs>(args: SelectSubset<T, GenrationRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends GPTCreatureRequestUpdateManyArgs>(args: SelectSubset<T, GPTCreatureRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more GenrationRequests and returns the data updated in the database.
-     * @param {GenrationRequestUpdateManyAndReturnArgs} args - Arguments to update many GenrationRequests.
+     * Update zero or more GPTCreatureRequests and returns the data updated in the database.
+     * @param {GPTCreatureRequestUpdateManyAndReturnArgs} args - Arguments to update many GPTCreatureRequests.
      * @example
-     * // Update many GenrationRequests
-     * const genrationRequest = await prisma.genrationRequest.updateManyAndReturn({
+     * // Update many GPTCreatureRequests
+     * const gPTCreatureRequest = await prisma.gPTCreatureRequest.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -25890,8 +25774,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more GenrationRequests and only return the `id`
-     * const genrationRequestWithIdOnly = await prisma.genrationRequest.updateManyAndReturn({
+     * // Update zero or more GPTCreatureRequests and only return the `id`
+     * const gPTCreatureRequestWithIdOnly = await prisma.gPTCreatureRequest.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -25904,56 +25788,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends GenrationRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, GenrationRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrationRequestPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends GPTCreatureRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, GPTCreatureRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
 
     /**
-     * Create or update one GenrationRequest.
-     * @param {GenrationRequestUpsertArgs} args - Arguments to update or create a GenrationRequest.
+     * Create or update one GPTCreatureRequest.
+     * @param {GPTCreatureRequestUpsertArgs} args - Arguments to update or create a GPTCreatureRequest.
      * @example
-     * // Update or create a GenrationRequest
-     * const genrationRequest = await prisma.genrationRequest.upsert({
+     * // Update or create a GPTCreatureRequest
+     * const gPTCreatureRequest = await prisma.gPTCreatureRequest.upsert({
      *   create: {
-     *     // ... data to create a GenrationRequest
+     *     // ... data to create a GPTCreatureRequest
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the GenrationRequest we want to update
+     *     // ... the filter for the GPTCreatureRequest we want to update
      *   }
      * })
      */
-    upsert<T extends GenrationRequestUpsertArgs>(args: SelectSubset<T, GenrationRequestUpsertArgs<ExtArgs>>): Prisma__GenrationRequestClient<$Result.GetResult<Prisma.$GenrationRequestPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends GPTCreatureRequestUpsertArgs>(args: SelectSubset<T, GPTCreatureRequestUpsertArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
 
 
     /**
-     * Count the number of GenrationRequests.
+     * Count the number of GPTCreatureRequests.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GenrationRequestCountArgs} args - Arguments to filter GenrationRequests to count.
+     * @param {GPTCreatureRequestCountArgs} args - Arguments to filter GPTCreatureRequests to count.
      * @example
-     * // Count the number of GenrationRequests
-     * const count = await prisma.genrationRequest.count({
+     * // Count the number of GPTCreatureRequests
+     * const count = await prisma.gPTCreatureRequest.count({
      *   where: {
-     *     // ... the filter for the GenrationRequests we want to count
+     *     // ... the filter for the GPTCreatureRequests we want to count
      *   }
      * })
     **/
-    count<T extends GenrationRequestCountArgs>(
-      args?: Subset<T, GenrationRequestCountArgs>,
+    count<T extends GPTCreatureRequestCountArgs>(
+      args?: Subset<T, GPTCreatureRequestCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], GenrationRequestCountAggregateOutputType>
+          : GetScalarType<T['select'], GPTCreatureRequestCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a GenrationRequest.
+     * Allows you to perform aggregations operations on a GPTCreatureRequest.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GenrationRequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {GPTCreatureRequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -25973,13 +25857,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends GenrationRequestAggregateArgs>(args: Subset<T, GenrationRequestAggregateArgs>): Prisma.PrismaPromise<GetGenrationRequestAggregateType<T>>
+    aggregate<T extends GPTCreatureRequestAggregateArgs>(args: Subset<T, GPTCreatureRequestAggregateArgs>): Prisma.PrismaPromise<GetGPTCreatureRequestAggregateType<T>>
 
     /**
-     * Group by GenrationRequest.
+     * Group by GPTCreatureRequest.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {GenrationRequestGroupByArgs} args - Group by arguments.
+     * @param {GPTCreatureRequestGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -25994,14 +25878,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends GenrationRequestGroupByArgs,
+      T extends GPTCreatureRequestGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: GenrationRequestGroupByArgs['orderBy'] }
-        : { orderBy?: GenrationRequestGroupByArgs['orderBy'] },
+        ? { orderBy: GPTCreatureRequestGroupByArgs['orderBy'] }
+        : { orderBy?: GPTCreatureRequestGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -26050,21 +25934,22 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, GenrationRequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGenrationRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, GPTCreatureRequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGPTCreatureRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the GenrationRequest model
+   * Fields of the GPTCreatureRequest model
    */
-  readonly fields: GenrationRequestFieldRefs;
+  readonly fields: GPTCreatureRequestFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for GenrationRequest.
+   * The delegate class that acts as a "Promise-like" for GPTCreatureRequest.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__GenrationRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__GPTCreatureRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    creature_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -26091,2486 +25976,428 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the GenrationRequest model
+   * Fields of the GPTCreatureRequest model
    */ 
-  interface GenrationRequestFieldRefs {
-    readonly id: FieldRef<"GenrationRequest", 'Int'>
-    readonly request: FieldRef<"GenrationRequest", 'String'>
-    readonly danger: FieldRef<"GenrationRequest", 'String'>
-    readonly name: FieldRef<"GenrationRequest", 'String'>
+  interface GPTCreatureRequestFieldRefs {
+    readonly id: FieldRef<"GPTCreatureRequest", 'Int'>
+    readonly creature_id: FieldRef<"GPTCreatureRequest", 'String'>
+    readonly name: FieldRef<"GPTCreatureRequest", 'String'>
+    readonly challenge_rating: FieldRef<"GPTCreatureRequest", 'String'>
+    readonly type_name: FieldRef<"GPTCreatureRequest", 'String'>
+    readonly creation_description: FieldRef<"GPTCreatureRequest", 'String'>
+    readonly role: FieldRef<"GPTCreatureRequest", 'CreatureRole'>
+    readonly createdAt: FieldRef<"GPTCreatureRequest", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * GenrationRequest findUnique
+   * GPTCreatureRequest findUnique
    */
-  export type GenrationRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GenrationRequest
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GenrationRequestSelect<ExtArgs> | null
+    select?: GPTCreatureRequestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the GenrationRequest
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GenrationRequestOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
-     * Filter, which GenrationRequest to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: GenrationRequestWhereUniqueInput
+    include?: GPTCreatureRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which GPTCreatureRequest to fetch.
+     */
+    where: GPTCreatureRequestWhereUniqueInput
   }
 
   /**
-   * GenrationRequest findUniqueOrThrow
+   * GPTCreatureRequest findUniqueOrThrow
    */
-  export type GenrationRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GenrationRequest
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GenrationRequestSelect<ExtArgs> | null
+    select?: GPTCreatureRequestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the GenrationRequest
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GenrationRequestOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
-     * Filter, which GenrationRequest to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where: GenrationRequestWhereUniqueInput
+    include?: GPTCreatureRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which GPTCreatureRequest to fetch.
+     */
+    where: GPTCreatureRequestWhereUniqueInput
   }
 
   /**
-   * GenrationRequest findFirst
+   * GPTCreatureRequest findFirst
    */
-  export type GenrationRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GenrationRequest
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GenrationRequestSelect<ExtArgs> | null
+    select?: GPTCreatureRequestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the GenrationRequest
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GenrationRequestOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
-     * Filter, which GenrationRequest to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: GenrationRequestWhereInput
+    include?: GPTCreatureRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which GPTCreatureRequest to fetch.
+     */
+    where?: GPTCreatureRequestWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of GenrationRequests to fetch.
+     * Determine the order of GPTCreatureRequests to fetch.
      */
-    orderBy?: GenrationRequestOrderByWithRelationInput | GenrationRequestOrderByWithRelationInput[]
+    orderBy?: GPTCreatureRequestOrderByWithRelationInput | GPTCreatureRequestOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for GenrationRequests.
+     * Sets the position for searching for GPTCreatureRequests.
      */
-    cursor?: GenrationRequestWhereUniqueInput
+    cursor?: GPTCreatureRequestWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` GenrationRequests from the position of the cursor.
+     * Take `±n` GPTCreatureRequests from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` GenrationRequests.
+     * Skip the first `n` GPTCreatureRequests.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of GenrationRequests.
+     * Filter by unique combinations of GPTCreatureRequests.
      */
-    distinct?: GenrationRequestScalarFieldEnum | GenrationRequestScalarFieldEnum[]
+    distinct?: GPTCreatureRequestScalarFieldEnum | GPTCreatureRequestScalarFieldEnum[]
   }
 
   /**
-   * GenrationRequest findFirstOrThrow
+   * GPTCreatureRequest findFirstOrThrow
    */
-  export type GenrationRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GenrationRequest
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GenrationRequestSelect<ExtArgs> | null
+    select?: GPTCreatureRequestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the GenrationRequest
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GenrationRequestOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
-     * Filter, which GenrationRequest to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: GenrationRequestWhereInput
+    include?: GPTCreatureRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which GPTCreatureRequest to fetch.
+     */
+    where?: GPTCreatureRequestWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of GenrationRequests to fetch.
+     * Determine the order of GPTCreatureRequests to fetch.
      */
-    orderBy?: GenrationRequestOrderByWithRelationInput | GenrationRequestOrderByWithRelationInput[]
+    orderBy?: GPTCreatureRequestOrderByWithRelationInput | GPTCreatureRequestOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for GenrationRequests.
+     * Sets the position for searching for GPTCreatureRequests.
      */
-    cursor?: GenrationRequestWhereUniqueInput
+    cursor?: GPTCreatureRequestWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` GenrationRequests from the position of the cursor.
+     * Take `±n` GPTCreatureRequests from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` GenrationRequests.
+     * Skip the first `n` GPTCreatureRequests.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of GenrationRequests.
+     * Filter by unique combinations of GPTCreatureRequests.
      */
-    distinct?: GenrationRequestScalarFieldEnum | GenrationRequestScalarFieldEnum[]
+    distinct?: GPTCreatureRequestScalarFieldEnum | GPTCreatureRequestScalarFieldEnum[]
   }
 
   /**
-   * GenrationRequest findMany
+   * GPTCreatureRequest findMany
    */
-  export type GenrationRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GenrationRequest
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GenrationRequestSelect<ExtArgs> | null
+    select?: GPTCreatureRequestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the GenrationRequest
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GenrationRequestOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
-     * Filter, which GenrationRequests to fetch.
+     * Choose, which related nodes to fetch as well
      */
-    where?: GenrationRequestWhereInput
+    include?: GPTCreatureRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which GPTCreatureRequests to fetch.
+     */
+    where?: GPTCreatureRequestWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of GenrationRequests to fetch.
+     * Determine the order of GPTCreatureRequests to fetch.
      */
-    orderBy?: GenrationRequestOrderByWithRelationInput | GenrationRequestOrderByWithRelationInput[]
+    orderBy?: GPTCreatureRequestOrderByWithRelationInput | GPTCreatureRequestOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing GenrationRequests.
+     * Sets the position for listing GPTCreatureRequests.
      */
-    cursor?: GenrationRequestWhereUniqueInput
+    cursor?: GPTCreatureRequestWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` GenrationRequests from the position of the cursor.
+     * Take `±n` GPTCreatureRequests from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` GenrationRequests.
+     * Skip the first `n` GPTCreatureRequests.
      */
     skip?: number
-    distinct?: GenrationRequestScalarFieldEnum | GenrationRequestScalarFieldEnum[]
+    distinct?: GPTCreatureRequestScalarFieldEnum | GPTCreatureRequestScalarFieldEnum[]
   }
 
   /**
-   * GenrationRequest create
+   * GPTCreatureRequest create
    */
-  export type GenrationRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GenrationRequest
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GenrationRequestSelect<ExtArgs> | null
+    select?: GPTCreatureRequestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the GenrationRequest
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GenrationRequestOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
-     * The data needed to create a GenrationRequest.
+     * Choose, which related nodes to fetch as well
      */
-    data: XOR<GenrationRequestCreateInput, GenrationRequestUncheckedCreateInput>
+    include?: GPTCreatureRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a GPTCreatureRequest.
+     */
+    data: XOR<GPTCreatureRequestCreateInput, GPTCreatureRequestUncheckedCreateInput>
   }
 
   /**
-   * GenrationRequest createMany
+   * GPTCreatureRequest createMany
    */
-  export type GenrationRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many GenrationRequests.
+     * The data used to create many GPTCreatureRequests.
      */
-    data: GenrationRequestCreateManyInput | GenrationRequestCreateManyInput[]
+    data: GPTCreatureRequestCreateManyInput | GPTCreatureRequestCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * GenrationRequest createManyAndReturn
+   * GPTCreatureRequest createManyAndReturn
    */
-  export type GenrationRequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GenrationRequest
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GenrationRequestSelectCreateManyAndReturn<ExtArgs> | null
+    select?: GPTCreatureRequestSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the GenrationRequest
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GenrationRequestOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
-     * The data used to create many GenrationRequests.
+     * The data used to create many GPTCreatureRequests.
      */
-    data: GenrationRequestCreateManyInput | GenrationRequestCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * GenrationRequest update
-   */
-  export type GenrationRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GenrationRequest
-     */
-    select?: GenrationRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GenrationRequest
-     */
-    omit?: GenrationRequestOmit<ExtArgs> | null
-    /**
-     * The data needed to update a GenrationRequest.
-     */
-    data: XOR<GenrationRequestUpdateInput, GenrationRequestUncheckedUpdateInput>
-    /**
-     * Choose, which GenrationRequest to update.
-     */
-    where: GenrationRequestWhereUniqueInput
-  }
-
-  /**
-   * GenrationRequest updateMany
-   */
-  export type GenrationRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update GenrationRequests.
-     */
-    data: XOR<GenrationRequestUpdateManyMutationInput, GenrationRequestUncheckedUpdateManyInput>
-    /**
-     * Filter which GenrationRequests to update
-     */
-    where?: GenrationRequestWhereInput
-    /**
-     * Limit how many GenrationRequests to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * GenrationRequest updateManyAndReturn
-   */
-  export type GenrationRequestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GenrationRequest
-     */
-    select?: GenrationRequestSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the GenrationRequest
-     */
-    omit?: GenrationRequestOmit<ExtArgs> | null
-    /**
-     * The data used to update GenrationRequests.
-     */
-    data: XOR<GenrationRequestUpdateManyMutationInput, GenrationRequestUncheckedUpdateManyInput>
-    /**
-     * Filter which GenrationRequests to update
-     */
-    where?: GenrationRequestWhereInput
-    /**
-     * Limit how many GenrationRequests to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * GenrationRequest upsert
-   */
-  export type GenrationRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GenrationRequest
-     */
-    select?: GenrationRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GenrationRequest
-     */
-    omit?: GenrationRequestOmit<ExtArgs> | null
-    /**
-     * The filter to search for the GenrationRequest to update in case it exists.
-     */
-    where: GenrationRequestWhereUniqueInput
-    /**
-     * In case the GenrationRequest found by the `where` argument doesn't exist, create a new GenrationRequest with this data.
-     */
-    create: XOR<GenrationRequestCreateInput, GenrationRequestUncheckedCreateInput>
-    /**
-     * In case the GenrationRequest was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<GenrationRequestUpdateInput, GenrationRequestUncheckedUpdateInput>
-  }
-
-  /**
-   * GenrationRequest delete
-   */
-  export type GenrationRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GenrationRequest
-     */
-    select?: GenrationRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GenrationRequest
-     */
-    omit?: GenrationRequestOmit<ExtArgs> | null
-    /**
-     * Filter which GenrationRequest to delete.
-     */
-    where: GenrationRequestWhereUniqueInput
-  }
-
-  /**
-   * GenrationRequest deleteMany
-   */
-  export type GenrationRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which GenrationRequests to delete
-     */
-    where?: GenrationRequestWhereInput
-    /**
-     * Limit how many GenrationRequests to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * GenrationRequest without action
-   */
-  export type GenrationRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GenrationRequest
-     */
-    select?: GenrationRequestSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GenrationRequest
-     */
-    omit?: GenrationRequestOmit<ExtArgs> | null
-  }
-
-
-  /**
-   * Model GPTMessageHistory
-   */
-
-  export type AggregateGPTMessageHistory = {
-    _count: GPTMessageHistoryCountAggregateOutputType | null
-    _min: GPTMessageHistoryMinAggregateOutputType | null
-    _max: GPTMessageHistoryMaxAggregateOutputType | null
-  }
-
-  export type GPTMessageHistoryMinAggregateOutputType = {
-    id: string | null
-    type: string | null
-  }
-
-  export type GPTMessageHistoryMaxAggregateOutputType = {
-    id: string | null
-    type: string | null
-  }
-
-  export type GPTMessageHistoryCountAggregateOutputType = {
-    id: number
-    type: number
-    _all: number
-  }
-
-
-  export type GPTMessageHistoryMinAggregateInputType = {
-    id?: true
-    type?: true
-  }
-
-  export type GPTMessageHistoryMaxAggregateInputType = {
-    id?: true
-    type?: true
-  }
-
-  export type GPTMessageHistoryCountAggregateInputType = {
-    id?: true
-    type?: true
-    _all?: true
-  }
-
-  export type GPTMessageHistoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which GPTMessageHistory to aggregate.
-     */
-    where?: GPTMessageHistoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GPTMessageHistories to fetch.
-     */
-    orderBy?: GPTMessageHistoryOrderByWithRelationInput | GPTMessageHistoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: GPTMessageHistoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GPTMessageHistories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GPTMessageHistories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned GPTMessageHistories
-    **/
-    _count?: true | GPTMessageHistoryCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: GPTMessageHistoryMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: GPTMessageHistoryMaxAggregateInputType
-  }
-
-  export type GetGPTMessageHistoryAggregateType<T extends GPTMessageHistoryAggregateArgs> = {
-        [P in keyof T & keyof AggregateGPTMessageHistory]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateGPTMessageHistory[P]>
-      : GetScalarType<T[P], AggregateGPTMessageHistory[P]>
-  }
-
-
-
-
-  export type GPTMessageHistoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: GPTMessageHistoryWhereInput
-    orderBy?: GPTMessageHistoryOrderByWithAggregationInput | GPTMessageHistoryOrderByWithAggregationInput[]
-    by: GPTMessageHistoryScalarFieldEnum[] | GPTMessageHistoryScalarFieldEnum
-    having?: GPTMessageHistoryScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: GPTMessageHistoryCountAggregateInputType | true
-    _min?: GPTMessageHistoryMinAggregateInputType
-    _max?: GPTMessageHistoryMaxAggregateInputType
-  }
-
-  export type GPTMessageHistoryGroupByOutputType = {
-    id: string
-    type: string
-    _count: GPTMessageHistoryCountAggregateOutputType | null
-    _min: GPTMessageHistoryMinAggregateOutputType | null
-    _max: GPTMessageHistoryMaxAggregateOutputType | null
-  }
-
-  type GetGPTMessageHistoryGroupByPayload<T extends GPTMessageHistoryGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<GPTMessageHistoryGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof GPTMessageHistoryGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], GPTMessageHistoryGroupByOutputType[P]>
-            : GetScalarType<T[P], GPTMessageHistoryGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type GPTMessageHistorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    type?: boolean
-    messages_relation?: boolean | GPTMessageHistory$messages_relationArgs<ExtArgs>
-    _count?: boolean | GPTMessageHistoryCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["gPTMessageHistory"]>
-
-  export type GPTMessageHistorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    type?: boolean
-  }, ExtArgs["result"]["gPTMessageHistory"]>
-
-  export type GPTMessageHistorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    type?: boolean
-  }, ExtArgs["result"]["gPTMessageHistory"]>
-
-  export type GPTMessageHistorySelectScalar = {
-    id?: boolean
-    type?: boolean
-  }
-
-  export type GPTMessageHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type", ExtArgs["result"]["gPTMessageHistory"]>
-  export type GPTMessageHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    messages_relation?: boolean | GPTMessageHistory$messages_relationArgs<ExtArgs>
-    _count?: boolean | GPTMessageHistoryCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type GPTMessageHistoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type GPTMessageHistoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $GPTMessageHistoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "GPTMessageHistory"
-    objects: {
-      messages_relation: Prisma.$GPTMessagePayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      type: string
-    }, ExtArgs["result"]["gPTMessageHistory"]>
-    composites: {}
-  }
-
-  type GPTMessageHistoryGetPayload<S extends boolean | null | undefined | GPTMessageHistoryDefaultArgs> = $Result.GetResult<Prisma.$GPTMessageHistoryPayload, S>
-
-  type GPTMessageHistoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<GPTMessageHistoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: GPTMessageHistoryCountAggregateInputType | true
-    }
-
-  export interface GPTMessageHistoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GPTMessageHistory'], meta: { name: 'GPTMessageHistory' } }
-    /**
-     * Find zero or one GPTMessageHistory that matches the filter.
-     * @param {GPTMessageHistoryFindUniqueArgs} args - Arguments to find a GPTMessageHistory
-     * @example
-     * // Get one GPTMessageHistory
-     * const gPTMessageHistory = await prisma.gPTMessageHistory.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends GPTMessageHistoryFindUniqueArgs>(args: SelectSubset<T, GPTMessageHistoryFindUniqueArgs<ExtArgs>>): Prisma__GPTMessageHistoryClient<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one GPTMessageHistory that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {GPTMessageHistoryFindUniqueOrThrowArgs} args - Arguments to find a GPTMessageHistory
-     * @example
-     * // Get one GPTMessageHistory
-     * const gPTMessageHistory = await prisma.gPTMessageHistory.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends GPTMessageHistoryFindUniqueOrThrowArgs>(args: SelectSubset<T, GPTMessageHistoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GPTMessageHistoryClient<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first GPTMessageHistory that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageHistoryFindFirstArgs} args - Arguments to find a GPTMessageHistory
-     * @example
-     * // Get one GPTMessageHistory
-     * const gPTMessageHistory = await prisma.gPTMessageHistory.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends GPTMessageHistoryFindFirstArgs>(args?: SelectSubset<T, GPTMessageHistoryFindFirstArgs<ExtArgs>>): Prisma__GPTMessageHistoryClient<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first GPTMessageHistory that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageHistoryFindFirstOrThrowArgs} args - Arguments to find a GPTMessageHistory
-     * @example
-     * // Get one GPTMessageHistory
-     * const gPTMessageHistory = await prisma.gPTMessageHistory.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends GPTMessageHistoryFindFirstOrThrowArgs>(args?: SelectSubset<T, GPTMessageHistoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__GPTMessageHistoryClient<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more GPTMessageHistories that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageHistoryFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all GPTMessageHistories
-     * const gPTMessageHistories = await prisma.gPTMessageHistory.findMany()
-     * 
-     * // Get first 10 GPTMessageHistories
-     * const gPTMessageHistories = await prisma.gPTMessageHistory.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const gPTMessageHistoryWithIdOnly = await prisma.gPTMessageHistory.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends GPTMessageHistoryFindManyArgs>(args?: SelectSubset<T, GPTMessageHistoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a GPTMessageHistory.
-     * @param {GPTMessageHistoryCreateArgs} args - Arguments to create a GPTMessageHistory.
-     * @example
-     * // Create one GPTMessageHistory
-     * const GPTMessageHistory = await prisma.gPTMessageHistory.create({
-     *   data: {
-     *     // ... data to create a GPTMessageHistory
-     *   }
-     * })
-     * 
-     */
-    create<T extends GPTMessageHistoryCreateArgs>(args: SelectSubset<T, GPTMessageHistoryCreateArgs<ExtArgs>>): Prisma__GPTMessageHistoryClient<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many GPTMessageHistories.
-     * @param {GPTMessageHistoryCreateManyArgs} args - Arguments to create many GPTMessageHistories.
-     * @example
-     * // Create many GPTMessageHistories
-     * const gPTMessageHistory = await prisma.gPTMessageHistory.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends GPTMessageHistoryCreateManyArgs>(args?: SelectSubset<T, GPTMessageHistoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many GPTMessageHistories and returns the data saved in the database.
-     * @param {GPTMessageHistoryCreateManyAndReturnArgs} args - Arguments to create many GPTMessageHistories.
-     * @example
-     * // Create many GPTMessageHistories
-     * const gPTMessageHistory = await prisma.gPTMessageHistory.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many GPTMessageHistories and only return the `id`
-     * const gPTMessageHistoryWithIdOnly = await prisma.gPTMessageHistory.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends GPTMessageHistoryCreateManyAndReturnArgs>(args?: SelectSubset<T, GPTMessageHistoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a GPTMessageHistory.
-     * @param {GPTMessageHistoryDeleteArgs} args - Arguments to delete one GPTMessageHistory.
-     * @example
-     * // Delete one GPTMessageHistory
-     * const GPTMessageHistory = await prisma.gPTMessageHistory.delete({
-     *   where: {
-     *     // ... filter to delete one GPTMessageHistory
-     *   }
-     * })
-     * 
-     */
-    delete<T extends GPTMessageHistoryDeleteArgs>(args: SelectSubset<T, GPTMessageHistoryDeleteArgs<ExtArgs>>): Prisma__GPTMessageHistoryClient<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one GPTMessageHistory.
-     * @param {GPTMessageHistoryUpdateArgs} args - Arguments to update one GPTMessageHistory.
-     * @example
-     * // Update one GPTMessageHistory
-     * const gPTMessageHistory = await prisma.gPTMessageHistory.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends GPTMessageHistoryUpdateArgs>(args: SelectSubset<T, GPTMessageHistoryUpdateArgs<ExtArgs>>): Prisma__GPTMessageHistoryClient<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more GPTMessageHistories.
-     * @param {GPTMessageHistoryDeleteManyArgs} args - Arguments to filter GPTMessageHistories to delete.
-     * @example
-     * // Delete a few GPTMessageHistories
-     * const { count } = await prisma.gPTMessageHistory.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends GPTMessageHistoryDeleteManyArgs>(args?: SelectSubset<T, GPTMessageHistoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more GPTMessageHistories.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageHistoryUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many GPTMessageHistories
-     * const gPTMessageHistory = await prisma.gPTMessageHistory.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends GPTMessageHistoryUpdateManyArgs>(args: SelectSubset<T, GPTMessageHistoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more GPTMessageHistories and returns the data updated in the database.
-     * @param {GPTMessageHistoryUpdateManyAndReturnArgs} args - Arguments to update many GPTMessageHistories.
-     * @example
-     * // Update many GPTMessageHistories
-     * const gPTMessageHistory = await prisma.gPTMessageHistory.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more GPTMessageHistories and only return the `id`
-     * const gPTMessageHistoryWithIdOnly = await prisma.gPTMessageHistory.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends GPTMessageHistoryUpdateManyAndReturnArgs>(args: SelectSubset<T, GPTMessageHistoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one GPTMessageHistory.
-     * @param {GPTMessageHistoryUpsertArgs} args - Arguments to update or create a GPTMessageHistory.
-     * @example
-     * // Update or create a GPTMessageHistory
-     * const gPTMessageHistory = await prisma.gPTMessageHistory.upsert({
-     *   create: {
-     *     // ... data to create a GPTMessageHistory
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the GPTMessageHistory we want to update
-     *   }
-     * })
-     */
-    upsert<T extends GPTMessageHistoryUpsertArgs>(args: SelectSubset<T, GPTMessageHistoryUpsertArgs<ExtArgs>>): Prisma__GPTMessageHistoryClient<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of GPTMessageHistories.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageHistoryCountArgs} args - Arguments to filter GPTMessageHistories to count.
-     * @example
-     * // Count the number of GPTMessageHistories
-     * const count = await prisma.gPTMessageHistory.count({
-     *   where: {
-     *     // ... the filter for the GPTMessageHistories we want to count
-     *   }
-     * })
-    **/
-    count<T extends GPTMessageHistoryCountArgs>(
-      args?: Subset<T, GPTMessageHistoryCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], GPTMessageHistoryCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a GPTMessageHistory.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageHistoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends GPTMessageHistoryAggregateArgs>(args: Subset<T, GPTMessageHistoryAggregateArgs>): Prisma.PrismaPromise<GetGPTMessageHistoryAggregateType<T>>
-
-    /**
-     * Group by GPTMessageHistory.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageHistoryGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends GPTMessageHistoryGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: GPTMessageHistoryGroupByArgs['orderBy'] }
-        : { orderBy?: GPTMessageHistoryGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, GPTMessageHistoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGPTMessageHistoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the GPTMessageHistory model
-   */
-  readonly fields: GPTMessageHistoryFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for GPTMessageHistory.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__GPTMessageHistoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    messages_relation<T extends GPTMessageHistory$messages_relationArgs<ExtArgs> = {}>(args?: Subset<T, GPTMessageHistory$messages_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the GPTMessageHistory model
-   */ 
-  interface GPTMessageHistoryFieldRefs {
-    readonly id: FieldRef<"GPTMessageHistory", 'String'>
-    readonly type: FieldRef<"GPTMessageHistory", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * GPTMessageHistory findUnique
-   */
-  export type GPTMessageHistoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageHistoryInclude<ExtArgs> | null
-    /**
-     * Filter, which GPTMessageHistory to fetch.
-     */
-    where: GPTMessageHistoryWhereUniqueInput
-  }
-
-  /**
-   * GPTMessageHistory findUniqueOrThrow
-   */
-  export type GPTMessageHistoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageHistoryInclude<ExtArgs> | null
-    /**
-     * Filter, which GPTMessageHistory to fetch.
-     */
-    where: GPTMessageHistoryWhereUniqueInput
-  }
-
-  /**
-   * GPTMessageHistory findFirst
-   */
-  export type GPTMessageHistoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageHistoryInclude<ExtArgs> | null
-    /**
-     * Filter, which GPTMessageHistory to fetch.
-     */
-    where?: GPTMessageHistoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GPTMessageHistories to fetch.
-     */
-    orderBy?: GPTMessageHistoryOrderByWithRelationInput | GPTMessageHistoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for GPTMessageHistories.
-     */
-    cursor?: GPTMessageHistoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GPTMessageHistories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GPTMessageHistories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of GPTMessageHistories.
-     */
-    distinct?: GPTMessageHistoryScalarFieldEnum | GPTMessageHistoryScalarFieldEnum[]
-  }
-
-  /**
-   * GPTMessageHistory findFirstOrThrow
-   */
-  export type GPTMessageHistoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageHistoryInclude<ExtArgs> | null
-    /**
-     * Filter, which GPTMessageHistory to fetch.
-     */
-    where?: GPTMessageHistoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GPTMessageHistories to fetch.
-     */
-    orderBy?: GPTMessageHistoryOrderByWithRelationInput | GPTMessageHistoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for GPTMessageHistories.
-     */
-    cursor?: GPTMessageHistoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GPTMessageHistories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GPTMessageHistories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of GPTMessageHistories.
-     */
-    distinct?: GPTMessageHistoryScalarFieldEnum | GPTMessageHistoryScalarFieldEnum[]
-  }
-
-  /**
-   * GPTMessageHistory findMany
-   */
-  export type GPTMessageHistoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageHistoryInclude<ExtArgs> | null
-    /**
-     * Filter, which GPTMessageHistories to fetch.
-     */
-    where?: GPTMessageHistoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GPTMessageHistories to fetch.
-     */
-    orderBy?: GPTMessageHistoryOrderByWithRelationInput | GPTMessageHistoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing GPTMessageHistories.
-     */
-    cursor?: GPTMessageHistoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GPTMessageHistories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GPTMessageHistories.
-     */
-    skip?: number
-    distinct?: GPTMessageHistoryScalarFieldEnum | GPTMessageHistoryScalarFieldEnum[]
-  }
-
-  /**
-   * GPTMessageHistory create
-   */
-  export type GPTMessageHistoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageHistoryInclude<ExtArgs> | null
-    /**
-     * The data needed to create a GPTMessageHistory.
-     */
-    data: XOR<GPTMessageHistoryCreateInput, GPTMessageHistoryUncheckedCreateInput>
-  }
-
-  /**
-   * GPTMessageHistory createMany
-   */
-  export type GPTMessageHistoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many GPTMessageHistories.
-     */
-    data: GPTMessageHistoryCreateManyInput | GPTMessageHistoryCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * GPTMessageHistory createManyAndReturn
-   */
-  export type GPTMessageHistoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * The data used to create many GPTMessageHistories.
-     */
-    data: GPTMessageHistoryCreateManyInput | GPTMessageHistoryCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * GPTMessageHistory update
-   */
-  export type GPTMessageHistoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageHistoryInclude<ExtArgs> | null
-    /**
-     * The data needed to update a GPTMessageHistory.
-     */
-    data: XOR<GPTMessageHistoryUpdateInput, GPTMessageHistoryUncheckedUpdateInput>
-    /**
-     * Choose, which GPTMessageHistory to update.
-     */
-    where: GPTMessageHistoryWhereUniqueInput
-  }
-
-  /**
-   * GPTMessageHistory updateMany
-   */
-  export type GPTMessageHistoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update GPTMessageHistories.
-     */
-    data: XOR<GPTMessageHistoryUpdateManyMutationInput, GPTMessageHistoryUncheckedUpdateManyInput>
-    /**
-     * Filter which GPTMessageHistories to update
-     */
-    where?: GPTMessageHistoryWhereInput
-    /**
-     * Limit how many GPTMessageHistories to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * GPTMessageHistory updateManyAndReturn
-   */
-  export type GPTMessageHistoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * The data used to update GPTMessageHistories.
-     */
-    data: XOR<GPTMessageHistoryUpdateManyMutationInput, GPTMessageHistoryUncheckedUpdateManyInput>
-    /**
-     * Filter which GPTMessageHistories to update
-     */
-    where?: GPTMessageHistoryWhereInput
-    /**
-     * Limit how many GPTMessageHistories to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * GPTMessageHistory upsert
-   */
-  export type GPTMessageHistoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageHistoryInclude<ExtArgs> | null
-    /**
-     * The filter to search for the GPTMessageHistory to update in case it exists.
-     */
-    where: GPTMessageHistoryWhereUniqueInput
-    /**
-     * In case the GPTMessageHistory found by the `where` argument doesn't exist, create a new GPTMessageHistory with this data.
-     */
-    create: XOR<GPTMessageHistoryCreateInput, GPTMessageHistoryUncheckedCreateInput>
-    /**
-     * In case the GPTMessageHistory was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<GPTMessageHistoryUpdateInput, GPTMessageHistoryUncheckedUpdateInput>
-  }
-
-  /**
-   * GPTMessageHistory delete
-   */
-  export type GPTMessageHistoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageHistoryInclude<ExtArgs> | null
-    /**
-     * Filter which GPTMessageHistory to delete.
-     */
-    where: GPTMessageHistoryWhereUniqueInput
-  }
-
-  /**
-   * GPTMessageHistory deleteMany
-   */
-  export type GPTMessageHistoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which GPTMessageHistories to delete
-     */
-    where?: GPTMessageHistoryWhereInput
-    /**
-     * Limit how many GPTMessageHistories to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * GPTMessageHistory.messages_relation
-   */
-  export type GPTMessageHistory$messages_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessage
-     */
-    select?: GPTMessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessage
-     */
-    omit?: GPTMessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageInclude<ExtArgs> | null
-    where?: GPTMessageWhereInput
-    orderBy?: GPTMessageOrderByWithRelationInput | GPTMessageOrderByWithRelationInput[]
-    cursor?: GPTMessageWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: GPTMessageScalarFieldEnum | GPTMessageScalarFieldEnum[]
-  }
-
-  /**
-   * GPTMessageHistory without action
-   */
-  export type GPTMessageHistoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessageHistory
-     */
-    select?: GPTMessageHistorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessageHistory
-     */
-    omit?: GPTMessageHistoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageHistoryInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model GPTMessage
-   */
-
-  export type AggregateGPTMessage = {
-    _count: GPTMessageCountAggregateOutputType | null
-    _avg: GPTMessageAvgAggregateOutputType | null
-    _sum: GPTMessageSumAggregateOutputType | null
-    _min: GPTMessageMinAggregateOutputType | null
-    _max: GPTMessageMaxAggregateOutputType | null
-  }
-
-  export type GPTMessageAvgAggregateOutputType = {
-    number: number | null
-  }
-
-  export type GPTMessageSumAggregateOutputType = {
-    number: number | null
-  }
-
-  export type GPTMessageMinAggregateOutputType = {
-    message_history_id: string | null
-    number: number | null
-    text: string | null
-    role: string | null
-  }
-
-  export type GPTMessageMaxAggregateOutputType = {
-    message_history_id: string | null
-    number: number | null
-    text: string | null
-    role: string | null
-  }
-
-  export type GPTMessageCountAggregateOutputType = {
-    message_history_id: number
-    number: number
-    text: number
-    role: number
-    _all: number
-  }
-
-
-  export type GPTMessageAvgAggregateInputType = {
-    number?: true
-  }
-
-  export type GPTMessageSumAggregateInputType = {
-    number?: true
-  }
-
-  export type GPTMessageMinAggregateInputType = {
-    message_history_id?: true
-    number?: true
-    text?: true
-    role?: true
-  }
-
-  export type GPTMessageMaxAggregateInputType = {
-    message_history_id?: true
-    number?: true
-    text?: true
-    role?: true
-  }
-
-  export type GPTMessageCountAggregateInputType = {
-    message_history_id?: true
-    number?: true
-    text?: true
-    role?: true
-    _all?: true
-  }
-
-  export type GPTMessageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which GPTMessage to aggregate.
-     */
-    where?: GPTMessageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GPTMessages to fetch.
-     */
-    orderBy?: GPTMessageOrderByWithRelationInput | GPTMessageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: GPTMessageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GPTMessages from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GPTMessages.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned GPTMessages
-    **/
-    _count?: true | GPTMessageCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: GPTMessageAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: GPTMessageSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: GPTMessageMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: GPTMessageMaxAggregateInputType
-  }
-
-  export type GetGPTMessageAggregateType<T extends GPTMessageAggregateArgs> = {
-        [P in keyof T & keyof AggregateGPTMessage]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateGPTMessage[P]>
-      : GetScalarType<T[P], AggregateGPTMessage[P]>
-  }
-
-
-
-
-  export type GPTMessageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: GPTMessageWhereInput
-    orderBy?: GPTMessageOrderByWithAggregationInput | GPTMessageOrderByWithAggregationInput[]
-    by: GPTMessageScalarFieldEnum[] | GPTMessageScalarFieldEnum
-    having?: GPTMessageScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: GPTMessageCountAggregateInputType | true
-    _avg?: GPTMessageAvgAggregateInputType
-    _sum?: GPTMessageSumAggregateInputType
-    _min?: GPTMessageMinAggregateInputType
-    _max?: GPTMessageMaxAggregateInputType
-  }
-
-  export type GPTMessageGroupByOutputType = {
-    message_history_id: string
-    number: number
-    text: string
-    role: string
-    _count: GPTMessageCountAggregateOutputType | null
-    _avg: GPTMessageAvgAggregateOutputType | null
-    _sum: GPTMessageSumAggregateOutputType | null
-    _min: GPTMessageMinAggregateOutputType | null
-    _max: GPTMessageMaxAggregateOutputType | null
-  }
-
-  type GetGPTMessageGroupByPayload<T extends GPTMessageGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<GPTMessageGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof GPTMessageGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], GPTMessageGroupByOutputType[P]>
-            : GetScalarType<T[P], GPTMessageGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type GPTMessageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    message_history_id?: boolean
-    number?: boolean
-    text?: boolean
-    role?: boolean
-    message_history_relation?: boolean | GPTMessageHistoryDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["gPTMessage"]>
-
-  export type GPTMessageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    message_history_id?: boolean
-    number?: boolean
-    text?: boolean
-    role?: boolean
-    message_history_relation?: boolean | GPTMessageHistoryDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["gPTMessage"]>
-
-  export type GPTMessageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    message_history_id?: boolean
-    number?: boolean
-    text?: boolean
-    role?: boolean
-    message_history_relation?: boolean | GPTMessageHistoryDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["gPTMessage"]>
-
-  export type GPTMessageSelectScalar = {
-    message_history_id?: boolean
-    number?: boolean
-    text?: boolean
-    role?: boolean
-  }
-
-  export type GPTMessageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"message_history_id" | "number" | "text" | "role", ExtArgs["result"]["gPTMessage"]>
-  export type GPTMessageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    message_history_relation?: boolean | GPTMessageHistoryDefaultArgs<ExtArgs>
-  }
-  export type GPTMessageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    message_history_relation?: boolean | GPTMessageHistoryDefaultArgs<ExtArgs>
-  }
-  export type GPTMessageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    message_history_relation?: boolean | GPTMessageHistoryDefaultArgs<ExtArgs>
-  }
-
-  export type $GPTMessagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "GPTMessage"
-    objects: {
-      message_history_relation: Prisma.$GPTMessageHistoryPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      message_history_id: string
-      number: number
-      text: string
-      role: string
-    }, ExtArgs["result"]["gPTMessage"]>
-    composites: {}
-  }
-
-  type GPTMessageGetPayload<S extends boolean | null | undefined | GPTMessageDefaultArgs> = $Result.GetResult<Prisma.$GPTMessagePayload, S>
-
-  type GPTMessageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<GPTMessageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: GPTMessageCountAggregateInputType | true
-    }
-
-  export interface GPTMessageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GPTMessage'], meta: { name: 'GPTMessage' } }
-    /**
-     * Find zero or one GPTMessage that matches the filter.
-     * @param {GPTMessageFindUniqueArgs} args - Arguments to find a GPTMessage
-     * @example
-     * // Get one GPTMessage
-     * const gPTMessage = await prisma.gPTMessage.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends GPTMessageFindUniqueArgs>(args: SelectSubset<T, GPTMessageFindUniqueArgs<ExtArgs>>): Prisma__GPTMessageClient<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one GPTMessage that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {GPTMessageFindUniqueOrThrowArgs} args - Arguments to find a GPTMessage
-     * @example
-     * // Get one GPTMessage
-     * const gPTMessage = await prisma.gPTMessage.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends GPTMessageFindUniqueOrThrowArgs>(args: SelectSubset<T, GPTMessageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GPTMessageClient<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first GPTMessage that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageFindFirstArgs} args - Arguments to find a GPTMessage
-     * @example
-     * // Get one GPTMessage
-     * const gPTMessage = await prisma.gPTMessage.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends GPTMessageFindFirstArgs>(args?: SelectSubset<T, GPTMessageFindFirstArgs<ExtArgs>>): Prisma__GPTMessageClient<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first GPTMessage that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageFindFirstOrThrowArgs} args - Arguments to find a GPTMessage
-     * @example
-     * // Get one GPTMessage
-     * const gPTMessage = await prisma.gPTMessage.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends GPTMessageFindFirstOrThrowArgs>(args?: SelectSubset<T, GPTMessageFindFirstOrThrowArgs<ExtArgs>>): Prisma__GPTMessageClient<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more GPTMessages that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all GPTMessages
-     * const gPTMessages = await prisma.gPTMessage.findMany()
-     * 
-     * // Get first 10 GPTMessages
-     * const gPTMessages = await prisma.gPTMessage.findMany({ take: 10 })
-     * 
-     * // Only select the `message_history_id`
-     * const gPTMessageWithMessage_history_idOnly = await prisma.gPTMessage.findMany({ select: { message_history_id: true } })
-     * 
-     */
-    findMany<T extends GPTMessageFindManyArgs>(args?: SelectSubset<T, GPTMessageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a GPTMessage.
-     * @param {GPTMessageCreateArgs} args - Arguments to create a GPTMessage.
-     * @example
-     * // Create one GPTMessage
-     * const GPTMessage = await prisma.gPTMessage.create({
-     *   data: {
-     *     // ... data to create a GPTMessage
-     *   }
-     * })
-     * 
-     */
-    create<T extends GPTMessageCreateArgs>(args: SelectSubset<T, GPTMessageCreateArgs<ExtArgs>>): Prisma__GPTMessageClient<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many GPTMessages.
-     * @param {GPTMessageCreateManyArgs} args - Arguments to create many GPTMessages.
-     * @example
-     * // Create many GPTMessages
-     * const gPTMessage = await prisma.gPTMessage.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends GPTMessageCreateManyArgs>(args?: SelectSubset<T, GPTMessageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many GPTMessages and returns the data saved in the database.
-     * @param {GPTMessageCreateManyAndReturnArgs} args - Arguments to create many GPTMessages.
-     * @example
-     * // Create many GPTMessages
-     * const gPTMessage = await prisma.gPTMessage.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many GPTMessages and only return the `message_history_id`
-     * const gPTMessageWithMessage_history_idOnly = await prisma.gPTMessage.createManyAndReturn({
-     *   select: { message_history_id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends GPTMessageCreateManyAndReturnArgs>(args?: SelectSubset<T, GPTMessageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a GPTMessage.
-     * @param {GPTMessageDeleteArgs} args - Arguments to delete one GPTMessage.
-     * @example
-     * // Delete one GPTMessage
-     * const GPTMessage = await prisma.gPTMessage.delete({
-     *   where: {
-     *     // ... filter to delete one GPTMessage
-     *   }
-     * })
-     * 
-     */
-    delete<T extends GPTMessageDeleteArgs>(args: SelectSubset<T, GPTMessageDeleteArgs<ExtArgs>>): Prisma__GPTMessageClient<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one GPTMessage.
-     * @param {GPTMessageUpdateArgs} args - Arguments to update one GPTMessage.
-     * @example
-     * // Update one GPTMessage
-     * const gPTMessage = await prisma.gPTMessage.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends GPTMessageUpdateArgs>(args: SelectSubset<T, GPTMessageUpdateArgs<ExtArgs>>): Prisma__GPTMessageClient<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more GPTMessages.
-     * @param {GPTMessageDeleteManyArgs} args - Arguments to filter GPTMessages to delete.
-     * @example
-     * // Delete a few GPTMessages
-     * const { count } = await prisma.gPTMessage.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends GPTMessageDeleteManyArgs>(args?: SelectSubset<T, GPTMessageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more GPTMessages.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many GPTMessages
-     * const gPTMessage = await prisma.gPTMessage.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends GPTMessageUpdateManyArgs>(args: SelectSubset<T, GPTMessageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more GPTMessages and returns the data updated in the database.
-     * @param {GPTMessageUpdateManyAndReturnArgs} args - Arguments to update many GPTMessages.
-     * @example
-     * // Update many GPTMessages
-     * const gPTMessage = await prisma.gPTMessage.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more GPTMessages and only return the `message_history_id`
-     * const gPTMessageWithMessage_history_idOnly = await prisma.gPTMessage.updateManyAndReturn({
-     *   select: { message_history_id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends GPTMessageUpdateManyAndReturnArgs>(args: SelectSubset<T, GPTMessageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one GPTMessage.
-     * @param {GPTMessageUpsertArgs} args - Arguments to update or create a GPTMessage.
-     * @example
-     * // Update or create a GPTMessage
-     * const gPTMessage = await prisma.gPTMessage.upsert({
-     *   create: {
-     *     // ... data to create a GPTMessage
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the GPTMessage we want to update
-     *   }
-     * })
-     */
-    upsert<T extends GPTMessageUpsertArgs>(args: SelectSubset<T, GPTMessageUpsertArgs<ExtArgs>>): Prisma__GPTMessageClient<$Result.GetResult<Prisma.$GPTMessagePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of GPTMessages.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageCountArgs} args - Arguments to filter GPTMessages to count.
-     * @example
-     * // Count the number of GPTMessages
-     * const count = await prisma.gPTMessage.count({
-     *   where: {
-     *     // ... the filter for the GPTMessages we want to count
-     *   }
-     * })
-    **/
-    count<T extends GPTMessageCountArgs>(
-      args?: Subset<T, GPTMessageCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], GPTMessageCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a GPTMessage.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends GPTMessageAggregateArgs>(args: Subset<T, GPTMessageAggregateArgs>): Prisma.PrismaPromise<GetGPTMessageAggregateType<T>>
-
-    /**
-     * Group by GPTMessage.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {GPTMessageGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends GPTMessageGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: GPTMessageGroupByArgs['orderBy'] }
-        : { orderBy?: GPTMessageGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, GPTMessageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetGPTMessageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the GPTMessage model
-   */
-  readonly fields: GPTMessageFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for GPTMessage.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__GPTMessageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    message_history_relation<T extends GPTMessageHistoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GPTMessageHistoryDefaultArgs<ExtArgs>>): Prisma__GPTMessageHistoryClient<$Result.GetResult<Prisma.$GPTMessageHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the GPTMessage model
-   */ 
-  interface GPTMessageFieldRefs {
-    readonly message_history_id: FieldRef<"GPTMessage", 'String'>
-    readonly number: FieldRef<"GPTMessage", 'Int'>
-    readonly text: FieldRef<"GPTMessage", 'String'>
-    readonly role: FieldRef<"GPTMessage", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * GPTMessage findUnique
-   */
-  export type GPTMessageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessage
-     */
-    select?: GPTMessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessage
-     */
-    omit?: GPTMessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageInclude<ExtArgs> | null
-    /**
-     * Filter, which GPTMessage to fetch.
-     */
-    where: GPTMessageWhereUniqueInput
-  }
-
-  /**
-   * GPTMessage findUniqueOrThrow
-   */
-  export type GPTMessageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessage
-     */
-    select?: GPTMessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessage
-     */
-    omit?: GPTMessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageInclude<ExtArgs> | null
-    /**
-     * Filter, which GPTMessage to fetch.
-     */
-    where: GPTMessageWhereUniqueInput
-  }
-
-  /**
-   * GPTMessage findFirst
-   */
-  export type GPTMessageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessage
-     */
-    select?: GPTMessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessage
-     */
-    omit?: GPTMessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageInclude<ExtArgs> | null
-    /**
-     * Filter, which GPTMessage to fetch.
-     */
-    where?: GPTMessageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GPTMessages to fetch.
-     */
-    orderBy?: GPTMessageOrderByWithRelationInput | GPTMessageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for GPTMessages.
-     */
-    cursor?: GPTMessageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GPTMessages from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GPTMessages.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of GPTMessages.
-     */
-    distinct?: GPTMessageScalarFieldEnum | GPTMessageScalarFieldEnum[]
-  }
-
-  /**
-   * GPTMessage findFirstOrThrow
-   */
-  export type GPTMessageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessage
-     */
-    select?: GPTMessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessage
-     */
-    omit?: GPTMessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageInclude<ExtArgs> | null
-    /**
-     * Filter, which GPTMessage to fetch.
-     */
-    where?: GPTMessageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GPTMessages to fetch.
-     */
-    orderBy?: GPTMessageOrderByWithRelationInput | GPTMessageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for GPTMessages.
-     */
-    cursor?: GPTMessageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GPTMessages from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GPTMessages.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of GPTMessages.
-     */
-    distinct?: GPTMessageScalarFieldEnum | GPTMessageScalarFieldEnum[]
-  }
-
-  /**
-   * GPTMessage findMany
-   */
-  export type GPTMessageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessage
-     */
-    select?: GPTMessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessage
-     */
-    omit?: GPTMessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageInclude<ExtArgs> | null
-    /**
-     * Filter, which GPTMessages to fetch.
-     */
-    where?: GPTMessageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of GPTMessages to fetch.
-     */
-    orderBy?: GPTMessageOrderByWithRelationInput | GPTMessageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing GPTMessages.
-     */
-    cursor?: GPTMessageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` GPTMessages from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` GPTMessages.
-     */
-    skip?: number
-    distinct?: GPTMessageScalarFieldEnum | GPTMessageScalarFieldEnum[]
-  }
-
-  /**
-   * GPTMessage create
-   */
-  export type GPTMessageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessage
-     */
-    select?: GPTMessageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessage
-     */
-    omit?: GPTMessageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: GPTMessageInclude<ExtArgs> | null
-    /**
-     * The data needed to create a GPTMessage.
-     */
-    data: XOR<GPTMessageCreateInput, GPTMessageUncheckedCreateInput>
-  }
-
-  /**
-   * GPTMessage createMany
-   */
-  export type GPTMessageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many GPTMessages.
-     */
-    data: GPTMessageCreateManyInput | GPTMessageCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * GPTMessage createManyAndReturn
-   */
-  export type GPTMessageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the GPTMessage
-     */
-    select?: GPTMessageSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the GPTMessage
-     */
-    omit?: GPTMessageOmit<ExtArgs> | null
-    /**
-     * The data used to create many GPTMessages.
-     */
-    data: GPTMessageCreateManyInput | GPTMessageCreateManyInput[]
+    data: GPTCreatureRequestCreateManyInput | GPTCreatureRequestCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GPTMessageIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: GPTCreatureRequestIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * GPTMessage update
+   * GPTCreatureRequest update
    */
-  export type GPTMessageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GPTMessage
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GPTMessageSelect<ExtArgs> | null
+    select?: GPTCreatureRequestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the GPTMessage
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GPTMessageOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GPTMessageInclude<ExtArgs> | null
+    include?: GPTCreatureRequestInclude<ExtArgs> | null
     /**
-     * The data needed to update a GPTMessage.
+     * The data needed to update a GPTCreatureRequest.
      */
-    data: XOR<GPTMessageUpdateInput, GPTMessageUncheckedUpdateInput>
+    data: XOR<GPTCreatureRequestUpdateInput, GPTCreatureRequestUncheckedUpdateInput>
     /**
-     * Choose, which GPTMessage to update.
+     * Choose, which GPTCreatureRequest to update.
      */
-    where: GPTMessageWhereUniqueInput
+    where: GPTCreatureRequestWhereUniqueInput
   }
 
   /**
-   * GPTMessage updateMany
+   * GPTCreatureRequest updateMany
    */
-  export type GPTMessageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update GPTMessages.
+     * The data used to update GPTCreatureRequests.
      */
-    data: XOR<GPTMessageUpdateManyMutationInput, GPTMessageUncheckedUpdateManyInput>
+    data: XOR<GPTCreatureRequestUpdateManyMutationInput, GPTCreatureRequestUncheckedUpdateManyInput>
     /**
-     * Filter which GPTMessages to update
+     * Filter which GPTCreatureRequests to update
      */
-    where?: GPTMessageWhereInput
+    where?: GPTCreatureRequestWhereInput
     /**
-     * Limit how many GPTMessages to update.
+     * Limit how many GPTCreatureRequests to update.
      */
     limit?: number
   }
 
   /**
-   * GPTMessage updateManyAndReturn
+   * GPTCreatureRequest updateManyAndReturn
    */
-  export type GPTMessageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GPTMessage
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GPTMessageSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: GPTCreatureRequestSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the GPTMessage
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GPTMessageOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
-     * The data used to update GPTMessages.
+     * The data used to update GPTCreatureRequests.
      */
-    data: XOR<GPTMessageUpdateManyMutationInput, GPTMessageUncheckedUpdateManyInput>
+    data: XOR<GPTCreatureRequestUpdateManyMutationInput, GPTCreatureRequestUncheckedUpdateManyInput>
     /**
-     * Filter which GPTMessages to update
+     * Filter which GPTCreatureRequests to update
      */
-    where?: GPTMessageWhereInput
+    where?: GPTCreatureRequestWhereInput
     /**
-     * Limit how many GPTMessages to update.
+     * Limit how many GPTCreatureRequests to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GPTMessageIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: GPTCreatureRequestIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * GPTMessage upsert
+   * GPTCreatureRequest upsert
    */
-  export type GPTMessageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GPTMessage
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GPTMessageSelect<ExtArgs> | null
+    select?: GPTCreatureRequestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the GPTMessage
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GPTMessageOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GPTMessageInclude<ExtArgs> | null
+    include?: GPTCreatureRequestInclude<ExtArgs> | null
     /**
-     * The filter to search for the GPTMessage to update in case it exists.
+     * The filter to search for the GPTCreatureRequest to update in case it exists.
      */
-    where: GPTMessageWhereUniqueInput
+    where: GPTCreatureRequestWhereUniqueInput
     /**
-     * In case the GPTMessage found by the `where` argument doesn't exist, create a new GPTMessage with this data.
+     * In case the GPTCreatureRequest found by the `where` argument doesn't exist, create a new GPTCreatureRequest with this data.
      */
-    create: XOR<GPTMessageCreateInput, GPTMessageUncheckedCreateInput>
+    create: XOR<GPTCreatureRequestCreateInput, GPTCreatureRequestUncheckedCreateInput>
     /**
-     * In case the GPTMessage was found with the provided `where` argument, update it with this data.
+     * In case the GPTCreatureRequest was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<GPTMessageUpdateInput, GPTMessageUncheckedUpdateInput>
+    update: XOR<GPTCreatureRequestUpdateInput, GPTCreatureRequestUncheckedUpdateInput>
   }
 
   /**
-   * GPTMessage delete
+   * GPTCreatureRequest delete
    */
-  export type GPTMessageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GPTMessage
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GPTMessageSelect<ExtArgs> | null
+    select?: GPTCreatureRequestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the GPTMessage
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GPTMessageOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GPTMessageInclude<ExtArgs> | null
+    include?: GPTCreatureRequestInclude<ExtArgs> | null
     /**
-     * Filter which GPTMessage to delete.
+     * Filter which GPTCreatureRequest to delete.
      */
-    where: GPTMessageWhereUniqueInput
+    where: GPTCreatureRequestWhereUniqueInput
   }
 
   /**
-   * GPTMessage deleteMany
+   * GPTCreatureRequest deleteMany
    */
-  export type GPTMessageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which GPTMessages to delete
+     * Filter which GPTCreatureRequests to delete
      */
-    where?: GPTMessageWhereInput
+    where?: GPTCreatureRequestWhereInput
     /**
-     * Limit how many GPTMessages to delete.
+     * Limit how many GPTCreatureRequests to delete.
      */
     limit?: number
   }
 
   /**
-   * GPTMessage without action
+   * GPTCreatureRequest without action
    */
-  export type GPTMessageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type GPTCreatureRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the GPTMessage
+     * Select specific fields to fetch from the GPTCreatureRequest
      */
-    select?: GPTMessageSelect<ExtArgs> | null
+    select?: GPTCreatureRequestSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the GPTMessage
+     * Omit specific fields from the GPTCreatureRequest
      */
-    omit?: GPTMessageOmit<ExtArgs> | null
+    omit?: GPTCreatureRequestOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: GPTMessageInclude<ExtArgs> | null
+    include?: GPTCreatureRequestInclude<ExtArgs> | null
   }
 
 
@@ -37389,32 +35216,18 @@ export namespace Prisma {
   export type ChallengeRatingMetadataScalarFieldEnum = (typeof ChallengeRatingMetadataScalarFieldEnum)[keyof typeof ChallengeRatingMetadataScalarFieldEnum]
 
 
-  export const GenrationRequestScalarFieldEnum: {
+  export const GPTCreatureRequestScalarFieldEnum: {
     id: 'id',
-    request: 'request',
-    danger: 'danger',
-    name: 'name'
+    creature_id: 'creature_id',
+    name: 'name',
+    challenge_rating: 'challenge_rating',
+    type_name: 'type_name',
+    creation_description: 'creation_description',
+    role: 'role',
+    createdAt: 'createdAt'
   };
 
-  export type GenrationRequestScalarFieldEnum = (typeof GenrationRequestScalarFieldEnum)[keyof typeof GenrationRequestScalarFieldEnum]
-
-
-  export const GPTMessageHistoryScalarFieldEnum: {
-    id: 'id',
-    type: 'type'
-  };
-
-  export type GPTMessageHistoryScalarFieldEnum = (typeof GPTMessageHistoryScalarFieldEnum)[keyof typeof GPTMessageHistoryScalarFieldEnum]
-
-
-  export const GPTMessageScalarFieldEnum: {
-    message_history_id: 'message_history_id',
-    number: 'number',
-    text: 'text',
-    role: 'role'
-  };
-
-  export type GPTMessageScalarFieldEnum = (typeof GPTMessageScalarFieldEnum)[keyof typeof GPTMessageScalarFieldEnum]
+  export type GPTCreatureRequestScalarFieldEnum = (typeof GPTCreatureRequestScalarFieldEnum)[keyof typeof GPTCreatureRequestScalarFieldEnum]
 
 
   export const AdventureScalarFieldEnum: {
@@ -37614,6 +35427,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'CreatureRole'
+   */
+  export type EnumCreatureRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CreatureRole'>
+    
+
+
+  /**
+   * Reference to a field of type 'CreatureRole[]'
+   */
+  export type ListEnumCreatureRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CreatureRole[]'>
     
 
 
@@ -38240,6 +36067,7 @@ export namespace Prisma {
     biomes_relation?: BiomeListRelationFilter
     actions_relation?: ActionListRelationFilter
     traits_relation?: TraitListRelationFilter
+    gpt_request_relation?: XOR<GPTCreatureRequestNullableScalarRelationFilter, GPTCreatureRequestWhereInput> | null
   }
 
   export type CreatureOrderByWithRelationInput = {
@@ -38272,6 +36100,7 @@ export namespace Prisma {
     biomes_relation?: BiomeOrderByRelationAggregateInput
     actions_relation?: ActionOrderByRelationAggregateInput
     traits_relation?: TraitOrderByRelationAggregateInput
+    gpt_request_relation?: GPTCreatureRequestOrderByWithRelationInput
   }
 
   export type CreatureWhereUniqueInput = Prisma.AtLeast<{
@@ -38307,6 +36136,7 @@ export namespace Prisma {
     biomes_relation?: BiomeListRelationFilter
     actions_relation?: ActionListRelationFilter
     traits_relation?: TraitListRelationFilter
+    gpt_request_relation?: XOR<GPTCreatureRequestNullableScalarRelationFilter, GPTCreatureRequestWhereInput> | null
   }, "id">
 
   export type CreatureOrderByWithAggregationInput = {
@@ -38665,146 +36495,76 @@ export namespace Prisma {
     xp_reward?: IntWithAggregatesFilter<"ChallengeRatingMetadata"> | number
   }
 
-  export type GenrationRequestWhereInput = {
-    AND?: GenrationRequestWhereInput | GenrationRequestWhereInput[]
-    OR?: GenrationRequestWhereInput[]
-    NOT?: GenrationRequestWhereInput | GenrationRequestWhereInput[]
-    id?: IntFilter<"GenrationRequest"> | number
-    request?: StringFilter<"GenrationRequest"> | string
-    danger?: StringFilter<"GenrationRequest"> | string
-    name?: StringFilter<"GenrationRequest"> | string
+  export type GPTCreatureRequestWhereInput = {
+    AND?: GPTCreatureRequestWhereInput | GPTCreatureRequestWhereInput[]
+    OR?: GPTCreatureRequestWhereInput[]
+    NOT?: GPTCreatureRequestWhereInput | GPTCreatureRequestWhereInput[]
+    id?: IntFilter<"GPTCreatureRequest"> | number
+    creature_id?: StringFilter<"GPTCreatureRequest"> | string
+    name?: StringFilter<"GPTCreatureRequest"> | string
+    challenge_rating?: StringFilter<"GPTCreatureRequest"> | string
+    type_name?: StringFilter<"GPTCreatureRequest"> | string
+    creation_description?: StringNullableFilter<"GPTCreatureRequest"> | string | null
+    role?: EnumCreatureRoleNullableFilter<"GPTCreatureRequest"> | $Enums.CreatureRole | null
+    createdAt?: DateTimeFilter<"GPTCreatureRequest"> | Date | string
+    creature_relation?: XOR<CreatureScalarRelationFilter, CreatureWhereInput>
   }
 
-  export type GenrationRequestOrderByWithRelationInput = {
+  export type GPTCreatureRequestOrderByWithRelationInput = {
     id?: SortOrder
-    request?: SortOrder
-    danger?: SortOrder
+    creature_id?: SortOrder
     name?: SortOrder
+    challenge_rating?: SortOrder
+    type_name?: SortOrder
+    creation_description?: SortOrderInput | SortOrder
+    role?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    creature_relation?: CreatureOrderByWithRelationInput
   }
 
-  export type GenrationRequestWhereUniqueInput = Prisma.AtLeast<{
+  export type GPTCreatureRequestWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: GenrationRequestWhereInput | GenrationRequestWhereInput[]
-    OR?: GenrationRequestWhereInput[]
-    NOT?: GenrationRequestWhereInput | GenrationRequestWhereInput[]
-    request?: StringFilter<"GenrationRequest"> | string
-    danger?: StringFilter<"GenrationRequest"> | string
-    name?: StringFilter<"GenrationRequest"> | string
-  }, "id">
+    creature_id?: string
+    AND?: GPTCreatureRequestWhereInput | GPTCreatureRequestWhereInput[]
+    OR?: GPTCreatureRequestWhereInput[]
+    NOT?: GPTCreatureRequestWhereInput | GPTCreatureRequestWhereInput[]
+    name?: StringFilter<"GPTCreatureRequest"> | string
+    challenge_rating?: StringFilter<"GPTCreatureRequest"> | string
+    type_name?: StringFilter<"GPTCreatureRequest"> | string
+    creation_description?: StringNullableFilter<"GPTCreatureRequest"> | string | null
+    role?: EnumCreatureRoleNullableFilter<"GPTCreatureRequest"> | $Enums.CreatureRole | null
+    createdAt?: DateTimeFilter<"GPTCreatureRequest"> | Date | string
+    creature_relation?: XOR<CreatureScalarRelationFilter, CreatureWhereInput>
+  }, "id" | "creature_id">
 
-  export type GenrationRequestOrderByWithAggregationInput = {
+  export type GPTCreatureRequestOrderByWithAggregationInput = {
     id?: SortOrder
-    request?: SortOrder
-    danger?: SortOrder
+    creature_id?: SortOrder
     name?: SortOrder
-    _count?: GenrationRequestCountOrderByAggregateInput
-    _avg?: GenrationRequestAvgOrderByAggregateInput
-    _max?: GenrationRequestMaxOrderByAggregateInput
-    _min?: GenrationRequestMinOrderByAggregateInput
-    _sum?: GenrationRequestSumOrderByAggregateInput
+    challenge_rating?: SortOrder
+    type_name?: SortOrder
+    creation_description?: SortOrderInput | SortOrder
+    role?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: GPTCreatureRequestCountOrderByAggregateInput
+    _avg?: GPTCreatureRequestAvgOrderByAggregateInput
+    _max?: GPTCreatureRequestMaxOrderByAggregateInput
+    _min?: GPTCreatureRequestMinOrderByAggregateInput
+    _sum?: GPTCreatureRequestSumOrderByAggregateInput
   }
 
-  export type GenrationRequestScalarWhereWithAggregatesInput = {
-    AND?: GenrationRequestScalarWhereWithAggregatesInput | GenrationRequestScalarWhereWithAggregatesInput[]
-    OR?: GenrationRequestScalarWhereWithAggregatesInput[]
-    NOT?: GenrationRequestScalarWhereWithAggregatesInput | GenrationRequestScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"GenrationRequest"> | number
-    request?: StringWithAggregatesFilter<"GenrationRequest"> | string
-    danger?: StringWithAggregatesFilter<"GenrationRequest"> | string
-    name?: StringWithAggregatesFilter<"GenrationRequest"> | string
-  }
-
-  export type GPTMessageHistoryWhereInput = {
-    AND?: GPTMessageHistoryWhereInput | GPTMessageHistoryWhereInput[]
-    OR?: GPTMessageHistoryWhereInput[]
-    NOT?: GPTMessageHistoryWhereInput | GPTMessageHistoryWhereInput[]
-    id?: StringFilter<"GPTMessageHistory"> | string
-    type?: StringFilter<"GPTMessageHistory"> | string
-    messages_relation?: GPTMessageListRelationFilter
-  }
-
-  export type GPTMessageHistoryOrderByWithRelationInput = {
-    id?: SortOrder
-    type?: SortOrder
-    messages_relation?: GPTMessageOrderByRelationAggregateInput
-  }
-
-  export type GPTMessageHistoryWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: GPTMessageHistoryWhereInput | GPTMessageHistoryWhereInput[]
-    OR?: GPTMessageHistoryWhereInput[]
-    NOT?: GPTMessageHistoryWhereInput | GPTMessageHistoryWhereInput[]
-    type?: StringFilter<"GPTMessageHistory"> | string
-    messages_relation?: GPTMessageListRelationFilter
-  }, "id">
-
-  export type GPTMessageHistoryOrderByWithAggregationInput = {
-    id?: SortOrder
-    type?: SortOrder
-    _count?: GPTMessageHistoryCountOrderByAggregateInput
-    _max?: GPTMessageHistoryMaxOrderByAggregateInput
-    _min?: GPTMessageHistoryMinOrderByAggregateInput
-  }
-
-  export type GPTMessageHistoryScalarWhereWithAggregatesInput = {
-    AND?: GPTMessageHistoryScalarWhereWithAggregatesInput | GPTMessageHistoryScalarWhereWithAggregatesInput[]
-    OR?: GPTMessageHistoryScalarWhereWithAggregatesInput[]
-    NOT?: GPTMessageHistoryScalarWhereWithAggregatesInput | GPTMessageHistoryScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"GPTMessageHistory"> | string
-    type?: StringWithAggregatesFilter<"GPTMessageHistory"> | string
-  }
-
-  export type GPTMessageWhereInput = {
-    AND?: GPTMessageWhereInput | GPTMessageWhereInput[]
-    OR?: GPTMessageWhereInput[]
-    NOT?: GPTMessageWhereInput | GPTMessageWhereInput[]
-    message_history_id?: StringFilter<"GPTMessage"> | string
-    number?: IntFilter<"GPTMessage"> | number
-    text?: StringFilter<"GPTMessage"> | string
-    role?: StringFilter<"GPTMessage"> | string
-    message_history_relation?: XOR<GPTMessageHistoryScalarRelationFilter, GPTMessageHistoryWhereInput>
-  }
-
-  export type GPTMessageOrderByWithRelationInput = {
-    message_history_id?: SortOrder
-    number?: SortOrder
-    text?: SortOrder
-    role?: SortOrder
-    message_history_relation?: GPTMessageHistoryOrderByWithRelationInput
-  }
-
-  export type GPTMessageWhereUniqueInput = Prisma.AtLeast<{
-    message_history_id_number?: GPTMessageMessage_history_idNumberCompoundUniqueInput
-    AND?: GPTMessageWhereInput | GPTMessageWhereInput[]
-    OR?: GPTMessageWhereInput[]
-    NOT?: GPTMessageWhereInput | GPTMessageWhereInput[]
-    message_history_id?: StringFilter<"GPTMessage"> | string
-    number?: IntFilter<"GPTMessage"> | number
-    text?: StringFilter<"GPTMessage"> | string
-    role?: StringFilter<"GPTMessage"> | string
-    message_history_relation?: XOR<GPTMessageHistoryScalarRelationFilter, GPTMessageHistoryWhereInput>
-  }, "message_history_id_number">
-
-  export type GPTMessageOrderByWithAggregationInput = {
-    message_history_id?: SortOrder
-    number?: SortOrder
-    text?: SortOrder
-    role?: SortOrder
-    _count?: GPTMessageCountOrderByAggregateInput
-    _avg?: GPTMessageAvgOrderByAggregateInput
-    _max?: GPTMessageMaxOrderByAggregateInput
-    _min?: GPTMessageMinOrderByAggregateInput
-    _sum?: GPTMessageSumOrderByAggregateInput
-  }
-
-  export type GPTMessageScalarWhereWithAggregatesInput = {
-    AND?: GPTMessageScalarWhereWithAggregatesInput | GPTMessageScalarWhereWithAggregatesInput[]
-    OR?: GPTMessageScalarWhereWithAggregatesInput[]
-    NOT?: GPTMessageScalarWhereWithAggregatesInput | GPTMessageScalarWhereWithAggregatesInput[]
-    message_history_id?: StringWithAggregatesFilter<"GPTMessage"> | string
-    number?: IntWithAggregatesFilter<"GPTMessage"> | number
-    text?: StringWithAggregatesFilter<"GPTMessage"> | string
-    role?: StringWithAggregatesFilter<"GPTMessage"> | string
+  export type GPTCreatureRequestScalarWhereWithAggregatesInput = {
+    AND?: GPTCreatureRequestScalarWhereWithAggregatesInput | GPTCreatureRequestScalarWhereWithAggregatesInput[]
+    OR?: GPTCreatureRequestScalarWhereWithAggregatesInput[]
+    NOT?: GPTCreatureRequestScalarWhereWithAggregatesInput | GPTCreatureRequestScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"GPTCreatureRequest"> | number
+    creature_id?: StringWithAggregatesFilter<"GPTCreatureRequest"> | string
+    name?: StringWithAggregatesFilter<"GPTCreatureRequest"> | string
+    challenge_rating?: StringWithAggregatesFilter<"GPTCreatureRequest"> | string
+    type_name?: StringWithAggregatesFilter<"GPTCreatureRequest"> | string
+    creation_description?: StringNullableWithAggregatesFilter<"GPTCreatureRequest"> | string | null
+    role?: EnumCreatureRoleNullableWithAggregatesFilter<"GPTCreatureRequest"> | $Enums.CreatureRole | null
+    createdAt?: DateTimeWithAggregatesFilter<"GPTCreatureRequest"> | Date | string
   }
 
   export type AdventureWhereInput = {
@@ -39772,6 +37532,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateInput = {
@@ -39798,6 +37559,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUpdateInput = {
@@ -39824,6 +37586,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateInput = {
@@ -39850,6 +37613,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureCreateManyInput = {
@@ -40205,137 +37969,77 @@ export namespace Prisma {
     xp_reward?: IntFieldUpdateOperationsInput | number
   }
 
-  export type GenrationRequestCreateInput = {
-    request: string
-    danger: string
+  export type GPTCreatureRequestCreateInput = {
     name: string
+    challenge_rating: string
+    type_name: string
+    creation_description?: string | null
+    role?: $Enums.CreatureRole | null
+    createdAt?: Date | string
+    creature_relation: CreatureCreateNestedOneWithoutGpt_request_relationInput
   }
 
-  export type GenrationRequestUncheckedCreateInput = {
+  export type GPTCreatureRequestUncheckedCreateInput = {
     id?: number
-    request: string
-    danger: string
+    creature_id: string
     name: string
+    challenge_rating: string
+    type_name: string
+    creation_description?: string | null
+    role?: $Enums.CreatureRole | null
+    createdAt?: Date | string
   }
 
-  export type GenrationRequestUpdateInput = {
-    request?: StringFieldUpdateOperationsInput | string
-    danger?: StringFieldUpdateOperationsInput | string
+  export type GPTCreatureRequestUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    challenge_rating?: StringFieldUpdateOperationsInput | string
+    type_name?: StringFieldUpdateOperationsInput | string
+    creation_description?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creature_relation?: CreatureUpdateOneRequiredWithoutGpt_request_relationNestedInput
   }
 
-  export type GenrationRequestUncheckedUpdateInput = {
+  export type GPTCreatureRequestUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    request?: StringFieldUpdateOperationsInput | string
-    danger?: StringFieldUpdateOperationsInput | string
+    creature_id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    challenge_rating?: StringFieldUpdateOperationsInput | string
+    type_name?: StringFieldUpdateOperationsInput | string
+    creation_description?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type GenrationRequestCreateManyInput = {
+  export type GPTCreatureRequestCreateManyInput = {
     id?: number
-    request: string
-    danger: string
+    creature_id: string
     name: string
+    challenge_rating: string
+    type_name: string
+    creation_description?: string | null
+    role?: $Enums.CreatureRole | null
+    createdAt?: Date | string
   }
 
-  export type GenrationRequestUpdateManyMutationInput = {
-    request?: StringFieldUpdateOperationsInput | string
-    danger?: StringFieldUpdateOperationsInput | string
+  export type GPTCreatureRequestUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    challenge_rating?: StringFieldUpdateOperationsInput | string
+    type_name?: StringFieldUpdateOperationsInput | string
+    creation_description?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type GenrationRequestUncheckedUpdateManyInput = {
+  export type GPTCreatureRequestUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    request?: StringFieldUpdateOperationsInput | string
-    danger?: StringFieldUpdateOperationsInput | string
+    creature_id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type GPTMessageHistoryCreateInput = {
-    id?: string
-    type: string
-    messages_relation?: GPTMessageCreateNestedManyWithoutMessage_history_relationInput
-  }
-
-  export type GPTMessageHistoryUncheckedCreateInput = {
-    id?: string
-    type: string
-    messages_relation?: GPTMessageUncheckedCreateNestedManyWithoutMessage_history_relationInput
-  }
-
-  export type GPTMessageHistoryUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    messages_relation?: GPTMessageUpdateManyWithoutMessage_history_relationNestedInput
-  }
-
-  export type GPTMessageHistoryUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-    messages_relation?: GPTMessageUncheckedUpdateManyWithoutMessage_history_relationNestedInput
-  }
-
-  export type GPTMessageHistoryCreateManyInput = {
-    id?: string
-    type: string
-  }
-
-  export type GPTMessageHistoryUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type GPTMessageHistoryUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type GPTMessageCreateInput = {
-    number: number
-    text: string
-    role: string
-    message_history_relation: GPTMessageHistoryCreateNestedOneWithoutMessages_relationInput
-  }
-
-  export type GPTMessageUncheckedCreateInput = {
-    message_history_id: string
-    number: number
-    text: string
-    role: string
-  }
-
-  export type GPTMessageUpdateInput = {
-    number?: IntFieldUpdateOperationsInput | number
-    text?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-    message_history_relation?: GPTMessageHistoryUpdateOneRequiredWithoutMessages_relationNestedInput
-  }
-
-  export type GPTMessageUncheckedUpdateInput = {
-    message_history_id?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
-    text?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type GPTMessageCreateManyInput = {
-    message_history_id: string
-    number: number
-    text: string
-    role: string
-  }
-
-  export type GPTMessageUpdateManyMutationInput = {
-    number?: IntFieldUpdateOperationsInput | number
-    text?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type GPTMessageUncheckedUpdateManyInput = {
-    message_history_id?: StringFieldUpdateOperationsInput | string
-    number?: IntFieldUpdateOperationsInput | number
-    text?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    challenge_rating?: StringFieldUpdateOperationsInput | string
+    type_name?: StringFieldUpdateOperationsInput | string
+    creation_description?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AdventureCreateInput = {
@@ -41340,6 +39044,11 @@ export namespace Prisma {
     none?: TraitWhereInput
   }
 
+  export type GPTCreatureRequestNullableScalarRelationFilter = {
+    is?: GPTCreatureRequestWhereInput | null
+    isNot?: GPTCreatureRequestWhereInput | null
+  }
+
   export type DamageTypeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -41670,97 +39379,11 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type GenrationRequestCountOrderByAggregateInput = {
-    id?: SortOrder
-    request?: SortOrder
-    danger?: SortOrder
-    name?: SortOrder
-  }
-
-  export type GenrationRequestAvgOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type GenrationRequestMaxOrderByAggregateInput = {
-    id?: SortOrder
-    request?: SortOrder
-    danger?: SortOrder
-    name?: SortOrder
-  }
-
-  export type GenrationRequestMinOrderByAggregateInput = {
-    id?: SortOrder
-    request?: SortOrder
-    danger?: SortOrder
-    name?: SortOrder
-  }
-
-  export type GenrationRequestSumOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type GPTMessageListRelationFilter = {
-    every?: GPTMessageWhereInput
-    some?: GPTMessageWhereInput
-    none?: GPTMessageWhereInput
-  }
-
-  export type GPTMessageOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type GPTMessageHistoryCountOrderByAggregateInput = {
-    id?: SortOrder
-    type?: SortOrder
-  }
-
-  export type GPTMessageHistoryMaxOrderByAggregateInput = {
-    id?: SortOrder
-    type?: SortOrder
-  }
-
-  export type GPTMessageHistoryMinOrderByAggregateInput = {
-    id?: SortOrder
-    type?: SortOrder
-  }
-
-  export type GPTMessageHistoryScalarRelationFilter = {
-    is?: GPTMessageHistoryWhereInput
-    isNot?: GPTMessageHistoryWhereInput
-  }
-
-  export type GPTMessageMessage_history_idNumberCompoundUniqueInput = {
-    message_history_id: string
-    number: number
-  }
-
-  export type GPTMessageCountOrderByAggregateInput = {
-    message_history_id?: SortOrder
-    number?: SortOrder
-    text?: SortOrder
-    role?: SortOrder
-  }
-
-  export type GPTMessageAvgOrderByAggregateInput = {
-    number?: SortOrder
-  }
-
-  export type GPTMessageMaxOrderByAggregateInput = {
-    message_history_id?: SortOrder
-    number?: SortOrder
-    text?: SortOrder
-    role?: SortOrder
-  }
-
-  export type GPTMessageMinOrderByAggregateInput = {
-    message_history_id?: SortOrder
-    number?: SortOrder
-    text?: SortOrder
-    role?: SortOrder
-  }
-
-  export type GPTMessageSumOrderByAggregateInput = {
-    number?: SortOrder
+  export type EnumCreatureRoleNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreatureRole | EnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CreatureRole[] | ListEnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CreatureRole[] | ListEnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCreatureRoleNullableFilter<$PrismaModel> | $Enums.CreatureRole | null
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -41772,6 +39395,71 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type GPTCreatureRequestCountOrderByAggregateInput = {
+    id?: SortOrder
+    creature_id?: SortOrder
+    name?: SortOrder
+    challenge_rating?: SortOrder
+    type_name?: SortOrder
+    creation_description?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GPTCreatureRequestAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type GPTCreatureRequestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    creature_id?: SortOrder
+    name?: SortOrder
+    challenge_rating?: SortOrder
+    type_name?: SortOrder
+    creation_description?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GPTCreatureRequestMinOrderByAggregateInput = {
+    id?: SortOrder
+    creature_id?: SortOrder
+    name?: SortOrder
+    challenge_rating?: SortOrder
+    type_name?: SortOrder
+    creation_description?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type GPTCreatureRequestSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EnumCreatureRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreatureRole | EnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CreatureRole[] | ListEnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CreatureRole[] | ListEnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCreatureRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.CreatureRole | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCreatureRoleNullableFilter<$PrismaModel>
+    _max?: NestedEnumCreatureRoleNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type GenreScalarRelationFilter = {
@@ -41814,20 +39502,6 @@ export namespace Prisma {
     creator_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type AdventureListRelationFilter = {
@@ -42628,6 +40302,12 @@ export namespace Prisma {
     connect?: TraitWhereUniqueInput | TraitWhereUniqueInput[]
   }
 
+  export type GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput = {
+    create?: XOR<GPTCreatureRequestCreateWithoutCreature_relationInput, GPTCreatureRequestUncheckedCreateWithoutCreature_relationInput>
+    connectOrCreate?: GPTCreatureRequestCreateOrConnectWithoutCreature_relationInput
+    connect?: GPTCreatureRequestWhereUniqueInput
+  }
+
   export type CreatureSpeedUncheckedCreateNestedOneWithoutCreature_relationInput = {
     create?: XOR<CreatureSpeedCreateWithoutCreature_relationInput, CreatureSpeedUncheckedCreateWithoutCreature_relationInput>
     connectOrCreate?: CreatureSpeedCreateOrConnectWithoutCreature_relationInput
@@ -42692,6 +40372,12 @@ export namespace Prisma {
     create?: XOR<TraitCreateWithoutCreatures_relationInput, TraitUncheckedCreateWithoutCreatures_relationInput> | TraitCreateWithoutCreatures_relationInput[] | TraitUncheckedCreateWithoutCreatures_relationInput[]
     connectOrCreate?: TraitCreateOrConnectWithoutCreatures_relationInput | TraitCreateOrConnectWithoutCreatures_relationInput[]
     connect?: TraitWhereUniqueInput | TraitWhereUniqueInput[]
+  }
+
+  export type GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput = {
+    create?: XOR<GPTCreatureRequestCreateWithoutCreature_relationInput, GPTCreatureRequestUncheckedCreateWithoutCreature_relationInput>
+    connectOrCreate?: GPTCreatureRequestCreateOrConnectWithoutCreature_relationInput
+    connect?: GPTCreatureRequestWhereUniqueInput
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -42887,6 +40573,16 @@ export namespace Prisma {
     deleteMany?: TraitScalarWhereInput | TraitScalarWhereInput[]
   }
 
+  export type GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput = {
+    create?: XOR<GPTCreatureRequestCreateWithoutCreature_relationInput, GPTCreatureRequestUncheckedCreateWithoutCreature_relationInput>
+    connectOrCreate?: GPTCreatureRequestCreateOrConnectWithoutCreature_relationInput
+    upsert?: GPTCreatureRequestUpsertWithoutCreature_relationInput
+    disconnect?: GPTCreatureRequestWhereInput | boolean
+    delete?: GPTCreatureRequestWhereInput | boolean
+    connect?: GPTCreatureRequestWhereUniqueInput
+    update?: XOR<XOR<GPTCreatureRequestUpdateToOneWithWhereWithoutCreature_relationInput, GPTCreatureRequestUpdateWithoutCreature_relationInput>, GPTCreatureRequestUncheckedUpdateWithoutCreature_relationInput>
+  }
+
   export type CreatureSpeedUncheckedUpdateOneWithoutCreature_relationNestedInput = {
     create?: XOR<CreatureSpeedCreateWithoutCreature_relationInput, CreatureSpeedUncheckedCreateWithoutCreature_relationInput>
     connectOrCreate?: CreatureSpeedCreateOrConnectWithoutCreature_relationInput
@@ -43016,6 +40712,16 @@ export namespace Prisma {
     update?: TraitUpdateWithWhereUniqueWithoutCreatures_relationInput | TraitUpdateWithWhereUniqueWithoutCreatures_relationInput[]
     updateMany?: TraitUpdateManyWithWhereWithoutCreatures_relationInput | TraitUpdateManyWithWhereWithoutCreatures_relationInput[]
     deleteMany?: TraitScalarWhereInput | TraitScalarWhereInput[]
+  }
+
+  export type GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput = {
+    create?: XOR<GPTCreatureRequestCreateWithoutCreature_relationInput, GPTCreatureRequestUncheckedCreateWithoutCreature_relationInput>
+    connectOrCreate?: GPTCreatureRequestCreateOrConnectWithoutCreature_relationInput
+    upsert?: GPTCreatureRequestUpsertWithoutCreature_relationInput
+    disconnect?: GPTCreatureRequestWhereInput | boolean
+    delete?: GPTCreatureRequestWhereInput | boolean
+    connect?: GPTCreatureRequestWhereUniqueInput
+    update?: XOR<XOR<GPTCreatureRequestUpdateToOneWithWhereWithoutCreature_relationInput, GPTCreatureRequestUpdateWithoutCreature_relationInput>, GPTCreatureRequestUncheckedUpdateWithoutCreature_relationInput>
   }
 
   export type CreatureCreateNestedOneWithoutSensesInput = {
@@ -43474,60 +41180,26 @@ export namespace Prisma {
     deleteMany?: CreatureScalarWhereInput | CreatureScalarWhereInput[]
   }
 
-  export type GPTMessageCreateNestedManyWithoutMessage_history_relationInput = {
-    create?: XOR<GPTMessageCreateWithoutMessage_history_relationInput, GPTMessageUncheckedCreateWithoutMessage_history_relationInput> | GPTMessageCreateWithoutMessage_history_relationInput[] | GPTMessageUncheckedCreateWithoutMessage_history_relationInput[]
-    connectOrCreate?: GPTMessageCreateOrConnectWithoutMessage_history_relationInput | GPTMessageCreateOrConnectWithoutMessage_history_relationInput[]
-    createMany?: GPTMessageCreateManyMessage_history_relationInputEnvelope
-    connect?: GPTMessageWhereUniqueInput | GPTMessageWhereUniqueInput[]
+  export type CreatureCreateNestedOneWithoutGpt_request_relationInput = {
+    create?: XOR<CreatureCreateWithoutGpt_request_relationInput, CreatureUncheckedCreateWithoutGpt_request_relationInput>
+    connectOrCreate?: CreatureCreateOrConnectWithoutGpt_request_relationInput
+    connect?: CreatureWhereUniqueInput
   }
 
-  export type GPTMessageUncheckedCreateNestedManyWithoutMessage_history_relationInput = {
-    create?: XOR<GPTMessageCreateWithoutMessage_history_relationInput, GPTMessageUncheckedCreateWithoutMessage_history_relationInput> | GPTMessageCreateWithoutMessage_history_relationInput[] | GPTMessageUncheckedCreateWithoutMessage_history_relationInput[]
-    connectOrCreate?: GPTMessageCreateOrConnectWithoutMessage_history_relationInput | GPTMessageCreateOrConnectWithoutMessage_history_relationInput[]
-    createMany?: GPTMessageCreateManyMessage_history_relationInputEnvelope
-    connect?: GPTMessageWhereUniqueInput | GPTMessageWhereUniqueInput[]
+  export type NullableEnumCreatureRoleFieldUpdateOperationsInput = {
+    set?: $Enums.CreatureRole | null
   }
 
-  export type GPTMessageUpdateManyWithoutMessage_history_relationNestedInput = {
-    create?: XOR<GPTMessageCreateWithoutMessage_history_relationInput, GPTMessageUncheckedCreateWithoutMessage_history_relationInput> | GPTMessageCreateWithoutMessage_history_relationInput[] | GPTMessageUncheckedCreateWithoutMessage_history_relationInput[]
-    connectOrCreate?: GPTMessageCreateOrConnectWithoutMessage_history_relationInput | GPTMessageCreateOrConnectWithoutMessage_history_relationInput[]
-    upsert?: GPTMessageUpsertWithWhereUniqueWithoutMessage_history_relationInput | GPTMessageUpsertWithWhereUniqueWithoutMessage_history_relationInput[]
-    createMany?: GPTMessageCreateManyMessage_history_relationInputEnvelope
-    set?: GPTMessageWhereUniqueInput | GPTMessageWhereUniqueInput[]
-    disconnect?: GPTMessageWhereUniqueInput | GPTMessageWhereUniqueInput[]
-    delete?: GPTMessageWhereUniqueInput | GPTMessageWhereUniqueInput[]
-    connect?: GPTMessageWhereUniqueInput | GPTMessageWhereUniqueInput[]
-    update?: GPTMessageUpdateWithWhereUniqueWithoutMessage_history_relationInput | GPTMessageUpdateWithWhereUniqueWithoutMessage_history_relationInput[]
-    updateMany?: GPTMessageUpdateManyWithWhereWithoutMessage_history_relationInput | GPTMessageUpdateManyWithWhereWithoutMessage_history_relationInput[]
-    deleteMany?: GPTMessageScalarWhereInput | GPTMessageScalarWhereInput[]
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
-  export type GPTMessageUncheckedUpdateManyWithoutMessage_history_relationNestedInput = {
-    create?: XOR<GPTMessageCreateWithoutMessage_history_relationInput, GPTMessageUncheckedCreateWithoutMessage_history_relationInput> | GPTMessageCreateWithoutMessage_history_relationInput[] | GPTMessageUncheckedCreateWithoutMessage_history_relationInput[]
-    connectOrCreate?: GPTMessageCreateOrConnectWithoutMessage_history_relationInput | GPTMessageCreateOrConnectWithoutMessage_history_relationInput[]
-    upsert?: GPTMessageUpsertWithWhereUniqueWithoutMessage_history_relationInput | GPTMessageUpsertWithWhereUniqueWithoutMessage_history_relationInput[]
-    createMany?: GPTMessageCreateManyMessage_history_relationInputEnvelope
-    set?: GPTMessageWhereUniqueInput | GPTMessageWhereUniqueInput[]
-    disconnect?: GPTMessageWhereUniqueInput | GPTMessageWhereUniqueInput[]
-    delete?: GPTMessageWhereUniqueInput | GPTMessageWhereUniqueInput[]
-    connect?: GPTMessageWhereUniqueInput | GPTMessageWhereUniqueInput[]
-    update?: GPTMessageUpdateWithWhereUniqueWithoutMessage_history_relationInput | GPTMessageUpdateWithWhereUniqueWithoutMessage_history_relationInput[]
-    updateMany?: GPTMessageUpdateManyWithWhereWithoutMessage_history_relationInput | GPTMessageUpdateManyWithWhereWithoutMessage_history_relationInput[]
-    deleteMany?: GPTMessageScalarWhereInput | GPTMessageScalarWhereInput[]
-  }
-
-  export type GPTMessageHistoryCreateNestedOneWithoutMessages_relationInput = {
-    create?: XOR<GPTMessageHistoryCreateWithoutMessages_relationInput, GPTMessageHistoryUncheckedCreateWithoutMessages_relationInput>
-    connectOrCreate?: GPTMessageHistoryCreateOrConnectWithoutMessages_relationInput
-    connect?: GPTMessageHistoryWhereUniqueInput
-  }
-
-  export type GPTMessageHistoryUpdateOneRequiredWithoutMessages_relationNestedInput = {
-    create?: XOR<GPTMessageHistoryCreateWithoutMessages_relationInput, GPTMessageHistoryUncheckedCreateWithoutMessages_relationInput>
-    connectOrCreate?: GPTMessageHistoryCreateOrConnectWithoutMessages_relationInput
-    upsert?: GPTMessageHistoryUpsertWithoutMessages_relationInput
-    connect?: GPTMessageHistoryWhereUniqueInput
-    update?: XOR<XOR<GPTMessageHistoryUpdateToOneWithWhereWithoutMessages_relationInput, GPTMessageHistoryUpdateWithoutMessages_relationInput>, GPTMessageHistoryUncheckedUpdateWithoutMessages_relationInput>
+  export type CreatureUpdateOneRequiredWithoutGpt_request_relationNestedInput = {
+    create?: XOR<CreatureCreateWithoutGpt_request_relationInput, CreatureUncheckedCreateWithoutGpt_request_relationInput>
+    connectOrCreate?: CreatureCreateOrConnectWithoutGpt_request_relationInput
+    upsert?: CreatureUpsertWithoutGpt_request_relationInput
+    connect?: CreatureWhereUniqueInput
+    update?: XOR<XOR<CreatureUpdateToOneWithWhereWithoutGpt_request_relationInput, CreatureUpdateWithoutGpt_request_relationInput>, CreatureUncheckedUpdateWithoutGpt_request_relationInput>
   }
 
   export type GenreCreateNestedOneWithoutAdventures_relationInput = {
@@ -43546,10 +41218,6 @@ export namespace Prisma {
     create?: XOR<KeywordCreateWithoutAdventures_relationInput, KeywordUncheckedCreateWithoutAdventures_relationInput> | KeywordCreateWithoutAdventures_relationInput[] | KeywordUncheckedCreateWithoutAdventures_relationInput[]
     connectOrCreate?: KeywordCreateOrConnectWithoutAdventures_relationInput | KeywordCreateOrConnectWithoutAdventures_relationInput[]
     connect?: KeywordWhereUniqueInput | KeywordWhereUniqueInput[]
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type GenreUpdateOneRequiredWithoutAdventures_relationNestedInput = {
@@ -44195,6 +41863,13 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedEnumCreatureRoleNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreatureRole | EnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CreatureRole[] | ListEnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CreatureRole[] | ListEnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCreatureRoleNullableFilter<$PrismaModel> | $Enums.CreatureRole | null
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -44204,6 +41879,16 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type NestedEnumCreatureRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CreatureRole | EnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    in?: $Enums.CreatureRole[] | ListEnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.CreatureRole[] | ListEnumCreatureRoleFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumCreatureRoleNullableWithAggregatesFilter<$PrismaModel> | $Enums.CreatureRole | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumCreatureRoleNullableFilter<$PrismaModel>
+    _max?: NestedEnumCreatureRoleNullableFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -44260,6 +41945,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutSize_relationInput = {
@@ -44285,6 +41971,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutSize_relationInput = {
@@ -44354,6 +42041,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutSource_relationInput = {
@@ -44379,6 +42067,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutSource_relationInput = {
@@ -44489,6 +42178,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutLanguages_relationInput = {
@@ -44514,6 +42204,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutLanguages_relationInput = {
@@ -44560,6 +42251,7 @@ export namespace Prisma {
     languages_relation?: LanguageCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutBiomes_relationInput = {
@@ -44585,6 +42277,7 @@ export namespace Prisma {
     languages_relation?: LanguageUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutBiomes_relationInput = {
@@ -44631,6 +42324,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutType_relationInput = {
@@ -44656,6 +42350,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutType_relationInput = {
@@ -44707,6 +42402,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutAlignment_relationInput = {
@@ -44732,6 +42428,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutAlignment_relationInput = {
@@ -44783,6 +42480,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutSpeedInput = {
@@ -44808,6 +42506,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutSpeedInput = {
@@ -44849,6 +42548,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutSpeedInput = {
@@ -44874,6 +42574,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureStatDetailCreateWithoutCreature_stats_relationInput = {
@@ -44923,6 +42624,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutStatsInput = {
@@ -44948,6 +42650,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutStatsInput = {
@@ -45016,6 +42719,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutStatsInput = {
@@ -45041,6 +42745,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureStatsCreateWithoutStatsInput = {
@@ -45122,6 +42827,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutSkillsInput = {
@@ -45147,6 +42853,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutSkillsInput = {
@@ -45215,6 +42922,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutSkillsInput = {
@@ -45240,6 +42948,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureSkillsCreateWithoutSkillsInput = {
@@ -45565,6 +43274,30 @@ export namespace Prisma {
   export type TraitCreateOrConnectWithoutCreatures_relationInput = {
     where: TraitWhereUniqueInput
     create: XOR<TraitCreateWithoutCreatures_relationInput, TraitUncheckedCreateWithoutCreatures_relationInput>
+  }
+
+  export type GPTCreatureRequestCreateWithoutCreature_relationInput = {
+    name: string
+    challenge_rating: string
+    type_name: string
+    creation_description?: string | null
+    role?: $Enums.CreatureRole | null
+    createdAt?: Date | string
+  }
+
+  export type GPTCreatureRequestUncheckedCreateWithoutCreature_relationInput = {
+    id?: number
+    name: string
+    challenge_rating: string
+    type_name: string
+    creation_description?: string | null
+    role?: $Enums.CreatureRole | null
+    createdAt?: Date | string
+  }
+
+  export type GPTCreatureRequestCreateOrConnectWithoutCreature_relationInput = {
+    where: GPTCreatureRequestWhereUniqueInput
+    create: XOR<GPTCreatureRequestCreateWithoutCreature_relationInput, GPTCreatureRequestUncheckedCreateWithoutCreature_relationInput>
   }
 
   export type CreatureSpeedUpsertWithoutCreature_relationInput = {
@@ -45948,6 +43681,36 @@ export namespace Prisma {
     is_template?: BoolNullableFilter<"Trait"> | boolean | null
   }
 
+  export type GPTCreatureRequestUpsertWithoutCreature_relationInput = {
+    update: XOR<GPTCreatureRequestUpdateWithoutCreature_relationInput, GPTCreatureRequestUncheckedUpdateWithoutCreature_relationInput>
+    create: XOR<GPTCreatureRequestCreateWithoutCreature_relationInput, GPTCreatureRequestUncheckedCreateWithoutCreature_relationInput>
+    where?: GPTCreatureRequestWhereInput
+  }
+
+  export type GPTCreatureRequestUpdateToOneWithWhereWithoutCreature_relationInput = {
+    where?: GPTCreatureRequestWhereInput
+    data: XOR<GPTCreatureRequestUpdateWithoutCreature_relationInput, GPTCreatureRequestUncheckedUpdateWithoutCreature_relationInput>
+  }
+
+  export type GPTCreatureRequestUpdateWithoutCreature_relationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    challenge_rating?: StringFieldUpdateOperationsInput | string
+    type_name?: StringFieldUpdateOperationsInput | string
+    creation_description?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type GPTCreatureRequestUncheckedUpdateWithoutCreature_relationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    challenge_rating?: StringFieldUpdateOperationsInput | string
+    type_name?: StringFieldUpdateOperationsInput | string
+    creation_description?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type CreatureCreateWithoutSensesInput = {
     id?: string
     name: string
@@ -45971,6 +43734,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutSensesInput = {
@@ -45996,6 +43760,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutSensesInput = {
@@ -46037,6 +43802,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutSensesInput = {
@@ -46062,6 +43828,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureCreateWithoutActions_relationInput = {
@@ -46087,6 +43854,7 @@ export namespace Prisma {
     languages_relation?: LanguageCreateNestedManyWithoutCreatures_relationInput
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutActions_relationInput = {
@@ -46112,6 +43880,7 @@ export namespace Prisma {
     languages_relation?: LanguageUncheckedCreateNestedManyWithoutCreatures_relationInput
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutActions_relationInput = {
@@ -46203,6 +43972,7 @@ export namespace Prisma {
     languages_relation?: LanguageCreateNestedManyWithoutCreatures_relationInput
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutTraits_relationInput = {
@@ -46228,6 +43998,7 @@ export namespace Prisma {
     languages_relation?: LanguageUncheckedCreateNestedManyWithoutCreatures_relationInput
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutTraits_relationInput = {
@@ -46354,6 +44125,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutRace_relationInput = {
@@ -46379,6 +44151,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutRace_relationInput = {
@@ -46462,6 +44235,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutResistancesInput = {
@@ -46487,6 +44261,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutResistancesInput = {
@@ -46517,6 +44292,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutImmunitiesInput = {
@@ -46542,6 +44318,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutImmunitiesInput = {
@@ -46572,6 +44349,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutVulnerabilitiesInput = {
@@ -46597,6 +44375,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutVulnerabilitiesInput = {
@@ -46675,6 +44454,7 @@ export namespace Prisma {
     biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureUncheckedCreateWithoutChallenge_rating_metaInput = {
@@ -46700,6 +44480,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
     actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
     traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedCreateNestedOneWithoutCreature_relationInput
   }
 
   export type CreatureCreateOrConnectWithoutChallenge_rating_metaInput = {
@@ -46728,88 +44509,124 @@ export namespace Prisma {
     data: XOR<CreatureUpdateManyMutationInput, CreatureUncheckedUpdateManyWithoutChallenge_rating_metaInput>
   }
 
-  export type GPTMessageCreateWithoutMessage_history_relationInput = {
-    number: number
-    text: string
-    role: string
-  }
-
-  export type GPTMessageUncheckedCreateWithoutMessage_history_relationInput = {
-    number: number
-    text: string
-    role: string
-  }
-
-  export type GPTMessageCreateOrConnectWithoutMessage_history_relationInput = {
-    where: GPTMessageWhereUniqueInput
-    create: XOR<GPTMessageCreateWithoutMessage_history_relationInput, GPTMessageUncheckedCreateWithoutMessage_history_relationInput>
-  }
-
-  export type GPTMessageCreateManyMessage_history_relationInputEnvelope = {
-    data: GPTMessageCreateManyMessage_history_relationInput | GPTMessageCreateManyMessage_history_relationInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type GPTMessageUpsertWithWhereUniqueWithoutMessage_history_relationInput = {
-    where: GPTMessageWhereUniqueInput
-    update: XOR<GPTMessageUpdateWithoutMessage_history_relationInput, GPTMessageUncheckedUpdateWithoutMessage_history_relationInput>
-    create: XOR<GPTMessageCreateWithoutMessage_history_relationInput, GPTMessageUncheckedCreateWithoutMessage_history_relationInput>
-  }
-
-  export type GPTMessageUpdateWithWhereUniqueWithoutMessage_history_relationInput = {
-    where: GPTMessageWhereUniqueInput
-    data: XOR<GPTMessageUpdateWithoutMessage_history_relationInput, GPTMessageUncheckedUpdateWithoutMessage_history_relationInput>
-  }
-
-  export type GPTMessageUpdateManyWithWhereWithoutMessage_history_relationInput = {
-    where: GPTMessageScalarWhereInput
-    data: XOR<GPTMessageUpdateManyMutationInput, GPTMessageUncheckedUpdateManyWithoutMessage_history_relationInput>
-  }
-
-  export type GPTMessageScalarWhereInput = {
-    AND?: GPTMessageScalarWhereInput | GPTMessageScalarWhereInput[]
-    OR?: GPTMessageScalarWhereInput[]
-    NOT?: GPTMessageScalarWhereInput | GPTMessageScalarWhereInput[]
-    message_history_id?: StringFilter<"GPTMessage"> | string
-    number?: IntFilter<"GPTMessage"> | number
-    text?: StringFilter<"GPTMessage"> | string
-    role?: StringFilter<"GPTMessage"> | string
-  }
-
-  export type GPTMessageHistoryCreateWithoutMessages_relationInput = {
+  export type CreatureCreateWithoutGpt_request_relationInput = {
     id?: string
-    type: string
+    name: string
+    creator_id?: string | null
+    description?: string | null
+    armor_class?: number | null
+    hit_points?: number | null
+    speed?: CreatureSpeedCreateNestedOneWithoutCreature_relationInput
+    stats?: CreatureStatsCreateNestedOneWithoutCreature_relationInput
+    skills?: CreatureSkillsCreateNestedOneWithoutCreature_relationInput
+    senses?: CreatureSensesCreateNestedOneWithoutCreature_relationInput
+    challenge_rating_meta: ChallengeRatingMetadataCreateNestedOneWithoutCreaturesInput
+    alignment_relation?: AlignmentCreateNestedOneWithoutCreaturesInput
+    race_relation?: CreatureRaceCreateNestedOneWithoutCreatures_relationInput
+    type_relation?: TypeCreateNestedOneWithoutCreaturesInput
+    size_relation?: SizeCreateNestedOneWithoutCreatureInput
+    source_relation?: SourceCreateNestedOneWithoutCreaturesInput
+    resistances?: DamageTypeCreateNestedManyWithoutResistant_creatures_relationInput
+    immunities?: DamageTypeCreateNestedManyWithoutImmune_creatures_relationInput
+    vulnerabilities?: DamageTypeCreateNestedManyWithoutVulnerable_creatures_relationInput
+    languages_relation?: LanguageCreateNestedManyWithoutCreatures_relationInput
+    biomes_relation?: BiomeCreateNestedManyWithoutCreatures_relationInput
+    actions_relation?: ActionCreateNestedManyWithoutCreatures_relationInput
+    traits_relation?: TraitCreateNestedManyWithoutCreatures_relationInput
   }
 
-  export type GPTMessageHistoryUncheckedCreateWithoutMessages_relationInput = {
+  export type CreatureUncheckedCreateWithoutGpt_request_relationInput = {
     id?: string
-    type: string
+    name: string
+    creator_id?: string | null
+    description?: string | null
+    size?: string | null
+    race_id?: number | null
+    type_id?: number | null
+    source_id?: number | null
+    alignment_id?: number | null
+    armor_class?: number | null
+    hit_points?: number | null
+    challenge_rating: string
+    speed?: CreatureSpeedUncheckedCreateNestedOneWithoutCreature_relationInput
+    stats?: CreatureStatsUncheckedCreateNestedOneWithoutCreature_relationInput
+    skills?: CreatureSkillsUncheckedCreateNestedOneWithoutCreature_relationInput
+    senses?: CreatureSensesUncheckedCreateNestedOneWithoutCreature_relationInput
+    resistances?: DamageTypeUncheckedCreateNestedManyWithoutResistant_creatures_relationInput
+    immunities?: DamageTypeUncheckedCreateNestedManyWithoutImmune_creatures_relationInput
+    vulnerabilities?: DamageTypeUncheckedCreateNestedManyWithoutVulnerable_creatures_relationInput
+    languages_relation?: LanguageUncheckedCreateNestedManyWithoutCreatures_relationInput
+    biomes_relation?: BiomeUncheckedCreateNestedManyWithoutCreatures_relationInput
+    actions_relation?: ActionUncheckedCreateNestedManyWithoutCreatures_relationInput
+    traits_relation?: TraitUncheckedCreateNestedManyWithoutCreatures_relationInput
   }
 
-  export type GPTMessageHistoryCreateOrConnectWithoutMessages_relationInput = {
-    where: GPTMessageHistoryWhereUniqueInput
-    create: XOR<GPTMessageHistoryCreateWithoutMessages_relationInput, GPTMessageHistoryUncheckedCreateWithoutMessages_relationInput>
+  export type CreatureCreateOrConnectWithoutGpt_request_relationInput = {
+    where: CreatureWhereUniqueInput
+    create: XOR<CreatureCreateWithoutGpt_request_relationInput, CreatureUncheckedCreateWithoutGpt_request_relationInput>
   }
 
-  export type GPTMessageHistoryUpsertWithoutMessages_relationInput = {
-    update: XOR<GPTMessageHistoryUpdateWithoutMessages_relationInput, GPTMessageHistoryUncheckedUpdateWithoutMessages_relationInput>
-    create: XOR<GPTMessageHistoryCreateWithoutMessages_relationInput, GPTMessageHistoryUncheckedCreateWithoutMessages_relationInput>
-    where?: GPTMessageHistoryWhereInput
+  export type CreatureUpsertWithoutGpt_request_relationInput = {
+    update: XOR<CreatureUpdateWithoutGpt_request_relationInput, CreatureUncheckedUpdateWithoutGpt_request_relationInput>
+    create: XOR<CreatureCreateWithoutGpt_request_relationInput, CreatureUncheckedCreateWithoutGpt_request_relationInput>
+    where?: CreatureWhereInput
   }
 
-  export type GPTMessageHistoryUpdateToOneWithWhereWithoutMessages_relationInput = {
-    where?: GPTMessageHistoryWhereInput
-    data: XOR<GPTMessageHistoryUpdateWithoutMessages_relationInput, GPTMessageHistoryUncheckedUpdateWithoutMessages_relationInput>
+  export type CreatureUpdateToOneWithWhereWithoutGpt_request_relationInput = {
+    where?: CreatureWhereInput
+    data: XOR<CreatureUpdateWithoutGpt_request_relationInput, CreatureUncheckedUpdateWithoutGpt_request_relationInput>
   }
 
-  export type GPTMessageHistoryUpdateWithoutMessages_relationInput = {
+  export type CreatureUpdateWithoutGpt_request_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    armor_class?: NullableIntFieldUpdateOperationsInput | number | null
+    hit_points?: NullableIntFieldUpdateOperationsInput | number | null
+    speed?: CreatureSpeedUpdateOneWithoutCreature_relationNestedInput
+    stats?: CreatureStatsUpdateOneWithoutCreature_relationNestedInput
+    skills?: CreatureSkillsUpdateOneWithoutCreature_relationNestedInput
+    senses?: CreatureSensesUpdateOneWithoutCreature_relationNestedInput
+    challenge_rating_meta?: ChallengeRatingMetadataUpdateOneRequiredWithoutCreaturesNestedInput
+    alignment_relation?: AlignmentUpdateOneWithoutCreaturesNestedInput
+    race_relation?: CreatureRaceUpdateOneWithoutCreatures_relationNestedInput
+    type_relation?: TypeUpdateOneWithoutCreaturesNestedInput
+    size_relation?: SizeUpdateOneWithoutCreatureNestedInput
+    source_relation?: SourceUpdateOneWithoutCreaturesNestedInput
+    resistances?: DamageTypeUpdateManyWithoutResistant_creatures_relationNestedInput
+    immunities?: DamageTypeUpdateManyWithoutImmune_creatures_relationNestedInput
+    vulnerabilities?: DamageTypeUpdateManyWithoutVulnerable_creatures_relationNestedInput
+    languages_relation?: LanguageUpdateManyWithoutCreatures_relationNestedInput
+    biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
+    actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
+    traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
   }
 
-  export type GPTMessageHistoryUncheckedUpdateWithoutMessages_relationInput = {
+  export type CreatureUncheckedUpdateWithoutGpt_request_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableStringFieldUpdateOperationsInput | string | null
+    race_id?: NullableIntFieldUpdateOperationsInput | number | null
+    type_id?: NullableIntFieldUpdateOperationsInput | number | null
+    source_id?: NullableIntFieldUpdateOperationsInput | number | null
+    alignment_id?: NullableIntFieldUpdateOperationsInput | number | null
+    armor_class?: NullableIntFieldUpdateOperationsInput | number | null
+    hit_points?: NullableIntFieldUpdateOperationsInput | number | null
+    challenge_rating?: StringFieldUpdateOperationsInput | string
+    speed?: CreatureSpeedUncheckedUpdateOneWithoutCreature_relationNestedInput
+    stats?: CreatureStatsUncheckedUpdateOneWithoutCreature_relationNestedInput
+    skills?: CreatureSkillsUncheckedUpdateOneWithoutCreature_relationNestedInput
+    senses?: CreatureSensesUncheckedUpdateOneWithoutCreature_relationNestedInput
+    resistances?: DamageTypeUncheckedUpdateManyWithoutResistant_creatures_relationNestedInput
+    immunities?: DamageTypeUncheckedUpdateManyWithoutImmune_creatures_relationNestedInput
+    vulnerabilities?: DamageTypeUncheckedUpdateManyWithoutVulnerable_creatures_relationNestedInput
+    languages_relation?: LanguageUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
   }
 
   export type GenreCreateWithoutAdventures_relationInput = {
@@ -47502,6 +45319,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutSize_relationInput = {
@@ -47527,6 +45345,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutSize_relationInput = {
@@ -47589,6 +45408,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutSource_relationInput = {
@@ -47614,6 +45434,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutSource_relationInput = {
@@ -47682,6 +45503,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutLanguages_relationInput = {
@@ -47707,6 +45529,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutLanguages_relationInput = {
@@ -47747,6 +45570,7 @@ export namespace Prisma {
     languages_relation?: LanguageUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutBiomes_relationInput = {
@@ -47772,6 +45596,7 @@ export namespace Prisma {
     languages_relation?: LanguageUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutBiomes_relationInput = {
@@ -47826,6 +45651,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutType_relationInput = {
@@ -47851,6 +45677,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutType_relationInput = {
@@ -47904,6 +45731,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutAlignment_relationInput = {
@@ -47929,6 +45757,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutAlignment_relationInput = {
@@ -48162,6 +45991,7 @@ export namespace Prisma {
     languages_relation?: LanguageUpdateManyWithoutCreatures_relationNestedInput
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutActions_relationInput = {
@@ -48187,6 +46017,7 @@ export namespace Prisma {
     languages_relation?: LanguageUncheckedUpdateManyWithoutCreatures_relationNestedInput
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutActions_relationInput = {
@@ -48248,6 +46079,7 @@ export namespace Prisma {
     languages_relation?: LanguageUpdateManyWithoutCreatures_relationNestedInput
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutTraits_relationInput = {
@@ -48273,6 +46105,7 @@ export namespace Prisma {
     languages_relation?: LanguageUncheckedUpdateManyWithoutCreatures_relationNestedInput
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutTraits_relationInput = {
@@ -48398,6 +46231,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutRace_relationInput = {
@@ -48423,6 +46257,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutRace_relationInput = {
@@ -48462,6 +46297,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutResistancesInput = {
@@ -48487,6 +46323,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutResistancesInput = {
@@ -48527,6 +46364,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutImmunitiesInput = {
@@ -48552,6 +46390,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutImmunitiesInput = {
@@ -48592,6 +46431,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutVulnerabilitiesInput = {
@@ -48617,6 +46457,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutVulnerabilitiesInput = {
@@ -48671,6 +46512,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateWithoutChallenge_rating_metaInput = {
@@ -48696,6 +46538,7 @@ export namespace Prisma {
     biomes_relation?: BiomeUncheckedUpdateManyWithoutCreatures_relationNestedInput
     actions_relation?: ActionUncheckedUpdateManyWithoutCreatures_relationNestedInput
     traits_relation?: TraitUncheckedUpdateManyWithoutCreatures_relationNestedInput
+    gpt_request_relation?: GPTCreatureRequestUncheckedUpdateOneWithoutCreature_relationNestedInput
   }
 
   export type CreatureUncheckedUpdateManyWithoutChallenge_rating_metaInput = {
@@ -48710,30 +46553,6 @@ export namespace Prisma {
     alignment_id?: NullableIntFieldUpdateOperationsInput | number | null
     armor_class?: NullableIntFieldUpdateOperationsInput | number | null
     hit_points?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type GPTMessageCreateManyMessage_history_relationInput = {
-    number: number
-    text: string
-    role: string
-  }
-
-  export type GPTMessageUpdateWithoutMessage_history_relationInput = {
-    number?: IntFieldUpdateOperationsInput | number
-    text?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type GPTMessageUncheckedUpdateWithoutMessage_history_relationInput = {
-    number?: IntFieldUpdateOperationsInput | number
-    text?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type GPTMessageUncheckedUpdateManyWithoutMessage_history_relationInput = {
-    number?: IntFieldUpdateOperationsInput | number
-    text?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type KeywordUpdateWithoutAdventures_relationInput = {

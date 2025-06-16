@@ -4,12 +4,16 @@ import { StyleXStyles } from '@stylexjs/stylex';
 
 interface LoadingOverlayProps extends Omit<ComponentProps<'div'>, 'style'> {
   style?: StyleXStyles;
+
   loading?: boolean;
+
   isLoader?: boolean;
 }
 
-export const LoadingOverlay = ({ loading, isLoader = true, style }: LoadingOverlayProps) => {
-  return <div {...stylex.props(styles.root, loading && styles.visible, style)}>{isLoader && 'Loading...'}</div>;
+export const LoadingOverlay = ({ loading, isLoader = true, children, style }: LoadingOverlayProps) => {
+  return (
+    <div {...stylex.props(styles.root, loading && styles.visible, style)}>{isLoader && (children ?? 'Loading...')}</div>
+  );
 };
 
 const styles = stylex.create({
@@ -26,6 +30,8 @@ const styles = stylex.create({
     zIndex: 100
   },
   visible: {
-    display: 'flex'
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'center'
   }
 });

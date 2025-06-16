@@ -13,15 +13,13 @@ export async function SeedSizes() {
   ];
 
   try {
-    await Promise.all(
-      sizes.map((size) =>
-        prisma.size.upsert({
-          where: { id: size.id },
-          update: {},
-          create: size
-        })
-      )
-    );
+    for (const size of sizes) {
+      await prisma.size.upsert({
+        where: { id: size.id },
+        update: {},
+        create: size
+      });
+    }
   } catch (error) {
     console.error('Error seeding sizes:', error);
   } finally {

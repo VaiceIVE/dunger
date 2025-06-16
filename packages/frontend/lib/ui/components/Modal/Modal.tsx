@@ -78,8 +78,8 @@ const ModalContent = ({ children, style }: ModalComponentProps) => {
   if (!ctx.openState) return null;
 
   const Modal = (
-    <div {...stylex.props(styles.wrapper)} onClick={ctx.withOverlay ? ctx.close : undefined}>
-      {ctx.withOverlay && <div {...stylex.props(styles.overlay)} />}
+    <div {...stylex.props(styles.wrapper)}>
+      {ctx.withOverlay && <div {...stylex.props(styles.overlay)} onClick={ctx.close} />}
       <div
         {...stylex.props(styles.content, style)}
         onClick={(e) => {
@@ -119,6 +119,7 @@ Modal.Target = ModalTarget;
 
 const styles = stylex.create({
   overlay: {
+    backdropFilter: 'blur(2px)',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     inset: 0,
     position: 'fixed',

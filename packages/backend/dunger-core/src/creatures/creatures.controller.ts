@@ -11,12 +11,13 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CreaturesService } from './creatures.service';
-import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
+import { CreateCreatureManualDto } from './dto/create-creature-manual.dto';
 import axios from 'axios';
 import { ConfigService } from '@nestjs/config';
 import { ApiCreatureInput, PaginationQueryDto } from 'src/common/dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
+import { CreateCreatureAiDto } from './dto/create-creature-ai.dto';
 
 @Controller('creatures')
 export class CreaturesController {
@@ -36,39 +37,32 @@ export class CreaturesController {
     @Body() createCreatureDto: CreateCreatureManualDto,
     @CurrentUser() user,
   ) {
-    //return this.creaturesService.initCreature(createCreatureDto, user.id);
+    return this.creaturesService.initCreature(createCreatureDto, user.id);
   }
 
+  /**
+   * POST, Генерирует существо или перегенерирует созданное
+   *
+   * Получает данные для создания из body и данные о пользователе из JWT payload
+   */
   @UseGuards(JwtAuthGuard)
-  @Post('/generate')
+  @Post('/generate/:id?')
   async generateCreature(
-    @Body() createCreatureDto: CreateCreatureManualDto,
+    @Body() createCreatureDto: CreateCreatureAiDto,
     @CurrentUser() user,
+    @Param('id') creatureId?: string,
   ) {
-    const creatureId = await this.creaturesService.initCreature(
+    return this.creaturesService.generateCreature(
       createCreatureDto,
       user.id,
+      creatureId,
     );
-
-    const aiCretureData = (
-      await axios.post(
-        `${this.configService.get('GPT_BASE_URL')}/gpt/generate/creature`,
-        createCreatureDto,
-      )
-    ).data;
-
-    const updatedCreature = await this.creaturesService.update(
-      creatureId.id,
-      aiCretureData,
-    );
-
-    return updatedCreature.id;
   }
 
   @UseGuards(JwtAuthGuard)
   @Post('/generate/debug')
   async generateCreatureDebug(
-    @Body() createCreatureDto: CreateCreatureManualDto,
+    @Body() createCreatureDto: CreateCreatureAiDto,
     @CurrentUser() user,
   ) {
     const creatureId = await this.creaturesService.initCreature(
@@ -181,11 +175,13 @@ export class CreaturesController {
     return this.creaturesService.findOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCreatureDto: ApiCreatureInput) {
     return this.creaturesService.update(id, updateCreatureDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.creaturesService.remove(+id);

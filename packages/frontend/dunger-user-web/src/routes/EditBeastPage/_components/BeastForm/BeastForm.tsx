@@ -24,6 +24,7 @@ const sectionById: Record<string, FC<SectionProps>> = {
 
 interface BeastFormProps {
   formState: ApiCreature & { languages_string_ids: string[]; biomes_string_ids: string[] };
+
   handleFieldChange: (value: unknown, name: string) => void;
 }
 

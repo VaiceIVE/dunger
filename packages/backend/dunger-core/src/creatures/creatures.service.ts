@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCreatureManualDto } from './dto/createCreatureManual.dto';
+import { CreateCreatureManualDto } from './dto/create-creature-manual.dto';
 import { Ability, Prisma, PrismaClient, Skill } from '@dunger/prisma';
 import { nullSpeedObject } from './objects/nullSpeed.object';
 import { nullSensesObject } from './objects/nullSenses.object';
@@ -16,6 +16,8 @@ import { AppError } from 'src/common/errors';
 import { HttpStatus } from '@dunger/common-enums';
 import { mapAbilitiesToApiStats } from './utils/stats.mapper';
 import { mapAbilitiesToApiSkills } from './utils/skills.mapper';
+import { CreateCreatureAiDto } from './dto/create-creature-ai.dto';
+import axios from 'axios';
 
 @Injectable()
 export class CreaturesService {
@@ -79,6 +81,59 @@ export class CreaturesService {
       data: creatureData,
       select: { id: true },
     });
+  }
+
+  /**
+   * Генерирует существо, создает запись в истории генераций.
+   * Устанавливает источник как кастомный (по shortName из this.customContentSource).
+   *
+   * @param generateCreatureDto - Данные для генерации существа.
+   * @param userId - id пользователя, который создает существо.
+   * @param creatureId - id созданного существа, которое перегенируют.
+   * @returns id созданного существа.
+   */
+  async generateCreature(
+    generateCreatureDto: CreateCreatureAiDto,
+    userId: string,
+    creatureId?: string,
+  ): Promise<{ id: string }> {
+    const gptUrl = `${this.configService.get('GPT_BASE_URL')}/gpt/generate/creature`;
+
+    const aiCreatureData: ApiCreatureInput = await this.requestAiGeneration(
+      gptUrl,
+      generateCreatureDto,
+    );
+
+    const id =
+      creatureId ?? (await this.initCreature(generateCreatureDto, userId)).id;
+
+    await this.update(id, aiCreatureData);
+
+    await this.prisma.gPTCreatureRequest.upsert({
+      where: { creature_id: id },
+      update: generateCreatureDto,
+      create: {
+        creature_id: id,
+        ...generateCreatureDto,
+      },
+    });
+
+    return { id };
+  }
+
+  private async requestAiGeneration(
+    url: string,
+    payload: CreateCreatureAiDto,
+  ): Promise<ApiCreatureInput> {
+    try {
+      const { data } = await axios.post(url, payload);
+      return data;
+    } catch {
+      throw new AppError({
+        errorText: 'Failed to AI generation',
+        statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+      });
+    }
   }
 
   /**
@@ -388,9 +443,9 @@ export class CreaturesService {
     });
   }
 
-  private cleanObj(obj) {
-    var newobj = {};
-    const complexPropnames = [
+  private cleanObj(obj: ApiCreatureInput) {
+    const newobj = {};
+    const complexPropnames: (keyof ApiCreatureInput)[] = [
       'speed',
       'stats',
       'skills',
@@ -405,20 +460,20 @@ export class CreaturesService {
       'immunities',
       'vulnerabilities',
       'senses',
-      'languages_relation',
+      'languages',
       'alignment_relation',
       'type_relation',
       'size_relation',
-      'biomes_relation',
+      'biome_relation',
       'biomes_ids',
       'race_relation',
     ];
-    for (var propname in obj) {
+    for (const propname in obj) {
       if (
         !(
           obj[propname] === null ||
           obj[propname] === undefined ||
-          complexPropnames.includes(propname)
+          complexPropnames.includes(propname as keyof ApiCreatureInput)
         )
       ) {
         newobj[propname] = obj[propname];
@@ -429,30 +484,17 @@ export class CreaturesService {
 
   async update(id: string, updateCreatureDto: ApiCreatureInput) {
     const cleanedUpdatedCreatureDto = this.cleanObj(updateCreatureDto);
+
     await this.prisma.creature.update({
       where: { id: id },
       data: {
         ...cleanedUpdatedCreatureDto,
       },
     });
-    if (updateCreatureDto.size_id) {
-      await this.prisma.creature.update({
-        where: {
-          id: id,
-        },
-        data: {
-          size_relation: {
-            connect: {
-              id: updateCreatureDto.size_id,
-            },
-          },
-        },
-      });
-    }
 
     if (updateCreatureDto.senses) {
       await this.prisma.creature.update({
-        where: { id: id },
+        where: { id },
         data: {
           senses: {
             upsert: {
@@ -467,91 +509,30 @@ export class CreaturesService {
       });
     }
 
-    if (updateCreatureDto.alignment_relation) {
-      await this.prisma.creature.update({
-        where: { id: id },
-        data: {
-          alignment_relation: {
-            connect: {
-              name: updateCreatureDto.alignment_relation.name.toLowerCase(),
-            },
-          },
-        },
-      });
-    }
-    if (updateCreatureDto.type_relation) {
-      await this.prisma.creature.update({
-        where: { id: id },
-        data: {
-          type_relation: {
-            connect: {
-              name: updateCreatureDto.type_relation.name.toLowerCase(),
-            },
-          },
-        },
-      });
-    }
-    if (updateCreatureDto.size_relation) {
-      await this.prisma.creature.update({
-        where: { id: id },
-        data: {
-          size_relation: {
-            connect: {
-              id: updateCreatureDto.size_relation.name,
-            },
-          },
-        },
-      });
-    }
-    if (updateCreatureDto.biome_relation) {
-      for (const biome of updateCreatureDto.biome_relation) {
-        await this.prisma.creature.update({
-          where: { id: id },
-          data: {
-            biomes_relation: {
-              connect: {
-                name: biome.title,
-              },
-            },
-          },
-        });
-      }
+    const updates: Prisma.CreatureUpdateInput = {};
+
+    if (updateCreatureDto.size_id) {
+      updates.size_relation = { connect: { id: updateCreatureDto.size_id } };
     }
 
-    if (updateCreatureDto.biomes_ids) {
-      for (const biome_id of updateCreatureDto.biomes_ids) {
-        await this.prisma.creature.update({
-          where: { id: id },
-          data: {
-            biomes_relation: {
-              connect: {
-                id: biome_id,
-              },
-            },
-          },
-        });
-      }
+    if (updateCreatureDto.size_relation) {
+      updates.size_relation = {
+        connect: { id: updateCreatureDto.size_relation.name },
+      };
     }
-    if (updateCreatureDto.languages) {
-      for (const lang of updateCreatureDto.languages) {
-        await this.prisma.creature.update({
-          where: { id: id },
-          data: {
-            languages_relation: {
-              set: [],
-              connectOrCreate: {
-                create: {
-                  name: lang.name,
-                },
-                where: {
-                  name: lang.name,
-                },
-              },
-            },
-          },
-        });
-      }
+
+    if (updateCreatureDto.alignment_relation) {
+      updates.alignment_relation = {
+        connect: { name: updateCreatureDto.alignment_relation.name },
+      };
     }
+
+    if (updateCreatureDto.type_relation) {
+      updates.type_relation = {
+        connect: { name: updateCreatureDto.type_relation.name },
+      };
+    }
+
     if (updateCreatureDto.speed) {
       await this.prisma.creature.update({
         where: { id: id },
@@ -564,7 +545,12 @@ export class CreaturesService {
                 },
               },
               create: updateCreatureDto.speed,
-              update: this.cleanObj(updateCreatureDto.speed),
+              update: {
+                walk: updateCreatureDto.speed?.walk ?? null,
+                fly: updateCreatureDto.speed?.fly ?? null,
+                climb: updateCreatureDto.speed?.climb ?? null,
+                swim: updateCreatureDto.speed?.swim ?? null,
+              },
             },
           },
         },
@@ -797,187 +783,111 @@ export class CreaturesService {
       });
     }
 
-    if (updateCreatureDto.languages_ids) {
-      await this.prisma.creature.update({
-        where: {
-          id: id,
-        },
-        data: {
-          languages_relation: {
-            set: [],
-          },
-        },
-      });
-      for (var language_id of updateCreatureDto.languages_ids) {
-        await this.prisma.creature.update({
-          where: { id: id },
-          data: {
-            languages_relation: {
-              connect: {
-                id: language_id,
-              },
-            },
-          },
-        });
-      }
+    updates.biomes_relation = {
+      set: [
+        ...(updateCreatureDto.biome_relation?.map((biome) => ({
+          name: biome.name,
+        })) ?? []),
+        ...(updateCreatureDto.biomes_ids?.map((id) => ({ id })) ?? []),
+      ],
+    };
+
+    updates.languages_relation = {
+      set: [
+        ...(updateCreatureDto?.languages ?? []).map((item) => ({
+          name: item.name,
+        })),
+        ...(updateCreatureDto.languages_ids ?? []).map((id) => ({ id })),
+      ],
+    };
+
+    updates.immunities = {
+      set: [
+        ...(updateCreatureDto.immunities ?? []).map((item) => ({
+          name: item.name,
+        })),
+        ...(updateCreatureDto.immunities_ids ?? []).map((id) => ({ id })),
+      ],
+    };
+
+    updates.vulnerabilities = {
+      set: [
+        ...(updateCreatureDto?.vulnerabilities ?? []).map((item) => ({
+          name: item.name,
+        })),
+        ...(updateCreatureDto?.vulnerabilities_ids ?? []).map((id) => ({ id })),
+      ],
+    };
+
+    updates.resistances = {
+      set: [
+        ...(updateCreatureDto?.resistances ?? []).map((item) => ({
+          name: item.name,
+        })),
+        ...(updateCreatureDto.resistances_ids ?? []).map((id) => ({ id })),
+      ],
+    };
+
+    if ('actions_ids' in updateCreatureDto) {
+      updates.actions_relation = {
+        set: (updateCreatureDto.actions_ids ?? []).map((id) => ({ id })),
+      };
     }
 
-    if (updateCreatureDto.resistances_ids) {
-      await this.prisma.creature.update({
-        where: { id: id },
-        data: {
-          resistances: {
-            set: [],
-          },
-        },
-      });
-      for (const resistance_id of updateCreatureDto.resistances_ids) {
-        await this.prisma.creature.update({
-          where: {
-            id: id,
-          },
-          data: {
-            resistances: {
-              connect: {
-                id: resistance_id,
-              },
-            },
-          },
-        });
-      }
+    if ('traits_ids' in updateCreatureDto) {
+      updates.traits_relation = {
+        set: (updateCreatureDto.traits_ids ?? []).map((id) => ({ id })),
+      };
     }
 
-    if (updateCreatureDto.immunities_ids) {
+    if (Object.keys(updates).length > 0) {
       await this.prisma.creature.update({
-        where: { id: id },
-        data: {
-          immunities: {
-            set: [],
-          },
-        },
+        where: { id },
+        data: updates,
       });
-      for (const immunity_id of updateCreatureDto.immunities_ids) {
-        await this.prisma.creature.update({
-          where: {
-            id: id,
-          },
-          data: {
-            immunities: {
-              connect: {
-                id: immunity_id,
-              },
-            },
-          },
-        });
-      }
     }
-    if (updateCreatureDto.vulnerabilities_ids) {
-      await this.prisma.creature.update({
-        where: { id: id },
-        data: {
-          vulnerabilities: {
-            set: [],
-          },
-        },
-      });
-      for (const vunlerability_id of updateCreatureDto.vulnerabilities_ids) {
-        await this.prisma.creature.update({
-          where: {
-            id: id,
-          },
-          data: {
-            vulnerabilities: {
-              connect: {
-                id: vunlerability_id,
-              },
-            },
-          },
-        });
-      }
-    }
-    if (updateCreatureDto.actions_ids) {
-      await this.prisma.creature.update({
-        where: { id: id },
-        data: {
-          actions_relation: {
-            set: [],
-          },
-        },
-      });
-      for (const action_id of updateCreatureDto.actions_ids) {
-        await this.prisma.creature.update({
-          where: { id: id },
-          data: {
-            actions_relation: {
-              connect: {
-                id: action_id,
-              },
-            },
-          },
-        });
-      }
-    }
-    if (updateCreatureDto.traits_ids) {
-      await this.prisma.creature.update({
-        where: { id: id },
-        data: {
-          traits_relation: {
-            set: [],
-          },
-        },
-      });
-      for (const trait_id of updateCreatureDto.traits_ids) {
-        await this.prisma.creature.update({
-          where: { id: id },
-          data: {
-            traits_relation: {
-              connect: {
-                id: trait_id,
-              },
-            },
-          },
-        });
-      }
-    }
+
     return this.selectCreatureForCard(id);
   }
 
-  private async mapCreatureToApiCreature(creature): Promise<ApiCreature> {
+  private async mapCreatureToApiCreature(creatureRaw): Promise<ApiCreature> {
     const metadata = await this.prisma.skillMetadata.findMany();
 
-    return {
-      id: creature.id,
-      name: creature.name,
-      description: creature.description,
-      alignment_id: creature.alignment_relation?.id ?? null,
-      alignment_name: creature.alignment_relation?.name ?? null,
-      size_id: creature.size_relation?.id ?? null,
-      size_name: creature.size_relation?.name ?? null,
-      type_id: creature.type_relation?.id ?? null,
-      type_name: creature.type_relation?.name ?? null,
-      armor_class: creature.armor_class,
+    const creature: ApiCreature = {
+      id: creatureRaw.id,
+      name: creatureRaw.name,
+      description: creatureRaw.description,
+      alignment_id: creatureRaw.alignment_relation?.id ?? null,
+      alignment_name: creatureRaw.alignment_relation?.name ?? null,
+      size_id: creatureRaw.size_relation?.id ?? null,
+      size_name: creatureRaw.size_relation?.name ?? null,
+      type_id: creatureRaw.type_relation?.id ?? null,
+      type_name: creatureRaw.type_relation?.name ?? null,
+      armor_class: creatureRaw.armor_class,
       armor_type_id: null, // TODO
       armor_type_name: null, // TODO
-      biomes_ids: creature.biomes_relation.map((b) => b.id),
-      biomes: creature.biomes_relation,
-      challenge_rating: creature.challenge_rating,
-      hit_points: creature.hit_points,
-      generation_info: null,
-      languages: creature.languages_relation ?? [],
-      languages_ids: creature.languages_relation?.map((l) => l.id) ?? [],
-      immunities: creature.immunities ?? [],
-      immunities_ids: creature.immunities?.map((i) => i.id) ?? [],
-      resistances: creature.resistances ?? [],
-      resistances_ids: creature.resistances?.map((r) => r.id) ?? [],
-      vulnerabilities: creature.vulnerabilities ?? [],
-      vulnerabilities_ids: creature.vulnerabilities?.map((v) => v.id) ?? [],
-      senses: creature.senses ?? nullSensesObject,
-      skills: mapAbilitiesToApiSkills(metadata, creature.skills?.skills),
-      stats: mapAbilitiesToApiStats(creature.stats?.stats),
-      speed: creature.speed ?? nullSpeedObject,
-      traits: creature.traits_relation ?? [],
-      actions: creature.actions_relation ?? [],
+      biomes_ids: creatureRaw.biomes_relation.map((b) => b.id),
+      biomes: creatureRaw.biomes_relation,
+      challenge_rating: creatureRaw.challenge_rating,
+      hit_points: creatureRaw.hit_points,
+      generation_info: creatureRaw.gpt_request_relation ?? null,
+      languages: creatureRaw.languages_relation ?? [],
+      languages_ids: creatureRaw.languages_relation?.map((l) => l.id) ?? [],
+      immunities: creatureRaw.immunities ?? [],
+      immunities_ids: creatureRaw.immunities?.map((i) => i.id) ?? [],
+      resistances: creatureRaw.resistances ?? [],
+      resistances_ids: creatureRaw.resistances?.map((r) => r.id) ?? [],
+      vulnerabilities: creatureRaw.vulnerabilities ?? [],
+      vulnerabilities_ids: creatureRaw.vulnerabilities?.map((v) => v.id) ?? [],
+      senses: creatureRaw.senses ?? nullSensesObject,
+      skills: mapAbilitiesToApiSkills(metadata, creatureRaw.skills?.skills),
+      stats: mapAbilitiesToApiStats(creatureRaw.stats?.stats),
+      speed: creatureRaw.speed ?? nullSpeedObject,
+      traits: creatureRaw.traits_relation ?? [],
+      actions: creatureRaw.actions_relation ?? [],
     };
+
+    return creature;
   }
 
   private async selectCreatureForCard(
