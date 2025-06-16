@@ -316,6 +316,69 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/magic-item-types- типы магических предметов",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{core_url}}/directories/magic-item-types",
+							"host": [
+								"{{core_url}}"
+							],
+							"path": [
+								"directories",
+								"magic-item-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/magic-item-rarities- редкости магических предметов",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{core_url}}/directories/magic-item-rarities",
+							"host": [
+								"{{core_url}}"
+							],
+							"path": [
+								"directories",
+								"magic-item-rarities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/attunement-conditions - возможные источники настройки для магических предметов",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{core_url}}/directories/attunement-conditions",
+							"host": [
+								"{{core_url}}"
+							],
+							"path": [
+								"directories",
+								"attunement-conditions"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -338,7 +401,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{core_url}}/s3/presignedUrl?object_key=20250531_982e5f4eaa904206883d0e0862927824.webp",
+							"raw": "{{core_url}}/s3/presignedUrl?object_key=20250615_229a89e2821f41da8989bf7de9784429.jpg",
 							"host": [
 								"{{core_url}}"
 							],
@@ -354,7 +417,7 @@
 								},
 								{
 									"key": "object_key",
-									"value": "20250531_982e5f4eaa904206883d0e0862927824.webp"
+									"value": "20250615_229a89e2821f41da8989bf7de9784429.jpg"
 								}
 							]
 						}
@@ -458,63 +521,185 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "magic-items",
+			"item": [
 				{
-					"name": "PUT example Copy",
+					"name": "/magic-items - магические предметы из книг",
 					"request": {
 						"auth": {
 							"type": "noauth"
 						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "x-amz-meta-source",
-								"value": "dunger-admin",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "file",
-							"file": {
-								"src": "7XtDnb5or/test (2).pdf"
-							}
-						},
+						"method": "GET",
+						"header": [],
 						"url": {
-							"raw": "http://localhost:9000/box/20250407_3bdecb529cfc46d59f80c13dc6059557.pdf?X-Amz-Expires=172800&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=c731CeGj3bSgaBZ5E7V9%2F20250407%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250407T121020Z&X-Amz-SignedHeaders=host%3Bx-amz-meta-source&X-Amz-Signature=389f4086d12b387eac7e8efd24db810bb55e3ada1bae3813c249a4681a97faaf",
-							"protocol": "http",
+							"raw": "{{core_url}}/magic-items?limit=20&offset=0&query=",
 							"host": [
-								"localhost"
+								"{{core_url}}"
 							],
-							"port": "9000",
 							"path": [
-								"box",
-								"20250407_3bdecb529cfc46d59f80c13dc6059557.pdf"
+								"magic-items"
 							],
 							"query": [
 								{
-									"key": "X-Amz-Expires",
-									"value": "172800"
+									"key": "limit",
+									"value": "20"
 								},
 								{
-									"key": "X-Amz-Algorithm",
-									"value": "AWS4-HMAC-SHA256"
+									"key": "offset",
+									"value": "0"
 								},
 								{
-									"key": "X-Amz-Credential",
-									"value": "c731CeGj3bSgaBZ5E7V9%2F20250407%2Fus-east-1%2Fs3%2Faws4_request"
-								},
-								{
-									"key": "X-Amz-Date",
-									"value": "20250407T121020Z"
-								},
-								{
-									"key": "X-Amz-SignedHeaders",
-									"value": "host%3Bx-amz-meta-source"
-								},
-								{
-									"key": "X-Amz-Signature",
-									"value": "389f4086d12b387eac7e8efd24db810bb55e3ada1bae3813c249a4681a97faaf"
+									"key": "query",
+									"value": ""
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/magic-items/:id - магический предмет",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{core_url}}/magic-items/2f683c00-2634-425c-ab20-3699cbe89c6f",
+							"host": [
+								"{{core_url}}"
+							],
+							"path": [
+								"magic-items",
+								"2f683c00-2634-425c-ab20-3699cbe89c6f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/magic-items/user - магические предметы пользователя",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{core_url}}/magic-items/user?limit=20&offset=0&query=",
+							"host": [
+								"{{core_url}}"
+							],
+							"path": [
+								"magic-items",
+								"user"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "query",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/magic-items/init - создание магического предмета",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Меч тысячи истин\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{core_url}}/magic-items/init",
+							"host": [
+								"{{core_url}}"
+							],
+							"path": [
+								"magic-items",
+								"init"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/magic-items/:id - обновление магического предмета",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{accessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Меч тысячи истин\",\n    \"description\": \"Сильный меч\",\n    \"rarity_id\": \"very rare\",\n    \"type_id\": \"Weapon\",\n    \"requires_attunement\": true,\n    \"attunement_ids\": [\"59df180d-bf19-40d0-9a7f-1a772fc1d880\", \"407a3cdb-7665-4568-952b-320a43f8beb0\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{core_url}}/magic-items/2f683c00-2634-425c-ab20-3699cbe89c6f",
+							"host": [
+								"{{core_url}}"
+							],
+							"path": [
+								"magic-items",
+								"2f683c00-2634-425c-ab20-3699cbe89c6f"
 							]
 						}
 					},
