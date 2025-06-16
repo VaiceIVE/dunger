@@ -6,7 +6,7 @@ export const creatureInclude = {
     },
   },
   gpt_request_relation: {
-    omit: { id: true, creature_id: true, createdAt: true },
+    omit: { id: true, creature_id: true, created_at: true },
   },
   race_relation: true,
   size_relation: true,
