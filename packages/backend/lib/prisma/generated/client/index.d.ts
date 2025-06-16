@@ -25301,7 +25301,7 @@ export namespace Prisma {
     type_name: string | null
     creation_description: string | null
     role: $Enums.CreatureRole | null
-    createdAt: Date | null
+    created_at: Date | null
   }
 
   export type GPTCreatureRequestMaxAggregateOutputType = {
@@ -25312,7 +25312,7 @@ export namespace Prisma {
     type_name: string | null
     creation_description: string | null
     role: $Enums.CreatureRole | null
-    createdAt: Date | null
+    created_at: Date | null
   }
 
   export type GPTCreatureRequestCountAggregateOutputType = {
@@ -25323,7 +25323,7 @@ export namespace Prisma {
     type_name: number
     creation_description: number
     role: number
-    createdAt: number
+    created_at: number
     _all: number
   }
 
@@ -25344,7 +25344,7 @@ export namespace Prisma {
     type_name?: true
     creation_description?: true
     role?: true
-    createdAt?: true
+    created_at?: true
   }
 
   export type GPTCreatureRequestMaxAggregateInputType = {
@@ -25355,7 +25355,7 @@ export namespace Prisma {
     type_name?: true
     creation_description?: true
     role?: true
-    createdAt?: true
+    created_at?: true
   }
 
   export type GPTCreatureRequestCountAggregateInputType = {
@@ -25366,7 +25366,7 @@ export namespace Prisma {
     type_name?: true
     creation_description?: true
     role?: true
-    createdAt?: true
+    created_at?: true
     _all?: true
   }
 
@@ -25464,7 +25464,7 @@ export namespace Prisma {
     type_name: string
     creation_description: string | null
     role: $Enums.CreatureRole | null
-    createdAt: Date
+    created_at: Date
     _count: GPTCreatureRequestCountAggregateOutputType | null
     _avg: GPTCreatureRequestAvgAggregateOutputType | null
     _sum: GPTCreatureRequestSumAggregateOutputType | null
@@ -25494,7 +25494,7 @@ export namespace Prisma {
     type_name?: boolean
     creation_description?: boolean
     role?: boolean
-    createdAt?: boolean
+    created_at?: boolean
     creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gPTCreatureRequest"]>
 
@@ -25506,7 +25506,7 @@ export namespace Prisma {
     type_name?: boolean
     creation_description?: boolean
     role?: boolean
-    createdAt?: boolean
+    created_at?: boolean
     creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gPTCreatureRequest"]>
 
@@ -25518,7 +25518,7 @@ export namespace Prisma {
     type_name?: boolean
     creation_description?: boolean
     role?: boolean
-    createdAt?: boolean
+    created_at?: boolean
     creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gPTCreatureRequest"]>
 
@@ -25530,10 +25530,10 @@ export namespace Prisma {
     type_name?: boolean
     creation_description?: boolean
     role?: boolean
-    createdAt?: boolean
+    created_at?: boolean
   }
 
-  export type GPTCreatureRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creature_id" | "name" | "challenge_rating" | "type_name" | "creation_description" | "role" | "createdAt", ExtArgs["result"]["gPTCreatureRequest"]>
+  export type GPTCreatureRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creature_id" | "name" | "challenge_rating" | "type_name" | "creation_description" | "role" | "created_at", ExtArgs["result"]["gPTCreatureRequest"]>
   export type GPTCreatureRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
   }
@@ -25557,7 +25557,7 @@ export namespace Prisma {
       type_name: string
       creation_description: string | null
       role: $Enums.CreatureRole | null
-      createdAt: Date
+      created_at: Date
     }, ExtArgs["result"]["gPTCreatureRequest"]>
     composites: {}
   }
@@ -25989,7 +25989,7 @@ export namespace Prisma {
     readonly type_name: FieldRef<"GPTCreatureRequest", 'String'>
     readonly creation_description: FieldRef<"GPTCreatureRequest", 'String'>
     readonly role: FieldRef<"GPTCreatureRequest", 'CreatureRole'>
-    readonly createdAt: FieldRef<"GPTCreatureRequest", 'DateTime'>
+    readonly created_at: FieldRef<"GPTCreatureRequest", 'DateTime'>
   }
     
 
@@ -29648,6 +29648,7 @@ export namespace Prisma {
 
   export type MagicItemMinAggregateOutputType = {
     id: string | null
+    creator_id: string | null
     name: string | null
     description: string | null
     type_id: string | null
@@ -29658,6 +29659,7 @@ export namespace Prisma {
 
   export type MagicItemMaxAggregateOutputType = {
     id: string | null
+    creator_id: string | null
     name: string | null
     description: string | null
     type_id: string | null
@@ -29668,6 +29670,7 @@ export namespace Prisma {
 
   export type MagicItemCountAggregateOutputType = {
     id: number
+    creator_id: number
     name: number
     description: number
     type_id: number
@@ -29688,6 +29691,7 @@ export namespace Prisma {
 
   export type MagicItemMinAggregateInputType = {
     id?: true
+    creator_id?: true
     name?: true
     description?: true
     type_id?: true
@@ -29698,6 +29702,7 @@ export namespace Prisma {
 
   export type MagicItemMaxAggregateInputType = {
     id?: true
+    creator_id?: true
     name?: true
     description?: true
     type_id?: true
@@ -29708,6 +29713,7 @@ export namespace Prisma {
 
   export type MagicItemCountAggregateInputType = {
     id?: true
+    creator_id?: true
     name?: true
     description?: true
     type_id?: true
@@ -29805,6 +29811,7 @@ export namespace Prisma {
 
   export type MagicItemGroupByOutputType = {
     id: string
+    creator_id: string | null
     name: string
     description: string | null
     type_id: string | null
@@ -29834,6 +29841,7 @@ export namespace Prisma {
 
   export type MagicItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    creator_id?: boolean
     name?: boolean
     description?: boolean
     type_id?: boolean
@@ -29849,6 +29857,7 @@ export namespace Prisma {
 
   export type MagicItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    creator_id?: boolean
     name?: boolean
     description?: boolean
     type_id?: boolean
@@ -29862,6 +29871,7 @@ export namespace Prisma {
 
   export type MagicItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    creator_id?: boolean
     name?: boolean
     description?: boolean
     type_id?: boolean
@@ -29875,6 +29885,7 @@ export namespace Prisma {
 
   export type MagicItemSelectScalar = {
     id?: boolean
+    creator_id?: boolean
     name?: boolean
     description?: boolean
     type_id?: boolean
@@ -29883,7 +29894,7 @@ export namespace Prisma {
     requires_attunement?: boolean
   }
 
-  export type MagicItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "type_id" | "rarity_id" | "source_id" | "requires_attunement", ExtArgs["result"]["magicItem"]>
+  export type MagicItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creator_id" | "name" | "description" | "type_id" | "rarity_id" | "source_id" | "requires_attunement", ExtArgs["result"]["magicItem"]>
   export type MagicItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     type_relation?: boolean | MagicItem$type_relationArgs<ExtArgs>
     rarity_relation?: boolean | MagicItem$rarity_relationArgs<ExtArgs>
@@ -29912,6 +29923,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      creator_id: string | null
       name: string
       description: string | null
       type_id: string | null
@@ -30346,6 +30358,7 @@ export namespace Prisma {
    */
   interface MagicItemFieldRefs {
     readonly id: FieldRef<"MagicItem", 'String'>
+    readonly creator_id: FieldRef<"MagicItem", 'String'>
     readonly name: FieldRef<"MagicItem", 'String'>
     readonly description: FieldRef<"MagicItem", 'String'>
     readonly type_id: FieldRef<"MagicItem", 'String'>
@@ -35284,7 +35297,7 @@ export namespace Prisma {
     type_name: 'type_name',
     creation_description: 'creation_description',
     role: 'role',
-    createdAt: 'createdAt'
+    created_at: 'created_at'
   };
 
   export type GPTCreatureRequestScalarFieldEnum = (typeof GPTCreatureRequestScalarFieldEnum)[keyof typeof GPTCreatureRequestScalarFieldEnum]
@@ -35321,6 +35334,7 @@ export namespace Prisma {
 
   export const MagicItemScalarFieldEnum: {
     id: 'id',
+    creator_id: 'creator_id',
     name: 'name',
     description: 'description',
     type_id: 'type_id',
@@ -36566,7 +36580,7 @@ export namespace Prisma {
     type_name?: StringFilter<"GPTCreatureRequest"> | string
     creation_description?: StringNullableFilter<"GPTCreatureRequest"> | string | null
     role?: EnumCreatureRoleNullableFilter<"GPTCreatureRequest"> | $Enums.CreatureRole | null
-    createdAt?: DateTimeFilter<"GPTCreatureRequest"> | Date | string
+    created_at?: DateTimeFilter<"GPTCreatureRequest"> | Date | string
     creature_relation?: XOR<CreatureScalarRelationFilter, CreatureWhereInput>
   }
 
@@ -36578,7 +36592,7 @@ export namespace Prisma {
     type_name?: SortOrder
     creation_description?: SortOrderInput | SortOrder
     role?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    created_at?: SortOrder
     creature_relation?: CreatureOrderByWithRelationInput
   }
 
@@ -36593,7 +36607,7 @@ export namespace Prisma {
     type_name?: StringFilter<"GPTCreatureRequest"> | string
     creation_description?: StringNullableFilter<"GPTCreatureRequest"> | string | null
     role?: EnumCreatureRoleNullableFilter<"GPTCreatureRequest"> | $Enums.CreatureRole | null
-    createdAt?: DateTimeFilter<"GPTCreatureRequest"> | Date | string
+    created_at?: DateTimeFilter<"GPTCreatureRequest"> | Date | string
     creature_relation?: XOR<CreatureScalarRelationFilter, CreatureWhereInput>
   }, "id" | "creature_id">
 
@@ -36605,7 +36619,7 @@ export namespace Prisma {
     type_name?: SortOrder
     creation_description?: SortOrderInput | SortOrder
     role?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    created_at?: SortOrder
     _count?: GPTCreatureRequestCountOrderByAggregateInput
     _avg?: GPTCreatureRequestAvgOrderByAggregateInput
     _max?: GPTCreatureRequestMaxOrderByAggregateInput
@@ -36624,7 +36638,7 @@ export namespace Prisma {
     type_name?: StringWithAggregatesFilter<"GPTCreatureRequest"> | string
     creation_description?: StringNullableWithAggregatesFilter<"GPTCreatureRequest"> | string | null
     role?: EnumCreatureRoleNullableWithAggregatesFilter<"GPTCreatureRequest"> | $Enums.CreatureRole | null
-    createdAt?: DateTimeWithAggregatesFilter<"GPTCreatureRequest"> | Date | string
+    created_at?: DateTimeWithAggregatesFilter<"GPTCreatureRequest"> | Date | string
   }
 
   export type AdventureWhereInput = {
@@ -36786,6 +36800,7 @@ export namespace Prisma {
     OR?: MagicItemWhereInput[]
     NOT?: MagicItemWhereInput | MagicItemWhereInput[]
     id?: StringFilter<"MagicItem"> | string
+    creator_id?: StringNullableFilter<"MagicItem"> | string | null
     name?: StringFilter<"MagicItem"> | string
     description?: StringNullableFilter<"MagicItem"> | string | null
     type_id?: StringNullableFilter<"MagicItem"> | string | null
@@ -36800,6 +36815,7 @@ export namespace Prisma {
 
   export type MagicItemOrderByWithRelationInput = {
     id?: SortOrder
+    creator_id?: SortOrderInput | SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     type_id?: SortOrderInput | SortOrder
@@ -36817,6 +36833,7 @@ export namespace Prisma {
     AND?: MagicItemWhereInput | MagicItemWhereInput[]
     OR?: MagicItemWhereInput[]
     NOT?: MagicItemWhereInput | MagicItemWhereInput[]
+    creator_id?: StringNullableFilter<"MagicItem"> | string | null
     name?: StringFilter<"MagicItem"> | string
     description?: StringNullableFilter<"MagicItem"> | string | null
     type_id?: StringNullableFilter<"MagicItem"> | string | null
@@ -36831,6 +36848,7 @@ export namespace Prisma {
 
   export type MagicItemOrderByWithAggregationInput = {
     id?: SortOrder
+    creator_id?: SortOrderInput | SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
     type_id?: SortOrderInput | SortOrder
@@ -36849,6 +36867,7 @@ export namespace Prisma {
     OR?: MagicItemScalarWhereWithAggregatesInput[]
     NOT?: MagicItemScalarWhereWithAggregatesInput | MagicItemScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MagicItem"> | string
+    creator_id?: StringNullableWithAggregatesFilter<"MagicItem"> | string | null
     name?: StringWithAggregatesFilter<"MagicItem"> | string
     description?: StringNullableWithAggregatesFilter<"MagicItem"> | string | null
     type_id?: StringNullableWithAggregatesFilter<"MagicItem"> | string | null
@@ -38035,7 +38054,7 @@ export namespace Prisma {
     type_name: string
     creation_description?: string | null
     role?: $Enums.CreatureRole | null
-    createdAt?: Date | string
+    created_at?: Date | string
     creature_relation: CreatureCreateNestedOneWithoutGpt_request_relationInput
   }
 
@@ -38047,7 +38066,7 @@ export namespace Prisma {
     type_name: string
     creation_description?: string | null
     role?: $Enums.CreatureRole | null
-    createdAt?: Date | string
+    created_at?: Date | string
   }
 
   export type GPTCreatureRequestUpdateInput = {
@@ -38056,7 +38075,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     creature_relation?: CreatureUpdateOneRequiredWithoutGpt_request_relationNestedInput
   }
 
@@ -38068,7 +38087,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GPTCreatureRequestCreateManyInput = {
@@ -38079,7 +38098,7 @@ export namespace Prisma {
     type_name: string
     creation_description?: string | null
     role?: $Enums.CreatureRole | null
-    createdAt?: Date | string
+    created_at?: Date | string
   }
 
   export type GPTCreatureRequestUpdateManyMutationInput = {
@@ -38088,7 +38107,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GPTCreatureRequestUncheckedUpdateManyInput = {
@@ -38099,7 +38118,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AdventureCreateInput = {
@@ -38258,6 +38277,7 @@ export namespace Prisma {
 
   export type MagicItemCreateInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     requires_attunement?: boolean | null
@@ -38269,6 +38289,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedCreateInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     type_id?: string | null
@@ -38280,6 +38301,7 @@ export namespace Prisma {
 
   export type MagicItemUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -38291,6 +38313,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -38302,6 +38325,7 @@ export namespace Prisma {
 
   export type MagicItemCreateManyInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     type_id?: string | null
@@ -38312,6 +38336,7 @@ export namespace Prisma {
 
   export type MagicItemUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -38319,6 +38344,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39465,7 +39491,7 @@ export namespace Prisma {
     type_name?: SortOrder
     creation_description?: SortOrder
     role?: SortOrder
-    createdAt?: SortOrder
+    created_at?: SortOrder
   }
 
   export type GPTCreatureRequestAvgOrderByAggregateInput = {
@@ -39480,7 +39506,7 @@ export namespace Prisma {
     type_name?: SortOrder
     creation_description?: SortOrder
     role?: SortOrder
-    createdAt?: SortOrder
+    created_at?: SortOrder
   }
 
   export type GPTCreatureRequestMinOrderByAggregateInput = {
@@ -39491,7 +39517,7 @@ export namespace Prisma {
     type_name?: SortOrder
     creation_description?: SortOrder
     role?: SortOrder
-    createdAt?: SortOrder
+    created_at?: SortOrder
   }
 
   export type GPTCreatureRequestSumOrderByAggregateInput = {
@@ -39629,6 +39655,7 @@ export namespace Prisma {
 
   export type MagicItemCountOrderByAggregateInput = {
     id?: SortOrder
+    creator_id?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type_id?: SortOrder
@@ -39643,6 +39670,7 @@ export namespace Prisma {
 
   export type MagicItemMaxOrderByAggregateInput = {
     id?: SortOrder
+    creator_id?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type_id?: SortOrder
@@ -39653,6 +39681,7 @@ export namespace Prisma {
 
   export type MagicItemMinOrderByAggregateInput = {
     id?: SortOrder
+    creator_id?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type_id?: SortOrder
@@ -42143,6 +42172,7 @@ export namespace Prisma {
 
   export type MagicItemCreateWithoutSource_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     requires_attunement?: boolean | null
@@ -42153,6 +42183,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedCreateWithoutSource_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     type_id?: string | null
@@ -42208,6 +42239,7 @@ export namespace Prisma {
     OR?: MagicItemScalarWhereInput[]
     NOT?: MagicItemScalarWhereInput | MagicItemScalarWhereInput[]
     id?: StringFilter<"MagicItem"> | string
+    creator_id?: StringNullableFilter<"MagicItem"> | string | null
     name?: StringFilter<"MagicItem"> | string
     description?: StringNullableFilter<"MagicItem"> | string | null
     type_id?: StringNullableFilter<"MagicItem"> | string | null
@@ -43343,7 +43375,7 @@ export namespace Prisma {
     type_name: string
     creation_description?: string | null
     role?: $Enums.CreatureRole | null
-    createdAt?: Date | string
+    created_at?: Date | string
   }
 
   export type GPTCreatureRequestUncheckedCreateWithoutCreature_relationInput = {
@@ -43353,7 +43385,7 @@ export namespace Prisma {
     type_name: string
     creation_description?: string | null
     role?: $Enums.CreatureRole | null
-    createdAt?: Date | string
+    created_at?: Date | string
   }
 
   export type GPTCreatureRequestCreateOrConnectWithoutCreature_relationInput = {
@@ -43759,7 +43791,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GPTCreatureRequestUncheckedUpdateWithoutCreature_relationInput = {
@@ -43769,7 +43801,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CreatureCreateWithoutSensesInput = {
@@ -45127,6 +45159,7 @@ export namespace Prisma {
 
   export type MagicItemCreateWithoutRarity_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     requires_attunement?: boolean | null
@@ -45137,6 +45170,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedCreateWithoutRarity_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     type_id?: string | null
@@ -45173,6 +45207,7 @@ export namespace Prisma {
 
   export type MagicItemCreateWithoutType_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     requires_attunement?: boolean | null
@@ -45183,6 +45218,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedCreateWithoutType_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     rarity_id?: string | null
@@ -45253,6 +45289,7 @@ export namespace Prisma {
 
   export type MagicItemCreateWithoutAttunements_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     requires_attunement?: boolean | null
@@ -45263,6 +45300,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedCreateWithoutAttunements_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     type_id?: string | null
@@ -45304,6 +45342,7 @@ export namespace Prisma {
 
   export type MagicItemUpdateWithoutAttunements_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -45314,6 +45353,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedUpdateWithoutAttunements_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45439,6 +45479,7 @@ export namespace Prisma {
 
   export type MagicItemCreateManySource_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     type_id?: string | null
@@ -45514,6 +45555,7 @@ export namespace Prisma {
 
   export type MagicItemUpdateWithoutSource_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -45524,6 +45566,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedUpdateWithoutSource_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -45534,6 +45577,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedUpdateManyWithoutSource_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46735,6 +46779,7 @@ export namespace Prisma {
 
   export type MagicItemCreateManyRarity_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     type_id?: string | null
@@ -46744,6 +46789,7 @@ export namespace Prisma {
 
   export type MagicItemUpdateWithoutRarity_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -46754,6 +46800,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedUpdateWithoutRarity_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46764,6 +46811,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedUpdateManyWithoutRarity_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     type_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46773,6 +46821,7 @@ export namespace Prisma {
 
   export type MagicItemCreateManyType_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
     description?: string | null
     rarity_id?: string | null
@@ -46782,6 +46831,7 @@ export namespace Prisma {
 
   export type MagicItemUpdateWithoutType_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -46792,6 +46842,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedUpdateWithoutType_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     rarity_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -46802,6 +46853,7 @@ export namespace Prisma {
 
   export type MagicItemUncheckedUpdateManyWithoutType_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     rarity_id?: NullableStringFieldUpdateOperationsInput | string | null

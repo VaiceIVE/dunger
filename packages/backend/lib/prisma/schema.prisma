@@ -333,7 +333,7 @@ model GPTCreatureRequest {
   type_name            String
   creation_description String?
   role                 CreatureRole?
-  createdAt            DateTime         @default(now())
+  created_at            DateTime         @default(now())
 
   creature_relation    Creature         @relation(fields: [creature_id], references: [id])    
 
@@ -386,6 +386,7 @@ enum Gender {
 
 model MagicItem {
   id                      String                  @id @default(uuid())
+  creator_id              String?
   name                    String
   description             String?
   type_id                 String?

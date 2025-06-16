@@ -254,7 +254,7 @@ exports.Prisma.GPTCreatureRequestScalarFieldEnum = {
   type_name: 'type_name',
   creation_description: 'creation_description',
   role: 'role',
-  createdAt: 'createdAt'
+  created_at: 'created_at'
 };
 
 exports.Prisma.AdventureScalarFieldEnum = {
@@ -279,6 +279,7 @@ exports.Prisma.GenreScalarFieldEnum = {
 
 exports.Prisma.MagicItemScalarFieldEnum = {
   id: 'id',
+  creator_id: 'creator_id',
   name: 'name',
   description: 'description',
   type_id: 'type_id',
