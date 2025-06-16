@@ -15,6 +15,7 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/auth/decorators/current-user.decorator';
 import { CreateMagicItemDto } from './dto/create-magic-item.dto';
 import { UpdateMagicItemDto } from './dto/update-magic-item.dto';
+import { OptionalJwtAuthGuard } from 'src/auth/guards/optional-jwt.guard';
 
 @Controller('magic-items')
 export class MagicItemsController {
@@ -83,8 +84,9 @@ export class MagicItemsController {
     return await this.magicItemsService.findAllUser(query, user.id);
   }
 
+  @UseGuards(OptionalJwtAuthGuard)
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.magicItemsService.findOne(id);
+  findOne(@Param('id') id: string, @CurrentUser() user) {
+    return this.magicItemsService.findOne(id, user.id);
   }
 }

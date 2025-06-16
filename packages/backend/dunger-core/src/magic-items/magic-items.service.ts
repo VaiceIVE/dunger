@@ -66,10 +66,20 @@ export class MagicItemsService {
     updateMagicItemDto: UpdateMagicItemDto,
     userId?: string,
   ) {
-    /**
-     * TODO: нормальная проверка на создателя
-     */
-    if (!userId)
+    const magicItem = await this.prisma.magicItem.findUnique({
+      where: { id: magicItemId },
+      select: {
+        creator_id: true,
+      },
+    });
+
+    if (!magicItem)
+      throw new AppError({
+        statusCode: HttpStatus.NOT_FOUND,
+        errorText: `Magic item not found: ${magicItemId}`,
+      });
+
+    if (magicItem?.creator_id && magicItem.creator_id !== userId)
       throw new AppError({
         errorText: 'Access denied',
         statusCode: HttpStatus.FORBIDDEN,
@@ -226,11 +236,12 @@ export class MagicItemsService {
     };
   }
 
-  async findOne(id: string): Promise<ApiMagicItem> {
+  async findOne(id: string, userId: string): Promise<ApiMagicItem> {
     const magicItemRaw = await this.prisma.magicItem.findUnique({
       where: { id: id },
       select: {
         id: true,
+        creator_id: true,
         name: true,
         description: true,
         type_relation: true,
@@ -252,7 +263,13 @@ export class MagicItemsService {
     if (!magicItemRaw)
       throw new AppError({
         statusCode: HttpStatus.NOT_FOUND,
-        errorText: `MagicItem not found: ${id}`,
+        errorText: `Magic item not found: ${id}`,
+      });
+
+    if (magicItemRaw?.creator_id && magicItemRaw.creator_id !== userId)
+      throw new AppError({
+        errorText: 'Access denied',
+        statusCode: HttpStatus.FORBIDDEN,
       });
 
     const { type_relation, rarity_relation, attunements_relation, ...rest } =
