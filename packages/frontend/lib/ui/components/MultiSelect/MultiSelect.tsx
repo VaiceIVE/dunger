@@ -116,13 +116,13 @@ export const MultiSelect = ({
       size="xs"
       value={item}
       key={`${item}-${index.toString()}`}
-      withRemoveButton={!readOnly && !optionsLockup[item].disabled}
+      withRemoveButton={!readOnly && !optionsLockup[item]?.disabled}
       onRemove={() => {
         setValue(_value.filter((i) => item !== i));
         onRemove?.(item);
       }}
       disabled={disabled}>
-      {optionsLockup[item].label || item}
+      {optionsLockup[item]?.label ?? item}
     </Chips>
   ));
 
