@@ -5,7 +5,7 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 import { OpenAiMessage, OpenAiRequest } from 'src/types/OpenAiMessage';
 import { PromptService } from 'src/prompt/prompt.service';
 import { CreateCreatureDto } from './dto/create-creature.dto';
-import { GenerationResultWithHistory } from 'src/types/generationResultWithHistory';
+import { GenerationResultWithHistory } from 'src/types/GenerationResultWithHistory';
 
 @Injectable()
 export class AppService {

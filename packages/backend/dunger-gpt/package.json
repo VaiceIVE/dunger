@@ -6,6 +6,8 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "build": "nest build",
+    "prod": "node dist/main",
     "g:build": "nest build",
     "g:format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "g:start": "nest start",
