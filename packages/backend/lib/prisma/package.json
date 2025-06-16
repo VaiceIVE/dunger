@@ -15,9 +15,9 @@
     "gen": "prisma generate"
   },
   "devDependencies": {
-    "@prisma/client": "6.4.1",
-    "@prisma/engines": "^6.5.0",
-    "prisma": "^6.4.1",
+    "@prisma/client": "^6.9.0",
+    "@prisma/engines": "^6.9.0",
+    "prisma": "^6.9.0",
     "typescript": "~5.8.0"
   }
 }

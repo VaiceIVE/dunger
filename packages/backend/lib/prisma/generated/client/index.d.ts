@@ -309,7 +309,7 @@ export class PrismaClient<
    */
 
   constructor(optionsArg ?: Prisma.Subset<ClientOptions, Prisma.PrismaClientOptions>);
-  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): void;
+  $on<V extends U>(eventType: V, callback: (event: V extends 'query' ? Prisma.QueryEvent : Prisma.LogEvent) => void): PrismaClient;
 
   /**
    * Connect with the database
@@ -393,9 +393,9 @@ export class PrismaClient<
   $transaction<R>(fn: (prisma: Omit<PrismaClient, runtime.ITXClientDenyList>) => $Utils.JsPromise<R>, options?: { maxWait?: number, timeout?: number, isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<R>
 
 
-  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb, ExtArgs, $Utils.Call<Prisma.TypeMapCb, {
+  $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb<ClientOptions>, ExtArgs, $Utils.Call<Prisma.TypeMapCb<ClientOptions>, {
     extArgs: ExtArgs
-  }>, ClientOptions>
+  }>>
 
       /**
    * `prisma.size`: Exposes CRUD operations for the **Size** model.
@@ -734,8 +734,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.4.1
-   * Query Engine version: 173f8d54f8d52e692c7e27e72a88314ec7aeff60
+   * Prisma Client JS version: 6.9.0
+   * Query Engine version: 81e4af48011447c3cc503a190e86995b66d2a28e
    */
   export type PrismaVersion = {
     client: string
@@ -1002,7 +1002,7 @@ export namespace Prisma {
   type AtLeast<O extends object, K extends string> = NoExpand<
     O extends unknown
     ? | (K extends keyof O ? { [P in K]: O[P] } & O : O)
-      | {[P in keyof O as P extends K ? K : never]-?: O[P]} & O
+      | {[P in keyof O as P extends K ? P : never]-?: O[P]} & O
     : never>;
 
   type _Strict<U, _U = U> = U extends unknown ? U & OptionalFlat<_Record<Exclude<Keys<_U>, keyof U>, never>> : never;
@@ -1153,11 +1153,14 @@ export namespace Prisma {
     db?: Datasource
   }
 
-  interface TypeMapCb extends $Utils.Fn<{extArgs: $Extensions.InternalArgs, clientOptions: PrismaClientOptions }, $Utils.Record<string, any>> {
-    returns: Prisma.TypeMap<this['params']['extArgs'], this['params']['clientOptions']>
+  interface TypeMapCb<ClientOptions = {}> extends $Utils.Fn<{extArgs: $Extensions.InternalArgs }, $Utils.Record<string, any>> {
+    returns: Prisma.TypeMap<this['params']['extArgs'], ClientOptions extends { omit: infer OmitOptions } ? OmitOptions : {}>
   }
 
-  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
+  export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> = {
+    globalOmitOptions: {
+      omit: GlobalOmitOptions
+    }
     meta: {
       modelProps: "size" | "source" | "language" | "biome" | "type" | "alignment" | "creatureSpeed" | "creatureStats" | "creatureStatDetail" | "creatureSkills" | "creatureSkillDetail" | "skillMetadata" | "creature" | "creatureSenses" | "action" | "trait" | "creatureRace" | "damageType" | "challengeRatingMetadata" | "gPTCreatureRequest" | "adventure" | "keyword" | "genre" | "magicItem" | "magicItemRarity" | "magicItemType" | "attunementCondition" | "magicItemAttunement"
       txIsolationLevel: Prisma.TransactionIsolationLevel
@@ -4403,7 +4406,7 @@ export namespace Prisma {
       select?: SizeCountAggregateInputType | true
     }
 
-  export interface SizeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface SizeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Size'], meta: { name: 'Size' } }
     /**
      * Find zero or one Size that matches the filter.
@@ -4416,7 +4419,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends SizeFindUniqueArgs>(args: SelectSubset<T, SizeFindUniqueArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends SizeFindUniqueArgs>(args: SelectSubset<T, SizeFindUniqueArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Size that matches the filter or throw an error with `error.code='P2025'`
@@ -4430,7 +4433,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends SizeFindUniqueOrThrowArgs>(args: SelectSubset<T, SizeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends SizeFindUniqueOrThrowArgs>(args: SelectSubset<T, SizeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Size that matches the filter.
@@ -4445,7 +4448,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends SizeFindFirstArgs>(args?: SelectSubset<T, SizeFindFirstArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends SizeFindFirstArgs>(args?: SelectSubset<T, SizeFindFirstArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Size that matches the filter or
@@ -4461,7 +4464,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends SizeFindFirstOrThrowArgs>(args?: SelectSubset<T, SizeFindFirstOrThrowArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends SizeFindFirstOrThrowArgs>(args?: SelectSubset<T, SizeFindFirstOrThrowArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Sizes that matches the filter.
@@ -4479,7 +4482,7 @@ export namespace Prisma {
      * const sizeWithIdOnly = await prisma.size.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends SizeFindManyArgs>(args?: SelectSubset<T, SizeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends SizeFindManyArgs>(args?: SelectSubset<T, SizeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Size.
@@ -4493,7 +4496,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends SizeCreateArgs>(args: SelectSubset<T, SizeCreateArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends SizeCreateArgs>(args: SelectSubset<T, SizeCreateArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Sizes.
@@ -4531,7 +4534,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends SizeCreateManyAndReturnArgs>(args?: SelectSubset<T, SizeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends SizeCreateManyAndReturnArgs>(args?: SelectSubset<T, SizeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Size.
@@ -4545,7 +4548,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends SizeDeleteArgs>(args: SelectSubset<T, SizeDeleteArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends SizeDeleteArgs>(args: SelectSubset<T, SizeDeleteArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Size.
@@ -4562,7 +4565,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends SizeUpdateArgs>(args: SelectSubset<T, SizeUpdateArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends SizeUpdateArgs>(args: SelectSubset<T, SizeUpdateArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Sizes.
@@ -4625,7 +4628,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends SizeUpdateManyAndReturnArgs>(args: SelectSubset<T, SizeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends SizeUpdateManyAndReturnArgs>(args: SelectSubset<T, SizeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Size.
@@ -4644,7 +4647,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends SizeUpsertArgs>(args: SelectSubset<T, SizeUpsertArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends SizeUpsertArgs>(args: SelectSubset<T, SizeUpsertArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -4784,9 +4787,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__SizeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__SizeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creature<T extends Size$creatureArgs<ExtArgs> = {}>(args?: Subset<T, Size$creatureArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    creature<T extends Size$creatureArgs<ExtArgs> = {}>(args?: Subset<T, Size$creatureArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4814,7 +4817,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Size model
-   */ 
+   */
   interface SizeFieldRefs {
     readonly id: FieldRef<"Size", 'String'>
     readonly name: FieldRef<"Size", 'String'>
@@ -5483,7 +5486,7 @@ export namespace Prisma {
       select?: SourceCountAggregateInputType | true
     }
 
-  export interface SourceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface SourceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Source'], meta: { name: 'Source' } }
     /**
      * Find zero or one Source that matches the filter.
@@ -5496,7 +5499,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends SourceFindUniqueArgs>(args: SelectSubset<T, SourceFindUniqueArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends SourceFindUniqueArgs>(args: SelectSubset<T, SourceFindUniqueArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Source that matches the filter or throw an error with `error.code='P2025'`
@@ -5510,7 +5513,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends SourceFindUniqueOrThrowArgs>(args: SelectSubset<T, SourceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends SourceFindUniqueOrThrowArgs>(args: SelectSubset<T, SourceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Source that matches the filter.
@@ -5525,7 +5528,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends SourceFindFirstArgs>(args?: SelectSubset<T, SourceFindFirstArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends SourceFindFirstArgs>(args?: SelectSubset<T, SourceFindFirstArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Source that matches the filter or
@@ -5541,7 +5544,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends SourceFindFirstOrThrowArgs>(args?: SelectSubset<T, SourceFindFirstOrThrowArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends SourceFindFirstOrThrowArgs>(args?: SelectSubset<T, SourceFindFirstOrThrowArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Sources that matches the filter.
@@ -5559,7 +5562,7 @@ export namespace Prisma {
      * const sourceWithIdOnly = await prisma.source.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends SourceFindManyArgs>(args?: SelectSubset<T, SourceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends SourceFindManyArgs>(args?: SelectSubset<T, SourceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Source.
@@ -5573,7 +5576,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends SourceCreateArgs>(args: SelectSubset<T, SourceCreateArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends SourceCreateArgs>(args: SelectSubset<T, SourceCreateArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Sources.
@@ -5611,7 +5614,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends SourceCreateManyAndReturnArgs>(args?: SelectSubset<T, SourceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends SourceCreateManyAndReturnArgs>(args?: SelectSubset<T, SourceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Source.
@@ -5625,7 +5628,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends SourceDeleteArgs>(args: SelectSubset<T, SourceDeleteArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends SourceDeleteArgs>(args: SelectSubset<T, SourceDeleteArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Source.
@@ -5642,7 +5645,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends SourceUpdateArgs>(args: SelectSubset<T, SourceUpdateArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends SourceUpdateArgs>(args: SelectSubset<T, SourceUpdateArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Sources.
@@ -5705,7 +5708,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends SourceUpdateManyAndReturnArgs>(args: SelectSubset<T, SourceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends SourceUpdateManyAndReturnArgs>(args: SelectSubset<T, SourceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Source.
@@ -5724,7 +5727,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends SourceUpsertArgs>(args: SelectSubset<T, SourceUpsertArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends SourceUpsertArgs>(args: SelectSubset<T, SourceUpsertArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -5864,10 +5867,10 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__SourceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__SourceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creatures<T extends Source$creaturesArgs<ExtArgs> = {}>(args?: Subset<T, Source$creaturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    magicItems<T extends Source$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, Source$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    creatures<T extends Source$creaturesArgs<ExtArgs> = {}>(args?: Subset<T, Source$creaturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    magicItems<T extends Source$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, Source$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5895,7 +5898,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Source model
-   */ 
+   */
   interface SourceFieldRefs {
     readonly id: FieldRef<"Source", 'Int'>
     readonly short_name: FieldRef<"Source", 'String'>
@@ -6574,7 +6577,7 @@ export namespace Prisma {
       select?: LanguageCountAggregateInputType | true
     }
 
-  export interface LanguageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface LanguageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Language'], meta: { name: 'Language' } }
     /**
      * Find zero or one Language that matches the filter.
@@ -6587,7 +6590,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends LanguageFindUniqueArgs>(args: SelectSubset<T, LanguageFindUniqueArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends LanguageFindUniqueArgs>(args: SelectSubset<T, LanguageFindUniqueArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Language that matches the filter or throw an error with `error.code='P2025'`
@@ -6601,7 +6604,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends LanguageFindUniqueOrThrowArgs>(args: SelectSubset<T, LanguageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends LanguageFindUniqueOrThrowArgs>(args: SelectSubset<T, LanguageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Language that matches the filter.
@@ -6616,7 +6619,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends LanguageFindFirstArgs>(args?: SelectSubset<T, LanguageFindFirstArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends LanguageFindFirstArgs>(args?: SelectSubset<T, LanguageFindFirstArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Language that matches the filter or
@@ -6632,7 +6635,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends LanguageFindFirstOrThrowArgs>(args?: SelectSubset<T, LanguageFindFirstOrThrowArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends LanguageFindFirstOrThrowArgs>(args?: SelectSubset<T, LanguageFindFirstOrThrowArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Languages that matches the filter.
@@ -6650,7 +6653,7 @@ export namespace Prisma {
      * const languageWithIdOnly = await prisma.language.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends LanguageFindManyArgs>(args?: SelectSubset<T, LanguageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends LanguageFindManyArgs>(args?: SelectSubset<T, LanguageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Language.
@@ -6664,7 +6667,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends LanguageCreateArgs>(args: SelectSubset<T, LanguageCreateArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends LanguageCreateArgs>(args: SelectSubset<T, LanguageCreateArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Languages.
@@ -6702,7 +6705,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends LanguageCreateManyAndReturnArgs>(args?: SelectSubset<T, LanguageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends LanguageCreateManyAndReturnArgs>(args?: SelectSubset<T, LanguageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Language.
@@ -6716,7 +6719,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends LanguageDeleteArgs>(args: SelectSubset<T, LanguageDeleteArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends LanguageDeleteArgs>(args: SelectSubset<T, LanguageDeleteArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Language.
@@ -6733,7 +6736,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends LanguageUpdateArgs>(args: SelectSubset<T, LanguageUpdateArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends LanguageUpdateArgs>(args: SelectSubset<T, LanguageUpdateArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Languages.
@@ -6796,7 +6799,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends LanguageUpdateManyAndReturnArgs>(args: SelectSubset<T, LanguageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends LanguageUpdateManyAndReturnArgs>(args: SelectSubset<T, LanguageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Language.
@@ -6815,7 +6818,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends LanguageUpsertArgs>(args: SelectSubset<T, LanguageUpsertArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends LanguageUpsertArgs>(args: SelectSubset<T, LanguageUpsertArgs<ExtArgs>>): Prisma__LanguageClient<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -6955,9 +6958,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__LanguageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__LanguageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creatures_relation<T extends Language$creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Language$creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    creatures_relation<T extends Language$creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Language$creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6985,7 +6988,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Language model
-   */ 
+   */
   interface LanguageFieldRefs {
     readonly id: FieldRef<"Language", 'Int'>
     readonly name: FieldRef<"Language", 'String'>
@@ -7651,7 +7654,7 @@ export namespace Prisma {
       select?: BiomeCountAggregateInputType | true
     }
 
-  export interface BiomeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface BiomeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Biome'], meta: { name: 'Biome' } }
     /**
      * Find zero or one Biome that matches the filter.
@@ -7664,7 +7667,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends BiomeFindUniqueArgs>(args: SelectSubset<T, BiomeFindUniqueArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends BiomeFindUniqueArgs>(args: SelectSubset<T, BiomeFindUniqueArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Biome that matches the filter or throw an error with `error.code='P2025'`
@@ -7678,7 +7681,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends BiomeFindUniqueOrThrowArgs>(args: SelectSubset<T, BiomeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends BiomeFindUniqueOrThrowArgs>(args: SelectSubset<T, BiomeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Biome that matches the filter.
@@ -7693,7 +7696,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends BiomeFindFirstArgs>(args?: SelectSubset<T, BiomeFindFirstArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends BiomeFindFirstArgs>(args?: SelectSubset<T, BiomeFindFirstArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Biome that matches the filter or
@@ -7709,7 +7712,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends BiomeFindFirstOrThrowArgs>(args?: SelectSubset<T, BiomeFindFirstOrThrowArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends BiomeFindFirstOrThrowArgs>(args?: SelectSubset<T, BiomeFindFirstOrThrowArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Biomes that matches the filter.
@@ -7727,7 +7730,7 @@ export namespace Prisma {
      * const biomeWithIdOnly = await prisma.biome.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends BiomeFindManyArgs>(args?: SelectSubset<T, BiomeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends BiomeFindManyArgs>(args?: SelectSubset<T, BiomeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Biome.
@@ -7741,7 +7744,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends BiomeCreateArgs>(args: SelectSubset<T, BiomeCreateArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends BiomeCreateArgs>(args: SelectSubset<T, BiomeCreateArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Biomes.
@@ -7779,7 +7782,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends BiomeCreateManyAndReturnArgs>(args?: SelectSubset<T, BiomeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends BiomeCreateManyAndReturnArgs>(args?: SelectSubset<T, BiomeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Biome.
@@ -7793,7 +7796,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends BiomeDeleteArgs>(args: SelectSubset<T, BiomeDeleteArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends BiomeDeleteArgs>(args: SelectSubset<T, BiomeDeleteArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Biome.
@@ -7810,7 +7813,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends BiomeUpdateArgs>(args: SelectSubset<T, BiomeUpdateArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends BiomeUpdateArgs>(args: SelectSubset<T, BiomeUpdateArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Biomes.
@@ -7873,7 +7876,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends BiomeUpdateManyAndReturnArgs>(args: SelectSubset<T, BiomeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends BiomeUpdateManyAndReturnArgs>(args: SelectSubset<T, BiomeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Biome.
@@ -7892,7 +7895,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends BiomeUpsertArgs>(args: SelectSubset<T, BiomeUpsertArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends BiomeUpsertArgs>(args: SelectSubset<T, BiomeUpsertArgs<ExtArgs>>): Prisma__BiomeClient<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -8032,9 +8035,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__BiomeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__BiomeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creatures_relation<T extends Biome$creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Biome$creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    creatures_relation<T extends Biome$creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Biome$creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8062,7 +8065,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Biome model
-   */ 
+   */
   interface BiomeFieldRefs {
     readonly id: FieldRef<"Biome", 'Int'>
     readonly short_name: FieldRef<"Biome", 'String'>
@@ -8717,7 +8720,7 @@ export namespace Prisma {
       select?: TypeCountAggregateInputType | true
     }
 
-  export interface TypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface TypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Type'], meta: { name: 'Type' } }
     /**
      * Find zero or one Type that matches the filter.
@@ -8730,7 +8733,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends TypeFindUniqueArgs>(args: SelectSubset<T, TypeFindUniqueArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends TypeFindUniqueArgs>(args: SelectSubset<T, TypeFindUniqueArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Type that matches the filter or throw an error with `error.code='P2025'`
@@ -8744,7 +8747,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends TypeFindUniqueOrThrowArgs>(args: SelectSubset<T, TypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends TypeFindUniqueOrThrowArgs>(args: SelectSubset<T, TypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Type that matches the filter.
@@ -8759,7 +8762,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends TypeFindFirstArgs>(args?: SelectSubset<T, TypeFindFirstArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends TypeFindFirstArgs>(args?: SelectSubset<T, TypeFindFirstArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Type that matches the filter or
@@ -8775,7 +8778,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends TypeFindFirstOrThrowArgs>(args?: SelectSubset<T, TypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends TypeFindFirstOrThrowArgs>(args?: SelectSubset<T, TypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Types that matches the filter.
@@ -8793,7 +8796,7 @@ export namespace Prisma {
      * const typeWithIdOnly = await prisma.type.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends TypeFindManyArgs>(args?: SelectSubset<T, TypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends TypeFindManyArgs>(args?: SelectSubset<T, TypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Type.
@@ -8807,7 +8810,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends TypeCreateArgs>(args: SelectSubset<T, TypeCreateArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends TypeCreateArgs>(args: SelectSubset<T, TypeCreateArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Types.
@@ -8845,7 +8848,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends TypeCreateManyAndReturnArgs>(args?: SelectSubset<T, TypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends TypeCreateManyAndReturnArgs>(args?: SelectSubset<T, TypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Type.
@@ -8859,7 +8862,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends TypeDeleteArgs>(args: SelectSubset<T, TypeDeleteArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends TypeDeleteArgs>(args: SelectSubset<T, TypeDeleteArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Type.
@@ -8876,7 +8879,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends TypeUpdateArgs>(args: SelectSubset<T, TypeUpdateArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends TypeUpdateArgs>(args: SelectSubset<T, TypeUpdateArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Types.
@@ -8939,7 +8942,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends TypeUpdateManyAndReturnArgs>(args: SelectSubset<T, TypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends TypeUpdateManyAndReturnArgs>(args: SelectSubset<T, TypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Type.
@@ -8958,7 +8961,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends TypeUpsertArgs>(args: SelectSubset<T, TypeUpsertArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends TypeUpsertArgs>(args: SelectSubset<T, TypeUpsertArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -9098,9 +9101,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__TypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creatures<T extends Type$creaturesArgs<ExtArgs> = {}>(args?: Subset<T, Type$creaturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    creatures<T extends Type$creaturesArgs<ExtArgs> = {}>(args?: Subset<T, Type$creaturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9128,7 +9131,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Type model
-   */ 
+   */
   interface TypeFieldRefs {
     readonly id: FieldRef<"Type", 'Int'>
     readonly name: FieldRef<"Type", 'String'>
@@ -9782,7 +9785,7 @@ export namespace Prisma {
       select?: AlignmentCountAggregateInputType | true
     }
 
-  export interface AlignmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface AlignmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Alignment'], meta: { name: 'Alignment' } }
     /**
      * Find zero or one Alignment that matches the filter.
@@ -9795,7 +9798,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends AlignmentFindUniqueArgs>(args: SelectSubset<T, AlignmentFindUniqueArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends AlignmentFindUniqueArgs>(args: SelectSubset<T, AlignmentFindUniqueArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Alignment that matches the filter or throw an error with `error.code='P2025'`
@@ -9809,7 +9812,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends AlignmentFindUniqueOrThrowArgs>(args: SelectSubset<T, AlignmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends AlignmentFindUniqueOrThrowArgs>(args: SelectSubset<T, AlignmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Alignment that matches the filter.
@@ -9824,7 +9827,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends AlignmentFindFirstArgs>(args?: SelectSubset<T, AlignmentFindFirstArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends AlignmentFindFirstArgs>(args?: SelectSubset<T, AlignmentFindFirstArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Alignment that matches the filter or
@@ -9840,7 +9843,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends AlignmentFindFirstOrThrowArgs>(args?: SelectSubset<T, AlignmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends AlignmentFindFirstOrThrowArgs>(args?: SelectSubset<T, AlignmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Alignments that matches the filter.
@@ -9858,7 +9861,7 @@ export namespace Prisma {
      * const alignmentWithIdOnly = await prisma.alignment.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends AlignmentFindManyArgs>(args?: SelectSubset<T, AlignmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends AlignmentFindManyArgs>(args?: SelectSubset<T, AlignmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Alignment.
@@ -9872,7 +9875,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends AlignmentCreateArgs>(args: SelectSubset<T, AlignmentCreateArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends AlignmentCreateArgs>(args: SelectSubset<T, AlignmentCreateArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Alignments.
@@ -9910,7 +9913,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends AlignmentCreateManyAndReturnArgs>(args?: SelectSubset<T, AlignmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends AlignmentCreateManyAndReturnArgs>(args?: SelectSubset<T, AlignmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Alignment.
@@ -9924,7 +9927,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends AlignmentDeleteArgs>(args: SelectSubset<T, AlignmentDeleteArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends AlignmentDeleteArgs>(args: SelectSubset<T, AlignmentDeleteArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Alignment.
@@ -9941,7 +9944,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends AlignmentUpdateArgs>(args: SelectSubset<T, AlignmentUpdateArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends AlignmentUpdateArgs>(args: SelectSubset<T, AlignmentUpdateArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Alignments.
@@ -10004,7 +10007,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends AlignmentUpdateManyAndReturnArgs>(args: SelectSubset<T, AlignmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends AlignmentUpdateManyAndReturnArgs>(args: SelectSubset<T, AlignmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Alignment.
@@ -10023,7 +10026,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends AlignmentUpsertArgs>(args: SelectSubset<T, AlignmentUpsertArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends AlignmentUpsertArgs>(args: SelectSubset<T, AlignmentUpsertArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -10163,9 +10166,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__AlignmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__AlignmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creatures<T extends Alignment$creaturesArgs<ExtArgs> = {}>(args?: Subset<T, Alignment$creaturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    creatures<T extends Alignment$creaturesArgs<ExtArgs> = {}>(args?: Subset<T, Alignment$creaturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10193,7 +10196,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Alignment model
-   */ 
+   */
   interface AlignmentFieldRefs {
     readonly id: FieldRef<"Alignment", 'Int'>
     readonly name: FieldRef<"Alignment", 'String'>
@@ -10915,7 +10918,7 @@ export namespace Prisma {
       select?: CreatureSpeedCountAggregateInputType | true
     }
 
-  export interface CreatureSpeedDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface CreatureSpeedDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CreatureSpeed'], meta: { name: 'CreatureSpeed' } }
     /**
      * Find zero or one CreatureSpeed that matches the filter.
@@ -10928,7 +10931,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends CreatureSpeedFindUniqueArgs>(args: SelectSubset<T, CreatureSpeedFindUniqueArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends CreatureSpeedFindUniqueArgs>(args: SelectSubset<T, CreatureSpeedFindUniqueArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one CreatureSpeed that matches the filter or throw an error with `error.code='P2025'`
@@ -10942,7 +10945,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CreatureSpeedFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureSpeedFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends CreatureSpeedFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureSpeedFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureSpeed that matches the filter.
@@ -10957,7 +10960,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends CreatureSpeedFindFirstArgs>(args?: SelectSubset<T, CreatureSpeedFindFirstArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends CreatureSpeedFindFirstArgs>(args?: SelectSubset<T, CreatureSpeedFindFirstArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureSpeed that matches the filter or
@@ -10973,7 +10976,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends CreatureSpeedFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureSpeedFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends CreatureSpeedFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureSpeedFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more CreatureSpeeds that matches the filter.
@@ -10991,7 +10994,7 @@ export namespace Prisma {
      * const creatureSpeedWithIdOnly = await prisma.creatureSpeed.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CreatureSpeedFindManyArgs>(args?: SelectSubset<T, CreatureSpeedFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends CreatureSpeedFindManyArgs>(args?: SelectSubset<T, CreatureSpeedFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a CreatureSpeed.
@@ -11005,7 +11008,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends CreatureSpeedCreateArgs>(args: SelectSubset<T, CreatureSpeedCreateArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends CreatureSpeedCreateArgs>(args: SelectSubset<T, CreatureSpeedCreateArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many CreatureSpeeds.
@@ -11043,7 +11046,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CreatureSpeedCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureSpeedCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends CreatureSpeedCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureSpeedCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a CreatureSpeed.
@@ -11057,7 +11060,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends CreatureSpeedDeleteArgs>(args: SelectSubset<T, CreatureSpeedDeleteArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends CreatureSpeedDeleteArgs>(args: SelectSubset<T, CreatureSpeedDeleteArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one CreatureSpeed.
@@ -11074,7 +11077,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CreatureSpeedUpdateArgs>(args: SelectSubset<T, CreatureSpeedUpdateArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends CreatureSpeedUpdateArgs>(args: SelectSubset<T, CreatureSpeedUpdateArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more CreatureSpeeds.
@@ -11137,7 +11140,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CreatureSpeedUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureSpeedUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends CreatureSpeedUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureSpeedUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one CreatureSpeed.
@@ -11156,7 +11159,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends CreatureSpeedUpsertArgs>(args: SelectSubset<T, CreatureSpeedUpsertArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends CreatureSpeedUpsertArgs>(args: SelectSubset<T, CreatureSpeedUpsertArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -11296,9 +11299,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CreatureSpeedClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CreatureSpeedClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creature_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    creature_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11326,7 +11329,7 @@ export namespace Prisma {
 
   /**
    * Fields of the CreatureSpeed model
-   */ 
+   */
   interface CreatureSpeedFieldRefs {
     readonly id: FieldRef<"CreatureSpeed", 'String'>
     readonly walk: FieldRef<"CreatureSpeed", 'Int'>
@@ -11931,7 +11934,7 @@ export namespace Prisma {
       select?: CreatureStatsCountAggregateInputType | true
     }
 
-  export interface CreatureStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface CreatureStatsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CreatureStats'], meta: { name: 'CreatureStats' } }
     /**
      * Find zero or one CreatureStats that matches the filter.
@@ -11944,7 +11947,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends CreatureStatsFindUniqueArgs>(args: SelectSubset<T, CreatureStatsFindUniqueArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends CreatureStatsFindUniqueArgs>(args: SelectSubset<T, CreatureStatsFindUniqueArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one CreatureStats that matches the filter or throw an error with `error.code='P2025'`
@@ -11958,7 +11961,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CreatureStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends CreatureStatsFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureStatsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureStats that matches the filter.
@@ -11973,7 +11976,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends CreatureStatsFindFirstArgs>(args?: SelectSubset<T, CreatureStatsFindFirstArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends CreatureStatsFindFirstArgs>(args?: SelectSubset<T, CreatureStatsFindFirstArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureStats that matches the filter or
@@ -11989,7 +11992,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends CreatureStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends CreatureStatsFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureStatsFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more CreatureStats that matches the filter.
@@ -12007,7 +12010,7 @@ export namespace Prisma {
      * const creatureStatsWithIdOnly = await prisma.creatureStats.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CreatureStatsFindManyArgs>(args?: SelectSubset<T, CreatureStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends CreatureStatsFindManyArgs>(args?: SelectSubset<T, CreatureStatsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a CreatureStats.
@@ -12021,7 +12024,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends CreatureStatsCreateArgs>(args: SelectSubset<T, CreatureStatsCreateArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends CreatureStatsCreateArgs>(args: SelectSubset<T, CreatureStatsCreateArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many CreatureStats.
@@ -12059,7 +12062,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CreatureStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends CreatureStatsCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureStatsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a CreatureStats.
@@ -12073,7 +12076,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends CreatureStatsDeleteArgs>(args: SelectSubset<T, CreatureStatsDeleteArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends CreatureStatsDeleteArgs>(args: SelectSubset<T, CreatureStatsDeleteArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one CreatureStats.
@@ -12090,7 +12093,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CreatureStatsUpdateArgs>(args: SelectSubset<T, CreatureStatsUpdateArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends CreatureStatsUpdateArgs>(args: SelectSubset<T, CreatureStatsUpdateArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more CreatureStats.
@@ -12153,7 +12156,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CreatureStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends CreatureStatsUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureStatsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one CreatureStats.
@@ -12172,7 +12175,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends CreatureStatsUpsertArgs>(args: SelectSubset<T, CreatureStatsUpsertArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends CreatureStatsUpsertArgs>(args: SelectSubset<T, CreatureStatsUpsertArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -12312,10 +12315,10 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CreatureStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CreatureStatsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    stats<T extends CreatureStats$statsArgs<ExtArgs> = {}>(args?: Subset<T, CreatureStats$statsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    creature_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    stats<T extends CreatureStats$statsArgs<ExtArgs> = {}>(args?: Subset<T, CreatureStats$statsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    creature_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12343,7 +12346,7 @@ export namespace Prisma {
 
   /**
    * Fields of the CreatureStats model
-   */ 
+   */
   interface CreatureStatsFieldRefs {
     readonly id: FieldRef<"CreatureStats", 'String'>
   }
@@ -13044,7 +13047,7 @@ export namespace Prisma {
       select?: CreatureStatDetailCountAggregateInputType | true
     }
 
-  export interface CreatureStatDetailDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface CreatureStatDetailDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CreatureStatDetail'], meta: { name: 'CreatureStatDetail' } }
     /**
      * Find zero or one CreatureStatDetail that matches the filter.
@@ -13057,7 +13060,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends CreatureStatDetailFindUniqueArgs>(args: SelectSubset<T, CreatureStatDetailFindUniqueArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends CreatureStatDetailFindUniqueArgs>(args: SelectSubset<T, CreatureStatDetailFindUniqueArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one CreatureStatDetail that matches the filter or throw an error with `error.code='P2025'`
@@ -13071,7 +13074,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CreatureStatDetailFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureStatDetailFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends CreatureStatDetailFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureStatDetailFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureStatDetail that matches the filter.
@@ -13086,7 +13089,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends CreatureStatDetailFindFirstArgs>(args?: SelectSubset<T, CreatureStatDetailFindFirstArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends CreatureStatDetailFindFirstArgs>(args?: SelectSubset<T, CreatureStatDetailFindFirstArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureStatDetail that matches the filter or
@@ -13102,7 +13105,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends CreatureStatDetailFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureStatDetailFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends CreatureStatDetailFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureStatDetailFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more CreatureStatDetails that matches the filter.
@@ -13120,7 +13123,7 @@ export namespace Prisma {
      * const creatureStatDetailWithIdOnly = await prisma.creatureStatDetail.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CreatureStatDetailFindManyArgs>(args?: SelectSubset<T, CreatureStatDetailFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends CreatureStatDetailFindManyArgs>(args?: SelectSubset<T, CreatureStatDetailFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a CreatureStatDetail.
@@ -13134,7 +13137,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends CreatureStatDetailCreateArgs>(args: SelectSubset<T, CreatureStatDetailCreateArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends CreatureStatDetailCreateArgs>(args: SelectSubset<T, CreatureStatDetailCreateArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many CreatureStatDetails.
@@ -13172,7 +13175,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CreatureStatDetailCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureStatDetailCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends CreatureStatDetailCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureStatDetailCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a CreatureStatDetail.
@@ -13186,7 +13189,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends CreatureStatDetailDeleteArgs>(args: SelectSubset<T, CreatureStatDetailDeleteArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends CreatureStatDetailDeleteArgs>(args: SelectSubset<T, CreatureStatDetailDeleteArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one CreatureStatDetail.
@@ -13203,7 +13206,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CreatureStatDetailUpdateArgs>(args: SelectSubset<T, CreatureStatDetailUpdateArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends CreatureStatDetailUpdateArgs>(args: SelectSubset<T, CreatureStatDetailUpdateArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more CreatureStatDetails.
@@ -13266,7 +13269,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CreatureStatDetailUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureStatDetailUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends CreatureStatDetailUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureStatDetailUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one CreatureStatDetail.
@@ -13285,7 +13288,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends CreatureStatDetailUpsertArgs>(args: SelectSubset<T, CreatureStatDetailUpsertArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends CreatureStatDetailUpsertArgs>(args: SelectSubset<T, CreatureStatDetailUpsertArgs<ExtArgs>>): Prisma__CreatureStatDetailClient<$Result.GetResult<Prisma.$CreatureStatDetailPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -13425,9 +13428,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CreatureStatDetailClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CreatureStatDetailClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creature_stats_relation<T extends CreatureStatsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureStatsDefaultArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    creature_stats_relation<T extends CreatureStatsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureStatsDefaultArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13455,7 +13458,7 @@ export namespace Prisma {
 
   /**
    * Fields of the CreatureStatDetail model
-   */ 
+   */
   interface CreatureStatDetailFieldRefs {
     readonly id: FieldRef<"CreatureStatDetail", 'String'>
     readonly ability: FieldRef<"CreatureStatDetail", 'Ability'>
@@ -14059,7 +14062,7 @@ export namespace Prisma {
       select?: CreatureSkillsCountAggregateInputType | true
     }
 
-  export interface CreatureSkillsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface CreatureSkillsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CreatureSkills'], meta: { name: 'CreatureSkills' } }
     /**
      * Find zero or one CreatureSkills that matches the filter.
@@ -14072,7 +14075,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends CreatureSkillsFindUniqueArgs>(args: SelectSubset<T, CreatureSkillsFindUniqueArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends CreatureSkillsFindUniqueArgs>(args: SelectSubset<T, CreatureSkillsFindUniqueArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one CreatureSkills that matches the filter or throw an error with `error.code='P2025'`
@@ -14086,7 +14089,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CreatureSkillsFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureSkillsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends CreatureSkillsFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureSkillsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureSkills that matches the filter.
@@ -14101,7 +14104,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends CreatureSkillsFindFirstArgs>(args?: SelectSubset<T, CreatureSkillsFindFirstArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends CreatureSkillsFindFirstArgs>(args?: SelectSubset<T, CreatureSkillsFindFirstArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureSkills that matches the filter or
@@ -14117,7 +14120,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends CreatureSkillsFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureSkillsFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends CreatureSkillsFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureSkillsFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more CreatureSkills that matches the filter.
@@ -14135,7 +14138,7 @@ export namespace Prisma {
      * const creatureSkillsWithIdOnly = await prisma.creatureSkills.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CreatureSkillsFindManyArgs>(args?: SelectSubset<T, CreatureSkillsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends CreatureSkillsFindManyArgs>(args?: SelectSubset<T, CreatureSkillsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a CreatureSkills.
@@ -14149,7 +14152,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends CreatureSkillsCreateArgs>(args: SelectSubset<T, CreatureSkillsCreateArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends CreatureSkillsCreateArgs>(args: SelectSubset<T, CreatureSkillsCreateArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many CreatureSkills.
@@ -14187,7 +14190,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CreatureSkillsCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureSkillsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends CreatureSkillsCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureSkillsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a CreatureSkills.
@@ -14201,7 +14204,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends CreatureSkillsDeleteArgs>(args: SelectSubset<T, CreatureSkillsDeleteArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends CreatureSkillsDeleteArgs>(args: SelectSubset<T, CreatureSkillsDeleteArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one CreatureSkills.
@@ -14218,7 +14221,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CreatureSkillsUpdateArgs>(args: SelectSubset<T, CreatureSkillsUpdateArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends CreatureSkillsUpdateArgs>(args: SelectSubset<T, CreatureSkillsUpdateArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more CreatureSkills.
@@ -14281,7 +14284,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CreatureSkillsUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureSkillsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends CreatureSkillsUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureSkillsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one CreatureSkills.
@@ -14300,7 +14303,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends CreatureSkillsUpsertArgs>(args: SelectSubset<T, CreatureSkillsUpsertArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends CreatureSkillsUpsertArgs>(args: SelectSubset<T, CreatureSkillsUpsertArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -14440,10 +14443,10 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CreatureSkillsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CreatureSkillsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    skills<T extends CreatureSkills$skillsArgs<ExtArgs> = {}>(args?: Subset<T, CreatureSkills$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    creature_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    skills<T extends CreatureSkills$skillsArgs<ExtArgs> = {}>(args?: Subset<T, CreatureSkills$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    creature_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14471,7 +14474,7 @@ export namespace Prisma {
 
   /**
    * Fields of the CreatureSkills model
-   */ 
+   */
   interface CreatureSkillsFieldRefs {
     readonly id: FieldRef<"CreatureSkills", 'String'>
   }
@@ -15172,7 +15175,7 @@ export namespace Prisma {
       select?: CreatureSkillDetailCountAggregateInputType | true
     }
 
-  export interface CreatureSkillDetailDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface CreatureSkillDetailDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CreatureSkillDetail'], meta: { name: 'CreatureSkillDetail' } }
     /**
      * Find zero or one CreatureSkillDetail that matches the filter.
@@ -15185,7 +15188,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends CreatureSkillDetailFindUniqueArgs>(args: SelectSubset<T, CreatureSkillDetailFindUniqueArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends CreatureSkillDetailFindUniqueArgs>(args: SelectSubset<T, CreatureSkillDetailFindUniqueArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one CreatureSkillDetail that matches the filter or throw an error with `error.code='P2025'`
@@ -15199,7 +15202,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CreatureSkillDetailFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureSkillDetailFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends CreatureSkillDetailFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureSkillDetailFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureSkillDetail that matches the filter.
@@ -15214,7 +15217,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends CreatureSkillDetailFindFirstArgs>(args?: SelectSubset<T, CreatureSkillDetailFindFirstArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends CreatureSkillDetailFindFirstArgs>(args?: SelectSubset<T, CreatureSkillDetailFindFirstArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureSkillDetail that matches the filter or
@@ -15230,7 +15233,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends CreatureSkillDetailFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureSkillDetailFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends CreatureSkillDetailFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureSkillDetailFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more CreatureSkillDetails that matches the filter.
@@ -15248,7 +15251,7 @@ export namespace Prisma {
      * const creatureSkillDetailWithIdOnly = await prisma.creatureSkillDetail.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CreatureSkillDetailFindManyArgs>(args?: SelectSubset<T, CreatureSkillDetailFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends CreatureSkillDetailFindManyArgs>(args?: SelectSubset<T, CreatureSkillDetailFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a CreatureSkillDetail.
@@ -15262,7 +15265,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends CreatureSkillDetailCreateArgs>(args: SelectSubset<T, CreatureSkillDetailCreateArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends CreatureSkillDetailCreateArgs>(args: SelectSubset<T, CreatureSkillDetailCreateArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many CreatureSkillDetails.
@@ -15300,7 +15303,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CreatureSkillDetailCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureSkillDetailCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends CreatureSkillDetailCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureSkillDetailCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a CreatureSkillDetail.
@@ -15314,7 +15317,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends CreatureSkillDetailDeleteArgs>(args: SelectSubset<T, CreatureSkillDetailDeleteArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends CreatureSkillDetailDeleteArgs>(args: SelectSubset<T, CreatureSkillDetailDeleteArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one CreatureSkillDetail.
@@ -15331,7 +15334,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CreatureSkillDetailUpdateArgs>(args: SelectSubset<T, CreatureSkillDetailUpdateArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends CreatureSkillDetailUpdateArgs>(args: SelectSubset<T, CreatureSkillDetailUpdateArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more CreatureSkillDetails.
@@ -15394,7 +15397,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CreatureSkillDetailUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureSkillDetailUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends CreatureSkillDetailUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureSkillDetailUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one CreatureSkillDetail.
@@ -15413,7 +15416,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends CreatureSkillDetailUpsertArgs>(args: SelectSubset<T, CreatureSkillDetailUpsertArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends CreatureSkillDetailUpsertArgs>(args: SelectSubset<T, CreatureSkillDetailUpsertArgs<ExtArgs>>): Prisma__CreatureSkillDetailClient<$Result.GetResult<Prisma.$CreatureSkillDetailPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -15553,9 +15556,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CreatureSkillDetailClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CreatureSkillDetailClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creature_skills_relation<T extends CreatureSkillsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureSkillsDefaultArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    creature_skills_relation<T extends CreatureSkillsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureSkillsDefaultArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -15583,7 +15586,7 @@ export namespace Prisma {
 
   /**
    * Fields of the CreatureSkillDetail model
-   */ 
+   */
   interface CreatureSkillDetailFieldRefs {
     readonly id: FieldRef<"CreatureSkillDetail", 'String'>
     readonly skill: FieldRef<"CreatureSkillDetail", 'Skill'>
@@ -16192,7 +16195,7 @@ export namespace Prisma {
       select?: SkillMetadataCountAggregateInputType | true
     }
 
-  export interface SkillMetadataDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface SkillMetadataDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SkillMetadata'], meta: { name: 'SkillMetadata' } }
     /**
      * Find zero or one SkillMetadata that matches the filter.
@@ -16205,7 +16208,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends SkillMetadataFindUniqueArgs>(args: SelectSubset<T, SkillMetadataFindUniqueArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends SkillMetadataFindUniqueArgs>(args: SelectSubset<T, SkillMetadataFindUniqueArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one SkillMetadata that matches the filter or throw an error with `error.code='P2025'`
@@ -16219,7 +16222,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends SkillMetadataFindUniqueOrThrowArgs>(args: SelectSubset<T, SkillMetadataFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends SkillMetadataFindUniqueOrThrowArgs>(args: SelectSubset<T, SkillMetadataFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first SkillMetadata that matches the filter.
@@ -16234,7 +16237,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends SkillMetadataFindFirstArgs>(args?: SelectSubset<T, SkillMetadataFindFirstArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends SkillMetadataFindFirstArgs>(args?: SelectSubset<T, SkillMetadataFindFirstArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first SkillMetadata that matches the filter or
@@ -16250,7 +16253,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends SkillMetadataFindFirstOrThrowArgs>(args?: SelectSubset<T, SkillMetadataFindFirstOrThrowArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends SkillMetadataFindFirstOrThrowArgs>(args?: SelectSubset<T, SkillMetadataFindFirstOrThrowArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more SkillMetadata that matches the filter.
@@ -16268,7 +16271,7 @@ export namespace Prisma {
      * const skillMetadataWithDisplay_nameOnly = await prisma.skillMetadata.findMany({ select: { display_name: true } })
      * 
      */
-    findMany<T extends SkillMetadataFindManyArgs>(args?: SelectSubset<T, SkillMetadataFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends SkillMetadataFindManyArgs>(args?: SelectSubset<T, SkillMetadataFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a SkillMetadata.
@@ -16282,7 +16285,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends SkillMetadataCreateArgs>(args: SelectSubset<T, SkillMetadataCreateArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends SkillMetadataCreateArgs>(args: SelectSubset<T, SkillMetadataCreateArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many SkillMetadata.
@@ -16320,7 +16323,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends SkillMetadataCreateManyAndReturnArgs>(args?: SelectSubset<T, SkillMetadataCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends SkillMetadataCreateManyAndReturnArgs>(args?: SelectSubset<T, SkillMetadataCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a SkillMetadata.
@@ -16334,7 +16337,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends SkillMetadataDeleteArgs>(args: SelectSubset<T, SkillMetadataDeleteArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends SkillMetadataDeleteArgs>(args: SelectSubset<T, SkillMetadataDeleteArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one SkillMetadata.
@@ -16351,7 +16354,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends SkillMetadataUpdateArgs>(args: SelectSubset<T, SkillMetadataUpdateArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends SkillMetadataUpdateArgs>(args: SelectSubset<T, SkillMetadataUpdateArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more SkillMetadata.
@@ -16414,7 +16417,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends SkillMetadataUpdateManyAndReturnArgs>(args: SelectSubset<T, SkillMetadataUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends SkillMetadataUpdateManyAndReturnArgs>(args: SelectSubset<T, SkillMetadataUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one SkillMetadata.
@@ -16433,7 +16436,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends SkillMetadataUpsertArgs>(args: SelectSubset<T, SkillMetadataUpsertArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends SkillMetadataUpsertArgs>(args: SelectSubset<T, SkillMetadataUpsertArgs<ExtArgs>>): Prisma__SkillMetadataClient<$Result.GetResult<Prisma.$SkillMetadataPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -16573,7 +16576,7 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__SkillMetadataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__SkillMetadataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -16602,7 +16605,7 @@ export namespace Prisma {
 
   /**
    * Fields of the SkillMetadata model
-   */ 
+   */
   interface SkillMetadataFieldRefs {
     readonly skill: FieldRef<"SkillMetadata", 'Skill'>
     readonly display_name: FieldRef<"SkillMetadata", 'String'>
@@ -17410,7 +17413,7 @@ export namespace Prisma {
       select?: CreatureCountAggregateInputType | true
     }
 
-  export interface CreatureDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface CreatureDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Creature'], meta: { name: 'Creature' } }
     /**
      * Find zero or one Creature that matches the filter.
@@ -17423,7 +17426,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends CreatureFindUniqueArgs>(args: SelectSubset<T, CreatureFindUniqueArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends CreatureFindUniqueArgs>(args: SelectSubset<T, CreatureFindUniqueArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Creature that matches the filter or throw an error with `error.code='P2025'`
@@ -17437,7 +17440,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CreatureFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends CreatureFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Creature that matches the filter.
@@ -17452,7 +17455,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends CreatureFindFirstArgs>(args?: SelectSubset<T, CreatureFindFirstArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends CreatureFindFirstArgs>(args?: SelectSubset<T, CreatureFindFirstArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Creature that matches the filter or
@@ -17468,7 +17471,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends CreatureFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends CreatureFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Creatures that matches the filter.
@@ -17486,7 +17489,7 @@ export namespace Prisma {
      * const creatureWithIdOnly = await prisma.creature.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CreatureFindManyArgs>(args?: SelectSubset<T, CreatureFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends CreatureFindManyArgs>(args?: SelectSubset<T, CreatureFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Creature.
@@ -17500,7 +17503,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends CreatureCreateArgs>(args: SelectSubset<T, CreatureCreateArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends CreatureCreateArgs>(args: SelectSubset<T, CreatureCreateArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Creatures.
@@ -17538,7 +17541,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CreatureCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends CreatureCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Creature.
@@ -17552,7 +17555,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends CreatureDeleteArgs>(args: SelectSubset<T, CreatureDeleteArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends CreatureDeleteArgs>(args: SelectSubset<T, CreatureDeleteArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Creature.
@@ -17569,7 +17572,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CreatureUpdateArgs>(args: SelectSubset<T, CreatureUpdateArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends CreatureUpdateArgs>(args: SelectSubset<T, CreatureUpdateArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Creatures.
@@ -17632,7 +17635,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CreatureUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends CreatureUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Creature.
@@ -17651,7 +17654,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends CreatureUpsertArgs>(args: SelectSubset<T, CreatureUpsertArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends CreatureUpsertArgs>(args: SelectSubset<T, CreatureUpsertArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -17791,26 +17794,26 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CreatureClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CreatureClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    speed<T extends Creature$speedArgs<ExtArgs> = {}>(args?: Subset<T, Creature$speedArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    stats<T extends Creature$statsArgs<ExtArgs> = {}>(args?: Subset<T, Creature$statsArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    skills<T extends Creature$skillsArgs<ExtArgs> = {}>(args?: Subset<T, Creature$skillsArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    senses<T extends Creature$sensesArgs<ExtArgs> = {}>(args?: Subset<T, Creature$sensesArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    challenge_rating_meta<T extends ChallengeRatingMetadataDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChallengeRatingMetadataDefaultArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    alignment_relation<T extends Creature$alignment_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$alignment_relationArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    race_relation<T extends Creature$race_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$race_relationArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    type_relation<T extends Creature$type_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$type_relationArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    size_relation<T extends Creature$size_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$size_relationArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    source_relation<T extends Creature$source_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$source_relationArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    resistances<T extends Creature$resistancesArgs<ExtArgs> = {}>(args?: Subset<T, Creature$resistancesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    immunities<T extends Creature$immunitiesArgs<ExtArgs> = {}>(args?: Subset<T, Creature$immunitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    vulnerabilities<T extends Creature$vulnerabilitiesArgs<ExtArgs> = {}>(args?: Subset<T, Creature$vulnerabilitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    languages_relation<T extends Creature$languages_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$languages_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    biomes_relation<T extends Creature$biomes_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$biomes_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    actions_relation<T extends Creature$actions_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$actions_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    traits_relation<T extends Creature$traits_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$traits_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    gpt_request_relation<T extends Creature$gpt_request_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$gpt_request_relationArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    speed<T extends Creature$speedArgs<ExtArgs> = {}>(args?: Subset<T, Creature$speedArgs<ExtArgs>>): Prisma__CreatureSpeedClient<$Result.GetResult<Prisma.$CreatureSpeedPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    stats<T extends Creature$statsArgs<ExtArgs> = {}>(args?: Subset<T, Creature$statsArgs<ExtArgs>>): Prisma__CreatureStatsClient<$Result.GetResult<Prisma.$CreatureStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    skills<T extends Creature$skillsArgs<ExtArgs> = {}>(args?: Subset<T, Creature$skillsArgs<ExtArgs>>): Prisma__CreatureSkillsClient<$Result.GetResult<Prisma.$CreatureSkillsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    senses<T extends Creature$sensesArgs<ExtArgs> = {}>(args?: Subset<T, Creature$sensesArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    challenge_rating_meta<T extends ChallengeRatingMetadataDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChallengeRatingMetadataDefaultArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    alignment_relation<T extends Creature$alignment_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$alignment_relationArgs<ExtArgs>>): Prisma__AlignmentClient<$Result.GetResult<Prisma.$AlignmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    race_relation<T extends Creature$race_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$race_relationArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    type_relation<T extends Creature$type_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$type_relationArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    size_relation<T extends Creature$size_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$size_relationArgs<ExtArgs>>): Prisma__SizeClient<$Result.GetResult<Prisma.$SizePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    source_relation<T extends Creature$source_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$source_relationArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    resistances<T extends Creature$resistancesArgs<ExtArgs> = {}>(args?: Subset<T, Creature$resistancesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    immunities<T extends Creature$immunitiesArgs<ExtArgs> = {}>(args?: Subset<T, Creature$immunitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    vulnerabilities<T extends Creature$vulnerabilitiesArgs<ExtArgs> = {}>(args?: Subset<T, Creature$vulnerabilitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    languages_relation<T extends Creature$languages_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$languages_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LanguagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    biomes_relation<T extends Creature$biomes_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$biomes_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BiomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    actions_relation<T extends Creature$actions_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$actions_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    traits_relation<T extends Creature$traits_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$traits_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    gpt_request_relation<T extends Creature$gpt_request_relationArgs<ExtArgs> = {}>(args?: Subset<T, Creature$gpt_request_relationArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17838,7 +17841,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Creature model
-   */ 
+   */
   interface CreatureFieldRefs {
     readonly id: FieldRef<"Creature", 'String'>
     readonly name: FieldRef<"Creature", 'String'>
@@ -18860,7 +18863,7 @@ export namespace Prisma {
       select?: CreatureSensesCountAggregateInputType | true
     }
 
-  export interface CreatureSensesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface CreatureSensesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CreatureSenses'], meta: { name: 'CreatureSenses' } }
     /**
      * Find zero or one CreatureSenses that matches the filter.
@@ -18873,7 +18876,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends CreatureSensesFindUniqueArgs>(args: SelectSubset<T, CreatureSensesFindUniqueArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends CreatureSensesFindUniqueArgs>(args: SelectSubset<T, CreatureSensesFindUniqueArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one CreatureSenses that matches the filter or throw an error with `error.code='P2025'`
@@ -18887,7 +18890,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CreatureSensesFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureSensesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends CreatureSensesFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureSensesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureSenses that matches the filter.
@@ -18902,7 +18905,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends CreatureSensesFindFirstArgs>(args?: SelectSubset<T, CreatureSensesFindFirstArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends CreatureSensesFindFirstArgs>(args?: SelectSubset<T, CreatureSensesFindFirstArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureSenses that matches the filter or
@@ -18918,7 +18921,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends CreatureSensesFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureSensesFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends CreatureSensesFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureSensesFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more CreatureSenses that matches the filter.
@@ -18936,7 +18939,7 @@ export namespace Prisma {
      * const creatureSensesWithIdOnly = await prisma.creatureSenses.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CreatureSensesFindManyArgs>(args?: SelectSubset<T, CreatureSensesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends CreatureSensesFindManyArgs>(args?: SelectSubset<T, CreatureSensesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a CreatureSenses.
@@ -18950,7 +18953,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends CreatureSensesCreateArgs>(args: SelectSubset<T, CreatureSensesCreateArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends CreatureSensesCreateArgs>(args: SelectSubset<T, CreatureSensesCreateArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many CreatureSenses.
@@ -18988,7 +18991,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CreatureSensesCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureSensesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends CreatureSensesCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureSensesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a CreatureSenses.
@@ -19002,7 +19005,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends CreatureSensesDeleteArgs>(args: SelectSubset<T, CreatureSensesDeleteArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends CreatureSensesDeleteArgs>(args: SelectSubset<T, CreatureSensesDeleteArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one CreatureSenses.
@@ -19019,7 +19022,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CreatureSensesUpdateArgs>(args: SelectSubset<T, CreatureSensesUpdateArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends CreatureSensesUpdateArgs>(args: SelectSubset<T, CreatureSensesUpdateArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more CreatureSenses.
@@ -19082,7 +19085,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CreatureSensesUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureSensesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends CreatureSensesUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureSensesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one CreatureSenses.
@@ -19101,7 +19104,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends CreatureSensesUpsertArgs>(args: SelectSubset<T, CreatureSensesUpsertArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends CreatureSensesUpsertArgs>(args: SelectSubset<T, CreatureSensesUpsertArgs<ExtArgs>>): Prisma__CreatureSensesClient<$Result.GetResult<Prisma.$CreatureSensesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -19241,9 +19244,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CreatureSensesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CreatureSensesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creature_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    creature_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19271,7 +19274,7 @@ export namespace Prisma {
 
   /**
    * Fields of the CreatureSenses model
-   */ 
+   */
   interface CreatureSensesFieldRefs {
     readonly id: FieldRef<"CreatureSenses", 'String'>
     readonly creature_id: FieldRef<"CreatureSenses", 'String'>
@@ -19949,7 +19952,7 @@ export namespace Prisma {
       select?: ActionCountAggregateInputType | true
     }
 
-  export interface ActionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface ActionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Action'], meta: { name: 'Action' } }
     /**
      * Find zero or one Action that matches the filter.
@@ -19962,7 +19965,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends ActionFindUniqueArgs>(args: SelectSubset<T, ActionFindUniqueArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends ActionFindUniqueArgs>(args: SelectSubset<T, ActionFindUniqueArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Action that matches the filter or throw an error with `error.code='P2025'`
@@ -19976,7 +19979,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ActionFindUniqueOrThrowArgs>(args: SelectSubset<T, ActionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends ActionFindUniqueOrThrowArgs>(args: SelectSubset<T, ActionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Action that matches the filter.
@@ -19991,7 +19994,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends ActionFindFirstArgs>(args?: SelectSubset<T, ActionFindFirstArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends ActionFindFirstArgs>(args?: SelectSubset<T, ActionFindFirstArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Action that matches the filter or
@@ -20007,7 +20010,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends ActionFindFirstOrThrowArgs>(args?: SelectSubset<T, ActionFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends ActionFindFirstOrThrowArgs>(args?: SelectSubset<T, ActionFindFirstOrThrowArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Actions that matches the filter.
@@ -20025,7 +20028,7 @@ export namespace Prisma {
      * const actionWithIdOnly = await prisma.action.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends ActionFindManyArgs>(args?: SelectSubset<T, ActionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends ActionFindManyArgs>(args?: SelectSubset<T, ActionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Action.
@@ -20039,7 +20042,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends ActionCreateArgs>(args: SelectSubset<T, ActionCreateArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends ActionCreateArgs>(args: SelectSubset<T, ActionCreateArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Actions.
@@ -20077,7 +20080,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends ActionCreateManyAndReturnArgs>(args?: SelectSubset<T, ActionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends ActionCreateManyAndReturnArgs>(args?: SelectSubset<T, ActionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Action.
@@ -20091,7 +20094,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends ActionDeleteArgs>(args: SelectSubset<T, ActionDeleteArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends ActionDeleteArgs>(args: SelectSubset<T, ActionDeleteArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Action.
@@ -20108,7 +20111,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends ActionUpdateArgs>(args: SelectSubset<T, ActionUpdateArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends ActionUpdateArgs>(args: SelectSubset<T, ActionUpdateArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Actions.
@@ -20171,7 +20174,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends ActionUpdateManyAndReturnArgs>(args: SelectSubset<T, ActionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends ActionUpdateManyAndReturnArgs>(args: SelectSubset<T, ActionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Action.
@@ -20190,7 +20193,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends ActionUpsertArgs>(args: SelectSubset<T, ActionUpsertArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends ActionUpsertArgs>(args: SelectSubset<T, ActionUpsertArgs<ExtArgs>>): Prisma__ActionClient<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -20330,10 +20333,10 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ActionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ActionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creatures_relation<T extends Action$creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Action$creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    creature_races_relation<T extends Action$creature_races_relationArgs<ExtArgs> = {}>(args?: Subset<T, Action$creature_races_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    creatures_relation<T extends Action$creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Action$creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    creature_races_relation<T extends Action$creature_races_relationArgs<ExtArgs> = {}>(args?: Subset<T, Action$creature_races_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20361,7 +20364,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Action model
-   */ 
+   */
   interface ActionFieldRefs {
     readonly id: FieldRef<"Action", 'Int'>
     readonly name: FieldRef<"Action", 'String'>
@@ -21081,7 +21084,7 @@ export namespace Prisma {
       select?: TraitCountAggregateInputType | true
     }
 
-  export interface TraitDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface TraitDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Trait'], meta: { name: 'Trait' } }
     /**
      * Find zero or one Trait that matches the filter.
@@ -21094,7 +21097,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends TraitFindUniqueArgs>(args: SelectSubset<T, TraitFindUniqueArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends TraitFindUniqueArgs>(args: SelectSubset<T, TraitFindUniqueArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Trait that matches the filter or throw an error with `error.code='P2025'`
@@ -21108,7 +21111,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends TraitFindUniqueOrThrowArgs>(args: SelectSubset<T, TraitFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends TraitFindUniqueOrThrowArgs>(args: SelectSubset<T, TraitFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Trait that matches the filter.
@@ -21123,7 +21126,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends TraitFindFirstArgs>(args?: SelectSubset<T, TraitFindFirstArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends TraitFindFirstArgs>(args?: SelectSubset<T, TraitFindFirstArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Trait that matches the filter or
@@ -21139,7 +21142,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends TraitFindFirstOrThrowArgs>(args?: SelectSubset<T, TraitFindFirstOrThrowArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends TraitFindFirstOrThrowArgs>(args?: SelectSubset<T, TraitFindFirstOrThrowArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Traits that matches the filter.
@@ -21157,7 +21160,7 @@ export namespace Prisma {
      * const traitWithIdOnly = await prisma.trait.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends TraitFindManyArgs>(args?: SelectSubset<T, TraitFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends TraitFindManyArgs>(args?: SelectSubset<T, TraitFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Trait.
@@ -21171,7 +21174,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends TraitCreateArgs>(args: SelectSubset<T, TraitCreateArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends TraitCreateArgs>(args: SelectSubset<T, TraitCreateArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Traits.
@@ -21209,7 +21212,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends TraitCreateManyAndReturnArgs>(args?: SelectSubset<T, TraitCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends TraitCreateManyAndReturnArgs>(args?: SelectSubset<T, TraitCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Trait.
@@ -21223,7 +21226,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends TraitDeleteArgs>(args: SelectSubset<T, TraitDeleteArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends TraitDeleteArgs>(args: SelectSubset<T, TraitDeleteArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Trait.
@@ -21240,7 +21243,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends TraitUpdateArgs>(args: SelectSubset<T, TraitUpdateArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends TraitUpdateArgs>(args: SelectSubset<T, TraitUpdateArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Traits.
@@ -21303,7 +21306,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends TraitUpdateManyAndReturnArgs>(args: SelectSubset<T, TraitUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends TraitUpdateManyAndReturnArgs>(args: SelectSubset<T, TraitUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Trait.
@@ -21322,7 +21325,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends TraitUpsertArgs>(args: SelectSubset<T, TraitUpsertArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends TraitUpsertArgs>(args: SelectSubset<T, TraitUpsertArgs<ExtArgs>>): Prisma__TraitClient<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -21462,10 +21465,10 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__TraitClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__TraitClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creatures_relation<T extends Trait$creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Trait$creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    creature_races_relation<T extends Trait$creature_races_relationArgs<ExtArgs> = {}>(args?: Subset<T, Trait$creature_races_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    creatures_relation<T extends Trait$creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Trait$creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    creature_races_relation<T extends Trait$creature_races_relationArgs<ExtArgs> = {}>(args?: Subset<T, Trait$creature_races_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21493,7 +21496,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Trait model
-   */ 
+   */
   interface TraitFieldRefs {
     readonly id: FieldRef<"Trait", 'Int'>
     readonly name: FieldRef<"Trait", 'String'>
@@ -22192,7 +22195,7 @@ export namespace Prisma {
       select?: CreatureRaceCountAggregateInputType | true
     }
 
-  export interface CreatureRaceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface CreatureRaceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CreatureRace'], meta: { name: 'CreatureRace' } }
     /**
      * Find zero or one CreatureRace that matches the filter.
@@ -22205,7 +22208,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends CreatureRaceFindUniqueArgs>(args: SelectSubset<T, CreatureRaceFindUniqueArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends CreatureRaceFindUniqueArgs>(args: SelectSubset<T, CreatureRaceFindUniqueArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one CreatureRace that matches the filter or throw an error with `error.code='P2025'`
@@ -22219,7 +22222,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends CreatureRaceFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureRaceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends CreatureRaceFindUniqueOrThrowArgs>(args: SelectSubset<T, CreatureRaceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureRace that matches the filter.
@@ -22234,7 +22237,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends CreatureRaceFindFirstArgs>(args?: SelectSubset<T, CreatureRaceFindFirstArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends CreatureRaceFindFirstArgs>(args?: SelectSubset<T, CreatureRaceFindFirstArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first CreatureRace that matches the filter or
@@ -22250,7 +22253,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends CreatureRaceFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureRaceFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends CreatureRaceFindFirstOrThrowArgs>(args?: SelectSubset<T, CreatureRaceFindFirstOrThrowArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more CreatureRaces that matches the filter.
@@ -22268,7 +22271,7 @@ export namespace Prisma {
      * const creatureRaceWithIdOnly = await prisma.creatureRace.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends CreatureRaceFindManyArgs>(args?: SelectSubset<T, CreatureRaceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends CreatureRaceFindManyArgs>(args?: SelectSubset<T, CreatureRaceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a CreatureRace.
@@ -22282,7 +22285,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends CreatureRaceCreateArgs>(args: SelectSubset<T, CreatureRaceCreateArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends CreatureRaceCreateArgs>(args: SelectSubset<T, CreatureRaceCreateArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many CreatureRaces.
@@ -22320,7 +22323,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends CreatureRaceCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureRaceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends CreatureRaceCreateManyAndReturnArgs>(args?: SelectSubset<T, CreatureRaceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a CreatureRace.
@@ -22334,7 +22337,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends CreatureRaceDeleteArgs>(args: SelectSubset<T, CreatureRaceDeleteArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends CreatureRaceDeleteArgs>(args: SelectSubset<T, CreatureRaceDeleteArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one CreatureRace.
@@ -22351,7 +22354,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends CreatureRaceUpdateArgs>(args: SelectSubset<T, CreatureRaceUpdateArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends CreatureRaceUpdateArgs>(args: SelectSubset<T, CreatureRaceUpdateArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more CreatureRaces.
@@ -22414,7 +22417,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends CreatureRaceUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureRaceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends CreatureRaceUpdateManyAndReturnArgs>(args: SelectSubset<T, CreatureRaceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one CreatureRace.
@@ -22433,7 +22436,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends CreatureRaceUpsertArgs>(args: SelectSubset<T, CreatureRaceUpsertArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends CreatureRaceUpsertArgs>(args: SelectSubset<T, CreatureRaceUpsertArgs<ExtArgs>>): Prisma__CreatureRaceClient<$Result.GetResult<Prisma.$CreatureRacePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -22573,11 +22576,11 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__CreatureRaceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CreatureRaceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    traits_relation<T extends CreatureRace$traits_relationArgs<ExtArgs> = {}>(args?: Subset<T, CreatureRace$traits_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    actions_relation<T extends CreatureRace$actions_relationArgs<ExtArgs> = {}>(args?: Subset<T, CreatureRace$actions_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    creatures_relation<T extends CreatureRace$creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, CreatureRace$creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    traits_relation<T extends CreatureRace$traits_relationArgs<ExtArgs> = {}>(args?: Subset<T, CreatureRace$traits_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    actions_relation<T extends CreatureRace$actions_relationArgs<ExtArgs> = {}>(args?: Subset<T, CreatureRace$actions_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    creatures_relation<T extends CreatureRace$creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, CreatureRace$creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -22605,7 +22608,7 @@ export namespace Prisma {
 
   /**
    * Fields of the CreatureRace model
-   */ 
+   */
   interface CreatureRaceFieldRefs {
     readonly id: FieldRef<"CreatureRace", 'Int'>
     readonly name: FieldRef<"CreatureRace", 'String'>
@@ -23280,7 +23283,7 @@ export namespace Prisma {
       select?: DamageTypeCountAggregateInputType | true
     }
 
-  export interface DamageTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface DamageTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['DamageType'], meta: { name: 'DamageType' } }
     /**
      * Find zero or one DamageType that matches the filter.
@@ -23293,7 +23296,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends DamageTypeFindUniqueArgs>(args: SelectSubset<T, DamageTypeFindUniqueArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends DamageTypeFindUniqueArgs>(args: SelectSubset<T, DamageTypeFindUniqueArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one DamageType that matches the filter or throw an error with `error.code='P2025'`
@@ -23307,7 +23310,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends DamageTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, DamageTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends DamageTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, DamageTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first DamageType that matches the filter.
@@ -23322,7 +23325,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends DamageTypeFindFirstArgs>(args?: SelectSubset<T, DamageTypeFindFirstArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends DamageTypeFindFirstArgs>(args?: SelectSubset<T, DamageTypeFindFirstArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first DamageType that matches the filter or
@@ -23338,7 +23341,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends DamageTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, DamageTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends DamageTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, DamageTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more DamageTypes that matches the filter.
@@ -23356,7 +23359,7 @@ export namespace Prisma {
      * const damageTypeWithIdOnly = await prisma.damageType.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends DamageTypeFindManyArgs>(args?: SelectSubset<T, DamageTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends DamageTypeFindManyArgs>(args?: SelectSubset<T, DamageTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a DamageType.
@@ -23370,7 +23373,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends DamageTypeCreateArgs>(args: SelectSubset<T, DamageTypeCreateArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends DamageTypeCreateArgs>(args: SelectSubset<T, DamageTypeCreateArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many DamageTypes.
@@ -23408,7 +23411,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends DamageTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, DamageTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends DamageTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, DamageTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a DamageType.
@@ -23422,7 +23425,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends DamageTypeDeleteArgs>(args: SelectSubset<T, DamageTypeDeleteArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends DamageTypeDeleteArgs>(args: SelectSubset<T, DamageTypeDeleteArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one DamageType.
@@ -23439,7 +23442,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends DamageTypeUpdateArgs>(args: SelectSubset<T, DamageTypeUpdateArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends DamageTypeUpdateArgs>(args: SelectSubset<T, DamageTypeUpdateArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more DamageTypes.
@@ -23502,7 +23505,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends DamageTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, DamageTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends DamageTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, DamageTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one DamageType.
@@ -23521,7 +23524,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends DamageTypeUpsertArgs>(args: SelectSubset<T, DamageTypeUpsertArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends DamageTypeUpsertArgs>(args: SelectSubset<T, DamageTypeUpsertArgs<ExtArgs>>): Prisma__DamageTypeClient<$Result.GetResult<Prisma.$DamageTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -23661,11 +23664,11 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__DamageTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__DamageTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    resistant_creatures_relation<T extends DamageType$resistant_creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, DamageType$resistant_creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    immune_creatures_relation<T extends DamageType$immune_creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, DamageType$immune_creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    vulnerable_creatures_relation<T extends DamageType$vulnerable_creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, DamageType$vulnerable_creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    resistant_creatures_relation<T extends DamageType$resistant_creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, DamageType$resistant_creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    immune_creatures_relation<T extends DamageType$immune_creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, DamageType$immune_creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    vulnerable_creatures_relation<T extends DamageType$vulnerable_creatures_relationArgs<ExtArgs> = {}>(args?: Subset<T, DamageType$vulnerable_creatures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23693,7 +23696,7 @@ export namespace Prisma {
 
   /**
    * Fields of the DamageType model
-   */ 
+   */
   interface DamageTypeFieldRefs {
     readonly id: FieldRef<"DamageType", 'String'>
     readonly name: FieldRef<"DamageType", 'String'>
@@ -24423,7 +24426,7 @@ export namespace Prisma {
       select?: ChallengeRatingMetadataCountAggregateInputType | true
     }
 
-  export interface ChallengeRatingMetadataDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface ChallengeRatingMetadataDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ChallengeRatingMetadata'], meta: { name: 'ChallengeRatingMetadata' } }
     /**
      * Find zero or one ChallengeRatingMetadata that matches the filter.
@@ -24436,7 +24439,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends ChallengeRatingMetadataFindUniqueArgs>(args: SelectSubset<T, ChallengeRatingMetadataFindUniqueArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends ChallengeRatingMetadataFindUniqueArgs>(args: SelectSubset<T, ChallengeRatingMetadataFindUniqueArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one ChallengeRatingMetadata that matches the filter or throw an error with `error.code='P2025'`
@@ -24450,7 +24453,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends ChallengeRatingMetadataFindUniqueOrThrowArgs>(args: SelectSubset<T, ChallengeRatingMetadataFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends ChallengeRatingMetadataFindUniqueOrThrowArgs>(args: SelectSubset<T, ChallengeRatingMetadataFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first ChallengeRatingMetadata that matches the filter.
@@ -24465,7 +24468,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends ChallengeRatingMetadataFindFirstArgs>(args?: SelectSubset<T, ChallengeRatingMetadataFindFirstArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends ChallengeRatingMetadataFindFirstArgs>(args?: SelectSubset<T, ChallengeRatingMetadataFindFirstArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first ChallengeRatingMetadata that matches the filter or
@@ -24481,7 +24484,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends ChallengeRatingMetadataFindFirstOrThrowArgs>(args?: SelectSubset<T, ChallengeRatingMetadataFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends ChallengeRatingMetadataFindFirstOrThrowArgs>(args?: SelectSubset<T, ChallengeRatingMetadataFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more ChallengeRatingMetadata that matches the filter.
@@ -24499,7 +24502,7 @@ export namespace Prisma {
      * const challengeRatingMetadataWithDisplayOnly = await prisma.challengeRatingMetadata.findMany({ select: { display: true } })
      * 
      */
-    findMany<T extends ChallengeRatingMetadataFindManyArgs>(args?: SelectSubset<T, ChallengeRatingMetadataFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends ChallengeRatingMetadataFindManyArgs>(args?: SelectSubset<T, ChallengeRatingMetadataFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a ChallengeRatingMetadata.
@@ -24513,7 +24516,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends ChallengeRatingMetadataCreateArgs>(args: SelectSubset<T, ChallengeRatingMetadataCreateArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends ChallengeRatingMetadataCreateArgs>(args: SelectSubset<T, ChallengeRatingMetadataCreateArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many ChallengeRatingMetadata.
@@ -24551,7 +24554,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends ChallengeRatingMetadataCreateManyAndReturnArgs>(args?: SelectSubset<T, ChallengeRatingMetadataCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends ChallengeRatingMetadataCreateManyAndReturnArgs>(args?: SelectSubset<T, ChallengeRatingMetadataCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a ChallengeRatingMetadata.
@@ -24565,7 +24568,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends ChallengeRatingMetadataDeleteArgs>(args: SelectSubset<T, ChallengeRatingMetadataDeleteArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends ChallengeRatingMetadataDeleteArgs>(args: SelectSubset<T, ChallengeRatingMetadataDeleteArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one ChallengeRatingMetadata.
@@ -24582,7 +24585,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends ChallengeRatingMetadataUpdateArgs>(args: SelectSubset<T, ChallengeRatingMetadataUpdateArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends ChallengeRatingMetadataUpdateArgs>(args: SelectSubset<T, ChallengeRatingMetadataUpdateArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more ChallengeRatingMetadata.
@@ -24645,7 +24648,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends ChallengeRatingMetadataUpdateManyAndReturnArgs>(args: SelectSubset<T, ChallengeRatingMetadataUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends ChallengeRatingMetadataUpdateManyAndReturnArgs>(args: SelectSubset<T, ChallengeRatingMetadataUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one ChallengeRatingMetadata.
@@ -24664,7 +24667,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends ChallengeRatingMetadataUpsertArgs>(args: SelectSubset<T, ChallengeRatingMetadataUpsertArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends ChallengeRatingMetadataUpsertArgs>(args: SelectSubset<T, ChallengeRatingMetadataUpsertArgs<ExtArgs>>): Prisma__ChallengeRatingMetadataClient<$Result.GetResult<Prisma.$ChallengeRatingMetadataPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -24804,9 +24807,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ChallengeRatingMetadataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ChallengeRatingMetadataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creatures<T extends ChallengeRatingMetadata$creaturesArgs<ExtArgs> = {}>(args?: Subset<T, ChallengeRatingMetadata$creaturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    creatures<T extends ChallengeRatingMetadata$creaturesArgs<ExtArgs> = {}>(args?: Subset<T, ChallengeRatingMetadata$creaturesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -24834,7 +24837,7 @@ export namespace Prisma {
 
   /**
    * Fields of the ChallengeRatingMetadata model
-   */ 
+   */
   interface ChallengeRatingMetadataFieldRefs {
     readonly cr: FieldRef<"ChallengeRatingMetadata", 'ChallengeRatingEnum'>
     readonly display: FieldRef<"ChallengeRatingMetadata", 'String'>
@@ -25298,7 +25301,7 @@ export namespace Prisma {
     type_name: string | null
     creation_description: string | null
     role: $Enums.CreatureRole | null
-    createdAt: Date | null
+    created_at: Date | null
   }
 
   export type GPTCreatureRequestMaxAggregateOutputType = {
@@ -25309,7 +25312,7 @@ export namespace Prisma {
     type_name: string | null
     creation_description: string | null
     role: $Enums.CreatureRole | null
-    createdAt: Date | null
+    created_at: Date | null
   }
 
   export type GPTCreatureRequestCountAggregateOutputType = {
@@ -25320,7 +25323,7 @@ export namespace Prisma {
     type_name: number
     creation_description: number
     role: number
-    createdAt: number
+    created_at: number
     _all: number
   }
 
@@ -25341,7 +25344,7 @@ export namespace Prisma {
     type_name?: true
     creation_description?: true
     role?: true
-    createdAt?: true
+    created_at?: true
   }
 
   export type GPTCreatureRequestMaxAggregateInputType = {
@@ -25352,7 +25355,7 @@ export namespace Prisma {
     type_name?: true
     creation_description?: true
     role?: true
-    createdAt?: true
+    created_at?: true
   }
 
   export type GPTCreatureRequestCountAggregateInputType = {
@@ -25363,7 +25366,7 @@ export namespace Prisma {
     type_name?: true
     creation_description?: true
     role?: true
-    createdAt?: true
+    created_at?: true
     _all?: true
   }
 
@@ -25461,7 +25464,7 @@ export namespace Prisma {
     type_name: string
     creation_description: string | null
     role: $Enums.CreatureRole | null
-    createdAt: Date
+    created_at: Date
     _count: GPTCreatureRequestCountAggregateOutputType | null
     _avg: GPTCreatureRequestAvgAggregateOutputType | null
     _sum: GPTCreatureRequestSumAggregateOutputType | null
@@ -25491,7 +25494,7 @@ export namespace Prisma {
     type_name?: boolean
     creation_description?: boolean
     role?: boolean
-    createdAt?: boolean
+    created_at?: boolean
     creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gPTCreatureRequest"]>
 
@@ -25503,7 +25506,7 @@ export namespace Prisma {
     type_name?: boolean
     creation_description?: boolean
     role?: boolean
-    createdAt?: boolean
+    created_at?: boolean
     creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gPTCreatureRequest"]>
 
@@ -25515,7 +25518,7 @@ export namespace Prisma {
     type_name?: boolean
     creation_description?: boolean
     role?: boolean
-    createdAt?: boolean
+    created_at?: boolean
     creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["gPTCreatureRequest"]>
 
@@ -25527,10 +25530,10 @@ export namespace Prisma {
     type_name?: boolean
     creation_description?: boolean
     role?: boolean
-    createdAt?: boolean
+    created_at?: boolean
   }
 
-  export type GPTCreatureRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creature_id" | "name" | "challenge_rating" | "type_name" | "creation_description" | "role" | "createdAt", ExtArgs["result"]["gPTCreatureRequest"]>
+  export type GPTCreatureRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creature_id" | "name" | "challenge_rating" | "type_name" | "creation_description" | "role" | "created_at", ExtArgs["result"]["gPTCreatureRequest"]>
   export type GPTCreatureRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creature_relation?: boolean | CreatureDefaultArgs<ExtArgs>
   }
@@ -25554,7 +25557,7 @@ export namespace Prisma {
       type_name: string
       creation_description: string | null
       role: $Enums.CreatureRole | null
-      createdAt: Date
+      created_at: Date
     }, ExtArgs["result"]["gPTCreatureRequest"]>
     composites: {}
   }
@@ -25566,7 +25569,7 @@ export namespace Prisma {
       select?: GPTCreatureRequestCountAggregateInputType | true
     }
 
-  export interface GPTCreatureRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface GPTCreatureRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['GPTCreatureRequest'], meta: { name: 'GPTCreatureRequest' } }
     /**
      * Find zero or one GPTCreatureRequest that matches the filter.
@@ -25579,7 +25582,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends GPTCreatureRequestFindUniqueArgs>(args: SelectSubset<T, GPTCreatureRequestFindUniqueArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends GPTCreatureRequestFindUniqueArgs>(args: SelectSubset<T, GPTCreatureRequestFindUniqueArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one GPTCreatureRequest that matches the filter or throw an error with `error.code='P2025'`
@@ -25593,7 +25596,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends GPTCreatureRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, GPTCreatureRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends GPTCreatureRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, GPTCreatureRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first GPTCreatureRequest that matches the filter.
@@ -25608,7 +25611,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends GPTCreatureRequestFindFirstArgs>(args?: SelectSubset<T, GPTCreatureRequestFindFirstArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends GPTCreatureRequestFindFirstArgs>(args?: SelectSubset<T, GPTCreatureRequestFindFirstArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first GPTCreatureRequest that matches the filter or
@@ -25624,7 +25627,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends GPTCreatureRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, GPTCreatureRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends GPTCreatureRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, GPTCreatureRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more GPTCreatureRequests that matches the filter.
@@ -25642,7 +25645,7 @@ export namespace Prisma {
      * const gPTCreatureRequestWithIdOnly = await prisma.gPTCreatureRequest.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends GPTCreatureRequestFindManyArgs>(args?: SelectSubset<T, GPTCreatureRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends GPTCreatureRequestFindManyArgs>(args?: SelectSubset<T, GPTCreatureRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a GPTCreatureRequest.
@@ -25656,7 +25659,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends GPTCreatureRequestCreateArgs>(args: SelectSubset<T, GPTCreatureRequestCreateArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends GPTCreatureRequestCreateArgs>(args: SelectSubset<T, GPTCreatureRequestCreateArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many GPTCreatureRequests.
@@ -25694,7 +25697,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends GPTCreatureRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, GPTCreatureRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends GPTCreatureRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, GPTCreatureRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a GPTCreatureRequest.
@@ -25708,7 +25711,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends GPTCreatureRequestDeleteArgs>(args: SelectSubset<T, GPTCreatureRequestDeleteArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends GPTCreatureRequestDeleteArgs>(args: SelectSubset<T, GPTCreatureRequestDeleteArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one GPTCreatureRequest.
@@ -25725,7 +25728,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends GPTCreatureRequestUpdateArgs>(args: SelectSubset<T, GPTCreatureRequestUpdateArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends GPTCreatureRequestUpdateArgs>(args: SelectSubset<T, GPTCreatureRequestUpdateArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more GPTCreatureRequests.
@@ -25788,7 +25791,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends GPTCreatureRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, GPTCreatureRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends GPTCreatureRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, GPTCreatureRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one GPTCreatureRequest.
@@ -25807,7 +25810,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends GPTCreatureRequestUpsertArgs>(args: SelectSubset<T, GPTCreatureRequestUpsertArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends GPTCreatureRequestUpsertArgs>(args: SelectSubset<T, GPTCreatureRequestUpsertArgs<ExtArgs>>): Prisma__GPTCreatureRequestClient<$Result.GetResult<Prisma.$GPTCreatureRequestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -25947,9 +25950,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__GPTCreatureRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__GPTCreatureRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creature_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    creature_relation<T extends CreatureDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatureDefaultArgs<ExtArgs>>): Prisma__CreatureClient<$Result.GetResult<Prisma.$CreaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -25977,7 +25980,7 @@ export namespace Prisma {
 
   /**
    * Fields of the GPTCreatureRequest model
-   */ 
+   */
   interface GPTCreatureRequestFieldRefs {
     readonly id: FieldRef<"GPTCreatureRequest", 'Int'>
     readonly creature_id: FieldRef<"GPTCreatureRequest", 'String'>
@@ -25986,7 +25989,7 @@ export namespace Prisma {
     readonly type_name: FieldRef<"GPTCreatureRequest", 'String'>
     readonly creation_description: FieldRef<"GPTCreatureRequest", 'String'>
     readonly role: FieldRef<"GPTCreatureRequest", 'CreatureRole'>
-    readonly createdAt: FieldRef<"GPTCreatureRequest", 'DateTime'>
+    readonly created_at: FieldRef<"GPTCreatureRequest", 'DateTime'>
   }
     
 
@@ -26644,7 +26647,7 @@ export namespace Prisma {
       select?: AdventureCountAggregateInputType | true
     }
 
-  export interface AdventureDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface AdventureDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Adventure'], meta: { name: 'Adventure' } }
     /**
      * Find zero or one Adventure that matches the filter.
@@ -26657,7 +26660,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends AdventureFindUniqueArgs>(args: SelectSubset<T, AdventureFindUniqueArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends AdventureFindUniqueArgs>(args: SelectSubset<T, AdventureFindUniqueArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Adventure that matches the filter or throw an error with `error.code='P2025'`
@@ -26671,7 +26674,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends AdventureFindUniqueOrThrowArgs>(args: SelectSubset<T, AdventureFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends AdventureFindUniqueOrThrowArgs>(args: SelectSubset<T, AdventureFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Adventure that matches the filter.
@@ -26686,7 +26689,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends AdventureFindFirstArgs>(args?: SelectSubset<T, AdventureFindFirstArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends AdventureFindFirstArgs>(args?: SelectSubset<T, AdventureFindFirstArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Adventure that matches the filter or
@@ -26702,7 +26705,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends AdventureFindFirstOrThrowArgs>(args?: SelectSubset<T, AdventureFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends AdventureFindFirstOrThrowArgs>(args?: SelectSubset<T, AdventureFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Adventures that matches the filter.
@@ -26720,7 +26723,7 @@ export namespace Prisma {
      * const adventureWithIdOnly = await prisma.adventure.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends AdventureFindManyArgs>(args?: SelectSubset<T, AdventureFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends AdventureFindManyArgs>(args?: SelectSubset<T, AdventureFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Adventure.
@@ -26734,7 +26737,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends AdventureCreateArgs>(args: SelectSubset<T, AdventureCreateArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends AdventureCreateArgs>(args: SelectSubset<T, AdventureCreateArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Adventures.
@@ -26772,7 +26775,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends AdventureCreateManyAndReturnArgs>(args?: SelectSubset<T, AdventureCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends AdventureCreateManyAndReturnArgs>(args?: SelectSubset<T, AdventureCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Adventure.
@@ -26786,7 +26789,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends AdventureDeleteArgs>(args: SelectSubset<T, AdventureDeleteArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends AdventureDeleteArgs>(args: SelectSubset<T, AdventureDeleteArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Adventure.
@@ -26803,7 +26806,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends AdventureUpdateArgs>(args: SelectSubset<T, AdventureUpdateArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends AdventureUpdateArgs>(args: SelectSubset<T, AdventureUpdateArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Adventures.
@@ -26866,7 +26869,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends AdventureUpdateManyAndReturnArgs>(args: SelectSubset<T, AdventureUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends AdventureUpdateManyAndReturnArgs>(args: SelectSubset<T, AdventureUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Adventure.
@@ -26885,7 +26888,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends AdventureUpsertArgs>(args: SelectSubset<T, AdventureUpsertArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends AdventureUpsertArgs>(args: SelectSubset<T, AdventureUpsertArgs<ExtArgs>>): Prisma__AdventureClient<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -27025,10 +27028,10 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__AdventureClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__AdventureClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    genre_relation<T extends GenreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GenreDefaultArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    keywords_relation<T extends Adventure$keywords_relationArgs<ExtArgs> = {}>(args?: Subset<T, Adventure$keywords_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    genre_relation<T extends GenreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GenreDefaultArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    keywords_relation<T extends Adventure$keywords_relationArgs<ExtArgs> = {}>(args?: Subset<T, Adventure$keywords_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -27056,7 +27059,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Adventure model
-   */ 
+   */
   interface AdventureFieldRefs {
     readonly id: FieldRef<"Adventure", 'String'>
     readonly name: FieldRef<"Adventure", 'String'>
@@ -27709,7 +27712,7 @@ export namespace Prisma {
       select?: KeywordCountAggregateInputType | true
     }
 
-  export interface KeywordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface KeywordDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Keyword'], meta: { name: 'Keyword' } }
     /**
      * Find zero or one Keyword that matches the filter.
@@ -27722,7 +27725,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends KeywordFindUniqueArgs>(args: SelectSubset<T, KeywordFindUniqueArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends KeywordFindUniqueArgs>(args: SelectSubset<T, KeywordFindUniqueArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Keyword that matches the filter or throw an error with `error.code='P2025'`
@@ -27736,7 +27739,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends KeywordFindUniqueOrThrowArgs>(args: SelectSubset<T, KeywordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends KeywordFindUniqueOrThrowArgs>(args: SelectSubset<T, KeywordFindUniqueOrThrowArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Keyword that matches the filter.
@@ -27751,7 +27754,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends KeywordFindFirstArgs>(args?: SelectSubset<T, KeywordFindFirstArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends KeywordFindFirstArgs>(args?: SelectSubset<T, KeywordFindFirstArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Keyword that matches the filter or
@@ -27767,7 +27770,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends KeywordFindFirstOrThrowArgs>(args?: SelectSubset<T, KeywordFindFirstOrThrowArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends KeywordFindFirstOrThrowArgs>(args?: SelectSubset<T, KeywordFindFirstOrThrowArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Keywords that matches the filter.
@@ -27785,7 +27788,7 @@ export namespace Prisma {
      * const keywordWithIdOnly = await prisma.keyword.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends KeywordFindManyArgs>(args?: SelectSubset<T, KeywordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends KeywordFindManyArgs>(args?: SelectSubset<T, KeywordFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Keyword.
@@ -27799,7 +27802,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends KeywordCreateArgs>(args: SelectSubset<T, KeywordCreateArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends KeywordCreateArgs>(args: SelectSubset<T, KeywordCreateArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Keywords.
@@ -27837,7 +27840,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends KeywordCreateManyAndReturnArgs>(args?: SelectSubset<T, KeywordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends KeywordCreateManyAndReturnArgs>(args?: SelectSubset<T, KeywordCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Keyword.
@@ -27851,7 +27854,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends KeywordDeleteArgs>(args: SelectSubset<T, KeywordDeleteArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends KeywordDeleteArgs>(args: SelectSubset<T, KeywordDeleteArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Keyword.
@@ -27868,7 +27871,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends KeywordUpdateArgs>(args: SelectSubset<T, KeywordUpdateArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends KeywordUpdateArgs>(args: SelectSubset<T, KeywordUpdateArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Keywords.
@@ -27931,7 +27934,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends KeywordUpdateManyAndReturnArgs>(args: SelectSubset<T, KeywordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends KeywordUpdateManyAndReturnArgs>(args: SelectSubset<T, KeywordUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Keyword.
@@ -27950,7 +27953,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends KeywordUpsertArgs>(args: SelectSubset<T, KeywordUpsertArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends KeywordUpsertArgs>(args: SelectSubset<T, KeywordUpsertArgs<ExtArgs>>): Prisma__KeywordClient<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -28090,10 +28093,10 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__KeywordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__KeywordClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    genre_relation<T extends GenreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GenreDefaultArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    adventures_relation<T extends Keyword$adventures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Keyword$adventures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    genre_relation<T extends GenreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GenreDefaultArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    adventures_relation<T extends Keyword$adventures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Keyword$adventures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -28121,7 +28124,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Keyword model
-   */ 
+   */
   interface KeywordFieldRefs {
     readonly id: FieldRef<"Keyword", 'String'>
     readonly name: FieldRef<"Keyword", 'String'>
@@ -28753,7 +28756,7 @@ export namespace Prisma {
       select?: GenreCountAggregateInputType | true
     }
 
-  export interface GenreDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface GenreDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Genre'], meta: { name: 'Genre' } }
     /**
      * Find zero or one Genre that matches the filter.
@@ -28766,7 +28769,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends GenreFindUniqueArgs>(args: SelectSubset<T, GenreFindUniqueArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends GenreFindUniqueArgs>(args: SelectSubset<T, GenreFindUniqueArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Genre that matches the filter or throw an error with `error.code='P2025'`
@@ -28780,7 +28783,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends GenreFindUniqueOrThrowArgs>(args: SelectSubset<T, GenreFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends GenreFindUniqueOrThrowArgs>(args: SelectSubset<T, GenreFindUniqueOrThrowArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Genre that matches the filter.
@@ -28795,7 +28798,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends GenreFindFirstArgs>(args?: SelectSubset<T, GenreFindFirstArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends GenreFindFirstArgs>(args?: SelectSubset<T, GenreFindFirstArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Genre that matches the filter or
@@ -28811,7 +28814,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends GenreFindFirstOrThrowArgs>(args?: SelectSubset<T, GenreFindFirstOrThrowArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends GenreFindFirstOrThrowArgs>(args?: SelectSubset<T, GenreFindFirstOrThrowArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Genres that matches the filter.
@@ -28829,7 +28832,7 @@ export namespace Prisma {
      * const genreWithIdOnly = await prisma.genre.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends GenreFindManyArgs>(args?: SelectSubset<T, GenreFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends GenreFindManyArgs>(args?: SelectSubset<T, GenreFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Genre.
@@ -28843,7 +28846,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends GenreCreateArgs>(args: SelectSubset<T, GenreCreateArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends GenreCreateArgs>(args: SelectSubset<T, GenreCreateArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Genres.
@@ -28881,7 +28884,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends GenreCreateManyAndReturnArgs>(args?: SelectSubset<T, GenreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends GenreCreateManyAndReturnArgs>(args?: SelectSubset<T, GenreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Genre.
@@ -28895,7 +28898,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends GenreDeleteArgs>(args: SelectSubset<T, GenreDeleteArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends GenreDeleteArgs>(args: SelectSubset<T, GenreDeleteArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Genre.
@@ -28912,7 +28915,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends GenreUpdateArgs>(args: SelectSubset<T, GenreUpdateArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends GenreUpdateArgs>(args: SelectSubset<T, GenreUpdateArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Genres.
@@ -28975,7 +28978,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends GenreUpdateManyAndReturnArgs>(args: SelectSubset<T, GenreUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends GenreUpdateManyAndReturnArgs>(args: SelectSubset<T, GenreUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Genre.
@@ -28994,7 +28997,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends GenreUpsertArgs>(args: SelectSubset<T, GenreUpsertArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends GenreUpsertArgs>(args: SelectSubset<T, GenreUpsertArgs<ExtArgs>>): Prisma__GenreClient<$Result.GetResult<Prisma.$GenrePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -29134,10 +29137,10 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__GenreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__GenreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    keywords_relation<T extends Genre$keywords_relationArgs<ExtArgs> = {}>(args?: Subset<T, Genre$keywords_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
-    adventures_relation<T extends Genre$adventures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Genre$adventures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    keywords_relation<T extends Genre$keywords_relationArgs<ExtArgs> = {}>(args?: Subset<T, Genre$keywords_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$KeywordPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    adventures_relation<T extends Genre$adventures_relationArgs<ExtArgs> = {}>(args?: Subset<T, Genre$adventures_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdventurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -29165,7 +29168,7 @@ export namespace Prisma {
 
   /**
    * Fields of the Genre model
-   */ 
+   */
   interface GenreFieldRefs {
     readonly id: FieldRef<"Genre", 'String'>
     readonly name: FieldRef<"Genre", 'String'>
@@ -29645,6 +29648,7 @@ export namespace Prisma {
 
   export type MagicItemMinAggregateOutputType = {
     id: string | null
+    creator_id: string | null
     name: string | null
     description: string | null
     type_id: string | null
@@ -29655,6 +29659,7 @@ export namespace Prisma {
 
   export type MagicItemMaxAggregateOutputType = {
     id: string | null
+    creator_id: string | null
     name: string | null
     description: string | null
     type_id: string | null
@@ -29665,6 +29670,7 @@ export namespace Prisma {
 
   export type MagicItemCountAggregateOutputType = {
     id: number
+    creator_id: number
     name: number
     description: number
     type_id: number
@@ -29685,6 +29691,7 @@ export namespace Prisma {
 
   export type MagicItemMinAggregateInputType = {
     id?: true
+    creator_id?: true
     name?: true
     description?: true
     type_id?: true
@@ -29695,6 +29702,7 @@ export namespace Prisma {
 
   export type MagicItemMaxAggregateInputType = {
     id?: true
+    creator_id?: true
     name?: true
     description?: true
     type_id?: true
@@ -29705,6 +29713,7 @@ export namespace Prisma {
 
   export type MagicItemCountAggregateInputType = {
     id?: true
+    creator_id?: true
     name?: true
     description?: true
     type_id?: true
@@ -29802,12 +29811,13 @@ export namespace Prisma {
 
   export type MagicItemGroupByOutputType = {
     id: string
+    creator_id: string | null
     name: string
-    description: string
-    type_id: string
-    rarity_id: string
-    source_id: number
-    requires_attunement: boolean
+    description: string | null
+    type_id: string | null
+    rarity_id: string | null
+    source_id: number | null
+    requires_attunement: boolean | null
     _count: MagicItemCountAggregateOutputType | null
     _avg: MagicItemAvgAggregateOutputType | null
     _sum: MagicItemSumAggregateOutputType | null
@@ -29831,47 +29841,51 @@ export namespace Prisma {
 
   export type MagicItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    creator_id?: boolean
     name?: boolean
     description?: boolean
     type_id?: boolean
     rarity_id?: boolean
     source_id?: boolean
     requires_attunement?: boolean
-    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
-    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
-    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+    type_relation?: boolean | MagicItem$type_relationArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItem$rarity_relationArgs<ExtArgs>
+    source_relation?: boolean | MagicItem$source_relationArgs<ExtArgs>
     attunements_relation?: boolean | MagicItem$attunements_relationArgs<ExtArgs>
     _count?: boolean | MagicItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["magicItem"]>
 
   export type MagicItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    creator_id?: boolean
     name?: boolean
     description?: boolean
     type_id?: boolean
     rarity_id?: boolean
     source_id?: boolean
     requires_attunement?: boolean
-    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
-    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
-    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+    type_relation?: boolean | MagicItem$type_relationArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItem$rarity_relationArgs<ExtArgs>
+    source_relation?: boolean | MagicItem$source_relationArgs<ExtArgs>
   }, ExtArgs["result"]["magicItem"]>
 
   export type MagicItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    creator_id?: boolean
     name?: boolean
     description?: boolean
     type_id?: boolean
     rarity_id?: boolean
     source_id?: boolean
     requires_attunement?: boolean
-    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
-    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
-    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+    type_relation?: boolean | MagicItem$type_relationArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItem$rarity_relationArgs<ExtArgs>
+    source_relation?: boolean | MagicItem$source_relationArgs<ExtArgs>
   }, ExtArgs["result"]["magicItem"]>
 
   export type MagicItemSelectScalar = {
     id?: boolean
+    creator_id?: boolean
     name?: boolean
     description?: boolean
     type_id?: boolean
@@ -29880,41 +29894,42 @@ export namespace Prisma {
     requires_attunement?: boolean
   }
 
-  export type MagicItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "type_id" | "rarity_id" | "source_id" | "requires_attunement", ExtArgs["result"]["magicItem"]>
+  export type MagicItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creator_id" | "name" | "description" | "type_id" | "rarity_id" | "source_id" | "requires_attunement", ExtArgs["result"]["magicItem"]>
   export type MagicItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
-    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
-    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+    type_relation?: boolean | MagicItem$type_relationArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItem$rarity_relationArgs<ExtArgs>
+    source_relation?: boolean | MagicItem$source_relationArgs<ExtArgs>
     attunements_relation?: boolean | MagicItem$attunements_relationArgs<ExtArgs>
     _count?: boolean | MagicItemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MagicItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
-    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
-    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+    type_relation?: boolean | MagicItem$type_relationArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItem$rarity_relationArgs<ExtArgs>
+    source_relation?: boolean | MagicItem$source_relationArgs<ExtArgs>
   }
   export type MagicItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    type_relation?: boolean | MagicItemTypeDefaultArgs<ExtArgs>
-    rarity_relation?: boolean | MagicItemRarityDefaultArgs<ExtArgs>
-    source_relation?: boolean | SourceDefaultArgs<ExtArgs>
+    type_relation?: boolean | MagicItem$type_relationArgs<ExtArgs>
+    rarity_relation?: boolean | MagicItem$rarity_relationArgs<ExtArgs>
+    source_relation?: boolean | MagicItem$source_relationArgs<ExtArgs>
   }
 
   export type $MagicItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MagicItem"
     objects: {
-      type_relation: Prisma.$MagicItemTypePayload<ExtArgs>
-      rarity_relation: Prisma.$MagicItemRarityPayload<ExtArgs>
-      source_relation: Prisma.$SourcePayload<ExtArgs>
+      type_relation: Prisma.$MagicItemTypePayload<ExtArgs> | null
+      rarity_relation: Prisma.$MagicItemRarityPayload<ExtArgs> | null
+      source_relation: Prisma.$SourcePayload<ExtArgs> | null
       attunements_relation: Prisma.$MagicItemAttunementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      creator_id: string | null
       name: string
-      description: string
-      type_id: string
-      rarity_id: string
-      source_id: number
-      requires_attunement: boolean
+      description: string | null
+      type_id: string | null
+      rarity_id: string | null
+      source_id: number | null
+      requires_attunement: boolean | null
     }, ExtArgs["result"]["magicItem"]>
     composites: {}
   }
@@ -29926,7 +29941,7 @@ export namespace Prisma {
       select?: MagicItemCountAggregateInputType | true
     }
 
-  export interface MagicItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface MagicItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MagicItem'], meta: { name: 'MagicItem' } }
     /**
      * Find zero or one MagicItem that matches the filter.
@@ -29939,7 +29954,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends MagicItemFindUniqueArgs>(args: SelectSubset<T, MagicItemFindUniqueArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends MagicItemFindUniqueArgs>(args: SelectSubset<T, MagicItemFindUniqueArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one MagicItem that matches the filter or throw an error with `error.code='P2025'`
@@ -29953,7 +29968,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends MagicItemFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends MagicItemFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first MagicItem that matches the filter.
@@ -29968,7 +29983,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends MagicItemFindFirstArgs>(args?: SelectSubset<T, MagicItemFindFirstArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends MagicItemFindFirstArgs>(args?: SelectSubset<T, MagicItemFindFirstArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first MagicItem that matches the filter or
@@ -29984,7 +29999,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends MagicItemFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends MagicItemFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more MagicItems that matches the filter.
@@ -30002,7 +30017,7 @@ export namespace Prisma {
      * const magicItemWithIdOnly = await prisma.magicItem.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends MagicItemFindManyArgs>(args?: SelectSubset<T, MagicItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends MagicItemFindManyArgs>(args?: SelectSubset<T, MagicItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a MagicItem.
@@ -30016,7 +30031,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends MagicItemCreateArgs>(args: SelectSubset<T, MagicItemCreateArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends MagicItemCreateArgs>(args: SelectSubset<T, MagicItemCreateArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many MagicItems.
@@ -30054,7 +30069,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends MagicItemCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends MagicItemCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a MagicItem.
@@ -30068,7 +30083,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends MagicItemDeleteArgs>(args: SelectSubset<T, MagicItemDeleteArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends MagicItemDeleteArgs>(args: SelectSubset<T, MagicItemDeleteArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one MagicItem.
@@ -30085,7 +30100,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends MagicItemUpdateArgs>(args: SelectSubset<T, MagicItemUpdateArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends MagicItemUpdateArgs>(args: SelectSubset<T, MagicItemUpdateArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more MagicItems.
@@ -30148,7 +30163,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends MagicItemUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends MagicItemUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one MagicItem.
@@ -30167,7 +30182,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends MagicItemUpsertArgs>(args: SelectSubset<T, MagicItemUpsertArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends MagicItemUpsertArgs>(args: SelectSubset<T, MagicItemUpsertArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -30307,12 +30322,12 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__MagicItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__MagicItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    type_relation<T extends MagicItemTypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemTypeDefaultArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    rarity_relation<T extends MagicItemRarityDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemRarityDefaultArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    source_relation<T extends SourceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SourceDefaultArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    attunements_relation<T extends MagicItem$attunements_relationArgs<ExtArgs> = {}>(args?: Subset<T, MagicItem$attunements_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    type_relation<T extends MagicItem$type_relationArgs<ExtArgs> = {}>(args?: Subset<T, MagicItem$type_relationArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    rarity_relation<T extends MagicItem$rarity_relationArgs<ExtArgs> = {}>(args?: Subset<T, MagicItem$rarity_relationArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    source_relation<T extends MagicItem$source_relationArgs<ExtArgs> = {}>(args?: Subset<T, MagicItem$source_relationArgs<ExtArgs>>): Prisma__SourceClient<$Result.GetResult<Prisma.$SourcePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    attunements_relation<T extends MagicItem$attunements_relationArgs<ExtArgs> = {}>(args?: Subset<T, MagicItem$attunements_relationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -30340,9 +30355,10 @@ export namespace Prisma {
 
   /**
    * Fields of the MagicItem model
-   */ 
+   */
   interface MagicItemFieldRefs {
     readonly id: FieldRef<"MagicItem", 'String'>
+    readonly creator_id: FieldRef<"MagicItem", 'String'>
     readonly name: FieldRef<"MagicItem", 'String'>
     readonly description: FieldRef<"MagicItem", 'String'>
     readonly type_id: FieldRef<"MagicItem", 'String'>
@@ -30745,6 +30761,63 @@ export namespace Prisma {
   }
 
   /**
+   * MagicItem.type_relation
+   */
+  export type MagicItem$type_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemType
+     */
+    select?: MagicItemTypeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemType
+     */
+    omit?: MagicItemTypeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemTypeInclude<ExtArgs> | null
+    where?: MagicItemTypeWhereInput
+  }
+
+  /**
+   * MagicItem.rarity_relation
+   */
+  export type MagicItem$rarity_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MagicItemRarity
+     */
+    select?: MagicItemRaritySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MagicItemRarity
+     */
+    omit?: MagicItemRarityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MagicItemRarityInclude<ExtArgs> | null
+    where?: MagicItemRarityWhereInput
+  }
+
+  /**
+   * MagicItem.source_relation
+   */
+  export type MagicItem$source_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Source
+     */
+    select?: SourceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Source
+     */
+    omit?: SourceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SourceInclude<ExtArgs> | null
+    where?: SourceWhereInput
+  }
+
+  /**
    * MagicItem.attunements_relation
    */
   export type MagicItem$attunements_relationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -31067,7 +31140,7 @@ export namespace Prisma {
       select?: MagicItemRarityCountAggregateInputType | true
     }
 
-  export interface MagicItemRarityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface MagicItemRarityDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MagicItemRarity'], meta: { name: 'MagicItemRarity' } }
     /**
      * Find zero or one MagicItemRarity that matches the filter.
@@ -31080,7 +31153,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends MagicItemRarityFindUniqueArgs>(args: SelectSubset<T, MagicItemRarityFindUniqueArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends MagicItemRarityFindUniqueArgs>(args: SelectSubset<T, MagicItemRarityFindUniqueArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one MagicItemRarity that matches the filter or throw an error with `error.code='P2025'`
@@ -31094,7 +31167,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends MagicItemRarityFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemRarityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends MagicItemRarityFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemRarityFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first MagicItemRarity that matches the filter.
@@ -31109,7 +31182,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends MagicItemRarityFindFirstArgs>(args?: SelectSubset<T, MagicItemRarityFindFirstArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends MagicItemRarityFindFirstArgs>(args?: SelectSubset<T, MagicItemRarityFindFirstArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first MagicItemRarity that matches the filter or
@@ -31125,7 +31198,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends MagicItemRarityFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemRarityFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends MagicItemRarityFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemRarityFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more MagicItemRarities that matches the filter.
@@ -31143,7 +31216,7 @@ export namespace Prisma {
      * const magicItemRarityWithIdOnly = await prisma.magicItemRarity.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends MagicItemRarityFindManyArgs>(args?: SelectSubset<T, MagicItemRarityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends MagicItemRarityFindManyArgs>(args?: SelectSubset<T, MagicItemRarityFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a MagicItemRarity.
@@ -31157,7 +31230,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends MagicItemRarityCreateArgs>(args: SelectSubset<T, MagicItemRarityCreateArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends MagicItemRarityCreateArgs>(args: SelectSubset<T, MagicItemRarityCreateArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many MagicItemRarities.
@@ -31195,7 +31268,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends MagicItemRarityCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemRarityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends MagicItemRarityCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemRarityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a MagicItemRarity.
@@ -31209,7 +31282,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends MagicItemRarityDeleteArgs>(args: SelectSubset<T, MagicItemRarityDeleteArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends MagicItemRarityDeleteArgs>(args: SelectSubset<T, MagicItemRarityDeleteArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one MagicItemRarity.
@@ -31226,7 +31299,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends MagicItemRarityUpdateArgs>(args: SelectSubset<T, MagicItemRarityUpdateArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends MagicItemRarityUpdateArgs>(args: SelectSubset<T, MagicItemRarityUpdateArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more MagicItemRarities.
@@ -31289,7 +31362,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends MagicItemRarityUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemRarityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends MagicItemRarityUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemRarityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one MagicItemRarity.
@@ -31308,7 +31381,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends MagicItemRarityUpsertArgs>(args: SelectSubset<T, MagicItemRarityUpsertArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends MagicItemRarityUpsertArgs>(args: SelectSubset<T, MagicItemRarityUpsertArgs<ExtArgs>>): Prisma__MagicItemRarityClient<$Result.GetResult<Prisma.$MagicItemRarityPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -31448,9 +31521,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__MagicItemRarityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__MagicItemRarityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    magicItems<T extends MagicItemRarity$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemRarity$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    magicItems<T extends MagicItemRarity$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemRarity$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -31478,7 +31551,7 @@ export namespace Prisma {
 
   /**
    * Fields of the MagicItemRarity model
-   */ 
+   */
   interface MagicItemRarityFieldRefs {
     readonly id: FieldRef<"MagicItemRarity", 'String'>
     readonly cost: FieldRef<"MagicItemRarity", 'String'>
@@ -32115,7 +32188,7 @@ export namespace Prisma {
       select?: MagicItemTypeCountAggregateInputType | true
     }
 
-  export interface MagicItemTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface MagicItemTypeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MagicItemType'], meta: { name: 'MagicItemType' } }
     /**
      * Find zero or one MagicItemType that matches the filter.
@@ -32128,7 +32201,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends MagicItemTypeFindUniqueArgs>(args: SelectSubset<T, MagicItemTypeFindUniqueArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends MagicItemTypeFindUniqueArgs>(args: SelectSubset<T, MagicItemTypeFindUniqueArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one MagicItemType that matches the filter or throw an error with `error.code='P2025'`
@@ -32142,7 +32215,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends MagicItemTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends MagicItemTypeFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemTypeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first MagicItemType that matches the filter.
@@ -32157,7 +32230,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends MagicItemTypeFindFirstArgs>(args?: SelectSubset<T, MagicItemTypeFindFirstArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends MagicItemTypeFindFirstArgs>(args?: SelectSubset<T, MagicItemTypeFindFirstArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first MagicItemType that matches the filter or
@@ -32173,7 +32246,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends MagicItemTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends MagicItemTypeFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemTypeFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more MagicItemTypes that matches the filter.
@@ -32191,7 +32264,7 @@ export namespace Prisma {
      * const magicItemTypeWithIdOnly = await prisma.magicItemType.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends MagicItemTypeFindManyArgs>(args?: SelectSubset<T, MagicItemTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends MagicItemTypeFindManyArgs>(args?: SelectSubset<T, MagicItemTypeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a MagicItemType.
@@ -32205,7 +32278,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends MagicItemTypeCreateArgs>(args: SelectSubset<T, MagicItemTypeCreateArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends MagicItemTypeCreateArgs>(args: SelectSubset<T, MagicItemTypeCreateArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many MagicItemTypes.
@@ -32243,7 +32316,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends MagicItemTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends MagicItemTypeCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemTypeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a MagicItemType.
@@ -32257,7 +32330,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends MagicItemTypeDeleteArgs>(args: SelectSubset<T, MagicItemTypeDeleteArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends MagicItemTypeDeleteArgs>(args: SelectSubset<T, MagicItemTypeDeleteArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one MagicItemType.
@@ -32274,7 +32347,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends MagicItemTypeUpdateArgs>(args: SelectSubset<T, MagicItemTypeUpdateArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends MagicItemTypeUpdateArgs>(args: SelectSubset<T, MagicItemTypeUpdateArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more MagicItemTypes.
@@ -32337,7 +32410,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends MagicItemTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends MagicItemTypeUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemTypeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one MagicItemType.
@@ -32356,7 +32429,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends MagicItemTypeUpsertArgs>(args: SelectSubset<T, MagicItemTypeUpsertArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends MagicItemTypeUpsertArgs>(args: SelectSubset<T, MagicItemTypeUpsertArgs<ExtArgs>>): Prisma__MagicItemTypeClient<$Result.GetResult<Prisma.$MagicItemTypePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -32496,9 +32569,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__MagicItemTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__MagicItemTypeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    magicItems<T extends MagicItemType$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemType$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    magicItems<T extends MagicItemType$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemType$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -32526,7 +32599,7 @@ export namespace Prisma {
 
   /**
    * Fields of the MagicItemType model
-   */ 
+   */
   interface MagicItemTypeFieldRefs {
     readonly id: FieldRef<"MagicItemType", 'String'>
     readonly name: FieldRef<"MagicItemType", 'String'>
@@ -33147,7 +33220,7 @@ export namespace Prisma {
       select?: AttunementConditionCountAggregateInputType | true
     }
 
-  export interface AttunementConditionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface AttunementConditionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AttunementCondition'], meta: { name: 'AttunementCondition' } }
     /**
      * Find zero or one AttunementCondition that matches the filter.
@@ -33160,7 +33233,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends AttunementConditionFindUniqueArgs>(args: SelectSubset<T, AttunementConditionFindUniqueArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends AttunementConditionFindUniqueArgs>(args: SelectSubset<T, AttunementConditionFindUniqueArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one AttunementCondition that matches the filter or throw an error with `error.code='P2025'`
@@ -33174,7 +33247,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends AttunementConditionFindUniqueOrThrowArgs>(args: SelectSubset<T, AttunementConditionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends AttunementConditionFindUniqueOrThrowArgs>(args: SelectSubset<T, AttunementConditionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first AttunementCondition that matches the filter.
@@ -33189,7 +33262,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends AttunementConditionFindFirstArgs>(args?: SelectSubset<T, AttunementConditionFindFirstArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends AttunementConditionFindFirstArgs>(args?: SelectSubset<T, AttunementConditionFindFirstArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first AttunementCondition that matches the filter or
@@ -33205,7 +33278,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends AttunementConditionFindFirstOrThrowArgs>(args?: SelectSubset<T, AttunementConditionFindFirstOrThrowArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends AttunementConditionFindFirstOrThrowArgs>(args?: SelectSubset<T, AttunementConditionFindFirstOrThrowArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more AttunementConditions that matches the filter.
@@ -33223,7 +33296,7 @@ export namespace Prisma {
      * const attunementConditionWithIdOnly = await prisma.attunementCondition.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends AttunementConditionFindManyArgs>(args?: SelectSubset<T, AttunementConditionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends AttunementConditionFindManyArgs>(args?: SelectSubset<T, AttunementConditionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a AttunementCondition.
@@ -33237,7 +33310,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends AttunementConditionCreateArgs>(args: SelectSubset<T, AttunementConditionCreateArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends AttunementConditionCreateArgs>(args: SelectSubset<T, AttunementConditionCreateArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many AttunementConditions.
@@ -33275,7 +33348,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends AttunementConditionCreateManyAndReturnArgs>(args?: SelectSubset<T, AttunementConditionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends AttunementConditionCreateManyAndReturnArgs>(args?: SelectSubset<T, AttunementConditionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a AttunementCondition.
@@ -33289,7 +33362,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends AttunementConditionDeleteArgs>(args: SelectSubset<T, AttunementConditionDeleteArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends AttunementConditionDeleteArgs>(args: SelectSubset<T, AttunementConditionDeleteArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one AttunementCondition.
@@ -33306,7 +33379,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends AttunementConditionUpdateArgs>(args: SelectSubset<T, AttunementConditionUpdateArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends AttunementConditionUpdateArgs>(args: SelectSubset<T, AttunementConditionUpdateArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more AttunementConditions.
@@ -33369,7 +33442,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends AttunementConditionUpdateManyAndReturnArgs>(args: SelectSubset<T, AttunementConditionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends AttunementConditionUpdateManyAndReturnArgs>(args: SelectSubset<T, AttunementConditionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one AttunementCondition.
@@ -33388,7 +33461,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends AttunementConditionUpsertArgs>(args: SelectSubset<T, AttunementConditionUpsertArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends AttunementConditionUpsertArgs>(args: SelectSubset<T, AttunementConditionUpsertArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -33528,9 +33601,9 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__AttunementConditionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__AttunementConditionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    magicItems<T extends AttunementCondition$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, AttunementCondition$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    magicItems<T extends AttunementCondition$magicItemsArgs<ExtArgs> = {}>(args?: Subset<T, AttunementCondition$magicItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -33558,7 +33631,7 @@ export namespace Prisma {
 
   /**
    * Fields of the AttunementCondition model
-   */ 
+   */
   interface AttunementConditionFieldRefs {
     readonly id: FieldRef<"AttunementCondition", 'String'>
     readonly name: FieldRef<"AttunementCondition", 'String'>
@@ -34189,7 +34262,7 @@ export namespace Prisma {
       select?: MagicItemAttunementCountAggregateInputType | true
     }
 
-  export interface MagicItemAttunementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+  export interface MagicItemAttunementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
     [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MagicItemAttunement'], meta: { name: 'MagicItemAttunement' } }
     /**
      * Find zero or one MagicItemAttunement that matches the filter.
@@ -34202,7 +34275,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends MagicItemAttunementFindUniqueArgs>(args: SelectSubset<T, MagicItemAttunementFindUniqueArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findUnique<T extends MagicItemAttunementFindUniqueArgs>(args: SelectSubset<T, MagicItemAttunementFindUniqueArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one MagicItemAttunement that matches the filter or throw an error with `error.code='P2025'`
@@ -34216,7 +34289,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends MagicItemAttunementFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemAttunementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findUniqueOrThrow<T extends MagicItemAttunementFindUniqueOrThrowArgs>(args: SelectSubset<T, MagicItemAttunementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first MagicItemAttunement that matches the filter.
@@ -34231,7 +34304,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends MagicItemAttunementFindFirstArgs>(args?: SelectSubset<T, MagicItemAttunementFindFirstArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    findFirst<T extends MagicItemAttunementFindFirstArgs>(args?: SelectSubset<T, MagicItemAttunementFindFirstArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first MagicItemAttunement that matches the filter or
@@ -34247,7 +34320,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends MagicItemAttunementFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemAttunementFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+    findFirstOrThrow<T extends MagicItemAttunementFindFirstOrThrowArgs>(args?: SelectSubset<T, MagicItemAttunementFindFirstOrThrowArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more MagicItemAttunements that matches the filter.
@@ -34265,7 +34338,7 @@ export namespace Prisma {
      * const magicItemAttunementWithMagicItemIdOnly = await prisma.magicItemAttunement.findMany({ select: { magicItemId: true } })
      * 
      */
-    findMany<T extends MagicItemAttunementFindManyArgs>(args?: SelectSubset<T, MagicItemAttunementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findMany", ClientOptions>>
+    findMany<T extends MagicItemAttunementFindManyArgs>(args?: SelectSubset<T, MagicItemAttunementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a MagicItemAttunement.
@@ -34279,7 +34352,7 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends MagicItemAttunementCreateArgs>(args: SelectSubset<T, MagicItemAttunementCreateArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+    create<T extends MagicItemAttunementCreateArgs>(args: SelectSubset<T, MagicItemAttunementCreateArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many MagicItemAttunements.
@@ -34317,7 +34390,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends MagicItemAttunementCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemAttunementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+    createManyAndReturn<T extends MagicItemAttunementCreateManyAndReturnArgs>(args?: SelectSubset<T, MagicItemAttunementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a MagicItemAttunement.
@@ -34331,7 +34404,7 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends MagicItemAttunementDeleteArgs>(args: SelectSubset<T, MagicItemAttunementDeleteArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+    delete<T extends MagicItemAttunementDeleteArgs>(args: SelectSubset<T, MagicItemAttunementDeleteArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one MagicItemAttunement.
@@ -34348,7 +34421,7 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends MagicItemAttunementUpdateArgs>(args: SelectSubset<T, MagicItemAttunementUpdateArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+    update<T extends MagicItemAttunementUpdateArgs>(args: SelectSubset<T, MagicItemAttunementUpdateArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more MagicItemAttunements.
@@ -34411,7 +34484,7 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends MagicItemAttunementUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemAttunementUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+    updateManyAndReturn<T extends MagicItemAttunementUpdateManyAndReturnArgs>(args: SelectSubset<T, MagicItemAttunementUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one MagicItemAttunement.
@@ -34430,7 +34503,7 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends MagicItemAttunementUpsertArgs>(args: SelectSubset<T, MagicItemAttunementUpsertArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+    upsert<T extends MagicItemAttunementUpsertArgs>(args: SelectSubset<T, MagicItemAttunementUpsertArgs<ExtArgs>>): Prisma__MagicItemAttunementClient<$Result.GetResult<Prisma.$MagicItemAttunementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
@@ -34570,10 +34643,10 @@ export namespace Prisma {
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__MagicItemAttunementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__MagicItemAttunementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    magicItem<T extends MagicItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemDefaultArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
-    attunement<T extends AttunementConditionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AttunementConditionDefaultArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    magicItem<T extends MagicItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MagicItemDefaultArgs<ExtArgs>>): Prisma__MagicItemClient<$Result.GetResult<Prisma.$MagicItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    attunement<T extends AttunementConditionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AttunementConditionDefaultArgs<ExtArgs>>): Prisma__AttunementConditionClient<$Result.GetResult<Prisma.$AttunementConditionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -34601,7 +34674,7 @@ export namespace Prisma {
 
   /**
    * Fields of the MagicItemAttunement model
-   */ 
+   */
   interface MagicItemAttunementFieldRefs {
     readonly magicItemId: FieldRef<"MagicItemAttunement", 'String'>
     readonly attunementId: FieldRef<"MagicItemAttunement", 'String'>
@@ -35224,7 +35297,7 @@ export namespace Prisma {
     type_name: 'type_name',
     creation_description: 'creation_description',
     role: 'role',
-    createdAt: 'createdAt'
+    created_at: 'created_at'
   };
 
   export type GPTCreatureRequestScalarFieldEnum = (typeof GPTCreatureRequestScalarFieldEnum)[keyof typeof GPTCreatureRequestScalarFieldEnum]
@@ -35261,6 +35334,7 @@ export namespace Prisma {
 
   export const MagicItemScalarFieldEnum: {
     id: 'id',
+    creator_id: 'creator_id',
     name: 'name',
     description: 'description',
     type_id: 'type_id',
@@ -35335,7 +35409,7 @@ export namespace Prisma {
 
 
   /**
-   * Field references 
+   * Field references
    */
 
 
@@ -36506,7 +36580,7 @@ export namespace Prisma {
     type_name?: StringFilter<"GPTCreatureRequest"> | string
     creation_description?: StringNullableFilter<"GPTCreatureRequest"> | string | null
     role?: EnumCreatureRoleNullableFilter<"GPTCreatureRequest"> | $Enums.CreatureRole | null
-    createdAt?: DateTimeFilter<"GPTCreatureRequest"> | Date | string
+    created_at?: DateTimeFilter<"GPTCreatureRequest"> | Date | string
     creature_relation?: XOR<CreatureScalarRelationFilter, CreatureWhereInput>
   }
 
@@ -36518,7 +36592,7 @@ export namespace Prisma {
     type_name?: SortOrder
     creation_description?: SortOrderInput | SortOrder
     role?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    created_at?: SortOrder
     creature_relation?: CreatureOrderByWithRelationInput
   }
 
@@ -36533,7 +36607,7 @@ export namespace Prisma {
     type_name?: StringFilter<"GPTCreatureRequest"> | string
     creation_description?: StringNullableFilter<"GPTCreatureRequest"> | string | null
     role?: EnumCreatureRoleNullableFilter<"GPTCreatureRequest"> | $Enums.CreatureRole | null
-    createdAt?: DateTimeFilter<"GPTCreatureRequest"> | Date | string
+    created_at?: DateTimeFilter<"GPTCreatureRequest"> | Date | string
     creature_relation?: XOR<CreatureScalarRelationFilter, CreatureWhereInput>
   }, "id" | "creature_id">
 
@@ -36545,7 +36619,7 @@ export namespace Prisma {
     type_name?: SortOrder
     creation_description?: SortOrderInput | SortOrder
     role?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    created_at?: SortOrder
     _count?: GPTCreatureRequestCountOrderByAggregateInput
     _avg?: GPTCreatureRequestAvgOrderByAggregateInput
     _max?: GPTCreatureRequestMaxOrderByAggregateInput
@@ -36564,7 +36638,7 @@ export namespace Prisma {
     type_name?: StringWithAggregatesFilter<"GPTCreatureRequest"> | string
     creation_description?: StringNullableWithAggregatesFilter<"GPTCreatureRequest"> | string | null
     role?: EnumCreatureRoleNullableWithAggregatesFilter<"GPTCreatureRequest"> | $Enums.CreatureRole | null
-    createdAt?: DateTimeWithAggregatesFilter<"GPTCreatureRequest"> | Date | string
+    created_at?: DateTimeWithAggregatesFilter<"GPTCreatureRequest"> | Date | string
   }
 
   export type AdventureWhereInput = {
@@ -36726,26 +36800,28 @@ export namespace Prisma {
     OR?: MagicItemWhereInput[]
     NOT?: MagicItemWhereInput | MagicItemWhereInput[]
     id?: StringFilter<"MagicItem"> | string
+    creator_id?: StringNullableFilter<"MagicItem"> | string | null
     name?: StringFilter<"MagicItem"> | string
-    description?: StringFilter<"MagicItem"> | string
-    type_id?: StringFilter<"MagicItem"> | string
-    rarity_id?: StringFilter<"MagicItem"> | string
-    source_id?: IntFilter<"MagicItem"> | number
-    requires_attunement?: BoolFilter<"MagicItem"> | boolean
-    type_relation?: XOR<MagicItemTypeScalarRelationFilter, MagicItemTypeWhereInput>
-    rarity_relation?: XOR<MagicItemRarityScalarRelationFilter, MagicItemRarityWhereInput>
-    source_relation?: XOR<SourceScalarRelationFilter, SourceWhereInput>
+    description?: StringNullableFilter<"MagicItem"> | string | null
+    type_id?: StringNullableFilter<"MagicItem"> | string | null
+    rarity_id?: StringNullableFilter<"MagicItem"> | string | null
+    source_id?: IntNullableFilter<"MagicItem"> | number | null
+    requires_attunement?: BoolNullableFilter<"MagicItem"> | boolean | null
+    type_relation?: XOR<MagicItemTypeNullableScalarRelationFilter, MagicItemTypeWhereInput> | null
+    rarity_relation?: XOR<MagicItemRarityNullableScalarRelationFilter, MagicItemRarityWhereInput> | null
+    source_relation?: XOR<SourceNullableScalarRelationFilter, SourceWhereInput> | null
     attunements_relation?: MagicItemAttunementListRelationFilter
   }
 
   export type MagicItemOrderByWithRelationInput = {
     id?: SortOrder
+    creator_id?: SortOrderInput | SortOrder
     name?: SortOrder
-    description?: SortOrder
-    type_id?: SortOrder
-    rarity_id?: SortOrder
-    source_id?: SortOrder
-    requires_attunement?: SortOrder
+    description?: SortOrderInput | SortOrder
+    type_id?: SortOrderInput | SortOrder
+    rarity_id?: SortOrderInput | SortOrder
+    source_id?: SortOrderInput | SortOrder
+    requires_attunement?: SortOrderInput | SortOrder
     type_relation?: MagicItemTypeOrderByWithRelationInput
     rarity_relation?: MagicItemRarityOrderByWithRelationInput
     source_relation?: SourceOrderByWithRelationInput
@@ -36757,26 +36833,28 @@ export namespace Prisma {
     AND?: MagicItemWhereInput | MagicItemWhereInput[]
     OR?: MagicItemWhereInput[]
     NOT?: MagicItemWhereInput | MagicItemWhereInput[]
+    creator_id?: StringNullableFilter<"MagicItem"> | string | null
     name?: StringFilter<"MagicItem"> | string
-    description?: StringFilter<"MagicItem"> | string
-    type_id?: StringFilter<"MagicItem"> | string
-    rarity_id?: StringFilter<"MagicItem"> | string
-    source_id?: IntFilter<"MagicItem"> | number
-    requires_attunement?: BoolFilter<"MagicItem"> | boolean
-    type_relation?: XOR<MagicItemTypeScalarRelationFilter, MagicItemTypeWhereInput>
-    rarity_relation?: XOR<MagicItemRarityScalarRelationFilter, MagicItemRarityWhereInput>
-    source_relation?: XOR<SourceScalarRelationFilter, SourceWhereInput>
+    description?: StringNullableFilter<"MagicItem"> | string | null
+    type_id?: StringNullableFilter<"MagicItem"> | string | null
+    rarity_id?: StringNullableFilter<"MagicItem"> | string | null
+    source_id?: IntNullableFilter<"MagicItem"> | number | null
+    requires_attunement?: BoolNullableFilter<"MagicItem"> | boolean | null
+    type_relation?: XOR<MagicItemTypeNullableScalarRelationFilter, MagicItemTypeWhereInput> | null
+    rarity_relation?: XOR<MagicItemRarityNullableScalarRelationFilter, MagicItemRarityWhereInput> | null
+    source_relation?: XOR<SourceNullableScalarRelationFilter, SourceWhereInput> | null
     attunements_relation?: MagicItemAttunementListRelationFilter
   }, "id">
 
   export type MagicItemOrderByWithAggregationInput = {
     id?: SortOrder
+    creator_id?: SortOrderInput | SortOrder
     name?: SortOrder
-    description?: SortOrder
-    type_id?: SortOrder
-    rarity_id?: SortOrder
-    source_id?: SortOrder
-    requires_attunement?: SortOrder
+    description?: SortOrderInput | SortOrder
+    type_id?: SortOrderInput | SortOrder
+    rarity_id?: SortOrderInput | SortOrder
+    source_id?: SortOrderInput | SortOrder
+    requires_attunement?: SortOrderInput | SortOrder
     _count?: MagicItemCountOrderByAggregateInput
     _avg?: MagicItemAvgOrderByAggregateInput
     _max?: MagicItemMaxOrderByAggregateInput
@@ -36789,12 +36867,13 @@ export namespace Prisma {
     OR?: MagicItemScalarWhereWithAggregatesInput[]
     NOT?: MagicItemScalarWhereWithAggregatesInput | MagicItemScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"MagicItem"> | string
+    creator_id?: StringNullableWithAggregatesFilter<"MagicItem"> | string | null
     name?: StringWithAggregatesFilter<"MagicItem"> | string
-    description?: StringWithAggregatesFilter<"MagicItem"> | string
-    type_id?: StringWithAggregatesFilter<"MagicItem"> | string
-    rarity_id?: StringWithAggregatesFilter<"MagicItem"> | string
-    source_id?: IntWithAggregatesFilter<"MagicItem"> | number
-    requires_attunement?: BoolWithAggregatesFilter<"MagicItem"> | boolean
+    description?: StringNullableWithAggregatesFilter<"MagicItem"> | string | null
+    type_id?: StringNullableWithAggregatesFilter<"MagicItem"> | string | null
+    rarity_id?: StringNullableWithAggregatesFilter<"MagicItem"> | string | null
+    source_id?: IntNullableWithAggregatesFilter<"MagicItem"> | number | null
+    requires_attunement?: BoolNullableWithAggregatesFilter<"MagicItem"> | boolean | null
   }
 
   export type MagicItemRarityWhereInput = {
@@ -37975,7 +38054,7 @@ export namespace Prisma {
     type_name: string
     creation_description?: string | null
     role?: $Enums.CreatureRole | null
-    createdAt?: Date | string
+    created_at?: Date | string
     creature_relation: CreatureCreateNestedOneWithoutGpt_request_relationInput
   }
 
@@ -37987,7 +38066,7 @@ export namespace Prisma {
     type_name: string
     creation_description?: string | null
     role?: $Enums.CreatureRole | null
-    createdAt?: Date | string
+    created_at?: Date | string
   }
 
   export type GPTCreatureRequestUpdateInput = {
@@ -37996,7 +38075,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     creature_relation?: CreatureUpdateOneRequiredWithoutGpt_request_relationNestedInput
   }
 
@@ -38008,7 +38087,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GPTCreatureRequestCreateManyInput = {
@@ -38019,7 +38098,7 @@ export namespace Prisma {
     type_name: string
     creation_description?: string | null
     role?: $Enums.CreatureRole | null
-    createdAt?: Date | string
+    created_at?: Date | string
   }
 
   export type GPTCreatureRequestUpdateManyMutationInput = {
@@ -38028,7 +38107,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GPTCreatureRequestUncheckedUpdateManyInput = {
@@ -38039,7 +38118,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AdventureCreateInput = {
@@ -38198,73 +38277,80 @@ export namespace Prisma {
 
   export type MagicItemCreateInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    requires_attunement?: boolean
-    type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
-    rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
-    source_relation: SourceCreateNestedOneWithoutMagicItemsInput
+    description?: string | null
+    requires_attunement?: boolean | null
+    type_relation?: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
+    rarity_relation?: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
+    source_relation?: SourceCreateNestedOneWithoutMagicItemsInput
     attunements_relation?: MagicItemAttunementCreateNestedManyWithoutMagicItemInput
   }
 
   export type MagicItemUncheckedCreateInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    type_id: string
-    rarity_id: string
-    source_id: number
-    requires_attunement?: boolean
+    description?: string | null
+    type_id?: string | null
+    rarity_id?: string | null
+    source_id?: number | null
+    requires_attunement?: boolean | null
     attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
   }
 
   export type MagicItemUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
-    type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
-    rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
-    source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type_relation?: MagicItemTypeUpdateOneWithoutMagicItemsNestedInput
+    rarity_relation?: MagicItemRarityUpdateOneWithoutMagicItemsNestedInput
+    source_relation?: SourceUpdateOneWithoutMagicItemsNestedInput
     attunements_relation?: MagicItemAttunementUpdateManyWithoutMagicItemNestedInput
   }
 
   export type MagicItemUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type_id?: StringFieldUpdateOperationsInput | string
-    rarity_id?: StringFieldUpdateOperationsInput | string
-    source_id?: IntFieldUpdateOperationsInput | number
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type_id?: NullableStringFieldUpdateOperationsInput | string | null
+    rarity_id?: NullableStringFieldUpdateOperationsInput | string | null
+    source_id?: NullableIntFieldUpdateOperationsInput | number | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
     attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
   }
 
   export type MagicItemCreateManyInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    type_id: string
-    rarity_id: string
-    source_id: number
-    requires_attunement?: boolean
+    description?: string | null
+    type_id?: string | null
+    rarity_id?: string | null
+    source_id?: number | null
+    requires_attunement?: boolean | null
   }
 
   export type MagicItemUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type MagicItemUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type_id?: StringFieldUpdateOperationsInput | string
-    rarity_id?: StringFieldUpdateOperationsInput | string
-    source_id?: IntFieldUpdateOperationsInput | number
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type_id?: NullableStringFieldUpdateOperationsInput | string | null
+    rarity_id?: NullableStringFieldUpdateOperationsInput | string | null
+    source_id?: NullableIntFieldUpdateOperationsInput | number | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type MagicItemRarityCreateInput = {
@@ -39405,7 +39491,7 @@ export namespace Prisma {
     type_name?: SortOrder
     creation_description?: SortOrder
     role?: SortOrder
-    createdAt?: SortOrder
+    created_at?: SortOrder
   }
 
   export type GPTCreatureRequestAvgOrderByAggregateInput = {
@@ -39420,7 +39506,7 @@ export namespace Prisma {
     type_name?: SortOrder
     creation_description?: SortOrder
     role?: SortOrder
-    createdAt?: SortOrder
+    created_at?: SortOrder
   }
 
   export type GPTCreatureRequestMinOrderByAggregateInput = {
@@ -39431,7 +39517,7 @@ export namespace Prisma {
     type_name?: SortOrder
     creation_description?: SortOrder
     role?: SortOrder
-    createdAt?: SortOrder
+    created_at?: SortOrder
   }
 
   export type GPTCreatureRequestSumOrderByAggregateInput = {
@@ -39547,19 +39633,14 @@ export namespace Prisma {
     name?: SortOrder
   }
 
-  export type MagicItemTypeScalarRelationFilter = {
-    is?: MagicItemTypeWhereInput
-    isNot?: MagicItemTypeWhereInput
+  export type MagicItemTypeNullableScalarRelationFilter = {
+    is?: MagicItemTypeWhereInput | null
+    isNot?: MagicItemTypeWhereInput | null
   }
 
-  export type MagicItemRarityScalarRelationFilter = {
-    is?: MagicItemRarityWhereInput
-    isNot?: MagicItemRarityWhereInput
-  }
-
-  export type SourceScalarRelationFilter = {
-    is?: SourceWhereInput
-    isNot?: SourceWhereInput
+  export type MagicItemRarityNullableScalarRelationFilter = {
+    is?: MagicItemRarityWhereInput | null
+    isNot?: MagicItemRarityWhereInput | null
   }
 
   export type MagicItemAttunementListRelationFilter = {
@@ -39574,6 +39655,7 @@ export namespace Prisma {
 
   export type MagicItemCountOrderByAggregateInput = {
     id?: SortOrder
+    creator_id?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type_id?: SortOrder
@@ -39588,6 +39670,7 @@ export namespace Prisma {
 
   export type MagicItemMaxOrderByAggregateInput = {
     id?: SortOrder
+    creator_id?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type_id?: SortOrder
@@ -39598,6 +39681,7 @@ export namespace Prisma {
 
   export type MagicItemMinOrderByAggregateInput = {
     id?: SortOrder
+    creator_id?: SortOrder
     name?: SortOrder
     description?: SortOrder
     type_id?: SortOrder
@@ -41422,26 +41506,32 @@ export namespace Prisma {
     connect?: MagicItemAttunementWhereUniqueInput | MagicItemAttunementWhereUniqueInput[]
   }
 
-  export type MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput = {
+  export type MagicItemTypeUpdateOneWithoutMagicItemsNestedInput = {
     create?: XOR<MagicItemTypeCreateWithoutMagicItemsInput, MagicItemTypeUncheckedCreateWithoutMagicItemsInput>
     connectOrCreate?: MagicItemTypeCreateOrConnectWithoutMagicItemsInput
     upsert?: MagicItemTypeUpsertWithoutMagicItemsInput
+    disconnect?: MagicItemTypeWhereInput | boolean
+    delete?: MagicItemTypeWhereInput | boolean
     connect?: MagicItemTypeWhereUniqueInput
     update?: XOR<XOR<MagicItemTypeUpdateToOneWithWhereWithoutMagicItemsInput, MagicItemTypeUpdateWithoutMagicItemsInput>, MagicItemTypeUncheckedUpdateWithoutMagicItemsInput>
   }
 
-  export type MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput = {
+  export type MagicItemRarityUpdateOneWithoutMagicItemsNestedInput = {
     create?: XOR<MagicItemRarityCreateWithoutMagicItemsInput, MagicItemRarityUncheckedCreateWithoutMagicItemsInput>
     connectOrCreate?: MagicItemRarityCreateOrConnectWithoutMagicItemsInput
     upsert?: MagicItemRarityUpsertWithoutMagicItemsInput
+    disconnect?: MagicItemRarityWhereInput | boolean
+    delete?: MagicItemRarityWhereInput | boolean
     connect?: MagicItemRarityWhereUniqueInput
     update?: XOR<XOR<MagicItemRarityUpdateToOneWithWhereWithoutMagicItemsInput, MagicItemRarityUpdateWithoutMagicItemsInput>, MagicItemRarityUncheckedUpdateWithoutMagicItemsInput>
   }
 
-  export type SourceUpdateOneRequiredWithoutMagicItemsNestedInput = {
+  export type SourceUpdateOneWithoutMagicItemsNestedInput = {
     create?: XOR<SourceCreateWithoutMagicItemsInput, SourceUncheckedCreateWithoutMagicItemsInput>
     connectOrCreate?: SourceCreateOrConnectWithoutMagicItemsInput
     upsert?: SourceUpsertWithoutMagicItemsInput
+    disconnect?: SourceWhereInput | boolean
+    delete?: SourceWhereInput | boolean
     connect?: SourceWhereUniqueInput
     update?: XOR<XOR<SourceUpdateToOneWithWhereWithoutMagicItemsInput, SourceUpdateWithoutMagicItemsInput>, SourceUncheckedUpdateWithoutMagicItemsInput>
   }
@@ -42082,21 +42172,23 @@ export namespace Prisma {
 
   export type MagicItemCreateWithoutSource_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    requires_attunement?: boolean
-    type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
-    rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
+    description?: string | null
+    requires_attunement?: boolean | null
+    type_relation?: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
+    rarity_relation?: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
     attunements_relation?: MagicItemAttunementCreateNestedManyWithoutMagicItemInput
   }
 
   export type MagicItemUncheckedCreateWithoutSource_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    type_id: string
-    rarity_id: string
-    requires_attunement?: boolean
+    description?: string | null
+    type_id?: string | null
+    rarity_id?: string | null
+    requires_attunement?: boolean | null
     attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
   }
 
@@ -42147,12 +42239,13 @@ export namespace Prisma {
     OR?: MagicItemScalarWhereInput[]
     NOT?: MagicItemScalarWhereInput | MagicItemScalarWhereInput[]
     id?: StringFilter<"MagicItem"> | string
+    creator_id?: StringNullableFilter<"MagicItem"> | string | null
     name?: StringFilter<"MagicItem"> | string
-    description?: StringFilter<"MagicItem"> | string
-    type_id?: StringFilter<"MagicItem"> | string
-    rarity_id?: StringFilter<"MagicItem"> | string
-    source_id?: IntFilter<"MagicItem"> | number
-    requires_attunement?: BoolFilter<"MagicItem"> | boolean
+    description?: StringNullableFilter<"MagicItem"> | string | null
+    type_id?: StringNullableFilter<"MagicItem"> | string | null
+    rarity_id?: StringNullableFilter<"MagicItem"> | string | null
+    source_id?: IntNullableFilter<"MagicItem"> | number | null
+    requires_attunement?: BoolNullableFilter<"MagicItem"> | boolean | null
   }
 
   export type CreatureCreateWithoutLanguages_relationInput = {
@@ -43282,7 +43375,7 @@ export namespace Prisma {
     type_name: string
     creation_description?: string | null
     role?: $Enums.CreatureRole | null
-    createdAt?: Date | string
+    created_at?: Date | string
   }
 
   export type GPTCreatureRequestUncheckedCreateWithoutCreature_relationInput = {
@@ -43292,7 +43385,7 @@ export namespace Prisma {
     type_name: string
     creation_description?: string | null
     role?: $Enums.CreatureRole | null
-    createdAt?: Date | string
+    created_at?: Date | string
   }
 
   export type GPTCreatureRequestCreateOrConnectWithoutCreature_relationInput = {
@@ -43698,7 +43791,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type GPTCreatureRequestUncheckedUpdateWithoutCreature_relationInput = {
@@ -43708,7 +43801,7 @@ export namespace Prisma {
     type_name?: StringFieldUpdateOperationsInput | string
     creation_description?: NullableStringFieldUpdateOperationsInput | string | null
     role?: NullableEnumCreatureRoleFieldUpdateOperationsInput | $Enums.CreatureRole | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CreatureCreateWithoutSensesInput = {
@@ -45066,21 +45159,23 @@ export namespace Prisma {
 
   export type MagicItemCreateWithoutRarity_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    requires_attunement?: boolean
-    type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
-    source_relation: SourceCreateNestedOneWithoutMagicItemsInput
+    description?: string | null
+    requires_attunement?: boolean | null
+    type_relation?: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
+    source_relation?: SourceCreateNestedOneWithoutMagicItemsInput
     attunements_relation?: MagicItemAttunementCreateNestedManyWithoutMagicItemInput
   }
 
   export type MagicItemUncheckedCreateWithoutRarity_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    type_id: string
-    source_id: number
-    requires_attunement?: boolean
+    description?: string | null
+    type_id?: string | null
+    source_id?: number | null
+    requires_attunement?: boolean | null
     attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
   }
 
@@ -45112,21 +45207,23 @@ export namespace Prisma {
 
   export type MagicItemCreateWithoutType_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    requires_attunement?: boolean
-    rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
-    source_relation: SourceCreateNestedOneWithoutMagicItemsInput
+    description?: string | null
+    requires_attunement?: boolean | null
+    rarity_relation?: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
+    source_relation?: SourceCreateNestedOneWithoutMagicItemsInput
     attunements_relation?: MagicItemAttunementCreateNestedManyWithoutMagicItemInput
   }
 
   export type MagicItemUncheckedCreateWithoutType_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    rarity_id: string
-    source_id: number
-    requires_attunement?: boolean
+    description?: string | null
+    rarity_id?: string | null
+    source_id?: number | null
+    requires_attunement?: boolean | null
     attunements_relation?: MagicItemAttunementUncheckedCreateNestedManyWithoutMagicItemInput
   }
 
@@ -45192,22 +45289,24 @@ export namespace Prisma {
 
   export type MagicItemCreateWithoutAttunements_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    requires_attunement?: boolean
-    type_relation: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
-    rarity_relation: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
-    source_relation: SourceCreateNestedOneWithoutMagicItemsInput
+    description?: string | null
+    requires_attunement?: boolean | null
+    type_relation?: MagicItemTypeCreateNestedOneWithoutMagicItemsInput
+    rarity_relation?: MagicItemRarityCreateNestedOneWithoutMagicItemsInput
+    source_relation?: SourceCreateNestedOneWithoutMagicItemsInput
   }
 
   export type MagicItemUncheckedCreateWithoutAttunements_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    type_id: string
-    rarity_id: string
-    source_id: number
-    requires_attunement?: boolean
+    description?: string | null
+    type_id?: string | null
+    rarity_id?: string | null
+    source_id?: number | null
+    requires_attunement?: boolean | null
   }
 
   export type MagicItemCreateOrConnectWithoutAttunements_relationInput = {
@@ -45243,22 +45342,24 @@ export namespace Prisma {
 
   export type MagicItemUpdateWithoutAttunements_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
-    type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
-    rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
-    source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type_relation?: MagicItemTypeUpdateOneWithoutMagicItemsNestedInput
+    rarity_relation?: MagicItemRarityUpdateOneWithoutMagicItemsNestedInput
+    source_relation?: SourceUpdateOneWithoutMagicItemsNestedInput
   }
 
   export type MagicItemUncheckedUpdateWithoutAttunements_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type_id?: StringFieldUpdateOperationsInput | string
-    rarity_id?: StringFieldUpdateOperationsInput | string
-    source_id?: IntFieldUpdateOperationsInput | number
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type_id?: NullableStringFieldUpdateOperationsInput | string | null
+    rarity_id?: NullableStringFieldUpdateOperationsInput | string | null
+    source_id?: NullableIntFieldUpdateOperationsInput | number | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type AttunementConditionUpsertWithoutMagicItemsInput = {
@@ -45378,11 +45479,12 @@ export namespace Prisma {
 
   export type MagicItemCreateManySource_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    type_id: string
-    rarity_id: string
-    requires_attunement?: boolean
+    description?: string | null
+    type_id?: string | null
+    rarity_id?: string | null
+    requires_attunement?: boolean | null
   }
 
   export type CreatureUpdateWithoutSource_relationInput = {
@@ -45453,31 +45555,34 @@ export namespace Prisma {
 
   export type MagicItemUpdateWithoutSource_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
-    type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
-    rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type_relation?: MagicItemTypeUpdateOneWithoutMagicItemsNestedInput
+    rarity_relation?: MagicItemRarityUpdateOneWithoutMagicItemsNestedInput
     attunements_relation?: MagicItemAttunementUpdateManyWithoutMagicItemNestedInput
   }
 
   export type MagicItemUncheckedUpdateWithoutSource_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type_id?: StringFieldUpdateOperationsInput | string
-    rarity_id?: StringFieldUpdateOperationsInput | string
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type_id?: NullableStringFieldUpdateOperationsInput | string | null
+    rarity_id?: NullableStringFieldUpdateOperationsInput | string | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
     attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
   }
 
   export type MagicItemUncheckedUpdateManyWithoutSource_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type_id?: StringFieldUpdateOperationsInput | string
-    rarity_id?: StringFieldUpdateOperationsInput | string
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type_id?: NullableStringFieldUpdateOperationsInput | string | null
+    rarity_id?: NullableStringFieldUpdateOperationsInput | string | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type CreatureUpdateWithoutLanguages_relationInput = {
@@ -46674,78 +46779,86 @@ export namespace Prisma {
 
   export type MagicItemCreateManyRarity_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    type_id: string
-    source_id: number
-    requires_attunement?: boolean
+    description?: string | null
+    type_id?: string | null
+    source_id?: number | null
+    requires_attunement?: boolean | null
   }
 
   export type MagicItemUpdateWithoutRarity_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
-    type_relation?: MagicItemTypeUpdateOneRequiredWithoutMagicItemsNestedInput
-    source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    type_relation?: MagicItemTypeUpdateOneWithoutMagicItemsNestedInput
+    source_relation?: SourceUpdateOneWithoutMagicItemsNestedInput
     attunements_relation?: MagicItemAttunementUpdateManyWithoutMagicItemNestedInput
   }
 
   export type MagicItemUncheckedUpdateWithoutRarity_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type_id?: StringFieldUpdateOperationsInput | string
-    source_id?: IntFieldUpdateOperationsInput | number
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type_id?: NullableStringFieldUpdateOperationsInput | string | null
+    source_id?: NullableIntFieldUpdateOperationsInput | number | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
     attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
   }
 
   export type MagicItemUncheckedUpdateManyWithoutRarity_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    type_id?: StringFieldUpdateOperationsInput | string
-    source_id?: IntFieldUpdateOperationsInput | number
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    type_id?: NullableStringFieldUpdateOperationsInput | string | null
+    source_id?: NullableIntFieldUpdateOperationsInput | number | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type MagicItemCreateManyType_relationInput = {
     id?: string
+    creator_id?: string | null
     name: string
-    description: string
-    rarity_id: string
-    source_id: number
-    requires_attunement?: boolean
+    description?: string | null
+    rarity_id?: string | null
+    source_id?: number | null
+    requires_attunement?: boolean | null
   }
 
   export type MagicItemUpdateWithoutType_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
-    rarity_relation?: MagicItemRarityUpdateOneRequiredWithoutMagicItemsNestedInput
-    source_relation?: SourceUpdateOneRequiredWithoutMagicItemsNestedInput
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    rarity_relation?: MagicItemRarityUpdateOneWithoutMagicItemsNestedInput
+    source_relation?: SourceUpdateOneWithoutMagicItemsNestedInput
     attunements_relation?: MagicItemAttunementUpdateManyWithoutMagicItemNestedInput
   }
 
   export type MagicItemUncheckedUpdateWithoutType_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    rarity_id?: StringFieldUpdateOperationsInput | string
-    source_id?: IntFieldUpdateOperationsInput | number
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    rarity_id?: NullableStringFieldUpdateOperationsInput | string | null
+    source_id?: NullableIntFieldUpdateOperationsInput | number | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
     attunements_relation?: MagicItemAttunementUncheckedUpdateManyWithoutMagicItemNestedInput
   }
 
   export type MagicItemUncheckedUpdateManyWithoutType_relationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    creator_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    rarity_id?: StringFieldUpdateOperationsInput | string
-    source_id?: IntFieldUpdateOperationsInput | number
-    requires_attunement?: BoolFieldUpdateOperationsInput | boolean
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    rarity_id?: NullableStringFieldUpdateOperationsInput | string | null
+    source_id?: NullableIntFieldUpdateOperationsInput | number | null
+    requires_attunement?: NullableBoolFieldUpdateOperationsInput | boolean | null
   }
 
   export type MagicItemAttunementCreateManyAttunementInput = {

@@ -74,4 +74,20 @@ export class DirectoriesService {
   async findKeywords() {
     return await this.prisma.keyword.findMany();
   }
+
+  async findAttunementConditions() {
+    return await this.prisma.attunementCondition.findMany();
+  }
+
+  async findMagicItemTypes() {
+    return await this.prisma.magicItemType.findMany();
+  }
+
+  async findMagicItemRarities() {
+    return await this.prisma.magicItemRarity.findMany({
+      orderBy: {
+        order: 'asc',
+      },
+    });
+  }
 }

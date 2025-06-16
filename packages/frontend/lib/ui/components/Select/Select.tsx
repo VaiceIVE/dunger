@@ -120,11 +120,11 @@ export const Select = ({
           leftSection={_leftSection}
           rightSection={<SelectorIcon />}
           onChange={(event) => {
-            setSearch(event.currentTarget.value);
+            searchable && setSearch(event.currentTarget.value);
             setError(null);
           }}
           onBlur={(event) => {
-            setSearch(_value != null ? optionsLockup[_value].label || '' : '');
+            searchable && setSearch(_value != null ? optionsLockup[_value].label || '' : '');
             onBlur?.(event);
           }}
           {...props}

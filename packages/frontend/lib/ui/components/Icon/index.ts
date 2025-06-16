@@ -18,6 +18,7 @@ import LogoutIcon from './_icons/logout.svg?react';
 import MenuIcon from './_icons/menu.svg?react';
 import MinusIcon from './_icons/minus.svg?react';
 import MoneybagIcon from './_icons/moneybag.svg?react';
+import PaperclipIcon from './_icons/paperclip.svg?react';
 import PencilIcon from './_icons/pencil.svg?react';
 import PhotoIcon from './_icons/photo.svg?react';
 import PlusFilledIcon from './_icons/plus-filled.svg?react';
@@ -52,6 +53,7 @@ export {
   MenuIcon,
   MinusIcon,
   MoneybagIcon,
+  PaperclipIcon,
   PencilIcon,
   PhotoIcon,
   PlusFilledIcon,

@@ -29,24 +29,20 @@ export function ComboboxOptions(props: ComboboxOptionsProps) {
 }
 
 function ComboboxOptionsImpl({ children, style, ...props }: ComboboxOptionsProps) {
-  const { open, setOpen, targetElement } = useComboboxContext();
+  const { open, setOpen, targetElement, value } = useComboboxContext();
+
   const ref = useRef<HTMLDivElement>(null);
 
-  function getVisualScrollY(): number {
-    const top = document.body.style.top;
-    if (document.body.style.position === 'fixed' && top) {
-      return -parseInt(top || '0', 10);
-    }
-    return window.scrollY;
-  }
+  const [dropUp, setDropUp] = useState(false);
+  const [dropdownHeight, setDropdownHeight] = useState(0);
+
+  const [position, setPosition] = useState<DOMRect | null>(null);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent | TouchEvent) => {
-      const target = e.target as Node | null;
+      const target = e.target as HTMLElement | null;
 
-      if (!target?.isConnected) {
-        return;
-      }
+      if (!target?.isConnected || target.closest('[data-target-ignored]')) return;
 
       if (ref.current && !ref.current.contains(target) && !targetElement?.contains(target)) {
         setOpen(false);
@@ -68,20 +64,56 @@ function ComboboxOptionsImpl({ children, style, ...props }: ComboboxOptionsProps
     };
   }, [ref, targetElement, setOpen]);
 
+  useEffect(() => {
+    if (!ref.current || !targetElement) return;
+
+    const updatePosition = () => {
+      if (!ref.current) return;
+
+      const height = ref.current.offsetHeight;
+      setDropdownHeight(height);
+
+      const position = targetElement.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - position.bottom;
+      setDropUp(spaceBelow < height + 4);
+      setPosition(position); // обновляем позицию
+    };
+
+    const observer = new ResizeObserver(updatePosition);
+    observer.observe(ref.current);
+
+    window.addEventListener('scroll', updatePosition, true); // true — чтобы ловить скрол в родителях
+    window.addEventListener('resize', updatePosition);
+
+    // Первая установка при монтировании
+    requestAnimationFrame(updatePosition);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', updatePosition, true);
+      window.removeEventListener('resize', updatePosition);
+    };
+  }, [targetElement]);
+
   if (!targetElement) {
     throw new Error('There must be a target element');
   }
-  const position = targetElement.getBoundingClientRect();
 
-  // Прибавляется текущее положение скролла страницы
-  const top = position.top + position.height + getVisualScrollY() + 4;
-  const left = position.left;
+  useEffect(() => {
+    const rect = targetElement.getBoundingClientRect();
+    setPosition(rect);
+  }, [value, targetElement]);
 
-  const width = position.width;
+  const top = dropUp
+    ? (position?.top ?? 0) + window.scrollY - dropdownHeight - 4
+    : (position?.top ?? 0) + (position?.height ?? 0) + window.scrollY + 4;
+
+  const left = position?.left ?? 0;
+  const width = position?.width ?? 'auto';
 
   const element = (
     <InfiniteScroll
-      {...stylex.props(styles.root(top, left, width), style)}
+      {...stylex.props(styles.root(top, left, width, !dropdownHeight ? 0 : 1), style)}
       ref={ref}
       data-state={open ? 'open' : 'closed'}
       {...props}>
@@ -98,7 +130,7 @@ function ComboboxOptionsImpl({ children, style, ...props }: ComboboxOptionsProps
 }
 
 const styles = stylex.create({
-  root: (top: number | string, left: number, width: number | string) => ({
+  root: (top: number | string, left: number, width: number | string, opacity: number) => ({
     backgroundColor: 'white',
     borderColor: colors.outlineAccentDefault,
     borderRadius: 12,
@@ -107,6 +139,7 @@ const styles = stylex.create({
     boxShadow: '0px 4px 4px 0px #383E490A, 0px 8px 24px 0px #383E491F',
     left,
     maxHeight: 176,
+    opacity,
     overflow: 'hidden',
     overflowY: 'auto',
     position: 'absolute',

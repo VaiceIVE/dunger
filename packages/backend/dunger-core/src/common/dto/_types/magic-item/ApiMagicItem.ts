@@ -1,9 +1,15 @@
-export interface ApiMagicItem {
+export type ApiMagicItem = {
   name: string;
-  description: string;
-  rarity_name: string;
-  type_name: string;
-  cost: string;
-  attunements: string[];
+  description: string | null;
+  rarity: {
+    id: string;
+    name: string;
+  } | null;
+  type: {
+    id: string;
+    name: string;
+  } | null;
+  cost: string | null;
+  attunements: { id: string; name: string }[];
   requires_attunement: boolean;
-}
+};

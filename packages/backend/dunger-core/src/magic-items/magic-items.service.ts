@@ -8,6 +8,8 @@ import {
 } from 'src/common/dto';
 import { ConfigService } from '@nestjs/config';
 import { AppError } from 'src/common/errors';
+import { CreateMagicItemDto } from './dto/create-magic-item.dto';
+import { UpdateMagicItemDto } from './dto/update-magic-item.dto';
 
 @Injectable()
 export class MagicItemsService {
@@ -20,6 +22,93 @@ export class MagicItemsService {
     this.customContentSource = this.configService.get<string>(
       'CUSTOM_CONTENT_SOURCE',
     );
+  }
+
+  /**
+   * Создаёт магический предмет.
+   * Устанавливает источник как кастомный (по shortName из this.customContentSource).
+   *
+   * @param createMagicItemDto - Данные для создания магического предмета.
+   * @param userId - id пользователя, который создает предемет.
+   * @returns id созданного предмета.
+   */
+  async initMagicItem(createMagicItemDto: CreateMagicItemDto, userId: string) {
+    // Получаем id кастомного источника (например, "DUNGER")
+    const customSourceId = (
+      await this.prisma.source.findUnique({
+        where: { short_name: this.customContentSource },
+        select: { id: true },
+      })
+    )?.id;
+
+    const magicItemData = {
+      name: createMagicItemDto.name,
+      source_id: customSourceId,
+      creator_id: userId,
+    };
+
+    return this.prisma.magicItem.create({
+      data: magicItemData,
+      select: { id: true },
+    });
+  }
+
+  /**
+   * Обновляет магический предмет.
+   *
+   * @param magicItemId - id редактируемого предемета.
+   * @param updateMagicItemDto - Данные для создания магического предмета.
+   * @param userId - id пользователя, который редактирует предемет.
+   * @returns id предмета.
+   */
+  async updateMagicItem(
+    magicItemId: string,
+    updateMagicItemDto: UpdateMagicItemDto,
+    userId?: string,
+  ) {
+    const magicItem = await this.prisma.magicItem.findUnique({
+      where: { id: magicItemId },
+      select: {
+        creator_id: true,
+      },
+    });
+
+    if (!magicItem)
+      throw new AppError({
+        statusCode: HttpStatus.NOT_FOUND,
+        errorText: `Magic item not found: ${magicItemId}`,
+      });
+
+    if (magicItem?.creator_id && magicItem.creator_id !== userId)
+      throw new AppError({
+        errorText: 'Access denied',
+        statusCode: HttpStatus.FORBIDDEN,
+      });
+
+    const { attunement_ids, ...magicItemData } = updateMagicItemDto;
+
+    await this.prisma.magicItemAttunement.deleteMany({
+      where: { magicItemId },
+    });
+
+    if (attunement_ids.length) {
+      await this.prisma.magicItemAttunement.createMany({
+        data: attunement_ids.map((attunementId) => ({
+          magicItemId,
+          attunementId,
+        })),
+      });
+    }
+
+    return this.prisma.magicItem.update({
+      where: {
+        id: magicItemId,
+      },
+      data: {
+        ...magicItemData,
+      },
+      select: { id: true },
+    });
   }
 
   /**
@@ -147,11 +236,12 @@ export class MagicItemsService {
     };
   }
 
-  async findOne(id: string): Promise<ApiMagicItem> {
+  async findOne(id: string, userId: string): Promise<ApiMagicItem> {
     const magicItemRaw = await this.prisma.magicItem.findUnique({
       where: { id: id },
       select: {
         id: true,
+        creator_id: true,
         name: true,
         description: true,
         type_relation: true,
@@ -173,7 +263,13 @@ export class MagicItemsService {
     if (!magicItemRaw)
       throw new AppError({
         statusCode: HttpStatus.NOT_FOUND,
-        errorText: `MagicItem not found: ${id}`,
+        errorText: `Magic item not found: ${id}`,
+      });
+
+    if (magicItemRaw?.creator_id && magicItemRaw.creator_id !== userId)
+      throw new AppError({
+        errorText: 'Access denied',
+        statusCode: HttpStatus.FORBIDDEN,
       });
 
     const { type_relation, rarity_relation, attunements_relation, ...rest } =
@@ -181,15 +277,20 @@ export class MagicItemsService {
 
     const magicItem: ApiMagicItem = {
       ...rest,
-      cost: rarity_relation.cost,
-      type_name: type_relation.name,
-      rarity_name:
-        type_relation.gender === Gender.HE
-          ? rarity_relation.name_he
-          : type_relation.gender === Gender.SHE
-            ? rarity_relation.name_she
-            : rarity_relation.name_it,
-      attunements: attunements_relation.map((a) => a.attunement.name),
+      cost: rarity_relation?.cost ?? null,
+      type: type_relation ?? null,
+      rarity: !rarity_relation
+        ? null
+        : {
+            id: rarity_relation.id,
+            name:
+              type_relation?.gender === Gender.HE
+                ? rarity_relation.name_he
+                : type_relation?.gender === Gender.SHE
+                  ? rarity_relation.name_she
+                  : rarity_relation.name_it,
+          },
+      attunements: attunements_relation?.map((a) => a.attunement) ?? [],
     };
 
     return magicItem;

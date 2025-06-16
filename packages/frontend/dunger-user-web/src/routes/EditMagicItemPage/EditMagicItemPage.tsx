@@ -1,9 +1,10 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useMemo, useState } from 'react';
 import * as stylex from '@stylexjs/stylex';
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuthFetch } from '@dunger/auth-fetch';
 import {
+  ArrowRightIcon,
   Button,
   ButtonVariant,
   ChevronsUpIcon,
@@ -18,15 +19,18 @@ import {
 import { colors } from '@dunger/ui/tokens.stylex';
 import { MagicItemCard } from 'features/MagicItemCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
-import { ApiMagicItem } from 'store/_types';
+import { ApiGender, ApiMagicItem } from 'store/_types';
 import { invariant } from 'utils/invariant';
 import { updateNestedField } from 'utils/updateNestedField';
 import { MagicItemForm } from './_components/MagicItemForm';
+import { useDirectoryOptions } from './useDirectoryOptions';
 import { useEditMagicItemAction } from './useEditMagicItemAction';
 
 export const EditMagicItemPage = () => {
   const { id } = useParams();
   invariant(id);
+
+  const navigate = useNavigate();
 
   const authFetch = useAuthFetch();
   const { data: magicItem } = useSuspenseQuery({
@@ -34,7 +38,38 @@ export const EditMagicItemPage = () => {
     queryFn: () => authFetch<ApiMagicItem>(`/magic-items/${id}`)
   });
 
-  const [formState, setFormState] = useState<ApiMagicItem>(magicItem);
+  const { magicItemTypes, magicItemRarities } = useDirectoryOptions();
+
+  const [formState, setFormState] = useState<
+    ApiMagicItem & { attunement_ids: string[]; type_id: string | null; rarity_id: string | null }
+  >({
+    ...magicItem,
+    attunement_ids: magicItem.attunements.map((i) => i.id),
+    type_id: magicItem.type?.id ?? null,
+    rarity_id: magicItem.rarity?.id ?? null
+  });
+
+  const _magicItem: ApiMagicItem = useMemo(() => {
+    const type = magicItemTypes.find((t) => t.id.toString() === formState.type_id) ?? null;
+    const rarity = magicItemRarities.find((r) => r.id === formState.rarity_id) ?? null;
+
+    return {
+      ...formState,
+      type,
+      cost: rarity?.cost ?? null,
+      rarity: !rarity
+        ? null
+        : {
+            id: rarity.id,
+            name:
+              type?.gender === ApiGender.HE
+                ? rarity.name_he
+                : type?.gender === ApiGender.SHE
+                  ? rarity.name_she
+                  : rarity.name_it
+          }
+    };
+  }, [formState, magicItemRarities, magicItemTypes]);
 
   const { saveAction } = useEditMagicItemAction();
 
@@ -51,10 +86,15 @@ export const EditMagicItemPage = () => {
 
     if (!changed) return;
     if (!e.currentTarget.reportValidity()) return;
+
+    const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement;
+
     void saveAction(new FormData(e.currentTarget))
       .then(() => {
         setChanged(false);
         setIsSaved(true);
+
+        if (submitter.value === 'end') void navigate(`/my-magic-items/${id}`);
       })
       .catch(() => {
         setIsFailed(true);
@@ -74,9 +114,9 @@ export const EditMagicItemPage = () => {
   };
 
   return (
-    <main>
+    <main {...stylex.props(styles.root)}>
       <form onSubmit={handleSubmit}>
-        <Container style={styles.root}>
+        <Container style={styles.content}>
           <SplitViewLayout isLayoutSplit gap={16}>
             <SplitViewLayout.Master span={6}>
               <Stack gap={32}>
@@ -87,7 +127,7 @@ export const EditMagicItemPage = () => {
             </SplitViewLayout.Master>
 
             <SplitViewLayout.Detail span={6}>
-              <MagicItemCard magicItem={magicItem} style={styles.card} />
+              <MagicItemCard magicItem={_magicItem} style={styles.card} />
             </SplitViewLayout.Detail>
           </SplitViewLayout>
         </Container>
@@ -95,8 +135,11 @@ export const EditMagicItemPage = () => {
         <Footer style={styles.footer}>
           <Container style={styles.container}>
             <Flex gap={8}>
-              <Button type="submit" disabled={!changed} variant={ButtonVariant.accent}>
-                Закончить редактирование
+              <Button value={'save'} type="submit" disabled={!changed} variant={ButtonVariant.accent}>
+                Сохранить
+              </Button>
+              <Button value={'end'} type="submit" disabled={!changed}>
+                Закончить редактирование <ArrowRightIcon width={16} height={16} />
               </Button>
               <IconButton type="button" onClick={scrollToTop} size="lg">
                 <ChevronsUpIcon />
@@ -113,7 +156,8 @@ export const EditMagicItemPage = () => {
 };
 
 const styles = stylex.create({
-  root: { color: colors.textPrimaryDefault, paddingBottom: 84 },
+  root: { color: colors.textPrimaryDefault, scrollbarGutter: 'stable' },
+  content: { paddingBottom: 84 },
   card: { height: 'calc(100dvh - 116px)', position: 'sticky', right: 0, top: 32 },
   footer: { left: 'unset', right: 0, width: 'calc(100% - 77px)' },
   container: { alignItems: 'center', display: 'flex', justifyContent: 'space-between', paddingBlock: 12 },
