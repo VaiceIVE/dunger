@@ -9,17 +9,27 @@ interface DirectoryItemProps extends PropsWithChildren {
 
   fullWidth?: boolean;
 
-  to: string;
+  to?: string;
+
+  gap?: number;
 }
 
-export const DirectoryItem = ({ active, fullWidth, to, children }: DirectoryItemProps) => {
+export const DirectoryItem = ({ active, fullWidth, to, gap = 4, children }: DirectoryItemProps) => {
   return (
     <Grid.Col span={fullWidth ? 12 : 6} asChild>
-      <Link to={to} preventScrollReset replace>
-        <Stack aria-selected={active} style={styles.root} gap={4}>
-          {children}
-        </Stack>
-      </Link>
+      {to ? (
+        <Link to={to} preventScrollReset replace>
+          <Stack aria-selected={active} style={styles.root} gap={gap}>
+            {children}
+          </Stack>
+        </Link>
+      ) : (
+        <div>
+          <Stack aria-selected={active} style={styles.root} gap={gap}>
+            {children}
+          </Stack>
+        </div>
+      )}
     </Grid.Col>
   );
 };

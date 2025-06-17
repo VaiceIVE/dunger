@@ -1,15 +1,18 @@
 import { ComponentProps } from 'react';
 import { StyleXStyles } from '@stylexjs/stylex';
 import * as stylex from '@stylexjs/stylex';
+import { DungerSize } from '../../styles/DungerSize';
 import { colors } from '../../tokens.stylex';
 import SpinnerIcon from './spinner.svg?react';
 
 export interface SpinnerProps extends Omit<ComponentProps<'svg'>, 'style'> {
   style?: StyleXStyles;
+
+  size?: Extract<DungerSize, 'sm' | 'md' | 'lg'>;
 }
 
-export function Spinner({ style, ...props }: SpinnerProps) {
-  return <SpinnerIcon {...stylex.props(styles.base, style)} {...props} />;
+export function Spinner({ style, size = 'sm', ...props }: SpinnerProps) {
+  return <SpinnerIcon {...stylex.props(styles.base, styles[size], style)} {...props} />;
 }
 
 const rotate = stylex.keyframes({
@@ -28,5 +31,8 @@ const styles = stylex.create({
     animationName: rotate,
     animationTimingFunction: 'linear',
     color: colors.brand80
-  }
+  },
+  sm: {},
+  md: {},
+  lg: { height: 50, width: 50 }
 });

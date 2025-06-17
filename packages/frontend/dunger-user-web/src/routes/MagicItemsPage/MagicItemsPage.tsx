@@ -20,6 +20,7 @@ import {
   XIcon
 } from '@dunger/ui';
 import { Directory, DirectoryItem } from 'components/Directory';
+import { Skeleton } from 'components/Skeleton';
 import { MagicItemCard } from 'features/MagicItemCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
 import { ApiMagicItem, ApiMagicItemListResult } from 'store/_types';
@@ -38,7 +39,8 @@ export const MagicItemsPage = () => {
   const {
     data,
     fetchNextPage: fetchMoreMagicItems,
-    hasNextPage: hasMoreMagicItems
+    hasNextPage: hasMoreMagicItems,
+    isLoading: loading
   } = useInfiniteQuery({
     queryKey: ['magic-items', { query: debouncedQuery }],
     queryFn: async ({ pageParam = 0 }) => {
@@ -89,14 +91,33 @@ export const MagicItemsPage = () => {
                     />
                   </Grid.Col>
                   <Grid.Col span={isActiveItem ? 1 : 6}>
-                    <Button variant={ButtonVariant.accentSecondary}>Фильтры</Button>
+                    <Button disabled variant={ButtonVariant.accentSecondary}>
+                      Фильтры
+                    </Button>
                   </Grid.Col>
                 </Grid>
 
                 <InfiniteScroll hasMore={hasMoreMagicItems} next={fetchMoreMagicItems}>
                   <Directory>
+                    {loading &&
+                      Array.from({ length: 16 }, (_, index) => index).map((c) => (
+                        <DirectoryItem gap={8} key={c}>
+                          <DirectoryItem.Title>
+                            <div {...stylex.props(styles.skeletonTitle)}>
+                              <Skeleton />
+                            </div>
+                          </DirectoryItem.Title>
+                          <DirectoryItem.Content>
+                            <div {...stylex.props(styles.skeletonContent)}>
+                              <Skeleton />
+                            </div>
+                          </DirectoryItem.Content>
+                        </DirectoryItem>
+                      ))}
+
                     {magicItems.map((i) => (
                       <DirectoryItem
+                        gap={8}
                         active={i.id === id}
                         fullWidth={isActiveItem}
                         key={i.id}
@@ -153,5 +174,17 @@ const styles = stylex.create({
     position: 'sticky',
     right: 0,
     top: 32
+  },
+  skeletonTitle: {
+    borderRadius: 2,
+    height: 20,
+    overflow: 'hidden',
+    width: '50%'
+  },
+  skeletonContent: {
+    borderRadius: 2,
+    height: 21,
+    overflow: 'hidden',
+    width: '25%'
   }
 });
