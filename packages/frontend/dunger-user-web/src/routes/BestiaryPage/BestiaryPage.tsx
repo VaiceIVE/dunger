@@ -21,6 +21,7 @@ import {
   XIcon
 } from '@dunger/ui';
 import { Directory, DirectoryItem } from 'components/Directory';
+import { Skeleton } from 'components/Skeleton';
 import { BeastCard } from 'features/BeastCard';
 import { SplitViewLayout } from 'features/SplitViewLayout';
 import { ApiCreatureListResult, ApiCreature } from 'store/_types';
@@ -40,7 +41,8 @@ export const BestiaryPage = () => {
   const {
     data,
     fetchNextPage: fetchMoreCreatures,
-    hasNextPage: hasMoreCreatures
+    hasNextPage: hasMoreCreatures,
+    isLoading: loading
   } = useInfiniteQuery({
     queryKey: ['creatures', { query: debouncedQuery }],
     queryFn: async ({ pageParam = 0 }) => {
@@ -91,12 +93,30 @@ export const BestiaryPage = () => {
                     />
                   </Grid.Col>
                   <Grid.Col span={isActiveCreature ? 1 : 6}>
-                    <Button variant={ButtonVariant.accentSecondary}>Фильтры</Button>
+                    <Button disabled variant={ButtonVariant.accentSecondary}>
+                      Фильтры
+                    </Button>
                   </Grid.Col>
                 </Grid>
 
                 <InfiniteScroll hasMore={hasMoreCreatures} next={fetchMoreCreatures}>
                   <Directory>
+                    {loading &&
+                      Array.from({ length: 16 }, (_, index) => index).map((c) => (
+                        <DirectoryItem gap={8} key={c}>
+                          <DirectoryItem.Title>
+                            <div {...stylex.props(styles.skeletonTitle)}>
+                              <Skeleton />
+                            </div>
+                          </DirectoryItem.Title>
+                          <DirectoryItem.Content>
+                            <div {...stylex.props(styles.skeletonContent)}>
+                              <Skeleton />
+                            </div>
+                          </DirectoryItem.Content>
+                        </DirectoryItem>
+                      ))}
+
                     {creatures.map((c) => (
                       <DirectoryItem
                         active={c.id === id}
@@ -160,5 +180,17 @@ const styles = stylex.create({
     position: 'sticky',
     right: 0,
     top: 32
+  },
+  skeletonTitle: {
+    borderRadius: 2,
+    height: 20,
+    overflow: 'hidden',
+    width: '25%'
+  },
+  skeletonContent: {
+    borderRadius: 2,
+    height: 21,
+    overflow: 'hidden',
+    width: '70%'
   }
 });
