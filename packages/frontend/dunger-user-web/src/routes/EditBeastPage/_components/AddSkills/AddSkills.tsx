@@ -159,15 +159,18 @@ export const AddSkills = ({ skills, stats, challenge_rating, handleFieldChange }
                         }
                       }));
                     }}
+                    id={skillValue.name}
                     checked={skillValue.mastery}
                     style={styles.checkbox}
                   />
-                  <div aria-selected={skillValue.mastery} {...stylex.props(text.defaultMedium, styles.label)}>
-                    {skillValue.name} ({skillKey[0].toUpperCase() + skillKey.slice(1).replaceAll('_', ' ')})
-                  </div>
-                  <div aria-selected={skillValue.mastery} {...stylex.props(text.defaultMedium, styles.value)}>
-                    {getModifier(t as keyof ApiSkills, skillValue)}
-                  </div>
+                  <label {...stylex.props(styles.labelWrapper)} htmlFor={skillValue.name}>
+                    <div aria-selected={skillValue.mastery} {...stylex.props(text.defaultMedium, styles.label)}>
+                      {skillValue.name} ({skillKey[0].toUpperCase() + skillKey.slice(1).replaceAll('_', ' ')})
+                    </div>
+                    <div aria-selected={skillValue.mastery} {...stylex.props(text.defaultMedium, styles.value)}>
+                      {getModifier(t as keyof ApiSkills, skillValue)}
+                    </div>
+                  </label>
                 </Flex>
               ))}
             </Stack>
@@ -214,6 +217,11 @@ const styles = stylex.create({
   icon: {
     height: 16,
     width: 16
+  },
+  labelWrapper: {
+    alignItems: 'center',
+    display: 'flex',
+    gap: 8
   },
   label: {
     backgroundColor: { default: 'transparent', ':is([aria-selected=true])': 'transparent' },
