@@ -3,8 +3,8 @@ import * as stylex from '@stylexjs/stylex';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@dunger/auth-fetch';
 import {
-  BellFilledIcon,
-  BinaryTreeIcon,
+  // BellFilledIcon,
+  // BinaryTreeIcon,
   Button,
   ButtonVariant,
   ButtonWidth,
@@ -73,19 +73,19 @@ export const SideBar = () => {
               }}>
               {open ? <XIcon /> : <MenuIcon />}
             </IconButton>
-            <IconButton variant={IconButtonVariant.ghost}>
+            {/* <IconButton variant={IconButtonVariant.ghost}>
               <BellFilledIcon />
             </IconButton>
             <IconButton variant={IconButtonVariant.ghost}>
               <BinaryTreeIcon />
-            </IconButton>
+            </IconButton> */}
           </Stack>
         </Stack>
 
         <Stack gap={16}>
           <CreationPanel isAuthenticated={isAuthenticated} />
 
-          <IconButton>
+          <IconButton disabled>
             <DiceD20Icon />
           </IconButton>
 
@@ -110,13 +110,13 @@ export const SideBar = () => {
               )}
             </div>
             <Stack gap={24}>
-              <section {...stylex.props(styles.section)}>
+              {/* <section {...stylex.props(styles.section)}>
                 <div {...stylex.props(text.subheaderBold, styles.sectionTitle)}>Игровой персонаж</div>
                 <Tab to={'species'}>Расы</Tab>
                 <Tab to={'classes'}>Классы </Tab>
                 <Tab to={'feats'}>Черты</Tab>
                 <Tab to={'backgrounds'}>Предыстории</Tab>
-              </section>
+              </section> */}
               <section {...stylex.props(styles.section)}>
                 <div {...stylex.props(text.subheaderBold, styles.sectionTitle)}>Для мастера</div>
                 <Tab to={'bestiary'}>Бестиарий</Tab>

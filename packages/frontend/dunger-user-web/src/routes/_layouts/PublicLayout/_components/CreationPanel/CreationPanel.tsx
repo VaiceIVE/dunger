@@ -107,6 +107,7 @@ export const CreationPanel = ({ isAuthenticated }: CreationPanelProps) => {
             Создать предмет <MoneybagIcon />
           </Tab>
           <Tab
+            disabled
             onClick={() => {
               setCreatedEntity('location');
             }}>
